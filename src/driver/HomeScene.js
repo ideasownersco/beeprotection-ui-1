@@ -18,8 +18,6 @@ class HomeScene extends Component {
   componentDidMount() {
     this.props.dispatch(DRIVER_ACTIONS.fetchUpcomingOrders());
     this.props.dispatch(DRIVER_ACTIONS.fetchProfile());
-
-
   }
 
   onOrdersListItemPress = (item: object) => {

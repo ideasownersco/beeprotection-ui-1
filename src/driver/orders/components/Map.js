@@ -5,18 +5,19 @@ import {
   Image,
   PermissionsAndroid,
   Platform,
-  StyleSheet, Text,
+  StyleSheet,
+  Text,
   View,
-  Linking
+  Linking,
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import isEqual from 'lodash/isEqual';
 import images from 'assets/theme/images';
-import Button from "components/Button";
+import Button from 'components/Button';
 import Touchable from 'react-native-platform-touchable';
-import Ionicons from "react-native-vector-icons/Ionicons";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import BackgroundGeolocation from 'react-native-background-geolocation';
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -50,27 +51,31 @@ export default class Map extends Component {
 
   componentDidMount() {
     BackgroundGeolocation.on('location', this.onLocation);
-    BackgroundGeolocation.configure({
-      distanceFilter: 10,
-      stopOnTerminate: false,
-      startOnBoot: true,
-      foregroundService: true,
-      url: '',
-      autoSync: true,
-      debug: true,
-      logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE
-    }, (state) => {
-      this.setState({
-        enabled: state.enabled,
-        isMoving: state.isMoving
-      });
-    })
+    BackgroundGeolocation.configure(
+      {
+        distanceFilter: 10,
+        stopOnTerminate: false,
+        startOnBoot: true,
+        foregroundService: true,
+        url: '',
+        autoSync: true,
+        debug: true,
+        logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
+      },
+      state => {
+        this.setState({
+          enabled: state.enabled,
+          isMoving: state.isMoving,
+        });
+      },
+    );
   }
 
   componentWillUnmount() {
     BackgroundGeolocation.un('location', this.onLocation);
   }
-    onLocation = (location) => {
+
+  onLocation = location => {
     console.log('[event] location: ', location);
     const lastPosition = this.state.origin;
     const currentLocation = {
@@ -84,8 +89,8 @@ export default class Map extends Component {
         origin: {
           ...this.state.origin,
           ...currentLocation,
-        }
-      })
+        },
+      });
     }
   };
 
@@ -117,7 +122,7 @@ export default class Map extends Component {
     let enabled = !this.state.enabled;
     this.setState({
       enabled: enabled,
-      isMoving: false
+      isMoving: false,
     });
     if (enabled) {
       BackgroundGeolocation.start();
@@ -130,12 +135,12 @@ export default class Map extends Component {
     const {destination} = this.props;
     const {origin, enabled} = this.state;
     const {heading} = this.state.origin;
-    const rotate = (typeof heading === 'number' && heading >= 0) ? `${heading}deg` : null;
+    const rotate =
+      typeof heading === 'number' && heading >= 0 ? `${heading}deg` : null;
 
-    console.log('state',...this.state.origin)
+    console.log('state', ...this.state.origin);
     return (
       <View style={styles.container}>
-
         <MapView
           // provider={PROVIDER_GOOGLE}
           ref={ref => {
@@ -150,7 +155,7 @@ export default class Map extends Component {
           onLayout={this.onMapLayout}>
           <MapView.Marker
             style={styles.mapMarker}
-            anchor={{x: 0.5, y: 0.5, position: 'relative',}}
+            anchor={{x: 0.5, y: 0.5, position: 'relative'}}
             coordinate={origin}
             identifier="MarkerOrigin">
             <Image
@@ -165,19 +170,21 @@ export default class Map extends Component {
           />
         </MapView>
 
-        <View style={{backgroundColor:'white'}}>
+        <View style={{backgroundColor: 'white'}}>
           <View style={styles.navContainer}>
             <Touchable onPress={this.reCenterMap}>
               <View style={{alignItems: 'center'}}>
-                <MaterialCommunityIcons name="arrow-all" size={35}/>
+                <MaterialCommunityIcons name="arrow-all" size={35} />
                 {/*<Text>Re center</Text>*/}
               </View>
             </Touchable>
-            <Text style={styles.address}>Salwa, Block 7, Street 5, House 22</Text>
+            <Text style={styles.address}>
+              Salwa, Block 7, Street 5, House 22
+            </Text>
 
             <Touchable onPress={this.openInGoogleMaps}>
               <View style={{alignItems: 'center'}}>
-                <Ionicons name="ios-navigate-outline" size={35}/>
+                <Ionicons name="ios-navigate-outline" size={35} />
                 {/*<Text>Direction</Text>*/}
               </View>
             </Touchable>
@@ -189,8 +196,6 @@ export default class Map extends Component {
             style={{marginBottom: 10}}
           />
         </View>
-
-
       </View>
     );
   }
@@ -200,10 +205,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // ...StyleSheet.absoluteFillObject,
-    justifyContent:'flex-end'
+    justifyContent: 'flex-end',
   },
   map: {
-    flex:1,
+    flex: 1,
   },
   mapMarker: {
     // width: 80,
@@ -220,11 +225,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
-    paddingVertical:5,
+    paddingVertical: 5,
   },
   address: {
     flex: 1,
-    paddingHorizontal: 15
-  }
-
+    paddingHorizontal: 15,
+  },
 });

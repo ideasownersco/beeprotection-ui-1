@@ -11,7 +11,7 @@ import {ACTIONS} from 'app/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
 import {CODE_PUSH_ENABLED} from 'utils/env';
 import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
-import BackgroundGeolocation from "react-native-background-geolocation";
+import BackgroundGeolocation from 'react-native-background-geolocation';
 
 class App extends Component {
   static propTypes = {
@@ -25,7 +25,6 @@ class App extends Component {
     this.props.dispatch(ACTIONS.boot());
     BackgroundGeolocation.stop();
     BackgroundGeolocation.removeListeners();
-
   }
 
   onLanguageSelect = name => {

@@ -6,7 +6,10 @@ import Touchable from 'react-native-platform-touchable';
 
 export default class Button extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.disabled !== this.props.disabled || nextProps.title !== this.props.title;
+    return (
+      nextProps.disabled !== this.props.disabled ||
+      nextProps.title !== this.props.title
+    );
   }
 
   static propTypes = {

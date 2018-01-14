@@ -1,9 +1,5 @@
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet, Text,
-  View
-} from 'react-native';
+import React, {Component} from 'react';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 
 // import DeviceInfo from 'react-native-device-info';
 
@@ -16,13 +12,12 @@ import {
 // 2.  private github repo (customers only):  react-native-background-geolocation-android
 //
 // This simply allows one to change the import in a single file.
-import BackgroundGeolocation from "react-native-background-geolocation";
-import Button from "components/Button";
+import BackgroundGeolocation from 'react-native-background-geolocation';
+import Button from 'components/Button';
 
 const TRACKER_HOST = 'http://tracker.transistorsoft.com/ZaL/';
 
 export default class HelloWorld extends Component<{}> {
-
   constructor(props) {
     super(props);
 
@@ -32,7 +27,7 @@ export default class HelloWorld extends Component<{}> {
       enabled: false,
       isMoving: false,
       username: 'ZaL',
-      events: []
+      events: [],
     };
   }
 
@@ -49,39 +44,42 @@ export default class HelloWorld extends Component<{}> {
     // BackgroundGeolocation.on('heartbeat', this.onHeartbeat.bind(this));
 
     // Step 2:  #configure:
-    BackgroundGeolocation.configure({
-      distanceFilter: 10,
-      stopOnTerminate: false,
-      startOnBoot: true,
-      foregroundService: true,
-      url: TRACKER_HOST,
-      // params: {
-      //   // Required for tracker.transistorsoft.com
-      //   device: {
-      //     uuid: DeviceInfo.getUniqueID(),
-      //     model: DeviceInfo.getModel(),
-      //     platform: DeviceInfo.getSystemName(),
-      //     manufacturer: DeviceInfo.getManufacturer(),
-      //     version: DeviceInfo.getSystemVersion(),
-      //     framework: 'ReactNative'
-      //   }
-      // },
-      autoSync: true,
-      debug: true,
-      logLevel: BackgroundGeolocation.LOG_LEVEL_OFF
-    }, (state) => {
-      console.log('- Configure success: ', state);
-      this.setState({
-        enabled: state.enabled,
-        isMoving: state.isMoving
-      });
-    });
+    BackgroundGeolocation.configure(
+      {
+        distanceFilter: 10,
+        stopOnTerminate: false,
+        startOnBoot: true,
+        foregroundService: true,
+        url: TRACKER_HOST,
+        // params: {
+        //   // Required for tracker.transistorsoft.com
+        //   device: {
+        //     uuid: DeviceInfo.getUniqueID(),
+        //     model: DeviceInfo.getModel(),
+        //     platform: DeviceInfo.getSystemName(),
+        //     manufacturer: DeviceInfo.getManufacturer(),
+        //     version: DeviceInfo.getSystemVersion(),
+        //     framework: 'ReactNative'
+        //   }
+        // },
+        autoSync: true,
+        debug: true,
+        logLevel: BackgroundGeolocation.LOG_LEVEL_OFF,
+      },
+      state => {
+        console.log('- Configure success: ', state);
+        this.setState({
+          enabled: state.enabled,
+          isMoving: state.isMoving,
+        });
+      },
+    );
   }
 
   /**
    * @event location
    */
-  onLocation(location){
+  onLocation(location) {
     console.log('[event] location: ', location);
     this.addEvent('location', new Date(location.timestamp), location);
   }
@@ -91,9 +89,13 @@ export default class HelloWorld extends Component<{}> {
   onMotionChange(event) {
     console.log('[event] motionchange: ', event.isMovign, event.location);
     this.setState({
-      isMoving: event.isMoving
+      isMoving: event.isMoving,
     });
-    this.addEvent('motionchange', new Date(event.location.timestamp), event.location);
+    this.addEvent(
+      'motionchange',
+      new Date(event.location.timestamp),
+      event.location,
+    );
   }
   /**
    * @event activitychange
@@ -114,7 +116,9 @@ export default class HelloWorld extends Component<{}> {
    */
   onPowerSaveChange(isPowerSaveMode) {
     console.log('[event] powersavechange', isPowerSaveMode);
-    this.addEvent('powersavechange', new Date(), {isPowerSaveMode: isPowerSaveMode});
+    this.addEvent('powersavechange', new Date(), {
+      isPowerSaveMode: isPowerSaveMode,
+    });
   }
   /**
    * @event heartbeat
@@ -135,7 +139,7 @@ export default class HelloWorld extends Component<{}> {
     let enabled = !this.state.enabled;
     this.setState({
       enabled: enabled,
-      isMoving: false
+      isMoving: false,
     });
     if (enabled) {
       BackgroundGeolocation.start();
@@ -145,15 +149,19 @@ export default class HelloWorld extends Component<{}> {
   }
 
   onClickGetCurrentPosition() {
-    BackgroundGeolocation.getCurrentPosition((location) => {
-      console.log('- getCurrentPosition success: ', location);
-    }, (error) => {
-      console.warn('- getCurrentPosition error: ', error);
-    }, {
-      persist: true,
-      samples: 1,
-      maximumAge: 5000
-    });
+    BackgroundGeolocation.getCurrentPosition(
+      location => {
+        console.log('- getCurrentPosition success: ', location);
+      },
+      error => {
+        console.warn('- getCurrentPosition error: ', error);
+      },
+      {
+        persist: true,
+        samples: 1,
+        maximumAge: 5000,
+      },
+    );
   }
 
   onClickChangePace() {
@@ -175,18 +183,18 @@ export default class HelloWorld extends Component<{}> {
       key: this.eventId++,
       name: name,
       timestamp: date.toLocaleTimeString(),
-      json: JSON.stringify(object, null, 2)
+      json: JSON.stringify(object, null, 2),
     };
     let rs = this.state.events;
     rs.unshift(event);
     this.setState({
-      events: rs
+      events: rs,
     });
   }
 
   renderEvents() {
     return null;
-    return this.state.events.map((event) => (
+    return this.state.events.map(event => (
       <View key={event.key} style={styles.listItem}>
         <Text style={styles.eventName}>[event] {event.name}</Text>
         <Text style={styles.eventTimestamp}>{event.timestamp}</Text>
@@ -198,13 +206,10 @@ export default class HelloWorld extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.list}>
-          {this.renderEvents()}
-        </View>
+        <View style={styles.list}>{this.renderEvents()}</View>
 
-        <Button title="enable" onPress={() => this.onToggleEnabled()}  />
-        <Button title="enable" onPress={() => this.onClickChangePace()}  />
-
+        <Button title="enable" onPress={() => this.onToggleEnabled()} />
+        <Button title="enable" onPress={() => this.onClickChangePace()} />
       </View>
     );
   }
@@ -212,53 +217,52 @@ export default class HelloWorld extends Component<{}> {
   /**
    * Navigate back to home-screen app-switcher
    */
-
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    backgroundColor: '#272727'
+    flex: 1,
+    backgroundColor: '#272727',
   },
   header: {
-    backgroundColor: '#fedd1e'
+    backgroundColor: '#fedd1e',
   },
   title: {
-    color: '#000'
+    color: '#000',
   },
   // listItem: {
   //   marginBottom: 10
   // },
   itemHeader: {
     backgroundColor: '#D5B601',
-    padding: 5
+    padding: 5,
   },
   eventName: {
     fontSize: 12,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   eventTimestamp: {
-    fontSize: 12
+    fontSize: 12,
   },
   eventJson: {
     fontFamily: 'Courier New',
     fontSize: 12,
-    color: '#e6db74'
+    color: '#e6db74',
   },
   footer: {
     backgroundColor: '#fedd1e',
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
   },
   footerBody: {
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   icon: {
-    color: '#fff'
+    color: '#fff',
   },
-  list:{
-    flex:1,
-    height:300,
-    backgroundColor:'yellow'
-  }
+  list: {
+    flex: 1,
+    height: 300,
+    backgroundColor: 'yellow',
+  },
 });
