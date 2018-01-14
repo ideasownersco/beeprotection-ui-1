@@ -58,6 +58,8 @@ PODS:
   - RNBackgroundGeolocation (2.10.1):
     - CocoaLumberjack (~> 3.0)
     - React
+  - RNI18n (2.0.10):
+    - React
   - yoga (0.52.0.React)
 
 DEPENDENCIES:
@@ -78,6 +80,7 @@ DEPENDENCIES:
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
   - RNBackgroundGeolocation (from `../node_modules/react-native-background-geolocation`)
+  - RNI18n (from `../node_modules/react-native-i18n`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 EXTERNAL SOURCES:
@@ -91,6 +94,8 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-background-fetch
   RNBackgroundGeolocation:
     :path: ../node_modules/react-native-background-geolocation
+  RNI18n:
+    :path: ../node_modules/react-native-i18n
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
@@ -102,8 +107,9 @@ SPEC CHECKSUMS:
   react-native-maps: d3b689927722398a12a4b3007fd9a0c60e1c48cd
   RNBackgroundFetch: f62e9e27a069511ae7b7015eff9c48c8221fe625
   RNBackgroundGeolocation: 2b8b5dd7c2d075cb432b16bfec9aedee46072e27
+  RNI18n: cd4ddd958e326a2427b70f5474b3fb04aea793b2
   yoga: 646606bf554d54a16711f35596178522fbc00480
 
-PODFILE CHECKSUM: 9d6aa10dcdecb0e56ae3f678191acc7e77edb56a
+PODFILE CHECKSUM: 4d57d7b06f4bd055b8cd535c1bcbda5c62107729
 
 COCOAPODS: 1.2.0
