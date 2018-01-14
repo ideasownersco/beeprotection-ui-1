@@ -67,7 +67,10 @@ export default class Map extends Component {
     })
   }
 
-  onLocation = (location) => {
+  componentWillUnmount() {
+    BackgroundGeolocation.un('location', this.onLocation);
+  }
+    onLocation = (location) => {
     console.log('[event] location: ', location);
     const lastPosition = this.state.origin;
     const currentLocation = {
