@@ -118,7 +118,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 241E20E6265528D383E1C74C;
+			remoteGlobalIDString = A99DF0F6DD437069C8E6B91E;
 			remoteInfo = React;
 		};
 		2AC989BFBC1B7A163596591665465D85 /* PBXContainerItemProxy */ = {
@@ -132,7 +132,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 241E20E6265528D383E1C74C;
+			remoteGlobalIDString = A99DF0F6DD437069C8E6B91E;
 			remoteInfo = React;
 		};
 		66102DD771F94F57FCCC43B67489CDA8 /* PBXContainerItemProxy */ = {
@@ -146,7 +146,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 241E20E6265528D383E1C74C;
+			remoteGlobalIDString = A99DF0F6DD437069C8E6B91E;
 			remoteInfo = React;
 		};
 /* End PBXContainerItemProxy section */
@@ -2381,9 +2381,9 @@
 			};
 			name = Release;
 		};
-		355507AF7FE423FADEE1754A7BDF0AAD /* Debug */ = {
+		2F00D4BFD32F537B62186ECA0B9FC4B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F78CC2D39A22E33AA07D37D5759BBED5 /* react-native-google-maps.xcconfig */;
+			baseConfigurationReference = 696E9B141B8E52EE1E72B15D5BD7113B /* yoga.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2391,7 +2391,9 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/react-native-google-maps/react-native-google-maps-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/yoga/yoga-prefix.pch";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -2404,9 +2406,9 @@
 			};
 			name = Debug;
 		};
-		3D25951CA583B55E9EE81BED803F000D /* Debug */ = {
+		355507AF7FE423FADEE1754A7BDF0AAD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 696E9B141B8E52EE1E72B15D5BD7113B /* yoga.xcconfig */;
+			baseConfigurationReference = F78CC2D39A22E33AA07D37D5759BBED5 /* react-native-google-maps.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2414,7 +2416,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/yoga/yoga-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/react-native-google-maps/react-native-google-maps-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -2478,29 +2480,6 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/react-native-google-maps/react-native-google-maps-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		8009ACBEA9A40B2AC14620BD4FA0FA73 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 696E9B141B8E52EE1E72B15D5BD7113B /* yoga.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/yoga/yoga-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -2582,14 +2561,39 @@
 			};
 			name = Debug;
 		};
+		E8609F2FFD383F6858903830B452E3C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 696E9B141B8E52EE1E72B15D5BD7113B /* yoga.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/yoga/yoga-prefix.pch";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		0450F8DBAAA6B38E8E32186ECB6B3510 /* Build configuration list for PBXNativeTarget "yoga" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3D25951CA583B55E9EE81BED803F000D /* Debug */,
-				8009ACBEA9A40B2AC14620BD4FA0FA73 /* Release */,
+				2F00D4BFD32F537B62186ECA0B9FC4B5 /* Debug */,
+				E8609F2FFD383F6858903830B452E3C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
