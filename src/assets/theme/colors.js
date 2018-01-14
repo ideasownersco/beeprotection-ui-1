@@ -1,0 +1,15 @@
+export default {
+  darkGrey: '#5d5f63',
+  mediumGrey: '#959ba1',
+  lightGrey: '#dfdfdf',
+  info: '#2196f3',
+  error: '#f44336',
+  success: '#4caf50',
+  primary: '#74c2d9',
+  secondary: '#2487a3',
+  blue: '#1B82F9',
+  fadedWhite: '#efefef',
+  fadedBlack: '#352d34',
+  black: '#000000',
+  white: '#ffffff',
+};
