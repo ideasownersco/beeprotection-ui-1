@@ -60,7 +60,6 @@ export default class Map extends Component {
       debug: true,
       logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE
     }, (state) => {
-      console.log('- Configure success: ', state);
       this.setState({
         enabled: state.enabled,
         isMoving: state.isMoving
@@ -70,7 +69,6 @@ export default class Map extends Component {
 
   onLocation = (location) => {
     console.log('[event] location: ', location);
-
     const lastPosition = this.state.origin;
     const currentLocation = {
       latitude: location.coords.latitude,
@@ -131,6 +129,7 @@ export default class Map extends Component {
     const {heading} = this.state.origin;
     const rotate = (typeof heading === 'number' && heading >= 0) ? `${heading}deg` : null;
 
+    console.log('state',...this.state.origin)
     return (
       <View style={styles.container}>
 
@@ -184,7 +183,7 @@ export default class Map extends Component {
           <Button
             title={enabled ? 'Stop Trip' : 'Start Trip'}
             onPress={this.toggleStartStopTrip}
-            style={{marginVertical: 10}}
+            style={{marginBottom: 10}}
           />
         </View>
 
@@ -217,7 +216,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10
+    paddingHorizontal: 10,
+    paddingVertical:5,
   },
   address: {
     flex: 1,
