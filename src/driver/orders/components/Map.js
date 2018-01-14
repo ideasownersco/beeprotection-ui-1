@@ -89,7 +89,7 @@ export default class Map extends Component {
   };
 
   onMapLayout = () => {
-    this.map.fitToElements(false);
+    this.map.fitToElements(true);
   };
 
   reCenterMap = () => {
@@ -101,7 +101,7 @@ export default class Map extends Component {
   };
 
   openMaps() {
-    let {latitude,longitude} = this.props.destination;
+    let {latitude, longitude} = this.props.destination;
 
     const nativeGoogleUrl = `comgooglemaps://?daddr=${latitude},${longitude}&center=${latitude},${longitude}&zoom=14&views=traffic&directionsmode=driving`;
     Linking.canOpenURL(nativeGoogleUrl).then(supported => {
@@ -135,7 +135,7 @@ export default class Map extends Component {
       <View style={styles.container}>
 
         <MapView
-          provider={PROVIDER_GOOGLE}
+          // provider={PROVIDER_GOOGLE}
           ref={ref => {
             this.map = ref;
           }}
@@ -148,7 +148,7 @@ export default class Map extends Component {
           onLayout={this.onMapLayout}>
           <MapView.Marker
             style={styles.mapMarker}
-            anchor={{x: 0.5, y: 0.5,position: 'relative',}}
+            anchor={{x: 0.5, y: 0.5, position: 'relative',}}
             coordinate={origin}
             identifier="MarkerOrigin">
             <Image
@@ -163,28 +163,31 @@ export default class Map extends Component {
           />
         </MapView>
 
-        <View style={styles.navContainer}>
-          <Touchable onPress={this.reCenterMap}>
-            <View style={{alignItems: 'center'}}>
-              <MaterialCommunityIcons name="arrow-all" size={35}/>
-              {/*<Text>Re center</Text>*/}
-            </View>
-          </Touchable>
-          <Text style={styles.address}>Salwa, Block 7, Street 5, House 22</Text>
+        <View style={{backgroundColor:'white'}}>
+          <View style={styles.navContainer}>
+            <Touchable onPress={this.reCenterMap}>
+              <View style={{alignItems: 'center'}}>
+                <MaterialCommunityIcons name="arrow-all" size={35}/>
+                {/*<Text>Re center</Text>*/}
+              </View>
+            </Touchable>
+            <Text style={styles.address}>Salwa, Block 7, Street 5, House 22</Text>
 
-          <Touchable onPress={this.openInGoogleMaps}>
-            <View style={{alignItems: 'center'}}>
-              <Ionicons name="ios-navigate-outline" size={35}/>
-              {/*<Text>Direction</Text>*/}
-            </View>
-          </Touchable>
+            <Touchable onPress={this.openInGoogleMaps}>
+              <View style={{alignItems: 'center'}}>
+                <Ionicons name="ios-navigate-outline" size={35}/>
+                {/*<Text>Direction</Text>*/}
+              </View>
+            </Touchable>
+          </View>
+
+          <Button
+            title={enabled ? 'Stop Trip' : 'Start Trip'}
+            onPress={this.toggleStartStopTrip}
+            style={{marginVertical: 10}}
+          />
         </View>
 
-        <Button
-          title={enabled ? 'Stop Trip' : 'Start Trip'}
-          onPress={this.toggleStartStopTrip}
-          style={{marginVertical: 10}}
-        />
 
       </View>
     );
@@ -195,19 +198,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // ...StyleSheet.absoluteFillObject,
+    justifyContent:'flex-end'
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    flex:1,
   },
   mapMarker: {
-    width: 80,
-    height: 160,
-    backgroundColor:'transparent',
+    // width: 80,
+    // height: 160,
+    // backgroundColor:'transparent',
   },
   image: {
     width: 20,
     height: 40,
-    backgroundColor:'yellow'
   },
   navContainer: {
     width: '100%',
