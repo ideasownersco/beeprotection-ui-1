@@ -1,4 +1,10 @@
 PODS:
+  - CocoaLumberjack (3.4.0):
+    - CocoaLumberjack/Default (= 3.4.0)
+    - CocoaLumberjack/Extensions (= 3.4.0)
+  - CocoaLumberjack/Default (3.4.0)
+  - CocoaLumberjack/Extensions (3.4.0):
+    - CocoaLumberjack/Default
   - GoogleMaps (2.5.0):
     - GoogleMaps/Maps (= 2.5.0)
   - GoogleMaps/Base (2.5.0)
@@ -47,6 +53,11 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - RNBackgroundFetch (2.2.1):
+    - React
+  - RNBackgroundGeolocation (2.10.1):
+    - CocoaLumberjack (~> 3.0)
+    - React
   - yoga (0.52.0.React)
 
 DEPENDENCIES:
@@ -65,6 +76,8 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
+  - RNBackgroundGeolocation (from `../node_modules/react-native-background-geolocation`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 EXTERNAL SOURCES:
@@ -74,16 +87,23 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-maps
   react-native-maps:
     :path: ../node_modules/react-native-maps
+  RNBackgroundFetch:
+    :path: ../node_modules/react-native-background-fetch
+  RNBackgroundGeolocation:
+    :path: ../node_modules/react-native-background-geolocation
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
+  CocoaLumberjack: e033a5d8513357af2dd456eb66e202c325c30627
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
   React: 61a6bdf17a9ff16875c230e6ff278d9de274e16c
   react-native-google-maps: dc6d7644b0517e6e232644d2b66004714b91e152
   react-native-maps: d3b689927722398a12a4b3007fd9a0c60e1c48cd
+  RNBackgroundFetch: f62e9e27a069511ae7b7015eff9c48c8221fe625
+  RNBackgroundGeolocation: 2b8b5dd7c2d075cb432b16bfec9aedee46072e27
   yoga: 646606bf554d54a16711f35596178522fbc00480
 
-PODFILE CHECKSUM: 7d8bdbcd3f914a52e97d38438368570c41cdc8a4
+PODFILE CHECKSUM: 9d6aa10dcdecb0e56ae3f678191acc7e77edb56a
 
 COCOAPODS: 1.2.0
