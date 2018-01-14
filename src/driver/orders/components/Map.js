@@ -7,6 +7,7 @@ import {
   Platform,
   StyleSheet, Text,
   View,
+  Linking
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import isEqual from 'lodash/isEqual';
@@ -32,20 +33,6 @@ export default class Map extends Component {
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
     }),
-    geolocationOptions: PropTypes.shape({
-      enableHighAccuracy: PropTypes.bool,
-      timeout: PropTypes.number,
-      maximumAge: PropTypes.number,
-    }),
-    heading: PropTypes.number,
-  };
-
-  static defaultProps = {
-    geolocationOptions: {
-      enableHighAccuracy: true,
-      timeout: 20000,
-      maximumAge: 1000,
-    },
   };
 
   constructor(props) {
@@ -62,17 +49,7 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
-    if (Platform.OS === 'android') {
-      PermissionsAndroid.requestPermission(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      ).then(granted => {
-        if (granted) this.watchLocation();
-      });
-    } else {
-      this.watchLocation();
-    }
     BackgroundGeolocation.on('location', this.onLocation);
-
     BackgroundGeolocation.configure({
       distanceFilter: 10,
       stopOnTerminate: false,
@@ -81,7 +58,7 @@ export default class Map extends Component {
       url: '',
       autoSync: true,
       debug: true,
-      logLevel: BackgroundGeolocation.LOG_LEVEL_OFF
+      logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE
     }, (state) => {
       console.log('- Configure success: ', state);
       this.setState({
@@ -91,61 +68,49 @@ export default class Map extends Component {
     })
   }
 
-  componentWillUnmount() {
-    navigator.geolocation.clearWatch(this.watchID)
-  }
-
-  onLocation(location) {
+  onLocation = (location) => {
     console.log('[event] location: ', location);
-    // this.addEvent('location', new Date(location.timestamp), location);
-  }
 
-  watchLocation() {
-    this.watchID = navigator.geolocation.watchPosition(
-      position => {
-        console.log('p', position);
+    const lastPosition = this.state.origin;
+    const currentLocation = {
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+      heading: location.coords.heading,
+    };
 
-        const myLastPosition = this.state.origin;
-        const origin = position.coords;
-        if (!isEqual(origin, myLastPosition)) {
-          this.setState({origin});
-          if (this.map) {
-            // this.map.fitToElements(true);
-          }
+    if (lastPosition.latitude !== currentLocation.latitude) {
+      this.setState({
+        origin: {
+          ...this.state.origin,
+          ...currentLocation,
         }
-      },
-      null,
-      this.props.geolocationOptions,
-    );
-
-    console.log('watchID', this.watchID);
-  }
+      })
+    }
+  };
 
   onMapLayout = () => {
     this.map.fitToElements(false);
   };
 
-  addEvent = (name, date, object) => {
-    let event = {
-      key: this.eventId++,
-      name: name,
-      timestamp: date.toLocaleTimeString(),
-      json: JSON.stringify(object, null, 2)
-    };
-    let rs = this.state.events;
-    rs.unshift(event);
-    this.setState({
-      events: rs
-    });
-  };
-
   reCenterMap = () => {
-    this.map.fitToElements(false);
+    this.map.fitToElements(true);
   };
 
   openInGoogleMaps = () => {
-    console.log('open in google maps');
+    this.openMaps();
   };
+
+  openMaps() {
+    let {latitude,longitude} = this.props.destination;
+
+    const nativeGoogleUrl = `comgooglemaps://?daddr=${latitude},${longitude}&center=${latitude},${longitude}&zoom=14&views=traffic&directionsmode=driving`;
+    Linking.canOpenURL(nativeGoogleUrl).then(supported => {
+      const url = supported
+        ? nativeGoogleUrl
+        : `http://maps.google.com/?q=loc:${latitude}+${longitude}`;
+      Linking.openURL(url);
+    });
+  }
 
   toggleStartStopTrip = () => {
     let enabled = !this.state.enabled;
@@ -162,13 +127,9 @@ export default class Map extends Component {
 
   render() {
     const {destination} = this.props;
-    const {origin} = this.state;
+    const {origin, enabled} = this.state;
     const {heading} = this.state.origin;
-
-    // const rotate = `${heading}deg`;
     const rotate = (typeof heading === 'number' && heading >= 0) ? `${heading}deg` : null;
-
-    console.log('s', this.state);
 
     return (
       <View style={styles.container}>
@@ -187,7 +148,7 @@ export default class Map extends Component {
           onLayout={this.onMapLayout}>
           <MapView.Marker
             style={styles.mapMarker}
-            anchor={{x: 0.5, y: 0.5}}
+            anchor={{x: 0.5, y: 0.5,position: 'relative',}}
             coordinate={origin}
             identifier="MarkerOrigin">
             <Image
@@ -205,28 +166,24 @@ export default class Map extends Component {
         <View style={styles.navContainer}>
           <Touchable onPress={this.reCenterMap}>
             <View style={{alignItems: 'center'}}>
-              <MaterialCommunityIcons name="arrow-all" size={40}/>
-              <Text>Re center</Text>
+              <MaterialCommunityIcons name="arrow-all" size={35}/>
+              {/*<Text>Re center</Text>*/}
             </View>
           </Touchable>
-          <Text style={styles.address}>Address</Text>
+          <Text style={styles.address}>Salwa, Block 7, Street 5, House 22</Text>
 
           <Touchable onPress={this.openInGoogleMaps}>
             <View style={{alignItems: 'center'}}>
-              <Ionicons name="ios-navigate-outline" size={40}/>
-              <Text>Direction</Text>
+              <Ionicons name="ios-navigate-outline" size={35}/>
+              {/*<Text>Direction</Text>*/}
             </View>
           </Touchable>
         </View>
 
         <Button
-          title="Start Trip"
+          title={enabled ? 'Stop Trip' : 'Start Trip'}
           onPress={this.toggleStartStopTrip}
-          style={
-            {
-              marginVertical: 10
-            }
-          }
+          style={{marginVertical: 10}}
         />
 
       </View>
@@ -236,21 +193,21 @@ export default class Map extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     // ...StyleSheet.absoluteFillObject,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
   },
   mapMarker: {
-    width: 40,
-    height: 100,
-    zIndex: 1000
+    width: 80,
+    height: 160,
+    backgroundColor:'transparent',
   },
   image: {
     width: 20,
     height: 40,
-    zIndex: 10000
+    backgroundColor:'yellow'
   },
   navContainer: {
     width: '100%',
