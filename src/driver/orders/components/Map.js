@@ -34,6 +34,8 @@ export default class Map extends Component {
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
     }),
+    startJob:PropTypes.func.isRequired,
+    finishJob:PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -51,16 +53,21 @@ export default class Map extends Component {
 
   componentDidMount() {
     BackgroundGeolocation.on('location', this.onLocation);
+    BackgroundGeolocation.on('http', this.onHttp);
+    BackgroundGeolocation.on('motionchange', this.onMotionChange.bind(this));
+
     BackgroundGeolocation.configure(
       {
-        distanceFilter: 10,
+        distanceFilter: 100,
         stopOnTerminate: false,
+        // preventSuspend:false,
         startOnBoot: true,
         foregroundService: true,
-        url: '',
+        url: 'http://beeprotection.test/api/jobs/1/location/update',
         autoSync: true,
         debug: true,
         logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
+        maxRecordsToPersist: 1
       },
       state => {
         this.setState({
@@ -94,6 +101,20 @@ export default class Map extends Component {
     }
   };
 
+  onHttp(response) {
+
+    console.log('[event] http: ', response);
+    // this.addEvent('http', new Date(), response);
+  }
+
+  onMotionChange(event) {
+    console.log('[event] motionchange: ', event.isMoving, event.location);
+    this.setState({
+      isMoving: event.isMoving
+    });
+    // this.addEvent('motionchange', new Date(event.location.timestamp), event.location);
+  }
+
   onMapLayout = () => {
     this.map.fitToElements(true);
   };
@@ -125,8 +146,10 @@ export default class Map extends Component {
       isMoving: false,
     });
     if (enabled) {
+      this.props.startJob();
       BackgroundGeolocation.start();
     } else {
+      this.props.finishJob();
       BackgroundGeolocation.stop();
     }
   };
@@ -230,5 +253,6 @@ const styles = StyleSheet.create({
   address: {
     flex: 1,
     paddingHorizontal: 15,
+    textAlign:'center'
   },
 });

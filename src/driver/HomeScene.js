@@ -28,9 +28,9 @@ class HomeScene extends Component {
 
   onStartStopButtonPress = () => {};
 
-  onAddressButtonPress = (item: object) => {
+  onAddressButtonPress = (order: object) => {
     this.props.navigation.navigate('CustomerLocationMap', {
-      address: item.address,
+      order: order,
     });
   };
 
