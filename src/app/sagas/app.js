@@ -57,6 +57,11 @@ function* boot() {
         entities: normalized.entities,
         payload: response.data,
       });
+
+      yield put({
+        type: AUTH_ACTION_TYPES.SYNC_USER_TO_SOCKET,
+      });
+
     } catch (error) {
       yield put({type: AUTH_ACTION_TYPES.LOGIN_FAILURE, error});
     }

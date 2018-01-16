@@ -20,6 +20,8 @@ export const ACTION_TYPES = {
   PASSWORD_UPDATE_FAILURE: '@user/PASSWORD_UPDATE_FAILURE',
   LOGOUT: '@user/LOGOUT',
   SET_AUTH_TOKEN: '@user/SET_AUTH_TOKEN',
+
+  SYNC_USER_TO_SOCKET: '@user/SYNC_USER_TO_SOCKET',
 };
 
 function login(credentials) {

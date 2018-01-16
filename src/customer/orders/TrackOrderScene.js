@@ -26,9 +26,15 @@ class TrackOrderScene extends Component {
     orderID: 0,
   };
 
+  loadTrackDetailScene = () => {
+    console.log('load');
+    this.props.navigation.navigate('TrackDetail',{
+      order:this.props.order
+    });
+  };
+
   render() {
     const {order} = this.props;
-
     return (
       <ScrollView
         style={{flex: 1}}
@@ -63,7 +69,7 @@ class TrackOrderScene extends Component {
           />
           <TrackItem
             title={I18n.t('on_our_way')}
-            onPress={() => {}}
+            onPress={this.loadTrackDetailScene}
             icon={
               <IconFactory
                 type="MaterialCommunityIcons"

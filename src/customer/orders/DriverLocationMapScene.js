@@ -4,10 +4,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import Map from 'driver/orders/components/Map';
+import Map from 'customer/orders/components/Map';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 
-class CustomerLocationMapScene extends Component {
+class DriverLocationMapScene extends Component {
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -70,4 +70,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CustomerLocationMapScene);
+export default connect(mapStateToProps)(DriverLocationMapScene);

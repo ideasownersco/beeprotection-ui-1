@@ -35,4 +35,5 @@ export const SELECTORS = {
   getAuthUser,
   getAuthUserType,
   getAuthUserProfile,
+  getAuthUserID
 };

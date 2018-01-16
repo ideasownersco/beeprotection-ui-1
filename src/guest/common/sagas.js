@@ -39,6 +39,10 @@ function* login(action) {
       payload: response.data,
     });
 
+    yield put({
+      type: ACTION_TYPES.SYNC_USER_TO_SOCKET,
+    });
+
     yield call(setStorageItem, AUTH_KEY, response.meta.api_token || '');
   } catch (error) {
     yield put({type: ACTION_TYPES.LOGIN_FAILURE, error});

@@ -13,6 +13,8 @@ import BidList from '/customer/orders/BidList';
 import OrderDetailScene from '/customer/orders/OrderDetailScene';
 import TrackOrderScene from '/customer/orders/TrackOrderScene';
 import Cart from '/customer/cart/Cart';
+import DriverLocationMapScene from "customer/orders/DriverLocationMapScene";
+import TrackDetailScene from "customer/orders/TrackDetailScene";
 
 const AuthStack = StackNavigator(
   {
@@ -51,6 +53,12 @@ const HomeStack = StackNavigator({
       headerLeft: <BackButton onPress={() => navigation.goBack(null)} />,
     }),
   },
+  DriverLocationMap: {
+    screen: DriverLocationMapScene,
+  },
+  TrackDetail:{
+    screen:TrackDetailScene
+  }
 });
 
 const SettingsStack = StackNavigator({

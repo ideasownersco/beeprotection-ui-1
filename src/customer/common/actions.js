@@ -40,6 +40,8 @@ export const ACTION_TYPES = {
   CHECKOUT_REQUEST: '@customer/CHECKOUT_REQUEST',
   CHECKOUT_SUCCESS: '@customer/CHECKOUT_SUCCESS',
   CHECKOUT_FAILURE: '@customer/CHECKOUT_FAILURE',
+
+  LOCATION_RECEIVED: '@customer/LOCATION_RECEIVED'
 };
 
 function fetchCartItems() {
@@ -127,6 +129,13 @@ function saveAddress(address: object) {
   };
 }
 
+function locationReceived(location:object) {
+  return {
+    type:ACTION_TYPES.LOCATION_RECEIVED,
+    payload:location
+  }
+}
+
 export const ACTIONS = {
   addToCart,
   fetchCartItems,
@@ -139,4 +148,5 @@ export const ACTIONS = {
   fetchStandingOrders,
   checkout,
   setCartItems,
+  locationReceived
 };
