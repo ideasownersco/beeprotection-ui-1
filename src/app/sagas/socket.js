@@ -4,7 +4,7 @@ import {SOCKET_SERVER} from 'utils/env';
 import {eventChannel} from 'redux-saga';
 
 import {
-  ACTIONS as CUSTOMER_ACTIONS,
+  ACTION_TYPES as CUSTOMER_ACTIONS,
 } from 'customer/common/actions';
 
 import {ACTION_TYPES as AUTH_ACTIONS} from 'guest/common/actions';
@@ -20,13 +20,25 @@ function connect() {
 }
 
 function subscribe(socket) {
+  console.log('socket',socket);
   return eventChannel(emit => {
-    socket.on('location.updated', location => {
-      emit(CUSTOMER_ACTIONS.locationReceived(location));
+    socket.on('location.updated', data => {
+      // console.log('location.updated',data);
+      // yield put({
+      //   type:CUSTOMER_ACTIONS.LOCATION_RECEIVED,
+      //   payload:data
+      // })
+      emit({
+          type:CUSTOMER_ACTIONS.LOCATION_RECEIVED,
+          payload:data
+      });
+      // emit(CUSTOMER_ACTIONS.locationReceived(data));
     });
     return () => {};
   });
+
 }
+
 
 // read from server
 function* read(socket) {
@@ -36,20 +48,6 @@ function* read(socket) {
     yield put(action);
   }
 }
-
-// write to server
-// function* addMessage(socket) {
-//   const state = yield select();
-//   const apiToken = AUTH_SELECTORS.getAuthToken(state);
-//   while (true) {
-//     const {params} = yield take(USER_ACTION_TYPES.SOCKET_EMIT_MESSAGE);
-//     const message = {
-//       api_token: apiToken,
-//       ...params.message,
-//     };
-//     socket.emit('message.new', message);
-//   }
-// }
 
 //
 function* syncUserToSocket(socket) {
@@ -62,23 +60,20 @@ function* syncUserToSocket(socket) {
 }
 
 //
-// function* subscribeUserToThread(socket) {
-//   while (true) {
-//     const threadParams = yield take(
-//       USER_ACTION_TYPES.SUBSCRIBE_TO_THREAD_SOCKET,
-//     );
-//     socket.emit('thread.subscribe', threadParams.params.thread_id);
-//   }
-// }
+function* subscribeToJobTrack(socket) {
+  while (true) {
+    const threadParams = yield take(
+      CUSTOMER_ACTIONS.SUBSCRIBE_TO_JOB_TRACK,
+    );
+    // console.log('subscribing to socket',threadParams.params.job_id);
+    socket.emit('job.track.subscribe', threadParams.params.job_id);
+  }
+}
 
 function* handleIO(socket) {
   yield fork(read, socket);
   yield fork(syncUserToSocket, socket);
-  // yield fork(subscribeUserToThread, socket);
-  // yield fork(addMessage, socket);
-  // yield put({
-  //   type: USER_ACTION_TYPES.SYNC_USER_TO_SOCKET,
-  // });
+  yield fork(subscribeToJobTrack, socket);
 }
 
 function* socketFlowMonitor() {

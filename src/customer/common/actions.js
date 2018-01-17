@@ -41,7 +41,9 @@ export const ACTION_TYPES = {
   CHECKOUT_SUCCESS: '@customer/CHECKOUT_SUCCESS',
   CHECKOUT_FAILURE: '@customer/CHECKOUT_FAILURE',
 
-  LOCATION_RECEIVED: '@customer/LOCATION_RECEIVED'
+  LOCATION_RECEIVED: '@customer/LOCATION_RECEIVED',
+
+  SUBSCRIBE_TO_JOB_TRACK: '@customer/SUBSCRIBE_TO_JOB_TRACK'
 };
 
 function fetchCartItems() {
@@ -136,6 +138,13 @@ function locationReceived(location:object) {
   }
 }
 
+function subscribeToJobTrack(params) {
+  return {
+    type:ACTION_TYPES.SUBSCRIBE_TO_JOB_TRACK,
+    params
+  }
+}
+
 export const ACTIONS = {
   addToCart,
   fetchCartItems,
@@ -148,5 +157,6 @@ export const ACTIONS = {
   fetchStandingOrders,
   checkout,
   setCartItems,
-  locationReceived
+  locationReceived,
+  subscribeToJobTrack
 };

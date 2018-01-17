@@ -12,6 +12,7 @@ const schemas = state => state.entities;
 const timingsEntity = state => state.entities.timings;
 const getStandingOrderIds = state => state.customer.orders.standingOrderIds;
 const getItemIdProp = ({}, itemID) => itemID;
+const getTrackings = state => state.customer.trackings;
 
 const getCategories = createSelector(
   [schemas, categoriesEntity],
@@ -59,9 +60,9 @@ const getCartItems = createSelector(
           category: categories[item.category],
           package: packages[item.package],
           services:
-            (item.services &&
-              item.services.map(service => services[service])) ||
-            [],
+          (item.services &&
+            item.services.map(service => services[service])) ||
+          [],
         };
       });
     // return Object.keys(items)
@@ -77,6 +78,13 @@ const getCartItems = createSelector(
   },
 );
 
+const getLocationUpdatesForJob = () => {
+  return createSelector(
+    [getTrackings, getItemIdProp],
+    (tracking, job) => tracking[job] || {}
+  );
+};
+
 export const SELECTORS = {
   getCart,
   getCartItems,
@@ -85,4 +93,5 @@ export const SELECTORS = {
   getTimings,
   getOrders,
   getOrderByID,
+  getLocationUpdatesForJob
 };

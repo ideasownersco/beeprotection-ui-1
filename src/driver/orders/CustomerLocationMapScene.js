@@ -45,6 +45,9 @@ class CustomerLocationMapScene extends Component {
   render() {
     let {order} = this.props.navigation.state.params;
     let {address} = order;
+    let {accepted_job} = this.props.navigation.state.params.order;
+
+    console.log('accepted_job',accepted_job);
 
     return (
       <Map
@@ -59,6 +62,7 @@ class CustomerLocationMapScene extends Component {
         startJob={this.onStartJobPress}
         finishJob={this.onFinishJobPress}
         updateLocation={this.onUpdateLocation}
+        jobID={accepted_job.id}
       />
     );
   }

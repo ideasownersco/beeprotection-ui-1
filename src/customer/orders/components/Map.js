@@ -21,16 +21,16 @@ export default class Map extends Component {
     }),
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      origin: {
-        latitude: this.props.origin.latitude,
-        longitude: this.props.origin.longitude,
-        heading: 0,
-      },
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     origin: {
+  //       latitude: this.props.origin.latitude,
+  //       longitude: this.props.origin.longitude,
+  //       heading: this.props.origin.heading,
+  //     },
+  //   };
+  // }
 
   onMapLayout = () => {
     this.map.fitToElements(true);
@@ -59,8 +59,8 @@ export default class Map extends Component {
 
   render() {
     const {destination} = this.props;
-    const {origin, enabled} = this.state;
-    const {heading} = this.state.origin;
+    const {origin} = this.props;
+    const {heading} = origin;
     const rotate =
       typeof heading === 'number' && heading >= 0 ? `${heading}deg` : null;
     return (

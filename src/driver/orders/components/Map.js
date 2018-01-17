@@ -52,18 +52,20 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
+    const {jobID} = this.props;
+
     BackgroundGeolocation.on('location', this.onLocation);
     BackgroundGeolocation.on('http', this.onHttp);
     BackgroundGeolocation.on('motionchange', this.onMotionChange.bind(this));
 
     BackgroundGeolocation.configure(
       {
-        distanceFilter: 100,
+        distanceFilter: 10,
         stopOnTerminate: false,
         // preventSuspend:false,
         startOnBoot: true,
         foregroundService: true,
-        url: 'http://beeprotection.test/api/jobs/1/location/update',
+        url: `http://beeprotection.test/api/jobs/${jobID}/location/update`,
         autoSync: true,
         debug: true,
         logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
