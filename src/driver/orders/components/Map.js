@@ -60,7 +60,7 @@ export default class Map extends Component {
 
     BackgroundGeolocation.configure(
       {
-        distanceFilter: 10,
+        distanceFilter: 1,
         stopOnTerminate: false,
         // preventSuspend:false,
         startOnBoot: true,
