@@ -38,11 +38,14 @@ export default class Map extends Component {
     finishJob:PropTypes.func.isRequired,
   };
 
+  static defaultPropTypes = {
+    jobStatus:'pending'
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       enabled: false,
-      isMoving: false,
       origin: {
         latitude: this.props.origin.latitude,
         longitude: this.props.origin.longitude,
@@ -52,7 +55,7 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
-    const {jobID} = this.props;
+    const {jobID,jobStatus} = this.props;
 
     BackgroundGeolocation.on('location', this.onLocation);
     BackgroundGeolocation.on('http', this.onHttp);
@@ -60,21 +63,20 @@ export default class Map extends Component {
 
     BackgroundGeolocation.configure(
       {
-        distanceFilter: 1,
+        distanceFilter: 10,
         stopOnTerminate: false,
-        // preventSuspend:false,
+        preventSuspend:false,
         startOnBoot: true,
         foregroundService: true,
         url: `http://beeprotection.test/api/jobs/${jobID}/location/update`,
         autoSync: true,
         debug: true,
         logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
-        maxRecordsToPersist: 1
+        maxRecordsToPersist: 1,
       },
       state => {
         this.setState({
-          enabled: state.enabled,
-          isMoving: state.isMoving,
+          enabled: state.enabled && jobStatus === 'working',
         });
       },
     );
@@ -85,6 +87,9 @@ export default class Map extends Component {
   }
 
   onLocation = location => {
+
+    this.map.fitToElements(true);
+
     console.log('[event] location: ', location);
     const lastPosition = this.state.origin;
     const currentLocation = {
@@ -101,10 +106,10 @@ export default class Map extends Component {
         },
       });
     }
+
   };
 
   onHttp(response) {
-
     console.log('[event] http: ', response);
     // this.addEvent('http', new Date(), response);
   }
@@ -141,20 +146,44 @@ export default class Map extends Component {
     });
   }
 
-  toggleStartStopTrip = () => {
-    let enabled = !this.state.enabled;
-    this.setState({
-      enabled: enabled,
-      isMoving: false,
-    });
-    if (enabled) {
+
+  startTrip = () => {
+    this.map.fitToElements(true);
+    if(!this.state.enabled) {
+      this.setState({
+        enabled: true,
+      });
       this.props.startJob();
       BackgroundGeolocation.start();
-    } else {
+    }
+  };
+
+  stopTrip = () => {
+    this.map.fitToElements(true);
+    if(this.state.enabled) {
+      this.setState({
+        enabled: false,
+      });
       this.props.finishJob();
       BackgroundGeolocation.stop();
     }
   };
+
+  // toggleStartStopTrip = () => {
+  //   this.map.fitToElements(true);
+  //
+  //   let enabled = !this.state.enabled;
+  //   this.setState({
+  //     enabled: enabled,
+  //   });
+  //   if (enabled) {
+  //     this.props.startJob();
+  //     BackgroundGeolocation.start();
+  //   } else {
+  //     this.props.finishJob();
+  //     BackgroundGeolocation.stop();
+  //   }
+  // };
 
   render() {
     const {destination} = this.props;
@@ -163,7 +192,7 @@ export default class Map extends Component {
     const rotate =
       typeof heading === 'number' && heading >= 0 ? `${heading}deg` : null;
 
-    console.log('state', ...this.state.origin);
+    console.log('enabled', this.state.enabled);
     return (
       <View style={styles.container}>
         <MapView
@@ -217,7 +246,7 @@ export default class Map extends Component {
 
           <Button
             title={enabled ? 'Stop Trip' : 'Start Trip'}
-            onPress={this.toggleStartStopTrip}
+            onPress={enabled ? this.stopTrip : this.startTrip}
             style={{marginBottom: 10}}
           />
         </View>

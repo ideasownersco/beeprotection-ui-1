@@ -16,6 +16,7 @@ class HomeScene extends Component {
   };
 
   componentDidMount() {
+    this.props.dispatch(DRIVER_ACTIONS.fetchWorkingOrder());
     this.props.dispatch(DRIVER_ACTIONS.fetchUpcomingOrders());
     this.props.dispatch(DRIVER_ACTIONS.fetchProfile());
   }

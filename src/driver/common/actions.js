@@ -15,6 +15,10 @@ export const ACTION_TYPES = {
   FETCH_UPCOMING_ORDERS_SUCCESS: '@driver/FETCH_UPCOMING_ORDERS_SUCCESS',
   FETCH_UPCOMING_ORDERS_FAILURE: '@driver/FETCH_UPCOMING_ORDERS_FAILURE',
 
+  FETCH_CURRENT_JOB_REQUEST: '@driver/FETCH_CURRENT_JOB_REQUEST',
+  FETCH_CURRENT_JOB_SUCCESS: '@driver/FETCH_CURRENT_JOB_SUCCESS',
+  FETCH_CURRENT_JOB_FAILURE: '@driver/FETCH_CURRENT_JOB_FAILURE',
+
   START_JOB_REQUEST: '@driver/START_JOB_REQUEST',
   START_JOB_SUCCESS: '@driver/START_JOB_SUCCESS',
   START_JOB_FAILURE: '@driver/START_JOB_FAILURE',
@@ -27,6 +31,13 @@ export const ACTION_TYPES = {
 function fetchProfile(params) {
   return {
     type: ACTION_TYPES.FETCH_PROFILE_REQUEST,
+    params,
+  };
+}
+
+function fetchCurrentJob(params) {
+  return {
+    type: ACTION_TYPES.FETCH_CURRENT_JOB_REQUEST,
     params,
   };
 }
@@ -63,6 +74,7 @@ export const ACTIONS = {
   saveProfile,
   fetchProfile,
   fetchUpcomingOrders,
+  fetchCurrentJob,
   startJob,
   finishJob
 };

@@ -4,6 +4,20 @@ import {ACTION_TYPES} from 'driver/common/actions';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 
+function* fetchCurrentJob() {
+  try {
+    const response = yield call(API.fetchCurrentJob);
+    const normalized = normalize(response.data, Schema.jobs);
+    yield put({
+      type: ACTION_TYPES.FETCH_CURRENT_JOB_SUCCESS,
+      entities: normalized.entities,
+      id: normalized.result,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.FETCH_CURRENT_JOB_FAILURE, error});
+  }
+}
+
 function* fetchUpcomingOrders() {
   try {
     const response = yield call(API.fetchUpcomingOrders);
@@ -25,4 +39,11 @@ function* fetchUpcomingOrdersMonitor() {
   );
 }
 
-export const sagas = all([fork(fetchUpcomingOrdersMonitor)]);
+function* fetchCurrentJobMonitor() {
+  yield takeLatest(
+    ACTION_TYPES.FETCH_CURRENT_JOB_REQUEST,
+    fetchCurrentJob,
+  );
+}
+
+export const sagas = all([fork(fetchCurrentJobMonitor)]);

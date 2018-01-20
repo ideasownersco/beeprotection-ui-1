@@ -63,6 +63,7 @@ class CustomerLocationMapScene extends Component {
         finishJob={this.onFinishJobPress}
         updateLocation={this.onUpdateLocation}
         jobID={accepted_job.id}
+        jobStatus={accepted_job.status}
       />
     );
   }

@@ -39,10 +39,16 @@ function fetchUpcomingOrders() {
   return request({url});
 }
 
+function fetchCurrentJob() {
+  const url = `driver/jobs/current`;
+  return request({url});
+}
+
 export const API = {
   saveProfile,
   fetchProfile,
   fetchUpcomingOrders,
+  fetchCurrentJob,
   startJob,
   finishJob
 };
