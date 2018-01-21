@@ -102,5 +102,6 @@
   "drivers" : "Drivers",
   "driver_assigned" : "Driver Assigned",
   "start" : "Start",
-  "stop" : "Stop"
+  "stop" : "Stop",
+  "working_order" : "Current Order"
 }

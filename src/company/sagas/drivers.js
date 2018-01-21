@@ -5,6 +5,7 @@ import {normalize} from 'normalizr';
 import {ACTION_TYPES as DRIVER_ACTIONS} from 'company/actions/drivers';
 import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
 import I18n from 'utils/locale';
+
 function* fetchDrivers() {
   try {
     const response = yield call(API.fetchDrivers);

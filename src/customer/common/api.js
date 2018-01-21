@@ -20,8 +20,8 @@ function fetchAddresses(params = '') {
   return request({url});
 }
 
-function fetchStandingOrders(params = '') {
-  const url = `customer/orders${params}`;
+function fetchUpcomingOrders(params = '') {
+  const url = `customer/orders/upcoming${params}`;
   return request({url});
 }
 
@@ -54,5 +54,5 @@ export const API = {
   fetchAddresses,
   saveAddress,
   saveOrder,
-  fetchStandingOrders,
+  fetchUpcomingOrders,
 };

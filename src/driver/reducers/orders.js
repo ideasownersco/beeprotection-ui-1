@@ -2,7 +2,7 @@ import {ACTION_TYPES} from 'driver/common/actions';
 
 const initialState = {
   upcomingOrderIDs: [],
-  currentOrderID: null,
+  workingOrderID: null,
   isWorking: false,
 };
 
@@ -12,6 +12,25 @@ export function reducer(state = initialState, action = {}) {
       return {
         ...state,
         upcomingOrderIDs: action.ids,
+      };
+    }
+    case ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS: {
+      return {
+        ...state,
+        workingOrderID: action.id,
+      };
+    }
+    case ACTION_TYPES.START_JOB_SUCCESS: {
+      return {
+        ...state,
+        isWorking: true,
+      };
+    }
+    case ACTION_TYPES.FINISH_JOB_SUCCESS: {
+      return {
+        ...state,
+        workingOrderID: null,
+        isWorking: false,
       };
     }
     default:

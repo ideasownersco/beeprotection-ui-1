@@ -43,7 +43,12 @@ export const ACTION_TYPES = {
 
   LOCATION_RECEIVED: '@customer/LOCATION_RECEIVED',
 
-  SUBSCRIBE_TO_JOB_TRACK: '@customer/SUBSCRIBE_TO_JOB_TRACK'
+  SUBSCRIBE_TO_JOB_TRACK: '@customer/SUBSCRIBE_TO_JOB_TRACK',
+
+  FETCH_UPCOMING_ORDERS_REQUEST: '@customer/FETCH_UPCOMING_ORDERS_REQUEST',
+  FETCH_UPCOMING_ORDERS_SUCCESS: '@customer/FETCH_UPCOMING_ORDERS_SUCCESS',
+  FETCH_UPCOMING_ORDERS_FAILURE: '@customer/FETCH_UPCOMING_ORDERS_FAILURE',
+
 };
 
 function fetchCartItems() {
@@ -145,6 +150,13 @@ function subscribeToJobTrack(params) {
   }
 }
 
+function fetchUpcomingOrders(params) {
+  return {
+    type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST,
+    params,
+  };
+}
+
 export const ACTIONS = {
   addToCart,
   fetchCartItems,
@@ -158,5 +170,6 @@ export const ACTIONS = {
   checkout,
   setCartItems,
   locationReceived,
-  subscribeToJobTrack
+  subscribeToJobTrack,
+  fetchUpcomingOrders
 };

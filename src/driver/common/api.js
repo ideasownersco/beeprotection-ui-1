@@ -35,12 +35,12 @@ function fetchProfile() {
 }
 
 function fetchUpcomingOrders() {
-  const url = `driver/orders`;
+  const url = `driver/orders/upcoming`;
   return request({url});
 }
 
-function fetchCurrentJob() {
-  const url = `driver/jobs/current`;
+function fetchWorkingOrder() {
+  const url = `driver/orders/working`;
   return request({url});
 }
 
@@ -48,7 +48,7 @@ export const API = {
   saveProfile,
   fetchProfile,
   fetchUpcomingOrders,
-  fetchCurrentJob,
+  fetchWorkingOrder,
   startJob,
   finishJob
 };

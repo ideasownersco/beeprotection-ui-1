@@ -8,6 +8,7 @@ function* startJob(action) {
   try {
     const response = yield call(API.startJob,action.params.job_id,action.params);
     const normalized = normalize(response.data, Schema.jobs);
+
     yield put({
       type: ACTION_TYPES.START_JOB_SUCCESS,
       entities: normalized.entities,
@@ -21,6 +22,7 @@ function* finishJob(action) {
   try {
     const response = yield call(API.finishJob,action.params.job_id,action.params);
     const normalized = normalize(response.data, Schema.jobs);
+
     yield put({
       type: ACTION_TYPES.FINISH_JOB_SUCCESS,
       entities: normalized.entities,

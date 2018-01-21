@@ -40,7 +40,7 @@ export default class OrdersList extends Component {
           <View style={{flex: 1}}>
             <View style={styles.itemContentContainer}>
               <Text style={styles.dateTime}>
-                Wed, {item.time.name}, {item.date}
+                {item.date}, {item.time}
               </Text>
             </View>
 

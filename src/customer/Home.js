@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ScrollView} from 'react-native';
-import HomeActionButtons from './components/HomeActionButtons';
+import HomeActionButtons from 'customer/components/HomeActionButtons';
 import StandingOrdersList from 'customer/components/StandingOrdersList';
 import {SELECTORS} from 'customer/common/selectors';
 import {connect} from 'react-redux';
@@ -9,7 +9,7 @@ import WelcomeText from './components/WelcomeText';
 
 class Home extends Component {
   componentDidMount() {
-    this.props.dispatch(ORDER_ACTIONS.fetchStandingOrders());
+    this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
   }
 
   onCreateOrderPress = () => {

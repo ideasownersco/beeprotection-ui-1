@@ -45,9 +45,9 @@ function* fetchAddresses() {
   }
 }
 
-function* fetchStandingOrders() {
+function* fetchUpcomingOrders() {
   try {
-    const response = yield call(API.fetchStandingOrders);
+    const response = yield call(API.fetchUpcomingOrders);
     const normalized = normalize(response.data, [Schema.orders]);
 
     let {entities, result} = normalized;
@@ -128,8 +128,8 @@ function* fetchAddressesMonitor() {
   yield takeLatest(ACTION_TYPES.ADDRESSES_REQUEST, fetchAddresses);
 }
 
-function* fetchStandingOrdersMonitor() {
-  yield takeLatest(ACTION_TYPES.STANDING_ORDERS_REQUEST, fetchStandingOrders);
+function* fetchUpcomingOrdersMonitor() {
+  yield takeLatest(ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST, fetchUpcomingOrders);
 }
 
 function* saveAddressMonitor() {
@@ -147,7 +147,7 @@ function* checkoutMonitor() {
 export const sagas = all([
   fork(fetchCategoriesMonitor),
   fork(fetchTimingsMonitor),
-  fork(fetchStandingOrdersMonitor),
+  fork(fetchUpcomingOrdersMonitor),
   fork(fetchAddressesMonitor),
   fork(saveAddressMonitor),
   fork(saveOrderMonitor),
