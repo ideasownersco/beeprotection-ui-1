@@ -23,6 +23,7 @@ import moment from 'moment';
 import Separator from 'components/Separator';
 import NavigatorService from 'components/NavigatorService';
 import colors from '../../assets/theme/colors';
+import SectionHeading from "../../company/components/SectionHeading";
 
 type State = {
   dates: Array,
@@ -48,7 +49,7 @@ class Cart extends PureComponent {
   performCheckout = () => {
     const {user, isAuthenticated, cart} = this.props;
 
-    const {selectedDate, selectedTimeID, selectedAddressID} = cart;
+    const {selectedDate, selectedTime, selectedAddressID} = cart;
     if (!isAuthenticated) {
       this.props.navigation.navigate('Login');
     } else {
@@ -57,7 +58,7 @@ class Cart extends PureComponent {
         address_id: selectedAddressID,
         items: this.props.cart.items,
         total: this.props.cart.total,
-        time_id: selectedTimeID,
+        time: selectedTime,
         date: selectedDate,
       };
 
@@ -71,8 +72,9 @@ class Cart extends PureComponent {
     this.props.actions.setCartItem('selectedDate', item);
   };
 
-  onTimePickerItemPress = (item: object) => {
-    this.props.actions.setCartItem('selectedTimeID', item.id);
+  onTimePickerItemPress = (time) => {
+    console.log('time',time);
+    this.props.actions.setCartItem('selectedTime', time);
   };
 
   onPaymentOptionsItemPress = () => {};
@@ -97,7 +99,7 @@ class Cart extends PureComponent {
   render() {
     let {cart, timings, cartItems, user} = this.props;
 
-    let {selectedDate, selectedTimeID, selectedAddressID} = cart;
+    let {selectedDate, selectedTime, selectedAddressID} = cart;
     let {dates} = this.state;
 
     return cartItems.length ? (
@@ -114,10 +116,30 @@ class Cart extends PureComponent {
 
         <Separator style={{marginVertical: 10}} />
 
+        {/*<TimePicker*/}
+          {/*items={timings}*/}
+          {/*onItemPress={this.onTimePickerItemPress}*/}
+          {/*activeItemID={selectedTime}*/}
+        {/*/>*/}
+
+        <SectionHeading title={I18n.t('select_time')}/>
         <TimePicker
-          items={timings}
-          onItemPress={this.onTimePickerItemPress}
-          activeItemID={selectedTimeID}
+          mode="time"
+          date={selectedTime}
+          placeholder={I18n.t('select')}
+          confirmBtnText={I18n.t('confirm')}
+          cancelBtnText={I18n.t('cancel')}
+          onDateChange={this.onTimePickerItemPress}
+          customStyles={{
+            dateTouchBody:{
+              padding:10,
+            },
+            dateText:{
+              color:colors.primary,
+              fontWeight:'500',
+              fontSize:25
+            }
+          }}
         />
 
         <Separator style={{marginVertical: 10}} />

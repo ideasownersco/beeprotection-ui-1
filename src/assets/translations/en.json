@@ -103,5 +103,7 @@
   "driver_assigned" : "Driver Assigned",
   "start" : "Start",
   "stop" : "Stop",
-  "working_order" : "Current Order"
+  "working_order" : "Current Order",
+  "select_time" : "Select Time",
+  "select" : "Select",
 }
