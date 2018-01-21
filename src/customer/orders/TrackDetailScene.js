@@ -24,39 +24,55 @@ class TrackDetailScene extends Component {
     }),
   };
 
-  componentDidMount() {
-    console.log('this.props',this.props);
-    const {accepted_job} = this.props.navigation.state.params.order;
-    console.log('compone',accepted_job);
-
-    this.props.dispatch(CUSTOMER_ACTIONS.subscribeToJobTrack({
-      job_id:accepted_job.id
-    }))
-  }
 
   static defaultProps = {
-    order: {},
+    navigation: {
+      state: {
+        params: {
+          order: {
+            accepted_job: {}
+          },
+        }
+      }
+    }
   };
+
+  componentDidMount() {
+    const {accepted_job} = this.props.navigation.state.params.order;
+    if (accepted_job) {
+      this.props.dispatch(CUSTOMER_ACTIONS.subscribeToJobTrack({
+        job_id: accepted_job.id
+      }))
+    }
+  }
+
 
   render() {
     let {order} = this.props.navigation.state.params;
+    let {tracking} = this.props;
     let {address} = order;
 
-    let {tracking} = this.props;
-    // console.log('tracking',tracking);
+    const {accepted_job} = this.props.navigation.state.params.order;
 
     let origin;
-    if(tracking.latitude) {
+
+    if (tracking.latitude) {
       origin = tracking
     } else {
       origin = {
         latitude: 37.78825,
         longitude: -122.4324,
-        heading:0
+        heading: 0
       }
     }
 
-    console.log('origin',origin);
+    if (!accepted_job) {
+      return (
+        <View style={{ padding:10 }}>
+          <Text style={{ textAlign:'center'}}>{I18n.t('tracking_not_available')}</Text>
+        </View>
+      )
+    }
 
     return (
       <Map
@@ -71,11 +87,17 @@ class TrackDetailScene extends Component {
 }
 
 const makeMapStateToProps = () => {
+
   const getLocationUpdatesForJob = ORDER_SELECTORS.getLocationUpdatesForJob();
+
   const mapStateToProps = (state, props) => {
+
+    const {accepted_job} = props.navigation.state.params.order;
+
     return {
-      tracking: getLocationUpdatesForJob(state, props.navigation.state.params.order.accepted_job.id),
+      tracking: accepted_job ? getLocationUpdatesForJob(state, accepted_job.id) : {},
     };
+
   };
   return mapStateToProps;
 };
