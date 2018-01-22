@@ -30,6 +30,7 @@ const initialState = {
   activeServicesIDs: [],
   amount: 0,
 };
+
 class CreateOrder extends PureComponent {
   state: State = initialState;
 
@@ -80,19 +81,10 @@ class CreateOrder extends PureComponent {
         activePackageID: undefined,
         activeServicesIDs: [],
       });
-
-      // this.props.actions.setCartItem('activePackageID', undefined);
-      // this.props.actions.setCartItem('activeServicesIDs', []);
-      // this.props.actions.setCartItem('activeCategoryID', item.id);
     }
   };
 
   onPackagesListItemPress = (item: object) => {
-    // if (this.props.cartReducer.activePackageID !== item.id) {
-    //   this.props.actions.setCartItem('activeServicesIDs', []);
-    // }
-    // this.props.actions.setCartItem('activePackageID', item.id);
-    // this.props.actions.setCartItem('total', parseInt(item.price));
 
     let params = {
       activePackageID: item.id,
@@ -115,15 +107,6 @@ class CreateOrder extends PureComponent {
     let currentAmount = parseInt(total) + parseInt(item.price);
 
     let index = activeServicesIDs.indexOf(item.id);
-
-    // this.props.actions.setCartItem(
-    //   'activeServicesIDs',
-    //   index > -1
-    //     ? activeServicesIDs.filter(serviceID => serviceID !== item.id)
-    //     : activeServicesIDs.concat(item.id),
-    // );
-    //
-    // this.props.actions.setCartItem('total', currentAmount);
 
     let params = {
       activeServicesIDs:
@@ -184,6 +167,7 @@ class CreateOrder extends PureComponent {
         style={{flex: 1, backgroundColor: 'white'}}
         keyboardShouldPersistTaps={'always'}
         contentInset={{bottom: 50}}>
+
         <CategoriesList
           items={categories}
           onItemPress={this.onCategoriesListItemPress}

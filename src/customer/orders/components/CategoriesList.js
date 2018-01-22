@@ -24,7 +24,7 @@ export default class CategoriesList extends Component {
             style={styles.image}
             resizeMode="contain"
           />
-          <LocalizedText
+          <Text
             style={[
               styles.title,
               item.id === activeItemID && {
@@ -32,9 +32,10 @@ export default class CategoriesList extends Component {
                 fontWeight: 'bold',
               },
             ]}
-            ar={item.name_ar}
-            en={item.name_en}
-          />
+
+          >
+            {item.name}
+          </Text>
         </View>
       </Touchable>
     );
