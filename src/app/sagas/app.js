@@ -49,7 +49,9 @@ function* boot() {
     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
     try {
       let response = yield call(AUTH_API.login, {
-        push_token: pushTokenStorageKey,
+        body:{
+          push_token: pushTokenStorageKey,
+        }
       });
       const normalized = normalize(response.data, Schema.users);
       yield put({
@@ -102,13 +104,20 @@ function* setLanguage(action) {
 
 function* setPushToken(action) {
   try {
-    const apiToken = yield call(getStorageItem, AUTH_KEY);
-    const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
-    const urlParams = `?api_token=${apiToken}`;
+    // const apiToken = yield call(getStorageItem, AUTH_KEY);
+
+    const params = {
+      body: {
+        token: action.params.token,
+        os: action.params.os,
+      }
+    };
+
+    const pushTokenStorageKey = yield call(getStorageItem, params);
 
     if (!pushTokenStorageKey) {
       yield call(setStorageItem, PUSH_TOKEN_KEY, action.params.token);
-      yield call(API.storePushToken, urlParams, {
+      yield call(API.storePushToken, {
         token: action.params.token,
         os: action.params.os,
       });

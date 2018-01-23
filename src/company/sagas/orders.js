@@ -18,12 +18,15 @@ function* fetchUpcomingOrders() {
         error: I18n.t('no_more_records'),
       });
     } else {
-      // initial query
-      let urlParams = nextPage || null;
+      let paginated = !!nextPage;
 
-      console.log('urlParams',urlParams);
+      const params = {
+        paginated: paginated,
+        paginatedUrl:nextPage
+      };
 
-      const response = yield call(API.fetchUpcomingOrders, urlParams);
+      const response = yield call(API.fetchUpcomingOrders, params);
+
       const normalized = normalize(response.data, [Schema.orders]);
       const {entities, result} = normalized;
       console.log('fetchUpcomingOrders', normalized);
@@ -48,18 +51,18 @@ function* fetchWorkingOrders() {
 
     if (nextPage === null) {
       yield put({
-        type: ORDER_ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE,
+        type: ORDER_ACTION_TYPES.FETCH_WORKING_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),
       });
     } else {
-      // initial query
-      let paginationAwareUrl = {
-        pagination:true,
-        url:nextPage,
-        body:{}
+      let paginated = !!nextPage;
+
+      const params = {
+        paginated: paginated,
+        paginatedUrl:nextPage
       };
 
-      const response = yield call(API.fetchWorkingOrders, paginationAwareUrl);
+      const response = yield call(API.fetchWorkingOrders, params);
       const normalized = normalize(response.data, [Schema.orders]);
       const {entities, result} = normalized;
       console.log('fetchWorkingOrders', normalized);

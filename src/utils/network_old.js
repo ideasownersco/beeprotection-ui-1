@@ -5,43 +5,23 @@ import NavigatorService from 'components/NavigatorService';
 
 export async function request({
   url,
-  paginated = false,
-  protocol = 'http://',
-  domain = null,
   method = 'GET',
-  params = {
-    body : null, // for POST
-    urlParams: null, // in url abc=1 // must be QS.stringified
-    isBlob : false,
-  },
-  // body = null,
-  // isBlob = false,
+  body = null,
+  isBlob = false,
   requiresAuthentication = false,
   forceAuthentication = false,
 }) {
-  // const delimiter = url.indexOf('?') === -1 ? '?' : '&';
-
-  // const localeAwareUrl = `${API_URL}/${url + delimiter}lang=${I18n.locale}`;
-
-
-  const urlParams = params.urlParams ? `&${params.urlParams}` : '';
-
-  const localeAwareUrl = `${API_URL}/${url}?lang=${I18n.locale}${urlParams}`;
-
-  let domainName = domain ? domain : paginated ? url : localeAwareUrl; // abc.com //http://abc.com/?page=1&lang=2
-
-  let fullURL =  `${protocol}${domainName}`; // http://abc.com/?page=1&lang=2
-
+  const delimiter = url.indexOf('?') === -1 ? '?' : '&';
+  const localeAwareUrl = `${API_URL}/${url + delimiter}lang=${I18n.locale}`;
   const apiToken = await getStorageItem(AUTH_KEY);
 
   if (__DEV__) {
     if (console.group) {
       console.groupCollapsed('action', 'NETWORK_REQUEST');
       console.log({
-        url: fullURL,
         method: method,
-        body: params.body,
-        api_token:apiToken
+        body: body,
+        url: localeAwareUrl,
       });
       console.groupEnd();
     }
@@ -66,12 +46,12 @@ export async function request({
   headers.append('Authorization', 'Bearer ' + apiToken);
   headers.append(
     'Content-Type',
-    params.isBlob ? 'multipart/form-data' : 'application/json',
+    isBlob ? 'multipart/form-data' : 'application/json',
   );
 
-  const request = fetch(fullURL, {
+  const request = fetch(localeAwareUrl, {
     method,
-    body: params.isBlob ? params.body : JSON.stringify(params.body),
+    body: method === 'GET' ? null : isBlob ? body : JSON.stringify(body),
     headers,
   });
 

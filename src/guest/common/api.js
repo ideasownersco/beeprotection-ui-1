@@ -7,7 +7,7 @@ function login(params, token) {
 
   let requestParams = {
     url,
-    body: params,
+    params,
     method: 'POST',
   };
   return request(requestParams);

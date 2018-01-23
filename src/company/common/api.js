@@ -2,7 +2,7 @@ import {request} from 'utils/network';
 
 function fetchUpcomingOrders(params = {}) {
   const url = `company/orders/upcoming`;
-  return request({url, params, requiresAuthentication: true});
+  return request({url, params, requiresAuthentication: true, params});
 }
 
 function fetchPastOrders(params = '') {
@@ -10,9 +10,9 @@ function fetchPastOrders(params = '') {
   return request({url, requiresAuthentication: true});
 }
 
-function fetchWorkingOrders(params = '') {
-  const url = `company/orders/working/${params}`;
-  return request({url, requiresAuthentication: true});
+function fetchWorkingOrders(params = {}) {
+  const url = `company/orders/working`;
+  return request({url, requiresAuthentication: true, params});
 }
 
 function fetchDrivers() {
@@ -20,17 +20,17 @@ function fetchDrivers() {
   return request({url, requiresAuthentication: true});
 }
 
-function fetchOrderDetails(params = '') {
-  const url = `company/orders/${params.order_id}/details`;
+function fetchOrderDetails(params = {}) {
+  const url = `company/orders/${params.id}/details`;
   return request({url, requiresAuthentication: true});
 }
 
-function assignDriver(params) {
-  const url = `company/orders/${params.order_id}/drivers/assign`;
+function assignDriver(params = {}) {
+  const url = `company/orders/${params.id}/drivers/assign`;
   let requestParams = {
     url,
     method: 'POST',
-    body: params,
+    params,
   };
   return request(requestParams);
 }

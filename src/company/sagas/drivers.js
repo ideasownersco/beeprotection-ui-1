@@ -22,7 +22,13 @@ function* fetchDrivers() {
 
 function* assignDriver(action) {
   try {
-    const response = yield call(API.assignDriver, action.params);
+
+    const params = {
+      body: action.params,
+      id:action.params.order_id
+    };
+
+    const response = yield call(API.assignDriver, params);
     const normalized = normalize(response.data, Schema.orders);
 
     yield put({

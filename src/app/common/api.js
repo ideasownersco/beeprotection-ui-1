@@ -1,9 +1,9 @@
 import {API_URL} from 'utils/env';
 import {request} from 'utils/network';
 
-function storePushToken(urlParams, body) {
-  const url = `${API_URL}/push_token/register${urlParams}`;
-  return request({url, method: 'POST', body});
+function storePushToken(params) {
+  const url = `push_token/register`;
+  return request({url, method: 'POST', params});
 }
 
 export const API = {
