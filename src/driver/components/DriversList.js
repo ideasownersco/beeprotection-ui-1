@@ -20,6 +20,11 @@ export default class DriversList extends Component {
     );
   }
 
+  static defaultProps = {
+    activeItemID:0
+  };
+
+
   renderItem = ({item}) => {
     const {onItemPress, activeItemID} = this.props;
 

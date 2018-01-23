@@ -3,7 +3,7 @@ import {request} from 'utils/network';
 
 function storePushToken(urlParams, body) {
   const url = `${API_URL}/push_token/register${urlParams}`;
-  return request({url, POST: 'POST', body});
+  return request({url, method: 'POST', body});
 }
 
 export const API = {

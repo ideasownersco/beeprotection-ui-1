@@ -82,8 +82,6 @@ function* setCountry(action) {
 }
 
 function* setLanguage(action) {
-  console.log('action', action);
-
   if (action.language === 'ar') {
     I18nManager.allowRTL(true);
     I18nManager.forceRTL(true);

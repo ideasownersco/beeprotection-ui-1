@@ -7,7 +7,7 @@ import DrawerIcon from 'components/DrawerIcon';
 import OrderDetailScene from 'company/orders/OrderDetailScene';
 import PastOrdersScene from 'company/orders/PastOrdersScene';
 import UpcomingOrdersScene from 'company/orders/UpcomingOrdersScene';
-import CurrentOrdersScene from 'company/orders/CurrentOrdersScene';
+import WorkingOrdersScene from 'company/orders/WorkingOrdersScene';
 import DriversListScene from 'company/drivers/DriversListScene';
 import AddDriverScene from 'company/drivers/AddDriverScene';
 import DriverDetailScene from 'company/drivers/DriverDetailScene';
@@ -31,7 +31,9 @@ const HomeStack = StackNavigator({
   DriverDetail: {screen: DriverDetailScene},
   PastOrders: {screen: PastOrdersScene},
   UpcomingOrders: {screen: UpcomingOrdersScene},
-  CurrentOrders: {screen: CurrentOrdersScene},
+  WorkingOrders: {screen: WorkingOrdersScene},
+},{
+  // initialRouteName:'WorkingOrders'
 });
 
 const DriversStack = StackNavigator({
@@ -55,9 +57,9 @@ const UpcomingOrdersStack = StackNavigator({
   },
 });
 
-const CurrentOrdersStack = StackNavigator({
-  CurrentOrders: {
-    screen: CurrentOrdersScene,
+const WorkingOrdersStack = StackNavigator({
+  WorkingOrders: {
+    screen: WorkingOrdersScene,
     navigationOptions: ({navigation}) => getDrawerIcon(navigation),
   },
 });
@@ -73,7 +75,7 @@ const DrawerRoutes = {
   HomeStack: {screen: HomeStack},
   DriversStack: {screen: DriversStack},
   PastOrdersStack: {screen: PastOrdersStack},
-  CurrentOrdersStack: {screen: CurrentOrdersStack},
+  WorkingOrdersStack: {screen: WorkingOrdersStack},
   UpcomingOrdersStack: {screen: UpcomingOrdersStack},
   SettingsStack: {screen: SettingsStack},
   Login: {screen: Login},

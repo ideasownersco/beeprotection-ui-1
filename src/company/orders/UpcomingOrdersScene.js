@@ -15,7 +15,7 @@ class UpcomingOrdersScene extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.dispatch(ORDER_ACTIONS.fetchStandingOrders());
+    this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
   }
 
   onOrdersListItemPress = (item: object) => {
@@ -24,14 +24,25 @@ class UpcomingOrdersScene extends PureComponent {
     });
   };
 
+  onFetchMore = () => {
+
+  };
+
+  onPullToRefresh = () => {
+
+  };
+
   render() {
-    const {orders} = this.props;
+    const {orders,isFetching} = this.props;
 
     return (
       <OrdersList
         items={orders}
         onItemPress={this.onOrdersListItemPress}
         activeItemID={0}
+        isFetching={isFetching}
+        onFetchMore={this.onFetchMore}
+        onPullToRefresh={this.onPullToRefresh}
       />
     );
   }
@@ -39,7 +50,8 @@ class UpcomingOrdersScene extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    orders: ORDER_SELECTORS.getOrders(state),
+    orders: ORDER_SELECTORS.getUpcomingOrders(state),
+    isFetching: state.company.upcoming_orders.isFetching,
   };
 }
 

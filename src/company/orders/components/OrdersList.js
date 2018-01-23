@@ -14,6 +14,16 @@ export default class OrdersList extends Component {
     items: PropTypes.array.isRequired,
     onItemPress: PropTypes.func.isRequired,
     activeItemID: PropTypes.number,
+    onPullToRefresh:PropTypes.func.isRequired,
+    isFetching:PropTypes.bool.isRequired,
+    onFetchMore:PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    isFetching:false,
+    onPullToRefresh:()=>{},
+    onFetchMore:()=>{},
+    activeItemID:undefined
   };
 
   shouldComponentUpdate(nextProps) {
@@ -32,7 +42,7 @@ export default class OrdersList extends Component {
           <View style={{flex: 1}}>
             <View style={styles.itemContentContainer}>
               <Text style={styles.dateTime}>
-                Wed, {item.time.name}, {item.date}
+                {item.date}, {item.time}
               </Text>
             </View>
 
@@ -62,7 +72,7 @@ export default class OrdersList extends Component {
   };
 
   render() {
-    const {items} = this.props;
+    const {items,onPullToRefresh,isFetching,onFetchMore} = this.props;
     return (
       <FlatList
         data={items}
@@ -70,6 +80,16 @@ export default class OrdersList extends Component {
         style={styles.listContainer}
         keyExtractor={item => item.id}
         ItemSeparatorComponent={() => <Separator />}
+        onRefresh={() => onPullToRefresh()}
+        scrollEventThrottle={120}
+        ref="listView"
+        showsVerticalScrollIndicator={false}
+        automaticallyAdjustContentInsets={false}
+        enableEmptySections={true}
+        initialListSize={20}
+        onEndReachedThreshold={1}
+        onEndReached={() => !isFetching && onFetchMore()}
+        refreshing={isFetching}
       />
     );
   }

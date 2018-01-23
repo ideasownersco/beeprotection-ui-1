@@ -25,8 +25,9 @@ class HomeScene extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.dispatch(ORDER_ACTIONS.fetchStandingOrders());
-    this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
+    // this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
+    // this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders());
+    // this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
   }
 
   onOrdersListItemPress = (item: object) => {
@@ -50,7 +51,7 @@ class HomeScene extends PureComponent {
   };
 
   loadCurrentOrders = () => {
-    this.props.navigation.navigate('CurrentOrders');
+    this.props.navigation.navigate('WorkingOrders');
   };
 
   render() {
@@ -58,6 +59,7 @@ class HomeScene extends PureComponent {
 
     return (
       <ScrollView style={{flex: 1}}>
+
         <SectionHeading
           title={I18n.t('current_orders')}
           buttonTitle={I18n.t('view_all')}
@@ -67,7 +69,6 @@ class HomeScene extends PureComponent {
         <OrdersList
           items={current_orders}
           onItemPress={this.onOrdersListItemPress}
-          activeItemID={0}
         />
 
         <SectionHeading
@@ -79,7 +80,6 @@ class HomeScene extends PureComponent {
         <DriversList
           items={drivers}
           onItemPress={this.onDriversListItemPress}
-          activeItemID={0}
         />
 
         <SectionHeading
@@ -91,7 +91,6 @@ class HomeScene extends PureComponent {
         <OrdersList
           items={upcoming_orders}
           onItemPress={this.onOrdersListItemPress}
-          activeItemID={0}
         />
       </ScrollView>
     );
@@ -100,8 +99,8 @@ class HomeScene extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    upcoming_orders: ORDER_SELECTORS.getOrders(state),
-    current_orders: ORDER_SELECTORS.getOrders(state),
+    upcoming_orders: ORDER_SELECTORS.getUpcomingOrders(state),
+    current_orders: ORDER_SELECTORS.getWorkingOrders(state),
     drivers: DRIVER_SELECTORS.getDrivers(state),
   };
 }

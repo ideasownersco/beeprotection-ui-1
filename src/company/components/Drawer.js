@@ -49,14 +49,14 @@ export default class Drawer extends Component {
         <Separator />
         <DrawerItem
           title={I18n.t('current_orders')}
-          routeName="CurrentOrdersStack"
+          routeName="WorkingOrdersStack"
           onItemPress={this.onItemPress}
           iconProps={{
             name: 'car-estate',
             type: 'MaterialCommunityIcons',
             size: 30,
           }}
-          active={activeRoute === 'CurrentOrdersStack'}
+          active={activeRoute === 'WorkingOrdersStack'}
         />
 
         <Separator />
