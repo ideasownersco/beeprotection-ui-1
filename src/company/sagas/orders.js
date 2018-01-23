@@ -55,12 +55,14 @@ function* fetchWorkingOrders() {
         error: I18n.t('no_more_records'),
       });
     } else {
+
       let paginated = !!nextPage;
 
       const params = {
         paginated: paginated,
         paginatedUrl:nextPage
       };
+      console.log('params',params);
 
       const response = yield call(API.fetchWorkingOrders, params);
       const normalized = normalize(response.data, [Schema.orders]);

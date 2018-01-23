@@ -26,7 +26,7 @@ class HomeScene extends PureComponent {
 
   componentDidMount() {
     // this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
-    // this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders());
+    this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders());
     // this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
   }
 

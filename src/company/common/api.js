@@ -2,11 +2,11 @@ import {request} from 'utils/network';
 
 function fetchUpcomingOrders(params = {}) {
   const url = `company/orders/upcoming`;
-  return request({url, params, requiresAuthentication: true, params});
+  return request({url, requiresAuthentication: true, params});
 }
 
 function fetchPastOrders(params = '') {
-  const url = `company/orders/past${params}`;
+  const url = `company/orders/past`;
   return request({url, requiresAuthentication: true});
 }
 

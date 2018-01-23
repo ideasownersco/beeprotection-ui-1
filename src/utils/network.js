@@ -5,14 +5,15 @@ import NavigatorService from 'components/NavigatorService';
 
 export async function request({
   url,
-  paginated = false,
   protocol = 'http://',
-  domain = null,
+  domain = null, //http://wwww.waa.com
   method = 'GET',
   params = {
     body : null, // for POST
-    urlParams: null, // in url abc=1 // must be QS.stringified
+    urlParams: '', // in url abc=1 // must be QS.stringified
     isBlob : false,
+    paginated:false,
+    paginatedUrl:''
   },
   // body = null,
   // isBlob = false,
@@ -20,17 +21,16 @@ export async function request({
   forceAuthentication = false,
 }) {
   // const delimiter = url.indexOf('?') === -1 ? '?' : '&';
-
   // const localeAwareUrl = `${API_URL}/${url + delimiter}lang=${I18n.locale}`;
 
+  let {paginated,paginatedUrl,body,isBlob,urlParams} = params;
 
-  const urlParams = params.urlParams ? `&${params.urlParams}` : '';
+  const localeAwareUrl = `${protocol}${API_URL}/${url}?lang=${I18n.locale}${urlParams}`;
 
-  const localeAwareUrl = `${API_URL}/${url}?lang=${I18n.locale}${urlParams}`;
+  let fullURL = domain ? domain : paginated ? paginatedUrl : localeAwareUrl; // abc.com //http://abc.com/?page=1&lang=2
 
-  let domainName = domain ? domain : paginated ? url : localeAwareUrl; // abc.com //http://abc.com/?page=1&lang=2
-
-  let fullURL =  `${protocol}${domainName}`; // http://abc.com/?page=1&lang=2
+  console.log('fullUrl',fullURL);
+  console.log('paginatedUrl',paginated ? paginatedUrl : localeAwareUrl);
 
   const apiToken = await getStorageItem(AUTH_KEY);
 
@@ -40,7 +40,8 @@ export async function request({
       console.log({
         url: fullURL,
         method: method,
-        body: params.body,
+        // body: body,
+        params:params,
         api_token:apiToken
       });
       console.groupEnd();
@@ -66,12 +67,12 @@ export async function request({
   headers.append('Authorization', 'Bearer ' + apiToken);
   headers.append(
     'Content-Type',
-    params.isBlob ? 'multipart/form-data' : 'application/json',
+    isBlob ? 'multipart/form-data' : 'application/json',
   );
 
   const request = fetch(fullURL, {
     method,
-    body: params.isBlob ? params.body : JSON.stringify(params.body),
+    body: isBlob ? body : JSON.stringify(body),
     headers,
   });
 
