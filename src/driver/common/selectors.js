@@ -9,6 +9,14 @@ const upcomingOrders = state => state.driver.orders.upcomingOrderIDs;
 const workingOrder = state => state.driver.orders.workingOrderID;
 const schemas = state => state.entities;
 
+const getItemIdProp = ({}, itemID) => itemID;
+
+const getDriverByID = () => {
+  return createSelector([schemas, getItemIdProp], (entities, itemID) =>
+    denormalize(itemID, Schema.drivers, entities),
+  );
+};
+
 const getUpcomingOrders = createSelector(
   [schemas, upcomingOrders],
   (entities, orders) => {
@@ -30,4 +38,5 @@ const getWorkingOrder = createSelector(
 export const SELECTORS = {
   getUpcomingOrders,
   getWorkingOrder,
+  getDriverByID,
 };

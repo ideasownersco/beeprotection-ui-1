@@ -27,7 +27,7 @@ export async function request({
   } else {
     let localeAwareUrl = domain
       ? domain
-      : `${protocol + API_URL}/${path}?lang=${I18n.locale}`;
+      : `${protocol + API_URL}/${path}?lang=${I18n.locale}&`;
     fullUrl = localeAwareUrl + query;
   }
 
@@ -63,7 +63,7 @@ export async function request({
 
   const request = fetch(fullUrl, {
     method,
-    body: isBlob ? body : JSON.stringify(body),
+    body: method === 'GET' ? null : isBlob ? body : JSON.stringify(body),
     headers,
   });
 

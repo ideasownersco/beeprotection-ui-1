@@ -5,7 +5,7 @@ import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {connect} from 'react-redux';
 import OrdersList from 'driver/orders/components/OrdersList';
 import {SELECTORS as DRIVER_SELECTORS} from 'driver/common/selectors';
-import SectionHeading from '../company/components/SectionHeading';
+import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
 
 class HomeScene extends Component {

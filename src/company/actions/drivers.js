@@ -3,10 +3,21 @@ export const ACTION_TYPES = {
   FETCH_DRIVERS_SUCCESS: '@company/drivers/FETCH_DRIVERS_SUCCESS',
   FETCH_DRIVERS_FAILURE: '@company/drivers/FETCH_DRIVERS_FAILURE',
 
+  FETCH_DRIVER_REQUEST: '@company/drivers/FETCH_DRIVER_REQUEST',
+  FETCH_DRIVER_SUCCESS: '@company/drivers/FETCH_DRIVER_SUCCESS',
+  FETCH_DRIVER_FAILURE: '@company/drivers/FETCH_DRIVER_FAILURE',
+
   ASSIGN_DRIVER_REQUEST: '@company/drivers/ASSIGN_DRIVER_REQUEST',
   ASSIGN_DRIVER_SUCCESS: '@company/drivers/ASSIGN_DRIVER_SUCCESS',
   ASSIGN_DRIVER_FAILURE: '@company/drivers/ASSIGN_DRIVER_FAILURE',
 };
+
+function fetchDriver(params) {
+  return {
+    type: ACTION_TYPES.FETCH_DRIVER_REQUEST,
+    params,
+  };
+}
 
 function fetchDrivers(params) {
   return {
@@ -24,5 +35,6 @@ function assignToOrder(params) {
 
 export const ACTIONS = {
   fetchDrivers,
+  fetchDriver,
   assignToOrder,
 };

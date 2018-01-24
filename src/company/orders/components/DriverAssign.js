@@ -42,13 +42,16 @@ export default class DriverAssign extends Component {
 
   render() {
     const {order, drivers, onDriversListItemPress} = this.props;
+
+    console.log('order',order);
+
     const {showModal} = this.state;
 
     return (
       <View style={styles.container}>
         <SectionTitle title={I18n.t('assign_driver')} />
 
-        {order.accepted_job ? (
+        {order.accepted_job && order.accepted_job.driver ? (
           <Text onPress={() => this.showModal(true)} style={styles.driver}>
             {order.accepted_job.driver.user.name}
           </Text>

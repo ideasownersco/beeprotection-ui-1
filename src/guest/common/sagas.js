@@ -24,12 +24,13 @@ function* login(action) {
     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
 
     const params = {
-      ...action.credentials,
-      push_token: pushTokenStorageKey,
+      body:{
+        ...action.credentials,
+        push_token: pushTokenStorageKey,
+      }
     };
 
     const response = yield call(API.login, params);
-    console.log('r', response);
 
     const normalized = normalize(response.data, Schema.users);
 

@@ -10,10 +10,9 @@ import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 import {ScrollView} from 'react-native';
 import OrderItems from 'company/orders/components/OrderItems';
 import OrderBasicInfo from 'company/orders/components/OrderBasicInfo';
-import Button from 'components/Button';
-import I18n from 'utils/locale';
 import DriverAssign from 'company/orders/components/DriverAssign';
 import PropTypes from 'prop-types';
+
 class OrderDetailScene extends Component {
   static propTypes = {
     navigation: PropTypes.shape({
@@ -73,6 +72,7 @@ class OrderDetailScene extends Component {
           drivers={drivers}
           onDriversListItemPress={this.selectDriver}
         />
+
       </ScrollView>
     );
   }

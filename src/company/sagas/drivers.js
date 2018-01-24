@@ -20,6 +20,25 @@ function* fetchDrivers() {
   }
 }
 
+function* fetchDriver(action) {
+  try {
+    const response = yield call(API.fetchDriver,action.params.driver_id);
+
+    if(response.working_order) {
+      response.data.working_order = response.working_order;
+    }
+
+    const normalized = normalize(response.data, Schema.drivers);
+
+    yield put({
+      type: DRIVER_ACTIONS.FETCH_DRIVER_SUCCESS,
+      entities: normalized.entities,
+    });
+  } catch (error) {
+    yield put({type: DRIVER_ACTIONS.FETCH_DRIVER_FAILURE, error});
+  }
+}
+
 function* assignDriver(action) {
   try {
     const params = {
@@ -43,6 +62,10 @@ function* assignDriver(action) {
   }
 }
 
+function* fetchDriverMonitor() {
+  yield takeLatest(DRIVER_ACTIONS.FETCH_DRIVER_REQUEST, fetchDriver);
+}
+
 function* fetchDriversMonitor() {
   yield takeLatest(DRIVER_ACTIONS.FETCH_DRIVERS_REQUEST, fetchDrivers);
 }
@@ -53,5 +76,6 @@ function* assignDriverMonitor() {
 
 export const sagas = all([
   fork(fetchDriversMonitor),
+  fork(fetchDriverMonitor),
   fork(assignDriverMonitor),
 ]);

@@ -20,6 +20,11 @@ function fetchDrivers() {
   return request({path, requiresAuthentication: true});
 }
 
+function fetchDriver(id) {
+  const path = `company/drivers/${id}/details`;
+  return request({path, requiresAuthentication: true});
+}
+
 function fetchOrderDetails(id, params = {}) {
   const path = `company/orders/${id}/details`;
   return request({path, requiresAuthentication: true});
@@ -41,5 +46,6 @@ export const API = {
   fetchPastOrders,
   fetchOrderDetails,
   fetchDrivers,
+  fetchDriver,
   assignDriver,
 };
