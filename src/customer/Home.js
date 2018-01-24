@@ -8,6 +8,7 @@ import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import WelcomeText from './components/WelcomeText';
 
 class Home extends Component {
+
   componentDidMount() {
     this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
   }

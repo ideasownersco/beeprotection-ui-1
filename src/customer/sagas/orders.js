@@ -62,9 +62,31 @@ function* fetchUpcomingOrders() {
   }
 }
 
+
+function* fetchWorkingOrder() {
+  try {
+    const response = yield call(API.fetchWorkingOrder);
+    const normalized = normalize(response.data, Schema.orders);
+    yield put({
+      type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
+      entities: normalized.entities,
+      id: normalized.result,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE, error});
+  }
+}
+
 function* saveAddress(action) {
   try {
-    const response = yield call(API.saveAddress, action.address);
+
+    const params = {
+      body:{
+        ...action.params
+      }
+    };
+
+    const response = yield call(API.saveAddress, params);
     const normalized = normalize(response.data, Schema.users);
     yield put({
       type: ACTION_TYPES.SAVE_ADDRESS_SUCCESS,
@@ -84,7 +106,13 @@ function* saveAddress(action) {
 
 function* saveOrder(action) {
   try {
-    const response = yield call(API.saveOrder, action.params);
+    const params = {
+      body:{
+        ...action.params
+      }
+    };
+
+    const response = yield call(API.saveOrder, params);
     const normalized = normalize(response.data, Schema.orders);
     let {entities, result} = normalized;
     yield put({
@@ -100,7 +128,14 @@ function* saveOrder(action) {
 
 function* checkout(action) {
   try {
-    const response = yield call(API.checkout, action.params);
+
+    const params = {
+      body:{
+        ...action.params
+      }
+    };
+
+    const response = yield call(API.checkout, params);
     const normalized = normalize(response.data, Schema.users);
     let {entities} = normalized;
     let orderIds = entities.orders ? Object.keys(entities.orders) : [];
@@ -147,6 +182,10 @@ function* checkoutMonitor() {
   yield takeLatest(ACTION_TYPES.CHECKOUT_REQUEST, checkout);
 }
 
+function* fetchWorkingOrderMonitor() {
+  yield takeLatest(ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST, fetchWorkingOrder);
+}
+
 export const sagas = all([
   fork(fetchCategoriesMonitor),
   fork(fetchTimingsMonitor),
@@ -155,4 +194,6 @@ export const sagas = all([
   fork(saveAddressMonitor),
   fork(saveOrderMonitor),
   fork(checkoutMonitor),
+  fork(fetchWorkingOrderMonitor),
+
 ]);

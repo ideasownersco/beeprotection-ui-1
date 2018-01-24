@@ -17,13 +17,15 @@ function* fetchCartItems() {
       cartItems.map(item => item.services).map(service => service),
     ).join();
 
-    let params = Qs.stringify({
-      categories,
-      packages,
-      services,
-    });
+    let params = {
+      query: Qs.stringify({
+        categories,
+        packages,
+        services,
+      })
+    };
 
-    const response = yield call(API.fetchCartItems, `/?${params}`);
+    const response = yield call(API.fetchCartItems, params);
     const normalized = normalize(response.data, [Schema.categories]);
     yield put({
       type: ACTION_TYPES.CART_FETCH_ITEMS_SUCCESS,

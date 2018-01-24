@@ -48,6 +48,11 @@ export const ACTION_TYPES = {
   FETCH_UPCOMING_ORDERS_REQUEST: '@customer/FETCH_UPCOMING_ORDERS_REQUEST',
   FETCH_UPCOMING_ORDERS_SUCCESS: '@customer/FETCH_UPCOMING_ORDERS_SUCCESS',
   FETCH_UPCOMING_ORDERS_FAILURE: '@customer/FETCH_UPCOMING_ORDERS_FAILURE',
+
+  FETCH_WORKING_ORDER_REQUEST: '@customer/FETCH_WORKING_ORDER_REQUEST',
+  FETCH_WORKING_ORDER_SUCCESS: '@customer/FETCH_WORKING_ORDER_SUCCESS',
+  FETCH_WORKING_ORDER_FAILURE: '@customer/FETCH_WORKING_ORDER_FAILURE',
+
 };
 
 function fetchCartItems() {
@@ -93,13 +98,6 @@ function fetchCategories(params) {
   };
 }
 
-function fetchStandingOrders(params) {
-  return {
-    type: ACTION_TYPES.STANDING_ORDERS_REQUEST,
-    params,
-  };
-}
-
 function fetchTimings(params) {
   return {
     type: ACTION_TYPES.TIMINGS_REQUEST,
@@ -128,10 +126,10 @@ function fetchAddresses(params) {
   };
 }
 
-function saveAddress(address: object) {
+function saveAddress(params: object) {
   return {
     type: ACTION_TYPES.SAVE_ADDRESS_REQUEST,
-    address,
+    params,
   };
 }
 
@@ -156,6 +154,13 @@ function fetchUpcomingOrders(params) {
   };
 }
 
+function fetchWorkingOrder(params) {
+  return {
+    type: ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST,
+    params,
+  };
+}
+
 export const ACTIONS = {
   addToCart,
   fetchCartItems,
@@ -165,10 +170,9 @@ export const ACTIONS = {
   fetchAddresses,
   saveAddress,
   saveOrder,
-  fetchStandingOrders,
   checkout,
   setCartItems,
-  locationReceived,
   subscribeToJobTrack,
   fetchUpcomingOrders,
+  fetchWorkingOrder,
 };
