@@ -18,7 +18,7 @@ function startJob(id) {
   return request(requestParams);
 }
 
-function finishJob(id,) {
+function finishJob(id) {
   const path = `driver/jobs/${id}/finish`;
   let requestParams = {
     path,

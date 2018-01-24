@@ -23,17 +23,13 @@ class CustomerLocationMapScene extends Component {
 
   onStartJobPress = () => {
     let {accepted_job} = this.props.navigation.state.params.order;
-    this.props.dispatch(
-      DRIVER_ACTIONS.startJob(accepted_job.id),
-    );
+    this.props.dispatch(DRIVER_ACTIONS.startJob(accepted_job.id));
     // console.log('job started', accepted_job);
   };
 
   onFinishJobPress = () => {
     let {accepted_job} = this.props.navigation.state.params.order;
-    this.props.dispatch(
-      DRIVER_ACTIONS.finishJob(accepted_job.id),
-    );
+    this.props.dispatch(DRIVER_ACTIONS.finishJob(accepted_job.id));
     // console.log('job ended', accepted_job);
   };
 

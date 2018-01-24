@@ -23,12 +23,9 @@ export const ACTION_TYPES = {
   FETCH_WORKING_ORDER_SUCCESS: '@driver/orders/FETCH_WORKING_ORDER_SUCCESS',
   FETCH_WORKING_ORDER_FAILURE: '@driver/orders/FETCH_WORKING_ORDER_FAILURE',
 
-  FETCH_UPCOMING_ORDERS_REQUEST:
-    '@driver/orders/FETCH_UPCOMING_ORDERS_REQUEST',
-  FETCH_UPCOMING_ORDERS_SUCCESS:
-    '@driver/orders/FETCH_UPCOMING_ORDERS_SUCCESS',
-  FETCH_UPCOMING_ORDERS_FAILURE:
-    '@driver/orders/FETCH_UPCOMING_ORDERS_FAILURE',
+  FETCH_UPCOMING_ORDERS_REQUEST: '@driver/orders/FETCH_UPCOMING_ORDERS_REQUEST',
+  FETCH_UPCOMING_ORDERS_SUCCESS: '@driver/orders/FETCH_UPCOMING_ORDERS_SUCCESS',
+  FETCH_UPCOMING_ORDERS_FAILURE: '@driver/orders/FETCH_UPCOMING_ORDERS_FAILURE',
 
   FETCH_UPCOMING_ORDERS_REFRESH_REQUEST:
     '@driver/orders/FETCH_WORKING_ORDERS_REFRESH_REQUEST',
@@ -38,8 +35,6 @@ export const ACTION_TYPES = {
   FETCH_PAST_ORDERS_FAILURE: '@driver/orders/FETCH_PAST_ORDERS_FAILURE',
   FETCH_PAST_ORDERS_REFRESH_REQUEST:
     '@driver/orders/FETCH_PAST_ORDERS_REFRESH_REQUEST',
-
-
 
   FETCH_ORDER_DETAILS_REQUEST: '@driver/orders/FETCH_ORDER_DETAILS_REQUEST',
   FETCH_ORDER_DETAILS_SUCCESS: '@driver/orders/FETCH_ORDER_DETAILS_SUCCESS',
@@ -95,18 +90,18 @@ function saveProfile(params) {
   };
 }
 
-function startJob(id,params = {}) {
+function startJob(id, params = {}) {
   return {
     type: ACTION_TYPES.START_JOB_REQUEST,
-    job_id:id,
+    job_id: id,
     params,
   };
 }
 
-function finishJob(id,params = {}) {
+function finishJob(id, params = {}) {
   return {
     type: ACTION_TYPES.FINISH_JOB_REQUEST,
-    job_id:id,
+    job_id: id,
     params,
   };
 }
@@ -114,7 +109,7 @@ function finishJob(id,params = {}) {
 function fetchOrderDetails(id) {
   return {
     type: ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST,
-    order_id:id,
+    order_id: id,
   };
 }
 

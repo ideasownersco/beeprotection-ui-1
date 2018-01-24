@@ -15,13 +15,15 @@ const getOrderByID = () => {
 };
 
 const getUpcomingOrders = createSelector(
-  [schemas, upcomingOrders,workingOrder],
+  [schemas, upcomingOrders, workingOrder],
   (entities, orders, workingOrderID) => {
     return (
       (orders &&
         orders
           .map(orderId => denormalize(orderId, Schema.orders, entities))
-          .filter(order => order.id !== workingOrderID && order.is_completed !== true)) ||
+          .filter(
+            order => order.id !== workingOrderID && order.is_completed !== true,
+          )) ||
       []
     );
   },
@@ -29,7 +31,7 @@ const getUpcomingOrders = createSelector(
 
 const getWorkingOrder = createSelector(
   [schemas, workingOrder],
-  (entities, orderID) =>  denormalize(orderID, Schema.orders, entities)
+  (entities, orderID) => denormalize(orderID, Schema.orders, entities),
 );
 
 const getPastOrders = createSelector(

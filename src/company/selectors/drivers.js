@@ -29,5 +29,4 @@ const getDrivers = createSelector(
 export const SELECTORS = {
   getDrivers,
   getDriverByID,
-
 };

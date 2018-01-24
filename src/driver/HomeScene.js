@@ -46,10 +46,7 @@ class HomeScene extends Component {
 
     return (
       <ScrollView style={{flex: 1}}>
-
-        <SectionHeading
-          title={I18n.t('working_order')}
-        />
+        <SectionHeading title={I18n.t('working_order')} />
 
         {order.id && (
           <OrdersList
@@ -72,7 +69,6 @@ class HomeScene extends Component {
           onAddressButtonPress={this.onAddressButtonPress}
           onStartStopButtonPress={this.onStartStopButtonPress}
         />
-
       </ScrollView>
     );
   }

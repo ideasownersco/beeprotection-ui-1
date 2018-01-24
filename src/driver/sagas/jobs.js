@@ -6,16 +6,11 @@ import {normalize} from 'normalizr';
 
 function* startJob(action) {
   try {
-
     const params = {
-      body:action.params
+      body: action.params,
     };
 
-    const response = yield call(
-      API.startJob,
-      action.job_id,
-      params
-    );
+    const response = yield call(API.startJob, action.job_id, params);
 
     const normalized = normalize(response.data, Schema.orders);
 
@@ -31,16 +26,11 @@ function* startJob(action) {
 
 function* finishJob(action) {
   try {
-
     const params = {
-      body:action.params
+      body: action.params,
     };
 
-    const response = yield call(
-      API.finishJob,
-      action.job_id,
-      params,
-    );
+    const response = yield call(API.finishJob, action.job_id, params);
     const normalized = normalize(response.data, Schema.orders);
 
     yield put({

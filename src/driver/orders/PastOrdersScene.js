@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'driver/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'driver/selectors/orders';
 import OrdersList from 'company/orders/components/OrdersList';
-import Button from "components/Button";
-import {ScrollView} from "react-native";
+import Button from 'components/Button';
+import {ScrollView} from 'react-native';
 
 class PastOrdersScene extends PureComponent {
   static propTypes = {

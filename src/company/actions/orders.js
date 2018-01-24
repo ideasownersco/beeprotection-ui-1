@@ -71,7 +71,7 @@ function fetchPastOrdersRefresh(params) {
 function fetchOrderDetails(id) {
   return {
     type: ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST,
-    order_id:id,
+    order_id: id,
   };
 }
 

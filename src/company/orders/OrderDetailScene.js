@@ -25,15 +25,12 @@ class OrderDetailScene extends Component {
   };
 
   componentDidMount() {
-    if(this.props.navigation.state && this.props.navigation.state.params) {
+    if (this.props.navigation.state && this.props.navigation.state.params) {
       let {orderID} = this.props.navigation.state.params;
-      this.props.dispatch(
-        ORDER_ACTIONS.fetchOrderDetails(orderID),
-      );
+      this.props.dispatch(ORDER_ACTIONS.fetchOrderDetails(orderID));
     }
 
     this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -52,7 +49,7 @@ class OrderDetailScene extends Component {
 
   selectDriver = (driver: object) => {
     this.props.dispatch(
-      DRIVER_ACTIONS.assignDriver(this.props.order.id,{
+      DRIVER_ACTIONS.assignDriver(this.props.order.id, {
         driver_id: driver.id,
       }),
     );
@@ -78,7 +75,6 @@ class OrderDetailScene extends Component {
     );
   }
 }
-
 
 const makeMapStateToProps = () => {
   const getOrderByID = ORDER_SELECTORS.getOrderByID();

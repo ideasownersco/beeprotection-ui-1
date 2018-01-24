@@ -84,7 +84,6 @@ function* fetchPastOrders() {
   }
 }
 
-
 function* fetchOrderDetails(action) {
   try {
     const response = yield call(API.fetchOrderDetails, action.order_id);
@@ -106,7 +105,10 @@ function* fetchUpcomingOrdersMonitor() {
 }
 
 function* fetchWorkingOrderMonitor() {
-  yield takeLatest(ORDER_ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST, fetchWorkingOrder);
+  yield takeLatest(
+    ORDER_ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST,
+    fetchWorkingOrder,
+  );
 }
 
 function* fetchPastOrdersMonitor() {
@@ -115,7 +117,6 @@ function* fetchPastOrdersMonitor() {
     fetchPastOrders,
   );
 }
-
 
 function* fetchOrderDetailsMonitor() {
   yield takeLatest(
@@ -128,5 +129,4 @@ export const sagas = all([
   fork(fetchUpcomingOrdersMonitor),
   fork(fetchPastOrdersMonitor),
   fork(fetchOrderDetailsMonitor),
-
 ]);

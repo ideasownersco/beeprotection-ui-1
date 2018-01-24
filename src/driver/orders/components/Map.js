@@ -175,8 +175,8 @@ export default class Map extends Component {
     const rotate =
       typeof heading === 'number' && heading >= 0 ? `${heading}deg` : null;
 
-    console.log('props',this.props);
-    console.log('state',this.state);
+    console.log('props', this.props);
+    console.log('state', this.state);
 
     // console.log('enabled', this.state.enabled);
 

@@ -28,7 +28,9 @@ class OrderDetailScene extends Component {
 
   componentDidMount() {
     this.props.dispatch(
-      ORDER_ACTIONS.fetchOrderDetails(this.props.navigation.state.params.orderID),
+      ORDER_ACTIONS.fetchOrderDetails(
+        this.props.navigation.state.params.orderID,
+      ),
     );
   }
 

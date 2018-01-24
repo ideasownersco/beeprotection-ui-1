@@ -15,7 +15,7 @@ export const ACTION_TYPES = {
 function fetchDriver(id) {
   return {
     type: ACTION_TYPES.FETCH_DRIVER_REQUEST,
-    driver_id:id,
+    driver_id: id,
   };
 }
 
@@ -26,10 +26,10 @@ function fetchDrivers(params) {
   };
 }
 
-function assignDriver(id,params) {
+function assignDriver(id, params) {
   return {
     type: ACTION_TYPES.ASSIGN_DRIVER_REQUEST,
-    order_id:id,
+    order_id: id,
     params,
   };
 }

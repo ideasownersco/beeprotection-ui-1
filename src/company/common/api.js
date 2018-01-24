@@ -30,7 +30,7 @@ function fetchOrderDetails(id) {
   return request({path, requiresAuthentication: true});
 }
 
-function assignDriver(id,params) {
+function assignDriver(id, params) {
   const path = `company/orders/${id}/drivers/assign`;
   let requestParams = {
     path,

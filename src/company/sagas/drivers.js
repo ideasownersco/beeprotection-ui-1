@@ -45,7 +45,7 @@ function* assignDriver(action) {
       body: action.params,
     };
 
-    const response = yield call(API.assignDriver, action.order_id,params);
+    const response = yield call(API.assignDriver, action.order_id, params);
     const normalized = normalize(response.data, Schema.orders);
 
     yield put({
