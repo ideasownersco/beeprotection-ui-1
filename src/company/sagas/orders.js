@@ -1,5 +1,5 @@
 import {all, call, fork, put, takeLatest, select} from 'redux-saga/effects';
-import {ACTION_TYPES as ORDER_ACTION_TYPES} from 'company/actions/orders';
+import {ACTION_TYPES} from 'company/common/actions';
 import {API} from 'company/common/api';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
@@ -13,7 +13,7 @@ function* fetchUpcomingOrders() {
 
     if (nextPage === null) {
       yield put({
-        type: ORDER_ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE,
+        type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),
       });
     } else {
@@ -28,14 +28,14 @@ function* fetchUpcomingOrders() {
       const {entities, result} = normalized;
 
       yield put({
-        type: ORDER_ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS,
+        type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS,
         entities: entities,
         result: result,
         nextPage: (response.links && response.links.next) || null,
       });
     }
   } catch (error) {
-    yield put({type: ORDER_ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE, error});
+    yield put({type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE, error});
   }
 }
 
@@ -47,7 +47,7 @@ function* fetchWorkingOrders() {
 
     if (nextPage === null) {
       yield put({
-        type: ORDER_ACTION_TYPES.FETCH_WORKING_ORDERS_FAILURE,
+        type: ACTION_TYPES.FETCH_WORKING_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),
       });
     } else {
@@ -60,14 +60,14 @@ function* fetchWorkingOrders() {
       const {entities, result} = normalized;
       console.log('fetchWorkingOrders', normalized);
       yield put({
-        type: ORDER_ACTION_TYPES.FETCH_WORKING_ORDERS_SUCCESS,
+        type: ACTION_TYPES.FETCH_WORKING_ORDERS_SUCCESS,
         entities: entities,
         result: result,
         nextPage: (response.links && response.links.next) || null,
       });
     }
   } catch (error) {
-    yield put({type: ORDER_ACTION_TYPES.FETCH_WORKING_ORDERS_FAILURE, error});
+    yield put({type: ACTION_TYPES.FETCH_WORKING_ORDERS_FAILURE, error});
   }
 }
 
@@ -79,7 +79,7 @@ function* fetchPastOrders() {
 
     if (nextPage === null) {
       yield put({
-        type: ORDER_ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE,
+        type: ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),
       });
     } else {
@@ -91,14 +91,14 @@ function* fetchPastOrders() {
       const normalized = normalize(response.data, [Schema.orders]);
       const {entities, result} = normalized;
       yield put({
-        type: ORDER_ACTION_TYPES.FETCH_PAST_ORDERS_SUCCESS,
+        type: ACTION_TYPES.FETCH_PAST_ORDERS_SUCCESS,
         entities: entities,
         result: result,
         nextPage: (response.links && response.links.next) || null,
       });
     }
   } catch (error) {
-    yield put({type: ORDER_ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE, error});
+    yield put({type: ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE, error});
   }
 }
 
@@ -107,38 +107,38 @@ function* fetchOrderDetails(action) {
     const response = yield call(API.fetchOrderDetails, action.order_id);
     const normalizedOrders = normalize(response.data, Schema.orders);
     yield put({
-      type: ORDER_ACTION_TYPES.FETCH_ORDER_DETAILS_SUCCESS,
+      type: ACTION_TYPES.FETCH_ORDER_DETAILS_SUCCESS,
       entities: normalizedOrders.entities,
     });
   } catch (error) {
-    yield put({type: ORDER_ACTION_TYPES.FETCH_ORDER_DETAILS_FAILURE, error});
+    yield put({type: ACTION_TYPES.FETCH_ORDER_DETAILS_FAILURE, error});
   }
 }
 
 function* fetchUpcomingOrdersMonitor() {
   yield takeLatest(
-    ORDER_ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST,
+    ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST,
     fetchUpcomingOrders,
   );
 }
 
 function* fetchWorkingOrdersMonitor() {
   yield takeLatest(
-    ORDER_ACTION_TYPES.FETCH_WORKING_ORDERS_REQUEST,
+    ACTION_TYPES.FETCH_WORKING_ORDERS_REQUEST,
     fetchWorkingOrders,
   );
 }
 
 function* fetchPastOrdersMonitor() {
   yield takeLatest(
-    ORDER_ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST,
+    ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST,
     fetchPastOrders,
   );
 }
 
 function* fetchOrderDetailsMonitor() {
   yield takeLatest(
-    ORDER_ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST,
+    ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST,
     fetchOrderDetails,
   );
 }

@@ -65,16 +65,6 @@ const getCartItems = createSelector(
             [],
         };
       });
-    // return Object.keys(items)
-    // .map(item => items[item])
-    // .map(item => {
-    //   return {
-    //     ...item,
-    //     category: categories[item.category],
-    //     package: packages[item.package],
-    //     services: item.services && item.services.map(service => services[service]) || [],
-    //   };
-    // });
   },
 );
 

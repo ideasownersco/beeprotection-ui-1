@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import DriversList from 'driver/components/DriversList';
 import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
-import {ACTIONS as DRIVER_ACTIONS} from 'company/actions/drivers';
+import {ACTIONS as DRIVER_ACTIONS} from 'company/common/actions';
 
 class DriversListScene extends PureComponent {
   static propTypes = {

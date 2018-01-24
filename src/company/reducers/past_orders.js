@@ -1,4 +1,4 @@
-import {ACTION_TYPES} from 'company/actions/orders';
+import {ACTION_TYPES} from 'company/common/actions';
 import union from 'lodash/union';
 
 const initialState = {

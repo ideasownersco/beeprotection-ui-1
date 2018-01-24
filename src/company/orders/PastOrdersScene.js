@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ACTIONS as ORDER_ACTIONS} from 'company/actions/orders';
+import {ACTIONS as ORDER_ACTIONS} from 'company/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
 import OrdersList from 'company/orders/components/OrdersList';
 

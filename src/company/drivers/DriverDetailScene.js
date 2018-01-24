@@ -9,7 +9,7 @@ import DriverInfo from 'company/drivers/components/DriverInfo';
 import DriverThumb from 'company/drivers/components/DriverThumb';
 import SectionHeading from 'company/components/SectionHeading';
 import OrdersList from 'company/orders/components/OrdersList';
-import {ACTIONS as COMPANY_ACTIONS} from 'company/actions/drivers';
+import {ACTIONS as COMPANY_ACTIONS} from 'company/common/actions';
 import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 
 import I18n from 'utils/locale';

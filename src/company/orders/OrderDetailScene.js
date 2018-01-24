@@ -3,8 +3,8 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ACTIONS as DRIVER_ACTIONS} from 'company/actions/drivers';
-import {ACTIONS as ORDER_ACTIONS} from 'company/actions/orders';
+import {ACTIONS as DRIVER_ACTIONS} from 'company/common/actions';
+import {ACTIONS as ORDER_ACTIONS} from 'company/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
 import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 import {ScrollView} from 'react-native';
