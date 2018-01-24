@@ -17,7 +17,7 @@ function register(params) {
   const path = `auth/register`;
   let requestParams = {
     path,
-    body: params,
+    params,
     method: 'POST',
   };
   return request(requestParams);
@@ -27,7 +27,7 @@ function forgotPassword(params) {
   const path = `auth/password/forgot`;
   let requestParams = {
     path,
-    body: params,
+    params,
     method: 'POST',
   };
   return request(requestParams);
@@ -37,7 +37,7 @@ function recoverPassword(params) {
   const path = `auth/password/recover`;
   let requestParams = {
     path,
-    body: params,
+    params,
     method: 'POST',
   };
   return request(requestParams);
@@ -47,7 +47,7 @@ function updatePassword(params) {
   const path = `auth/password/update`;
   let requestParams = {
     path,
-    body: params,
+    params,
     method: 'POST',
   };
   return request(requestParams);

@@ -55,7 +55,14 @@ function* login(action) {
 
 function* register(action) {
   try {
-    const response = yield call(API.register, action.params);
+
+    const params = {
+      body: {
+        ...action.params,
+      }
+    };
+
+    const response = yield call(API.register, params);
     yield put({type: ACTION_TYPES.REGISTER_SUCCESS, payload: response.data});
 
     yield put(
@@ -82,7 +89,13 @@ function* forgotPassword(action) {
       return yield put(APP_ACTIONS.setNotification('Invalid Email', 'error'));
     }
 
-    const response = yield call(API.forgotPassword, action.params);
+    const params = {
+      body: {
+        ...action.params,
+      }
+    };
+
+    const response = yield call(API.forgotPassword, params);
 
     yield put({
       type: ACTION_TYPES.FORGOT_PASSWORD_SUCCESS,
@@ -96,7 +109,14 @@ function* forgotPassword(action) {
 
 function* recoverPassword(action) {
   try {
-    const response = yield call(API.recoverPassword, action.params);
+
+    const params = {
+      body: {
+        ...action.params,
+      }
+    };
+
+    const response = yield call(API.recoverPassword, params);
     yield put({
       type: ACTION_TYPES.RECOVER_PASSWORD_SUCCESS,
       payload: response.data,
@@ -109,7 +129,13 @@ function* recoverPassword(action) {
 
 function* updatePassword(action) {
   try {
-    const response = yield call(API.updatePassword, action.params);
+    const params = {
+      body: {
+        ...action.params,
+      }
+    };
+
+    const response = yield call(API.updatePassword, params);
 
     if (action.params.password !== action.params.password_confirmation) {
       return yield put(

@@ -40,8 +40,10 @@ class DriverDetailScene extends PureComponent {
     }));
   }
 
-  onOrdersListItemPress = () => {
-
+  onOrdersListItemPress = (item: object) => {
+    this.props.navigation.navigate('OrderDetail', {
+      orderID: item.id,
+    });
   };
 
   render() {

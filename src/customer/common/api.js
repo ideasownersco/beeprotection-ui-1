@@ -29,7 +29,7 @@ function saveAddress(params) {
   const path = `customer/addresses`;
   let requestParams = {
     path,
-    body: params,
+    params,
     method: 'POST',
     // requiresAuthentication: true,
     // forceAuthentication: true,
@@ -41,7 +41,7 @@ function saveOrder(params) {
   const path = `customer/orders`;
   let requestParams = {
     path,
-    body: params,
+    params,
     method: 'POST',
   };
   return request(requestParams);
