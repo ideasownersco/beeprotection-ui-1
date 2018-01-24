@@ -1,42 +1,43 @@
-import {createSelector} from 'reselect';
-import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
-import flatten from 'lodash/flatten';
-import {denormalize} from 'normalizr';
-import {Schema} from 'utils/schema';
+// import {createSelector} from 'reselect';
+// import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
+// import flatten from 'lodash/flatten';
+// import {denormalize} from 'normalizr';
+// import {Schema} from 'utils/schema';
+//
+// const ordersSchema = state => state.entities.orders;
+// const upcomingOrders = state => state.driver.orders.upcomingOrderIDs;
+// const workingOrder = state => state.driver.orders.workingOrderID;
+// const schemas = state => state.entities;
+//
+// const getItemIdProp = ({}, itemID) => itemID;
+//
+// const getDriverByID = () => {
+//   return createSelector([schemas, getItemIdProp], (entities, itemID) =>
+//     denormalize(itemID, Schema.drivers, entities),
+//   );
+// };
+//
+// const getUpcomingOrders = createSelector(
+//   [schemas, upcomingOrders,workingOrder],
+//   (entities, orders,workingOrderID) => {
+//     return (
+//       (orders &&
+//         orders.map(orderId => denormalize(orderId, Schema.orders, entities)).filter(order => order.id !== workingOrderID)) ||
+//       []
+//     );
+//   },
+// );
+//
+// const getWorkingOrder = createSelector(
+//   [schemas, workingOrder],
+//   (entities, orderId) => {
+//     return (orderId && denormalize(orderId, Schema.orders, entities)) || {};
+//   },
+// );
+//
+// export const SELECTORS = {
+//   getUpcomingOrders,
+//   getWorkingOrder,
+//   getDriverByID,
 
-const ordersSchema = state => state.entities.orders;
-const upcomingOrders = state => state.driver.orders.upcomingOrderIDs;
-const workingOrder = state => state.driver.orders.workingOrderID;
-const schemas = state => state.entities;
-
-const getItemIdProp = ({}, itemID) => itemID;
-
-const getDriverByID = () => {
-  return createSelector([schemas, getItemIdProp], (entities, itemID) =>
-    denormalize(itemID, Schema.drivers, entities),
-  );
-};
-
-const getUpcomingOrders = createSelector(
-  [schemas, upcomingOrders],
-  (entities, orders) => {
-    return (
-      (orders &&
-        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
-      []
-    );
-  },
-);
-
-const getWorkingOrder = createSelector(
-  [schemas, workingOrder],
-  (entities, orderId) => {
-    return (orderId && denormalize(orderId, Schema.orders, entities)) || {};
-  },
-);
-
-export const SELECTORS = {
-  getUpcomingOrders,
-  getWorkingOrder,
-  getDriverByID,
-};
+// };

@@ -4,7 +4,7 @@ import {ScrollView, View} from 'react-native';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {connect} from 'react-redux';
 import OrdersList from 'driver/orders/components/OrdersList';
-import {SELECTORS as DRIVER_SELECTORS} from 'driver/common/selectors';
+import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
 
@@ -41,9 +41,10 @@ class HomeScene extends Component {
 
   render() {
     let {orders, order} = this.props;
-    console.log('props', this.props);
+
     return (
       <ScrollView style={{flex: 1}}>
+
         <SectionHeading
           title={I18n.t('working_order')}
           onButtonPress={this.loadCurrentOrders}
@@ -70,6 +71,7 @@ class HomeScene extends Component {
           onAddressButtonPress={this.onAddressButtonPress}
           onStartStopButtonPress={this.onStartStopButtonPress}
         />
+
       </ScrollView>
     );
   }
@@ -78,7 +80,7 @@ class HomeScene extends Component {
 function mapStateToProps(state) {
   return {
     orders: DRIVER_SELECTORS.getUpcomingOrders(state),
-    order: DRIVER_SELECTORS.getWorkingOrder(state),
+    order: DRIVER_SELECTORS.getWorkingOrder(state) || {},
   };
 }
 

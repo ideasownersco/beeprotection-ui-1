@@ -1,37 +1,45 @@
 import {ACTION_TYPES} from 'driver/common/actions';
 
 const initialState = {
-  upcomingOrderIDs: [],
-  workingOrderID: null,
-  isWorking: false,
+  isFetching: false,
+  id: null,
+  error: null,
 };
 
 export function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS: {
+    case ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST:
       return {
         ...state,
-        upcomingOrderIDs: action.ids,
+        isFetching: true,
+        error: null,
       };
-    }
+
     case ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS: {
       return {
         ...state,
-        workingOrderID: action.id,
+        isFetching: false,
+        id: action.result,
+        error: null,
       };
     }
+
+    case ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
     case ACTION_TYPES.START_JOB_SUCCESS: {
       return {
         ...state,
-        isWorking: true,
-        workingOrderID: action.id,
+        id: action.result,
       };
     }
     case ACTION_TYPES.FINISH_JOB_SUCCESS: {
       return {
         ...state,
-        workingOrderID: null,
-        isWorking: false,
+        id: null,
       };
     }
     default:

@@ -104,7 +104,7 @@ function* fetchPastOrders() {
 
 function* fetchOrderDetails(action) {
   try {
-    const response = yield call(API.fetchOrderDetails, action.params.order_id);
+    const response = yield call(API.fetchOrderDetails, action.order_id);
     const normalizedOrders = normalize(response.data, Schema.orders);
     yield put({
       type: ORDER_ACTION_TYPES.FETCH_ORDER_DETAILS_SUCCESS,

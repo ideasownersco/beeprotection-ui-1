@@ -44,6 +44,7 @@ const DriversStack = StackNavigator({
     screen: DriversListScene,
     navigationOptions: ({navigation}) => getDrawerIcon(navigation),
   },
+  OrderDetail: {screen: OrderDetailScene},
 });
 
 const PastOrdersStack = StackNavigator({
@@ -51,6 +52,7 @@ const PastOrdersStack = StackNavigator({
     screen: PastOrdersScene,
     navigationOptions: ({navigation}) => getDrawerIcon(navigation),
   },
+  OrderDetail: {screen: OrderDetailScene},
 });
 
 const UpcomingOrdersStack = StackNavigator({
@@ -58,6 +60,7 @@ const UpcomingOrdersStack = StackNavigator({
     screen: UpcomingOrdersScene,
     navigationOptions: ({navigation}) => getDrawerIcon(navigation),
   },
+  OrderDetail: {screen: OrderDetailScene},
 });
 
 const WorkingOrdersStack = StackNavigator({
@@ -65,6 +68,7 @@ const WorkingOrdersStack = StackNavigator({
     screen: WorkingOrdersScene,
     navigationOptions: ({navigation}) => getDrawerIcon(navigation),
   },
+  OrderDetail: {screen: OrderDetailScene},
 });
 
 const SettingsStack = StackNavigator({

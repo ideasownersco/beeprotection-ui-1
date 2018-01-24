@@ -25,13 +25,13 @@ function fetchDriver(id) {
   return request({path, requiresAuthentication: true});
 }
 
-function fetchOrderDetails(id, params = {}) {
+function fetchOrderDetails(id) {
   const path = `company/orders/${id}/details`;
   return request({path, requiresAuthentication: true});
 }
 
-function assignDriver(params = {}) {
-  const path = `company/orders/${params.id}/drivers/assign`;
+function assignDriver(id,params) {
+  const path = `company/orders/${id}/drivers/assign`;
   let requestParams = {
     path,
     method: 'POST',

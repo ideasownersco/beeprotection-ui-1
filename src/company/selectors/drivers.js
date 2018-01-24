@@ -6,6 +6,14 @@ const schemas = state => state.entities;
 const driversSchema = state => state.entities.drivers;
 const usersSchema = state => state.entities.users;
 
+const getItemIdProp = ({}, itemID) => itemID;
+
+const getDriverByID = () => {
+  return createSelector([schemas, getItemIdProp], (entities, itemID) =>
+    denormalize(itemID, Schema.drivers, entities),
+  );
+};
+
 const getDrivers = createSelector(
   [schemas, driversSchema, usersSchema],
   (entities, drivers, usersSchema) =>
@@ -20,4 +28,6 @@ const getDrivers = createSelector(
 
 export const SELECTORS = {
   getDrivers,
+  getDriverByID,
+
 };

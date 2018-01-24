@@ -42,11 +42,23 @@ function fetchWorkingOrder() {
   return request({path});
 }
 
+function fetchPastOrders() {
+  const path = `driver/orders/past`;
+  return request({path});
+}
+
+function fetchOrderDetails(id) {
+  const path = `driver/orders/${id}/details`;
+  return request({path, requiresAuthentication: true});
+}
+
 export const API = {
   saveProfile,
   fetchProfile,
   fetchUpcomingOrders,
   fetchWorkingOrder,
+  fetchOrderDetails,
+  fetchPastOrders,
   startJob,
   finishJob,
 };

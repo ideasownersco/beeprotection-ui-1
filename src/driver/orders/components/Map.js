@@ -76,7 +76,8 @@ export default class Map extends Component {
       },
       state => {
         this.setState({
-          enabled: state.enabled && jobStatus === 'working',
+          enabled: jobStatus === 'working',
+          // enabled: state.enabled && jobStatus === 'working',
         });
       },
     );
@@ -89,7 +90,7 @@ export default class Map extends Component {
   onLocation = location => {
     this.map.fitToElements(true);
 
-    console.log('[event] location: ', location);
+    // console.log('[event] location: ', location);
     const lastPosition = this.state.origin;
     const currentLocation = {
       latitude: location.coords.latitude,
@@ -108,12 +109,12 @@ export default class Map extends Component {
   };
 
   onHttp(response) {
-    console.log('[event] http: ', response);
+    // console.log('[event] http: ', response);
     // this.addEvent('http', new Date(), response);
   }
 
   onMotionChange(event) {
-    console.log('[event] motionchange: ', event.isMoving, event.location);
+    // console.log('[event] motionchange: ', event.isMoving, event.location);
     this.setState({
       isMoving: event.isMoving,
     });
@@ -150,9 +151,10 @@ export default class Map extends Component {
       this.setState({
         enabled: true,
       });
-      this.props.startJob();
-      BackgroundGeolocation.start();
     }
+
+    this.props.startJob();
+    BackgroundGeolocation.start();
   };
 
   stopTrip = () => {
@@ -161,26 +163,10 @@ export default class Map extends Component {
       this.setState({
         enabled: false,
       });
-      this.props.finishJob();
-      BackgroundGeolocation.stop();
     }
+    this.props.finishJob();
+    BackgroundGeolocation.stop();
   };
-
-  // toggleStartStopTrip = () => {
-  //   this.map.fitToElements(true);
-  //
-  //   let enabled = !this.state.enabled;
-  //   this.setState({
-  //     enabled: enabled,
-  //   });
-  //   if (enabled) {
-  //     this.props.startJob();
-  //     BackgroundGeolocation.start();
-  //   } else {
-  //     this.props.finishJob();
-  //     BackgroundGeolocation.stop();
-  //   }
-  // };
 
   render() {
     const {destination} = this.props;
@@ -189,7 +175,11 @@ export default class Map extends Component {
     const rotate =
       typeof heading === 'number' && heading >= 0 ? `${heading}deg` : null;
 
-    console.log('enabled', this.state.enabled);
+    console.log('props',this.props);
+    console.log('state',this.state);
+
+    // console.log('enabled', this.state.enabled);
+
     return (
       <View style={styles.container}>
         <MapView

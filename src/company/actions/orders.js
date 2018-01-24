@@ -68,10 +68,10 @@ function fetchPastOrdersRefresh(params) {
   };
 }
 
-function fetchOrderDetails(params) {
+function fetchOrderDetails(id) {
   return {
     type: ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST,
-    params,
+    order_id:id,
   };
 }
 

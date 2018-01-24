@@ -9,9 +9,8 @@ import DriverInfo from 'company/drivers/components/DriverInfo';
 import DriverThumb from 'company/drivers/components/DriverThumb';
 import SectionHeading from 'company/components/SectionHeading';
 import OrdersList from 'company/orders/components/OrdersList';
-import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
 import {ACTIONS as COMPANY_ACTIONS} from 'company/actions/drivers';
-import {SELECTORS as DRIVER_SELECTORS} from 'driver/common/selectors';
+import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 
 import I18n from 'utils/locale';
 
@@ -34,9 +33,7 @@ class DriverDetailScene extends PureComponent {
 
   componentDidMount() {
     this.props.dispatch(
-      COMPANY_ACTIONS.fetchDriver({
-        driver_id: this.props.navigation.state.params.driverID,
-      }),
+      COMPANY_ACTIONS.fetchDriver(this.props.navigation.state.params.driverID),
     );
   }
 

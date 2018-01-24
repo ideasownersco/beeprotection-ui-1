@@ -12,10 +12,10 @@ export const ACTION_TYPES = {
   ASSIGN_DRIVER_FAILURE: '@company/drivers/ASSIGN_DRIVER_FAILURE',
 };
 
-function fetchDriver(params) {
+function fetchDriver(id) {
   return {
     type: ACTION_TYPES.FETCH_DRIVER_REQUEST,
-    params,
+    driver_id:id,
   };
 }
 
@@ -26,9 +26,10 @@ function fetchDrivers(params) {
   };
 }
 
-function assignToOrder(params) {
+function assignDriver(id,params) {
   return {
     type: ACTION_TYPES.ASSIGN_DRIVER_REQUEST,
+    order_id:id,
     params,
   };
 }
@@ -36,5 +37,5 @@ function assignToOrder(params) {
 export const ACTIONS = {
   fetchDrivers,
   fetchDriver,
-  assignToOrder,
+  assignDriver,
 };

@@ -3,8 +3,8 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ACTIONS as ORDER_ACTIONS} from 'company/actions/orders';
-import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
+import {ACTIONS as ORDER_ACTIONS} from 'driver/common/actions';
+import {SELECTORS as ORDER_SELECTORS} from 'driver/selectors/orders';
 import {ScrollView} from 'react-native';
 import OrderItems from 'company/orders/components/OrderItems';
 import OrderBasicInfo from 'company/orders/components/OrderBasicInfo';
@@ -28,9 +28,7 @@ class OrderDetailScene extends Component {
 
   componentDidMount() {
     this.props.dispatch(
-      ORDER_ACTIONS.fetchOrderDetails({
-        order_id: this.props.navigation.state.params.orderID,
-      }),
+      ORDER_ACTIONS.fetchOrderDetails(this.props.navigation.state.params.orderID),
     );
   }
 
@@ -44,9 +42,6 @@ class OrderDetailScene extends Component {
 
   render() {
     let {order} = this.props;
-
-    console.log('order', order);
-
     return (
       <ScrollView style={{flex: 1}} keyboardShouldPersistTap="always">
         <OrderBasicInfo item={order} />
@@ -55,7 +50,6 @@ class OrderDetailScene extends Component {
     );
   }
 }
-
 const makeMapStateToProps = () => {
   const getOrderByID = ORDER_SELECTORS.getOrderByID();
   const mapStateToProps = (state, props) => {

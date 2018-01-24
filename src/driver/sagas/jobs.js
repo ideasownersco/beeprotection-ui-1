@@ -17,11 +17,12 @@ function* startJob(action) {
       params
     );
 
-    const normalized = normalize(response.data, Schema.jobs);
+    const normalized = normalize(response.data, Schema.orders);
 
     yield put({
       type: ACTION_TYPES.START_JOB_SUCCESS,
       entities: normalized.entities,
+      result: normalized.result,
     });
   } catch (error) {
     yield put({type: ACTION_TYPES.START_JOB_FAILURE, error});
@@ -40,11 +41,12 @@ function* finishJob(action) {
       action.job_id,
       params,
     );
-    const normalized = normalize(response.data, Schema.jobs);
+    const normalized = normalize(response.data, Schema.orders);
 
     yield put({
       type: ACTION_TYPES.FINISH_JOB_SUCCESS,
       entities: normalized.entities,
+      result: normalized.result,
     });
   } catch (error) {
     yield put({type: ACTION_TYPES.FINISH_JOB_FAILURE, error});

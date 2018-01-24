@@ -6,6 +6,8 @@ import Login from 'guest/Login';
 import DrawerIcon from 'components/DrawerIcon';
 import OrderDetailScene from 'driver/orders/OrderDetailScene';
 import CustomerLocationMapScene from 'driver/orders/CustomerLocationMapScene';
+import PastOrdersScene from 'driver/orders/PastOrdersScene';
+import UpcomingOrdersScene from 'driver/orders/UpcomingOrdersScene';
 
 const getDrawerIcon = navigation => {
   return {
@@ -24,6 +26,24 @@ const HomeStack = StackNavigator({
   CustomerLocationMap: {
     screen: CustomerLocationMapScene,
   },
+  PastOrders: {screen: PastOrdersScene},
+  UpcomingOrders: {screen: UpcomingOrdersScene},
+});
+
+const PastOrdersStack = StackNavigator({
+  PastOrders: {
+    screen: PastOrdersScene,
+    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+  },
+  OrderDetail: {screen: OrderDetailScene},
+});
+
+const UpcomingOrdersStack = StackNavigator({
+  UpcomingOrders: {
+    screen: UpcomingOrdersScene,
+    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+  },
+  OrderDetail: {screen: OrderDetailScene},
 });
 
 const DrawerRoutes = {
@@ -33,6 +53,8 @@ const DrawerRoutes = {
   Login: {
     screen: Login,
   },
+  PastOrdersStack: {screen: PastOrdersStack},
+  UpcomingOrdersStack: {screen: UpcomingOrdersStack},
 };
 
 export const Router = DrawerNavigator(DrawerRoutes, {

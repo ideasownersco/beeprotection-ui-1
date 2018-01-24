@@ -39,6 +39,24 @@ export default class Drawer extends Component {
         />
 
         <Separator />
+        <DrawerItem
+          title={I18n.t('upcoming_orders')}
+          routeName="UpcomingOrdersStack"
+          onItemPress={this.onItemPress}
+          iconProps={{name: 'back-in-time', type: 'Entypo', size: 30}}
+          active={activeRoute === 'UpcomingOrdersStack'}
+        />
+
+        <Separator />
+        <DrawerItem
+          title={I18n.t('past_orders')}
+          routeName="PastOrdersStack"
+          onItemPress={this.onItemPress}
+          iconProps={{name: 'timelapse', type: 'MaterialIcons', size: 30}}
+          active={activeRoute === 'PastOrdersStack'}
+        />
+
+        <Separator />
 
         <DrawerItem
           title={I18n.t('logout')}

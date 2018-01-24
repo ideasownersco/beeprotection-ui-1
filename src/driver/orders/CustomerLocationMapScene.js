@@ -26,7 +26,7 @@ class CustomerLocationMapScene extends Component {
     this.props.dispatch(
       DRIVER_ACTIONS.startJob(accepted_job.id),
     );
-    console.log('job started', accepted_job);
+    // console.log('job started', accepted_job);
   };
 
   onFinishJobPress = () => {
@@ -34,12 +34,12 @@ class CustomerLocationMapScene extends Component {
     this.props.dispatch(
       DRIVER_ACTIONS.finishJob(accepted_job.id),
     );
-    console.log('job ended', accepted_job);
+    // console.log('job ended', accepted_job);
   };
 
   onUpdateLocation = () => {
     let {accepted_job} = this.props.navigation.state.params.order;
-    console.log('updating location');
+    // console.log('updating location');
   };
 
   render() {
@@ -47,7 +47,7 @@ class CustomerLocationMapScene extends Component {
     let {address} = order;
     let {accepted_job} = this.props.navigation.state.params.order;
 
-    console.log('accepted_job', accepted_job);
+    // console.log('accepted_job', accepted_job);
 
     return (
       <Map
