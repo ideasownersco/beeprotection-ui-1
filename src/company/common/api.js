@@ -7,7 +7,7 @@ function fetchUpcomingOrders(params = {}) {
 
 function fetchPastOrders(params = {}) {
   const path = `company/orders/past`;
-  return request({path, requiresAuthentication: true});
+  return request({path, requiresAuthentication: true, params});
 }
 
 function fetchWorkingOrders(params = {}) {
@@ -20,8 +20,8 @@ function fetchDrivers() {
   return request({path, requiresAuthentication: true});
 }
 
-function fetchOrderDetails(params = {}) {
-  const path = `company/orders/${params.id}/details`;
+function fetchOrderDetails(id, params = {}) {
+  const path = `company/orders/${id}/details`;
   return request({path, requiresAuthentication: true});
 }
 

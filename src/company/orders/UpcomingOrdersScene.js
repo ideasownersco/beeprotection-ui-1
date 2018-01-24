@@ -24,9 +24,14 @@ class UpcomingOrdersScene extends PureComponent {
     });
   };
 
-  onFetchMore = () => {};
+  onFetchMore = () => {
+    this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
+  };
 
-  onPullToRefresh = () => {};
+  onPullToRefresh = () => {
+    this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrdersRefresh());
+    this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
+  };
 
   render() {
     const {orders, isFetching} = this.props;

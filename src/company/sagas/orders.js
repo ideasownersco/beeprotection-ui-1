@@ -17,10 +17,8 @@ function* fetchUpcomingOrders() {
         error: I18n.t('no_more_records'),
       });
     } else {
-      let paginated = !!nextPage;
-
       const params = {
-        paginated: paginated,
+        paginated: !!nextPage,
         paginatedUrl: nextPage,
       };
 
@@ -28,7 +26,7 @@ function* fetchUpcomingOrders() {
 
       const normalized = normalize(response.data, [Schema.orders]);
       const {entities, result} = normalized;
-      console.log('fetchUpcomingOrders', normalized);
+
       yield put({
         type: ORDER_ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS,
         entities: entities,
@@ -53,14 +51,10 @@ function* fetchWorkingOrders() {
         error: I18n.t('no_more_records'),
       });
     } else {
-      let paginated = !!nextPage;
-
       const params = {
-        paginated: paginated,
+        paginated: !!nextPage,
         paginatedUrl: nextPage,
       };
-      console.log('params', params);
-
       const response = yield call(API.fetchWorkingOrders, params);
       const normalized = normalize(response.data, [Schema.orders]);
       const {entities, result} = normalized;
@@ -77,9 +71,40 @@ function* fetchWorkingOrders() {
   }
 }
 
+function* fetchPastOrders() {
+  try {
+    const state = yield select();
+
+    const {nextPage} = state.company.past_orders;
+
+    if (nextPage === null) {
+      yield put({
+        type: ORDER_ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE,
+        error: I18n.t('no_more_records'),
+      });
+    } else {
+      const params = {
+        paginated: !!nextPage,
+        paginatedUrl: nextPage,
+      };
+      const response = yield call(API.fetchPastOrders, params);
+      const normalized = normalize(response.data, [Schema.orders]);
+      const {entities, result} = normalized;
+      yield put({
+        type: ORDER_ACTION_TYPES.FETCH_PAST_ORDERS_SUCCESS,
+        entities: entities,
+        result: result,
+        nextPage: (response.links && response.links.next) || null,
+      });
+    }
+  } catch (error) {
+    yield put({type: ORDER_ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE, error});
+  }
+}
+
 function* fetchOrderDetails(action) {
   try {
-    const response = yield call(API.fetchOrderDetails, action.params);
+    const response = yield call(API.fetchOrderDetails, action.params.id);
     const normalizedOrders = normalize(response.data, Schema.orders);
     yield put({
       type: ORDER_ACTION_TYPES.FETCH_ORDER_DETAILS_SUCCESS,
@@ -104,6 +129,13 @@ function* fetchWorkingOrdersMonitor() {
   );
 }
 
+function* fetchPastOrdersMonitor() {
+  yield takeLatest(
+    ORDER_ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST,
+    fetchPastOrders,
+  );
+}
+
 function* fetchOrderDetailsMonitor() {
   yield takeLatest(
     ORDER_ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST,
@@ -114,5 +146,6 @@ function* fetchOrderDetailsMonitor() {
 export const sagas = all([
   fork(fetchUpcomingOrdersMonitor),
   fork(fetchWorkingOrdersMonitor),
+  fork(fetchPastOrdersMonitor),
   fork(fetchOrderDetailsMonitor),
 ]);

@@ -1,4 +1,4 @@
-import {createSelector} from 'reselect';
+import g{createSelector} from 'reselect';
 import {denormalize} from 'normalizr';
 import {Schema} from 'utils/schema';
 
@@ -45,9 +45,7 @@ const getPastOrders = createSelector(
   (entities, orders) => {
     return (
       (orders &&
-        orders
-          .map(orderId => denormalize(orderId, Schema.orders, entities))
-          .filter(order => order.is_working)) ||
+        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
       []
     );
   },

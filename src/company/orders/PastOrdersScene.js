@@ -15,7 +15,7 @@ class PastOrdersScene extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.dispatch(ORDER_ACTIONS.fetchStandingOrders());
+    this.props.dispatch(ORDER_ACTIONS.fetchPastOrders());
   }
 
   onOrdersListItemPress = (item: object) => {
@@ -24,14 +24,25 @@ class PastOrdersScene extends PureComponent {
     });
   };
 
+  onFetchMore = () => {
+    this.props.dispatch(ORDER_ACTIONS.fetchPastOrders());
+  };
+
+  onPullToRefresh = () => {
+    this.props.dispatch(ORDER_ACTIONS.fetchPastOrdersRefresh());
+    this.props.dispatch(ORDER_ACTIONS.fetchPastOrders());
+  };
+
   render() {
-    const {orders} = this.props;
+    const {orders, isFetching} = this.props;
 
     return (
       <OrdersList
         items={orders}
         onItemPress={this.onOrdersListItemPress}
-        activeItemID={0}
+        isFetching={isFetching}
+        onFetchMore={this.onFetchMore}
+        onPullToRefresh={this.onPullToRefresh}
       />
     );
   }
@@ -39,7 +50,8 @@ class PastOrdersScene extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    orders: ORDER_SELECTORS.getOrders(state),
+    orders: ORDER_SELECTORS.getPastOrders(state),
+    isFetching: state.company.past_orders.isFetching,
   };
 }
 

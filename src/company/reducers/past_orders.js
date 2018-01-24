@@ -4,7 +4,7 @@ import union from 'lodash/union';
 const initialState = {
   isFetching: false,
   ids: [],
-  nextPage: [],
+  nextPage: undefined,
   error: null,
 };
 
