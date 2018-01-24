@@ -39,7 +39,6 @@ class WorkingOrdersScene extends PureComponent {
     const {orders, isFetching} = this.props;
 
     return (
-      <ScrollView style={{flex: 1}}>
         <OrdersList
           items={orders}
           onItemPress={this.onOrdersListItemPress}
@@ -47,9 +46,6 @@ class WorkingOrdersScene extends PureComponent {
           onFetchMore={this.onFetchMore}
           onPullToRefresh={this.onPullToRefresh}
         />
-
-        <Button title="Load More" onPress={this.onFetchMore} />
-      </ScrollView>
     );
   }
 }

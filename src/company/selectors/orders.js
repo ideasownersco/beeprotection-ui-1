@@ -1,4 +1,4 @@
-import g{createSelector} from 'reselect';
+import {createSelector} from 'reselect';
 import {denormalize} from 'normalizr';
 import {Schema} from 'utils/schema';
 
