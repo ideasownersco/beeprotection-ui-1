@@ -37,7 +37,9 @@ class HomeScene extends Component {
     });
   };
 
-  loadCurrentOrders = () => {};
+  loadUpcomingOrders = () => {
+    this.props.navigation.navigate('UpcomingOrders');
+  };
 
   render() {
     let {orders, order} = this.props;
@@ -47,7 +49,6 @@ class HomeScene extends Component {
 
         <SectionHeading
           title={I18n.t('working_order')}
-          onButtonPress={this.loadCurrentOrders}
         />
 
         {order.id && (
@@ -62,7 +63,7 @@ class HomeScene extends Component {
         <SectionHeading
           title={I18n.t('upcoming_orders')}
           buttonTitle={I18n.t('view_all')}
-          onButtonPress={this.loadCurrentOrders}
+          onButtonPress={this.loadUpcomingOrders}
         />
 
         <OrdersList
