@@ -7,7 +7,12 @@ import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
 
 function* saveProfile(action) {
   try {
-    const response = yield call(API.saveProfile, action.params);
+
+    const params = {
+      body:action.params
+    };
+
+    const response = yield call(API.saveProfile,params);
     const normalized = normalize(response.data, Schema.drivers);
     yield put({
       type: ACTION_TYPES.UPDATE_PROFILE_SUCCESS,

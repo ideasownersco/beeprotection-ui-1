@@ -39,13 +39,13 @@ class WorkingOrdersScene extends PureComponent {
     const {orders, isFetching} = this.props;
 
     return (
-        <OrdersList
-          items={orders}
-          onItemPress={this.onOrdersListItemPress}
-          isFetching={isFetching}
-          onFetchMore={this.onFetchMore}
-          onPullToRefresh={this.onPullToRefresh}
-        />
+      <OrdersList
+        items={orders}
+        onItemPress={this.onOrdersListItemPress}
+        isFetching={isFetching}
+        onFetchMore={this.onFetchMore}
+        onPullToRefresh={this.onPullToRefresh}
+      />
     );
   }
 }

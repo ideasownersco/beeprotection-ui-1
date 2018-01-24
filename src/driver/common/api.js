@@ -1,30 +1,28 @@
 import {request} from 'utils/network';
 
-function saveProfile(body) {
+function saveProfile(params) {
   const path = `driver/profile/update`;
   let requestParams = {
     path,
     method: 'POST',
-    body: body,
+    params,
   };
   return request(requestParams);
 }
-function startJob(id, body) {
+function startJob(id) {
   const path = `driver/jobs/${id}/start`;
   let requestParams = {
     path,
     method: 'POST',
-    body: body,
   };
   return request(requestParams);
 }
 
-function finishJob(id, body) {
+function finishJob(id,) {
   const path = `driver/jobs/${id}/finish`;
   let requestParams = {
     path,
     method: 'POST',
-    body: body,
   };
   return request(requestParams);
 }

@@ -38,9 +38,9 @@ usersSchema.define({
 
 driversSchema.define({
   user: usersSchema,
-  working_order:ordersSchema,
-  past_orders:[ordersSchema],
-  upcoming_orders:[ordersSchema]
+  working_order: ordersSchema,
+  past_orders: [ordersSchema],
+  upcoming_orders: [ordersSchema],
 });
 
 export const Schema = {

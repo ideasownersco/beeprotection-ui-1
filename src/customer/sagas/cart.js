@@ -22,7 +22,7 @@ function* fetchCartItems() {
         categories,
         packages,
         services,
-      })
+      }),
     };
 
     const response = yield call(API.fetchCartItems, params);

@@ -56,16 +56,18 @@ function saveProfile(params) {
   };
 }
 
-function startJob(params) {
+function startJob(id,params = {}) {
   return {
     type: ACTION_TYPES.START_JOB_REQUEST,
+    job_id:id,
     params,
   };
 }
 
-function finishJob(params) {
+function finishJob(id,params = {}) {
   return {
     type: ACTION_TYPES.FINISH_JOB_REQUEST,
+    job_id:id,
     params,
   };
 }

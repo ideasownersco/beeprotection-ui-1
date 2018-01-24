@@ -62,7 +62,6 @@ function* fetchUpcomingOrders() {
   }
 }
 
-
 function* fetchWorkingOrder() {
   try {
     const response = yield call(API.fetchWorkingOrder);
@@ -79,11 +78,10 @@ function* fetchWorkingOrder() {
 
 function* saveAddress(action) {
   try {
-
     const params = {
-      body:{
-        ...action.params
-      }
+      body: {
+        ...action.params,
+      },
     };
 
     const response = yield call(API.saveAddress, params);
@@ -107,9 +105,9 @@ function* saveAddress(action) {
 function* saveOrder(action) {
   try {
     const params = {
-      body:{
-        ...action.params
-      }
+      body: {
+        ...action.params,
+      },
     };
 
     const response = yield call(API.saveOrder, params);
@@ -128,11 +126,10 @@ function* saveOrder(action) {
 
 function* checkout(action) {
   try {
-
     const params = {
-      body:{
-        ...action.params
-      }
+      body: {
+        ...action.params,
+      },
     };
 
     const response = yield call(API.checkout, params);
@@ -195,5 +192,4 @@ export const sagas = all([
   fork(saveOrderMonitor),
   fork(checkoutMonitor),
   fork(fetchWorkingOrderMonitor),
-
 ]);

@@ -72,7 +72,6 @@ class OrderDetailScene extends Component {
           drivers={drivers}
           onDriversListItemPress={this.selectDriver}
         />
-
       </ScrollView>
     );
   }

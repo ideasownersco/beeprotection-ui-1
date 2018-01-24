@@ -6,11 +6,17 @@ import {normalize} from 'normalizr';
 
 function* startJob(action) {
   try {
+
+    const params = {
+      body:action.params
+    };
+
     const response = yield call(
       API.startJob,
-      action.params.job_id,
-      action.params,
+      action.job_id,
+      params
     );
+
     const normalized = normalize(response.data, Schema.jobs);
 
     yield put({
@@ -24,10 +30,15 @@ function* startJob(action) {
 
 function* finishJob(action) {
   try {
+
+    const params = {
+      body:action.params
+    };
+
     const response = yield call(
       API.finishJob,
-      action.params.job_id,
-      action.params,
+      action.job_id,
+      params,
     );
     const normalized = normalize(response.data, Schema.jobs);
 

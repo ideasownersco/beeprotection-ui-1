@@ -22,9 +22,9 @@ function* fetchDrivers() {
 
 function* fetchDriver(action) {
   try {
-    const response = yield call(API.fetchDriver,action.params.driver_id);
+    const response = yield call(API.fetchDriver, action.params.driver_id);
 
-    if(response.working_order) {
+    if (response.working_order) {
       response.data.working_order = response.working_order;
     }
 

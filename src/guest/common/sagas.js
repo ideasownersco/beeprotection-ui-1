@@ -24,10 +24,10 @@ function* login(action) {
     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
 
     const params = {
-      body:{
+      body: {
         ...action.credentials,
         push_token: pushTokenStorageKey,
-      }
+      },
     };
 
     const response = yield call(API.login, params);
@@ -55,11 +55,10 @@ function* login(action) {
 
 function* register(action) {
   try {
-
     const params = {
       body: {
         ...action.params,
-      }
+      },
     };
 
     const response = yield call(API.register, params);
@@ -92,7 +91,7 @@ function* forgotPassword(action) {
     const params = {
       body: {
         ...action.params,
-      }
+      },
     };
 
     const response = yield call(API.forgotPassword, params);
@@ -109,11 +108,10 @@ function* forgotPassword(action) {
 
 function* recoverPassword(action) {
   try {
-
     const params = {
       body: {
         ...action.params,
-      }
+      },
     };
 
     const response = yield call(API.recoverPassword, params);
@@ -132,7 +130,7 @@ function* updatePassword(action) {
     const params = {
       body: {
         ...action.params,
-      }
+      },
     };
 
     const response = yield call(API.updatePassword, params);

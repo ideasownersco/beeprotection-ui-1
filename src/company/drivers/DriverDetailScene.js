@@ -11,13 +11,11 @@ import SectionHeading from 'company/components/SectionHeading';
 import OrdersList from 'company/orders/components/OrdersList';
 import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
 import {ACTIONS as COMPANY_ACTIONS} from 'company/actions/drivers';
-import {SELECTORS as DRIVER_SELECTORS} from "driver/common/selectors";
-
+import {SELECTORS as DRIVER_SELECTORS} from 'driver/common/selectors';
 
 import I18n from 'utils/locale';
 
 class DriverDetailScene extends PureComponent {
-
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -35,9 +33,11 @@ class DriverDetailScene extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.dispatch(COMPANY_ACTIONS.fetchDriver({
-      driver_id: this.props.navigation.state.params.driverID
-    }));
+    this.props.dispatch(
+      COMPANY_ACTIONS.fetchDriver({
+        driver_id: this.props.navigation.state.params.driverID,
+      }),
+    );
   }
 
   onOrdersListItemPress = (item: object) => {
@@ -54,32 +54,28 @@ class DriverDetailScene extends PureComponent {
         style={{flex: 1}}
         keyboardShouldPersistTap="always"
         contentInset={{bottom: 150}}>
+        <DriverThumb image={image} name={name} />
 
-        <DriverThumb image={image} name={name}/>
+        <DriverInfo driver={driver} />
 
-        <DriverInfo driver={driver}/>
+        {driver.working_order &&
+          driver.working_order.id && (
+            <View>
+              <SectionHeading
+                title={I18n.t('working_order')}
+                onButtonPress={this.loadCurrentOrders}
+              />
 
-        {
-          driver.working_order && driver.working_order.id &&
-
-          <View>
-            <SectionHeading
-              title={I18n.t('working_order')}
-              onButtonPress={this.loadCurrentOrders}
-            />
-
-            <OrdersList
-              items={[driver.working_order]}
-              onItemPress={this.onOrdersListItemPress}
-            />
-          </View>
-        }
-
+              <OrdersList
+                items={[driver.working_order]}
+                onItemPress={this.onOrdersListItemPress}
+              />
+            </View>
+          )}
       </ScrollView>
     );
   }
 }
-
 
 const makeMapStateToProps = () => {
   const getDriverByID = DRIVER_SELECTORS.getDriverByID();
