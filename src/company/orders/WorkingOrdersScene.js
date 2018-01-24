@@ -22,7 +22,7 @@ class WorkingOrdersScene extends PureComponent {
 
   onOrdersListItemPress = (item: object) => {
     this.props.navigation.navigate('OrderDetail', {
-      order: item,
+      orderID: item.id,
     });
   };
 
