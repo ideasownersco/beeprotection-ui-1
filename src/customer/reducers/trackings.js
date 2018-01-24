@@ -5,7 +5,6 @@ const initialState = {};
 export function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case ACTION_TYPES.LOCATION_RECEIVED: {
-      console.log('action', action);
       return {
         ...state,
         [action.payload.jobID]: action.payload.location,

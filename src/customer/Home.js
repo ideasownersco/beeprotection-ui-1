@@ -2,21 +2,29 @@ import React, {Component} from 'react';
 import {ScrollView} from 'react-native';
 import HomeActionButtons from 'customer/components/HomeActionButtons';
 import StandingOrdersList from 'customer/components/StandingOrdersList';
-import {SELECTORS} from 'customer/common/selectors';
+import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import WelcomeText from './components/WelcomeText';
 
 class Home extends Component {
+
+  static defaultProps = {
+    upcoming_orders: [],
+    working_order: {}
+  };
+
   componentDidMount() {
-    this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
+    this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrder());
+    // this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
   }
 
   onCreateOrderPress = () => {
     this.props.navigation.navigate('CreateOrder');
   };
 
-  onProtectionPress = () => {};
+  onProtectionPress = () => {
+  };
 
   onItemTrackPress = (item: Object) => {
     this.props.navigation.navigate('TrackOrder', {
@@ -31,24 +39,28 @@ class Home extends Component {
   };
 
   render() {
-    let {orders} = this.props;
+    let {upcoming_orders, working_order} = this.props;
 
-    console.log('orders', orders);
+    console.log('orders', working_order);
 
     return (
       <ScrollView style={{flex: 1}}>
-        <WelcomeText />
+        <WelcomeText/>
 
         <HomeActionButtons
           onCreateOrderPress={this.onCreateOrderPress}
           onProtectionPress={this.onProtectionPress}
         />
 
-        <StandingOrdersList
-          items={orders || []}
-          onItemPress={this.onStandingOrderListItemPress}
-          onItemTrackPress={this.onItemTrackPress}
-        />
+        {
+          working_order && working_order.id &&
+          <StandingOrdersList
+            items={[working_order]}
+            onItemPress={this.onStandingOrderListItemPress}
+            onItemTrackPress={this.onItemTrackPress}
+          />
+        }
+
       </ScrollView>
     );
   }
@@ -56,7 +68,8 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    orders: SELECTORS.getOrders(state),
+    upcoming_orders: SELECTORS.getUpcomingOrders(state),
+    working_order: SELECTORS.getWorkingOrder(state),
   };
 }
 

@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {SELECTORS as ORDER_SELECTORS} from 'customer/common/selectors';
+import {SELECTORS as ORDER_SELECTORS} from 'customer/selectors/orders';
 import {View} from 'react-native';
 import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';

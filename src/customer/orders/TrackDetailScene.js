@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ScrollView, Text, View} from 'react-native';
 import {connect} from 'react-redux';
-import {SELECTORS as ORDER_SELECTORS} from 'customer/common/selectors';
+import {SELECTORS as ORDER_SELECTORS} from 'customer/selectors/orders';
 import TrackItem from 'customer/orders/components/TrackItem';
 import I18n from 'utils/locale';
 import IconFactory from 'components/IconFactory';

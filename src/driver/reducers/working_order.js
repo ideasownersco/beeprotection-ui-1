@@ -1,47 +1,20 @@
-import {ACTION_TYPES} from 'driver/common/actions';
+import {ACTION_TYPES} from 'customer/common/actions';
+import union from 'lodash/union';
 
 const initialState = {
   isFetching: false,
-  id: null,
+  ids: null,
   error: null,
 };
 
 export function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST:
+    case ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS:
+    case ACTION_TYPES.SAVE_ORDER_SUCCESS:
       return {
         ...state,
-        isFetching: true,
-        error: null,
+        ids: union(state.ids.concat(action.result)),
       };
-
-    case ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS: {
-      return {
-        ...state,
-        isFetching: false,
-        id: action.result,
-        error: null,
-      };
-    }
-
-    case ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.error,
-      };
-    case ACTION_TYPES.START_JOB_SUCCESS: {
-      return {
-        ...state,
-        id: action.result,
-      };
-    }
-    case ACTION_TYPES.FINISH_JOB_SUCCESS: {
-      return {
-        ...state,
-        id: null,
-      };
-    }
     default:
       return state;
   }

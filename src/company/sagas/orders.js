@@ -130,17 +130,11 @@ function* fetchWorkingOrdersMonitor() {
 }
 
 function* fetchPastOrdersMonitor() {
-  yield takeLatest(
-    ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST,
-    fetchPastOrders,
-  );
+  yield takeLatest(ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST, fetchPastOrders);
 }
 
 function* fetchOrderDetailsMonitor() {
-  yield takeLatest(
-    ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST,
-    fetchOrderDetails,
-  );
+  yield takeLatest(ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST, fetchOrderDetails);
 }
 
 export const sagas = all([

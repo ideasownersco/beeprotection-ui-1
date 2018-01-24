@@ -25,6 +25,11 @@ function fetchUpcomingOrders(params = {}) {
   return request({path, params});
 }
 
+function fetchPastOrders(params = {}) {
+  const path = `customer/orders/past`;
+  return request({path, params});
+}
+
 function fetchWorkingOrder() {
   const path = `customer/orders/working`;
   return request({path});
@@ -58,5 +63,6 @@ export const API = {
   saveAddress,
   saveOrder,
   fetchUpcomingOrders,
+  fetchPastOrders,
   fetchWorkingOrder,
 };

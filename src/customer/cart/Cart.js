@@ -10,7 +10,7 @@ import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
 import {
   SELECTORS,
   SELECTORS as ORDER_SELECTORS,
-} from 'customer/common/selectors';
+} from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import Button from 'components/Button';
 import I18n from 'utils/locale';

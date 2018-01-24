@@ -53,12 +53,12 @@ function* fetchUpcomingOrders() {
     let {entities, result} = normalized;
 
     yield put({
-      type: ACTION_TYPES.STANDING_ORDERS_SUCCESS,
+      type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS,
       entities: entities,
-      orderIds: result,
+      result: result,
     });
   } catch (error) {
-    yield put({type: ACTION_TYPES.STANDING_ORDERS_FAILURE, error});
+    yield put({type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE, error});
   }
 }
 
@@ -69,7 +69,7 @@ function* fetchWorkingOrder() {
     yield put({
       type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
       entities: normalized.entities,
-      id: normalized.result,
+      result: normalized.result,
     });
   } catch (error) {
     yield put({type: ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE, error});

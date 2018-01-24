@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as CART_ACTIONS} from 'customer/common/actions';
 import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
-import {SELECTORS} from 'customer/common/selectors';
+import {SELECTORS} from 'customer/selectors/orders';
 import CategoriesList from 'customer/orders/components/CategoriesList';
 import PackagesList from 'customer/orders/components/PackagesList';
 import ServicesList from 'customer/orders/components/ServicesList';
