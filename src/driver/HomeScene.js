@@ -5,7 +5,7 @@ import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {connect} from 'react-redux';
 import OrdersList from 'driver/orders/components/OrdersList';
 import {SELECTORS as DRIVER_SELECTORS} from 'driver/common/selectors';
-import SectionHeading from "../company/components/SectionHeading";
+import SectionHeading from '../company/components/SectionHeading';
 import I18n from 'utils/locale';
 
 class HomeScene extends Component {
@@ -29,8 +29,7 @@ class HomeScene extends Component {
     });
   };
 
-  onStartStopButtonPress = () => {
-  };
+  onStartStopButtonPress = () => {};
 
   onAddressButtonPress = (order: object) => {
     this.props.navigation.navigate('CustomerLocationMap', {
@@ -38,29 +37,26 @@ class HomeScene extends Component {
     });
   };
 
-  loadCurrentOrders = () => {
-  }
+  loadCurrentOrders = () => {};
 
   render() {
     let {orders, order} = this.props;
     console.log('props', this.props);
     return (
       <ScrollView style={{flex: 1}}>
-
         <SectionHeading
           title={I18n.t('working_order')}
           onButtonPress={this.loadCurrentOrders}
         />
 
-        {
-          order.id &&
+        {order.id && (
           <OrdersList
             items={[order]}
             onItemPress={this.onOrdersListItemPress}
             onAddressButtonPress={this.onAddressButtonPress}
             onStartStopButtonPress={this.onStartStopButtonPress}
           />
-        }
+        )}
 
         <SectionHeading
           title={I18n.t('upcoming_orders')}

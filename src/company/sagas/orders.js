@@ -1,4 +1,4 @@
-import {all, call, fork, put, takeLatest,select} from 'redux-saga/effects';
+import {all, call, fork, put, takeLatest, select} from 'redux-saga/effects';
 import {ACTION_TYPES as ORDER_ACTION_TYPES} from 'company/actions/orders';
 import {API} from 'company/common/api';
 import {Schema} from 'utils/schema';
@@ -7,7 +7,6 @@ import I18n from 'utils/locale';
 
 function* fetchUpcomingOrders() {
   try {
-
     const state = yield select();
 
     const {nextPage} = state.company.upcoming_orders;
@@ -22,7 +21,7 @@ function* fetchUpcomingOrders() {
 
       const params = {
         paginated: paginated,
-        paginatedUrl:nextPage
+        paginatedUrl: nextPage,
       };
 
       const response = yield call(API.fetchUpcomingOrders, params);
@@ -34,7 +33,7 @@ function* fetchUpcomingOrders() {
         type: ORDER_ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS,
         entities: entities,
         result: result,
-        nextPage: response.links && response.links.next || null
+        nextPage: (response.links && response.links.next) || null,
       });
     }
   } catch (error) {
@@ -44,7 +43,6 @@ function* fetchUpcomingOrders() {
 
 function* fetchWorkingOrders() {
   try {
-
     const state = yield select();
 
     const {nextPage} = state.company.working_orders;
@@ -55,14 +53,13 @@ function* fetchWorkingOrders() {
         error: I18n.t('no_more_records'),
       });
     } else {
-
       let paginated = !!nextPage;
 
       const params = {
         paginated: paginated,
-        paginatedUrl:nextPage
+        paginatedUrl: nextPage,
       };
-      console.log('params',params);
+      console.log('params', params);
 
       const response = yield call(API.fetchWorkingOrders, params);
       const normalized = normalize(response.data, [Schema.orders]);
@@ -72,7 +69,7 @@ function* fetchWorkingOrders() {
         type: ORDER_ACTION_TYPES.FETCH_WORKING_ORDERS_SUCCESS,
         entities: entities,
         result: result,
-        nextPage: response.links && response.links.next || null
+        nextPage: (response.links && response.links.next) || null,
       });
     }
   } catch (error) {

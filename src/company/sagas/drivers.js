@@ -22,10 +22,9 @@ function* fetchDrivers() {
 
 function* assignDriver(action) {
   try {
-
     const params = {
       body: action.params,
-      id:action.params.order_id
+      id: action.params.order_id,
     };
 
     const response = yield call(API.assignDriver, params);

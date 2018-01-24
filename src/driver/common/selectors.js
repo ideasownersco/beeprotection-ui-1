@@ -23,13 +23,9 @@ const getUpcomingOrders = createSelector(
 const getWorkingOrder = createSelector(
   [schemas, workingOrder],
   (entities, orderId) => {
-    return (
-      (orderId && denormalize(orderId, Schema.orders, entities)) ||
-      {}
-    );
+    return (orderId && denormalize(orderId, Schema.orders, entities)) || {};
   },
 );
-
 
 export const SELECTORS = {
   getUpcomingOrders,

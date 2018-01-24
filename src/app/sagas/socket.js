@@ -3,9 +3,7 @@ import {all, call, cancel, fork, put, select, take} from 'redux-saga/effects';
 import {SOCKET_SERVER} from 'utils/env';
 import {eventChannel} from 'redux-saga';
 
-import {
-  ACTION_TYPES as CUSTOMER_ACTIONS,
-} from 'customer/common/actions';
+import {ACTION_TYPES as CUSTOMER_ACTIONS} from 'customer/common/actions';
 
 import {ACTION_TYPES as AUTH_ACTIONS} from 'guest/common/actions';
 import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
@@ -20,7 +18,7 @@ function connect() {
 }
 
 function subscribe(socket) {
-  console.log('socket',socket);
+  console.log('socket', socket);
   return eventChannel(emit => {
     socket.on('location.updated', data => {
       // console.log('location.updated',data);
@@ -29,16 +27,14 @@ function subscribe(socket) {
       //   payload:data
       // })
       emit({
-          type:CUSTOMER_ACTIONS.LOCATION_RECEIVED,
-          payload:data
+        type: CUSTOMER_ACTIONS.LOCATION_RECEIVED,
+        payload: data,
       });
       // emit(CUSTOMER_ACTIONS.locationReceived(data));
     });
     return () => {};
   });
-
 }
-
 
 // read from server
 function* read(socket) {
@@ -62,9 +58,7 @@ function* syncUserToSocket(socket) {
 //
 function* subscribeToJobTrack(socket) {
   while (true) {
-    const threadParams = yield take(
-      CUSTOMER_ACTIONS.SUBSCRIBE_TO_JOB_TRACK,
-    );
+    const threadParams = yield take(CUSTOMER_ACTIONS.SUBSCRIBE_TO_JOB_TRACK);
     // console.log('subscribing to socket',threadParams.params.job_id);
     socket.emit('job.track.subscribe', threadParams.params.job_id);
   }
@@ -91,4 +85,3 @@ function* socketFlowMonitor() {
 }
 
 export const sagas = all([fork(socketFlowMonitor)]);
-

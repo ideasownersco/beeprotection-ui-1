@@ -40,10 +40,10 @@ function* fetchUpcomingOrdersMonitor() {
 }
 
 function* fetchWorkingOrderMonitor() {
-  yield takeLatest(
-    ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST,
-    fetchWorkingOrder,
-  );
+  yield takeLatest(ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST, fetchWorkingOrder);
 }
 
-export const sagas = all([fork(fetchWorkingOrderMonitor),fork(fetchUpcomingOrdersMonitor)]);
+export const sagas = all([
+  fork(fetchWorkingOrderMonitor),
+  fork(fetchUpcomingOrdersMonitor),
+]);

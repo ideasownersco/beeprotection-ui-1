@@ -1,28 +1,28 @@
 import {request} from 'utils/network';
 
 function saveProfile(body) {
-  const url = `driver/profile/update`;
+  const path = `driver/profile/update`;
   let requestParams = {
-    url,
+    path,
     method: 'POST',
     body: body,
   };
   return request(requestParams);
 }
-function startJob(id,body) {
-  const url = `driver/jobs/${id}/start`;
+function startJob(id, body) {
+  const path = `driver/jobs/${id}/start`;
   let requestParams = {
-    url,
+    path,
     method: 'POST',
     body: body,
   };
   return request(requestParams);
 }
 
-function finishJob(id,body) {
-  const url = `driver/jobs/${id}/finish`;
+function finishJob(id, body) {
+  const path = `driver/jobs/${id}/finish`;
   let requestParams = {
-    url,
+    path,
     method: 'POST',
     body: body,
   };
@@ -30,18 +30,18 @@ function finishJob(id,body) {
 }
 
 function fetchProfile() {
-  const url = `driver/profile`;
-  return request({url});
+  const path = `driver/profile`;
+  return request({path});
 }
 
 function fetchUpcomingOrders() {
-  const url = `driver/orders/upcoming`;
-  return request({url});
+  const path = `driver/orders/upcoming`;
+  return request({path});
 }
 
 function fetchWorkingOrder() {
-  const url = `driver/orders/working`;
-  return request({url});
+  const path = `driver/orders/working`;
+  return request({path});
 }
 
 export const API = {
@@ -50,5 +50,5 @@ export const API = {
   fetchUpcomingOrders,
   fetchWorkingOrder,
   startJob,
-  finishJob
+  finishJob,
 };

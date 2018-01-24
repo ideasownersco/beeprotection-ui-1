@@ -6,7 +6,11 @@ import {normalize} from 'normalizr';
 
 function* startJob(action) {
   try {
-    const response = yield call(API.startJob,action.params.job_id,action.params);
+    const response = yield call(
+      API.startJob,
+      action.params.job_id,
+      action.params,
+    );
     const normalized = normalize(response.data, Schema.jobs);
 
     yield put({
@@ -20,7 +24,11 @@ function* startJob(action) {
 
 function* finishJob(action) {
   try {
-    const response = yield call(API.finishJob,action.params.job_id,action.params);
+    const response = yield call(
+      API.finishJob,
+      action.params.job_id,
+      action.params,
+    );
     const normalized = normalize(response.data, Schema.jobs);
 
     yield put({
@@ -33,17 +41,11 @@ function* finishJob(action) {
 }
 
 function* startJobMonitor() {
-  yield takeLatest(
-    ACTION_TYPES.START_JOB_REQUEST,
-    startJob,
-  );
+  yield takeLatest(ACTION_TYPES.START_JOB_REQUEST, startJob);
 }
 
 function* finishJobMonitor() {
-  yield takeLatest(
-    ACTION_TYPES.FINISH_JOB_REQUEST,
-    finishJob,
-  );
+  yield takeLatest(ACTION_TYPES.FINISH_JOB_REQUEST, finishJob);
 }
 
-export const sagas = all([fork(startJobMonitor),fork(finishJobMonitor)]);
+export const sagas = all([fork(startJobMonitor), fork(finishJobMonitor)]);

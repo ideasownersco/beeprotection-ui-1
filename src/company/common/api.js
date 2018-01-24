@@ -1,34 +1,34 @@
 import {request} from 'utils/network';
 
 function fetchUpcomingOrders(params = {}) {
-  const url = `company/orders/upcoming`;
-  return request({url, requiresAuthentication: true, params});
+  const path = `company/orders/upcoming`;
+  return request({path, requiresAuthentication: true, params});
 }
 
-function fetchPastOrders(params = '') {
-  const url = `company/orders/past`;
-  return request({url, requiresAuthentication: true});
+function fetchPastOrders(params = {}) {
+  const path = `company/orders/past`;
+  return request({path, requiresAuthentication: true});
 }
 
 function fetchWorkingOrders(params = {}) {
-  const url = `company/orders/working`;
-  return request({url, requiresAuthentication: true, params});
+  const path = `company/orders/working`;
+  return request({path, requiresAuthentication: true, params});
 }
 
 function fetchDrivers() {
-  const url = `company/drivers`;
-  return request({url, requiresAuthentication: true});
+  const path = `company/drivers`;
+  return request({path, requiresAuthentication: true});
 }
 
 function fetchOrderDetails(params = {}) {
-  const url = `company/orders/${params.id}/details`;
-  return request({url, requiresAuthentication: true});
+  const path = `company/orders/${params.id}/details`;
+  return request({path, requiresAuthentication: true});
 }
 
 function assignDriver(params = {}) {
-  const url = `company/orders/${params.id}/drivers/assign`;
+  const path = `company/orders/${params.id}/drivers/assign`;
   let requestParams = {
-    url,
+    path,
     method: 'POST',
     params,
   };

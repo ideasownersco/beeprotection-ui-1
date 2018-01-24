@@ -21,20 +21,23 @@ const getDrawerIcon = navigation => {
   };
 };
 
-const HomeStack = StackNavigator({
-  Home: {
-    screen: HomeScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+const HomeStack = StackNavigator(
+  {
+    Home: {
+      screen: HomeScene,
+      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    },
+    OrderDetail: {screen: OrderDetailScene},
+    AddDriver: {screen: AddDriverScene},
+    DriverDetail: {screen: DriverDetailScene},
+    PastOrders: {screen: PastOrdersScene},
+    UpcomingOrders: {screen: UpcomingOrdersScene},
+    WorkingOrders: {screen: WorkingOrdersScene},
   },
-  OrderDetail: {screen: OrderDetailScene},
-  AddDriver: {screen: AddDriverScene},
-  DriverDetail: {screen: DriverDetailScene},
-  PastOrders: {screen: PastOrdersScene},
-  UpcomingOrders: {screen: UpcomingOrdersScene},
-  WorkingOrders: {screen: WorkingOrdersScene},
-},{
-  // initialRouteName:'WorkingOrders'
-});
+  {
+    // initialRouteName:'WorkingOrders'
+  },
+);
 
 const DriversStack = StackNavigator({
   DriversList: {

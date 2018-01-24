@@ -48,7 +48,6 @@ export const ACTION_TYPES = {
   FETCH_UPCOMING_ORDERS_REQUEST: '@customer/FETCH_UPCOMING_ORDERS_REQUEST',
   FETCH_UPCOMING_ORDERS_SUCCESS: '@customer/FETCH_UPCOMING_ORDERS_SUCCESS',
   FETCH_UPCOMING_ORDERS_FAILURE: '@customer/FETCH_UPCOMING_ORDERS_FAILURE',
-
 };
 
 function fetchCartItems() {
@@ -136,18 +135,18 @@ function saveAddress(address: object) {
   };
 }
 
-function locationReceived(location:object) {
+function locationReceived(location: object) {
   return {
-    type:ACTION_TYPES.LOCATION_RECEIVED,
-    payload:location
-  }
+    type: ACTION_TYPES.LOCATION_RECEIVED,
+    payload: location,
+  };
 }
 
 function subscribeToJobTrack(params) {
   return {
-    type:ACTION_TYPES.SUBSCRIBE_TO_JOB_TRACK,
-    params
-  }
+    type: ACTION_TYPES.SUBSCRIBE_TO_JOB_TRACK,
+    params,
+  };
 }
 
 function fetchUpcomingOrders(params) {
@@ -171,5 +170,5 @@ export const ACTIONS = {
   setCartItems,
   locationReceived,
   subscribeToJobTrack,
-  fetchUpcomingOrders
+  fetchUpcomingOrders,
 };

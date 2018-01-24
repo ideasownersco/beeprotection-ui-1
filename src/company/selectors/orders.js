@@ -10,7 +10,7 @@ const getItemIdProp = ({}, itemID) => itemID;
 
 const getOrderByID = () => {
   return createSelector([schemas, getItemIdProp], (entities, itemID) =>
-    denormalize(itemID, Schema.orders, entities)
+    denormalize(itemID, Schema.orders, entities),
   );
 };
 
@@ -18,8 +18,10 @@ const getUpcomingOrders = createSelector(
   [schemas, upcomingOrders],
   (entities, orders) => {
     return (
-      orders &&
-        orders.map(orderId => denormalize(orderId, Schema.orders, entities)).filter(order => !order.is_working) ||
+      (orders &&
+        orders
+          .map(orderId => denormalize(orderId, Schema.orders, entities))
+          .filter(order => !order.is_working)) ||
       []
     );
   },
@@ -29,8 +31,10 @@ const getWorkingOrders = createSelector(
   [schemas, workingOrders],
   (entities, orders) => {
     return (
-      orders &&
-        orders.map(orderId => denormalize(orderId, Schema.orders, entities)).filter(order => order.is_working) ||
+      (orders &&
+        orders
+          .map(orderId => denormalize(orderId, Schema.orders, entities))
+          .filter(order => order.is_working)) ||
       []
     );
   },
@@ -40,8 +44,10 @@ const getPastOrders = createSelector(
   [schemas, pastOrders],
   (entities, orders) => {
     return (
-      orders &&
-        orders.map(orderId => denormalize(orderId, Schema.orders, entities)).filter(order => order.is_working) ||
+      (orders &&
+        orders
+          .map(orderId => denormalize(orderId, Schema.orders, entities))
+          .filter(order => order.is_working)) ||
       []
     );
   },

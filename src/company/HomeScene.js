@@ -59,7 +59,6 @@ class HomeScene extends PureComponent {
 
     return (
       <ScrollView style={{flex: 1}}>
-
         <SectionHeading
           title={I18n.t('current_orders')}
           buttonTitle={I18n.t('view_all')}

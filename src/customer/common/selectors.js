@@ -60,9 +60,9 @@ const getCartItems = createSelector(
           category: categories[item.category],
           package: packages[item.package],
           services:
-          (item.services &&
-            item.services.map(service => services[service])) ||
-          [],
+            (item.services &&
+              item.services.map(service => services[service])) ||
+            [],
         };
       });
     // return Object.keys(items)
@@ -81,7 +81,7 @@ const getCartItems = createSelector(
 const getLocationUpdatesForJob = () => {
   return createSelector(
     [getTrackings, getItemIdProp],
-    (tracking, job) => tracking[job] || {}
+    (tracking, job) => tracking[job] || {},
   );
 };
 
@@ -93,5 +93,5 @@ export const SELECTORS = {
   getTimings,
   getOrders,
   getOrderByID,
-  getLocationUpdatesForJob
+  getLocationUpdatesForJob,
 };

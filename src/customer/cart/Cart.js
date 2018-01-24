@@ -23,7 +23,7 @@ import moment from 'moment';
 import Separator from 'components/Separator';
 import NavigatorService from 'components/NavigatorService';
 import colors from '../../assets/theme/colors';
-import SectionHeading from "../../company/components/SectionHeading";
+import SectionHeading from '../../company/components/SectionHeading';
 
 type State = {
   dates: Array,
@@ -72,8 +72,8 @@ class Cart extends PureComponent {
     this.props.actions.setCartItem('selectedDate', item);
   };
 
-  onTimePickerItemPress = (time) => {
-    console.log('time',time);
+  onTimePickerItemPress = time => {
+    console.log('time', time);
     this.props.actions.setCartItem('selectedTime', time);
   };
 
@@ -117,12 +117,12 @@ class Cart extends PureComponent {
         <Separator style={{marginVertical: 10}} />
 
         {/*<TimePicker*/}
-          {/*items={timings}*/}
-          {/*onItemPress={this.onTimePickerItemPress}*/}
-          {/*activeItemID={selectedTime}*/}
+        {/*items={timings}*/}
+        {/*onItemPress={this.onTimePickerItemPress}*/}
+        {/*activeItemID={selectedTime}*/}
         {/*/>*/}
 
-        <SectionHeading title={I18n.t('select_time')}/>
+        <SectionHeading title={I18n.t('select_time')} />
         <TimePicker
           mode="time"
           date={selectedTime}
@@ -131,14 +131,14 @@ class Cart extends PureComponent {
           cancelBtnText={I18n.t('cancel')}
           onDateChange={this.onTimePickerItemPress}
           customStyles={{
-            dateTouchBody:{
-              padding:10,
+            dateTouchBody: {
+              padding: 10,
             },
-            dateText:{
-              color:colors.primary,
-              fontWeight:'500',
-              fontSize:25
-            }
+            dateText: {
+              color: colors.primary,
+              fontWeight: '500',
+              fontSize: 25,
+            },
           }}
         />
 

@@ -1,34 +1,34 @@
 import {request} from 'utils/network';
 
-function fetchCartItems(params = '') {
-  const url = `cart/make${params}`;
-  return request({url});
+function fetchCartItems(params = {}) {
+  const path = `cart/make${params}`;
+  return request({path});
 }
 
-function fetchCategories(params = '') {
-  const url = `categories${params}`;
-  return request({url});
+function fetchCategories(params = {}) {
+  const path = `categories${params}`;
+  return request({path});
 }
 
-function fetchTimings(params = '') {
-  const url = `timings${params}`;
-  return request({url});
+function fetchTimings(params = {}) {
+  const path = `timings${params}`;
+  return request({path});
 }
 
-function fetchAddresses(params = '') {
-  const url = `customer/addresses${params}`;
-  return request({url});
+function fetchAddresses(params = {}) {
+  const path = `customer/addresses${params}`;
+  return request({path});
 }
 
-function fetchUpcomingOrders(params = '') {
-  const url = `customer/orders/upcoming${params}`;
-  return request({url});
+function fetchUpcomingOrders(params = {}) {
+  const path = `customer/orders/upcoming${params}`;
+  return request({path});
 }
 
 function saveAddress(params) {
-  const url = `customer/addresses`;
+  const path = `customer/addresses`;
   let requestParams = {
-    url,
+    path,
     body: params,
     method: 'POST',
     // requiresAuthentication: true,
@@ -38,9 +38,9 @@ function saveAddress(params) {
 }
 
 function saveOrder(params) {
-  const url = `customer/orders`;
+  const path = `customer/orders`;
   let requestParams = {
-    url,
+    path,
     body: params,
     method: 'POST',
   };

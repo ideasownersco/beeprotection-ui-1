@@ -129,7 +129,10 @@ function* fetchAddressesMonitor() {
 }
 
 function* fetchUpcomingOrdersMonitor() {
-  yield takeLatest(ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST, fetchUpcomingOrders);
+  yield takeLatest(
+    ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST,
+    fetchUpcomingOrders,
+  );
 }
 
 function* saveAddressMonitor() {

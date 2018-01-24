@@ -43,10 +43,9 @@ function* login(action) {
       type: ACTION_TYPES.SYNC_USER_TO_SOCKET,
     });
 
-    if(response.meta) {
+    if (response.meta) {
       yield call(setStorageItem, AUTH_KEY, response.meta.api_token || '');
     }
-
   } catch (error) {
     yield put({type: ACTION_TYPES.LOGIN_FAILURE, error});
     yield put(APP_ACTIONS.setNotification(error, 'error'));

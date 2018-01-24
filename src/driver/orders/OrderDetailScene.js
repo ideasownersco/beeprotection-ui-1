@@ -45,7 +45,7 @@ class OrderDetailScene extends Component {
   render() {
     let {order} = this.props;
 
-    console.log('order',order);
+    console.log('order', order);
 
     return (
       <ScrollView style={{flex: 1}} keyboardShouldPersistTap="always">

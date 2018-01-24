@@ -47,5 +47,5 @@ export const Schema = {
   orders: ordersSchema,
   users: usersSchema,
   drivers: driversSchema,
-  jobs:jobsSchema
+  jobs: jobsSchema,
 };

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Dimensions, Image, Linking, StyleSheet, View,} from 'react-native';
+import {Dimensions, Image, Linking, StyleSheet, View} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import images from 'assets/theme/images';
 
@@ -55,7 +55,6 @@ export default class Map extends Component {
       Linking.openURL(url);
     });
   }
-
 
   render() {
     const {destination} = this.props;
@@ -127,6 +126,6 @@ const styles = StyleSheet.create({
   address: {
     flex: 1,
     paddingHorizontal: 15,
-    textAlign:'center'
+    textAlign: 'center',
   },
 });

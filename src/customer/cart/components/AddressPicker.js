@@ -60,7 +60,6 @@ export default class AddressPicker extends PureComponent {
           onPress={this.saveAddress}
           onClose={this.hideCreateAddressForm}
         />
-
       </View>
     );
   }

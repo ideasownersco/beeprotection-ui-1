@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'company/actions/orders';
 import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
 import OrdersList from 'company/orders/components/OrdersList';
-import Button from "../../components/Button";
-import {ScrollView, View} from "react-native";
+import Button from '../../components/Button';
+import {ScrollView, View} from 'react-native';
 
 class WorkingOrdersScene extends PureComponent {
   static propTypes = {
@@ -39,8 +39,7 @@ class WorkingOrdersScene extends PureComponent {
     const {orders, isFetching} = this.props;
 
     return (
-
-      <ScrollView style={{flex:1}} >
+      <ScrollView style={{flex: 1}}>
         <OrdersList
           items={orders}
           onItemPress={this.onOrdersListItemPress}
@@ -49,7 +48,7 @@ class WorkingOrdersScene extends PureComponent {
           onPullToRefresh={this.onPullToRefresh}
         />
 
-        <Button title="Load More" onPress={this.onFetchMore}/>
+        <Button title="Load More" onPress={this.onFetchMore} />
       </ScrollView>
     );
   }

@@ -12,11 +12,11 @@ import Touchable from 'react-native-platform-touchable';
 
 const TrackItem = ({title, onPress, description, icon, style}) => {
   return (
-    <Touchable onPress={() => onPress()} >
+    <Touchable onPress={() => onPress()}>
       <View style={[styles.container, style]}>
         <View style={styles.iconContainer}>{icon}</View>
         <View style={styles.contentContainerStyle}>
-          <SectionTitle title={title} style={styles.title}/>
+          <SectionTitle title={title} style={styles.title} />
           {description && <Text style={styles.description}>{description}</Text>}
         </View>
       </View>

@@ -34,12 +34,12 @@ export default class Map extends Component {
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
     }),
-    startJob:PropTypes.func.isRequired,
-    finishJob:PropTypes.func.isRequired,
+    startJob: PropTypes.func.isRequired,
+    finishJob: PropTypes.func.isRequired,
   };
 
   static defaultPropTypes = {
-    jobStatus:'pending'
+    jobStatus: 'pending',
   };
 
   constructor(props) {
@@ -55,7 +55,7 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
-    const {jobID,jobStatus} = this.props;
+    const {jobID, jobStatus} = this.props;
 
     BackgroundGeolocation.on('location', this.onLocation);
     BackgroundGeolocation.on('http', this.onHttp);
@@ -65,7 +65,7 @@ export default class Map extends Component {
       {
         distanceFilter: 10,
         stopOnTerminate: false,
-        preventSuspend:false,
+        preventSuspend: false,
         startOnBoot: true,
         foregroundService: true,
         url: `http://beeprotection.test/api/jobs/${jobID}/location/update`,
@@ -87,7 +87,6 @@ export default class Map extends Component {
   }
 
   onLocation = location => {
-
     this.map.fitToElements(true);
 
     console.log('[event] location: ', location);
@@ -106,7 +105,6 @@ export default class Map extends Component {
         },
       });
     }
-
   };
 
   onHttp(response) {
@@ -117,7 +115,7 @@ export default class Map extends Component {
   onMotionChange(event) {
     console.log('[event] motionchange: ', event.isMoving, event.location);
     this.setState({
-      isMoving: event.isMoving
+      isMoving: event.isMoving,
     });
     // this.addEvent('motionchange', new Date(event.location.timestamp), event.location);
   }
@@ -146,10 +144,9 @@ export default class Map extends Component {
     });
   }
 
-
   startTrip = () => {
     this.map.fitToElements(true);
-    if(!this.state.enabled) {
+    if (!this.state.enabled) {
       this.setState({
         enabled: true,
       });
@@ -160,7 +157,7 @@ export default class Map extends Component {
 
   stopTrip = () => {
     this.map.fitToElements(true);
-    if(this.state.enabled) {
+    if (this.state.enabled) {
       this.setState({
         enabled: false,
       });
@@ -284,6 +281,6 @@ const styles = StyleSheet.create({
   address: {
     flex: 1,
     paddingHorizontal: 15,
-    textAlign:'center'
+    textAlign: 'center',
   },
 });

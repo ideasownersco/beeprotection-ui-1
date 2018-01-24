@@ -49,9 +49,9 @@ function* boot() {
     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
     try {
       let response = yield call(AUTH_API.login, {
-        body:{
+        body: {
           push_token: pushTokenStorageKey,
-        }
+        },
       });
       const normalized = normalize(response.data, Schema.users);
       yield put({
@@ -63,7 +63,6 @@ function* boot() {
       yield put({
         type: AUTH_ACTION_TYPES.SYNC_USER_TO_SOCKET,
       });
-
     } catch (error) {
       yield put({type: AUTH_ACTION_TYPES.LOGIN_FAILURE, error});
     }
@@ -110,7 +109,7 @@ function* setPushToken(action) {
       body: {
         token: action.params.token,
         os: action.params.os,
-      }
+      },
     };
 
     const pushTokenStorageKey = yield call(getStorageItem, params);

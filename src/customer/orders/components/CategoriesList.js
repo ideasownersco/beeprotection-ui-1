@@ -31,9 +31,7 @@ export default class CategoriesList extends Component {
                 color: colors.primary,
                 fontWeight: 'bold',
               },
-            ]}
-
-          >
+            ]}>
             {item.name}
           </Text>
         </View>

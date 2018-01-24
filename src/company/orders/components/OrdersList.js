@@ -14,16 +14,16 @@ export default class OrdersList extends Component {
     items: PropTypes.array.isRequired,
     onItemPress: PropTypes.func.isRequired,
     activeItemID: PropTypes.number,
-    onPullToRefresh:PropTypes.func.isRequired,
-    isFetching:PropTypes.bool.isRequired,
-    onFetchMore:PropTypes.func.isRequired
+    onPullToRefresh: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    onFetchMore: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    isFetching:false,
-    onPullToRefresh:()=>{},
-    onFetchMore:()=>{},
-    activeItemID:undefined
+    isFetching: false,
+    onPullToRefresh: () => {},
+    onFetchMore: () => {},
+    activeItemID: undefined,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -72,7 +72,7 @@ export default class OrdersList extends Component {
   };
 
   render() {
-    const {items,onPullToRefresh,isFetching,onFetchMore} = this.props;
+    const {items, onPullToRefresh, isFetching, onFetchMore} = this.props;
     return (
       <FlatList
         data={items}

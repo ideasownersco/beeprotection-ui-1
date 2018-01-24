@@ -10,7 +10,7 @@ import TrackItem from 'customer/orders/components/TrackItem';
 import I18n from 'utils/locale';
 import IconFactory from 'components/IconFactory';
 import colors from 'assets/theme/colors';
-import {ACTIONS as ORDER_ACTIONS} from "company/actions/orders";
+import {ACTIONS as ORDER_ACTIONS} from 'company/actions/orders';
 
 class TrackOrderScene extends Component {
   static propTypes = {
@@ -29,8 +29,8 @@ class TrackOrderScene extends Component {
 
   loadTrackDetailScene = () => {
     console.log('load');
-    this.props.navigation.navigate('TrackDetail',{
-      order:this.props.order
+    this.props.navigation.navigate('TrackDetail', {
+      order: this.props.order,
     });
   };
 

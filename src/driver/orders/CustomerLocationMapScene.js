@@ -13,9 +13,9 @@ class CustomerLocationMapScene extends Component {
       state: PropTypes.shape({
         params: PropTypes.shape({
           order: PropTypes.shape({
-            address:PropTypes.object.isRequired,
-            accepted_job:PropTypes.object.isRequired
-          })
+            address: PropTypes.object.isRequired,
+            accepted_job: PropTypes.object.isRequired,
+          }),
         }),
       }),
     }).isRequired,
@@ -23,18 +23,22 @@ class CustomerLocationMapScene extends Component {
 
   onStartJobPress = () => {
     let {accepted_job} = this.props.navigation.state.params.order;
-    this.props.dispatch(DRIVER_ACTIONS.startJob({
-      job_id:accepted_job.id
-    }));
-    console.log('job started',accepted_job);
+    this.props.dispatch(
+      DRIVER_ACTIONS.startJob({
+        job_id: accepted_job.id,
+      }),
+    );
+    console.log('job started', accepted_job);
   };
 
   onFinishJobPress = () => {
     let {accepted_job} = this.props.navigation.state.params.order;
-    this.props.dispatch(DRIVER_ACTIONS.finishJob({
-      job_id:accepted_job.id
-    }));
-    console.log('job ended',accepted_job);
+    this.props.dispatch(
+      DRIVER_ACTIONS.finishJob({
+        job_id: accepted_job.id,
+      }),
+    );
+    console.log('job ended', accepted_job);
   };
 
   onUpdateLocation = () => {
@@ -47,7 +51,7 @@ class CustomerLocationMapScene extends Component {
     let {address} = order;
     let {accepted_job} = this.props.navigation.state.params.order;
 
-    console.log('accepted_job',accepted_job);
+    console.log('accepted_job', accepted_job);
 
     return (
       <Map

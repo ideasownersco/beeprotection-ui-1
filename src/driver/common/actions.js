@@ -76,5 +76,5 @@ export const ACTIONS = {
   fetchUpcomingOrders,
   fetchWorkingOrder,
   startJob,
-  finishJob
+  finishJob,
 };

@@ -4,33 +4,32 @@ import {getStorageItem} from 'utils/functions';
 import NavigatorService from 'components/NavigatorService';
 
 export async function request({
-  url,
+  path,
   protocol = 'http://',
   domain = null, //http://wwww.waa.com
   method = 'GET',
   params = {
-    body : null, // for POST
-    urlParams: '', // in url abc=1 // must be QS.stringified
-    isBlob : false,
-    paginated:false,
-    paginatedUrl:''
+    body: null, // for POST
+    query: '', // in path abc=1 // must be QS.stringified
+    isBlob: false,
+    paginated: false,
+    paginatedUrl: '',
   },
-  // body = null,
-  // isBlob = false,
   requiresAuthentication = false,
   forceAuthentication = false,
 }) {
-  // const delimiter = url.indexOf('?') === -1 ? '?' : '&';
-  // const localeAwareUrl = `${API_URL}/${url + delimiter}lang=${I18n.locale}`;
+  let {paginated, paginatedUrl, body, isBlob, query} = params;
 
-  let {paginated,paginatedUrl,body,isBlob,urlParams} = params;
+  let fullUrl;
 
-  const localeAwareUrl = `${protocol}${API_URL}/${url}?lang=${I18n.locale}${urlParams}`;
-
-  let fullURL = domain ? domain : paginated ? paginatedUrl : localeAwareUrl; // abc.com //http://abc.com/?page=1&lang=2
-
-  console.log('fullUrl',fullURL);
-  console.log('paginatedUrl',paginated ? paginatedUrl : localeAwareUrl);
+  if (paginated) {
+    fullUrl = paginatedUrl;
+  } else {
+    let localeAwareUrl = domain
+      ? domain
+      : `${protocol + API_URL}/${path}?lang=${I18n.locale}`;
+    fullUrl = localeAwareUrl + query;
+  }
 
   const apiToken = await getStorageItem(AUTH_KEY);
 
@@ -38,24 +37,16 @@ export async function request({
     if (console.group) {
       console.groupCollapsed('action', 'NETWORK_REQUEST');
       console.log({
-        url: fullURL,
+        path: fullUrl,
         method: method,
-        // body: body,
-        params:params,
-        api_token:apiToken
+        params: params,
+        api_token: apiToken,
       });
       console.groupEnd();
     }
   }
 
   if (requiresAuthentication && !apiToken) {
-    // if (__DEV__) {
-    //   if (console.group) {
-    //     console.groupCollapsed('action', 'NETWORK_REQUEST_FAILED');
-    //     console.log('NOT_AUTHENTICATED');
-    //     console.groupEnd();
-    //   }
-    // }
     if (forceAuthentication) {
       NavigatorService.navigate('Login');
     }
@@ -70,7 +61,7 @@ export async function request({
     isBlob ? 'multipart/form-data' : 'application/json',
   );
 
-  const request = fetch(fullURL, {
+  const request = fetch(fullUrl, {
     method,
     body: isBlob ? body : JSON.stringify(body),
     headers,

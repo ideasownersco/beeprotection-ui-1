@@ -14,9 +14,9 @@ class DriverLocationMapScene extends Component {
       state: PropTypes.shape({
         params: PropTypes.shape({
           order: PropTypes.shape({
-            address:PropTypes.object.isRequired,
-            accepted_job:PropTypes.object.isRequired
-          })
+            address: PropTypes.object.isRequired,
+            accepted_job: PropTypes.object.isRequired,
+          }),
         }),
       }),
     }).isRequired,
@@ -24,13 +24,14 @@ class DriverLocationMapScene extends Component {
 
   componentDidMount() {
     const {accepted_job} = this.props.navigation.state.params.order;
-    console.log('compone',accepted_job);
+    console.log('compone', accepted_job);
 
-    this.props.dispatch(CUSTOMER_ACTIONS.subscribeToJobTrack({
-      job_id:accepted_job.id
-    }))
+    this.props.dispatch(
+      CUSTOMER_ACTIONS.subscribeToJobTrack({
+        job_id: accepted_job.id,
+      }),
+    );
   }
-
 
   render() {
     let {order} = this.props.navigation.state.params;

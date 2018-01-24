@@ -5,13 +5,11 @@ const initialState = {
   isFetching: false,
   ids: [],
   nextPage: undefined,
-  error:null
+  error: null,
 };
 
 export function reducer(state = initialState, action = {}) {
-
   switch (action.type) {
-
     case ACTION_TYPES.FETCH_WORKING_ORDERS_REQUEST:
       return {
         ...state,
@@ -33,7 +31,7 @@ export function reducer(state = initialState, action = {}) {
       return {
         ...state,
         isFetching: false,
-        error: action.error
+        error: action.error,
       };
 
     case ACTION_TYPES.FETCH_WORKING_ORDERS_REFRESH_REQUEST:
@@ -45,5 +43,4 @@ export function reducer(state = initialState, action = {}) {
     default:
       return state;
   }
-
 }
