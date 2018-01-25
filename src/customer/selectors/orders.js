@@ -2,6 +2,7 @@ import map from 'lodash/map';
 import {createSelector} from 'reselect';
 import {denormalize} from 'normalizr';
 import {Schema} from 'utils/schema';
+import {entities} from '../../app/common/reducer';
 
 const getCart = state => state.customer.cart;
 const cartItems = state => state.customer.cart.items;
@@ -12,6 +13,7 @@ const schemas = state => state.entities;
 const timingsEntity = state => state.entities.timings;
 const upcomingOrders = state => state.customer.upcoming_orders.ids;
 const workingOrder = state => state.customer.working_order.id;
+const pastOrders = state => state.customer.past_orders.ids;
 const getItemIdProp = ({}, itemID) => itemID;
 const getTrackings = state => state.customer.trackings;
 
@@ -32,7 +34,6 @@ const getTimings = createSelector([timingsEntity], timings => {
   return Object.keys(timings).map(timing => timings[timing]);
 });
 
-
 const getOrderByID = () => {
   return createSelector([schemas, getItemIdProp], (entities, itemID) =>
     denormalize(itemID, Schema.orders, entities),
@@ -50,9 +51,9 @@ const getCartItems = createSelector(
           category: categories[item.category],
           package: packages[item.package],
           services:
-          (item.services &&
-            item.services.map(service => services[service])) ||
-          [],
+            (item.services &&
+              item.services.map(service => services[service])) ||
+            [],
         };
       });
   },
@@ -66,11 +67,13 @@ const getLocationUpdatesForJob = () => {
 };
 
 const getUpcomingOrders = createSelector(
-  [schemas, upcomingOrders],
-  (entities, orders) => {
+  [schemas, upcomingOrders, workingOrder],
+  (entities, orders, workingOrderID) => {
     let orderSet =
       (orders &&
-        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
+        orders
+          .map(orderId => denormalize(orderId, Schema.orders, entities))
+          .filter(order => order.id !== workingOrderID)) ||
       [];
 
     return [...new Set(orderSet)];
@@ -82,14 +85,26 @@ const getWorkingOrder = createSelector(
   (entities, orderID) => denormalize(orderID, Schema.orders, entities),
 );
 
+const getPastOrders = createSelector(
+  [schemas, pastOrders],
+  (entities, orders) => {
+    return (
+      (orders &&
+        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
+      []
+    );
+  },
+);
+
 export const SELECTORS = {
   getCart,
   getCartItems,
   getCategories,
   getParentCategories,
   getTimings,
-  getUpcomingOrders,
-  getWorkingOrder,
   getOrderByID,
   getLocationUpdatesForJob,
+  getUpcomingOrders,
+  getWorkingOrder,
+  getPastOrders,
 };

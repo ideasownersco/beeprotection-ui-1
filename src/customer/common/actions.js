@@ -46,10 +46,18 @@ export const ACTION_TYPES = {
   FETCH_UPCOMING_ORDERS_REQUEST: '@customer/FETCH_UPCOMING_ORDERS_REQUEST',
   FETCH_UPCOMING_ORDERS_SUCCESS: '@customer/FETCH_UPCOMING_ORDERS_SUCCESS',
   FETCH_UPCOMING_ORDERS_FAILURE: '@customer/FETCH_UPCOMING_ORDERS_FAILURE',
+  FETCH_UPCOMING_ORDERS_REFRESH_REQUEST:
+    '@customer/FETCH_WORKING_ORDERS_REFRESH_REQUEST',
 
   FETCH_WORKING_ORDER_REQUEST: '@customer/FETCH_WORKING_ORDER_REQUEST',
   FETCH_WORKING_ORDER_SUCCESS: '@customer/FETCH_WORKING_ORDER_SUCCESS',
   FETCH_WORKING_ORDER_FAILURE: '@customer/FETCH_WORKING_ORDER_FAILURE',
+
+  FETCH_PAST_ORDERS_REQUEST: '@customer/FETCH_PAST_ORDERS_REQUEST',
+  FETCH_PAST_ORDERS_SUCCESS: '@customer/FETCH_PAST_ORDERS_SUCCESS',
+  FETCH_PAST_ORDERS_FAILURE: '@customer/FETCH_PAST_ORDERS_FAILURE',
+  FETCH_PAST_ORDERS_REFRESH_REQUEST:
+    '@customer/FETCH_PAST_ORDERS_REFRESH_REQUEST',
 };
 
 function fetchCartItems() {
@@ -151,9 +159,30 @@ function fetchUpcomingOrders(params) {
   };
 }
 
+function fetchUpcomingOrdersRefresh(params) {
+  return {
+    type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_REFRESH_REQUEST,
+    params,
+  };
+}
+
 function fetchWorkingOrder(params) {
   return {
     type: ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST,
+    params,
+  };
+}
+
+function fetchPastOrders(params) {
+  return {
+    type: ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST,
+    params,
+  };
+}
+
+function fetchPastOrdersRefresh(params) {
+  return {
+    type: ACTION_TYPES.FETCH_PAST_ORDERS_REFRESH_REQUEST,
     params,
   };
 }
@@ -171,5 +200,8 @@ export const ACTIONS = {
   setCartItems,
   subscribeToJobTrack,
   fetchUpcomingOrders,
+  fetchUpcomingOrdersRefresh,
   fetchWorkingOrder,
+  fetchPastOrders,
+  fetchPastOrdersRefresh,
 };

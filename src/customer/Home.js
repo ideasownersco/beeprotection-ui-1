@@ -8,10 +8,9 @@ import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import WelcomeText from './components/WelcomeText';
 
 class Home extends Component {
-
   static defaultProps = {
     upcoming_orders: [],
-    working_order: {}
+    working_order: {},
   };
 
   componentDidMount() {
@@ -23,8 +22,7 @@ class Home extends Component {
     this.props.navigation.navigate('CreateOrder');
   };
 
-  onProtectionPress = () => {
-  };
+  onProtectionPress = () => {};
 
   onItemTrackPress = (item: Object) => {
     this.props.navigation.navigate('TrackOrder', {
@@ -45,22 +43,21 @@ class Home extends Component {
 
     return (
       <ScrollView style={{flex: 1}}>
-        <WelcomeText/>
+        <WelcomeText />
 
         <HomeActionButtons
           onCreateOrderPress={this.onCreateOrderPress}
           onProtectionPress={this.onProtectionPress}
         />
 
-        {
-          working_order && working_order.id &&
-          <StandingOrdersList
-            items={[working_order]}
-            onItemPress={this.onStandingOrderListItemPress}
-            onItemTrackPress={this.onItemTrackPress}
-          />
-        }
-
+        {working_order &&
+          working_order.id && (
+            <StandingOrdersList
+              items={[working_order]}
+              onItemPress={this.onStandingOrderListItemPress}
+              onItemTrackPress={this.onItemTrackPress}
+            />
+          )}
       </ScrollView>
     );
   }

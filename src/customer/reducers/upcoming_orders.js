@@ -16,7 +16,8 @@ export function reducer(state = initialState, action = {}) {
         isFetching: true,
         error: null,
       };
-    case ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS: {
+    case ACTION_TYPES.FETCH_UPCOMING_ORDERS_SUCCESS:
+    case ACTION_TYPES.SAVE_ORDER_SUCCESS: {
       return {
         ...state,
         isFetching: false,

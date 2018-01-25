@@ -66,7 +66,7 @@ class TrackDetailScene extends Component {
       };
     }
 
-    if (!accepted_job) {
+    if (!accepted_job || !order.is_working) {
       return (
         <View style={{padding: 10}}>
           <Text style={{textAlign: 'center'}}>

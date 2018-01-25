@@ -13,8 +13,17 @@ import BidList from '/customer/orders/BidList';
 import OrderDetailScene from '/customer/orders/OrderDetailScene';
 import TrackOrderScene from '/customer/orders/TrackOrderScene';
 import Cart from '/customer/cart/Cart';
-import DriverLocationMapScene from 'customer/orders/DriverLocationMapScene';
 import TrackDetailScene from 'customer/orders/TrackDetailScene';
+import PastOrdersScene from 'customer/orders/PastOrdersScene';
+import UpcomingOrdersScene from 'customer/orders/UpcomingOrdersScene';
+
+const getDrawerIcon = navigation => {
+  return {
+    headerLeft: (
+      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
+    ),
+  };
+};
 
 const AuthStack = StackNavigator(
   {
@@ -53,12 +62,14 @@ const HomeStack = StackNavigator({
       headerLeft: <BackButton onPress={() => navigation.goBack(null)} />,
     }),
   },
-  DriverLocationMap: {
-    screen: DriverLocationMapScene,
-  },
+  // DriverLocationMap: {
+  //   screen: DriverLocationMapScene,
+  // },
   TrackDetail: {
     screen: TrackDetailScene,
   },
+  PastOrders: {screen: PastOrdersScene},
+  UpcomingOrders: {screen: UpcomingOrdersScene},
 });
 
 const SettingsStack = StackNavigator({
@@ -72,11 +83,29 @@ const SettingsStack = StackNavigator({
   },
 });
 
+const PastOrdersStack = StackNavigator({
+  PastOrders: {
+    screen: PastOrdersScene,
+    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+  },
+  OrderDetail: {screen: OrderDetailScene},
+});
+
+const UpcomingOrdersStack = StackNavigator({
+  UpcomingOrders: {
+    screen: UpcomingOrdersScene,
+    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+  },
+  OrderDetail: {screen: OrderDetailScene},
+});
+
 const DrawerRoutes = {
   HomeStack: {
     screen: HomeStack,
   },
   SettingsStack: {screen: SettingsStack},
+  PastOrdersStack: {screen: PastOrdersStack},
+  UpcomingOrdersStack: {screen: UpcomingOrdersStack},
 };
 
 export const Router = DrawerNavigator(DrawerRoutes, {

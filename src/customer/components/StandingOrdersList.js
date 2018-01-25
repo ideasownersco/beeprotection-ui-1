@@ -1,19 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet,
-  FlatList,
-  View,
-  Text,
-  Image,
-  Dimensions,
-} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
+import {Dimensions, FlatList, StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
-import I18n, {isRTL} from 'utils/locale';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import I18n from 'utils/locale';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class StandingOrdersList extends Component {
@@ -46,7 +36,9 @@ export default class StandingOrdersList extends Component {
               </View>
             ))}
 
-            <Text style={styles.dateTime}>{item.date}</Text>
+            <Text style={styles.dateTime}>
+              {item.date} {item.time}
+            </Text>
           </View>
         </Touchable>
 
