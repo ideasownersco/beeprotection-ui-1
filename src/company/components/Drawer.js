@@ -88,6 +88,15 @@ export default class Drawer extends Component {
 
         <Separator />
         <DrawerItem
+          title={I18n.t('track_drivers')}
+          routeName="TrackDriversStack"
+          onItemPress={this.onItemPress}
+          iconProps={{name: 'map-marker-multiple', type: 'MaterialCommunityIcons', size: 30}}
+          active={activeRoute === 'TrackDriversStack'}
+        />
+
+        <Separator />
+        <DrawerItem
           title={I18n.t('settings')}
           routeName="SettingsStack"
           onItemPress={this.onItemPress}

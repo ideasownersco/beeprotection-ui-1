@@ -35,15 +35,12 @@ class CustomerLocationMapScene extends Component {
 
   onUpdateLocation = () => {
     let {accepted_job} = this.props.navigation.state.params.order;
-    // console.log('updating location');
   };
 
   render() {
     let {order} = this.props.navigation.state.params;
     let {address} = order;
     let {accepted_job} = this.props.navigation.state.params.order;
-
-    // console.log('accepted_job', accepted_job);
 
     return (
       <Map

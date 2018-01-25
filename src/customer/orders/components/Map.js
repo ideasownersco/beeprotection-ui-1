@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Dimensions, Image, Linking, StyleSheet, View} from 'react-native';
+import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import images from 'assets/theme/images';
 
@@ -21,40 +21,9 @@ export default class Map extends Component {
     }),
   };
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     origin: {
-  //       latitude: this.props.origin.latitude,
-  //       longitude: this.props.origin.longitude,
-  //       heading: this.props.origin.heading,
-  //     },
-  //   };
-  // }
-
   onMapLayout = () => {
     this.map.fitToElements(true);
   };
-
-  reCenterMap = () => {
-    this.map.fitToElements(true);
-  };
-
-  openInGoogleMaps = () => {
-    this.openMaps();
-  };
-
-  openMaps() {
-    let {latitude, longitude} = this.props.destination;
-
-    const nativeGoogleUrl = `comgooglemaps://?daddr=${latitude},${longitude}&center=${latitude},${longitude}&zoom=14&views=traffic&directionsmode=driving`;
-    Linking.canOpenURL(nativeGoogleUrl).then(supported => {
-      const url = supported
-        ? nativeGoogleUrl
-        : `http://maps.google.com/?q=loc:${latitude}+${longitude}`;
-      Linking.openURL(url);
-    });
-  }
 
   render() {
     const {destination} = this.props;
@@ -100,16 +69,12 @@ export default class Map extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
   },
   map: {
     flex: 1,
   },
   mapMarker: {
-    // width: 80,
-    // height: 160,
-    // backgroundColor:'transparent',
   },
   image: {
     width: 20,

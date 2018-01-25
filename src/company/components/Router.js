@@ -12,6 +12,7 @@ import DriversListScene from 'company/drivers/DriversListScene';
 import AddDriverScene from 'company/drivers/AddDriverScene';
 import DriverDetailScene from 'company/drivers/DriverDetailScene';
 import SettingsScene from 'company/SettingsScene';
+import TrackDriversScene from 'company/drivers/TrackScene';
 
 const getDrawerIcon = navigation => {
   return {
@@ -77,6 +78,12 @@ const SettingsStack = StackNavigator({
     navigationOptions: ({navigation}) => getDrawerIcon(navigation),
   },
 });
+const TrackDriversStack = StackNavigator({
+  TrackDrivers: {
+    screen: TrackDriversScene,
+    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+  },
+});
 
 const DrawerRoutes = {
   HomeStack: {screen: HomeStack},
@@ -85,6 +92,7 @@ const DrawerRoutes = {
   WorkingOrdersStack: {screen: WorkingOrdersStack},
   UpcomingOrdersStack: {screen: UpcomingOrdersStack},
   SettingsStack: {screen: SettingsStack},
+  TrackDriversStack: {screen: TrackDriversStack},
   Login: {screen: Login},
 };
 

@@ -58,8 +58,8 @@ export default class Map extends Component {
     const {jobID, jobStatus} = this.props;
 
     BackgroundGeolocation.on('location', this.onLocation);
-    BackgroundGeolocation.on('http', this.onHttp);
-    BackgroundGeolocation.on('motionchange', this.onMotionChange.bind(this));
+    // BackgroundGeolocation.on('http', this.onHttp);
+    // BackgroundGeolocation.on('motionchange', this.onMotionChange.bind(this));
 
     BackgroundGeolocation.configure(
       {
@@ -108,18 +108,18 @@ export default class Map extends Component {
     }
   };
 
-  onHttp(response) {
-    // console.log('[event] http: ', response);
-    // this.addEvent('http', new Date(), response);
-  }
-
-  onMotionChange(event) {
-    // console.log('[event] motionchange: ', event.isMoving, event.location);
-    this.setState({
-      isMoving: event.isMoving,
-    });
-    // this.addEvent('motionchange', new Date(event.location.timestamp), event.location);
-  }
+  // onHttp(response) {
+  //   // console.log('[event] http: ', response);
+  //   // this.addEvent('http', new Date(), response);
+  // }
+  //
+  // onMotionChange(event) {
+  //   // console.log('[event] motionchange: ', event.isMoving, event.location);
+  //   this.setState({
+  //     isMoving: event.isMoving,
+  //   });
+  //   // this.addEvent('motionchange', new Date(event.location.timestamp), event.location);
+  // }
 
   onMapLayout = () => {
     this.map.fitToElements(true);
@@ -172,13 +172,7 @@ export default class Map extends Component {
     const {destination} = this.props;
     const {origin, enabled} = this.state;
     const {heading} = this.state.origin;
-    const rotate =
-      typeof heading === 'number' && heading >= 0 ? `${heading}deg` : null;
-
-    console.log('props', this.props);
-    console.log('state', this.state);
-
-    // console.log('enabled', this.state.enabled);
+    const rotate = typeof heading === 'number' && heading >= 0 ? `${heading}deg` : null;
 
     return (
       <View style={styles.container}>
@@ -245,16 +239,12 @@ export default class Map extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
   },
   map: {
     flex: 1,
   },
   mapMarker: {
-    // width: 80,
-    // height: 160,
-    // backgroundColor:'transparent',
   },
   image: {
     width: 20,
