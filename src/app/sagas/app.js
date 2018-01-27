@@ -103,8 +103,6 @@ function* setLanguage(action) {
 
 function* setPushToken(action) {
   try {
-    // const apiToken = yield call(getStorageItem, AUTH_KEY);
-
     const params = {
       body: {
         token: action.params.token,
@@ -112,15 +110,12 @@ function* setPushToken(action) {
       },
     };
 
-    const pushTokenStorageKey = yield call(getStorageItem, params);
+    const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
 
-    if (!pushTokenStorageKey) {
+    // if (!pushTokenStorageKey) {
       yield call(setStorageItem, PUSH_TOKEN_KEY, action.params.token);
-      yield call(API.storePushToken, {
-        token: action.params.token,
-        os: action.params.os,
-      });
-    }
+      yield call(API.storePushToken, params);
+    // }
 
     yield put({
       type: ACTION_TYPES.SET_PUSH_TOKEN_SUCCESS,

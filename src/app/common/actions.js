@@ -57,7 +57,7 @@ function setNotification(message, messageType) {
   };
 }
 
-function setPushToken(token) {
+function setPushToken(token:object) {
   return {
     type: ACTION_TYPES.SET_PUSH_TOKEN_REQUEST,
     params: token,
