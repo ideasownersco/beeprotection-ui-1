@@ -22,6 +22,32 @@ class CustomerLocationMapScene extends Component {
     }).isRequired,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.origin = {
+      latitude: 37.78825,
+      longitude: -122.4324,
+      // latitude: 29.3772392006689,
+      // longitude: 47.98511826155676,
+    };
+
+    BackgroundGeolocation.getCurrentPosition((location) => {
+      let {latitude,longitude} = location.coords;
+      this.origin = {
+        latitude:latitude,
+        longitude:longitude
+      }
+    }, (error) => {
+      console.warn('- getCurrentPosition error: ', error);
+    }, {
+      persist: true,
+      samples: 1,
+      maximumAge: 5000
+    });
+
+  }
+
   onStartJobPress = () => {
     let {accepted_job} = this.props.navigation.state.params.order;
     this.props.dispatch(DRIVER_ACTIONS.startJob(accepted_job.id));
@@ -41,29 +67,12 @@ class CustomerLocationMapScene extends Component {
     let {address} = order;
     let {accepted_job} = this.props.navigation.state.params.order;
 
-    BackgroundGeolocation.getCurrentPosition((location) => {
-      console.log('- getCurrentPosition success: ', location);
-    }, (error) => {
-      console.warn('- getCurrentPosition error: ', error);
-    }, {
-      persist: true,
-      samples: 1,
-      maximumAge: 5000
-    });
-
     //crsytal
     // 29.3769 47.9777
 
     return (
       <Map
-        origin={{
-          // latitude: 37.78825,
-          // longitude: -122.4324,
-
-          latitude: 29.3772392006689,
-          longitude: 47.98511826155676,
-
-        }}
+        origin={this.origin}
         destination={{
           latitude: address.latitude,
           longitude: address.longitude,

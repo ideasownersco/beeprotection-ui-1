@@ -174,7 +174,7 @@ export default class Map extends Component {
     const {destination} = this.props;
     const {origin, enabled} = this.state;
     const {heading} = this.state.origin;
-    const rotate = typeof heading === 'number' && heading >= 0 ? `${heading}deg` : null;
+    const rotate = typeof heading === 'number' && heading >= 0 ? `${heading}deg` : undefined;
 
     return (
       <View style={styles.container}>
@@ -195,10 +195,10 @@ export default class Map extends Component {
             anchor={{x: 0.5, y: 0.5, position: 'relative'}}
             coordinate={origin}
             identifier="MarkerOrigin">
-            {/*<Image*/}
-              {/*source={images.car}*/}
-              {/*style={[styles.image, {transform: [{rotate}]}]}*/}
-            {/*/>*/}
+            <Image
+              source={images.car}
+              style={[styles.image, rotate && {transform: [{rotate}]}]}
+            />
           </MapView.Marker>
 
           <MapView.Marker

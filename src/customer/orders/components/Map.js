@@ -21,6 +21,13 @@ export default class Map extends Component {
     }),
   };
 
+  componentDidUpdate(nextProps) {
+    console.log('componentDidUpdate',nextProps);
+    if(this.props.origin.latitude !== nextProps.origin.latitude) {
+      this.map.fitToElements(true);
+    }
+  }
+
   onMapLayout = () => {
     this.map.fitToElements(true);
   };
@@ -29,12 +36,19 @@ export default class Map extends Component {
     const {destination} = this.props;
     const {origin} = this.props;
     const {heading} = origin;
+    console.log('heading',heading);
+
     const rotate =
-      typeof heading === 'number' && heading >= 0 ? `${heading}deg` : null;
+      typeof heading === 'number' && heading >= 0 ? `${heading}deg` : undefined;
+
+    if(rotate) {
+      console.log('rotated',rotate);
+    }
+
     return (
       <View style={styles.container}>
         <MapView
-          // provider={PROVIDER_GOOGLE}
+          provider={PROVIDER_GOOGLE}
           ref={ref => {
             this.map = ref;
           }}
@@ -50,10 +64,10 @@ export default class Map extends Component {
             anchor={{x: 0.5, y: 0.5, position: 'relative'}}
             coordinate={origin}
             identifier="MarkerOrigin">
-            {/*<Image*/}
-              {/*source={images.car}*/}
-              {/*style={[styles.image, {transform: [{rotate}]}]}*/}
-            {/*/>*/}
+            <Image
+              source={images.car}
+              style={[styles.image, rotate && {transform: [{rotate}]}]}
+            />
           </MapView.Marker>
 
           <MapView.Marker

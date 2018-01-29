@@ -34,6 +34,6 @@ if (__DEV__) {
     LANGUAGE_KEY: 'LANGUAGE_KEY',
     PUSH_TOKEN_KEY: 'PUSH_TOKEN_KEY',
     COUNTRY_KEY: 'COUNTRY_KEY',
-    CODE_PUSH_ENABLED: false,
+    CODE_PUSH_ENABLED: true,
   };
 }
