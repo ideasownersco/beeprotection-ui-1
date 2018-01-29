@@ -95,6 +95,7 @@ export async function request({
       return json;
     })
     .catch(e => {
+      console.log('fetch error',e);
       return Promise.reject(`${e}`);
     });
 }

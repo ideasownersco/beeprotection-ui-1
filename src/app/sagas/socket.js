@@ -21,16 +21,11 @@ function subscribe(socket) {
   console.log('socket', socket);
   return eventChannel(emit => {
     socket.on('location.updated', data => {
-      // console.log('location.updated',data);
-      // yield put({
-      //   type:CUSTOMER_ACTIONS.LOCATION_RECEIVED,
-      //   payload:data
-      // })
+      console.log('location',data);
       emit({
         type: CUSTOMER_ACTIONS.LOCATION_RECEIVED,
         payload: data,
       });
-      // emit(CUSTOMER_ACTIONS.locationReceived(data));
     });
     return () => {};
   });
@@ -45,7 +40,6 @@ function* read(socket) {
   }
 }
 
-//
 function* syncUserToSocket(socket) {
   const state = yield select();
   const userID = AUTH_SELECTORS.getAuthUserID(state);
@@ -55,11 +49,9 @@ function* syncUserToSocket(socket) {
   }
 }
 
-//
 function* subscribeToJobTrack(socket) {
   while (true) {
     const threadParams = yield take(CUSTOMER_ACTIONS.SUBSCRIBE_TO_JOB_TRACK);
-    // console.log('subscribing to socket',threadParams.params.job_id);
     socket.emit('job.track.subscribe', threadParams.params.job_id);
   }
 }

@@ -23,8 +23,10 @@ const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+import {API_URL} from 'utils/env';
 
 export default class Map extends Component {
+
   static propTypes = {
     origin: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
@@ -36,9 +38,10 @@ export default class Map extends Component {
     }),
     startJob: PropTypes.func.isRequired,
     finishJob: PropTypes.func.isRequired,
+    jobStatus:PropTypes.string
   };
 
-  static defaultPropTypes = {
+  static defaultProps = {
     jobStatus: 'pending',
   };
 
@@ -58,8 +61,7 @@ export default class Map extends Component {
     const {jobID, jobStatus} = this.props;
 
     BackgroundGeolocation.on('location', this.onLocation);
-    // BackgroundGeolocation.on('http', this.onHttp);
-    // BackgroundGeolocation.on('motionchange', this.onMotionChange.bind(this));
+    BackgroundGeolocation.on('http', this.onHttp);
 
     BackgroundGeolocation.configure(
       {
@@ -68,7 +70,7 @@ export default class Map extends Component {
         preventSuspend: false,
         startOnBoot: true,
         foregroundService: true,
-        url: `http://beeprotection.test/api/jobs/${jobID}/location/update`,
+        url: `http://${API_URL}/jobs/${jobID}/location/update`,
         autoSync: true,
         debug: true,
         logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
@@ -108,10 +110,10 @@ export default class Map extends Component {
     }
   };
 
-  // onHttp(response) {
-  //   // console.log('[event] http: ', response);
-  //   // this.addEvent('http', new Date(), response);
-  // }
+  onHttp(response) {
+    console.log('[event] http: ', response);
+    // this.addEvent('http', new Date(), response);
+  }
   //
   // onMotionChange(event) {
   //   // console.log('[event] motionchange: ', event.isMoving, event.location);
@@ -193,10 +195,10 @@ export default class Map extends Component {
             anchor={{x: 0.5, y: 0.5, position: 'relative'}}
             coordinate={origin}
             identifier="MarkerOrigin">
-            <Image
-              source={images.car}
-              style={[styles.image, {transform: [{rotate}]}]}
-            />
+            {/*<Image*/}
+              {/*source={images.car}*/}
+              {/*style={[styles.image, {transform: [{rotate}]}]}*/}
+            {/*/>*/}
           </MapView.Marker>
 
           <MapView.Marker

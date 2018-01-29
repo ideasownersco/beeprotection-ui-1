@@ -50,6 +50,9 @@ class TrackDetailScene extends Component {
   render() {
     let {order} = this.props.navigation.state.params;
     let {tracking} = this.props;
+
+    console.log('tracking',tracking);
+
     let {address} = order;
 
     const {accepted_job} = this.props.navigation.state.params.order;
@@ -60,13 +63,15 @@ class TrackDetailScene extends Component {
       origin = tracking;
     } else {
       origin = {
-        latitude: 37.78825,
-        longitude: -122.4324,
+        // latitude: 37.78825,
+        // longitude: -122.4324,
+        latitude: 29.3772392006689,
+        longitude: 47.98511826155676,
         heading: 0,
       };
     }
 
-    if (!accepted_job || !order.is_working) {
+    if (!accepted_job) {
       return (
         <View style={{padding: 10}}>
           <Text style={{textAlign: 'center'}}>

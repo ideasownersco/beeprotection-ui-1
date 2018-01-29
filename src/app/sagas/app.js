@@ -12,7 +12,6 @@ import {
   PUSH_TOKEN_KEY,
   AUTH_KEY,
   DEFAULT_LANGUAGE,
-  DEFAULT_COUNTRY,
 } from 'utils/env';
 import {API as AUTH_API} from 'guest/common/api';
 import {ACTION_TYPES as AUTH_ACTION_TYPES} from 'guest/common/actions';
@@ -112,10 +111,10 @@ function* setPushToken(action) {
 
     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
 
-    // if (!pushTokenStorageKey) {
+    if (!pushTokenStorageKey) {
       yield call(setStorageItem, PUSH_TOKEN_KEY, action.params.token);
       yield call(API.storePushToken, params);
-    // }
+    }
 
     yield put({
       type: ACTION_TYPES.SET_PUSH_TOKEN_SUCCESS,
