@@ -67,9 +67,6 @@ class CustomerLocationMapScene extends Component {
     let {address} = order;
     let {accepted_job} = this.props.navigation.state.params.order;
 
-    //crsytal
-    // 29.3769 47.9777
-
     return (
       <Map
         origin={this.origin}
