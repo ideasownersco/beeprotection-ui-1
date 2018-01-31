@@ -29,9 +29,17 @@ class OrderDetailScene extends Component {
     let {order} = this.props;
     return (
       <View style={{flex: 1}}>
-        <OrderBasicInfo item={order} />
-        <OrderItems order={order} />
-        <OrderTotal total={order.total} />
+
+        {
+          order &&
+
+          <View>
+            <OrderBasicInfo item={order}/>
+            <OrderItems order={order}/>
+            <OrderTotal total={order.total}/>
+          </View>
+        }
+
       </View>
     );
   }

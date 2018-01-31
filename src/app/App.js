@@ -5,7 +5,7 @@ import CodePush from 'react-native-code-push';
 import PushNotificationManager from 'app/components/PushNotificationManager';
 import Notification from 'app/components/Notification';
 import Navigator from 'components/Navigator';
-import {SafeAreaView,AppState} from 'react-native';
+import {SafeAreaView, AppState} from 'react-native';
 import {connect} from 'react-redux';
 import {ACTIONS} from 'app/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
@@ -13,18 +13,35 @@ import {CODE_PUSH_ENABLED} from 'utils/env';
 import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import PushNotification from 'react-native-push-notification';
+import NavigatorService from "components/NavigatorService";
+
 class App extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
   };
 
-  componentDidMount() {
+  constructor(props) {
+    super(props);
     if (CODE_PUSH_ENABLED) {
       CodePush.sync();
     }
-    this.props.dispatch(ACTIONS.boot());
+
     BackgroundGeolocation.stop();
     BackgroundGeolocation.removeListeners();
+
+    PushNotification.configure({
+      onRegister: token => {
+        props.dispatch(ACTIONS.setPushToken(token));
+      },
+      onNotification: (notification) => {
+        this.onReceivePushNotifications(notification);
+      },
+    });
+
+  }
+
+  componentDidMount() {
+    this.props.dispatch(ACTIONS.boot());
     AppState.addEventListener('change', this.handleAppStateChange);
   }
 
@@ -33,12 +50,12 @@ class App extends Component {
   }
 
   handleAppStateChange(appState) {
-    console.log('appState',appState);
+    console.log('appState', appState);
     if (appState === 'background') {
-      let date = new Date(Date.now() + (1 * 1000));
+      let date = new Date(Date.now() + (1000));
       PushNotification.localNotificationSchedule({
         message: "My Notification Message",
-        date:date,
+        date: date,
       });
     }
   }
@@ -46,10 +63,6 @@ class App extends Component {
   onLanguageSelect = name => {
     this.props.dispatch(ACTIONS.setLanguage(name));
     this.props.dispatch(ACTIONS.setInstalled(true));
-  };
-
-  setPushToken = token => {
-    this.props.dispatch(ACTIONS.setPushToken(token));
   };
 
   dismissNotification = () => {
@@ -60,21 +73,12 @@ class App extends Component {
     this.props.dispatch(USER_ACTIONS.logout());
   };
 
-  onReceivePushNotifications = (notification :object) => {
-
-    let {data} = notification;
-
-    console.log('data',data);
-    // if(data && data.type) {
-      console.log('type',data.type);
-      console.log('props',this.props);
-      // let {navigation} = this.props;
-      // navigation.navigate('UpcomingOrdersStack');
-      // // navigation.navigate('UpcomingOrders');
-      // navigation.navigate('OrderDetail', {
-      //   orderID:1
-      // });
-    // }
+  onReceivePushNotifications = (notification: object) => {
+    let navigation = NavigatorService;
+    navigation.navigate('UpcomingOrders');
+    navigation.navigate('OrderDetail', {
+      orderID:1
+    });
   };
 
   render() {
@@ -83,12 +87,11 @@ class App extends Component {
     if (!app.booted) return null;
 
     if (!app.installed) {
-      return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
+      return <LanguageSelectScene onItemPress={this.onLanguageSelect}/>;
     }
 
     return (
       <SafeAreaView style={{flex: 1}}>
-
         {app.notifications.message && (
           <Notification
             message={app.notifications.message}
@@ -96,11 +99,6 @@ class App extends Component {
             dismissNotification={this.dismissNotification}
           />
         )}
-
-        <PushNotificationManager
-          setPushToken={this.setPushToken}
-          onReceiveNotifications={this.onReceivePushNotifications}
-        />
 
         <Navigator
           isAuthenticated={isAuthenticated}

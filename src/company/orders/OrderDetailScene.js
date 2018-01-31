@@ -34,7 +34,7 @@ class OrderDetailScene extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.order.total) {
+    if (nextProps.order && nextProps.order.total) {
       this.setState({
         amount: nextProps.order.amount,
       });
