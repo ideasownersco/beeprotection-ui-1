@@ -33,12 +33,13 @@ class App extends Component {
   }
 
   handleAppStateChange(appState) {
+    console.log('appState',appState);
     if (appState === 'background') {
-      let date = new Date(Date.now() + (5 * 1000));
-      // PushNotification.localNotificationSchedule({
-      //   message: "My Notification Message",
-      //   date:date,
-      // });
+      let date = new Date(Date.now() + (1 * 1000));
+      PushNotification.localNotificationSchedule({
+        message: "My Notification Message",
+        date:date,
+      });
     }
   }
 
@@ -59,6 +60,22 @@ class App extends Component {
     this.props.dispatch(USER_ACTIONS.logout());
   };
 
+  onReceivePushNotifications = (notification :object) => {
+
+    let {data} = notification;
+
+    console.log('data',data);
+    // if(data && data.type) {
+      console.log('type',data.type);
+      console.log('props',this.props);
+      // let {navigation} = this.props;
+      // navigation.navigate('UpcomingOrdersStack');
+      // // navigation.navigate('UpcomingOrders');
+      // navigation.navigate('OrderDetail', {
+      //   orderID:1
+      // });
+    // }
+  };
 
   render() {
     const {app, isAuthenticated, userType} = this.props;
@@ -71,6 +88,7 @@ class App extends Component {
 
     return (
       <SafeAreaView style={{flex: 1}}>
+
         {app.notifications.message && (
           <Notification
             message={app.notifications.message}
@@ -79,13 +97,17 @@ class App extends Component {
           />
         )}
 
-        <PushNotificationManager setPushToken={this.setPushToken} />
+        <PushNotificationManager
+          setPushToken={this.setPushToken}
+          onReceiveNotifications={this.onReceivePushNotifications}
+        />
 
         <Navigator
           isAuthenticated={isAuthenticated}
           userType={userType}
           logout={this.logout}
         />
+
       </SafeAreaView>
     );
   }
