@@ -25,19 +25,8 @@ class App extends Component {
     if (CODE_PUSH_ENABLED) {
       CodePush.sync();
     }
-
     BackgroundGeolocation.stop();
     BackgroundGeolocation.removeListeners();
-
-    PushNotification.configure({
-      onRegister: token => {
-        props.dispatch(ACTIONS.setPushToken(token));
-      },
-      onNotification: (notification) => {
-        this.onReceivePushNotifications(notification);
-      },
-    });
-
   }
 
   componentDidMount() {
@@ -65,6 +54,7 @@ class App extends Component {
     this.props.dispatch(ACTIONS.setInstalled(true));
   };
 
+
   dismissNotification = () => {
     this.props.dispatch(ACTIONS.dismissNotification());
   };
@@ -73,11 +63,15 @@ class App extends Component {
     this.props.dispatch(USER_ACTIONS.logout());
   };
 
+  setPushToken = token => {
+    this.props.dispatch(ACTIONS.setPushToken(token));
+  };
+
   onReceivePushNotifications = (notification: object) => {
     let navigation = NavigatorService;
     navigation.navigate('UpcomingOrders');
     navigation.navigate('OrderDetail', {
-      orderID:1
+      orderID: 13
     });
   };
 
@@ -92,6 +86,7 @@ class App extends Component {
 
     return (
       <SafeAreaView style={{flex: 1}}>
+
         {app.notifications.message && (
           <Notification
             message={app.notifications.message}
@@ -99,6 +94,11 @@ class App extends Component {
             dismissNotification={this.dismissNotification}
           />
         )}
+
+        <PushNotificationManager
+          setPushToken={this.setPushToken}
+          onReceiveNotifications={this.onReceivePushNotifications}
+        />
 
         <Navigator
           isAuthenticated={isAuthenticated}

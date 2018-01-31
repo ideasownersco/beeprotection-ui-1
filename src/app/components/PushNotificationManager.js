@@ -1,24 +1,46 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import PushNotification from 'react-native-push-notification';
-import {PushNotificationIOS, View} from 'react-native';
-import {withNavigation} from 'react-navigation';
+import {PushNotificationIOS} from 'react-native';
 
-class PushNotificationManager extends Component {
+export default class PushNotificationManager extends Component {
 
   static propTypes = {
-    // setPushToken: PropTypes.func.isRequired,
-    // onReceiveNotifications: PropTypes.func.isRequired,
+    setPushToken: PropTypes.func.isRequired,
+    onReceiveNotifications: PropTypes.func.isRequired,
   };
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
+  constructor(props) {
+    super(props);
+
+    PushNotification.configure({
+
+      onRegister: token => {
+        this.props.setPushToken(token);
+      },
+
+      onNotification: (notification) => {
+        this.props.onReceiveNotifications(notification);
+        notification.finish(PushNotificationIOS.FetchResult.NoData);
+      },
+
+      permissions: {
+        alert: true,
+        badge: true,
+        sound: true,
+      },
+
+      popInitialNotification: true,
+      requestPermissions: true,
+    });
+  }
+
   render() {
-    return (
-      <View style={{height:500,backgroundColor:'black'}}>
-
-      </View>
-
-    );
+    return null;
   }
 }
 
-export default withNavigation(PushNotificationManager);
