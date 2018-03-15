@@ -39,8 +39,6 @@ class Home extends Component {
   render() {
     let {upcoming_orders, working_order} = this.props;
 
-    console.log('orders', working_order);
-
     return (
       <ScrollView style={{flex: 1}}>
         <WelcomeText />

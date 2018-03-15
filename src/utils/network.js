@@ -32,7 +32,6 @@ export async function request({
   }
 
   const apiToken = await getStorageItem(AUTH_KEY);
-  console.log('api',apiToken);
 
   if (__DEV__) {
     if (console.group) {
