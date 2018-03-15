@@ -140,12 +140,17 @@ function* saveAddress(action) {
       address_id: response.address_id,
     });
     yield put(
-      APP_ACTIONS.setNotification(I18n.t('address_save_success'), 'success'),
+      APP_ACTIONS.setNotification({
+        message:I18n.t('address_save_success')
+      }),
     );
   } catch (error) {
     yield put({type: ACTION_TYPES.SAVE_ADDRESS_FAILURE, error});
     yield put(
-      APP_ACTIONS.setNotification(I18n.t('address_save_failure'), 'error'),
+      APP_ACTIONS.setNotification({
+        message:I18n.t('address_save_failure'),
+        type:'error'
+      }),
     );
   }
 }
@@ -168,7 +173,10 @@ function* saveOrder(action) {
     });
   } catch (error) {
     yield put({type: ACTION_TYPES.SAVE_ORDER_FAILURE, error});
-    yield put(APP_ACTIONS.setNotification(error, 'error'));
+    yield put(APP_ACTIONS.setNotification({
+      message:error,
+      type:'error'
+    }));
   }
 }
 
@@ -192,7 +200,10 @@ function* checkout(action) {
     });
   } catch (error) {
     yield put({type: ACTION_TYPES.CHECKOUT_FAILURE, error});
-    yield put(APP_ACTIONS.setNotification(error, 'error'));
+    yield put(APP_ACTIONS.setNotification({
+      message:error,
+      type:'error'
+    }));
   }
 }
 

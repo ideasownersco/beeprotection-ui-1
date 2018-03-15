@@ -52,12 +52,22 @@ function* assignDriver(action) {
       type: ACTION_TYPES.ASSIGN_DRIVER_SUCCESS,
       entities: normalized.entities,
     });
+
+
     yield put(
-      APP_ACTIONS.setNotification(I18n.t('driver_assigned'), 'success'),
+      APP_ACTIONS.setNotification({
+        message: I18n.t('driver_assigned'),
+      }),
     );
+
   } catch (error) {
     yield put({type: ACTION_TYPES.ASSIGN_DRIVER_FAILURE, error});
-    yield put(APP_ACTIONS.setNotification(error, 'error'));
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: I18n.t('driver_assigned'),
+        type:'error'
+      }),
+    );
   }
 }
 

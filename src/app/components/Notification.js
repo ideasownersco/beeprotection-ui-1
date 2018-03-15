@@ -29,9 +29,8 @@ export default class Notification extends Component {
       return {
         visible: true,
       }
-    } else {
-      return null
     }
+    return null
   }
 
   closeModal = () => {
@@ -109,7 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    padding:22,
+    padding: 22,
   },
   top: {
     justifyContent: 'flex-start',
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   centerModal: {
-    backgroundColor:'white',
+    backgroundColor: 'white',
     alignItems: 'center',
     paddingVertical: 50,
     // padding:30,

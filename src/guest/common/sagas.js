@@ -50,7 +50,14 @@ function* login(action) {
 
   } catch (error) {
     yield put({type: ACTION_TYPES.LOGIN_FAILURE, error});
-    yield put(APP_ACTIONS.setNotification(error, 'error'));
+
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: error,
+        type: 'error',
+      }),
+    );
+
   }
 }
 
@@ -86,7 +93,10 @@ function* forgotPassword(action) {
     const emailPattern = /(.+)@(.+){2,}\.(.+){2,}/;
 
     if (!emailPattern.test(action.params.email)) {
-      return yield put(APP_ACTIONS.setNotification('Invalid Email', 'error'));
+      return yield put(APP_ACTIONS.setNotification({
+        message: 'Invalid Email',
+        type: 'error',
+      }));
     }
 
     const params = {
@@ -102,7 +112,10 @@ function* forgotPassword(action) {
       payload: response.data,
     });
   } catch (error) {
-    yield put(APP_ACTIONS.setNotification(error, 'error'));
+    yield put(APP_ACTIONS.setNotification({
+      message:error,
+      type:'error'
+    }));
     yield put({type: ACTION_TYPES.FORGOT_PASSWORD_FAILURE, error});
   }
 }
@@ -121,7 +134,10 @@ function* recoverPassword(action) {
       payload: response.data,
     });
   } catch (error) {
-    yield put(APP_ACTIONS.setNotification(error, 'error'));
+    yield put(APP_ACTIONS.setNotification({
+      message:error,
+      type:'error'
+    }));
     yield put({type: ACTION_TYPES.RECOVER_PASSWORD_FAILURE, error});
   }
 }
@@ -138,7 +154,10 @@ function* updatePassword(action) {
 
     if (action.params.password !== action.params.password_confirmation) {
       return yield put(
-        APP_ACTIONS.setNotification('Password does not match', 'error'),
+        APP_ACTIONS.setNotification({
+          message:'Password does not match',
+          type:'error'
+        }),
       );
     }
 
@@ -149,7 +168,10 @@ function* updatePassword(action) {
 
     yield put(NavigationActions.back(null));
   } catch (error) {
-    yield put(APP_ACTIONS.setNotification(error, 'error'));
+    yield put(APP_ACTIONS.setNotification({
+      message:error,
+      type:'error'
+    }));
     yield put({type: ACTION_TYPES.PASSWORD_UPDATE_FAILURE, error});
   }
 }
@@ -178,6 +200,7 @@ function* forgotPasswordMonitor() {
 function* recoverPasswordMonitor() {
   yield takeLatest(ACTION_TYPES.RECOVER_PASSWORD_REQUEST, recoverPassword);
 }
+
 function* passwordUpdateMonitor() {
   yield takeLatest(ACTION_TYPES.PASSWORD_UPDATE_REQUEST, updatePassword);
 }
