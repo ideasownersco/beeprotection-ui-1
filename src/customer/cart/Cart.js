@@ -104,6 +104,7 @@ class Cart extends PureComponent {
 
     return cartItems.length ? (
       <ScrollView contentInset={{bottom: 50}}>
+
         <CartItems items={cartItems} onItemPress={() => {}} />
 
         <Separator style={{marginVertical: 10}} />
@@ -122,7 +123,7 @@ class Cart extends PureComponent {
         {/*activeItemID={selectedTime}*/}
         {/*/>*/}
 
-        <SectionHeading title={I18n.t('select_time')} />
+        <SectionHeading title={I18n.t('select_time')} style={{backgroundColor:'transparent'}} />
         <TimePicker
           mode="time"
           date={selectedTime}
@@ -133,6 +134,7 @@ class Cart extends PureComponent {
           customStyles={{
             dateTouchBody: {
               padding: 10,
+              backgroundColor:'white'
             },
             dateText: {
               color: colors.primary,

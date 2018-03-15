@@ -13,9 +13,9 @@ export default class SectionHeading extends Component {
   };
 
   render() {
-    const {onButtonPress, title, buttonTitle} = this.props;
+    const {onButtonPress, title, buttonTitle,style} = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container,style]}>
         <View style={styles.headerContainer}>
           <SectionTitle title={title} style={styles.sectionTitle} />
           <Text

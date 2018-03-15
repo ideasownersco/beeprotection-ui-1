@@ -11,7 +11,7 @@ import {SELECTORS} from 'customer/selectors/orders';
 import CategoriesList from 'customer/orders/components/CategoriesList';
 import PackagesList from 'customer/orders/components/PackagesList';
 import ServicesList from 'customer/orders/components/ServicesList';
-import Button from 'components/Button';
+import {Button} from 'react-native-paper';
 import I18n from 'utils/locale';
 import NavButton from 'components/NavButton';
 import colors from 'assets/theme/colors';
@@ -190,11 +190,13 @@ class CreateOrder extends PureComponent {
         )}
 
         <Button
-          title={I18n.t('add_to_cart')}
           onPress={this.onAddToCartPress}
           disabled={!activePackageID}
-          style={{marginVertical: 20}}
-        />
+          raised
+          primary
+        >
+          {I18n.t('add_to_cart')}
+        </Button>
       </ScrollView>
     );
   }
