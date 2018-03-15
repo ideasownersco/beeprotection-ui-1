@@ -43,4 +43,3 @@ export default class PushNotificationManager extends Component {
     return null;
   }
 }
-
