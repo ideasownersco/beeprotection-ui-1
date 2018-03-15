@@ -76,7 +76,7 @@ class App extends Component {
   };
 
   render() {
-    const {app, isAuthenticated, userType} = this.props;
+    const {app, notifications, isAuthenticated, userType} = this.props;
 
     if (!app.booted) return null;
 
@@ -87,13 +87,10 @@ class App extends Component {
     return (
       <SafeAreaView style={{flex: 1}}>
 
-        {app.notifications.message && (
-          <Notification
-            message={app.notifications.message}
-            messageType={app.notifications.messageType}
-            dismissNotification={this.dismissNotification}
-          />
-        )}
+        <Notification
+          {...notifications}
+          dismissNotification={this.dismissNotification}
+        />
 
         <PushNotificationManager
           setPushToken={this.setPushToken}
@@ -114,9 +111,9 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     app: state.app,
+    notifications: state.notifications,
     isAuthenticated: USER_SELECTOR.isAuthenticated(state),
     userType: USER_SELECTOR.getAuthUserType(state),
-  };
-}
+  };}
 
 export default connect(mapStateToProps)(App);

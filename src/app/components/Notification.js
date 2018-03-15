@@ -1,98 +1,143 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import {
-  Animated,
-  Dimensions,
-  Easing,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  StatusBar,
-} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import Modal from 'react-native-modal';
+import isEmpty from 'lodash/isEmpty';
 import colors from 'assets/theme/colors';
+import Button from 'components/Button';
+import I18n from 'utils/locale';
 
-export default class Notification extends React.Component {
-  static propTypes = {
-    message: PropTypes.string,
-    messageType: PropTypes.string,
-    dismissNotification: PropTypes.func.isRequired,
+export default class Notification extends Component {
+  static propTypes = PropTypes.shape({
+    message: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    backdropDismiss: PropTypes.bool.isRequired,
+  }).isRequired;
+
+  state = {
+    visible: false,
   };
 
-  constructor(props) {
-    super(props);
-    this.fadeAnim = new Animated.Value(1);
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.visible !== this.state.visible;
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.message !== nextProps.message;
+  static getDerivedStateFromProps(nextProps, prevState) {
+
+    if (!isEmpty(nextProps.message)) {
+      return {
+        visible: true,
+      }
+    } else {
+      return null
+    }
   }
 
-  hideMessage = () => {
+  closeModal = () => {
+    this.setState({
+      visible: false,
+    });
     this.props.dismissNotification();
-    StatusBar.setHidden(false);
   };
 
-  showMessage = () => {
-    StatusBar.setHidden(true);
-    Animated.timing(this.fadeAnim, {
-      toValue: 1, // Target
-      duration: 500, // Configuration
-      easing: Easing.bounce,
-    }).start();
+  resolvePosition = position => {
+    let modalPosition;
+    switch (position) {
+      case 'top':
+        modalPosition = styles.topModal;
+        break;
+      case 'bottom':
+        modalPosition = styles.bottomModal;
+        break;
+      default:
+        modalPosition = styles.centerModal;
+        break;
+    }
   };
-
-  componentDidMount() {
-    setTimeout(this.hideMessage, 4000);
-    this.showMessage();
-  }
 
   render() {
-    const {messageType, message} = this.props;
+    const {type, message, backdropDismiss, position} = this.props;
+
+    const {visible} = this.state;
 
     return (
-      <Animated.View
-        style={[
-          styles.container,
-          styles[messageType],
-          {opacity: this.fadeAnim},
-        ]}>
-        <TouchableHighlight
-          onPress={() => this.hideMessage()}
-          underlayColor="transparent">
-          <Text style={styles.title}>{message}</Text>
-        </TouchableHighlight>
-      </Animated.View>
+      <View style={styles.container}>
+        <Modal
+          isVisible={visible}
+          style={[styles[position]]}
+          onBackdropPress={() => (backdropDismiss ? this.closeModal() : null)}
+          ref="root-modal"
+          useNativeDriver={true}>
+          {position === 'center' ? (
+            <View
+              style={[
+                styles.centerModal,
+                // {
+                //   backgroundColor: colors[type],
+                // },
+              ]}>
+              <Text style={[styles.text, styles.centerText]}>{message}</Text>
+              <Button
+                style={styles.centerButton}
+                title={I18n.t('continue').toUpperCase()}
+                onPress={this.closeModal}
+              />
+            </View>
+          ) : (
+            <View
+              style={[
+                styles.modalContent,
+                {
+                  backgroundColor: colors[type],
+                },
+              ]}>
+              <Text style={styles.text}>{message}</Text>
+            </View>
+          )}
+        </Modal>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: Dimensions.get('window').width,
-    backgroundColor: 'transparent',
-    height: 74,
-    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  modalContent: {
+    backgroundColor: colors.primary,
     justifyContent: 'center',
-    padding: 5,
-    zIndex: 10000,
+    alignItems: 'center',
+    padding:22,
   },
-  title: {
+  top: {
+    justifyContent: 'flex-start',
+    margin: 0,
+  },
+  bottom: {
+    justifyContent: 'flex-end',
+    margin: 0,
+  },
+  center: {
+    padding: 10,
+  },
+  centerModal: {
+    backgroundColor:'white',
+    alignItems: 'center',
+    paddingVertical: 50,
+    // padding:30,
+  },
+  text: {
     color: 'white',
+    fontSize: 25,
+  },
+  centerText: {
     fontSize: 18,
-    fontWeight: '500',
-    textShadowColor: colors.fadedBlack,
-    textShadowOffset: {width: 0.1, height: 0.1},
+    paddingVertical: 30,
+    color: colors.black,
   },
-  success: {
-    backgroundColor: colors.success,
-  },
-  error: {
-    backgroundColor: colors.error,
-  },
-  info: {
-    backgroundColor: colors.info,
+  centerButton: {
+    width: 200,
   },
 });
