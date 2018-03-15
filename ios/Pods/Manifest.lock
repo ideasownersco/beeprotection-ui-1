@@ -1,72 +1,63 @@
 PODS:
-  - CocoaLumberjack (3.4.0):
-    - CocoaLumberjack/Default (= 3.4.0)
-    - CocoaLumberjack/Extensions (= 3.4.0)
-  - CocoaLumberjack/Default (3.4.0)
-  - CocoaLumberjack/Extensions (3.4.0):
+  - CocoaLumberjack (3.4.1):
+    - CocoaLumberjack/Default (= 3.4.1)
+    - CocoaLumberjack/Extensions (= 3.4.1)
+  - CocoaLumberjack/Default (3.4.1)
+  - CocoaLumberjack/Extensions (3.4.1):
     - CocoaLumberjack/Default
   - GoogleMaps (2.5.0):
     - GoogleMaps/Maps (= 2.5.0)
   - GoogleMaps/Base (2.5.0)
   - GoogleMaps/Maps (2.5.0):
     - GoogleMaps/Base
-  - React (0.52.0):
-    - React/Core (= 0.52.0)
-  - react-native-google-maps (0.19.0):
+  - React (0.54.2):
+    - React/Core (= 0.54.2)
+  - react-native-google-maps (0.20.1):
     - GoogleMaps (= 2.5.0)
     - React
-  - react-native-maps (0.19.0):
+  - react-native-maps (0.20.1):
     - React
-  - React/BatchedBridge (0.52.0):
+  - React/Core (0.54.2):
+    - yoga (= 0.54.2.React)
+  - React/fishhook (0.54.2)
+  - React/RCTActionSheet (0.54.2):
     - React/Core
-    - React/cxxreact_legacy
-  - React/Core (0.52.0):
-    - yoga (= 0.52.0.React)
-  - React/cxxreact_legacy (0.52.0):
-    - React/jschelpers_legacy
-    - React/jsinspector_legacy
-  - React/fishhook (0.52.0)
-  - React/jschelpers_legacy (0.52.0)
-  - React/jsinspector_legacy (0.52.0)
-  - React/RCTActionSheet (0.52.0):
+  - React/RCTAnimation (0.54.2):
     - React/Core
-  - React/RCTAnimation (0.52.0):
+  - React/RCTBlob (0.54.2):
     - React/Core
-  - React/RCTBlob (0.52.0):
+  - React/RCTGeolocation (0.54.2):
     - React/Core
-  - React/RCTGeolocation (0.52.0):
-    - React/Core
-  - React/RCTImage (0.52.0):
+  - React/RCTImage (0.54.2):
     - React/Core
     - React/RCTNetwork
-  - React/RCTLinkingIOS (0.52.0):
+  - React/RCTLinkingIOS (0.54.2):
     - React/Core
-  - React/RCTNetwork (0.52.0):
+  - React/RCTNetwork (0.54.2):
     - React/Core
-  - React/RCTSettings (0.52.0):
+  - React/RCTSettings (0.54.2):
     - React/Core
-  - React/RCTText (0.52.0):
+  - React/RCTText (0.54.2):
     - React/Core
-  - React/RCTVibration (0.52.0):
+  - React/RCTVibration (0.54.2):
     - React/Core
-  - React/RCTWebSocket (0.52.0):
+  - React/RCTWebSocket (0.54.2):
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - RNBackgroundFetch (2.2.1):
+  - RNBackgroundFetch (2.3.0):
     - React
-  - RNBackgroundGeolocation (2.10.1):
+  - RNBackgroundGeolocation (2.11.0):
     - CocoaLumberjack (~> 3.0)
     - React
-  - RNI18n (2.0.10):
+  - RNI18n (2.0.12):
     - React
-  - yoga (0.52.0.React)
+  - yoga (0.54.2.React)
 
 DEPENDENCIES:
   - GoogleMaps
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
-  - React/BatchedBridge (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
   - React/RCTActionSheet (from `../node_modules/react-native`)
   - React/RCTAnimation (from `../node_modules/react-native`)
@@ -100,16 +91,16 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: e033a5d8513357af2dd456eb66e202c325c30627
+  CocoaLumberjack: 2e258a064cacc8eb9a2aca318e24d02a0a7fd56d
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
-  React: 61a6bdf17a9ff16875c230e6ff278d9de274e16c
-  react-native-google-maps: dc6d7644b0517e6e232644d2b66004714b91e152
-  react-native-maps: d3b689927722398a12a4b3007fd9a0c60e1c48cd
-  RNBackgroundFetch: f62e9e27a069511ae7b7015eff9c48c8221fe625
-  RNBackgroundGeolocation: 2b8b5dd7c2d075cb432b16bfec9aedee46072e27
-  RNI18n: cd4ddd958e326a2427b70f5474b3fb04aea793b2
-  yoga: 646606bf554d54a16711f35596178522fbc00480
+  React: c237e42de9c70e5cac6eeb52b4cfd3a0910c1f00
+  react-native-google-maps: 963fc78a5ac32dad3a726e4fa08b5307faa5cab2
+  react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
+  RNBackgroundFetch: 8c4f77f83c398c659bce82af2f0a885079417b9e
+  RNBackgroundGeolocation: c9bbf69b9aa277f0b46754cc5f853bd26051a18f
+  RNI18n: db9be06a40336f04d136f24dd5de3f5eb9f3207c
+  yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: 4d57d7b06f4bd055b8cd535c1bcbda5c62107729
+PODFILE CHECKSUM: 8d5de814c1c05b33585a30cee44a819c9f222c4f
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.4.0
