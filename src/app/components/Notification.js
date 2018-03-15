@@ -23,14 +23,12 @@ export default class Notification extends Component {
     return nextState.visible !== this.state.visible;
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-
+  componentWillReceiveProps(nextProps, prevState) {
     if (!isEmpty(nextProps.message)) {
-      return {
-        visible: true,
-      }
+      return this.setState({
+        visible:true
+      })
     }
-    return null
   }
 
   closeModal = () => {
