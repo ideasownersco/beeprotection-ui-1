@@ -4582,9 +4582,9 @@ react-native-i18n@^2.0.12:
   dependencies:
     i18n-js "^3.0.3"
 
-react-native-maps@^0.20.1:
+"react-native-maps@https://github.com/react-community/react-native-maps.git":
   version "0.20.1"
-  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.20.1.tgz#b5247a9a26446b2e1ffc3f680db8ba6ccc960096"
+  resolved "https://github.com/react-community/react-native-maps.git#6cc87aa5bf25f10ca1c689eed0ddb2c2e551a933"
   dependencies:
     babel-plugin-module-resolver "^2.3.0"
     babel-preset-react-native "1.9.0"
