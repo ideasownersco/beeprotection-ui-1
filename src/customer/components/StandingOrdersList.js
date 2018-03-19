@@ -63,7 +63,7 @@ export default class StandingOrdersList extends Component {
         data={items}
         renderItem={this.renderItem}
         style={styles.listContainer}
-        keyExtractor={item => item.id}
+        keyExtractor={item => `${item.id}`}
         contentContainerStyle={styles.contentContainerStyle}
       />
     );

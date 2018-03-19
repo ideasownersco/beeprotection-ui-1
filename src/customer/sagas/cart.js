@@ -4,11 +4,12 @@ import {ACTION_TYPES} from 'customer/common/actions';
 import {API} from 'customer/common/api';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
+import flatten from 'lodash/flatten';
 
 function* fetchCartItems() {
   try {
     const state = yield select();
-    const {items} = state.cartReducer;
+    const {items} = state.customer.cart;
     let cartItems = Object.keys(items).map(item => items[item]);
 
     let categories = cartItems.map(item => item.category).join();
@@ -25,6 +26,7 @@ function* fetchCartItems() {
       }),
     };
 
+    console.log('params',params);
     const response = yield call(API.fetchCartItems, params);
     const normalized = normalize(response.data, [Schema.categories]);
     yield put({

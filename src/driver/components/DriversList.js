@@ -65,7 +65,7 @@ export default class DriversList extends Component {
         data={items}
         renderItem={this.renderItem}
         style={styles.listContainer}
-        keyExtractor={item => item.id}
+        keyExtractor={item => `${item.id}`}
         extraData={activeItemID}
         ItemSeparatorComponent={() => <Separator style={{marginVertical: 5}} />}
       />

@@ -1,7 +1,7 @@
 import {request} from 'utils/network';
 
 function fetchCartItems(params = {}) {
-  const path = `cart/make`;
+  const path = `customer/cart/make`;
   return request({path, params});
 }
 
@@ -45,7 +45,7 @@ function saveAddress(params) {
   return request(requestParams);
 }
 
-function saveOrder(params) {
+function createOrder(params) {
   const path = `customer/orders`;
   let requestParams = {
     path,
@@ -61,7 +61,7 @@ export const API = {
   fetchTimings,
   fetchAddresses,
   saveAddress,
-  saveOrder,
+  createOrder,
   fetchUpcomingOrders,
   fetchPastOrders,
   fetchWorkingOrder,

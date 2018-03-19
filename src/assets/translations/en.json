@@ -107,5 +107,8 @@
   "select_time" : "Select Time",
   "select" : "Select",
   "tracking_not_available" : "Tracking is not available",
-  "track_drivers" : "Track Drivers"
+  "track_drivers" : "Track Drivers",
+  "knet" : "KNET",
+  "cash" : "CASH",
+
 }

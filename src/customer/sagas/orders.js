@@ -155,28 +155,39 @@ function* saveAddress(action) {
   }
 }
 
-function* saveOrder(action) {
+function* createOrder(action) {
+
+  console.log('action',action);
+
+  const {item, resolve,reject} = action.payload;
+
   try {
     const params = {
       body: {
-        ...action.params,
+        ...item,
       },
     };
 
-    const response = yield call(API.saveOrder, params);
+    const response = yield call(API.createOrder, params);
     const normalized = normalize(response.data, Schema.orders);
     let {entities, result} = normalized;
     yield put({
-      type: ACTION_TYPES.SAVE_ORDER_SUCCESS,
+      type: ACTION_TYPES.CREATE_ORDER_SUCCESS,
       entities: entities,
       orderIds: [result],
     });
+
+    yield resolve();
+
   } catch (error) {
-    yield put({type: ACTION_TYPES.SAVE_ORDER_FAILURE, error});
+    yield put({type: ACTION_TYPES.CREATE_ORDER_FAILURE, error});
     yield put(APP_ACTIONS.setNotification({
       message:error,
       type:'error'
     }));
+
+    yield reject(error);
+
   }
 }
 
@@ -231,7 +242,7 @@ function* saveAddressMonitor() {
 }
 
 function* saveOrderMonitor() {
-  yield takeLatest(ACTION_TYPES.SAVE_ORDER_REQUEST, saveOrder);
+  yield takeLatest(ACTION_TYPES.CREATE_ORDER_REQUEST, createOrder);
 }
 
 function* checkoutMonitor() {

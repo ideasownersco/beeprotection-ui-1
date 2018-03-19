@@ -37,7 +37,7 @@ export default class CartItems extends Component {
           ))}
 
           <View style={styles.packageItemContainer}>
-            <Text style={styles.total}>{I18n.t('total')}</Text>
+            {/*<Text style={styles.total}>{I18n.t('total')}</Text>*/}
             <Text style={styles.totalPrice}>{item.total} KD</Text>
           </View>
         </View>
@@ -58,7 +58,7 @@ export default class CartItems extends Component {
           data={items}
           renderItem={this.renderItem}
           style={styles.listContainer}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => `${index}`}
           extraData={activeItemID}
         />
       </View>

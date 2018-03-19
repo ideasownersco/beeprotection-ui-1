@@ -23,7 +23,6 @@ export function reducer(state = initialState, action = {}) {
         error: null,
       };
     }
-
     case ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE:
       return {
         ...state,

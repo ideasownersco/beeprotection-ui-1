@@ -31,9 +31,9 @@ export const ACTION_TYPES = {
   SAVE_ADDRESS_SUCCESS: '@customer/SAVE_ADDRESS_SUCCESS',
   SAVE_ADDRESS_FAILURE: '@customer/SAVE_ADDRESS_FAILURE',
 
-  SAVE_ORDER_REQUEST: '@customer/SAVE_ORDER_REQUEST',
-  SAVE_ORDER_SUCCESS: '@customer/SAVE_ORDER_SUCCESS',
-  SAVE_ORDER_FAILURE: '@customer/SAVE_ORDER_FAILURE',
+  CREATE_ORDER_REQUEST: '@customer/CREATE_ORDER_REQUEST',
+  CREATE_ORDER_SUCCESS: '@customer/CREATE_ORDER_SUCCESS',
+  CREATE_ORDER_FAILURE: '@customer/CREATE_ORDER_FAILURE',
 
   CHECKOUT_REQUEST: '@customer/CHECKOUT_REQUEST',
   CHECKOUT_SUCCESS: '@customer/CHECKOUT_SUCCESS',
@@ -58,6 +58,7 @@ export const ACTION_TYPES = {
   FETCH_PAST_ORDERS_FAILURE: '@customer/FETCH_PAST_ORDERS_FAILURE',
   FETCH_PAST_ORDERS_REFRESH_REQUEST:
     '@customer/FETCH_PAST_ORDERS_REFRESH_REQUEST',
+
 };
 
 function fetchCartItems() {
@@ -117,10 +118,10 @@ function checkout(params) {
   };
 }
 
-function saveOrder(params) {
+function createOrder(payload) {
   return {
-    type: ACTION_TYPES.SAVE_ORDER_REQUEST,
-    params,
+    type: ACTION_TYPES.CREATE_ORDER_REQUEST,
+    payload,
   };
 }
 
@@ -195,7 +196,7 @@ export const ACTIONS = {
   fetchTimings,
   fetchAddresses,
   saveAddress,
-  saveOrder,
+  createOrder,
   checkout,
   setCartItems,
   subscribeToJobTrack,
