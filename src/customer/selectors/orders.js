@@ -63,7 +63,7 @@ const getCartTotal = createSelector(
   [cartItems],
   (items) => {
     return Object.keys(items)
-      .map(item => items[item].total).reduce((total,amount) => total + amount)
+      .map(item => items[item].total).reduce((total,amount) => total + amount,0)
     }
 );
 

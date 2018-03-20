@@ -197,6 +197,20 @@ function* checkout(action) {
   }
 }
 
+function* fetchOrderDetails(action) {
+  try {
+    const response = yield call(API.fetchOrderDetails, action.order_id);
+    const normalizedOrders = normalize(response.data, Schema.orders);
+    yield put({
+      type: ACTION_TYPES.FETCH_ORDER_DETAILS_SUCCESS,
+      entities: normalizedOrders.entities,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.FETCH_ORDER_DETAILS_FAILURE, error});
+  }
+}
+
+
 // function* checkout(action) {
 //   try {
 //     const params = {
@@ -266,6 +280,10 @@ function* fetchPastOrdersMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_PAST_ORDERS_REQUEST, fetchPastOrders);
 }
 
+function* fetchOrderDetailsMonitor() {
+  yield takeLatest(ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST, fetchOrderDetails);
+}
+
 export const sagas = all([
   fork(fetchCategoriesMonitor),
   fork(fetchTimingsMonitor),
@@ -276,4 +294,6 @@ export const sagas = all([
   fork(fetchWorkingOrderMonitor),
   fork(fetchUpcomingOrdersMonitor),
   fork(fetchPastOrdersMonitor),
+  fork(fetchOrderDetailsMonitor),
+
 ]);

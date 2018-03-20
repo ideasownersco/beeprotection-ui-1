@@ -3,17 +3,21 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {SELECTORS as ORDER_SELECTORS} from 'customer/selectors/orders';
-import TrackItem from 'customer/orders/components/TrackItem';
 import I18n from 'utils/locale';
-import IconFactory from 'components/IconFactory';
-import colors from 'assets/theme/colors';
 import Map from 'customer/orders/components/Map';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
+import {ACTIONS} from "customer/common/actions";
+import {bindActionCreators} from "redux";
 
 class TrackDetailScene extends Component {
+
+  componentDidMount() {
+    this.props.actions.fetchOrderDetails(this.props.navigation.state.params.orderID);
+  }
+
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -93,19 +97,38 @@ class TrackDetailScene extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(
+      {...ACTIONS,},
+      dispatch,
+    ),
+  };
+}
 const makeMapStateToProps = () => {
+
+  // const mapStateToProps = (state, props) => {
+  //   const {accepted_job} = props.navigation.state.params.order;
+  //
+  //   return {
+  //     tracking: accepted_job
+  //       ? getLocationUpdatesForJob(state, accepted_job.id)
+  //       : {},
+  //   };
+  // };
+
+  const getOrderByID = ORDER_SELECTORS.getOrderByID();
   const getLocationUpdatesForJob = ORDER_SELECTORS.getLocationUpdatesForJob();
 
   const mapStateToProps = (state, props) => {
-    const {accepted_job} = props.navigation.state.params.order;
-
     return {
-      tracking: accepted_job
-        ? getLocationUpdatesForJob(state, accepted_job.id)
-        : {},
+      order: getOrderByID(state, props.navigation.state.params.orderID),
+      tracking: getOrderTrackLocation = ORDER_SELECTORS.getLocationUpdatesForJob();
     };
   };
+
   return mapStateToProps;
+
 };
 
-export default connect(makeMapStateToProps)(TrackDetailScene);
+export default connect(makeMapStateToProps,mapDispatchToProps)(TrackDetailScene);

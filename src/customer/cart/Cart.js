@@ -80,11 +80,11 @@ class Cart extends Component {
         // dispatch(someActionCreator({ values, resolve, reject }))
       }).then((order) => {
 
-        if (order.status === 'success') {
+        if (order.status == 'Success') {
           this.setState({
             showOrderSuccessModal: true
           });
-        } else if(order.status === 'checkout') {
+        } else if(order.status == 'Checkout') {
           this.setState({
             showPaymentModal: true
           });
@@ -145,6 +145,7 @@ class Cart extends Component {
   };
 
   render() {
+
     let {cart, cartItems, user, cartTotal, checkout} = this.props;
     let {selectedDate, selectedTime, selectedAddressID} = cart;
     console.log('selectedTime in Cart',selectedTime);
@@ -158,8 +159,7 @@ class Cart extends Component {
     return (
       <ScrollView contentInset={{bottom: 50}}>
 
-        <CartItems items={cartItems} onItemPress={() => {
-        }}/>
+        <CartItems items={cartItems} onItemPress={() => {}}/>
 
         <CartTotal total={cartTotal}/>
 

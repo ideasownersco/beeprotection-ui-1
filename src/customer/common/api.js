@@ -55,6 +55,12 @@ function checkout(params) {
   return request(requestParams);
 }
 
+function fetchOrderDetails(id) {
+  const path = `customer/orders/${id}/details`;
+  return request({path, requiresAuthentication: true});
+}
+
+
 export const API = {
   fetchCartItems,
   fetchCategories,
@@ -65,4 +71,6 @@ export const API = {
   fetchUpcomingOrders,
   fetchPastOrders,
   fetchWorkingOrder,
+  fetchOrderDetails,
+
 };

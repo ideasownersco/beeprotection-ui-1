@@ -5,10 +5,12 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {SELECTORS as ORDER_SELECTORS} from 'customer/selectors/orders';
-import {View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import OrderTotal from 'customer/orders/components/OrderTotal';
+import {bindActionCreators} from "redux";
+import {ACTIONS} from "customer/common/actions";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -25,24 +27,36 @@ class OrderDetailScene extends Component {
     orderID: 0,
   };
 
+  componentDidMount() {
+    this.props.actions.fetchOrderDetails(this.props.navigation.state.params.orderID);
+  }
+
   render() {
     let {order} = this.props;
+    console.log('order',order);
+
     return (
       <View style={{flex: 1}}>
-
         {
           order &&
-
-          <View>
+          <ScrollView style={{flex:1}}>
             <OrderBasicInfo item={order}/>
             <OrderItems order={order}/>
             <OrderTotal total={order.total}/>
-          </View>
+          </ScrollView>
         }
-
       </View>
     );
   }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(
+      {...ACTIONS,},
+      dispatch,
+    ),
+  };
 }
 
 const makeMapStateToProps = () => {
@@ -55,4 +69,4 @@ const makeMapStateToProps = () => {
   return mapStateToProps;
 };
 
-export default connect(makeMapStateToProps)(OrderDetailScene);
+export default connect(makeMapStateToProps,mapDispatchToProps)(OrderDetailScene);

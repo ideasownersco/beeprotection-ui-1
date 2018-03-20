@@ -153,7 +153,9 @@ class CreateOrder extends PureComponent {
   };
 
   onAddNewItemPress = () => {
-
+    this.setState({
+      showCartSuccessModal: false
+    });
   };
 
   onCheckoutPress = () => {
@@ -200,11 +202,14 @@ class CreateOrder extends PureComponent {
           activeItemID={activeCategoryID}
         />
 
-        <PackagesList
-          items={activeCategory.packages}
-          onItemPress={this.onPackagesListItemPress}
-          activeItemID={activePackageID}
-        />
+        {
+          activeCategory.packages && activeCategory.packages.length &&
+          <PackagesList
+            items={activeCategory.packages}
+            onItemPress={this.onPackagesListItemPress}
+            activeItemID={activePackageID}
+          />
+        }
 
         {activePackageID && (
           <ServicesList

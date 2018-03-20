@@ -113,5 +113,8 @@
 
   "cart_item_added" : "Item Added to the Cart",
   "add_item" : "Add New Car",
-  "payment_mode" : "Payment Mode"
+  "payment_mode" : "Payment Mode",
+  "order_status" : "Status",
+  "job_status" : "Job Status",
+  "pending" : "Pending"
 }

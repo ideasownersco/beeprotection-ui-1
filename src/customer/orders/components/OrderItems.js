@@ -19,10 +19,11 @@ export default class OrderItems extends Component {
 
   render() {
     const {order} = this.props;
+
     const {packages} = order;
     return (
       <View style={styles.container}>
-        <SectionTitle title={I18n.t('order_details')} />
+        <SectionTitle title={I18n.t('order_details')}/>
 
         {packages.map((packageModel, index) => (
           <View key={packageModel.id}>
@@ -32,15 +33,41 @@ export default class OrderItems extends Component {
               </Text>
             </View>
 
-            <View style={styles.serviceListContainer}>
-              <Text style={styles.serviceTitle}>{packageModel.name}</Text>
+            <View style={styles.packageItemContainer}>
+              <Text style={styles.packageTitle}>{packageModel.name}</Text>
               {packageModel.price && (
-                <Text style={styles.servicePrice}>{packageModel.price} KD</Text>
+                <Text style={styles.packagePrice}>{packageModel.price} KD</Text>
               )}
             </View>
-            <Separator style={{marginVertical: 5}} />
+
+            {
+              order.services && order.services.length && order.services.filter(service => service.package.id === packageModel.id).map(service => {
+                return (
+                  <View style={{flex: 1}} key={service.id}>
+                    <View style={styles.serviceListContainer}>
+                      <Text style={styles.serviceTitle}>{service.name} </Text>
+                      <Text style={styles.servicePrice}>10 KD</Text>
+                    </View>
+                    <Separator style={{flex: 1, marginVertical: 5}}/>
+                  </View>
+                );
+              })
+
+            }
           </View>
         ))}
+
+        {/*{item.services.map((service, index) => (*/}
+        {/*<View style={{flex: 1}} key={index}>*/}
+        {/*<View style={styles.serviceListContainer}>*/}
+        {/*<Text style={styles.serviceTitle}>{service.name}</Text>*/}
+        {/*<Text style={styles.servicePrice}>{service.price} KD</Text>*/}
+        {/*</View>*/}
+        {/*<Separator style={{flex: 1, marginVertical: 5}} />*/}
+        {/*</View>*/}
+        {/*))}*/}
+
+
       </View>
     );
   }
@@ -53,21 +80,25 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   categoryTitle: {
-    fontSize: 20,
-    paddingHorizontal: 5,
+    fontSize: 18,
+    color: '#aa2d29',
+    fontWeight: 'bold',
   },
   packageItemContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 10,
   },
   packageTitle: {
     flex: 4,
-    fontSize: 16,
-    color: colors.mediumGrey,
+    fontSize: 20,
+    color: colors.darkGrey,
+    fontWeight: 'bold',
+    paddingLeft: 20,
   },
   packagePrice: {
     flex: 1,
-    color: colors.primary,
+    color: colors.darkGrey,
     fontSize: 15,
     textAlign: 'right',
   },
@@ -75,16 +106,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  serviceTitle: {
-    flex: 3,
-    paddingLeft: 20,
-    fontSize: 18,
-    color: colors.darkGrey,
-  },
   servicePrice: {
     flex: 1,
     color: colors.primary,
     fontSize: 16,
     textAlign: 'right',
   },
+  serviceTitle: {
+    flex: 3,
+    color: colors.darkGrey,
+    fontSize: 16,
+    fontWeight: 'bold',
+    paddingLeft: 40,
+  },
+
 });

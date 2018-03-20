@@ -63,6 +63,10 @@ export const ACTION_TYPES = {
   FETCH_PAST_ORDERS_REFRESH_REQUEST:
     '@customer/FETCH_PAST_ORDERS_REFRESH_REQUEST',
 
+  FETCH_ORDER_DETAILS_REQUEST: '@customer/FETCH_ORDER_DETAILS_REQUEST',
+  FETCH_ORDER_DETAILS_SUCCESS: '@customer/FETCH_ORDER_DETAILS_SUCCESS',
+  FETCH_ORDER_DETAILS_FAILURE: '@customer/FETCH_ORDER_DETAILS_FAILURE',
+
 };
 
 function fetchCartItems() {
@@ -192,6 +196,14 @@ function fetchPastOrdersRefresh(params) {
   };
 }
 
+
+function fetchOrderDetails(id) {
+  return {
+    type: ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST,
+    order_id: id,
+  };
+}
+
 export const ACTIONS = {
   addToCart,
   fetchCartItems,
@@ -209,4 +221,6 @@ export const ACTIONS = {
   fetchWorkingOrder,
   fetchPastOrders,
   fetchPastOrdersRefresh,
+  fetchOrderDetails,
+
 };
