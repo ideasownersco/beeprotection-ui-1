@@ -39,6 +39,10 @@ export const ACTION_TYPES = {
   CHECKOUT_SUCCESS: '@customer/CHECKOUT_SUCCESS',
   CHECKOUT_FAILURE: '@customer/CHECKOUT_FAILURE',
 
+  CREATE_PAYMENT_REQUEST: '@customer/CREATE_PAYMENT_REQUEST',
+  CREATE_PAYMENT_SUCCESS: '@customer/CREATE_PAYMENT_SUCCESS',
+  CREATE_PAYMENT_FAILURE: '@customer/CREATE_PAYMENT_FAILURE',
+
   LOCATION_RECEIVED: '@customer/LOCATION_RECEIVED',
 
   SUBSCRIBE_TO_JOB_TRACK: '@customer/SUBSCRIBE_TO_JOB_TRACK',
@@ -111,10 +115,10 @@ function fetchTimings(params) {
   };
 }
 
-function checkout(params) {
+function checkout(payload) {
   return {
     type: ACTION_TYPES.CHECKOUT_REQUEST,
-    params,
+    payload,
   };
 }
 

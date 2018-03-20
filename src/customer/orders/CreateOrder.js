@@ -16,12 +16,14 @@ import I18n from 'utils/locale';
 import NavButton from 'components/NavButton';
 import colors from 'assets/theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import CartSuccessModal from "../cart/components/CartSuccessModal";
 
 type State = {
   activeCategoryID: ?number,
   activePackageID: ?number,
   activeServicesIDs: Array<string>,
   amount: number,
+  showCartSuccessModal: boolean
 };
 
 const initialState = {
@@ -29,6 +31,7 @@ const initialState = {
   activePackageID: undefined,
   activeServicesIDs: [],
   amount: 0,
+  showCartSuccessModal: false
 };
 
 class CreateOrder extends PureComponent {
@@ -139,9 +142,32 @@ class CreateOrder extends PureComponent {
       activeServicesIDs: [],
     });
 
+    // return new Promise((resolve, reject) => {
     this.props.actions.addToCart(item);
 
+    // dispatch order success
+    this.setState({
+      showCartSuccessModal: true
+    });
+
+  };
+
+  onAddNewItemPress = () => {
+
+  };
+
+  onCheckoutPress = () => {
+    this.setState({
+      showCartSuccessModal: false
+    });
     this.props.navigation.navigate('Cart');
+  };
+
+
+  hideCheckoutModal = () => {
+    this.setState({
+      showCartSuccessModal: false
+    });
   };
 
   render() {
@@ -152,14 +178,16 @@ class CreateOrder extends PureComponent {
     } = this.props.cartReducer;
     const {categories} = this.props;
 
+    const {showCartSuccessModal} = this.state;
+
     let activeCategory = activeCategoryID
       ? categories.find(item => item.id === activeCategoryID)
       : categories.length
         ? categories[0]
         : {
-            id: undefined,
-            packages: [],
-          };
+          id: undefined,
+          packages: [],
+        };
 
     return (
       <ScrollView
@@ -197,6 +225,15 @@ class CreateOrder extends PureComponent {
         >
           {I18n.t('add_to_cart')}
         </Button>
+
+        <CartSuccessModal
+          onAddNewItemPress={this.onAddNewItemPress}
+          onCheckoutPress={this.onCheckoutPress}
+          visible={showCartSuccessModal}
+          onHide={this.hideCheckoutModal}
+        />
+
+
       </ScrollView>
     );
   }

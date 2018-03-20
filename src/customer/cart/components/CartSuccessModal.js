@@ -5,21 +5,25 @@ import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 import Modal from 'react-native-modal';
 import colors from "assets/theme/colors";
+import {Button} from "react-native-paper";
+import I18n from 'utils/locale';
+import IconFactory from "../../../components/IconFactory";
 
-export default class PaymentPage extends Component {
+export default class CartSuccessModal extends Component {
 
   // shouldComponentUpdate(nextProps) {
   //   return nextProps.visible !== this.props.visible;
   // }
 
   static propTypes = {
-    onPress: PropTypes.func.isRequired,
+    onCheckoutPress: PropTypes.func.isRequired,
+    onAddNewItemPress: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
     onHide:PropTypes.func.isRequired
   };
 
   render() {
-    let { visible,onHide } = this.props;
+    let { visible,onHide,onAddNewItemPress,onCheckoutPress } = this.props;
     return (
       <Modal isVisible={visible}
              animationType="slide"
@@ -37,9 +41,21 @@ export default class PaymentPage extends Component {
           style={[
             styles.centerModal,
           ]}>
+
+          <IconFactory type="MaterialIcons" name="check-circle" color={colors.primary} size={40}/>
+
           <Text style={[styles.text, styles.centerText]}>
-            Payment Page
+            {I18n.t('cart_item_added')}
           </Text>
+
+
+          <Button onPress={onCheckoutPress} raised primary>
+            {I18n.t('checkout')}
+          </Button>
+
+          <Button onPress={onAddNewItemPress} raised secondary>
+            {I18n.t('add_item')}
+          </Button>
 
         </View>
 
@@ -58,6 +74,10 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     alignItems: 'center',
     paddingVertical: 50,
+    // shadowColor:colors.fadedBlack,
+    // shadowOffset:{height:1,width:1},
+    // shadowRadius:3,
+    // shadowOpacity:.3,
     // padding:30,
   },
   text: {

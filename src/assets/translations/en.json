@@ -111,4 +111,7 @@
   "knet" : "KNET",
   "cash" : "CASH",
 
+  "cart_item_added" : "Item Added to the Cart",
+  "add_item" : "Add New Car",
+  "payment_mode" : "Payment Mode"
 }

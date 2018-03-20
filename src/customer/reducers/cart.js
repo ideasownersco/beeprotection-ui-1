@@ -6,7 +6,7 @@ const initialState = {
   items: {},
   total: 0,
   selectedDate: moment(),
-  selectedTime: moment().format('Hm'),
+  selectedTime: moment().format('HH:mm'),
   selectedAddressID: null,
   activeCategoryID: null,
   activePackageID: null,

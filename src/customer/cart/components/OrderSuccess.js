@@ -21,18 +21,14 @@ export default class OrderSuccess extends Component {
   render() {
     let { visible,onHide } = this.props;
     return (
-      <Modal visible={visible}
+      <Modal isVisible={visible}
              animationType="slide"
-             onSwipe={onHide}
              onBackdropPress={onHide}
-             swipeDirection="up"
              backdropOpacity={.8}
+             transparent={true}
+             backdropColor="rgba(0,0,0,0.5)"
              style={{
                margin:50,
-               shadowColor:colors.fadedBlack,
-               shadowOffset:{height:1,width:1},
-               shadowRadius:3,
-               shadowOpacity:.3,
              }}
              useNativeDriver={true}
              hideModalContentWhileAnimating={true}

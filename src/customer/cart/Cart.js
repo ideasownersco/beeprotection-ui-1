@@ -75,17 +75,16 @@ class Cart extends Component {
       };
 
       return new Promise((resolve, reject) => {
-        this.props.actions.createOrder({item, resolve, reject});
+        this.props.actions.checkout({item, resolve, reject});
         // this.props.dispatch(CUSTOMER_ACTIONS.saveLoad({params, resolve}));
         // dispatch(someActionCreator({ values, resolve, reject }))
-      }).then(() => {
+      }).then((order) => {
 
-        if (this.state.paymentMode === 'cash') {
-          // dispatch order success
+        if (order.status === 'success') {
           this.setState({
             showOrderSuccessModal: true
           });
-        } else {
+        } else if(order.status === 'checkout') {
           this.setState({
             showPaymentModal: true
           });
@@ -139,9 +138,16 @@ class Cart extends Component {
     })
   };
 
+  hideSuccessModal = () => {
+    this.setState({
+      showOrderSuccessModal: false
+    })
+  };
+
   render() {
     let {cart, cartItems, user, cartTotal, checkout} = this.props;
     let {selectedDate, selectedTime, selectedAddressID} = cart;
+    console.log('selectedTime in Cart',selectedTime);
     let {dates, showPaymentModal, showOrderSuccessModal, paymentMode} = this.state;
 
 
@@ -200,6 +206,8 @@ class Cart extends Component {
 
         <Separator style={{marginVertical: 10}}/>
 
+        <SectionHeading title={I18n.t('payment_mode')} style={{backgroundColor: 'transparent'}}/>
+
         <PaymentOptions onPress={this.onPaymentOptionsItemPress} selectedItem={paymentMode}/>
 
         {/*<Button*/}
@@ -216,7 +224,7 @@ class Cart extends Component {
           raised
           primary
           loading={checkout.isFetching}
-          style={{justifyContent: 'center', paddingVertical: 10}}
+          style={{justifyContent: 'center', paddingVertical: 10,marginTop:20}}
         >
           {I18n.t('checkout')}
         </Button>
@@ -231,7 +239,7 @@ class Cart extends Component {
         <OrderSuccess
           onPress={this.onPaymentOptionsItemPress}
           visible={showOrderSuccessModal}
-          onHide={this.hideCheckoutModal}
+          onHide={this.hideSuccessModal}
         />
 
         <PaymentPage

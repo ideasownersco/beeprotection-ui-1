@@ -9,30 +9,31 @@ const initialState = {
 
 export function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ACTION_TYPES.CREATE_ORDER_REQUEST:
+    case ACTION_TYPES.CHECKOUT_REQUEST:
       return {
         ...state,
         isFetching: true,
         error: null,
-        success:false
+        success:false,
+        orderID: null,
       };
 
-    case ACTION_TYPES.CREATE_ORDER_SUCCESS: {
+    case ACTION_TYPES.CHECKOUT_SUCCESS: {
       return {
         ...state,
         isFetching: false,
-        id: action.result,
+        orderID: action.orderID,
         error: null,
         success:true
       };
     }
-
-    case ACTION_TYPES.CREATE_ORDER_FAILURE:
+    case ACTION_TYPES.CHECKOUT_FAILURE:
       return {
         ...state,
         isFetching: false,
         error: action.error,
-        success:false
+        success:false,
+        orderID: null,
       };
     default:
       return state;

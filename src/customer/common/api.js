@@ -45,8 +45,8 @@ function saveAddress(params) {
   return request(requestParams);
 }
 
-function createOrder(params) {
-  const path = `customer/orders`;
+function checkout(params) {
+  const path = `customer/checkout`;
   let requestParams = {
     path,
     params,
@@ -61,7 +61,7 @@ export const API = {
   fetchTimings,
   fetchAddresses,
   saveAddress,
-  createOrder,
+  checkout,
   fetchUpcomingOrders,
   fetchPastOrders,
   fetchWorkingOrder,
