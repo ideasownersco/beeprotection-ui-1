@@ -22,29 +22,29 @@ const HomeStack = StackNavigator({
     screen: HomeScene,
     navigationOptions: ({navigation}) => getDrawerIcon(navigation),
   },
-  OrderDetail: {screen: OrderDetailScene},
+  // OrderDetail: {screen: OrderDetailScene},
   CustomerLocationMap: {
     screen: CustomerLocationMapScene,
   },
-  PastOrders: {screen: PastOrdersScene},
-  UpcomingOrders: {screen: UpcomingOrdersScene},
+  // PastOrders: {screen: PastOrdersScene},
+  // UpcomingOrders: {screen: UpcomingOrdersScene},
 });
 
-const PastOrdersStack = StackNavigator({
-  PastOrders: {
-    screen: PastOrdersScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
-  },
-  OrderDetail: {screen: OrderDetailScene},
-});
-
-const UpcomingOrdersStack = StackNavigator({
-  UpcomingOrders: {
-    screen: UpcomingOrdersScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
-  },
-  OrderDetail: {screen: OrderDetailScene},
-});
+// const PastOrdersStack = StackNavigator({
+//   // PastOrders: {
+//   //   screen: PastOrdersScene,
+//   //   navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+//   // },
+//   // OrderDetail: {screen: OrderDetailScene},
+// });
+//
+// const UpcomingOrdersStack = StackNavigator({
+//   // UpcomingOrders: {
+//   //   screen: UpcomingOrdersScene,
+//   //   navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+//   // },
+//   // OrderDetail: {screen: OrderDetailScene},
+// });
 
 const DrawerRoutes = {
   HomeStack: {
@@ -53,8 +53,8 @@ const DrawerRoutes = {
   Login: {
     screen: Login,
   },
-  PastOrdersStack: {screen: PastOrdersStack},
-  UpcomingOrdersStack: {screen: UpcomingOrdersStack},
+  // PastOrdersStack: {screen: PastOrdersStack},
+  // UpcomingOrdersStack: {screen: UpcomingOrdersStack},
 };
 
 export const Router = DrawerNavigator(DrawerRoutes, {
