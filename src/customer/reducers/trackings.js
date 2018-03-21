@@ -5,10 +5,10 @@ const initialState = {};
 export function reducer(state = initialState, action = {}) {
   switch (action.type) {
 
-    case ACTION_TYPES.LOCATION_RECEIVED: {
+    case ACTION_TYPES.DRIVER_LOCATION_UPDATED: {
       return {
         ...state,
-        [action.payload.jobID]: action.payload.location,
+        [action.payload.orderID]: action.payload.location,
       };
     }
 

@@ -4,51 +4,51 @@ import {ACTION_TYPES} from 'driver/common/actions';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 
-function* startJob(action) {
+function* startWorking(action) {
   try {
     const params = {
       body: action.params,
     };
 
-    const response = yield call(API.startJob, action.job_id, params);
+    const response = yield call(API.startWorking, action.job_id, params);
 
     const normalized = normalize(response.data, Schema.orders);
 
     yield put({
-      type: ACTION_TYPES.START_JOB_SUCCESS,
+      type: ACTION_TYPES.START_WORKING_SUCCESS,
       entities: normalized.entities,
       result: normalized.result,
     });
   } catch (error) {
-    yield put({type: ACTION_TYPES.START_JOB_FAILURE, error});
+    yield put({type: ACTION_TYPES.START_WORKING_FAILURE, error});
   }
 }
 
-function* finishJob(action) {
+function* finishWorking(action) {
   try {
     const params = {
       body: action.params,
     };
 
-    const response = yield call(API.finishJob, action.job_id, params);
+    const response = yield call(API.finishWorking, action.job_id, params);
     const normalized = normalize(response.data, Schema.orders);
 
     yield put({
-      type: ACTION_TYPES.FINISH_JOB_SUCCESS,
+      type: ACTION_TYPES.FINISH_WORKING_SUCCESS,
       entities: normalized.entities,
       result: normalized.result,
     });
   } catch (error) {
-    yield put({type: ACTION_TYPES.FINISH_JOB_FAILURE, error});
+    yield put({type: ACTION_TYPES.FINISH_WORKING_FAILURE, error});
   }
 }
 
-function* startJobMonitor() {
-  yield takeLatest(ACTION_TYPES.START_JOB_REQUEST, startJob);
+function* startWorkingMonitor() {
+  yield takeLatest(ACTION_TYPES.START_WORKING_REQUEST, startWorking);
 }
 
-function* finishJobMonitor() {
-  yield takeLatest(ACTION_TYPES.FINISH_JOB_REQUEST, finishJob);
+function* finishWorkingMonitor() {
+  yield takeLatest(ACTION_TYPES.FINISH_WORKING_REQUEST, finishWorking);
 }
 
-export const sagas = all([fork(startJobMonitor), fork(finishJobMonitor)]);
+export const sagas = all([fork(startWorkingMonitor), fork(finishWorkingMonitor)]);

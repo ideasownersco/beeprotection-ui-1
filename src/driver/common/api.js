@@ -9,8 +9,8 @@ function saveProfile(params) {
   };
   return request(requestParams);
 }
-function startJob(id) {
-  const path = `driver/jobs/${id}/start`;
+function startWorking(id) {
+  const path = `driver/orders/${id}/job/start`;
   let requestParams = {
     path,
     method: 'POST',
@@ -18,8 +18,8 @@ function startJob(id) {
   return request(requestParams);
 }
 
-function finishJob(id) {
-  const path = `driver/jobs/${id}/finish`;
+function finishWorking(id) {
+  const path = `driver/orders/${id}/job/finish`;
   let requestParams = {
     path,
     method: 'POST',
@@ -59,6 +59,6 @@ export const API = {
   fetchWorkingOrder,
   fetchOrderDetails,
   fetchPastOrders,
-  startJob,
-  finishJob,
+  startWorking,
+  finishWorking,
 };

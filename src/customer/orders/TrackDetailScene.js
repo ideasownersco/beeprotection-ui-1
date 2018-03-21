@@ -22,44 +22,32 @@ class TrackDetailScene extends Component {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
         params: PropTypes.shape({
-          order: PropTypes.object.isRequired,
+          orderID: PropTypes.number.isRequired,
         }),
       }),
     }),
   };
 
-  static defaultProps = {
-    navigation: {
-      state: {
-        params: {
-          order: {
-            accepted_job: {},
-          },
-        },
-      },
-    },
-  };
-
   componentDidMount() {
-    const {accepted_job} = this.props.navigation.state.params.order;
-    if (accepted_job) {
+    const {order} = this.props;
+    if (order.tracking_on) {
       this.props.dispatch(
-        CUSTOMER_ACTIONS.subscribeToJobTrack({
-          job_id: accepted_job.id,
+        CUSTOMER_ACTIONS.subscribeToOrderTracking({
+          order_id: order.id,
         }),
       );
     }
   }
 
   render() {
-    let {order} = this.props.navigation.state.params;
+    let {order} = this.props;
     let {tracking} = this.props;
 
     console.log('tracking',tracking);
 
     let {address} = order;
 
-    const {accepted_job} = this.props.navigation.state.params.order;
+    // const {accepted_job} = this.props.navigation.state.params.order;
 
     let origin;
 
@@ -75,7 +63,7 @@ class TrackDetailScene extends Component {
       };
     }
 
-    if (!accepted_job) {
+    if (!order.is_working) {
       return (
         <View style={{padding: 10}}>
           <Text style={{textAlign: 'center'}}>
@@ -105,6 +93,7 @@ function mapDispatchToProps(dispatch) {
     ),
   };
 }
+
 const makeMapStateToProps = () => {
 
   // const mapStateToProps = (state, props) => {
@@ -118,12 +107,12 @@ const makeMapStateToProps = () => {
   // };
 
   const getOrderByID = ORDER_SELECTORS.getOrderByID();
-  const getLocationUpdatesForJob = ORDER_SELECTORS.getLocationUpdatesForJob();
+  const getLocationUpdatesForOrder = ORDER_SELECTORS.getLocationUpdatesForOrder();
 
   const mapStateToProps = (state, props) => {
     return {
       order: getOrderByID(state, props.navigation.state.params.orderID),
-      tracking: getOrderTrackLocation = ORDER_SELECTORS.getLocationUpdatesForJob();
+      tracking: getLocationUpdatesForOrder(state, props.navigation.state.params.orderID)
     };
   };
 

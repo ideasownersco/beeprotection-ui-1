@@ -36,8 +36,8 @@ export default class Map extends Component {
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
     }),
-    startJob: PropTypes.func.isRequired,
-    finishJob: PropTypes.func.isRequired,
+    startWorking: PropTypes.func.isRequired,
+    finishWorking: PropTypes.func.isRequired,
     jobStatus:PropTypes.string
   };
 
@@ -58,7 +58,7 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
-    const {jobID, jobStatus} = this.props;
+    const {orderID, jobStatus} = this.props;
 
     BackgroundGeolocation.on('location', this.onLocation);
     BackgroundGeolocation.on('http', this.onHttp);
@@ -70,7 +70,7 @@ export default class Map extends Component {
         preventSuspend: false,
         startOnBoot: true,
         foregroundService: true,
-        url: `http://${API_URL}/jobs/${jobID}/location/update`,
+        url: `http://${API_URL}/orders/${orderID}/location/update`,
         autoSync: true,
         debug: true,
         logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
@@ -155,7 +155,7 @@ export default class Map extends Component {
       });
     }
 
-    this.props.startJob();
+    this.props.startWorking();
     BackgroundGeolocation.start();
   };
 
@@ -166,7 +166,7 @@ export default class Map extends Component {
         enabled: false,
       });
     }
-    this.props.finishJob();
+    this.props.finishWorking();
     BackgroundGeolocation.stop();
   };
 

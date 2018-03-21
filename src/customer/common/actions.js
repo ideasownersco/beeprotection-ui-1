@@ -43,9 +43,9 @@ export const ACTION_TYPES = {
   CREATE_PAYMENT_SUCCESS: '@customer/CREATE_PAYMENT_SUCCESS',
   CREATE_PAYMENT_FAILURE: '@customer/CREATE_PAYMENT_FAILURE',
 
-  LOCATION_RECEIVED: '@customer/LOCATION_RECEIVED',
+  DRIVER_LOCATION_UPDATED: '@customer/DRIVER_LOCATION_UPDATED',
 
-  SUBSCRIBE_TO_JOB_TRACK: '@customer/SUBSCRIBE_TO_JOB_TRACK',
+  SUBSCRIBE_TO_ORDER_TRACKING: '@customer/SUBSCRIBE_TO_ORDER_TRACKING',
 
   FETCH_UPCOMING_ORDERS_REQUEST: '@customer/FETCH_UPCOMING_ORDERS_REQUEST',
   FETCH_UPCOMING_ORDERS_SUCCESS: '@customer/FETCH_UPCOMING_ORDERS_SUCCESS',
@@ -149,14 +149,14 @@ function saveAddress(params: object) {
 
 function locationReceived(location: object) {
   return {
-    type: ACTION_TYPES.LOCATION_RECEIVED,
+    type: ACTION_TYPES.DRIVER_LOCATION_UPDATED,
     payload: location,
   };
 }
 
-function subscribeToJobTrack(params) {
+function subscribeToOrderTracking(params) {
   return {
-    type: ACTION_TYPES.SUBSCRIBE_TO_JOB_TRACK,
+    type: ACTION_TYPES.SUBSCRIBE_TO_ORDER_TRACKING,
     params,
   };
 }
@@ -215,7 +215,7 @@ export const ACTIONS = {
   createOrder,
   checkout,
   setCartItems,
-  subscribeToJobTrack,
+  subscribeToOrderTracking,
   fetchUpcomingOrders,
   fetchUpcomingOrdersRefresh,
   fetchWorkingOrder,

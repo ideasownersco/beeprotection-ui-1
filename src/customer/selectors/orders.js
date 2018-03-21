@@ -67,10 +67,10 @@ const getCartTotal = createSelector(
     }
 );
 
-const getLocationUpdatesForJob = () => {
+const getLocationUpdatesForOrder = () => {
   return createSelector(
     [getTrackings, getItemIdProp],
-    (tracking, job) => tracking[job] || {},
+    (tracking, order) => tracking[order] || {},
   );
 };
 
@@ -112,7 +112,7 @@ export const SELECTORS = {
   getParentCategories,
   getTimings,
   getOrderByID,
-  getLocationUpdatesForJob,
+  getLocationUpdatesForOrder,
   getUpcomingOrders,
   getWorkingOrder,
   getPastOrders,

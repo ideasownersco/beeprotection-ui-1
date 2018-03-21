@@ -21,9 +21,8 @@ function subscribe(socket) {
   console.log('socket', socket);
   return eventChannel(emit => {
     socket.on('location.updated', data => {
-      console.log('location',data);
       emit({
-        type: CUSTOMER_ACTIONS.LOCATION_RECEIVED,
+        type: CUSTOMER_ACTIONS.DRIVER_LOCATION_UPDATED,
         payload: data,
       });
     });
@@ -51,8 +50,8 @@ function* syncUserToSocket(socket) {
 
 function* subscribeToJobTrack(socket) {
   while (true) {
-    const threadParams = yield take(CUSTOMER_ACTIONS.SUBSCRIBE_TO_JOB_TRACK);
-    socket.emit('job.track.subscribe', threadParams.params.job_id);
+    const threadParams = yield take(CUSTOMER_ACTIONS.SUBSCRIBE_TO_ORDER_TRACKING);
+    socket.emit('order.track.subscribe', threadParams.params.order_id);
   }
 }
 

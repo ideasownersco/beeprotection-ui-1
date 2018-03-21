@@ -9,6 +9,7 @@ import SectionTitle from 'components/SectionTitle';
 import I18n from 'utils/locale';
 
 export default class OrderItems extends Component {
+
   shouldComponentUpdate(nextProps) {
     return nextProps.order !== this.props.order;
   }
@@ -19,7 +20,6 @@ export default class OrderItems extends Component {
 
   render() {
     const {order} = this.props;
-
     const {packages} = order;
     return (
       <View style={styles.container}>
@@ -46,7 +46,7 @@ export default class OrderItems extends Component {
                   <View style={{flex: 1}} key={service.id}>
                     <View style={styles.serviceListContainer}>
                       <Text style={styles.serviceTitle}>{service.name} </Text>
-                      <Text style={styles.servicePrice}>10 KD</Text>
+                      <Text style={styles.servicePrice}>{service.price} KD</Text>
                     </View>
                     <Separator style={{flex: 1, marginVertical: 5}}/>
                   </View>

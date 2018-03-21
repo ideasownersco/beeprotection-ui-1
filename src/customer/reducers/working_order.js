@@ -29,13 +29,13 @@ export function reducer(state = initialState, action = {}) {
         isFetching: false,
         error: action.error,
       };
-    case ACTION_TYPES.START_JOB_SUCCESS: {
+    case ACTION_TYPES.START_WORKING_SUCCESS: {
       return {
         ...state,
         id: action.result,
       };
     }
-    case ACTION_TYPES.FINISH_JOB_SUCCESS: {
+    case ACTION_TYPES.FINISH_WORKING_SUCCESS: {
       return {
         ...state,
         id: null,
