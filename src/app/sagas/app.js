@@ -53,6 +53,8 @@ function* boot() {
         },
       });
       const normalized = normalize(response.data, Schema.users);
+      console.log('normalized',normalized);
+
       yield put({
         type: AUTH_ACTION_TYPES.LOGIN_SUCCESS,
         entities: normalized.entities,

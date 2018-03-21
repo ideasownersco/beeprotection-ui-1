@@ -23,7 +23,7 @@ function subscribe(socket) {
     socket.on('location.updated', data => {
       console.log('location',data);
       emit({
-        type: CUSTOMER_ACTIONS.LOCATION_RECEIVED,
+        type: CUSTOMER_ACTIONS.DRIVER_LOCATION_UPDATED,
         payload: data,
       });
     });
