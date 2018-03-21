@@ -97,47 +97,6 @@ function* fetchOrderDetails(action) {
   }
 }
 
-
-function* startWorking(action) {
-  try {
-    const params = {
-      body: action.params,
-    };
-
-    const response = yield call(API.startWorking, action.job_id, params);
-
-    const normalized = normalize(response.data, Schema.orders);
-
-    yield put({
-      type: ACTION_TYPES.START_WORKING_SUCCESS,
-      entities: normalized.entities,
-      result: normalized.result,
-    });
-  } catch (error) {
-    yield put({type: ACTION_TYPES.START_WORKING_FAILURE, error});
-  }
-}
-
-function* finishWorking(action) {
-  try {
-    const params = {
-      body: action.params,
-    };
-
-    const response = yield call(API.finishWorking, action.job_id, params);
-    const normalized = normalize(response.data, Schema.orders);
-
-    yield put({
-      type: ACTION_TYPES.FINISH_WORKING_SUCCESS,
-      entities: normalized.entities,
-      result: normalized.result,
-    });
-  } catch (error) {
-    yield put({type: ACTION_TYPES.FINISH_WORKING_FAILURE, error});
-  }
-}
-
-
 function* fetchUpcomingOrdersMonitor() {
   yield takeLatest(
     ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST,
@@ -157,20 +116,10 @@ function* fetchOrderDetailsMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST, fetchOrderDetails);
 }
 
-function* startWorkingMonitor() {
-  yield takeLatest(ACTION_TYPES.START_WORKING_REQUEST, startWorking);
-}
-
-function* finishWorkingMonitor() {
-  yield takeLatest(ACTION_TYPES.FINISH_WORKING_REQUEST, finishWorking);
-}
-
 
 export const sagas = all([
   fork(fetchWorkingOrderMonitor),
   fork(fetchUpcomingOrdersMonitor),
   fork(fetchPastOrdersMonitor),
   fork(fetchOrderDetailsMonitor),
-  fork(startWorkingMonitor),
-  fork(finishWorkingMonitor)
 ]);

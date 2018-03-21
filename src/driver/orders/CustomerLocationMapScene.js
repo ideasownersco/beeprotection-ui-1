@@ -5,69 +5,66 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Map from 'driver/orders/components/Map';
-import {ACTIONS} from 'driver/common/actions';
-import {SELECTORS as ORDER_SELECTORS} from "driver/selectors/orders";
-import {bindActionCreators} from "redux";
-import LoadingIndicator from "/components/LoadingIndicator";
-import {View,} from 'react-native';
+import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import BackgroundGeolocation from 'react-native-background-geolocation';
+import {View} from "react-native";
 
 class CustomerLocationMapScene extends Component {
-
-  // componentDidMount() {
-  //   this.props.actions.fetchOrderDetails(this.props.navigation.state.params.orderID);
-  // }
 
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
         params: PropTypes.shape({
-          orderID: PropTypes.number.isRequired
+          order: PropTypes.shape({
+            address: PropTypes.object.isRequired,
+            accepted_job: PropTypes.object.isRequired,
+          }),
         }),
       }),
     }).isRequired,
   };
 
-  static defaultProps = {
-    order: {
-      address: {}
-    }
-  };
-
   constructor(props) {
     super(props);
-
-    this.origin = {
-      latitude: 37.78825,
-      longitude: -122.4324,
-      // latitude: 29.3772392006689,
-      // longitude: 47.98511826155676,
-    };
-
-    BackgroundGeolocation.getCurrentPosition((location) => {
-      let {latitude, longitude} = location.coords;
-      this.origin = {
-        latitude: latitude,
-        longitude: longitude
+    this.state = {
+      origin: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        // latitude: 29.3772392006689,
+        // longitude: 47.98511826155676,
       }
-    }, (error) => {
-      console.warn('- getCurrentPosition error: ', error);
-    }, {
-      persist: true,
-      samples: 1,
-      maximumAge: 5000
-    });
-
+    };
   }
 
-  onStartWorkPress = () => {
-    console.log('started');
-    this.props.actions.startWorking(this.props.order.id);
+  componentDidMount() {
+    BackgroundGeolocation.stop();
+    BackgroundGeolocation.removeListeners();
+
+    // BackgroundGeolocation.getCurrentPosition((location) => {
+    //   let {latitude, longitude} = location.coords;
+    //   // this.setState({
+    //   //   origin: {
+    //   //     latitude: latitude,
+    //   //     longitude: longitude
+    //   //   }
+    //   // });
+    // }, (error) => {
+    //   console.warn('- getCurrentPosition error: ', error);
+    // }, {
+    //   persist: true,
+    //   samples: 1,
+    //   maximumAge: 5000
+    // });
+  }
+
+  onStartJobPress = () => {
+    let {accepted_job} = this.props.navigation.state.params.order;
+    this.props.dispatch(DRIVER_ACTIONS.startJob(accepted_job.id));
   };
 
   onFinishJobPress = () => {
-    console.log('finished');
-    this.props.actions.finishWorking(this.props.order.id);
+    let {accepted_job} = this.props.navigation.state.params.order;
+    this.props.dispatch(DRIVER_ACTIONS.finishJob(accepted_job.id));
   };
 
   onUpdateLocation = () => {
@@ -75,57 +72,35 @@ class CustomerLocationMapScene extends Component {
   };
 
   render() {
+    console.log('customer map');
+    console.log('sat',this.state);
 
-    // let {order} = this.props;
     let {order} = this.props.navigation.state.params;
     let {address} = order;
+    let {accepted_job} = this.props.navigation.state.params.order;
 
+    let {origin} = this.state;
 
-    console.log('rendered driver customer location scene');
-
-    if (order && order.accepted_job) {
-      return (
-
-        <Map
-          origin={this.origin}
-          destination={{
-            latitude: address.latitude,
-            longitude: address.longitude,
-          }}
-          startWorking={this.onStartWorkPress}
-          finishWorking={this.onFinishJobPress}
-          updateLocation={this.onUpdateLocation}
-          orderID={order.id}
-          jobStatus='pending'
-        />
-
-      )
-    }
-
-    return <LoadingIndicator/>;
+    return (
+      <Map
+        origin={origin}
+        destination={{
+          latitude: address.latitude,
+          longitude: address.longitude,
+        }}
+        startJob={this.onStartJobPress}
+        finishJob={this.onFinishJobPress}
+        updateLocation={this.onUpdateLocation}
+        jobID={accepted_job.id}
+        jobStatus={accepted_job.status}
+      />
+    );
   }
 }
 
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(
-      {...ACTIONS,},
-      dispatch,
-    ),
-  };
-}
-
-const makeMapStateToProps = () => {
-
-  const getOrderByID = ORDER_SELECTORS.getOrderByID();
-  const mapStateToProps = (state, props) => {
-    return {
-      order: getOrderByID(state, props.navigation.state.params.orderID),
-    };
-  };
-
-  return mapStateToProps;
-
+const mapStateToProps = state => {
+  return state;
 };
-export default connect(makeMapStateToProps, mapDispatchToProps)(CustomerLocationMapScene);
+
+// export default CustomerLocationMapScene;
+export default connect(mapStateToProps)(CustomerLocationMapScene);

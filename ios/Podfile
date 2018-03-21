@@ -17,7 +17,8 @@ target 'BeeProtection' do
      'RCTSettings',
      'RCTText',
      'RCTVibration',
-     'RCTWebSocket'
+     'RCTWebSocket',
+     'BatchedBridge'
    ]
 
    pod 'react-native-maps', path: rn_maps_path

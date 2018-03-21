@@ -14,20 +14,20 @@ export function reducer(state = initialState, action = {}) {
         upcomingOrderIDs: action.ids,
       };
     }
-    case ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS: {
+    case ACTION_TYPES.FETCH_JOB_ORDER_SUCCESS: {
       return {
         ...state,
         workingOrderID: action.id,
       };
     }
-    case ACTION_TYPES.START_WORKING_SUCCESS: {
+    case ACTION_TYPES.START_JOB_SUCCESS: {
       return {
         ...state,
         isWorking: true,
         workingOrderID: action.id,
       };
     }
-    case ACTION_TYPES.FINISH_WORKING_SUCCESS: {
+    case ACTION_TYPES.FINISH_JOB_SUCCESS: {
       return {
         ...state,
         workingOrderID: null,

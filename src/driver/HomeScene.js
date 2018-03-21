@@ -18,15 +18,20 @@ class HomeScene extends Component {
   };
 
   componentDidMount() {
-    // this.props.dispatch(DRIVER_ACTIONS.fetchProfile());
+    console.log('did mount from driver home');
+
+    this.props.dispatch(DRIVER_ACTIONS.fetchProfile());
     this.props.dispatch(DRIVER_ACTIONS.fetchWorkingOrder());
     this.props.dispatch(DRIVER_ACTIONS.fetchUpcomingOrders());
   }
 
   onOrdersListItemPress = (item: object) => {
-    // return this.props.navigation.navigate('OrderDetail', {
-    //   orderID: item.id,
-    // });
+
+    console.log('order list button pressed');
+
+    return this.props.navigation.navigate('OrderDetail', {
+      orderID: item.id,
+    });
   };
 
   onStartStopButtonPress = () => {};
@@ -37,6 +42,12 @@ class HomeScene extends Component {
       orderID: order.id,
       order:order
     });
+    //
+    // return this.props.navigation.navigate('OrderDetail', {
+    //   orderID: order.id,
+    //   order:order
+    // });
+
   };
 
   loadUpcomingOrders = () => {
@@ -45,7 +56,7 @@ class HomeScene extends Component {
 
   render() {
     let {orders, order} = this.props;
-    console.log('rendered driver home scene');
+    console.log('driver home scene');
 
     return (
       <ScrollView style={{flex: 1}}>

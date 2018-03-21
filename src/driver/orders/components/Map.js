@@ -36,15 +36,15 @@ export default class Map extends Component {
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
     }),
-    startWorking: PropTypes.func.isRequired,
-    finishWorking: PropTypes.func.isRequired,
+    startJob: PropTypes.func.isRequired,
+    finishJob: PropTypes.func.isRequired,
     jobStatus:PropTypes.string
   };
-
+  //
   static defaultProps = {
     jobStatus: 'pending',
   };
-
+  //
   constructor(props) {
     super(props);
     this.state = {
@@ -57,12 +57,8 @@ export default class Map extends Component {
     };
   }
 
-  shouldComponentUpdate() {
-    return false;
-  }
-
   componentDidMount() {
-    const {orderID, jobStatus} = this.props;
+    const {jobID, jobStatus} = this.props;
 
     BackgroundGeolocation.on('location', this.onLocation);
     BackgroundGeolocation.on('http', this.onHttp);
@@ -74,7 +70,7 @@ export default class Map extends Component {
         preventSuspend: false,
         startOnBoot: true,
         foregroundService: true,
-        url: `http://${API_URL}/orders/${orderID}/location/update`,
+        url: `http://${API_URL}/jobs/${jobID}/location/update`,
         autoSync: true,
         debug: true,
         logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
@@ -82,8 +78,8 @@ export default class Map extends Component {
       },
       state => {
         this.setState({
-          enabled: jobStatus === 'working',
-          // enabled: state.enabled && jobStatus === 'working',
+          // enabled: jobStatus === 'working',
+          enabled: state.enabled && jobStatus === 'working',
         });
       },
     );
@@ -114,18 +110,18 @@ export default class Map extends Component {
     }
   };
 
-  onHttp(response) {
+  onHttp = (response) => {
     console.log('[event] http: ', response);
     // this.addEvent('http', new Date(), response);
+  };
+
+  onMotionChange(event) {
+    // console.log('[event] motionchange: ', event.isMoving, event.location);
+    this.setState({
+      isMoving: event.isMoving,
+    });
+    // this.addEvent('motionchange', new Date(event.location.timestamp), event.location);
   }
-  //
-  // onMotionChange(event) {
-  //   // console.log('[event] motionchange: ', event.isMoving, event.location);
-  //   this.setState({
-  //     isMoving: event.isMoving,
-  //   });
-  //   // this.addEvent('motionchange', new Date(event.location.timestamp), event.location);
-  // }
 
   onMapLayout = () => {
     this.map.fitToElements(true);
@@ -139,7 +135,7 @@ export default class Map extends Component {
     this.openMaps();
   };
 
-  openMaps() {
+  openMaps = () => {
     let {latitude, longitude} = this.props.destination;
 
     const nativeGoogleUrl = `comgooglemaps://?daddr=${latitude},${longitude}&center=${latitude},${longitude}&zoom=14&views=traffic&directionsmode=driving`;
@@ -149,7 +145,7 @@ export default class Map extends Component {
         : `http://maps.google.com/?q=loc:${latitude}+${longitude}`;
       Linking.openURL(url);
     });
-  }
+  };
 
   startTrip = () => {
     this.map.fitToElements(true);
@@ -159,7 +155,7 @@ export default class Map extends Component {
       });
     }
 
-    this.props.startWorking();
+    this.props.startJob();
     BackgroundGeolocation.start();
   };
 
@@ -170,7 +166,7 @@ export default class Map extends Component {
         enabled: false,
       });
     }
-    this.props.finishWorking();
+    this.props.finishJob();
     BackgroundGeolocation.stop();
   };
 

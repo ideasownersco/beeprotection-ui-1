@@ -18,9 +18,9 @@ const theme = {
 const Root = () => {
   return (
     <Provider store={Store}>
-      <PaperProvider theme={theme}>
+      {/*<PaperProvider theme={theme}>*/}
         <App/>
-      </PaperProvider>
+      {/*</PaperProvider>*/}
     </Provider>
   );
 };

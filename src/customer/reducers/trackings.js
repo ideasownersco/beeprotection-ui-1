@@ -8,7 +8,7 @@ export function reducer(state = initialState, action = {}) {
     case ACTION_TYPES.DRIVER_LOCATION_UPDATED: {
       return {
         ...state,
-        [action.payload.orderID]: action.payload.location,
+        [action.payload.jobID]: action.payload.location,
       };
     }
 

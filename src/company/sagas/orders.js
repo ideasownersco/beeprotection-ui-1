@@ -47,7 +47,7 @@ function* fetchWorkingOrders() {
 
     if (nextPage === null) {
       yield put({
-        type: ACTION_TYPES.FETCH_WORKING_ORDERS_FAILURE,
+        type: ACTION_TYPES.FETCH_JOB_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),
       });
     } else {
@@ -60,14 +60,14 @@ function* fetchWorkingOrders() {
       const {entities, result} = normalized;
       console.log('fetchWorkingOrders', normalized);
       yield put({
-        type: ACTION_TYPES.FETCH_WORKING_ORDERS_SUCCESS,
+        type: ACTION_TYPES.FETCH_JOB_ORDERS_SUCCESS,
         entities: entities,
         result: result,
         nextPage: (response.links && response.links.next) || null,
       });
     }
   } catch (error) {
-    yield put({type: ACTION_TYPES.FETCH_WORKING_ORDERS_FAILURE, error});
+    yield put({type: ACTION_TYPES.FETCH_JOB_ORDERS_FAILURE, error});
   }
 }
 
@@ -124,7 +124,7 @@ function* fetchUpcomingOrdersMonitor() {
 
 function* fetchWorkingOrdersMonitor() {
   yield takeLatest(
-    ACTION_TYPES.FETCH_WORKING_ORDERS_REQUEST,
+    ACTION_TYPES.FETCH_JOB_ORDERS_REQUEST,
     fetchWorkingOrders,
   );
 }

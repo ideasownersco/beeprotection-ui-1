@@ -11,13 +11,13 @@ export const ACTION_TYPES = {
   FETCH_PROFILE_SUCCESS: '@driver/FETCH_PROFILE_SUCCESS',
   FETCH_PROFILE_FAILURE: '@driver/FETCH_PROFILE_FAILURE',
 
-  START_WORKING_REQUEST: '@driver/START_WORKING_REQUEST',
-  START_WORKING_SUCCESS: '@driver/START_WORKING_SUCCESS',
-  START_WORKING_FAILURE: '@driver/START_WORKING_FAILURE',
+  START_JOB_REQUEST: '@driver/START_JOB_REQUEST',
+  START_JOB_SUCCESS: '@driver/START_JOB_SUCCESS',
+  START_JOB_FAILURE: '@driver/START_JOB_FAILURE',
 
-  FINISH_WORKING_REQUEST: '@driver/FINISH_WORKING_REQUEST',
-  FINISH_WORKING_SUCCESS: '@driver/FINISH_WORKING_SUCCESS',
-  FINISH_WORKING_FAILURE: '@driver/FINISH_WORKING_FAILURE',
+  FINISH_JOB_REQUEST: '@driver/FINISH_JOB_REQUEST',
+  FINISH_JOB_SUCCESS: '@driver/FINISH_JOB_SUCCESS',
+  FINISH_JOB_FAILURE: '@driver/FINISH_JOB_FAILURE',
 
   FETCH_WORKING_ORDER_REQUEST: '@driver/FETCH_WORKING_ORDER_REQUEST',
   FETCH_WORKING_ORDER_SUCCESS: '@driver/FETCH_WORKING_ORDER_SUCCESS',
@@ -57,7 +57,7 @@ function fetchWorkingOrder(params) {
 
 function fetchUpcomingOrders(params) {
   return {
-    type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST,
+    type: 'wa',
     params,
   };
 }
@@ -65,6 +65,7 @@ function fetchUpcomingOrders(params) {
 function fetchUpcomingOrdersRefresh(params) {
   return {
     type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_REFRESH_REQUEST,
+    // type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_REFRESH_REQUEST,
     params,
   };
 }
@@ -90,17 +91,17 @@ function saveProfile(params) {
   };
 }
 
-function startWorking(id, params = {}) {
+function startJob(id, params = {}) {
   return {
-    type: ACTION_TYPES.START_WORKING_REQUEST,
+    type: ACTION_TYPES.START_JOB_REQUEST,
     job_id: id,
     params,
   };
 }
 
-function finishWorking(id, params = {}) {
+function finishJob(id, params = {}) {
   return {
-    type: ACTION_TYPES.FINISH_WORKING_REQUEST,
+    type: ACTION_TYPES.FINISH_JOB_REQUEST,
     job_id: id,
     params,
   };
@@ -121,7 +122,7 @@ export const ACTIONS = {
   fetchWorkingOrder,
   fetchPastOrders,
   fetchPastOrdersRefresh,
-  startWorking,
-  finishWorking,
+  startJob,
+  finishJob,
   fetchOrderDetails,
 };

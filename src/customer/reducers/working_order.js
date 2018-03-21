@@ -8,14 +8,14 @@ const initialState = {
 
 export function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST:
+    case ACTION_TYPES.FETCH_JOB_ORDER_REQUEST:
       return {
         ...state,
         isFetching: true,
         error: null,
       };
 
-    case ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS: {
+    case ACTION_TYPES.FETCH_JOB_ORDER_SUCCESS: {
       return {
         ...state,
         isFetching: false,
@@ -23,19 +23,19 @@ export function reducer(state = initialState, action = {}) {
         error: null,
       };
     }
-    case ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE:
+    case ACTION_TYPES.FETCH_JOB_ORDER_FAILURE:
       return {
         ...state,
         isFetching: false,
         error: action.error,
       };
-    case ACTION_TYPES.START_WORKING_SUCCESS: {
+    case ACTION_TYPES.START_JOB_SUCCESS: {
       return {
         ...state,
         id: action.result,
       };
     }
-    case ACTION_TYPES.FINISH_WORKING_SUCCESS: {
+    case ACTION_TYPES.FINISH_JOB_SUCCESS: {
       return {
         ...state,
         id: null,
