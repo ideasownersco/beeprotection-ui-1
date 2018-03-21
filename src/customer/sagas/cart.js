@@ -26,7 +26,7 @@ function* fetchCartItems() {
       }),
     };
 
-    console.log('params',params);
+    console.log('params', params);
     const response = yield call(API.fetchCartItems, params);
     const normalized = normalize(response.data, [Schema.categories]);
     yield put({

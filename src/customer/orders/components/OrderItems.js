@@ -9,7 +9,6 @@ import SectionTitle from 'components/SectionTitle';
 import I18n from 'utils/locale';
 
 export default class OrderItems extends Component {
-
   shouldComponentUpdate(nextProps) {
     return nextProps.order !== this.props.order;
   }
@@ -23,7 +22,7 @@ export default class OrderItems extends Component {
     const {packages} = order;
     return (
       <View style={styles.container}>
-        <SectionTitle title={I18n.t('order_details')}/>
+        <SectionTitle title={I18n.t('order_details')} />
 
         {packages.map((packageModel, index) => (
           <View key={packageModel.id}>
@@ -40,20 +39,23 @@ export default class OrderItems extends Component {
               )}
             </View>
 
-            {
-              order.services && order.services.length && order.services.filter(service => service.package.id === packageModel.id).map(service => {
-                return (
-                  <View style={{flex: 1}} key={service.id}>
-                    <View style={styles.serviceListContainer}>
-                      <Text style={styles.serviceTitle}>{service.name} </Text>
-                      <Text style={styles.servicePrice}>{service.price} KD</Text>
+            {order.services &&
+              order.services.length &&
+              order.services
+                .filter(service => service.package.id === packageModel.id)
+                .map(service => {
+                  return (
+                    <View style={{flex: 1}} key={service.id}>
+                      <View style={styles.serviceListContainer}>
+                        <Text style={styles.serviceTitle}>{service.name} </Text>
+                        <Text style={styles.servicePrice}>
+                          {service.price} KD
+                        </Text>
+                      </View>
+                      <Separator style={{flex: 1, marginVertical: 5}} />
                     </View>
-                    <Separator style={{flex: 1, marginVertical: 5}}/>
-                  </View>
-                );
-              })
-
-            }
+                  );
+                })}
           </View>
         ))}
 
@@ -66,8 +68,6 @@ export default class OrderItems extends Component {
         {/*<Separator style={{flex: 1, marginVertical: 5}} />*/}
         {/*</View>*/}
         {/*))}*/}
-
-
       </View>
     );
   }
@@ -119,5 +119,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: 40,
   },
-
 });

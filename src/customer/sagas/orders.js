@@ -114,7 +114,7 @@ function* fetchWorkingOrder() {
   try {
     const response = yield call(API.fetchWorkingOrder);
 
-    if(response.data) {
+    if (response.data) {
       const normalized = normalize(response.data, Schema.orders);
       yield put({
         type: ACTION_TYPES.FETCH_JOB_ORDER_SUCCESS,
@@ -124,9 +124,8 @@ function* fetchWorkingOrder() {
     } else {
       yield put({
         type: ACTION_TYPES.FETCH_JOB_ORDER_SUCCESS,
-      })
+      });
     }
-
   } catch (error) {
     yield put({type: ACTION_TYPES.FETCH_JOB_ORDER_FAILURE, error});
   }
@@ -149,23 +148,22 @@ function* saveAddress(action) {
     });
     yield put(
       APP_ACTIONS.setNotification({
-        message:I18n.t('address_save_success')
+        message: I18n.t('address_save_success'),
       }),
     );
   } catch (error) {
     yield put({type: ACTION_TYPES.SAVE_ADDRESS_FAILURE, error});
     yield put(
       APP_ACTIONS.setNotification({
-        message:I18n.t('address_save_failure'),
-        type:'error'
+        message: I18n.t('address_save_failure'),
+        type: 'error',
       }),
     );
   }
 }
 
 function* checkout(action) {
-
-  const {item, resolve,reject} = action.payload;
+  const {item, resolve, reject} = action.payload;
 
   try {
     const params = {
@@ -184,16 +182,16 @@ function* checkout(action) {
     });
 
     yield resolve(response.data);
-
   } catch (error) {
     yield put({type: ACTION_TYPES.CHECKOUT_FAILURE, error});
-    yield put(APP_ACTIONS.setNotification({
-      message:error,
-      type:'error'
-    }));
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: error,
+        type: 'error',
+      }),
+    );
 
     yield reject(error);
-
   }
 }
 
@@ -209,7 +207,6 @@ function* fetchOrderDetails(action) {
     yield put({type: ACTION_TYPES.FETCH_ORDER_DETAILS_FAILURE, error});
   }
 }
-
 
 // function* checkout(action) {
 //   try {
@@ -295,5 +292,4 @@ export const sagas = all([
   fork(fetchUpcomingOrdersMonitor),
   fork(fetchPastOrdersMonitor),
   fork(fetchOrderDetailsMonitor),
-
 ]);

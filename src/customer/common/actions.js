@@ -66,7 +66,6 @@ export const ACTION_TYPES = {
   FETCH_ORDER_DETAILS_REQUEST: '@customer/FETCH_ORDER_DETAILS_REQUEST',
   FETCH_ORDER_DETAILS_SUCCESS: '@customer/FETCH_ORDER_DETAILS_SUCCESS',
   FETCH_ORDER_DETAILS_FAILURE: '@customer/FETCH_ORDER_DETAILS_FAILURE',
-
 };
 
 function fetchCartItems() {
@@ -196,7 +195,6 @@ function fetchPastOrdersRefresh(params) {
   };
 }
 
-
 function fetchOrderDetails(id) {
   return {
     type: ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST,
@@ -222,5 +220,4 @@ export const ACTIONS = {
   fetchPastOrders,
   fetchPastOrdersRefresh,
   fetchOrderDetails,
-
 };

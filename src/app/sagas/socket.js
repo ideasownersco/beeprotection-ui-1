@@ -21,7 +21,7 @@ function subscribe(socket) {
   console.log('socket', socket);
   return eventChannel(emit => {
     socket.on('location.updated', data => {
-      console.log('location',data);
+      console.log('location', data);
       emit({
         type: CUSTOMER_ACTIONS.DRIVER_LOCATION_UPDATED,
         payload: data,

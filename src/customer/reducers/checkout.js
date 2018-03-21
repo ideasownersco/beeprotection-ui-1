@@ -4,7 +4,7 @@ const initialState = {
   isFetching: false,
   orderID: null,
   error: null,
-  success:false
+  success: false,
 };
 
 export function reducer(state = initialState, action = {}) {
@@ -14,7 +14,7 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         isFetching: true,
         error: null,
-        success:false,
+        success: false,
         orderID: null,
       };
 
@@ -24,7 +24,7 @@ export function reducer(state = initialState, action = {}) {
         isFetching: false,
         orderID: action.orderID,
         error: null,
-        success:true
+        success: true,
       };
     }
     case ACTION_TYPES.CHECKOUT_FAILURE:
@@ -32,7 +32,7 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         isFetching: false,
         error: action.error,
-        success:false,
+        success: false,
         orderID: null,
       };
     default:

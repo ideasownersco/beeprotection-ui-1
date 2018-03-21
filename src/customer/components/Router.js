@@ -16,6 +16,7 @@ import Cart from '/customer/cart/Cart';
 import TrackDetailScene from 'customer/orders/TrackDetailScene';
 import PastOrdersScene from 'customer/orders/PastOrdersScene';
 import UpcomingOrdersScene from 'customer/orders/UpcomingOrdersScene';
+import I18n from 'utils/locale';
 
 const getDrawerIcon = navigation => {
   return {
@@ -46,16 +47,27 @@ const HomeStack = StackNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({navigation}) => ({
+      title: I18n.t('home'),
       headerLeft: (
         <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
       ),
     }),
   },
-  CreateOrder: {screen: CreateOrder},
+  CreateOrder: {
+    screen: CreateOrder,
+    navigationOptions: ({navigation}) => ({
+      title: I18n.t('create_order'),
+    }),
+  },
   BidList: {screen: BidList},
   OrderDetail: {screen: OrderDetailScene},
   TrackOrder: {screen: TrackOrderScene},
-  Cart: {screen: Cart},
+  Cart: {
+    screen: Cart,
+    navigationOptions: ({navigation}) => ({
+      title: I18n.t('cart'),
+    }),
+  },
   Login: {
     screen: AuthStack,
     navigationOptions: ({navigation}) => ({

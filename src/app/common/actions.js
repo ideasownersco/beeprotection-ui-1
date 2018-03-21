@@ -54,7 +54,7 @@ function setNotification(payload) {
   };
 }
 
-function setPushToken(token:object) {
+function setPushToken(token: object) {
   return {
     type: ACTION_TYPES.SET_PUSH_TOKEN_REQUEST,
     params: token,

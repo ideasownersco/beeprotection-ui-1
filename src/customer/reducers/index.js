@@ -14,5 +14,5 @@ export const reducer = combineReducers({
   past_orders,
   trackings,
   payment,
-  checkout
+  checkout,
 });

@@ -9,14 +9,13 @@ import {ScrollView, View} from 'react-native';
 import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import OrderTotal from 'customer/orders/components/OrderTotal';
-import {bindActionCreators} from "redux";
-import {ACTIONS} from "customer/common/actions";
-import DriverInfo from "driver/components/DriverInfo";
-import SectionHeading from "../../company/components/SectionHeading";
+import {bindActionCreators} from 'redux';
+import {ACTIONS} from 'customer/common/actions';
+import DriverInfo from 'driver/components/DriverInfo';
+import SectionHeading from '../../company/components/SectionHeading';
 import I18n from 'utils/locale';
 
 class OrderDetailScene extends Component {
-
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -32,7 +31,9 @@ class OrderDetailScene extends Component {
   };
 
   componentDidMount() {
-    this.props.actions.fetchOrderDetails(this.props.navigation.state.params.orderID);
+    this.props.actions.fetchOrderDetails(
+      this.props.navigation.state.params.orderID,
+    );
   }
 
   render() {
@@ -41,23 +42,23 @@ class OrderDetailScene extends Component {
 
     return (
       <View style={{flex: 1}}>
-        {
-          order &&
+        {order && (
           <ScrollView style={{flex: 1}}>
-            <OrderBasicInfo item={order}/>
-            <OrderItems order={order}/>
-            <OrderTotal total={order.total}/>
+            <OrderBasicInfo item={order} />
+            <OrderItems order={order} />
+            <OrderTotal total={order.total} />
 
-            {
-              order.accepted_job && order.accepted_job.driver && order.accepted_job.driver && order.accepted_job.driver.user &&
-              <View>
-                <SectionHeading title={I18n.t('driver_info')}/>
-                <DriverInfo driver={order.accepted_job.driver}/>
-              </View>
-            }
-
+            {order.accepted_job &&
+              order.accepted_job.driver &&
+              order.accepted_job.driver &&
+              order.accepted_job.driver.user && (
+                <View>
+                  <SectionHeading title={I18n.t('driver_info')} />
+                  <DriverInfo driver={order.accepted_job.driver} />
+                </View>
+              )}
           </ScrollView>
-        }
+        )}
       </View>
     );
   }
@@ -65,10 +66,7 @@ class OrderDetailScene extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(
-      {...ACTIONS,},
-      dispatch,
-    ),
+    actions: bindActionCreators({...ACTIONS}, dispatch),
   };
 }
 
@@ -82,4 +80,6 @@ const makeMapStateToProps = () => {
   return mapStateToProps;
 };
 
-export default connect(makeMapStateToProps, mapDispatchToProps)(OrderDetailScene);
+export default connect(makeMapStateToProps, mapDispatchToProps)(
+  OrderDetailScene,
+);

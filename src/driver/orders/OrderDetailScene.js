@@ -9,7 +9,7 @@ import {ScrollView, View} from 'react-native';
 import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import PropTypes from 'prop-types';
-import OrderTotal from "customer/orders/components/OrderTotal";
+import OrderTotal from 'customer/orders/components/OrderTotal';
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -44,20 +44,17 @@ class OrderDetailScene extends Component {
 
   render() {
     let {order} = this.props;
-    console.log('order detail scene',order);
+    console.log('order detail scene', order);
 
     return (
       <ScrollView style={{flex: 1}} keyboardShouldPersistTap="always">
-        {
-          order.packages &&
+        {order.packages && (
           <View>
-            <OrderBasicInfo item={order}/>
-            <OrderItems order={order}/>
-            <OrderTotal total={order.total}/>
-
+            <OrderBasicInfo item={order} />
+            <OrderItems order={order} />
+            <OrderTotal total={order.total} />
           </View>
-        }
-
+        )}
       </ScrollView>
     );
   }

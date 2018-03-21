@@ -47,7 +47,6 @@ function* login(action) {
       entities: normalized.entities,
       payload: response.data,
     });
-
   } catch (error) {
     yield put({type: ACTION_TYPES.LOGIN_FAILURE, error});
 
@@ -57,7 +56,6 @@ function* login(action) {
         type: 'error',
       }),
     );
-
   }
 }
 
@@ -93,10 +91,12 @@ function* forgotPassword(action) {
     const emailPattern = /(.+)@(.+){2,}\.(.+){2,}/;
 
     if (!emailPattern.test(action.params.email)) {
-      return yield put(APP_ACTIONS.setNotification({
-        message: 'Invalid Email',
-        type: 'error',
-      }));
+      return yield put(
+        APP_ACTIONS.setNotification({
+          message: 'Invalid Email',
+          type: 'error',
+        }),
+      );
     }
 
     const params = {
@@ -112,10 +112,12 @@ function* forgotPassword(action) {
       payload: response.data,
     });
   } catch (error) {
-    yield put(APP_ACTIONS.setNotification({
-      message:error,
-      type:'error'
-    }));
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: error,
+        type: 'error',
+      }),
+    );
     yield put({type: ACTION_TYPES.FORGOT_PASSWORD_FAILURE, error});
   }
 }
@@ -134,10 +136,12 @@ function* recoverPassword(action) {
       payload: response.data,
     });
   } catch (error) {
-    yield put(APP_ACTIONS.setNotification({
-      message:error,
-      type:'error'
-    }));
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: error,
+        type: 'error',
+      }),
+    );
     yield put({type: ACTION_TYPES.RECOVER_PASSWORD_FAILURE, error});
   }
 }
@@ -155,8 +159,8 @@ function* updatePassword(action) {
     if (action.params.password !== action.params.password_confirmation) {
       return yield put(
         APP_ACTIONS.setNotification({
-          message:'Password does not match',
-          type:'error'
+          message: 'Password does not match',
+          type: 'error',
         }),
       );
     }
@@ -168,10 +172,12 @@ function* updatePassword(action) {
 
     yield put(NavigationActions.back(null));
   } catch (error) {
-    yield put(APP_ACTIONS.setNotification({
-      message:error,
-      type:'error'
-    }));
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: error,
+        type: 'error',
+      }),
+    );
     yield put({type: ACTION_TYPES.PASSWORD_UPDATE_FAILURE, error});
   }
 }

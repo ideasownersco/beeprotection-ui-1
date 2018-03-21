@@ -59,13 +59,11 @@ const getCartItems = createSelector(
   },
 );
 
-const getCartTotal = createSelector(
-  [cartItems],
-  (items) => {
-    return Object.keys(items)
-      .map(item => items[item].total).reduce((total,amount) => total + amount,0)
-    }
-);
+const getCartTotal = createSelector([cartItems], items => {
+  return Object.keys(items)
+    .map(item => items[item].total)
+    .reduce((total, amount) => total + amount, 0);
+});
 
 const getLocationUpdatesForOrder = () => {
   return createSelector(

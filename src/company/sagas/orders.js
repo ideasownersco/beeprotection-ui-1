@@ -123,10 +123,7 @@ function* fetchUpcomingOrdersMonitor() {
 }
 
 function* fetchWorkingOrdersMonitor() {
-  yield takeLatest(
-    ACTION_TYPES.FETCH_JOB_ORDERS_REQUEST,
-    fetchWorkingOrders,
-  );
+  yield takeLatest(ACTION_TYPES.FETCH_JOB_ORDERS_REQUEST, fetchWorkingOrders);
 }
 
 function* fetchPastOrdersMonitor() {

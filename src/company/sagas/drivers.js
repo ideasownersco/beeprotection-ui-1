@@ -53,19 +53,17 @@ function* assignDriver(action) {
       entities: normalized.entities,
     });
 
-
     yield put(
       APP_ACTIONS.setNotification({
         message: I18n.t('driver_assigned'),
       }),
     );
-
   } catch (error) {
     yield put({type: ACTION_TYPES.ASSIGN_DRIVER_FAILURE, error});
     yield put(
       APP_ACTIONS.setNotification({
         message: I18n.t('driver_assigned'),
-        type:'error'
+        type: 'error',
       }),
     );
   }

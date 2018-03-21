@@ -7,10 +7,9 @@ import PropTypes from 'prop-types';
 import Map from 'driver/orders/components/Map';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import BackgroundGeolocation from 'react-native-background-geolocation';
-import {View} from "react-native";
+import {View} from 'react-native';
 
 class CustomerLocationMapScene extends Component {
-
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -32,7 +31,7 @@ class CustomerLocationMapScene extends Component {
         longitude: -122.4324,
         // latitude: 29.3772392006689,
         // longitude: 47.98511826155676,
-      }
+      },
     };
   }
 
@@ -73,14 +72,14 @@ class CustomerLocationMapScene extends Component {
 
   render() {
     console.log('customer map');
-    console.log('sat',this.state);
+    console.log('sat', this.state);
 
     let {order} = this.props.navigation.state.params;
     let {address} = order;
     let {accepted_job} = this.props.navigation.state.params.order;
     let {origin} = this.state;
 
-    console.log('order',order);
+    console.log('order', order);
 
     return (
       <Map

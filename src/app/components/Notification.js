@@ -26,8 +26,8 @@ export default class Notification extends Component {
   componentWillReceiveProps(nextProps, prevState) {
     if (!isEmpty(nextProps.message)) {
       return this.setState({
-        visible:true
-      })
+        visible: true,
+      });
     }
   }
 

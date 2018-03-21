@@ -7,7 +7,6 @@ import {Router as CustomerRouter} from 'customer/components/Router';
 import {Router as GuestRouter} from 'guest/components/Router';
 
 export default class Navigator extends Component {
-
   shouldComponentUpdate(nextProps) {
     return (
       this.props.isAuthenticated !== nextProps.isAuthenticated ||

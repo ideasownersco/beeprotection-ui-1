@@ -60,7 +60,6 @@ function fetchOrderDetails(id) {
   return request({path, requiresAuthentication: true});
 }
 
-
 export const API = {
   fetchCartItems,
   fetchCategories,
@@ -72,5 +71,4 @@ export const API = {
   fetchPastOrders,
   fetchWorkingOrder,
   fetchOrderDetails,
-
 };

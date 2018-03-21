@@ -13,7 +13,7 @@ import {CODE_PUSH_ENABLED} from 'utils/env';
 import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import PushNotification from 'react-native-push-notification';
-import NavigatorService from "components/NavigatorService";
+import NavigatorService from 'components/NavigatorService';
 
 class App extends Component {
   static propTypes = {
@@ -41,9 +41,9 @@ class App extends Component {
   handleAppStateChange(appState) {
     console.log('appState', appState);
     if (appState === 'background') {
-      let date = new Date(Date.now() + (1000));
+      let date = new Date(Date.now() + 1000);
       PushNotification.localNotificationSchedule({
-        message: "My Notification Message",
+        message: 'My Notification Message',
         date: date,
       });
     }
@@ -53,7 +53,6 @@ class App extends Component {
     this.props.dispatch(ACTIONS.setLanguage(name));
     this.props.dispatch(ACTIONS.setInstalled(true));
   };
-
 
   dismissNotification = () => {
     this.props.dispatch(ACTIONS.dismissNotification());
@@ -71,7 +70,7 @@ class App extends Component {
     let navigation = NavigatorService;
     navigation.navigate('UpcomingOrders');
     navigation.navigate('OrderDetail', {
-      orderID: 13
+      orderID: 13,
     });
   };
 
@@ -81,12 +80,11 @@ class App extends Component {
     if (!app.booted) return null;
 
     if (!app.installed) {
-      return <LanguageSelectScene onItemPress={this.onLanguageSelect}/>;
+      return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
     }
 
     return (
       <SafeAreaView style={{flex: 1}}>
-
         <Notification
           {...notifications}
           dismissNotification={this.dismissNotification}
@@ -102,7 +100,6 @@ class App extends Component {
           userType={userType}
           logout={this.logout}
         />
-
       </SafeAreaView>
     );
   }
@@ -114,6 +111,7 @@ function mapStateToProps(state) {
     notifications: state.notifications,
     isAuthenticated: USER_SELECTOR.isAuthenticated(state),
     userType: USER_SELECTOR.getAuthUserType(state),
-  };}
+  };
+}
 
 export default connect(mapStateToProps)(App);

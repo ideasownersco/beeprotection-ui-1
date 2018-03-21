@@ -23,25 +23,24 @@ import moment from 'moment';
 import Separator from 'components/Separator';
 import colors from 'assets/theme/colors';
 import SectionHeading from 'company/components/SectionHeading';
-import CartTotal from "customer/cart/components/CartTotal";
-import PaymentOptions from "customer/cart/components/PaymentOptions";
-import OrderSuccess from "customer/cart/components/OrderSuccess";
-import PaymentPage from "customer/cart/components/PaymentPage";
+import CartTotal from 'customer/cart/components/CartTotal';
+import PaymentOptions from 'customer/cart/components/PaymentOptions';
+import OrderSuccess from 'customer/cart/components/OrderSuccess';
+import PaymentPage from 'customer/cart/components/PaymentPage';
 
 type State = {
   dates: Array,
   paymentMode: 'knet' | 'cash',
   showPaymentModal: boolean,
-  showOrderSuccessModal: boolean
+  showOrderSuccessModal: boolean,
 };
 
 class Cart extends Component {
-
   state: State = {
     dates: [],
     showPaymentModal: false,
     showOrderSuccessModal: false,
-    paymentMode: 'knet'
+    paymentMode: 'knet',
   };
 
   componentDidMount() {
@@ -57,7 +56,7 @@ class Cart extends Component {
   }
 
   performCheckout = () => {
-    const {user, isAuthenticated, cart,} = this.props;
+    const {user, isAuthenticated, cart} = this.props;
     const {paymentMode} = this.state;
 
     const {selectedDate, selectedTime, selectedAddressID} = cart;
@@ -71,29 +70,30 @@ class Cart extends Component {
         total: this.props.cart.total,
         time: selectedTime,
         date: selectedDate,
-        payment_mode: paymentMode
+        payment_mode: paymentMode,
       };
 
       return new Promise((resolve, reject) => {
         this.props.actions.checkout({item, resolve, reject});
         // this.props.dispatch(CUSTOMER_ACTIONS.saveLoad({params, resolve}));
         // dispatch(someActionCreator({ values, resolve, reject }))
-      }).then((order) => {
+      })
+        .then(order => {
+          if (order.status == 'Success') {
+            this.setState({
+              showOrderSuccessModal: true,
+            });
+          } else if (order.status == 'Checkout') {
+            this.setState({
+              showPaymentModal: true,
+            });
+          }
 
-        if (order.status == 'Success') {
-          this.setState({
-            showOrderSuccessModal: true
-          });
-        } else if(order.status == 'Checkout') {
-          this.setState({
-            showPaymentModal: true
-          });
-        }
-
-        console.log('order success');
-      }).catch((e) => {
-        console.log('e');
-      });
+          console.log('order success');
+        })
+        .catch(e => {
+          console.log('e');
+        });
 
       // NavigatorService.reset('Home');
     }
@@ -111,8 +111,8 @@ class Cart extends Component {
   onPaymentOptionsItemPress = (option: string) => {
     console.log('onPyamentPress', option);
     this.setState({
-      paymentMode: option
-    })
+      paymentMode: option,
+    });
   };
 
   onAddressPickerItemPress = (item: object) => {
@@ -134,36 +134,38 @@ class Cart extends Component {
 
   hideCheckoutModal = () => {
     this.setState({
-      showPaymentModal: false
-    })
+      showPaymentModal: false,
+    });
   };
 
   hideSuccessModal = () => {
     this.setState({
-      showOrderSuccessModal: false
-    })
+      showOrderSuccessModal: false,
+    });
   };
 
   render() {
-
     let {cart, cartItems, user, cartTotal, checkout} = this.props;
     let {selectedDate, selectedTime, selectedAddressID} = cart;
-    console.log('selectedTime in Cart',selectedTime);
-    let {dates, showPaymentModal, showOrderSuccessModal, paymentMode} = this.state;
-
+    console.log('selectedTime in Cart', selectedTime);
+    let {
+      dates,
+      showPaymentModal,
+      showOrderSuccessModal,
+      paymentMode,
+    } = this.state;
 
     if (!cartItems.length) {
-      return <EmptyCart/>;
+      return <EmptyCart />;
     }
 
     return (
       <ScrollView contentInset={{bottom: 50}}>
+        <CartItems items={cartItems} onItemPress={() => {}} />
 
-        <CartItems items={cartItems} onItemPress={() => {}}/>
+        <CartTotal total={cartTotal} />
 
-        <CartTotal total={cartTotal}/>
-
-        <Separator style={{marginVertical: 10}}/>
+        <Separator style={{marginVertical: 10}} />
 
         <DatePicker
           items={dates}
@@ -171,9 +173,12 @@ class Cart extends Component {
           activeItem={selectedDate}
         />
 
-        <Separator style={{marginVertical: 10}}/>
+        <Separator style={{marginVertical: 10}} />
 
-        <SectionHeading title={I18n.t('select_time')} style={{backgroundColor: 'transparent'}}/>
+        <SectionHeading
+          title={I18n.t('select_time')}
+          style={{backgroundColor: 'transparent'}}
+        />
 
         <TimePicker
           mode="time"
@@ -185,7 +190,7 @@ class Cart extends Component {
           customStyles={{
             dateTouchBody: {
               padding: 10,
-              backgroundColor: 'white'
+              backgroundColor: 'white',
             },
             dateText: {
               color: colors.primary,
@@ -195,7 +200,7 @@ class Cart extends Component {
           }}
         />
 
-        <Separator style={{marginVertical: 10}}/>
+        <Separator style={{marginVertical: 10}} />
 
         <AddressPicker
           addresses={user ? (user.addresses ? user.addresses : []) : []}
@@ -204,11 +209,17 @@ class Cart extends Component {
           activeItemID={selectedAddressID}
         />
 
-        <Separator style={{marginVertical: 10}}/>
+        <Separator style={{marginVertical: 10}} />
 
-        <SectionHeading title={I18n.t('payment_mode')} style={{backgroundColor: 'transparent'}}/>
+        <SectionHeading
+          title={I18n.t('payment_mode')}
+          style={{backgroundColor: 'transparent'}}
+        />
 
-        <PaymentOptions onPress={this.onPaymentOptionsItemPress} selectedItem={paymentMode}/>
+        <PaymentOptions
+          onPress={this.onPaymentOptionsItemPress}
+          selectedItem={paymentMode}
+        />
 
         {/*<Button*/}
         {/*title={I18n.t('checkout')}*/}
@@ -224,8 +235,11 @@ class Cart extends Component {
           raised
           primary
           loading={checkout.isFetching}
-          style={{justifyContent: 'center', paddingVertical: 10,marginTop:20}}
-        >
+          style={{
+            justifyContent: 'center',
+            paddingVertical: 10,
+            marginTop: 20,
+          }}>
           {I18n.t('checkout')}
         </Button>
 
@@ -247,10 +261,8 @@ class Cart extends Component {
           visible={showPaymentModal}
           onHide={this.hideCheckoutModal}
         />
-
       </ScrollView>
     );
-
   }
 }
 
@@ -271,7 +283,7 @@ function mapStateToProps(state) {
     timings: ORDER_SELECTORS.getTimings(state) || [],
     user: USER_SELECTORS.getAuthUser(state),
     isAuthenticated: USER_SELECTORS.isAuthenticated(state),
-    checkout: state.customer.checkout
+    checkout: state.customer.checkout,
   };
 }
 

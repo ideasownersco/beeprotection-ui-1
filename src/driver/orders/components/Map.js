@@ -26,7 +26,6 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 import {API_URL} from 'utils/env';
 
 export default class Map extends Component {
-
   static propTypes = {
     origin: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
@@ -38,7 +37,7 @@ export default class Map extends Component {
     }),
     startJob: PropTypes.func.isRequired,
     finishJob: PropTypes.func.isRequired,
-    jobStatus:PropTypes.string
+    jobStatus: PropTypes.string,
   };
   //
   static defaultProps = {
@@ -110,7 +109,7 @@ export default class Map extends Component {
     }
   };
 
-  onHttp = (response) => {
+  onHttp = response => {
     console.log('[event] http: ', response);
     // this.addEvent('http', new Date(), response);
   };
@@ -174,7 +173,8 @@ export default class Map extends Component {
     const {destination} = this.props;
     const {origin, enabled} = this.state;
     const {heading} = this.state.origin;
-    const rotate = typeof heading === 'number' && heading >= 0 ? `${heading}deg` : undefined;
+    const rotate =
+      typeof heading === 'number' && heading >= 0 ? `${heading}deg` : undefined;
 
     return (
       <View style={styles.container}>
@@ -246,8 +246,7 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
-  mapMarker: {
-  },
+  mapMarker: {},
   image: {
     width: 20,
     height: 40,

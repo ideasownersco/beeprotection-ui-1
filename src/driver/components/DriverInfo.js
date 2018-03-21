@@ -5,18 +5,15 @@ import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import Feather from 'react-native-vector-icons/Feather';
 import I18n from 'utils/locale';
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export default class DriverInfo extends Component {
-
   static propTypes = {
     driver: PropTypes.object.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
-    return (
-      nextProps.driver !== this.props.driver
-    );
+    return nextProps.driver !== this.props.driver;
   }
 
   makeCall = () => {
@@ -46,49 +43,38 @@ export default class DriverInfo extends Component {
     let {user} = driver;
 
     return (
-      <View
-        style={[
-          styles.itemContainer,
-        ]}>
+      <View style={[styles.itemContainer]}>
         <View style={styles.imageContainer}>
-
           {user.image ? (
-            <Image source={{uri: user.image}} style={styles.image}/>
+            <Image source={{uri: user.image}} style={styles.image} />
           ) : (
-            <Feather name="user" size={30} style={styles.image}/>
+            <Feather name="user" size={30} style={styles.image} />
           )}
         </View>
 
-        <View style={{flex: 1, flexDirection: 'row',alignItems:'center',paddingHorizontal:5}}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingHorizontal: 5,
+          }}>
+          <View style={{flex: 1}}>
+            <Text style={[styles.title]}>{user.name}</Text>
 
-          <View style={{flex:1,}}>
-            <Text
-              style={[
-                styles.title,
-              ]}>
-              {user.name}
-            </Text>
-
-            <Text style={[
-              styles.title,
-            ]}>
+            <Text style={[styles.title]}>
               {I18n.t('mobile')}:
               {user.mobile}
             </Text>
-
           </View>
 
-          <Touchable
-            onPress={this.makeCall}
-          >
-            <MaterialIcons name="phone" size={30} color="green"/>
+          <Touchable onPress={this.makeCall}>
+            <MaterialIcons name="phone" size={30} color="green" />
           </Touchable>
-
         </View>
       </View>
     );
-  };
-
+  }
 }
 
 const styles = StyleSheet.create({

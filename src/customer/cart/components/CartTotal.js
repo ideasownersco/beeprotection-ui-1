@@ -9,7 +9,6 @@ import SectionTitle from 'components/SectionTitle';
 import I18n from 'utils/locale';
 
 export default class CartTotal extends Component {
-
   static propTypes = {
     total: PropTypes.number.isRequired,
   };
@@ -19,7 +18,6 @@ export default class CartTotal extends Component {
   }
 
   render() {
-
     return (
       <View style={styles.itemContainer}>
         <View style={styles.packageItemContainer}>
@@ -27,11 +25,8 @@ export default class CartTotal extends Component {
           <Text style={styles.totalPrice}>{this.props.total} KD</Text>
         </View>
       </View>
-
     );
-  };
-
-
+  }
 }
 
 const styles = StyleSheet.create({

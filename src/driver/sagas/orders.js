@@ -116,7 +116,6 @@ function* fetchOrderDetailsMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST, fetchOrderDetails);
 }
 
-
 export const sagas = all([
   fork(fetchWorkingOrderMonitor),
   fork(fetchUpcomingOrdersMonitor),

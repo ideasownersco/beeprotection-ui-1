@@ -63,9 +63,10 @@ const OrderBasicInfo = ({item, onPress, style}) => {
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('job_status')}</Text>
-          <Text style={[styles.value]}>{item.accepted_job ? item.accepted_job.status : I18n.t('pending')}</Text>
+          <Text style={[styles.value]}>
+            {item.accepted_job ? item.accepted_job.status : I18n.t('pending')}
+          </Text>
         </View>
-
       </View>
     </View>
   );
@@ -93,9 +94,9 @@ const styles = StyleSheet.create({
     color: colors.darkGrey,
   },
   value: {
-    flex:1,
+    flex: 1,
     color: colors.primary,
-    textAlign:'right'
+    textAlign: 'right',
   },
 });
 export default OrderBasicInfo;

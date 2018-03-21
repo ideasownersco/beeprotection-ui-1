@@ -4,7 +4,6 @@ import PushNotification from 'react-native-push-notification';
 import {PushNotificationIOS} from 'react-native';
 
 export default class PushNotificationManager extends Component {
-
   static propTypes = {
     setPushToken: PropTypes.func.isRequired,
     onReceiveNotifications: PropTypes.func.isRequired,
@@ -18,12 +17,11 @@ export default class PushNotificationManager extends Component {
     super(props);
 
     PushNotification.configure({
-
       onRegister: token => {
         this.props.setPushToken(token);
       },
 
-      onNotification: (notification) => {
+      onNotification: notification => {
         this.props.onReceiveNotifications(notification);
         notification.finish(PushNotificationIOS.FetchResult.NoData);
       },

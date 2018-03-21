@@ -21,14 +21,14 @@ import {Schema} from 'utils/schema';
 
 function* setInstalled() {
   yield call(setStorageItem, INSTALLED_KEY, 'INSTALLED');
-  yield put({type: ACTION_TYPES.INSTALL_SUCCESS, value:true});
+  yield put({type: ACTION_TYPES.INSTALL_SUCCESS, value: true});
 }
 
 function* boot() {
   // 1- Set is the app has installed(run) before
   let installedStorageKey = yield call(getStorageItem, INSTALLED_KEY);
   if (!isNull(installedStorageKey)) {
-    yield put({type: ACTION_TYPES.INSTALL_SUCCESS, value:true});
+    yield put({type: ACTION_TYPES.INSTALL_SUCCESS, value: true});
   }
 
   // 2- Set language from history
@@ -53,7 +53,7 @@ function* boot() {
         },
       });
       const normalized = normalize(response.data, Schema.users);
-      console.log('normalized',normalized);
+      console.log('normalized', normalized);
 
       yield put({
         type: AUTH_ACTION_TYPES.LOGIN_SUCCESS,

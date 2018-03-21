@@ -9,13 +9,14 @@ import {SELECTORS as ORDER_SELECTORS} from 'customer/selectors/orders';
 import I18n from 'utils/locale';
 import Map from 'customer/orders/components/Map';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
-import {ACTIONS} from "customer/common/actions";
-import {bindActionCreators} from "redux";
+import {ACTIONS} from 'customer/common/actions';
+import {bindActionCreators} from 'redux';
 
 class TrackDetailScene extends Component {
-
   componentDidMount() {
-    this.props.actions.fetchOrderDetails(this.props.navigation.state.params.orderID);
+    this.props.actions.fetchOrderDetails(
+      this.props.navigation.state.params.orderID,
+    );
   }
 
   static propTypes = {
@@ -43,7 +44,7 @@ class TrackDetailScene extends Component {
     let {order} = this.props;
     let {tracking} = this.props;
 
-    console.log('tracking',tracking);
+    console.log('tracking', tracking);
 
     let {address} = order;
 
@@ -87,15 +88,11 @@ class TrackDetailScene extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(
-      {...ACTIONS,},
-      dispatch,
-    ),
+    actions: bindActionCreators({...ACTIONS}, dispatch),
   };
 }
 
 const makeMapStateToProps = () => {
-
   // const mapStateToProps = (state, props) => {
   //   const {accepted_job} = props.navigation.state.params.order;
   //
@@ -112,12 +109,16 @@ const makeMapStateToProps = () => {
   const mapStateToProps = (state, props) => {
     return {
       order: getOrderByID(state, props.navigation.state.params.orderID),
-      tracking: getLocationUpdatesForOrder(state, props.navigation.state.params.orderID)
+      tracking: getLocationUpdatesForOrder(
+        state,
+        props.navigation.state.params.orderID,
+      ),
     };
   };
 
   return mapStateToProps;
-
 };
 
-export default connect(makeMapStateToProps,mapDispatchToProps)(TrackDetailScene);
+export default connect(makeMapStateToProps, mapDispatchToProps)(
+  TrackDetailScene,
+);

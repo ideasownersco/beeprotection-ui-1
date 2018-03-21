@@ -15,12 +15,10 @@ const initialState = {
 };
 
 export function reducer(state = initialState, action = {}) {
-
   // {
   //   return Object.keys(items)
   //     .map(item => items[item].total).reduce((total,amount) => total + amount)
   // }
-
 
   switch (action.type) {
     case ACTION_TYPES.CART_ADD_ITEM_SUCCESS: {

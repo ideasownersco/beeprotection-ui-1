@@ -16,14 +16,14 @@ import I18n from 'utils/locale';
 import NavButton from 'components/NavButton';
 import colors from 'assets/theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import CartSuccessModal from "../cart/components/CartSuccessModal";
+import CartSuccessModal from '../cart/components/CartSuccessModal';
 
 type State = {
   activeCategoryID: ?number,
   activePackageID: ?number,
   activeServicesIDs: Array<string>,
   amount: number,
-  showCartSuccessModal: boolean
+  showCartSuccessModal: boolean,
 };
 
 const initialState = {
@@ -31,7 +31,7 @@ const initialState = {
   activePackageID: undefined,
   activeServicesIDs: [],
   amount: 0,
-  showCartSuccessModal: false
+  showCartSuccessModal: false,
 };
 
 class CreateOrder extends PureComponent {
@@ -50,7 +50,8 @@ class CreateOrder extends PureComponent {
           }
           onPress={() =>
             navigation.state.params &&
-            navigation.state.params.handleRightButtonPress()}
+            navigation.state.params.handleRightButtonPress()
+          }
         />
       ),
     };
@@ -147,28 +148,26 @@ class CreateOrder extends PureComponent {
 
     // dispatch order success
     this.setState({
-      showCartSuccessModal: true
+      showCartSuccessModal: true,
     });
-
   };
 
   onAddNewItemPress = () => {
     this.setState({
-      showCartSuccessModal: false
+      showCartSuccessModal: false,
     });
   };
 
   onCheckoutPress = () => {
     this.setState({
-      showCartSuccessModal: false
+      showCartSuccessModal: false,
     });
     this.props.navigation.navigate('Cart');
   };
 
-
   hideCheckoutModal = () => {
     this.setState({
-      showCartSuccessModal: false
+      showCartSuccessModal: false,
     });
   };
 
@@ -187,9 +186,9 @@ class CreateOrder extends PureComponent {
       : categories.length
         ? categories[0]
         : {
-          id: undefined,
-          packages: [],
-        };
+            id: undefined,
+            packages: [],
+          };
 
     return (
       <ScrollView
@@ -202,14 +201,14 @@ class CreateOrder extends PureComponent {
           activeItemID={activeCategoryID}
         />
 
-        {
-          activeCategory.packages && activeCategory.packages.length &&
-          <PackagesList
-            items={activeCategory.packages}
-            onItemPress={this.onPackagesListItemPress}
-            activeItemID={activePackageID}
-          />
-        }
+        {activeCategory.packages &&
+          activeCategory.packages.length && (
+            <PackagesList
+              items={activeCategory.packages}
+              onItemPress={this.onPackagesListItemPress}
+              activeItemID={activePackageID}
+            />
+          )}
 
         {activePackageID && (
           <ServicesList
@@ -226,8 +225,7 @@ class CreateOrder extends PureComponent {
           onPress={this.onAddToCartPress}
           disabled={!activePackageID}
           raised
-          primary
-        >
+          primary>
           {I18n.t('add_to_cart')}
         </Button>
 
@@ -237,8 +235,6 @@ class CreateOrder extends PureComponent {
           visible={showCartSuccessModal}
           onHide={this.hideCheckoutModal}
         />
-
-
       </ScrollView>
     );
   }

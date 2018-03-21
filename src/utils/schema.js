@@ -24,7 +24,7 @@ servicesSchema.define({
 ordersSchema.define({
   user: usersSchema,
   accepted_job: jobsSchema,
-  packages:[packagesSchema],
+  packages: [packagesSchema],
   // services:[servicesSchema]
 });
 
