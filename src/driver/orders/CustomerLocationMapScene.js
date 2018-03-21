@@ -10,6 +10,7 @@ import {SELECTORS as ORDER_SELECTORS} from "driver/selectors/orders";
 import {bindActionCreators} from "redux";
 import LoadingIndicator from "/components/LoadingIndicator";
 import {View,} from 'react-native';
+import BackgroundGeolocation from 'react-native-background-geolocation';
 
 class CustomerLocationMapScene extends Component {
 
@@ -43,27 +44,29 @@ class CustomerLocationMapScene extends Component {
       // longitude: 47.98511826155676,
     };
 
-    // BackgroundGeolocation.getCurrentPosition((location) => {
-    //   let {latitude, longitude} = location.coords;
-    //   this.origin = {
-    //     latitude: latitude,
-    //     longitude: longitude
-    //   }
-    // }, (error) => {
-    //   console.warn('- getCurrentPosition error: ', error);
-    // }, {
-    //   persist: true,
-    //   samples: 1,
-    //   maximumAge: 5000
-    // });
+    BackgroundGeolocation.getCurrentPosition((location) => {
+      let {latitude, longitude} = location.coords;
+      this.origin = {
+        latitude: latitude,
+        longitude: longitude
+      }
+    }, (error) => {
+      console.warn('- getCurrentPosition error: ', error);
+    }, {
+      persist: true,
+      samples: 1,
+      maximumAge: 5000
+    });
 
   }
 
   onStartWorkPress = () => {
+    console.log('started');
     this.props.actions.startWorking(this.props.order.id);
   };
 
   onFinishJobPress = () => {
+    console.log('finished');
     this.props.actions.finishWorking(this.props.order.id);
   };
 
@@ -83,18 +86,18 @@ class CustomerLocationMapScene extends Component {
     if (order && order.accepted_job) {
       return (
 
-          <Map
-            origin={this.origin}
-            destination={{
-              latitude: address.latitude,
-              longitude: address.longitude,
-            }}
-            startWorking={this.onStartWorkPress}
-            finishWorking={this.onFinishJobPress}
-            updateLocation={this.onUpdateLocation}
-            orderID={order.id}
-            jobStatus={order.accepted_job.status}
-          />
+        <Map
+          origin={this.origin}
+          destination={{
+            latitude: address.latitude,
+            longitude: address.longitude,
+          }}
+          startWorking={this.onStartWorkPress}
+          finishWorking={this.onFinishJobPress}
+          updateLocation={this.onUpdateLocation}
+          orderID={order.id}
+          jobStatus='pending'
+        />
 
       )
     }
@@ -114,6 +117,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const makeMapStateToProps = () => {
+
   const getOrderByID = ORDER_SELECTORS.getOrderByID();
   const mapStateToProps = (state, props) => {
     return {

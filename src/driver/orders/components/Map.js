@@ -57,6 +57,10 @@ export default class Map extends Component {
     };
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   componentDidMount() {
     const {orderID, jobStatus} = this.props;
 
