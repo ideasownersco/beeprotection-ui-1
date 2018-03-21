@@ -116,5 +116,7 @@
   "payment_mode" : "Payment Mode",
   "order_status" : "Status",
   "job_status" : "Job Status",
-  "pending" : "Pending"
+  "pending" : "Pending",
+  "driver_info" : "Driver Info",
+  "call" : "Call"
 }

@@ -11,8 +11,12 @@ import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import OrderTotal from 'customer/orders/components/OrderTotal';
 import {bindActionCreators} from "redux";
 import {ACTIONS} from "customer/common/actions";
+import DriverInfo from "driver/components/DriverInfo";
+import SectionHeading from "../../company/components/SectionHeading";
+import I18n from 'utils/locale';
 
 class OrderDetailScene extends Component {
+
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -33,16 +37,25 @@ class OrderDetailScene extends Component {
 
   render() {
     let {order} = this.props;
-    console.log('order',order);
+    console.log('order', order);
 
     return (
       <View style={{flex: 1}}>
         {
           order &&
-          <ScrollView style={{flex:1}}>
+          <ScrollView style={{flex: 1}}>
             <OrderBasicInfo item={order}/>
             <OrderItems order={order}/>
             <OrderTotal total={order.total}/>
+
+            {
+              order.accepted_job && order.accepted_job.driver && order.accepted_job.driver && order.accepted_job.driver.user &&
+              <View>
+                <SectionHeading title={I18n.t('driver_info')}/>
+                <DriverInfo driver={order.accepted_job.driver}/>
+              </View>
+            }
+
           </ScrollView>
         }
       </View>
@@ -69,4 +82,4 @@ const makeMapStateToProps = () => {
   return mapStateToProps;
 };
 
-export default connect(makeMapStateToProps,mapDispatchToProps)(OrderDetailScene);
+export default connect(makeMapStateToProps, mapDispatchToProps)(OrderDetailScene);
