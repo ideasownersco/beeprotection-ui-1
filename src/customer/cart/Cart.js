@@ -239,7 +239,10 @@ class Cart extends Component {
             justifyContent: 'center',
             paddingVertical: 10,
             marginTop: 20,
-          }}>
+            backgroundColor:colors.primary
+          }}
+
+        >
           {I18n.t('checkout')}
         </Button>
 

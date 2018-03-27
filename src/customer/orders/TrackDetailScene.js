@@ -48,7 +48,7 @@ class TrackDetailScene extends Component {
 
     let {address} = order;
 
-    // const {accepted_job} = this.props.navigation.state.params.order;
+    // const {job} = this.props.navigation.state.params.order;
 
     let origin;
 
@@ -94,11 +94,11 @@ function mapDispatchToProps(dispatch) {
 
 const makeMapStateToProps = () => {
   // const mapStateToProps = (state, props) => {
-  //   const {accepted_job} = props.navigation.state.params.order;
+  //   const {job} = props.navigation.state.params.order;
   //
   //   return {
-  //     tracking: accepted_job
-  //       ? getLocationUpdatesForJob(state, accepted_job.id)
+  //     tracking: job
+  //       ? getLocationUpdatesForJob(state, job.id)
   //       : {},
   //   };
   // };

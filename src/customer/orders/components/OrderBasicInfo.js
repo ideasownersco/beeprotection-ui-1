@@ -64,7 +64,7 @@ const OrderBasicInfo = ({item, onPress, style}) => {
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('job_status')}</Text>
           <Text style={[styles.value]}>
-            {item.accepted_job ? item.accepted_job.status : I18n.t('pending')}
+            {item.job ? item.job.status : I18n.t('pending')}
           </Text>
         </View>
       </View>

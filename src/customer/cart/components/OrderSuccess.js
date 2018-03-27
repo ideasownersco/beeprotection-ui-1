@@ -5,6 +5,7 @@ import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 import Modal from 'react-native-modal';
 import colors from 'assets/theme/colors';
+import Button from "../../../components/Button";
 
 export default class OrderSuccess extends Component {
   // shouldComponentUpdate(nextProps) {
@@ -27,19 +28,30 @@ export default class OrderSuccess extends Component {
         backdropOpacity={0.8}
         transparent={true}
         backdropColor="rgba(0,0,0,0.5)"
-        style={{
-          margin: 50,
-        }}
         useNativeDriver={true}
-        hideModalContentWhileAnimating={true}>
+        hideModalContentWhileAnimating={true}
+        style={{
+          backgroundColor:'yellow'
+        }}
+      >
         <View
           style={[
-            styles.centerModal,
+            styles.contentContainer,
             // {
             //   backgroundColor: colors[type],
             // },
           ]}>
-          <Text style={[styles.text, styles.centerText]}>Order Success</Text>
+          <Text style={[styles.text, styles.centerText]}>
+            Order Success
+          </Text>
+
+          <Button
+            primary
+            raised
+            onPress={()=>{}}
+          >
+            Go To Home
+          </Button>
         </View>
       </Modal>
     );
@@ -47,16 +59,13 @@ export default class OrderSuccess extends Component {
 }
 
 const styles = StyleSheet.create({
-  listContainer: {},
-  itemContainer: {
-    padding: 10,
-    marginHorizontal: 5,
-  },
-  centerModal: {
+  contentContainer: {
+    flex:1,
     backgroundColor: 'white',
     alignItems: 'center',
-    paddingVertical: 50,
-    // padding:30,
+    justifyContent:'center',
+    margin:0,
+    padding:0,
   },
   text: {
     color: 'white',
@@ -64,7 +73,7 @@ const styles = StyleSheet.create({
   },
   centerText: {
     fontSize: 18,
-    paddingVertical: 30,
+    // paddingVertical: 30,
     color: colors.black,
   },
   centerButton: {

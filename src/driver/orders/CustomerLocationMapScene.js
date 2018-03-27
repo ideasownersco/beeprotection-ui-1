@@ -16,7 +16,7 @@ class CustomerLocationMapScene extends Component {
         params: PropTypes.shape({
           order: PropTypes.shape({
             address: PropTypes.object.isRequired,
-            accepted_job: PropTypes.object.isRequired,
+            job: PropTypes.object.isRequired,
           }),
         }),
       }),
@@ -57,17 +57,17 @@ class CustomerLocationMapScene extends Component {
   }
 
   onStartJobPress = () => {
-    let {accepted_job} = this.props.navigation.state.params.order;
-    this.props.dispatch(DRIVER_ACTIONS.startJob(accepted_job.id));
+    let {job} = this.props.navigation.state.params.order;
+    this.props.dispatch(DRIVER_ACTIONS.startJob(job.id));
   };
 
   onFinishJobPress = () => {
-    let {accepted_job} = this.props.navigation.state.params.order;
-    this.props.dispatch(DRIVER_ACTIONS.finishJob(accepted_job.id));
+    let {job} = this.props.navigation.state.params.order;
+    this.props.dispatch(DRIVER_ACTIONS.finishJob(job.id));
   };
 
   onUpdateLocation = () => {
-    // let {accepted_job} = this.props.navigation.state.params.order;
+    // let {job} = this.props.navigation.state.params.order;
   };
 
   render() {
@@ -76,7 +76,7 @@ class CustomerLocationMapScene extends Component {
 
     let {order} = this.props.navigation.state.params;
     let {address} = order;
-    let {accepted_job} = this.props.navigation.state.params.order;
+    let {job} = this.props.navigation.state.params.order;
     let {origin} = this.state;
 
     console.log('order', order);
@@ -91,8 +91,8 @@ class CustomerLocationMapScene extends Component {
         startJob={this.onStartJobPress}
         finishJob={this.onFinishJobPress}
         updateLocation={this.onUpdateLocation}
-        jobID={accepted_job.id}
-        jobStatus={accepted_job.status}
+        jobID={job.id}
+        jobStatus={job.status}
       />
     );
   }

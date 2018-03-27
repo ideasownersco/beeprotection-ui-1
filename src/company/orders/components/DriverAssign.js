@@ -51,9 +51,9 @@ export default class DriverAssign extends Component {
       <View style={styles.container}>
         <SectionTitle title={I18n.t('assign_driver')} />
 
-        {order.accepted_job && order.accepted_job.driver ? (
+        {order.job && order.job.driver ? (
           <Text onPress={() => this.showModal(true)} style={styles.driver}>
-            {order.accepted_job.driver.user.name}
+            {order.job.driver.user.name}
           </Text>
         ) : (
           <Text onPress={() => this.showModal(true)}>

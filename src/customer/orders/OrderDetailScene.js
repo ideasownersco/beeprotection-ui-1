@@ -48,13 +48,13 @@ class OrderDetailScene extends Component {
             <OrderItems order={order} />
             <OrderTotal total={order.total} />
 
-            {order.accepted_job &&
-              order.accepted_job.driver &&
-              order.accepted_job.driver &&
-              order.accepted_job.driver.user && (
+            {order.job &&
+              order.job.driver &&
+              order.job.driver &&
+              order.job.driver.user && (
                 <View>
                   <SectionHeading title={I18n.t('driver_info')} />
-                  <DriverInfo driver={order.accepted_job.driver} />
+                  <DriverInfo driver={order.job.driver} />
                 </View>
               )}
           </ScrollView>

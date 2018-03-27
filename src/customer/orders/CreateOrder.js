@@ -225,7 +225,9 @@ class CreateOrder extends PureComponent {
           onPress={this.onAddToCartPress}
           disabled={!activePackageID}
           raised
-          primary>
+          style={{
+            backgroundColor:colors.primary
+          }}>
           {I18n.t('add_to_cart')}
         </Button>
 
