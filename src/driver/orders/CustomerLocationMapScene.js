@@ -36,24 +36,21 @@ class CustomerLocationMapScene extends Component {
   }
 
   componentDidMount() {
-    BackgroundGeolocation.stop();
-    BackgroundGeolocation.removeListeners();
-
-    // BackgroundGeolocation.getCurrentPosition((location) => {
-    //   let {latitude, longitude} = location.coords;
-    //   // this.setState({
-    //   //   origin: {
-    //   //     latitude: latitude,
-    //   //     longitude: longitude
-    //   //   }
-    //   // });
-    // }, (error) => {
-    //   console.warn('- getCurrentPosition error: ', error);
-    // }, {
-    //   persist: true,
-    //   samples: 1,
-    //   maximumAge: 5000
-    // });
+    BackgroundGeolocation.getCurrentPosition((location) => {
+      let {latitude, longitude} = location.coords;
+      // this.setState({
+      //   origin: {
+      //     latitude: latitude,
+      //     longitude: longitude
+      //   }
+      // });
+    }, (error) => {
+      console.warn('- getCurrentPosition error: ', error);
+    }, {
+      persist: true,
+      samples: 1,
+      maximumAge: 5000
+    });
   }
 
   onStartJobPress = () => {

@@ -117,17 +117,17 @@ function* fetchWorkingOrder() {
     if (response.data) {
       const normalized = normalize(response.data, Schema.orders);
       yield put({
-        type: ACTION_TYPES.FETCH_JOB_ORDER_SUCCESS,
+        type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
         entities: normalized.entities,
         result: normalized.result,
       });
     } else {
       yield put({
-        type: ACTION_TYPES.FETCH_JOB_ORDER_SUCCESS,
+        type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
       });
     }
   } catch (error) {
-    yield put({type: ACTION_TYPES.FETCH_JOB_ORDER_FAILURE, error});
+    yield put({type: ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE, error});
   }
 }
 
@@ -270,7 +270,7 @@ function* checkoutMonitor() {
 }
 
 function* fetchWorkingOrderMonitor() {
-  yield takeLatest(ACTION_TYPES.FETCH_JOB_ORDER_REQUEST, fetchWorkingOrder);
+  yield takeLatest(ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST, fetchWorkingOrder);
 }
 
 function* fetchPastOrdersMonitor() {

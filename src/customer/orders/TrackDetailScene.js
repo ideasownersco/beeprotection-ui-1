@@ -13,11 +13,12 @@ import {ACTIONS} from 'customer/common/actions';
 import {bindActionCreators} from 'redux';
 
 class TrackDetailScene extends Component {
-  componentDidMount() {
-    this.props.actions.fetchOrderDetails(
-      this.props.navigation.state.params.orderID,
-    );
-  }
+
+  // componentDidMount() {
+  //   this.props.actions.fetchOrderDetails(
+  //     this.props.navigation.state.params.orderID,
+  //   );
+  // }
 
   static propTypes = {
     navigation: PropTypes.shape({
@@ -30,18 +31,19 @@ class TrackDetailScene extends Component {
   };
 
   componentDidMount() {
-    const {order} = this.props;
-    if (order.tracking_on) {
+    const {order} = this.props.navigation.state.params;
+    // const {order} = this.props;
+    if (order && order.trackeable) {
       this.props.dispatch(
         CUSTOMER_ACTIONS.subscribeToOrderTracking({
-          order_id: order.id,
+          job_id: order.job.id,
         }),
       );
     }
   }
 
   render() {
-    let {order} = this.props;
+    let {order} = this.props.navigation.state.params;
     let {tracking} = this.props;
 
     console.log('tracking', tracking);
@@ -64,7 +66,7 @@ class TrackDetailScene extends Component {
       };
     }
 
-    if (!order.is_working) {
+    if (!order.trackeable) {
       return (
         <View style={{padding: 10}}>
           <Text style={{textAlign: 'center'}}>
@@ -86,11 +88,11 @@ class TrackDetailScene extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({...ACTIONS}, dispatch),
-  };
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     actions: bindActionCreators({...ACTIONS}, dispatch),
+//   };
+// }
 
 const makeMapStateToProps = () => {
   // const mapStateToProps = (state, props) => {
@@ -102,23 +104,23 @@ const makeMapStateToProps = () => {
   //       : {},
   //   };
   // };
+  // const getOrderByID = ORDER_SELECTORS.getOrderByID();
 
-  const getOrderByID = ORDER_SELECTORS.getOrderByID();
-  const getLocationUpdatesForOrder = ORDER_SELECTORS.getLocationUpdatesForOrder();
+  const getLocationUpdatesForJob = ORDER_SELECTORS.getLocationUpdatesForJob();
 
   const mapStateToProps = (state, props) => {
+    const {job} = props.navigation.state.params.order;
+
     return {
-      order: getOrderByID(state, props.navigation.state.params.orderID),
-      tracking: getLocationUpdatesForOrder(
-        state,
-        props.navigation.state.params.orderID,
-      ),
+      tracking: job
+        ? getLocationUpdatesForJob(state, job.id)
+        : {},
     };
   };
 
   return mapStateToProps;
 };
 
-export default connect(makeMapStateToProps, mapDispatchToProps)(
+export default connect(makeMapStateToProps)(
   TrackDetailScene,
 );

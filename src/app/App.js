@@ -25,12 +25,12 @@ class App extends Component {
     if (CODE_PUSH_ENABLED) {
       CodePush.sync();
     }
-    BackgroundGeolocation.stop();
-    BackgroundGeolocation.removeListeners();
   }
 
   componentDidMount() {
     this.props.dispatch(ACTIONS.boot());
+    BackgroundGeolocation.stop();
+    BackgroundGeolocation.removeListeners();
     AppState.addEventListener('change', this.handleAppStateChange);
   }
 
@@ -38,16 +38,8 @@ class App extends Component {
     AppState.removeEventListener('change', this.handleAppStateChange);
   }
 
-  handleAppStateChange(appState) {
-    console.log('appState', appState);
-    if (appState === 'background') {
-      let date = new Date(Date.now() + 1000);
-      PushNotification.localNotificationSchedule({
-        message: 'My Notification Message',
-        date: date,
-      });
-    }
-  }
+  handleAppStateChange = (appState) => {
+  };
 
   onLanguageSelect = name => {
     this.props.dispatch(ACTIONS.setLanguage(name));
@@ -67,11 +59,11 @@ class App extends Component {
   };
 
   onReceivePushNotifications = (notification: object) => {
-    let navigation = NavigatorService;
-    navigation.navigate('UpcomingOrders');
-    navigation.navigate('OrderDetail', {
-      orderID: 13,
-    });
+    // let navigation = NavigatorService;
+    // navigation.navigate('UpcomingOrders');
+    // navigation.navigate('OrderDetail', {
+    //   orderID: 13,
+    // });
   };
 
   render() {

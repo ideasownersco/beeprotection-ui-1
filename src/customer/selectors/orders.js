@@ -65,7 +65,7 @@ const getCartTotal = createSelector([cartItems], items => {
     .reduce((total, amount) => total + amount, 0);
 });
 
-const getLocationUpdatesForOrder = () => {
+const getLocationUpdatesForJob = () => {
   return createSelector(
     [getTrackings, getItemIdProp],
     (tracking, order) => tracking[order] || {},
@@ -110,7 +110,7 @@ export const SELECTORS = {
   getParentCategories,
   getTimings,
   getOrderByID,
-  getLocationUpdatesForOrder,
+  getLocationUpdatesForJob,
   getUpcomingOrders,
   getWorkingOrder,
   getPastOrders,

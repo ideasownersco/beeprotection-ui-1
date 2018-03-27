@@ -26,7 +26,8 @@ class Home extends Component {
 
   onItemTrackPress = (item: Object) => {
     this.props.navigation.navigate('TrackDetail', {
-      orderID: item.id,
+      // orderID: item.id,
+      order: item,
     });
   };
 
