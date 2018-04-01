@@ -37,6 +37,11 @@ export default class CartSuccessModal extends Component {
         useNativeDriver={true}
         hideModalContentWhileAnimating={true}>
         <View style={[styles.centerModal]}>
+
+          <Text style={[styles.text, styles.centerText]}>
+            {I18n.t('cart_item_added')}
+          </Text>
+
           <IconFactory
             type="MaterialIcons"
             name="check-circle"
@@ -44,17 +49,17 @@ export default class CartSuccessModal extends Component {
             size={40}
           />
 
-          <Text style={[styles.text, styles.centerText]}>
-            {I18n.t('cart_item_added')}
-          </Text>
+          <View style={{flexDirection: 'row',paddingTop:20}}>
 
-          <Button onPress={onCheckoutPress} raised primary>
-            {I18n.t('checkout')}
-          </Button>
+            <Button onPress={onAddNewItemPress} raised secondary>
+              {I18n.t('add_item')}
+            </Button>
 
-          <Button onPress={onAddNewItemPress} raised secondary>
-            {I18n.t('add_item')}
-          </Button>
+            <Button onPress={onCheckoutPress} raised color={colors.primary} dark>
+              {I18n.t('checkout')}
+            </Button>
+
+          </View>
         </View>
       </Modal>
     );
@@ -83,7 +88,7 @@ const styles = StyleSheet.create({
   },
   centerText: {
     fontSize: 18,
-    paddingVertical: 30,
+    paddingVertical: 10,
     color: colors.black,
   },
   centerButton: {

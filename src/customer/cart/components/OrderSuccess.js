@@ -37,20 +37,13 @@ export default class OrderSuccess extends Component {
         style={{flex: 1,}}
       >
         <ScrollView
-          style={[
-            styles.container,
-            // {
-            //   backgroundColor: colors[type],
-            // },
-
-          ]}
+          style={[styles.container]}
           contentContainer={styles.contentContainer}
         >
 
-          <View style={{padding: 10,paddingTop:200}}>
-            <Title style={{textAlign: 'center'}}>{I18n.t('thank_you')}</Title>
+          <View style={{padding: 10,paddingTop:150}}>
+            <Title style={{textAlign: 'center',fontSize:20}}>{I18n.t('thank_you')}</Title>
           </View>
-
 
           <View style={styles.rowContainer}>
             <View style={styles.leftCol}>
@@ -84,10 +77,13 @@ export default class OrderSuccess extends Component {
           </View>
 
           <Button
-            primary
+            color={colors.primary}
+            dark
             raised
             onPress={onPress}
+            style={{padding:20}}
           >{I18n.t('home')}</Button>
+
         </ScrollView>
       </Modal>
     );

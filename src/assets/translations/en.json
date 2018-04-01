@@ -112,7 +112,7 @@
   "knet" : "KNET",
   "cash" : "CASH",
 
-  "cart_item_added" : "Item Added to the Cart",
+  "cart_item_added" : "Added to Cart",
   "add_item" : "Add New Car",
   "payment_mode" : "Payment Mode",
   "order_status" : "Status",
