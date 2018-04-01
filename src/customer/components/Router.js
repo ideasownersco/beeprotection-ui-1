@@ -82,6 +82,10 @@ const HomeStack = StackNavigator({
   },
   PastOrders: {screen: PastOrdersScene},
   UpcomingOrders: {screen: UpcomingOrdersScene},
+},{
+  navigationOptions: ({navigation}) => ({
+    gesturesEnabled: false
+  })
 });
 
 const SettingsStack = StackNavigator({

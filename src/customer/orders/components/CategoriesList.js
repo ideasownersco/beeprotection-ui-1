@@ -6,8 +6,9 @@ import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 
 export default class CategoriesList extends Component {
+
   shouldComponentUpdate(nextProps) {
-    return nextProps.activeItemID !== this.props.activeItemID;
+    return nextProps.items !== this.props.items || nextProps.activeItemID !== this.props.activeItemID;
   }
 
   renderItem = ({item}) => {
@@ -41,12 +42,13 @@ export default class CategoriesList extends Component {
 
   render() {
     const {items, activeItemID} = this.props;
+
     return (
       <FlatList
         data={items}
         renderItem={this.renderItem}
         style={styles.listContainer}
-        keyExtractor={item => `${item.id}`}
+        keyExtractor={(item,index) => `${index}`}
         horizontal={true}
         extraData={activeItemID}
       />

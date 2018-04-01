@@ -35,15 +35,12 @@ export default class DriverAssign extends Component {
   };
 
   selectDriver = driver => {
-    console.log('select driver');
     this.showModal(false);
     this.props.onDriversListItemPress(driver);
   };
 
   render() {
     const {order, drivers, onDriversListItemPress} = this.props;
-
-    console.log('order', order);
 
     const {showModal} = this.state;
 

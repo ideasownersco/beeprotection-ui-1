@@ -11,7 +11,7 @@ import {SELECTORS} from 'customer/selectors/orders';
 import CategoriesList from 'customer/orders/components/CategoriesList';
 import PackagesList from 'customer/orders/components/PackagesList';
 import ServicesList from 'customer/orders/components/ServicesList';
-import {Button} from 'react-native-paper';
+import {Button, Title} from 'react-native-paper';
 import I18n from 'utils/locale';
 import NavButton from 'components/NavButton';
 import colors from 'assets/theme/colors';
@@ -72,14 +72,14 @@ class CreateOrder extends PureComponent {
   componentDidUpdate() {
     const categories = this.props.categories;
     if (categories.length) {
-      if (!this.props.cartReducer.activeCategoryID) {
+      if (!this.props.cart.activeCategoryID) {
         this.props.actions.setCartItem('activeCategoryID', categories[0].id);
       }
     }
   }
 
   onCategoriesListItemPress = (item: object) => {
-    if (this.props.cartReducer.activeCategoryID !== item.id) {
+    if (this.props.cart.activeCategoryID !== item.id) {
       this.props.actions.setCartItems({
         activeCategoryID: item.id,
         activePackageID: undefined,
@@ -94,7 +94,7 @@ class CreateOrder extends PureComponent {
       total: parseInt(item.price),
     };
 
-    if (this.props.cartReducer.activePackageID !== item.id) {
+    if (this.props.cart.activePackageID !== item.id) {
       params = {
         ...params,
         activeServicesIDs: [],
@@ -105,11 +105,17 @@ class CreateOrder extends PureComponent {
   };
 
   onServicesListItemPress = (item: object) => {
-    const {total, activeServicesIDs} = this.props.cartReducer;
+    const {total, activeServicesIDs} = this.props.cart;
 
-    let currentAmount = parseInt(total) + parseInt(item.price);
+    let currentAmount;
 
     let index = activeServicesIDs.indexOf(item.id);
+
+    if(index > -1) {
+      currentAmount = parseInt(total) - parseInt(item.price)
+    } else {
+      currentAmount = parseInt(total) + parseInt(item.price)
+    }
 
     let params = {
       activeServicesIDs:
@@ -128,7 +134,7 @@ class CreateOrder extends PureComponent {
       activePackageID,
       activeServicesIDs,
       total,
-    } = this.props.cartReducer;
+    } = this.props.cart;
 
     const item = {
       category: activeCategoryID,
@@ -153,6 +159,7 @@ class CreateOrder extends PureComponent {
   };
 
   onAddNewItemPress = () => {
+    this.props.actions.setCartItem('total',0);
     this.setState({
       showCartSuccessModal: false,
     });
@@ -176,7 +183,8 @@ class CreateOrder extends PureComponent {
       activeCategoryID,
       activePackageID,
       activeServicesIDs,
-    } = this.props.cartReducer;
+      total
+    } = this.props.cart;
     const {categories} = this.props;
 
     const {showCartSuccessModal} = this.state;
@@ -194,7 +202,9 @@ class CreateOrder extends PureComponent {
       <ScrollView
         style={{flex: 1, backgroundColor: 'white'}}
         keyboardShouldPersistTaps={'always'}
-        contentInset={{bottom: 50}}>
+        contentInset={{bottom: 50}}
+      >
+
         <CategoriesList
           items={categories}
           onItemPress={this.onCategoriesListItemPress}
@@ -221,12 +231,15 @@ class CreateOrder extends PureComponent {
           />
         )}
 
+        <Title style={{textAlign:'center',padding:10,backgroundColor:colors.fadedWhite,marginBottom:10}}>{I18n.t('total')} {total} KD</Title>
+
         <Button
           onPress={this.onAddToCartPress}
           disabled={!activePackageID}
           raised
           style={{
-            backgroundColor:colors.primary
+            backgroundColor:colors.primary,
+            padding:10
           }}>
           {I18n.t('add_to_cart')}
         </Button>
@@ -254,7 +267,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     categories: SELECTORS.getCategories(state),
-    cartReducer: SELECTORS.getCart(state),
+    cart: SELECTORS.getCart(state),
   };
 }
 

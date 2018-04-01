@@ -5051,9 +5051,23 @@ react-native-i18n@^2.0.12:
     babel-plugin-module-resolver "^2.3.0"
     babel-preset-react-native "1.9.0"
 
+react-native-modal-datetime-picker@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-5.0.0.tgz#8b1d8c5a04a1680d2aa8671ecfdd88bc068223de"
+  dependencies:
+    prop-types "^15.6.1"
+    react-native-modal "^5.4.0"
+
 react-native-modal@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-5.3.0.tgz#000ccc40034a097125d6dfbe9ce846ec5958e3fc"
+  dependencies:
+    prop-types "^15.6.1"
+    react-native-animatable "^1.2.4"
+
+react-native-modal@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-5.4.0.tgz#95f70b5d68e08824951cd11038b9db2d6fdb9962"
   dependencies:
     prop-types "^15.6.1"
     react-native-animatable "^1.2.4"

@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text} from 'react-native';
+import {StyleSheet, FlatList, View, Text, ScrollView} from 'react-native';
 import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 import Modal from 'react-native-modal';
 import colors from 'assets/theme/colors';
-import Button from "../../../components/Button";
+import {Title, Button} from "react-native-paper";
+import I18n from 'utils/locale';
+import Separator from "../../../components/Separator";
 
 export default class OrderSuccess extends Component {
   // shouldComponentUpdate(nextProps) {
@@ -16,56 +18,96 @@ export default class OrderSuccess extends Component {
     onPress: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
     onHide: PropTypes.func.isRequired,
+    cart: PropTypes.object.isRequired,
+    total: PropTypes.number.isRequired
   };
 
   render() {
-    let {visible, onHide} = this.props;
+    let {visible, onHide, cart, total, onPress} = this.props;
     return (
       <Modal
         isVisible={visible}
         animationType="slide"
-        onBackdropPress={onHide}
+        // onBackdropPress={onHide}
         backdropOpacity={0.8}
         transparent={true}
-        backdropColor="rgba(0,0,0,0.5)"
+        backdropColor="black"
         useNativeDriver={true}
         hideModalContentWhileAnimating={true}
-        style={{
-          backgroundColor:'yellow'
-        }}
+        style={{flex: 1,}}
       >
-        <View
+        <ScrollView
           style={[
-            styles.contentContainer,
+            styles.container,
             // {
             //   backgroundColor: colors[type],
             // },
-          ]}>
-          <Text style={[styles.text, styles.centerText]}>
-            Order Success
-          </Text>
+
+          ]}
+          contentContainer={styles.contentContainer}
+        >
+
+          <View style={{padding: 10,paddingTop:200}}>
+            <Title style={{textAlign: 'center'}}>{I18n.t('thank_you')}</Title>
+          </View>
+
+
+          <View style={styles.rowContainer}>
+            <View style={styles.leftCol}>
+              {I18n.t('order_date')}
+            </View>
+            <View style={styles.rightCol}>
+              {cart.selectedDate.format('dd-mm-yy')}
+            </View>
+          </View>
+
+          <Separator/>
+
+          <View style={styles.rowContainer}>
+            <View style={styles.leftCol}>
+              {I18n.t('order_time')}
+            </View>
+            <View style={styles.rightCol}>
+              {cart.selectedTime.format('dd-mm-yy')}
+            </View>
+          </View>
+
+          <Separator/>
+
+          <View style={styles.rowContainer}>
+            <View style={styles.leftCol}>
+              {I18n.t('total')}
+            </View>
+            <View style={styles.rightCol}>
+              {total}
+            </View>
+          </View>
 
           <Button
             primary
             raised
-            onPress={()=>{}}
-          >
-            Go To Home
-          </Button>
-        </View>
+            onPress={onPress}
+          >{I18n.t('home')}</Button>
+        </ScrollView>
       </Modal>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    flex:1,
+  container: {
+    flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent:'center',
-    margin:0,
-    padding:0,
+  },
+  contentContainer: {
+    flexGrow: 1,
+    justifyContent: 'center'
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
+  rowContainer: {
+    flex: 1,
+    flexDirection: 'row'
   },
   text: {
     color: 'white',
@@ -79,4 +121,10 @@ const styles = StyleSheet.create({
   centerButton: {
     width: 200,
   },
+  leftCol: {
+    flex: 1,
+  },
+  rightCol: {
+    flex: 1,
+  }
 });

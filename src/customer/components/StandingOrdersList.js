@@ -30,7 +30,7 @@ export default class StandingOrdersList extends Component {
             </Text>
 
             {item.packages.map((packageItem, index) => (
-              <View key={packageItem.id}>
+              <View key={`${index}`}>
                 <Text style={styles.dateTime}>{packageItem.category.name}</Text>
                 <Text style={styles.dateTime}>{packageItem.name},</Text>
               </View>
@@ -63,7 +63,7 @@ export default class StandingOrdersList extends Component {
         data={items}
         renderItem={this.renderItem}
         style={styles.listContainer}
-        keyExtractor={item => `${item.id}`}
+        keyExtractor={(item,index) => `${index}`}
         contentContainerStyle={styles.contentContainerStyle}
       />
     );

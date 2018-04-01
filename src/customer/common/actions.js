@@ -14,6 +14,9 @@ export const ACTION_TYPES = {
 
   CART_SET_ITEM: '@customer/CART_SET_ITEM',
   CART_SET_ITEMS: '@customer/CART_SET_ITEMS',
+  // CART_REMOVE_ITEM: '@customer/CART_REMOVE_ITEM',
+
+  CART_FLUSH_ITEMS : '@customer/CART_FLUSH_ITEMS',
 
   CATEGORY_REQUEST: '@customer/CATEGORY_REQUEST',
   CATEGORY_SUCCESS: '@customer/CATEGORY_SUCCESS',
@@ -75,17 +78,14 @@ function fetchCartItems() {
 }
 
 function addToCart(item: object) {
+  let id =uuid();
   return {
     type: ACTION_TYPES.CART_ADD_ITEM_SUCCESS,
-    id: uuid(),
-    item,
-  };
-}
-
-function removeFromCart(item: string) {
-  return {
-    type: ACTION_TYPES.CART_REMOVE_ITEM,
-    item,
+    id,
+    item:{
+      id,
+      ...item
+    },
   };
 }
 
@@ -94,6 +94,20 @@ function setCartItem(key, value) {
     type: ACTION_TYPES.CART_SET_ITEM,
     key,
     value,
+  };
+}
+
+function removeCartItem(key) {
+  return {
+    type: ACTION_TYPES.CART_REMOVE_ITEM,
+    itemID:key,
+  };
+}
+
+
+function flushCart() {
+  return {
+    type: ACTION_TYPES.CART_FLUSH_ITEMS,
   };
 }
 
@@ -125,13 +139,6 @@ function checkout(payload) {
   };
 }
 
-function createOrder(payload) {
-  return {
-    type: ACTION_TYPES.CREATE_ORDER_REQUEST,
-    payload,
-  };
-}
-
 function fetchAddresses(params) {
   return {
     type: ACTION_TYPES.ADDRESSES_REQUEST,
@@ -143,13 +150,6 @@ function saveAddress(params: object) {
   return {
     type: ACTION_TYPES.SAVE_ADDRESS_REQUEST,
     params,
-  };
-}
-
-function locationReceived(location: object) {
-  return {
-    type: ACTION_TYPES.DRIVER_LOCATION_UPDATED,
-    payload: location,
   };
 }
 
@@ -206,11 +206,12 @@ export const ACTIONS = {
   addToCart,
   fetchCartItems,
   setCartItem,
+  removeCartItem,
+  flushCart,
   fetchCategories,
   fetchTimings,
   fetchAddresses,
   saveAddress,
-  createOrder,
   checkout,
   setCartItems,
   subscribeToOrderTracking,

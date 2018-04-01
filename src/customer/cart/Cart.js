@@ -1,8 +1,8 @@
 /**
  * @flow
  */
-import React, {Component} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import React, {PureComponent} from 'react';
+import {ScrollView, Text,Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
@@ -12,11 +12,10 @@ import {
   SELECTORS as ORDER_SELECTORS,
 } from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
-import {Button} from 'react-native-paper';
+import {Button, Title} from 'react-native-paper';
 import I18n from 'utils/locale';
 import CartItems from 'customer/cart/components/CartItems';
 import DatePicker from 'customer/cart/components/DatePicker';
-import TimePicker from 'customer/cart/components/TimePicker';
 import AddressPicker from 'customer/cart/components/AddressPicker';
 import EmptyCart from 'customer/cart/components/EmptyCart';
 import moment from 'moment';
@@ -27,20 +26,23 @@ import CartTotal from 'customer/cart/components/CartTotal';
 import PaymentOptions from 'customer/cart/components/PaymentOptions';
 import OrderSuccess from 'customer/cart/components/OrderSuccess';
 import PaymentPage from 'customer/cart/components/PaymentPage';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 type State = {
   dates: Array,
   paymentMode: 'knet' | 'cash',
   showPaymentModal: boolean,
   showOrderSuccessModal: boolean,
+  timePickerModalVisible: boolean
 };
 
-class Cart extends Component {
+class Cart extends PureComponent {
   state: State = {
     dates: [],
     showPaymentModal: false,
     showOrderSuccessModal: false,
     paymentMode: 'knet',
+    timePickerModalVisible: false
   };
 
   componentDidMount() {
@@ -68,15 +70,13 @@ class Cart extends Component {
         address_id: selectedAddressID,
         items: this.props.cart.items,
         total: this.props.cart.total,
-        time: selectedTime,
+        time: selectedTime.format('HH:mm'),
         date: selectedDate,
         payment_mode: paymentMode,
       };
 
       return new Promise((resolve, reject) => {
         this.props.actions.checkout({item, resolve, reject});
-        // this.props.dispatch(CUSTOMER_ACTIONS.saveLoad({params, resolve}));
-        // dispatch(someActionCreator({ values, resolve, reject }))
       })
         .then(order => {
           if (order.status == 'Success') {
@@ -88,14 +88,10 @@ class Cart extends Component {
               showPaymentModal: true,
             });
           }
-
-          console.log('order success');
         })
         .catch(e => {
           console.log('e');
         });
-
-      // NavigatorService.reset('Home');
     }
   };
 
@@ -103,13 +99,11 @@ class Cart extends Component {
     this.props.actions.setCartItem('selectedDate', item);
   };
 
-  onTimePickerItemPress = time => {
-    console.log('time', time);
-    this.props.actions.setCartItem('selectedTime', time);
+  onTimeChange = (time) => {
+    this.props.actions.setCartItem('selectedTime', moment(time));
   };
 
   onPaymentOptionsItemPress = (option: string) => {
-    console.log('onPyamentPress', option);
     this.setState({
       paymentMode: option,
     });
@@ -117,19 +111,6 @@ class Cart extends Component {
 
   onAddressPickerItemPress = (item: object) => {
     this.props.actions.setCartItem('selectedAddressID', item.id);
-  };
-
-  saveAddress = address => {
-    const {isAuthenticated} = this.props;
-    if (!isAuthenticated) {
-      this.props.navigation.navigate('Login');
-    } else {
-      this.props.actions.saveAddress(address);
-    }
-  };
-
-  addNewCar = () => {
-    this.props.navigation.goBack(null);
   };
 
   hideCheckoutModal = () => {
@@ -144,10 +125,49 @@ class Cart extends Component {
     });
   };
 
+  showDateTimePickerModal = () => {
+    this.setState({
+      timePickerModalVisible: true
+    });
+  };
+
+  hideDateTimePickerModal = () => {
+    this.setState({
+      timePickerModalVisible: false
+    });
+  };
+
+  onCartItemPress = (item: object) => {
+    console.log('item',item);
+
+    return Alert.alert(`${I18n.t('cart_remove_item')} ?`, '', [
+      {text: I18n.t('cancel')},
+      {
+        text: I18n.t('yes'),
+        onPress: () => this.props.actions.removeCartItem(item.id),
+      },
+    ]);
+  };
+
+  saveAddress = address => {
+    const {isAuthenticated} = this.props;
+    if (!isAuthenticated) {
+      this.props.navigation.navigate('Login');
+    } else {
+      this.props.actions.saveAddress(address);
+    }
+  };
+
+  onSuccessButtonPress = () => {
+    this.hideSuccessModal();
+    this.props.actions.flushCart();
+    this.props.actions.fetchWorkingOrder();
+    this.props.navigation.popToTop();
+  };
+
   render() {
     let {cart, cartItems, user, cartTotal, checkout} = this.props;
     let {selectedDate, selectedTime, selectedAddressID} = cart;
-    console.log('selectedTime in Cart', selectedTime);
     let {
       dates,
       showPaymentModal,
@@ -156,16 +176,16 @@ class Cart extends Component {
     } = this.state;
 
     if (!cartItems.length) {
-      return <EmptyCart />;
+      return <EmptyCart/>;
     }
 
     return (
       <ScrollView contentInset={{bottom: 50}}>
-        <CartItems items={cartItems} onItemPress={() => {}} />
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
 
-        <CartTotal total={cartTotal} />
+        <CartTotal total={cartTotal}/>
 
-        <Separator style={{marginVertical: 10}} />
+        <Separator style={{marginVertical: 10}}/>
 
         <DatePicker
           items={dates}
@@ -173,20 +193,28 @@ class Cart extends Component {
           activeItem={selectedDate}
         />
 
-        <Separator style={{marginVertical: 10}} />
+        <Separator style={{marginVertical: 10}}/>
 
-        <SectionHeading
-          title={I18n.t('select_time')}
-          style={{backgroundColor: 'transparent'}}
-        />
+        <Text style={{fontSize: 20, paddingHorizontal: 10,}}>{I18n.t('select_time')}</Text>
 
-        <TimePicker
+        <Button
+          style={{backgroundColor: 'white'}}
+          onPress={this.showDateTimePickerModal}
+        >
+          {selectedTime.format('HH:mm')}
+        </Button>
+
+        <DateTimePicker
+          titleIOS={I18n.t('select_time')}
+          date={selectedTime.toDate()}
+          isVisible={this.state.timePickerModalVisible}
+          neverDisableConfirmIOS={true}
           mode="time"
-          date={selectedTime}
-          placeholder={I18n.t('select')}
           confirmBtnText={I18n.t('confirm')}
           cancelBtnText={I18n.t('cancel')}
-          onDateChange={this.onTimePickerItemPress}
+          onConfirm={this.hideDateTimePickerModal}
+          onCancel={this.hideDateTimePickerModal}
+          onDateChange={this.onTimeChange}
           customStyles={{
             dateTouchBody: {
               padding: 10,
@@ -198,9 +226,12 @@ class Cart extends Component {
               fontSize: 25,
             },
           }}
+          titleStyle={{
+            fontSize: 20
+          }}
         />
 
-        <Separator style={{marginVertical: 10}} />
+        <Separator style={{marginVertical: 10}}/>
 
         <AddressPicker
           addresses={user ? (user.addresses ? user.addresses : []) : []}
@@ -209,7 +240,7 @@ class Cart extends Component {
           activeItemID={selectedAddressID}
         />
 
-        <Separator style={{marginVertical: 10}} />
+        <Separator style={{marginVertical: 10}}/>
 
         <SectionHeading
           title={I18n.t('payment_mode')}
@@ -221,14 +252,6 @@ class Cart extends Component {
           selectedItem={paymentMode}
         />
 
-        {/*<Button*/}
-        {/*title={I18n.t('checkout')}*/}
-        {/*onPress={this.performCheckout}*/}
-        {/*style={{marginTop: 10}}*/}
-        {/*background="success"*/}
-        {/*disabled={checkout.isFetching}*/}
-        {/*/>*/}
-
         <Button
           onPress={this.performCheckout}
           disabled={checkout.isFetching}
@@ -239,24 +262,20 @@ class Cart extends Component {
             justifyContent: 'center',
             paddingVertical: 10,
             marginTop: 20,
-            backgroundColor:colors.primary
+            backgroundColor: colors.primary
           }}
 
         >
           {I18n.t('checkout')}
         </Button>
 
-        {/*<Button*/}
-        {/*title={I18n.t('add_new_car')}*/}
-        {/*onPress={this.addNewCar}*/}
-        {/*style={{marginTop: 30}}*/}
-        {/*background="secondary"*/}
-        {/*/>*/}
-
         <OrderSuccess
-          onPress={this.onPaymentOptionsItemPress}
+          onPress={this.onSuccessButtonPress}
+          // visible={true}
           visible={showOrderSuccessModal}
           onHide={this.hideSuccessModal}
+          cart={cart}
+          total={cartTotal}
         />
 
         <PaymentPage

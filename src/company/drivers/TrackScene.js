@@ -27,7 +27,6 @@ class TrackScene extends PureComponent {
   render() {
     const {drivers} = this.props;
 
-    console.log('drivers', drivers);
     return null;
   }
 }

@@ -44,7 +44,7 @@ const getCartItems = createSelector(
   [cartItems, categoriesEntity, packagesEntity, servicesEntity],
   (items, categories, packages, services) => {
     return Object.keys(items)
-      .map(item => items[item])
+      .map(id => items[id])
       .map(item => {
         return {
           ...item,

@@ -58,8 +58,6 @@ class OrderDetailScene extends Component {
   render() {
     let {order, drivers} = this.props;
 
-    console.log('order waa', order);
-
     return (
       <ScrollView style={{flex: 1}} keyboardShouldPersistTap="always">
         <OrderBasicInfo item={order} />

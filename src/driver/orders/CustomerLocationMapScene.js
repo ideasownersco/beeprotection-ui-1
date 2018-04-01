@@ -68,15 +68,10 @@ class CustomerLocationMapScene extends Component {
   };
 
   render() {
-    console.log('customer map');
-    console.log('sat', this.state);
-
     let {order} = this.props.navigation.state.params;
     let {address} = order;
     let {job} = this.props.navigation.state.params.order;
     let {origin} = this.state;
-
-    console.log('order', order);
 
     return (
       <Map

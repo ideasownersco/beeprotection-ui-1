@@ -46,8 +46,6 @@ class TrackDetailScene extends Component {
     let {order} = this.props.navigation.state.params;
     let {tracking} = this.props;
 
-    console.log('tracking', tracking);
-
     let {address} = order;
 
     // const {job} = this.props.navigation.state.params.order;

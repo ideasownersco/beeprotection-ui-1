@@ -28,7 +28,6 @@ class TrackOrderScene extends Component {
   };
 
   loadTrackDetailScene = () => {
-    console.log('load');
     this.props.navigation.navigate('TrackDetail', {
       order: this.props.order,
     });

@@ -6,35 +6,37 @@ const initialState = {
   items: {},
   total: 0,
   selectedDate: moment(),
-  selectedTime: moment().format('HH:mm'),
+  selectedTime: moment(),
   selectedAddressID: null,
   activeCategoryID: null,
   activePackageID: null,
   activeServicesIDs: [],
-  // amount: 0,
 };
 
 export function reducer(state = initialState, action = {}) {
-  // {
-  //   return Object.keys(items)
-  //     .map(item => items[item].total).reduce((total,amount) => total + amount)
-  // }
-
   switch (action.type) {
     case ACTION_TYPES.CART_ADD_ITEM_SUCCESS: {
       return {
         ...state,
+        total:0,
         items: {
           ...state.items,
           [action.id]: action.item,
         },
-        // total: state.total + action.item.total,
       };
     }
     case ACTION_TYPES.CART_REMOVE_ITEM:
+      let {[action.itemID]:itemID,...rest} = state.items;
+
       return {
         ...state,
-        error: action.error,
+        items:rest,
+        total:0,
+        // items: Object.keys(state.items).filter(id => id != action.itemID).map(id => {
+        //   return {
+        //     [id] : state.items[id]
+        //   }
+        // }),
       };
     case ACTION_TYPES.CART_SET_ITEM:
       return {
@@ -50,6 +52,10 @@ export function reducer(state = initialState, action = {}) {
       return {
         ...state,
         selectedAddressID: action.address_id,
+      };
+    case ACTION_TYPES.CART_FLUSH_ITEMS:
+      return {
+        ...initialState,
       };
     default:
       return state;

@@ -69,7 +69,6 @@ export default class MyLocationMapMarker extends React.PureComponent {
     // eslint-disable-next-line no-undef
     this.watchID = navigator.geolocation.watchPosition(
       position => {
-        console.log('wa');
         const myLastPosition = this.state.myPosition;
         const myPosition = position.coords;
         if (!isEqual(myPosition, myLastPosition)) {

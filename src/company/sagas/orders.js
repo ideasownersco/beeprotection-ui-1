@@ -58,7 +58,6 @@ function* fetchWorkingOrders() {
       const response = yield call(API.fetchWorkingOrders, params);
       const normalized = normalize(response.data, [Schema.orders]);
       const {entities, result} = normalized;
-      console.log('fetchWorkingOrders', normalized);
       yield put({
         type: ACTION_TYPES.FETCH_JOB_ORDERS_SUCCESS,
         entities: entities,
