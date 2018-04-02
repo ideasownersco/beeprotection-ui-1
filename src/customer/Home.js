@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView,AppState} from 'react-native';
 import HomeActionButtons from 'customer/components/HomeActionButtons';
 import StandingOrdersList from 'customer/components/StandingOrdersList';
 import {SELECTORS} from 'customer/selectors/orders';
@@ -13,10 +13,26 @@ class Home extends Component {
     working_order: {},
   };
 
+  state = {
+    appState:AppState.currentState
+  };
+
   componentDidMount() {
     this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrder());
-    // this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
+    AppState.addEventListener('change', this.handleAppStateChange);
   }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this.handleAppStateChange);
+  }
+
+  handleAppStateChange = nextAppState => {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      console.log('referesssshinggggggg');
+      this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrder());
+    }
+    this.setState({appState: nextAppState});
+  };
 
   onCreateOrderPress = () => {
     this.props.navigation.navigate('CreateOrder');
@@ -32,8 +48,6 @@ class Home extends Component {
   };
 
   onStandingOrderListItemPress = (item: Object) => {
-    console.log('item', item);
-
     this.props.navigation.navigate('OrderDetail', {
       orderID: item.id,
     });

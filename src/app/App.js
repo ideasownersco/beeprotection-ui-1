@@ -29,16 +29,9 @@ class App extends Component {
 
   componentDidMount() {
     this.props.dispatch(ACTIONS.boot());
-    BackgroundGeolocation.stop();
-    BackgroundGeolocation.removeListeners();
-    AppState.addEventListener('change', this.handleAppStateChange);
+    // BackgroundGeolocation.stop();
+    // BackgroundGeolocation.removeListeners();
   }
-
-  componentWillUnmount() {
-    AppState.removeEventListener('change', this.handleAppStateChange);
-  }
-
-  handleAppStateChange = appState => {};
 
   onLanguageSelect = name => {
     this.props.dispatch(ACTIONS.setLanguage(name));
@@ -58,6 +51,38 @@ class App extends Component {
   };
 
   onReceivePushNotifications = (notification: object) => {
+    console.log('notification', notification);
+    let {foreground, data} = notification;
+    let navigation = NavigatorService;
+
+    if (!foreground) {
+      console.log('not foregorund');
+      let {type} = data;
+      switch (type) {
+        case 'job.started':
+          console.log('job.started');
+          let {order_id} = data;
+          return navigation.navigate('OrderDetail', {
+            orderID: order_id,
+          });
+      }
+    }
+    //
+    // if (
+    //   notification.data.type &&
+    //   notification.data.type === 'message.created'
+    // ) {
+    //   if (AppState.currentState === 'background') {
+    //     navigateToScene('ChatListScene', {});
+    //     navigateToScene('ChatThreadScene', {
+    //       thread_id: notification.data.thread_id,
+    //       title: '',
+    //     });
+    //   }
+    // }
+
+    // if(notification.)
+
     // let navigation = NavigatorService;
     // navigation.navigate('UpcomingOrders');
     // navigation.navigate('OrderDetail', {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {DrawerNavigator, StackNavigator} from 'react-navigation';
 import Drawer from 'driver/components/Drawer';
-import HomeScene from 'driver/HomeScene';
+import Home from 'driver/Home';
 import Login from 'guest/Login';
 import DrawerIcon from 'components/DrawerIcon';
 import OrderDetailScene from 'driver/orders/OrderDetailScene';
@@ -19,7 +19,7 @@ const getDrawerIcon = navigation => {
 
 const HomeStack = StackNavigator({
   Home: {
-    screen: HomeScene,
+    screen: Home,
     navigationOptions: ({navigation}) => getDrawerIcon(navigation),
   },
   OrderDetail: {screen: OrderDetailScene},

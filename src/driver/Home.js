@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView, View} from 'react-native';
+import {ScrollView, View,AppState} from 'react-native';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {connect} from 'react-redux';
 import OrdersList from 'driver/orders/components/OrdersList';
@@ -8,7 +8,7 @@ import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
 
-class HomeScene extends Component {
+class Home extends Component {
   static propTypes = {
     orders: PropTypes.array.isRequired,
   };
@@ -17,11 +17,27 @@ class HomeScene extends Component {
     orders: [],
   };
 
+  state = {
+    appState:AppState.currentState
+  };
+
   componentDidMount() {
     this.props.dispatch(DRIVER_ACTIONS.fetchProfile());
     this.props.dispatch(DRIVER_ACTIONS.fetchWorkingOrder());
     this.props.dispatch(DRIVER_ACTIONS.fetchUpcomingOrders());
+    AppState.addEventListener('change', this.handleAppStateChange);
   }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this.handleAppStateChange);
+  }
+
+  handleAppStateChange = nextAppState => {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      this.props.dispatch(DRIVER_ACTIONS.fetchWorkingOrder());
+    }
+    this.setState({appState: nextAppState});
+  };
 
   onOrdersListItemPress = (item: object) => {
     return this.props.navigation.navigate('OrderDetail', {
@@ -87,4 +103,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(HomeScene);
+export default connect(mapStateToProps)(Home);
