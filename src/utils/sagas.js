@@ -5,6 +5,8 @@ import {sagas as COMPANY_SAGAS} from 'company/sagas';
 import {sagas as DRIVER_SAGAS} from 'driver/sagas';
 import {all} from 'redux-saga/effects';
 
-export default function* rootSaga() {
+const rootSaga = function* rootSaga() {
   yield all([APP_SAGA, AUTH_SAGA, CUSTOMER_SAGA, COMPANY_SAGAS, DRIVER_SAGAS]);
-}
+};
+
+export default rootSaga;
