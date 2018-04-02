@@ -5,9 +5,9 @@ import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 import Modal from 'react-native-modal';
 import colors from 'assets/theme/colors';
-import {Title, Button} from "react-native-paper";
+import {Title, Button} from 'react-native-paper';
 import I18n from 'utils/locale';
-import Separator from "../../../components/Separator";
+import Separator from '../../../components/Separator';
 
 export default class OrderSuccess extends Component {
   // shouldComponentUpdate(nextProps) {
@@ -19,7 +19,7 @@ export default class OrderSuccess extends Component {
     visible: PropTypes.bool.isRequired,
     onHide: PropTypes.func.isRequired,
     cart: PropTypes.object.isRequired,
-    total: PropTypes.number.isRequired
+    total: PropTypes.number.isRequired,
   };
 
   render() {
@@ -34,46 +34,37 @@ export default class OrderSuccess extends Component {
         backdropColor="black"
         useNativeDriver={true}
         hideModalContentWhileAnimating={true}
-        style={{flex: 1,}}
-      >
+        style={{flex: 1}}>
         <ScrollView
           style={[styles.container]}
-          contentContainer={styles.contentContainer}
-        >
-
-          <View style={{padding: 10,paddingTop:150}}>
-            <Title style={{textAlign: 'center',fontSize:20}}>{I18n.t('thank_you')}</Title>
+          contentContainer={styles.contentContainer}>
+          <View style={{padding: 10, paddingTop: 200}}>
+            <Title style={{textAlign: 'center', fontSize: 20}}>
+              {I18n.t('thank_you')}
+            </Title>
           </View>
 
           <View style={styles.rowContainer}>
-            <View style={styles.leftCol}>
-              {I18n.t('order_date')}
-            </View>
+            <View style={styles.leftCol}>{I18n.t('order_date')}</View>
             <View style={styles.rightCol}>
               {cart.selectedDate.format('dd-mm-yy')}
             </View>
           </View>
 
-          <Separator/>
+          <Separator />
 
           <View style={styles.rowContainer}>
-            <View style={styles.leftCol}>
-              {I18n.t('order_time')}
-            </View>
+            <View style={styles.leftCol}>{I18n.t('order_time')}</View>
             <View style={styles.rightCol}>
               {cart.selectedTime.format('dd-mm-yy')}
             </View>
           </View>
 
-          <Separator/>
+          <Separator />
 
           <View style={styles.rowContainer}>
-            <View style={styles.leftCol}>
-              {I18n.t('total')}
-            </View>
-            <View style={styles.rightCol}>
-              {total}
-            </View>
+            <View style={styles.leftCol}>{I18n.t('total')}</View>
+            <View style={styles.rightCol}>{total}</View>
           </View>
 
           <Button
@@ -81,9 +72,9 @@ export default class OrderSuccess extends Component {
             dark
             raised
             onPress={onPress}
-            style={{padding:20}}
-          >{I18n.t('home')}</Button>
-
+            style={{padding: 20}}>
+            {I18n.t('home')}
+          </Button>
         </ScrollView>
       </Modal>
     );
@@ -97,13 +88,13 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
     // alignItems: 'center',
     // justifyContent: 'center',
   },
   rowContainer: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   text: {
     color: 'white',
@@ -122,5 +113,5 @@ const styles = StyleSheet.create({
   },
   rightCol: {
     flex: 1,
-  }
+  },
 });

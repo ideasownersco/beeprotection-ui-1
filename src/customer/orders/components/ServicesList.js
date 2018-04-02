@@ -32,21 +32,19 @@ export default class ServicesList extends Component {
             style={styles.image}
             resizeMode="contain"
           />
-          <View style={{flexDirection:'row'}}>
-          <LocalizedText
-            style={[
-              styles.title,
-              activeItemIDs.indexOf(item.id) > -1 && {
-                color: colors.primary,
-                fontWeight: 'bold',
-              },
-            ]}
-            ar={item.name_ar}
-            en={item.name_en}
-          />
-            <Text style={styles.price}>
-              {item.price} KD
-            </Text>
+          <View style={{flexDirection: 'row'}}>
+            <LocalizedText
+              style={[
+                styles.title,
+                activeItemIDs.indexOf(item.id) > -1 && {
+                  color: colors.primary,
+                  fontWeight: 'bold',
+                },
+              ]}
+              ar={item.name_ar}
+              en={item.name_en}
+            />
+            <Text style={styles.price}>{item.price} KD</Text>
           </View>
         </View>
       </Touchable>
@@ -107,8 +105,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {},
-  price:{
-    fontWeight:'600',
-    paddingHorizontal:3,
-  }
+  price: {
+    fontWeight: '600',
+    paddingHorizontal: 3,
+  },
 });

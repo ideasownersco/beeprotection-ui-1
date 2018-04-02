@@ -16,7 +16,7 @@ export const ACTION_TYPES = {
   CART_SET_ITEMS: '@customer/CART_SET_ITEMS',
   // CART_REMOVE_ITEM: '@customer/CART_REMOVE_ITEM',
 
-  CART_FLUSH_ITEMS : '@customer/CART_FLUSH_ITEMS',
+  CART_FLUSH_ITEMS: '@customer/CART_FLUSH_ITEMS',
 
   CATEGORY_REQUEST: '@customer/CATEGORY_REQUEST',
   CATEGORY_SUCCESS: '@customer/CATEGORY_SUCCESS',
@@ -78,13 +78,13 @@ function fetchCartItems() {
 }
 
 function addToCart(item: object) {
-  let id =uuid();
+  let id = uuid();
   return {
     type: ACTION_TYPES.CART_ADD_ITEM_SUCCESS,
     id,
-    item:{
+    item: {
       id,
-      ...item
+      ...item,
     },
   };
 }
@@ -100,10 +100,9 @@ function setCartItem(key, value) {
 function removeCartItem(key) {
   return {
     type: ACTION_TYPES.CART_REMOVE_ITEM,
-    itemID:key,
+    itemID: key,
   };
 }
-
 
 function flushCart() {
   return {

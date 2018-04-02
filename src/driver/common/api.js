@@ -19,7 +19,7 @@ function startJob(id) {
 }
 
 function finishJob(id) {
-  const path = `driver/orders/${id}/job/finish`;
+  const path = `driver/jobs/${id}/finish`;
   let requestParams = {
     path,
     method: 'POST',

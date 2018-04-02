@@ -2,7 +2,7 @@
  * @flow
  */
 import React, {PureComponent} from 'react';
-import {ScrollView, Text,Alert} from 'react-native';
+import {ScrollView, Text, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
@@ -33,7 +33,7 @@ type State = {
   paymentMode: 'knet' | 'cash',
   showPaymentModal: boolean,
   showOrderSuccessModal: boolean,
-  timePickerModalVisible: boolean
+  timePickerModalVisible: boolean,
 };
 
 class Cart extends PureComponent {
@@ -42,7 +42,7 @@ class Cart extends PureComponent {
     showPaymentModal: false,
     showOrderSuccessModal: false,
     paymentMode: 'knet',
-    timePickerModalVisible: false
+    timePickerModalVisible: false,
   };
 
   componentDidMount() {
@@ -99,7 +99,7 @@ class Cart extends PureComponent {
     this.props.actions.setCartItem('selectedDate', item);
   };
 
-  onTimeChange = (time) => {
+  onTimeChange = time => {
     this.props.actions.setCartItem('selectedTime', moment(time));
   };
 
@@ -127,18 +127,18 @@ class Cart extends PureComponent {
 
   showDateTimePickerModal = () => {
     this.setState({
-      timePickerModalVisible: true
+      timePickerModalVisible: true,
     });
   };
 
   hideDateTimePickerModal = () => {
     this.setState({
-      timePickerModalVisible: false
+      timePickerModalVisible: false,
     });
   };
 
   onCartItemPress = (item: object) => {
-    console.log('item',item);
+    console.log('item', item);
 
     return Alert.alert(`${I18n.t('cart_remove_item')} ?`, '', [
       {text: I18n.t('cancel')},
@@ -176,16 +176,16 @@ class Cart extends PureComponent {
     } = this.state;
 
     if (!cartItems.length) {
-      return <EmptyCart/>;
+      return <EmptyCart />;
     }
 
     return (
       <ScrollView contentInset={{bottom: 50}}>
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
 
-        <CartTotal total={cartTotal}/>
+        <CartTotal total={cartTotal} />
 
-        <Separator style={{marginVertical: 10}}/>
+        <Separator style={{marginVertical: 10}} />
 
         <DatePicker
           items={dates}
@@ -193,15 +193,16 @@ class Cart extends PureComponent {
           activeItem={selectedDate}
         />
 
-        <Separator style={{marginVertical: 10}}/>
+        <Separator style={{marginVertical: 10}} />
 
-        <Text style={{fontSize: 20, paddingHorizontal: 10,}}>{I18n.t('select_time')}</Text>
+        <Text style={{fontSize: 20, paddingHorizontal: 10}}>
+          {I18n.t('select_time')}
+        </Text>
 
         <Button
-          style={{backgroundColor: 'white'}}
-          onPress={this.showDateTimePickerModal}
-        >
-          {selectedTime.format('HH:mm')}
+          style={{flex: 1, alignItems: 'flex-start', backgroundColor: 'white'}}
+          onPress={this.showDateTimePickerModal}>
+          <Text style={{fontSize: 20}}>{selectedTime.format('h:mm a')}</Text>
         </Button>
 
         <DateTimePicker
@@ -227,11 +228,11 @@ class Cart extends PureComponent {
             },
           }}
           titleStyle={{
-            fontSize: 20
+            fontSize: 20,
           }}
         />
 
-        <Separator style={{marginVertical: 10}}/>
+        <Separator style={{marginVertical: 10}} />
 
         <AddressPicker
           addresses={user ? (user.addresses ? user.addresses : []) : []}
@@ -240,7 +241,7 @@ class Cart extends PureComponent {
           activeItemID={selectedAddressID}
         />
 
-        <Separator style={{marginVertical: 10}}/>
+        <Separator style={{marginVertical: 10}} />
 
         <SectionHeading
           title={I18n.t('payment_mode')}
@@ -262,10 +263,8 @@ class Cart extends PureComponent {
             justifyContent: 'center',
             paddingVertical: 10,
             marginTop: 20,
-            backgroundColor: colors.primary
-          }}
-
-        >
+            backgroundColor: colors.primary,
+          }}>
           {I18n.t('checkout')}
         </Button>
 

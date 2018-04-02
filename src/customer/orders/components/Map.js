@@ -44,7 +44,7 @@ export default class Map extends Component {
     return (
       <View style={styles.container}>
         <MapView
-          provider={PROVIDER_GOOGLE}
+          // provider={PROVIDER_GOOGLE}
           ref={ref => {
             this.map = ref;
           }}

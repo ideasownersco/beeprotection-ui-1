@@ -32,6 +32,8 @@ class Home extends Component {
   };
 
   onStandingOrderListItemPress = (item: Object) => {
+    console.log('item', item);
+
     this.props.navigation.navigate('OrderDetail', {
       orderID: item.id,
     });

@@ -18,7 +18,7 @@ export function reducer(state = initialState, action = {}) {
     case ACTION_TYPES.CART_ADD_ITEM_SUCCESS: {
       return {
         ...state,
-        total:0,
+        total: 0,
         items: {
           ...state.items,
           [action.id]: action.item,
@@ -26,12 +26,12 @@ export function reducer(state = initialState, action = {}) {
       };
     }
     case ACTION_TYPES.CART_REMOVE_ITEM:
-      let {[action.itemID]:itemID,...rest} = state.items;
+      let {[action.itemID]: itemID, ...rest} = state.items;
 
       return {
         ...state,
-        items:rest,
-        total:0,
+        items: rest,
+        total: 0,
         // items: Object.keys(state.items).filter(id => id != action.itemID).map(id => {
         //   return {
         //     [id] : state.items[id]

@@ -38,8 +38,7 @@ class App extends Component {
     AppState.removeEventListener('change', this.handleAppStateChange);
   }
 
-  handleAppStateChange = (appState) => {
-  };
+  handleAppStateChange = appState => {};
 
   onLanguageSelect = name => {
     this.props.dispatch(ACTIONS.setLanguage(name));

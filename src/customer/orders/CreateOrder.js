@@ -111,10 +111,10 @@ class CreateOrder extends PureComponent {
 
     let index = activeServicesIDs.indexOf(item.id);
 
-    if(index > -1) {
-      currentAmount = parseInt(total) - parseInt(item.price)
+    if (index > -1) {
+      currentAmount = parseInt(total) - parseInt(item.price);
     } else {
-      currentAmount = parseInt(total) + parseInt(item.price)
+      currentAmount = parseInt(total) + parseInt(item.price);
     }
 
     let params = {
@@ -159,7 +159,7 @@ class CreateOrder extends PureComponent {
   };
 
   onAddNewItemPress = () => {
-    this.props.actions.setCartItem('total',0);
+    this.props.actions.setCartItem('total', 0);
     this.setState({
       showCartSuccessModal: false,
     });
@@ -183,7 +183,7 @@ class CreateOrder extends PureComponent {
       activeCategoryID,
       activePackageID,
       activeServicesIDs,
-      total
+      total,
     } = this.props.cart;
     const {categories} = this.props;
 
@@ -202,9 +202,7 @@ class CreateOrder extends PureComponent {
       <ScrollView
         style={{flex: 1, backgroundColor: 'white'}}
         keyboardShouldPersistTaps={'always'}
-        contentInset={{bottom: 50}}
-      >
-
+        contentInset={{bottom: 50}}>
         <CategoriesList
           items={categories}
           onItemPress={this.onCategoriesListItemPress}
@@ -231,15 +229,23 @@ class CreateOrder extends PureComponent {
           />
         )}
 
-        <Title style={{textAlign:'center',padding:10,backgroundColor:colors.fadedWhite,marginBottom:10}}>{I18n.t('total')} {total} KD</Title>
+        <Title
+          style={{
+            textAlign: 'center',
+            padding: 10,
+            backgroundColor: colors.fadedWhite,
+            marginBottom: 10,
+          }}>
+          {I18n.t('total')} {total} KD
+        </Title>
 
         <Button
           onPress={this.onAddToCartPress}
           disabled={!activePackageID}
           raised
           style={{
-            backgroundColor:colors.primary,
-            padding:10
+            backgroundColor: colors.primary,
+            padding: 10,
           }}>
           {I18n.t('add_to_cart')}
         </Button>

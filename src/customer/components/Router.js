@@ -17,6 +17,7 @@ import TrackDetailScene from 'customer/orders/TrackDetailScene';
 import PastOrdersScene from 'customer/orders/PastOrdersScene';
 import UpcomingOrdersScene from 'customer/orders/UpcomingOrdersScene';
 import I18n from 'utils/locale';
+import colors from 'assets/theme/colors';
 
 const getDrawerIcon = navigation => {
   return {
@@ -43,50 +44,54 @@ const AuthStack = StackNavigator(
   },
 );
 
-const HomeStack = StackNavigator({
-  Home: {
-    screen: Home,
+const HomeStack = StackNavigator(
+  {
+    Home: {
+      screen: Home,
+      navigationOptions: ({navigation}) => ({
+        title: I18n.t('home'),
+        headerLeft: (
+          <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
+        ),
+      }),
+    },
+    CreateOrder: {
+      screen: CreateOrder,
+      navigationOptions: ({navigation}) => ({
+        title: I18n.t('create_order'),
+      }),
+    },
+    BidList: {screen: BidList},
+    OrderDetail: {screen: OrderDetailScene},
+    TrackOrder: {screen: TrackOrderScene},
+    Cart: {
+      screen: Cart,
+      navigationOptions: ({navigation}) => ({
+        title: I18n.t('cart'),
+      }),
+    },
+    Login: {
+      screen: AuthStack,
+      navigationOptions: ({navigation}) => ({
+        headerLeft: <BackButton onPress={() => navigation.goBack(null)} />,
+      }),
+    },
+    // DriverLocationMap: {
+    //   screen: DriverLocationMapScene,
+    // },
+    TrackDetail: {
+      screen: TrackDetailScene,
+    },
+    PastOrders: {screen: PastOrdersScene},
+    UpcomingOrders: {screen: UpcomingOrdersScene},
+  },
+  {
     navigationOptions: ({navigation}) => ({
-      title: I18n.t('home'),
-      headerLeft: (
-        <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
-      ),
+      gesturesEnabled: false,
+      headerTintColor: colors.primary,
     }),
   },
-  CreateOrder: {
-    screen: CreateOrder,
-    navigationOptions: ({navigation}) => ({
-      title: I18n.t('create_order'),
-    }),
-  },
-  BidList: {screen: BidList},
-  OrderDetail: {screen: OrderDetailScene},
-  TrackOrder: {screen: TrackOrderScene},
-  Cart: {
-    screen: Cart,
-    navigationOptions: ({navigation}) => ({
-      title: I18n.t('cart'),
-    }),
-  },
-  Login: {
-    screen: AuthStack,
-    navigationOptions: ({navigation}) => ({
-      headerLeft: <BackButton onPress={() => navigation.goBack(null)} />,
-    }),
-  },
-  // DriverLocationMap: {
-  //   screen: DriverLocationMapScene,
-  // },
-  TrackDetail: {
-    screen: TrackDetailScene,
-  },
-  PastOrders: {screen: PastOrdersScene},
-  UpcomingOrders: {screen: UpcomingOrdersScene},
-},{
-  navigationOptions: ({navigation}) => ({
-    gesturesEnabled: false
-  })
-});
+);
 
 const SettingsStack = StackNavigator({
   Settings: {

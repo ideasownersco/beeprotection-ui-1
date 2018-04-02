@@ -50,7 +50,7 @@ function* syncUserToSocket(socket) {
 }
 
 function* subscribeToJobTrack(socket) {
-  console.log('socket',socket);
+  console.log('socket', socket);
 
   while (true) {
     const threadParams = yield take(CUSTOMER_ACTIONS.SUBSCRIBE_TO_JOB_TRACK);

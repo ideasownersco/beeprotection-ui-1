@@ -9,31 +9,26 @@ import {SELECTORS as ORDER_SELECTORS} from 'customer/selectors/orders';
 import I18n from 'utils/locale';
 import Map from 'customer/orders/components/Map';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
-import {ACTIONS} from 'customer/common/actions';
-import {bindActionCreators} from 'redux';
 
 class TrackDetailScene extends Component {
-
-  // componentDidMount() {
-  //   this.props.actions.fetchOrderDetails(
-  //     this.props.navigation.state.params.orderID,
-  //   );
-  // }
-
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
         params: PropTypes.shape({
-          orderID: PropTypes.number.isRequired,
+          order: PropTypes.object.isRequired,
         }),
       }),
     }),
   };
 
   componentDidMount() {
-    const {order} = this.props.navigation.state.params;
-    // const {order} = this.props;
-    if (order && order.trackeable) {
+    this.props.dispatch(
+      CUSTOMER_ACTIONS.fetchOrderDetails(
+        this.props.navigation.state.params.order.id,
+      ),
+    );
+    const {order} = this.props;
+    if (order && order.trackeable && order.job) {
       this.props.dispatch(
         CUSTOMER_ACTIONS.subscribeToOrderTracking({
           job_id: order.job.id,
@@ -43,13 +38,9 @@ class TrackDetailScene extends Component {
   }
 
   render() {
-    let {order} = this.props.navigation.state.params;
+    let {order} = this.props;
     let {tracking} = this.props;
-
     let {address} = order;
-
-    // const {job} = this.props.navigation.state.params.order;
-
     let origin;
 
     if (tracking.latitude) {
@@ -64,61 +55,40 @@ class TrackDetailScene extends Component {
       };
     }
 
-    if (!order.trackeable) {
+    if (order.trackeable) {
       return (
-        <View style={{padding: 10}}>
-          <Text style={{textAlign: 'center'}}>
-            {I18n.t('tracking_not_available')}
-          </Text>
-        </View>
+        <Map
+          origin={origin}
+          destination={{
+            latitude: address.latitude,
+            longitude: address.longitude,
+          }}
+        />
       );
     }
 
     return (
-      <Map
-        origin={origin}
-        destination={{
-          latitude: address.latitude,
-          longitude: address.longitude,
-        }}
-      />
+      <View style={{padding: 10}}>
+        <Text style={{textAlign: 'center'}}>
+          {I18n.t('tracking_not_available')}
+        </Text>
+      </View>
     );
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     actions: bindActionCreators({...ACTIONS}, dispatch),
-//   };
-// }
-
 const makeMapStateToProps = () => {
-  // const mapStateToProps = (state, props) => {
-  //   const {job} = props.navigation.state.params.order;
-  //
-  //   return {
-  //     tracking: job
-  //       ? getLocationUpdatesForJob(state, job.id)
-  //       : {},
-  //   };
-  // };
-  // const getOrderByID = ORDER_SELECTORS.getOrderByID();
-
+  const getOrderByID = ORDER_SELECTORS.getOrderByID();
   const getLocationUpdatesForJob = ORDER_SELECTORS.getLocationUpdatesForJob();
-
   const mapStateToProps = (state, props) => {
-    const {job} = props.navigation.state.params.order;
-
+    const {order} = props.navigation.state.params;
+    const job = (order && order.job) || {};
     return {
-      tracking: job
-        ? getLocationUpdatesForJob(state, job.id)
-        : {},
+      order: getOrderByID(state, order.id),
+      tracking: job.id ? getLocationUpdatesForJob(state, job.id) : {},
     };
   };
-
   return mapStateToProps;
 };
 
-export default connect(makeMapStateToProps)(
-  TrackDetailScene,
-);
+export default connect(makeMapStateToProps)(TrackDetailScene);
