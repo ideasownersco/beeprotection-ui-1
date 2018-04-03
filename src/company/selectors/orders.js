@@ -6,7 +6,7 @@ const schemas = state => state.entities;
 const upcomingOrders = state => state.company.upcoming_orders.ids;
 const workingOrders = state => state.company.working_orders.ids;
 const pastOrders = state => state.company.past_orders.ids;
-const getItemIdProp = ({}, itemID) => itemID;
+const getItemIdProp = (state, itemID) => itemID;
 
 const getOrderByID = () => {
   return createSelector([schemas, getItemIdProp], (entities, itemID) =>

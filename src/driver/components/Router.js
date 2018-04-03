@@ -8,6 +8,7 @@ import OrderDetailScene from 'driver/orders/OrderDetailScene';
 import CustomerLocationMapScene from 'driver/orders/CustomerLocationMapScene';
 import PastOrdersScene from 'driver/orders/PastOrdersScene';
 import UpcomingOrdersScene from 'driver/orders/UpcomingOrdersScene';
+import I18n from 'utils/locale';
 
 const getDrawerIcon = navigation => {
   return {
@@ -20,7 +21,12 @@ const getDrawerIcon = navigation => {
 const HomeStack = StackNavigator({
   Home: {
     screen: Home,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    navigationOptions: ({navigation}) => ({
+      title: I18n.t('driver_home'),
+      headerLeft: (
+        <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
+      ),
+    }),
   },
   OrderDetail: {screen: OrderDetailScene},
   CustomerLocationMap: {

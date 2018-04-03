@@ -1,7 +1,7 @@
 import React from 'react';
 import {DrawerNavigator, StackNavigator} from 'react-navigation';
 import Drawer from 'company/components/Drawer';
-import HomeScene from 'company/HomeScene';
+import Home from 'company/Home';
 import Login from 'guest/Login';
 import DrawerIcon from 'components/DrawerIcon';
 import OrderDetailScene from 'company/orders/OrderDetailScene';
@@ -13,6 +13,7 @@ import AddDriverScene from 'company/drivers/AddDriverScene';
 import DriverDetailScene from 'company/drivers/DriverDetailScene';
 import SettingsScene from 'company/SettingsScene';
 import TrackDriversScene from 'company/drivers/TrackScene';
+import I18n from 'utils/locale';
 
 const getDrawerIcon = navigation => {
   return {
@@ -25,8 +26,13 @@ const getDrawerIcon = navigation => {
 const HomeStack = StackNavigator(
   {
     Home: {
-      screen: HomeScene,
-      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+      screen: Home,
+      navigationOptions: ({navigation}) => ({
+        title: I18n.t('admin_home'),
+        headerLeft: (
+          <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
+        ),
+      }),
     },
     OrderDetail: {screen: OrderDetailScene},
     AddDriver: {screen: AddDriverScene},

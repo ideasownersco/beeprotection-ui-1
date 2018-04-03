@@ -14,7 +14,7 @@ const timingsEntity = state => state.entities.timings;
 const upcomingOrders = state => state.customer.upcoming_orders.ids;
 const workingOrder = state => state.customer.working_order.id;
 const pastOrders = state => state.customer.past_orders.ids;
-const getItemIdProp = ({}, itemID) => itemID;
+const getItemIdProp = (state, itemID) => itemID;
 const getTrackings = state => state.customer.trackings;
 
 const getCategories = createSelector(

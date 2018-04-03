@@ -57,7 +57,7 @@ function fetchWorkingOrder(params) {
 
 function fetchUpcomingOrders(params) {
   return {
-    type: 'wa',
+    type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST,
     params,
   };
 }

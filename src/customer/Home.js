@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ScrollView,AppState} from 'react-native';
+import {ScrollView, AppState} from 'react-native';
 import HomeActionButtons from 'customer/components/HomeActionButtons';
 import StandingOrdersList from 'customer/components/StandingOrdersList';
 import {SELECTORS} from 'customer/selectors/orders';
@@ -14,7 +14,7 @@ class Home extends Component {
   };
 
   state = {
-    appState:AppState.currentState
+    appState: AppState.currentState,
   };
 
   componentDidMount() {
@@ -27,7 +27,10 @@ class Home extends Component {
   }
 
   handleAppStateChange = nextAppState => {
-    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
       console.log('referesssshinggggggg');
       this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrder());
     }

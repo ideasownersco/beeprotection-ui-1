@@ -49,7 +49,7 @@ const HomeStack = StackNavigator(
     Home: {
       screen: Home,
       navigationOptions: ({navigation}) => ({
-        title: I18n.t('home'),
+        title: I18n.t('customer_home'),
         headerLeft: (
           <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
         ),

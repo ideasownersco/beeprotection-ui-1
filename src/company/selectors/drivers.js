@@ -6,7 +6,7 @@ const schemas = state => state.entities;
 const driversSchema = state => state.entities.drivers;
 const usersSchema = state => state.entities.users;
 
-const getItemIdProp = ({}, itemID) => itemID;
+const getItemIdProp = (state, itemID) => itemID;
 
 const getDriverByID = () => {
   return createSelector([schemas, getItemIdProp], (entities, itemID) =>

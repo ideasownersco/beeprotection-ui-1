@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView, View,AppState} from 'react-native';
+import {ScrollView, View, AppState} from 'react-native';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {connect} from 'react-redux';
 import OrdersList from 'driver/orders/components/OrdersList';
@@ -18,7 +18,7 @@ class Home extends Component {
   };
 
   state = {
-    appState:AppState.currentState
+    appState: AppState.currentState,
   };
 
   componentDidMount() {
@@ -33,7 +33,10 @@ class Home extends Component {
   }
 
   handleAppStateChange = nextAppState => {
-    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
       this.props.dispatch(DRIVER_ACTIONS.fetchWorkingOrder());
     }
     this.setState({appState: nextAppState});

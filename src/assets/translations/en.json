@@ -120,5 +120,9 @@
   "pending" : "Pending",
   "driver_info" : "Driver Info",
   "call" : "Call",
-  "thank_you" : "Thank you for choosing BeeProtection. Your order has been confirmed"
+  "thank_you" : "Thank you for choosing BeeProtection. Your order has been confirmed",
+
+  "admin_home" : "Admin Home",
+  "customer_home": "Customer Home",
+  "driver_home" : "Driver Home"
 }

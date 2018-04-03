@@ -38,13 +38,13 @@ class OrderDetailScene extends Component {
   }
 
   trackOrder = () => {
-    this.props.navigation.navigate('TrackDetail',{
-      order:this.props.order
-    })
+    this.props.navigation.navigate('TrackDetail', {
+      order: this.props.order,
+    });
   };
 
   render() {
-    let {order} = this.props;
+    let { order } = this.props;
     return (
       <View style={{flex: 1}}>
         {order && (
