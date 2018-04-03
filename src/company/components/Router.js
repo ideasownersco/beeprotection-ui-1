@@ -14,6 +14,7 @@ import DriverDetailScene from 'company/drivers/DriverDetailScene';
 import SettingsScene from 'company/SettingsScene';
 import TrackDriversScene from 'company/drivers/TrackScene';
 import I18n from 'utils/locale';
+import colors from 'assets/theme/colors';
 
 const getDrawerIcon = navigation => {
   return {
@@ -43,53 +44,105 @@ const HomeStack = StackNavigator(
   },
   {
     // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
   },
 );
 
-const DriversStack = StackNavigator({
-  DriversList: {
-    screen: DriversListScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+const DriversStack = StackNavigator(
+  {
+    DriversList: {
+      screen: DriversListScene,
+      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    },
+    DriverDetail: {screen: DriverDetailScene},
+    OrderDetail: {screen: OrderDetailScene},
   },
-  OrderDetail: {screen: OrderDetailScene},
-});
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
+  },
+);
 
-const PastOrdersStack = StackNavigator({
-  PastOrders: {
-    screen: PastOrdersScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+const PastOrdersStack = StackNavigator(
+  {
+    PastOrders: {
+      screen: PastOrdersScene,
+      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    },
+    OrderDetail: {screen: OrderDetailScene},
   },
-  OrderDetail: {screen: OrderDetailScene},
-});
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
+  },
+);
 
-const UpcomingOrdersStack = StackNavigator({
-  UpcomingOrders: {
-    screen: UpcomingOrdersScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+const UpcomingOrdersStack = StackNavigator(
+  {
+    UpcomingOrders: {
+      screen: UpcomingOrdersScene,
+      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    },
+    OrderDetail: {screen: OrderDetailScene},
   },
-  OrderDetail: {screen: OrderDetailScene},
-});
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
+  },
+);
 
-const WorkingOrdersStack = StackNavigator({
-  WorkingOrders: {
-    screen: WorkingOrdersScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+const WorkingOrdersStack = StackNavigator(
+  {
+    WorkingOrders: {
+      screen: WorkingOrdersScene,
+      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    },
+    OrderDetail: {screen: OrderDetailScene},
   },
-  OrderDetail: {screen: OrderDetailScene},
-});
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
+  },
+);
 
-const SettingsStack = StackNavigator({
-  Settings: {
-    screen: SettingsScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+const SettingsStack = StackNavigator(
+  {
+    Settings: {
+      screen: SettingsScene,
+      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    },
   },
-});
-const TrackDriversStack = StackNavigator({
-  TrackDrivers: {
-    screen: TrackDriversScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
   },
-});
+);
+const TrackDriversStack = StackNavigator(
+  {
+    TrackDrivers: {
+      screen: TrackDriversScene,
+      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    },
+  },
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
+  },
+);
 
 const DrawerRoutes = {
   HomeStack: {screen: HomeStack},

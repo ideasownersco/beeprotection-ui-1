@@ -122,7 +122,10 @@ function* fetchUpcomingOrdersMonitor() {
 }
 
 function* fetchWorkingOrdersMonitor() {
-  yield takeLatest(ACTION_TYPES.FETCH_WORKING_ORDERS_REQUEST, fetchWorkingOrders);
+  yield takeLatest(
+    ACTION_TYPES.FETCH_WORKING_ORDERS_REQUEST,
+    fetchWorkingOrders,
+  );
 }
 
 function* fetchPastOrdersMonitor() {

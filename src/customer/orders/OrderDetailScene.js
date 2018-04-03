@@ -44,7 +44,7 @@ class OrderDetailScene extends Component {
   };
 
   render() {
-    let { order } = this.props;
+    let {order} = this.props;
     return (
       <View style={{flex: 1}}>
         {order && (

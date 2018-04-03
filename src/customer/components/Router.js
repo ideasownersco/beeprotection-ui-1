@@ -41,6 +41,9 @@ const AuthStack = StackNavigator(
   },
   {
     headerMode: 'none',
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
   },
 );
 
@@ -93,32 +96,56 @@ const HomeStack = StackNavigator(
   },
 );
 
-const SettingsStack = StackNavigator({
-  Settings: {
-    screen: Settings,
+const SettingsStack = StackNavigator(
+  {
+    Settings: {
+      screen: Settings,
+      navigationOptions: ({navigation}) => ({
+        headerLeft: (
+          <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
+        ),
+      }),
+    },
+  },
+  {
+    // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      headerLeft: (
-        <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
-      ),
+      headerTintColor: colors.primary,
     }),
   },
-});
+);
 
-const PastOrdersStack = StackNavigator({
-  PastOrders: {
-    screen: PastOrdersScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+const PastOrdersStack = StackNavigator(
+  {
+    PastOrders: {
+      screen: PastOrdersScene,
+      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    },
+    OrderDetail: {screen: OrderDetailScene},
   },
-  OrderDetail: {screen: OrderDetailScene},
-});
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
+  },
+);
 
-const UpcomingOrdersStack = StackNavigator({
-  UpcomingOrders: {
-    screen: UpcomingOrdersScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+const UpcomingOrdersStack = StackNavigator(
+  {
+    UpcomingOrders: {
+      screen: UpcomingOrdersScene,
+      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    },
+    OrderDetail: {screen: OrderDetailScene},
   },
-  OrderDetail: {screen: OrderDetailScene},
-});
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
+  },
+);
 
 const DrawerRoutes = {
   HomeStack: {
