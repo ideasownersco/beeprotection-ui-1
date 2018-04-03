@@ -2,15 +2,11 @@
  * @flow
  */
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import Touchable from 'react-native-platform-touchable';
+import {StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
-import CompanyName from 'company/components/CompanyName';
-import CompanyImage from 'company/components/CompanyImage';
 import I18n from 'utils/locale';
 import SectionTitle from 'components/SectionTitle';
-import Separator from '../../../components/Separator';
+import Separator from 'components/Separator';
 
 const OrderBasicInfo = ({item, onPress, style}) => {
   return (

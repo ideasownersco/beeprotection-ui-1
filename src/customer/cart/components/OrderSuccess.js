@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text, ScrollView} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
-import Touchable from 'react-native-platform-touchable';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import Modal from 'react-native-modal';
 import colors from 'assets/theme/colors';
-import {Title, Button} from 'react-native-paper';
+import {Button, Title} from 'react-native-paper';
 import I18n from 'utils/locale';
-import Separator from '../../../components/Separator';
+import Separator from 'components/Separator';
 
 export default class OrderSuccess extends Component {
   // shouldComponentUpdate(nextProps) {

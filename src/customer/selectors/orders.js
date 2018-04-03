@@ -2,7 +2,6 @@ import map from 'lodash/map';
 import {createSelector} from 'reselect';
 import {denormalize} from 'normalizr';
 import {Schema} from 'utils/schema';
-import {entities} from '../../app/common/reducer';
 
 const getCart = state => state.customer.cart;
 const cartItems = state => state.customer.cart.items;

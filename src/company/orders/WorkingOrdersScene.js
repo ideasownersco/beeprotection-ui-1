@@ -4,8 +4,6 @@ import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'company/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
 import OrdersList from 'company/orders/components/OrdersList';
-import Button from '../../components/Button';
-import {ScrollView, View} from 'react-native';
 
 class WorkingOrdersScene extends PureComponent {
   static propTypes = {

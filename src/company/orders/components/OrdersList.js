@@ -5,9 +5,8 @@ import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from 'utils/locale';
-import SectionTitle from 'components/SectionTitle';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import Separator from '../../../components/Separator';
+import Separator from 'components/Separator';
 
 export default class OrdersList extends Component {
   static propTypes = {

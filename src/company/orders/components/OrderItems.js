@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
-import Touchable from 'react-native-platform-touchable';
+import {StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import Separator from 'components/Separator';
-import SectionTitle from '../../../components/SectionTitle';
+import SectionTitle from 'components/SectionTitle';
 
 export default class OrderItems extends Component {
   shouldComponentUpdate(nextProps) {

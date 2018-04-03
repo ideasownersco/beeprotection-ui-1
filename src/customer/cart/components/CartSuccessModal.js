@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
-import Touchable from 'react-native-platform-touchable';
+import {StyleSheet, Text, View} from 'react-native';
 import Modal from 'react-native-modal';
 import colors from 'assets/theme/colors';
 import {Button} from 'react-native-paper';
 import I18n from 'utils/locale';
-import IconFactory from '../../../components/IconFactory';
+import IconFactory from 'components/IconFactory';
 
 export default class CartSuccessModal extends Component {
   // shouldComponentUpdate(nextProps) {

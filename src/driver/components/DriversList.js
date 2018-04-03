@@ -4,7 +4,7 @@ import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import Feather from 'react-native-vector-icons/Feather';
-import Separator from '../../components/Separator';
+import Separator from 'components/Separator';
 
 export default class DriversList extends Component {
   static propTypes = {

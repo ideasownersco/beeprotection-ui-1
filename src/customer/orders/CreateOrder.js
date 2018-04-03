@@ -16,7 +16,7 @@ import I18n from 'utils/locale';
 import NavButton from 'components/NavButton';
 import colors from 'assets/theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import CartSuccessModal from '../cart/components/CartSuccessModal';
+import CartSuccessModal from 'customer/cart/components/CartSuccessModal';
 
 type State = {
   activeCategoryID: ?number,
