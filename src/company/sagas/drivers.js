@@ -71,6 +71,33 @@ function* assignDriver(action) {
   }
 }
 
+function* setDriverOfflineStatus(action) {
+
+  try {
+
+    const params = {
+      body:action.params
+    };
+
+    const response = yield call(API.setDriverOfflineStatus, params);
+    const normalized = normalize(response.data, Schema.drivers);
+
+    yield put({
+      type: ACTION_TYPES.SET_DRIVER_OFFLINE_STATUS_SUCCESS,
+      entities: normalized.entities,
+    });
+
+  } catch (error) {
+    yield put({type: ACTION_TYPES.SET_DRIVER_OFFLINE_STATUS_FAILURE, error});
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: I18n.t('driver_status_update_failed'),
+        type: 'error',
+      }),
+    );
+  }
+}
+
 function* fetchDriverMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_DRIVER_REQUEST, fetchDriver);
 }
@@ -83,8 +110,13 @@ function* assignDriverMonitor() {
   yield takeLatest(ACTION_TYPES.ASSIGN_DRIVER_REQUEST, assignDriver);
 }
 
+function* setDriverOfflineStatusMonitor() {
+  yield takeLatest(ACTION_TYPES.SET_DRIVER_OFFLINE_STATUS_REQUEST, setDriverOfflineStatus);
+}
+
 export const sagas = all([
   fork(fetchDriversMonitor),
   fork(fetchDriverMonitor),
   fork(assignDriverMonitor),
+  fork(setDriverOfflineStatusMonitor),
 ]);

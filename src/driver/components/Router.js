@@ -9,52 +9,74 @@ import CustomerLocationMapScene from 'driver/orders/CustomerLocationMapScene';
 import PastOrdersScene from 'driver/orders/PastOrdersScene';
 import UpcomingOrdersScene from 'driver/orders/UpcomingOrdersScene';
 import I18n from 'utils/locale';
+import colors from "assets/theme/colors";
 
 const getDrawerIcon = navigation => {
   return {
     headerLeft: (
-      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
+      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')}/>
     ),
   };
 };
 
 const HomeStack = StackNavigator({
-  Home: {
-    screen: Home,
+    Home: {
+      screen: Home,
+      navigationOptions: ({navigation}) => ({
+        title: I18n.t('driver_home'),
+        ...getDrawerIcon(navigation),
+      }),
+    },
+    OrderDetail: {screen: OrderDetailScene},
+    CustomerLocationMap: {
+      screen: CustomerLocationMapScene,
+    },
+    PastOrders: {screen: PastOrdersScene},
+    UpcomingOrders: {screen: UpcomingOrdersScene},
+  },
+  {
     navigationOptions: ({navigation}) => ({
-      title: I18n.t('driver_home'),
-      ...getDrawerIcon(navigation),
+      gesturesEnabled: false,
+      headerTintColor: colors.primary,
     }),
   },
-  OrderDetail: {screen: OrderDetailScene},
-  CustomerLocationMap: {
-    screen: CustomerLocationMapScene,
-  },
-  PastOrders: {screen: PastOrdersScene},
-  UpcomingOrders: {screen: UpcomingOrdersScene},
-});
+);
 
 const PastOrdersStack = StackNavigator({
   PastOrders: {
     screen: PastOrdersScene,
     navigationOptions: ({navigation}) => ({
       ...getDrawerIcon(navigation),
-      title:I18n.t('past_orders')
+      title: I18n.t('past_orders')
     }),
   },
   OrderDetail: {screen: OrderDetailScene},
-});
+},
+
+  {
+    navigationOptions: ({navigation}) => ({
+      gesturesEnabled: false,
+      headerTintColor: colors.primary,
+    }),
+  },
+  );
 
 const UpcomingOrdersStack = StackNavigator({
   UpcomingOrders: {
     screen: UpcomingOrdersScene,
     navigationOptions: ({navigation}) => ({
       ...getDrawerIcon(navigation),
-      title:I18n.t('upcoming_orders')
+      title: I18n.t('upcoming_orders')
     }),
   },
   OrderDetail: {screen: OrderDetailScene},
-});
+},
+  {
+    navigationOptions: ({navigation}) => ({
+      gesturesEnabled: false,
+      headerTintColor: colors.primary,
+    }),
+  },);
 
 const DrawerRoutes = {
   HomeStack: {

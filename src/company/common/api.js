@@ -40,6 +40,16 @@ function assignDriver(id, params) {
   return request(requestParams);
 }
 
+function setDriverOfflineStatus(params) {
+  const path = `company/drivers/status/update`;
+  let requestParams = {
+    path,
+    method: 'POST',
+    params,
+  };
+  return request(requestParams);
+}
+
 export const API = {
   fetchUpcomingOrders,
   fetchWorkingOrders,
@@ -48,4 +58,5 @@ export const API = {
   fetchDrivers,
   fetchDriver,
   assignDriver,
+  setDriverOfflineStatus
 };

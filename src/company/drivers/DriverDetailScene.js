@@ -13,6 +13,10 @@ import {ACTIONS as COMPANY_ACTIONS} from 'company/common/actions';
 import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 
 import I18n from 'utils/locale';
+import NavButton from "components/NavButton";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import colors from "assets/theme/colors";
+import {Switch} from "react-native-paper";
 
 class DriverDetailScene extends PureComponent {
   static propTypes = {
@@ -31,11 +35,62 @@ class DriverDetailScene extends PureComponent {
     driver: {user: {}},
   };
 
+  state = {
+    offline:true
+  };
+
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerRight: (
+        <Switch
+          style={{transform: [{scaleX: .8}, {scaleY: .8}]}}
+          value={navigation.state.params && navigation.state.params.offline}
+          onValueChange={(value) =>
+            navigation.state.params &&
+            navigation.state.params.handleRightButtonPress(value)
+          }
+        />
+      ),
+    };
+  };
+
   componentDidMount() {
     this.props.dispatch(
       COMPANY_ACTIONS.fetchDriver(this.props.navigation.state.params.driverID),
     );
+    this.props.navigation.setParams({
+      handleRightButtonPress: this.activateDriver,
+      offline:this.state.offline
+    });
   }
+
+  static getDerivedStateFromProps(nextProps,prevState) {
+    return {
+      offline:nextProps.driver.offline
+    }
+  }
+
+  componentDidUpdate(prevProps,prevState) {
+    if(prevState.offline !== this.state.offline) {
+      console.log('did update');
+      this.props.navigation.setParams({
+        offline:this.state.offline
+      })
+    }
+  }
+
+  activateDriver = (status: boolean) => {
+
+    this.setState({
+      offline:!this.state.offline
+    });
+
+    this.props.dispatch(COMPANY_ACTIONS.setDriverOfflineStatus({
+      driver_id:this.props.driver.id,
+      status:status
+    }));
+
+  };
 
   onOrdersListItemPress = (item: object) => {
     this.props.navigation.navigate('OrderDetail', {
@@ -43,11 +98,11 @@ class DriverDetailScene extends PureComponent {
     });
   };
 
-  
-
   render() {
     const {driver} = this.props;
-    const {image, name, mobile, email} = driver.user;
+    console.log('offline',this.state.offline);
+
+    const {image, name} = driver.user;
     return (
       <ScrollView
         style={{flex: 1}}

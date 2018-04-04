@@ -33,6 +33,10 @@ export const ACTION_TYPES = {
   ASSIGN_DRIVER_REQUEST: '@company/drivers/ASSIGN_DRIVER_REQUEST',
   ASSIGN_DRIVER_SUCCESS: '@company/drivers/ASSIGN_DRIVER_SUCCESS',
   ASSIGN_DRIVER_FAILURE: '@company/drivers/ASSIGN_DRIVER_FAILURE',
+
+  SET_DRIVER_OFFLINE_STATUS_REQUEST : '@company/drivers/SET_DRIVER_OFFLINE_STATUS_REQUEST',
+  SET_DRIVER_OFFLINE_STATUS_FAILURE : '@company/drivers/SET_DRIVER_OFFLINE_STATUS_FAILURE',
+  SET_DRIVER_OFFLINE_STATUS_SUCCESS : '@company/drivers/SET_DRIVER_OFFLINE_STATUS_SUCCESS',
 };
 
 function fetchUpcomingOrders(params) {
@@ -106,6 +110,13 @@ function assignDriver(id, params) {
   };
 }
 
+function setDriverOfflineStatus(params:object) {
+  return {
+    type: ACTION_TYPES.SET_DRIVER_OFFLINE_STATUS_REQUEST,
+    params
+  };
+}
+
 export const ACTIONS = {
   fetchWorkingOrders,
   fetchWorkingOrdersRefresh,
@@ -117,4 +128,5 @@ export const ACTIONS = {
   fetchDrivers,
   fetchDriver,
   assignDriver,
+  setDriverOfflineStatus
 };
