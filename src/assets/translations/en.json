@@ -96,15 +96,16 @@
   "total" : "Total",
   "add_new_car" : "Add New Car",
   "list_of_drivers" : "List of Drivers",
-  "add_driver" : "Add Driver",
+  "driver_add" : "Add Driver",
   "upcoming_orders" : "Upcoming Orders",
-  "current_orders" : "Orders on Progress",
   "past_orders" : "Past Orders",
   "drivers" : "Drivers",
   "driver_assigned" : "Driver Assigned",
+  "driver_information" : "Driver Information",
   "start" : "Start",
   "stop" : "Stop",
   "working_order" : "Current Order",
+  "working_orders" : "Current Orders",
   "select_time" : "Select Time",
   "select" : "Select",
   "tracking_not_available" : "Tracking is not available",
@@ -124,5 +125,9 @@
 
   "admin_home" : "Admin Home",
   "customer_home": "Customer Home",
-  "driver_home" : "Driver Home"
+  "driver_home" : "Driver Home",
+  "customer_information" : "Customer Information",
+
+  "invoice" : "Invoice"
+
 }

@@ -48,7 +48,7 @@ export default class Drawer extends Component {
 
         <Separator />
         <DrawerItem
-          title={I18n.t('current_orders')}
+          title={I18n.t('working_orders')}
           routeName="WorkingOrdersStack"
           onItemPress={this.onItemPress}
           iconProps={{

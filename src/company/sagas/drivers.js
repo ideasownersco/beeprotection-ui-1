@@ -28,6 +28,8 @@ function* fetchDriver(action) {
       response.data.working_order = response.working_order;
     }
 
+    response.data.upcoming_orders = response.upcoming_orders;
+
     const normalized = normalize(response.data, Schema.drivers);
 
     yield put({

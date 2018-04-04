@@ -53,9 +53,7 @@ const HomeStack = StackNavigator(
       screen: Home,
       navigationOptions: ({navigation}) => ({
         title: I18n.t('customer_home'),
-        headerLeft: (
-          <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
-        ),
+        ...getDrawerIcon(navigation),
       }),
     },
     CreateOrder: {
@@ -64,9 +62,12 @@ const HomeStack = StackNavigator(
         title: I18n.t('create_order'),
       }),
     },
-    BidList: {screen: BidList},
     OrderDetail: {screen: OrderDetailScene},
-    TrackOrder: {screen: TrackOrderScene},
+    TrackOrder: {screen: TrackOrderScene,
+      navigationOptions: ({navigation}) => ({
+        title: I18n.t('track_order'),
+      }),
+    },
     Cart: {
       screen: Cart,
       navigationOptions: ({navigation}) => ({
@@ -96,30 +97,16 @@ const HomeStack = StackNavigator(
   },
 );
 
-const SettingsStack = StackNavigator(
-  {
-    Settings: {
-      screen: Settings,
-      navigationOptions: ({navigation}) => ({
-        headerLeft: (
-          <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
-        ),
-      }),
-    },
-  },
-  {
-    // initialRouteName:'WorkingOrders'
-    navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
-    }),
-  },
-);
-
 const PastOrdersStack = StackNavigator(
   {
     PastOrders: {
       screen: PastOrdersScene,
-      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+      navigationOptions: ({navigation}) => {
+        return {
+          ...getDrawerIcon(navigation),
+          title:I18n.t('past_orders')
+        }
+      },
     },
     OrderDetail: {screen: OrderDetailScene},
   },
@@ -135,7 +122,12 @@ const UpcomingOrdersStack = StackNavigator(
   {
     UpcomingOrders: {
       screen: UpcomingOrdersScene,
-      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+      navigationOptions: ({navigation}) => {
+        return {
+          ...getDrawerIcon(navigation),
+          title:I18n.t('upcoming_orders')
+        }
+      },
     },
     OrderDetail: {screen: OrderDetailScene},
   },
@@ -146,6 +138,25 @@ const UpcomingOrdersStack = StackNavigator(
     }),
   },
 );
+
+
+const SettingsStack = StackNavigator(
+  {
+    Settings: {
+      screen: Settings,
+      navigationOptions: ({navigation}) => ({
+        ...getDrawerIcon(navigation),
+      }),
+    },
+  },
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      headerTintColor: colors.primary,
+    }),
+  },
+);
+
 
 const DrawerRoutes = {
   HomeStack: {

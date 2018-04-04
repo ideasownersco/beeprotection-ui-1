@@ -58,16 +58,6 @@ export default class OrderItems extends Component {
                 })}
           </View>
         ))}
-
-        {/*{item.services.map((service, index) => (*/}
-        {/*<View style={{flex: 1}} key={index}>*/}
-        {/*<View style={styles.serviceListContainer}>*/}
-        {/*<Text style={styles.serviceTitle}>{service.name}</Text>*/}
-        {/*<Text style={styles.servicePrice}>{service.price} KD</Text>*/}
-        {/*</View>*/}
-        {/*<Separator style={{flex: 1, marginVertical: 5}} />*/}
-        {/*</View>*/}
-        {/*))}*/}
       </View>
     );
   }

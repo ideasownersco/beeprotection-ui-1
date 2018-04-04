@@ -7,11 +7,17 @@ import {ACTIONS as DRIVER_ACTIONS} from 'company/common/actions';
 import {ACTIONS as ORDER_ACTIONS} from 'company/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
 import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
-import {ScrollView} from 'react-native';
-import OrderItems from 'company/orders/components/OrderItems';
-import OrderBasicInfo from 'company/orders/components/OrderBasicInfo';
+import {ScrollView, View, Linking} from 'react-native';
+import OrderItems from 'customer/orders/components/OrderItems';
+import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import DriverAssign from 'company/orders/components/DriverAssign';
 import PropTypes from 'prop-types';
+import OrderTotal from "customer/orders/components/OrderTotal";
+import SectionHeading from "../components/SectionHeading";
+import DriverInfo from "../drivers/components/DriverInfo";
+import OrderTrackButton from "../../customer/orders/components/OrderTrackButton";
+import I18n from 'utils/locale';
+import UserInfo from "../../customer/components/UserInfo";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -41,12 +47,6 @@ class OrderDetailScene extends Component {
     }
   }
 
-  assignDriver = () => {
-    // this.props.dispatch(
-    // ORDER_ACTIONS.makeBid({order_id: this.props.order.id, amount: this.state.amount}),
-    // );
-  };
-
   selectDriver = (driver: object) => {
     this.props.dispatch(
       DRIVER_ACTIONS.assignDriver(this.props.order.id, {
@@ -55,20 +55,61 @@ class OrderDetailScene extends Component {
     );
   };
 
+
+  trackOrder = () => {
+    this.props.navigation.navigate('TrackDetail', {
+      order: this.props.order,
+    });
+  };
+
+  makeCall = (mobile) => {
+    let url = `tel:${mobile}`;
+    return Linking.canOpenURL(url)
+      .then(supported => {
+        if (supported) {
+          return Linking.openURL(url);
+        }
+      });
+  };
+
   render() {
     let {order, drivers} = this.props;
 
+    console.log('order', order);
+
     return (
       <ScrollView style={{flex: 1}} keyboardShouldPersistTap="always">
-        <OrderBasicInfo item={order} />
 
-        <OrderItems order={order} />
+        <OrderBasicInfo item={order}/>
+        <OrderItems order={order}/>
+        <OrderTotal total={order.total}/>
 
-        <DriverAssign
-          order={order}
-          drivers={drivers}
-          onDriversListItemPress={this.selectDriver}
+        {order.user && order.user.id &&
+        <UserInfo
+          user={order.user}
+          makeCall={this.makeCall}
         />
+        }
+
+        {/*<DriverAssign*/}
+        {/*order={order}*/}
+        {/*drivers={drivers}*/}
+        {/*onDriversListItemPress={this.selectDriver}*/}
+        {/*/>*/}
+
+        {order.job &&
+        order.job.driver &&
+        order.job.driver &&
+        order.job.driver.user && (
+          <View>
+            <DriverInfo driver={order.job.driver}/>
+            <OrderTrackButton
+              onPress={this.trackOrder}
+              disabled={!order.trackeable}
+            />
+          </View>
+        )}
+
       </ScrollView>
     );
   }

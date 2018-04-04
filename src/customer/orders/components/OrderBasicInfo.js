@@ -22,8 +22,15 @@ const OrderBasicInfo = ({item, onPress, style}) => {
         <Separator style={{marginVertical: 5}} />
 
         <View style={styles.content}>
+          <Text style={styles.label}>{I18n.t('invoice')}</Text>
+          <Text style={styles.value}>{item.invoice}</Text>
+        </View>
+
+        <Separator style={{marginVertical: 5}} />
+
+        <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('requested_date')}</Text>
-          <Text style={styles.value}>{item.date}</Text>
+          <Text style={styles.value}>{item.date}, {item.time}</Text>
         </View>
 
         <Separator style={{marginVertical: 5}} />
@@ -55,8 +62,8 @@ const OrderBasicInfo = ({item, onPress, style}) => {
         <Separator style={{marginVertical: 5}} />
 
         <View style={styles.content}>
-          <Text style={styles.label}>{I18n.t('order_status')}</Text>
-          <Text style={[styles.value]}>{item.status}</Text>
+          <Text style={styles.label}>{I18n.t('payment_mode')}</Text>
+          <Text style={[styles.value]}>{item.payment_mode}</Text>
         </View>
 
         <Separator style={{marginVertical: 5}} />
@@ -83,6 +90,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flexDirection: 'row',
+    paddingVertical:5,
   },
   label: {
     // flex: 1,

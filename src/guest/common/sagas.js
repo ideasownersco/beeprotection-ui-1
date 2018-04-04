@@ -1,14 +1,14 @@
 import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
 import {NavigationActions} from 'react-navigation';
-
+import NavigatorService from 'components/NavigatorService';
 import {ACTION_TYPES} from 'guest/common/actions';
 import {API} from 'guest/common/api';
 import {AUTH_KEY} from 'utils/env';
 
 import {
-  ACTION_TYPES as APP_ACTION_TYPES,
   ACTIONS as APP_ACTIONS,
 } from 'app/common/actions';
+
 import {
   forgetStorageItem,
   getStorageItem,
@@ -66,23 +66,25 @@ function* register(action) {
         ...action.params,
       },
     };
-
     const response = yield call(API.register, params);
+
     yield put({type: ACTION_TYPES.REGISTER_SUCCESS, payload: response.data});
 
     yield put(
-      APP_ACTIONS.setNotification(I18n.t('registration_success'), 'success'),
+      APP_ACTIONS.setNotification({
+        message: I18n.t('registration_success'),
+        type: 'success',
+      }),
     );
-    yield put(NavigationActions.back());
+    yield NavigatorService.back();
   } catch (error) {
     yield put({type: ACTION_TYPES.REGISTER_FAILURE, error});
-    yield put({
-      type: APP_ACTION_TYPES.SET_NOTIFICATION,
-      payload: {
+    yield put(
+      APP_ACTIONS.setNotification({
         message: error,
-        messageType: 'error',
-      },
-    });
+        type: 'error',
+      }),
+    );
   }
 }
 

@@ -23,9 +23,7 @@ const HomeStack = StackNavigator({
     screen: Home,
     navigationOptions: ({navigation}) => ({
       title: I18n.t('driver_home'),
-      headerLeft: (
-        <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
-      ),
+      ...getDrawerIcon(navigation),
     }),
   },
   OrderDetail: {screen: OrderDetailScene},
@@ -39,7 +37,10 @@ const HomeStack = StackNavigator({
 const PastOrdersStack = StackNavigator({
   PastOrders: {
     screen: PastOrdersScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    navigationOptions: ({navigation}) => ({
+      ...getDrawerIcon(navigation),
+      title:I18n.t('past_orders')
+    }),
   },
   OrderDetail: {screen: OrderDetailScene},
 });
@@ -47,7 +48,10 @@ const PastOrdersStack = StackNavigator({
 const UpcomingOrdersStack = StackNavigator({
   UpcomingOrders: {
     screen: UpcomingOrdersScene,
-    navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    navigationOptions: ({navigation}) => ({
+      ...getDrawerIcon(navigation),
+      title:I18n.t('upcoming_orders')
+    }),
   },
   OrderDetail: {screen: OrderDetailScene},
 });

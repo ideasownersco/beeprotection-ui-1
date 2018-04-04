@@ -43,6 +43,8 @@ class DriverDetailScene extends PureComponent {
     });
   };
 
+  
+
   render() {
     const {driver} = this.props;
     const {image, name, mobile, email} = driver.user;
@@ -51,24 +53,42 @@ class DriverDetailScene extends PureComponent {
         style={{flex: 1}}
         keyboardShouldPersistTap="always"
         contentInset={{bottom: 150}}>
-        <DriverThumb image={image} name={name} />
 
-        <DriverInfo driver={driver} />
+        <DriverThumb image={image} name={name}/>
+
+        <DriverInfo driver={driver}/>
 
         {driver.working_order &&
-          driver.working_order.id && (
-            <View>
-              <SectionHeading
-                title={I18n.t('working_order')}
-                onButtonPress={this.loadCurrentOrders}
-              />
+        driver.working_order.id && (
+          <View>
+            <SectionHeading
+              title={I18n.t('working_order')}
+              onButtonPress={this.loadCurrentOrders}
+            />
 
-              <OrdersList
-                items={[driver.working_order]}
-                onItemPress={this.onOrdersListItemPress}
-              />
-            </View>
-          )}
+            <OrdersList
+              items={[driver.working_order]}
+              onItemPress={this.onOrdersListItemPress}
+            />
+          </View>
+        )}
+
+        {driver.upcoming_orders && driver.upcoming_orders.length &&
+        <View>
+
+          <SectionHeading
+            title={I18n.t('upcoming_orders')}
+            onButtonPress={this.loadCurrentOrders}
+          />
+
+          <OrdersList
+            items={driver.upcoming_orders}
+            onItemPress={this.onOrdersListItemPress}
+          />
+
+        </View>
+        }
+
       </ScrollView>
     );
   }

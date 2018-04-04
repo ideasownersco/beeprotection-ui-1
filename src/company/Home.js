@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView} from 'react-native';
+import {RefreshControl, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'company/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
@@ -15,19 +15,35 @@ class Home extends PureComponent {
   static propTypes = {
     drivers: PropTypes.array.isRequired,
     upcoming_orders: PropTypes.array.isRequired,
-    current_orders: PropTypes.array.isRequired,
+    working_orders: PropTypes.array.isRequired,
   };
 
   static defaultProps = {
     drivers: [],
     upcoming_orders: [],
-    current_orders: [],
+    working_orders: [],
+  };
+
+  state = {
+    refreshing:false
   };
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = () => {
     this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
     this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders());
     this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
+  };
+
+  _onRefresh() {
+    this.setState({refreshing: true});
+    setTimeout(() => {
+      this.fetchData();
+      this.setState({refreshing: false});
+    }, 1000);
   }
 
   onOrdersListItemPress = (item: object) => {
@@ -55,24 +71,32 @@ class Home extends PureComponent {
   };
 
   render() {
-    const {current_orders, upcoming_orders, drivers} = this.props;
+    const {working_orders, upcoming_orders, drivers} = this.props;
 
     return (
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{flex: 1}}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />
+        }
+
+      >
         <SectionHeading
-          title={I18n.t('current_orders')}
+          title={I18n.t('working_orders')}
           buttonTitle={I18n.t('view_all')}
           onButtonPress={this.loadCurrentOrders}
         />
 
         <OrdersList
-          items={current_orders}
+          items={working_orders}
           onItemPress={this.onOrdersListItemPress}
         />
 
         <SectionHeading
           title={I18n.t('list_of_drivers')}
-          buttonTitle={I18n.t('add_driver')}
+          buttonTitle={I18n.t('driver_add')}
           onButtonPress={this.addDriver}
         />
 
@@ -99,7 +123,7 @@ class Home extends PureComponent {
 function mapStateToProps(state) {
   return {
     upcoming_orders: ORDER_SELECTORS.getUpcomingOrders(state),
-    current_orders: ORDER_SELECTORS.getWorkingOrders(state),
+    working_orders: ORDER_SELECTORS.getWorkingOrders(state),
     drivers: DRIVER_SELECTORS.getDrivers(state),
   };
 }

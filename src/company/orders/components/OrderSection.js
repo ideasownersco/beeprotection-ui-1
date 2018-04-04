@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import Touchable from 'react-native-platform-touchable';
+import {StyleSheet, View} from 'react-native';
 import colors from 'assets/theme/colors';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import I18n from 'utils/locale';
 import SectionTitle from 'components/SectionTitle';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import OrderItems from './OrderItems';
+import OrderItems from "customer/orders/components/OrderItems";
 
 export default class OrderSection extends Component {
   static propTypes = {

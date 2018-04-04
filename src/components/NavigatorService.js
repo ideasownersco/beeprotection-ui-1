@@ -32,6 +32,12 @@ function navigate(routeName: string, params?: NavigationParams) {
   );
 }
 
+function back() {
+  _container.dispatch(
+    NavigationActions.back(),
+  );
+}
+
 function navigateDeep(
   actions: {routeName: string, params?: NavigationParams}[],
 ) {
@@ -63,4 +69,5 @@ export default {
   navigate,
   reset,
   getCurrentRoute,
+  back,
 };
