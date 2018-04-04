@@ -13,9 +13,6 @@ import {ACTIONS as COMPANY_ACTIONS} from 'company/common/actions';
 import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 
 import I18n from 'utils/locale';
-import NavButton from "components/NavButton";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import colors from "assets/theme/colors";
 import {Switch} from "react-native-paper";
 
 class DriverDetailScene extends PureComponent {
@@ -36,7 +33,7 @@ class DriverDetailScene extends PureComponent {
   };
 
   state = {
-    offline:true
+    online:true
   };
 
   static navigationOptions = ({navigation}) => {
@@ -44,7 +41,7 @@ class DriverDetailScene extends PureComponent {
       headerRight: (
         <Switch
           style={{transform: [{scaleX: .8}, {scaleY: .8}]}}
-          value={navigation.state.params && navigation.state.params.offline}
+          value={navigation.state.params && navigation.state.params.online}
           onValueChange={(value) =>
             navigation.state.params &&
             navigation.state.params.handleRightButtonPress(value)
@@ -60,21 +57,21 @@ class DriverDetailScene extends PureComponent {
     );
     this.props.navigation.setParams({
       handleRightButtonPress: this.activateDriver,
-      offline:this.state.offline
+      online:this.state.online
     });
   }
 
   static getDerivedStateFromProps(nextProps,prevState) {
     return {
-      offline:nextProps.driver.offline
+      online:nextProps.driver.online
     }
   }
 
   componentDidUpdate(prevProps,prevState) {
-    if(prevState.offline !== this.state.offline) {
+    if(prevState.online !== this.state.online) {
       console.log('did update');
       this.props.navigation.setParams({
-        offline:this.state.offline
+        online:this.state.online
       })
     }
   }
@@ -82,10 +79,10 @@ class DriverDetailScene extends PureComponent {
   activateDriver = (status: boolean) => {
 
     this.setState({
-      offline:!this.state.offline
+      online:!this.state.online
     });
 
-    this.props.dispatch(COMPANY_ACTIONS.setDriverOfflineStatus({
+    this.props.dispatch(COMPANY_ACTIONS.setDriverOnlineStatus({
       driver_id:this.props.driver.id,
       status:status
     }));
@@ -100,7 +97,7 @@ class DriverDetailScene extends PureComponent {
 
   render() {
     const {driver} = this.props;
-    console.log('offline',this.state.offline);
+    console.log('online',this.state.online);
 
     const {image, name} = driver.user;
     return (

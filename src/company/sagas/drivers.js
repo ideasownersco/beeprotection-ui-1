@@ -71,7 +71,7 @@ function* assignDriver(action) {
   }
 }
 
-function* setDriverOfflineStatus(action) {
+function* setDriverOnlineStatus(action) {
 
   try {
 
@@ -79,16 +79,16 @@ function* setDriverOfflineStatus(action) {
       body:action.params
     };
 
-    const response = yield call(API.setDriverOfflineStatus, params);
+    const response = yield call(API.setDriverOnlineStatus, params);
     const normalized = normalize(response.data, Schema.drivers);
 
     yield put({
-      type: ACTION_TYPES.SET_DRIVER_OFFLINE_STATUS_SUCCESS,
+      type: ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_SUCCESS,
       entities: normalized.entities,
     });
 
   } catch (error) {
-    yield put({type: ACTION_TYPES.SET_DRIVER_OFFLINE_STATUS_FAILURE, error});
+    yield put({type: ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_FAILURE, error});
     yield put(
       APP_ACTIONS.setNotification({
         message: I18n.t('driver_status_update_failed'),
@@ -110,13 +110,13 @@ function* assignDriverMonitor() {
   yield takeLatest(ACTION_TYPES.ASSIGN_DRIVER_REQUEST, assignDriver);
 }
 
-function* setDriverOfflineStatusMonitor() {
-  yield takeLatest(ACTION_TYPES.SET_DRIVER_OFFLINE_STATUS_REQUEST, setDriverOfflineStatus);
+function* setDriverOnlineStatusMonitor() {
+  yield takeLatest(ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_REQUEST, setDriverOnlineStatus);
 }
 
 export const sagas = all([
   fork(fetchDriversMonitor),
   fork(fetchDriverMonitor),
   fork(assignDriverMonitor),
-  fork(setDriverOfflineStatusMonitor),
+  fork(setDriverOnlineStatusMonitor),
 ]);
