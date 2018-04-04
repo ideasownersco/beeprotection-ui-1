@@ -33,9 +33,7 @@ function navigate(routeName: string, params?: NavigationParams) {
 }
 
 function back() {
-  _container.dispatch(
-    NavigationActions.back(),
-  );
+  _container.dispatch(NavigationActions.back());
 }
 
 function navigateDeep(

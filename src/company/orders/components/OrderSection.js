@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {StyleSheet, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import SectionTitle from 'components/SectionTitle';
-import OrderItems from "customer/orders/components/OrderItems";
+import OrderItems from 'customer/orders/components/OrderItems';
 
 export default class OrderSection extends Component {
   static propTypes = {

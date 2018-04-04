@@ -30,7 +30,9 @@ const OrderBasicInfo = ({item, onPress, style}) => {
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('requested_date')}</Text>
-          <Text style={styles.value}>{item.date}, {item.time}</Text>
+          <Text style={styles.value}>
+            {item.date}, {item.time}
+          </Text>
         </View>
 
         <Separator style={{marginVertical: 5}} />
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flexDirection: 'row',
-    paddingVertical:5,
+    paddingVertical: 5,
   },
   label: {
     // flex: 1,

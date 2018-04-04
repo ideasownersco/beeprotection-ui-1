@@ -34,9 +34,12 @@ export const ACTION_TYPES = {
   ASSIGN_DRIVER_SUCCESS: '@company/drivers/ASSIGN_DRIVER_SUCCESS',
   ASSIGN_DRIVER_FAILURE: '@company/drivers/ASSIGN_DRIVER_FAILURE',
 
-  SET_DRIVER_ONLINE_STATUS_REQUEST : '@company/drivers/SET_DRIVER_ONLINE_STATUS_REQUEST',
-  SET_DRIVER_ONLINE_STATUS_FAILURE : '@company/drivers/SET_DRIVER_ONLINE_STATUS_FAILURE',
-  SET_DRIVER_ONLINE_STATUS_SUCCESS : '@company/drivers/SET_DRIVER_ONLINE_STATUS_SUCCESS',
+  SET_DRIVER_ONLINE_STATUS_REQUEST:
+    '@company/drivers/SET_DRIVER_ONLINE_STATUS_REQUEST',
+  SET_DRIVER_ONLINE_STATUS_FAILURE:
+    '@company/drivers/SET_DRIVER_ONLINE_STATUS_FAILURE',
+  SET_DRIVER_ONLINE_STATUS_SUCCESS:
+    '@company/drivers/SET_DRIVER_ONLINE_STATUS_SUCCESS',
 };
 
 function fetchUpcomingOrders(params) {
@@ -110,10 +113,10 @@ function assignDriver(id, params) {
   };
 }
 
-function setDriverOnlineStatus(params:object) {
+function setDriverOnlineStatus(params: object) {
   return {
     type: ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_REQUEST,
-    params
+    params,
   };
 }
 
@@ -128,5 +131,5 @@ export const ACTIONS = {
   fetchDrivers,
   fetchDriver,
   assignDriver,
-  setDriverOnlineStatus
+  setDriverOnlineStatus,
 };

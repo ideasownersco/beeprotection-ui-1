@@ -5,9 +5,7 @@ import {ACTION_TYPES} from 'guest/common/actions';
 import {API} from 'guest/common/api';
 import {AUTH_KEY} from 'utils/env';
 
-import {
-  ACTIONS as APP_ACTIONS,
-} from 'app/common/actions';
+import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
 
 import {
   forgetStorageItem,

@@ -9,13 +9,12 @@ import I18n from 'utils/locale';
 import SectionTitle from 'components/SectionTitle';
 import Separator from 'components/Separator';
 import Touchable from 'react-native-platform-touchable';
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const UserInfo = ({user, style, makeCall}) => {
   return (
     <View style={[styles.container, style]}>
-      <SectionTitle title={I18n.t('customer_information')}/>
+      <SectionTitle title={I18n.t('customer_information')} />
 
       <View style={styles.contentContainer}>
         <View style={styles.content}>
@@ -23,27 +22,25 @@ const UserInfo = ({user, style, makeCall}) => {
           <Text style={styles.value}>{user.name}</Text>
         </View>
 
-        <Separator style={{marginVertical: 5}}/>
+        <Separator style={{marginVertical: 5}} />
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('email')}</Text>
           <Text style={styles.value}>{user.email}</Text>
         </View>
 
-        <Separator style={{marginVertical: 5}}/>
+        <Separator style={{marginVertical: 5}} />
 
         <View style={styles.content}>
-          <Text style={[styles.label,{flex:1}]}>{I18n.t('mobile')}</Text>
+          <Text style={[styles.label, {flex: 1}]}>{I18n.t('mobile')}</Text>
 
           <Touchable onPress={makeCall}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <MaterialIcons name="phone" size={30} color="green"/>
-              <Text >{user.mobile}</Text>
+              <MaterialIcons name="phone" size={30} color="green" />
+              <Text>{user.mobile}</Text>
             </View>
           </Touchable>
-
         </View>
-
       </View>
     </View>
   );
@@ -65,8 +62,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flexDirection: 'row',
-    alignItems:'center',
-    paddingVertical:5
+    alignItems: 'center',
+    paddingVertical: 5,
   },
   label: {
     // flex: 1,

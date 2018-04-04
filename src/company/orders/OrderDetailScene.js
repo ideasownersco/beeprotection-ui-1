@@ -12,12 +12,12 @@ import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import DriverAssign from 'company/orders/components/DriverAssign';
 import PropTypes from 'prop-types';
-import OrderTotal from "customer/orders/components/OrderTotal";
-import SectionHeading from "../components/SectionHeading";
-import DriverInfo from "../drivers/components/DriverInfo";
-import OrderTrackButton from "../../customer/orders/components/OrderTrackButton";
+import OrderTotal from 'customer/orders/components/OrderTotal';
+import SectionHeading from '../components/SectionHeading';
+import DriverInfo from '../drivers/components/DriverInfo';
+import OrderTrackButton from '../../customer/orders/components/OrderTrackButton';
 import I18n from 'utils/locale';
-import UserInfo from "../../customer/components/UserInfo";
+import UserInfo from '../../customer/components/UserInfo';
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -55,21 +55,19 @@ class OrderDetailScene extends Component {
     );
   };
 
-
   trackOrder = () => {
     this.props.navigation.navigate('TrackDetail', {
       order: this.props.order,
     });
   };
 
-  makeCall = (mobile) => {
+  makeCall = mobile => {
     let url = `tel:${mobile}`;
-    return Linking.canOpenURL(url)
-      .then(supported => {
-        if (supported) {
-          return Linking.openURL(url);
-        }
-      });
+    return Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        return Linking.openURL(url);
+      }
+    });
   };
 
   render() {
@@ -79,17 +77,14 @@ class OrderDetailScene extends Component {
 
     return (
       <ScrollView style={{flex: 1}} keyboardShouldPersistTap="always">
+        <OrderBasicInfo item={order} />
+        <OrderItems order={order} />
+        <OrderTotal total={order.total} />
 
-        <OrderBasicInfo item={order}/>
-        <OrderItems order={order}/>
-        <OrderTotal total={order.total}/>
-
-        {order.user && order.user.id &&
-        <UserInfo
-          user={order.user}
-          makeCall={this.makeCall}
-        />
-        }
+        {order.user &&
+          order.user.id && (
+            <UserInfo user={order.user} makeCall={this.makeCall} />
+          )}
 
         {/*<DriverAssign*/}
         {/*order={order}*/}
@@ -98,18 +93,17 @@ class OrderDetailScene extends Component {
         {/*/>*/}
 
         {order.job &&
-        order.job.driver &&
-        order.job.driver &&
-        order.job.driver.user && (
-          <View>
-            <DriverInfo driver={order.job.driver}/>
-            <OrderTrackButton
-              onPress={this.trackOrder}
-              disabled={!order.trackeable}
-            />
-          </View>
-        )}
-
+          order.job.driver &&
+          order.job.driver &&
+          order.job.driver.user && (
+            <View>
+              <DriverInfo driver={order.job.driver} />
+              <OrderTrackButton
+                onPress={this.trackOrder}
+                disabled={!order.trackeable}
+              />
+            </View>
+          )}
       </ScrollView>
     );
   }

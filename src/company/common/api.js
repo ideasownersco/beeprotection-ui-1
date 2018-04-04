@@ -58,5 +58,5 @@ export const API = {
   fetchDrivers,
   fetchDriver,
   assignDriver,
-  setDriverOnlineStatus
+  setDriverOnlineStatus,
 };

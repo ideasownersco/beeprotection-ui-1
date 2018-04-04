@@ -13,7 +13,7 @@ import {ACTIONS as COMPANY_ACTIONS} from 'company/common/actions';
 import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 
 import I18n from 'utils/locale';
-import {Switch} from "react-native-paper";
+import {Switch} from 'react-native-paper';
 
 class DriverDetailScene extends PureComponent {
   static propTypes = {
@@ -33,16 +33,16 @@ class DriverDetailScene extends PureComponent {
   };
 
   state = {
-    online:true
+    online: true,
   };
 
   static navigationOptions = ({navigation}) => {
     return {
       headerRight: (
         <Switch
-          style={{transform: [{scaleX: .8}, {scaleY: .8}]}}
+          style={{transform: [{scaleX: 0.8}, {scaleY: 0.8}]}}
           value={navigation.state.params && navigation.state.params.online}
-          onValueChange={(value) =>
+          onValueChange={value =>
             navigation.state.params &&
             navigation.state.params.handleRightButtonPress(value)
           }
@@ -57,36 +57,36 @@ class DriverDetailScene extends PureComponent {
     );
     this.props.navigation.setParams({
       handleRightButtonPress: this.activateDriver,
-      online:this.state.online
+      online: this.state.online,
     });
   }
 
-  static getDerivedStateFromProps(nextProps,prevState) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     return {
-      online:nextProps.driver.online
-    }
+      online: nextProps.driver.online,
+    };
   }
 
-  componentDidUpdate(prevProps,prevState) {
-    if(prevState.online !== this.state.online) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.online !== this.state.online) {
       console.log('did update');
       this.props.navigation.setParams({
-        online:this.state.online
-      })
+        online: this.state.online,
+      });
     }
   }
 
   activateDriver = (status: boolean) => {
-
     this.setState({
-      online:!this.state.online
+      online: !this.state.online,
     });
 
-    this.props.dispatch(COMPANY_ACTIONS.setDriverOnlineStatus({
-      driver_id:this.props.driver.id,
-      status:status
-    }));
-
+    this.props.dispatch(
+      COMPANY_ACTIONS.setDriverOnlineStatus({
+        driver_id: this.props.driver.id,
+        status: status,
+      }),
+    );
   };
 
   onOrdersListItemPress = (item: object) => {
@@ -97,7 +97,7 @@ class DriverDetailScene extends PureComponent {
 
   render() {
     const {driver} = this.props;
-    console.log('online',this.state.online);
+    console.log('online', this.state.online);
 
     const {image, name} = driver.user;
     return (
@@ -105,42 +105,39 @@ class DriverDetailScene extends PureComponent {
         style={{flex: 1}}
         keyboardShouldPersistTap="always"
         contentInset={{bottom: 150}}>
+        <DriverThumb image={image} name={name} />
 
-        <DriverThumb image={image} name={name}/>
-
-        <DriverInfo driver={driver}/>
+        <DriverInfo driver={driver} />
 
         {driver.working_order &&
-        driver.working_order.id && (
-          <View>
-            <SectionHeading
-              title={I18n.t('working_order')}
-              onButtonPress={this.loadCurrentOrders}
-            />
+          driver.working_order.id && (
+            <View>
+              <SectionHeading
+                title={I18n.t('working_order')}
+                onButtonPress={this.loadCurrentOrders}
+              />
 
-            <OrdersList
-              items={[driver.working_order]}
-              onItemPress={this.onOrdersListItemPress}
-            />
-          </View>
-        )}
+              <OrdersList
+                items={[driver.working_order]}
+                onItemPress={this.onOrdersListItemPress}
+              />
+            </View>
+          )}
 
-        {driver.upcoming_orders && driver.upcoming_orders.length &&
-        <View>
+        {driver.upcoming_orders &&
+          driver.upcoming_orders.length && (
+            <View>
+              <SectionHeading
+                title={I18n.t('upcoming_orders')}
+                onButtonPress={this.loadCurrentOrders}
+              />
 
-          <SectionHeading
-            title={I18n.t('upcoming_orders')}
-            onButtonPress={this.loadCurrentOrders}
-          />
-
-          <OrdersList
-            items={driver.upcoming_orders}
-            onItemPress={this.onOrdersListItemPress}
-          />
-
-        </View>
-        }
-
+              <OrdersList
+                items={driver.upcoming_orders}
+                onItemPress={this.onOrdersListItemPress}
+              />
+            </View>
+          )}
       </ScrollView>
     );
   }

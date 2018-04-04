@@ -15,12 +15,12 @@ import SettingsScene from 'company/SettingsScene';
 import TrackDriversScene from 'company/drivers/TrackScene';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
-import TrackDetailScene from "company/orders/TrackDetailScene";
+import TrackDetailScene from 'company/orders/TrackDetailScene';
 
 const getDrawerIcon = navigation => {
   return {
     headerLeft: (
-      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')}/>
+      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
     ),
   };
 };
@@ -31,7 +31,7 @@ const HomeStack = StackNavigator(
       screen: Home,
       navigationOptions: ({navigation}) => ({
         title: I18n.t('admin_home'),
-        ...getDrawerIcon(navigation)
+        ...getDrawerIcon(navigation),
       }),
     },
     OrderDetail: {screen: OrderDetailScene},
@@ -39,22 +39,26 @@ const HomeStack = StackNavigator(
       screen: AddDriverScene,
       navigationOptions: ({navigation}) => ({
         title: I18n.t('driver_add'),
-      })
+      }),
     },
     DriverDetail: {screen: DriverDetailScene},
-    PastOrders: {screen: PastOrdersScene,
+    PastOrders: {
+      screen: PastOrdersScene,
       navigationOptions: ({navigation}) => ({
         title: I18n.t('past_orders'),
-      })
+      }),
     },
-    UpcomingOrders: {screen: UpcomingOrdersScene,
+    UpcomingOrders: {
+      screen: UpcomingOrdersScene,
       navigationOptions: ({navigation}) => ({
         title: I18n.t('upcoming_orders'),
-      })},
-    WorkingOrders: {screen: WorkingOrdersScene,
+      }),
+    },
+    WorkingOrders: {
+      screen: WorkingOrdersScene,
       navigationOptions: ({navigation}) => ({
         title: I18n.t('working_orders'),
-      })
+      }),
     },
     TrackDetail: {
       screen: TrackDetailScene,
@@ -77,7 +81,7 @@ const DriversStack = StackNavigator(
       screen: DriversListScene,
       navigationOptions: ({navigation}) => ({
         ...getDrawerIcon(navigation),
-        title: I18n.t('drivers')
+        title: I18n.t('drivers'),
       }),
     },
     DriverDetail: {screen: DriverDetailScene},
@@ -97,7 +101,7 @@ const PastOrdersStack = StackNavigator(
       screen: PastOrdersScene,
       navigationOptions: ({navigation}) => ({
         ...getDrawerIcon(navigation),
-        title: I18n.t('past_orders')
+        title: I18n.t('past_orders'),
       }),
     },
     OrderDetail: {screen: OrderDetailScene},
@@ -116,7 +120,7 @@ const UpcomingOrdersStack = StackNavigator(
       screen: UpcomingOrdersScene,
       navigationOptions: ({navigation}) => ({
         ...getDrawerIcon(navigation),
-        title: I18n.t('upcoming_orders')
+        title: I18n.t('upcoming_orders'),
       }),
     },
     OrderDetail: {screen: OrderDetailScene},
@@ -135,7 +139,7 @@ const WorkingOrdersStack = StackNavigator(
       screen: WorkingOrdersScene,
       navigationOptions: ({navigation}) => ({
         ...getDrawerIcon(navigation),
-        title: I18n.t('working_orders')
+        title: I18n.t('working_orders'),
       }),
     },
     OrderDetail: {screen: OrderDetailScene},

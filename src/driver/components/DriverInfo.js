@@ -22,12 +22,11 @@ export default class DriverInfo extends Component {
 
     let url = `tel:${user.mobile}`;
 
-    return Linking.canOpenURL(url)
-      .then(supported => {
-        if (supported) {
-          return Linking.openURL(url);
-        }
-      });
+    return Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        return Linking.openURL(url);
+      }
+    });
   };
 
   render() {
@@ -38,9 +37,9 @@ export default class DriverInfo extends Component {
       <View style={[styles.itemContainer]}>
         <View style={styles.imageContainer}>
           {user.image ? (
-            <Image source={{uri: user.image}} style={styles.image}/>
+            <Image source={{uri: user.image}} style={styles.image} />
           ) : (
-            <Feather name="user" size={30} style={styles.image}/>
+            <Feather name="user" size={30} style={styles.image} />
           )}
         </View>
 
@@ -61,7 +60,7 @@ export default class DriverInfo extends Component {
           </View>
 
           <Touchable onPress={this.makeCall}>
-            <MaterialIcons name="phone" size={30} color="green"/>
+            <MaterialIcons name="phone" size={30} color="green" />
           </Touchable>
         </View>
       </View>

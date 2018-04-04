@@ -25,7 +25,7 @@ class Home extends PureComponent {
   };
 
   state = {
-    refreshing:false
+    refreshing: false,
   };
 
   componentDidMount() {
@@ -74,15 +74,14 @@ class Home extends PureComponent {
     const {working_orders, upcoming_orders, drivers} = this.props;
 
     return (
-      <ScrollView style={{flex: 1}}
+      <ScrollView
+        style={{flex: 1}}
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
             onRefresh={this._onRefresh.bind(this)}
           />
-        }
-
-      >
+        }>
         <SectionHeading
           title={I18n.t('working_orders')}
           buttonTitle={I18n.t('view_all')}

@@ -9,7 +9,7 @@ import SectionTitle from 'components/SectionTitle';
 import I18n from 'utils/locale';
 import Separator from 'components/Separator';
 import Touchable from 'react-native-platform-touchable';
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export default class DriverInfo extends Component {
   static propTypes = {
@@ -33,21 +33,20 @@ export default class DriverInfo extends Component {
           <Text style={styles.value}>{driver.user.email}</Text>
         </View>
 
-        <Separator style={{flex: 1}}/>
+        <Separator style={{flex: 1}} />
 
         <View style={styles.itemContainer}>
           <Text style={styles.label}>Mobile</Text>
 
           <Touchable onPress={this.makeCall}>
             <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-              <MaterialIcons name="phone" size={30} color="green"/>
+              <MaterialIcons name="phone" size={30} color="green" />
               <Text style={styles.value}>{driver.user.mobile}</Text>
             </View>
           </Touchable>
-
         </View>
 
-        <Separator style={{flex: 1}}/>
+        <Separator style={{flex: 1}} />
 
         <View style={styles.itemContainer}>
           <Text style={styles.label}>Status</Text>

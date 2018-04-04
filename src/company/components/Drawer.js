@@ -101,15 +101,15 @@ export default class Drawer extends Component {
 
         {/*<Separator />*/}
         {/*<DrawerItem*/}
-          {/*title={I18n.t('settings')}*/}
-          {/*routeName="SettingsStack"*/}
-          {/*onItemPress={this.onItemPress}*/}
-          {/*iconProps={{*/}
-            {/*name: 'settings',*/}
-            {/*type: 'MaterialCommunityIcons',*/}
-            {/*size: 30,*/}
-          {/*}}*/}
-          {/*active={activeRoute === 'SettingsStack'}*/}
+        {/*title={I18n.t('settings')}*/}
+        {/*routeName="SettingsStack"*/}
+        {/*onItemPress={this.onItemPress}*/}
+        {/*iconProps={{*/}
+        {/*name: 'settings',*/}
+        {/*type: 'MaterialCommunityIcons',*/}
+        {/*size: 30,*/}
+        {/*}}*/}
+        {/*active={activeRoute === 'SettingsStack'}*/}
         {/*/>*/}
 
         <Separator />

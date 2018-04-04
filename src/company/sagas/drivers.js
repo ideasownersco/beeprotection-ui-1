@@ -72,11 +72,9 @@ function* assignDriver(action) {
 }
 
 function* setDriverOnlineStatus(action) {
-
   try {
-
     const params = {
-      body:action.params
+      body: action.params,
     };
 
     const response = yield call(API.setDriverOnlineStatus, params);
@@ -86,7 +84,6 @@ function* setDriverOnlineStatus(action) {
       type: ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_SUCCESS,
       entities: normalized.entities,
     });
-
   } catch (error) {
     yield put({type: ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_FAILURE, error});
     yield put(
@@ -111,7 +108,10 @@ function* assignDriverMonitor() {
 }
 
 function* setDriverOnlineStatusMonitor() {
-  yield takeLatest(ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_REQUEST, setDriverOnlineStatus);
+  yield takeLatest(
+    ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_REQUEST,
+    setDriverOnlineStatus,
+  );
 }
 
 export const sagas = all([

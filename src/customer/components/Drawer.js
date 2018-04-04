@@ -61,15 +61,15 @@ export default class Drawer extends Component {
         {isAuthenticated ? (
           <View>
             {/*<DrawerItem*/}
-              {/*title={I18n.t('settings')}*/}
-              {/*routeName="Settings"*/}
-              {/*onItemPress={this.onItemPress}*/}
-              {/*iconProps={{*/}
-                {/*name: 'settings',*/}
-                {/*type: 'MaterialCommunityIcons',*/}
-                {/*size: 30,*/}
-              {/*}}*/}
-              {/*active={this.state.activeRoute === 'Logout'}*/}
+            {/*title={I18n.t('settings')}*/}
+            {/*routeName="Settings"*/}
+            {/*onItemPress={this.onItemPress}*/}
+            {/*iconProps={{*/}
+            {/*name: 'settings',*/}
+            {/*type: 'MaterialCommunityIcons',*/}
+            {/*size: 30,*/}
+            {/*}}*/}
+            {/*active={this.state.activeRoute === 'Logout'}*/}
             {/*/>*/}
             <DrawerItem
               title={I18n.t('logout')}

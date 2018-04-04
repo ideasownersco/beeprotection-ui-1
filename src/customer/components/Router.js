@@ -63,7 +63,8 @@ const HomeStack = StackNavigator(
       }),
     },
     OrderDetail: {screen: OrderDetailScene},
-    TrackOrder: {screen: TrackOrderScene,
+    TrackOrder: {
+      screen: TrackOrderScene,
       navigationOptions: ({navigation}) => ({
         title: I18n.t('track_order'),
       }),
@@ -104,8 +105,8 @@ const PastOrdersStack = StackNavigator(
       navigationOptions: ({navigation}) => {
         return {
           ...getDrawerIcon(navigation),
-          title:I18n.t('past_orders')
-        }
+          title: I18n.t('past_orders'),
+        };
       },
     },
     OrderDetail: {screen: OrderDetailScene},
@@ -125,8 +126,8 @@ const UpcomingOrdersStack = StackNavigator(
       navigationOptions: ({navigation}) => {
         return {
           ...getDrawerIcon(navigation),
-          title:I18n.t('upcoming_orders')
-        }
+          title: I18n.t('upcoming_orders'),
+        };
       },
     },
     OrderDetail: {screen: OrderDetailScene},
@@ -138,7 +139,6 @@ const UpcomingOrdersStack = StackNavigator(
     }),
   },
 );
-
 
 const SettingsStack = StackNavigator(
   {
@@ -156,7 +156,6 @@ const SettingsStack = StackNavigator(
     }),
   },
 );
-
 
 const DrawerRoutes = {
   HomeStack: {
