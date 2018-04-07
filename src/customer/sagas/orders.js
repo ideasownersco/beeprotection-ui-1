@@ -126,7 +126,7 @@ function* fetchWorkingOrder() {
         paginated: !!nextPage,
         paginatedUrl: nextPage,
       };
-      const response = yield call(API.fetchWorkingOrders, params);
+      const response = yield call(API.fetchWorkingOrder, params);
       const normalized = normalize(response.data, [Schema.orders]);
       const {entities, result} = normalized;
       yield put({
