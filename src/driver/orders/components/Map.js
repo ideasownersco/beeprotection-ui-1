@@ -42,6 +42,7 @@ export default class Map extends Component {
   //
   static defaultProps = {
     jobStatus: 'pending',
+    driverID: 1,
   };
   //
   constructor(props) {
@@ -57,14 +58,14 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
-    const {jobID, jobStatus} = this.props;
+    const {jobID, jobStatus, driverID} = this.props;
 
     BackgroundGeolocation.on('location', this.onLocation);
     BackgroundGeolocation.on('http', this.onHttp);
 
     BackgroundGeolocation.configure(
       {
-        distanceFilter: 10,
+        distanceFilter: 100,
         stopOnTerminate: false,
         preventSuspend: false,
         startOnBoot: true,
@@ -74,6 +75,9 @@ export default class Map extends Component {
         debug: true,
         logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
         maxRecordsToPersist: 1,
+        params: {
+          driver_id: driverID,
+        },
       },
       state => {
         this.setState({

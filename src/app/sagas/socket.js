@@ -4,6 +4,8 @@ import {SOCKET_SERVER} from 'utils/env';
 import {eventChannel} from 'redux-saga';
 
 import {ACTION_TYPES as CUSTOMER_ACTIONS} from 'customer/common/actions';
+import {ACTION_TYPES as DRIVER_ACTIONS} from 'driver/common/actions';
+import {ACTION_TYPES as COMPANY_ACTIONS} from 'company/common/actions';
 
 import {ACTION_TYPES as AUTH_ACTIONS} from 'guest/common/actions';
 import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
@@ -18,13 +20,12 @@ function connect() {
 }
 
 function subscribe(socket) {
-  console.log('socket', socket);
   return eventChannel(emit => {
     socket.on('location.updated', data => {
-      console.log('location', data);
+      console.log('location.updated', data);
       emit({
-        type: CUSTOMER_ACTIONS.DRIVER_LOCATION_UPDATED,
-        payload: data,
+        type: DRIVER_ACTIONS.DRIVER_LOCATION_UPDATED,
+        payload: data.payload,
       });
     });
     return () => {};
@@ -50,11 +51,17 @@ function* syncUserToSocket(socket) {
 }
 
 function* subscribeToJobTrack(socket) {
-  console.log('socket', socket);
-
   while (true) {
     const threadParams = yield take(CUSTOMER_ACTIONS.SUBSCRIBE_TO_JOB_TRACK);
     socket.emit('job.track.subscribe', threadParams.params.job_id);
+  }
+}
+
+function* subscribeToDriversTracking(socket) {
+  console.log('socket', socket);
+  while (true) {
+    yield take(COMPANY_ACTIONS.SUBSCRIBE_TO_DRIVER_TRACKINGS);
+    socket.emit('track.drivers.subscribe');
   }
 }
 
@@ -62,6 +69,7 @@ function* handleIO(socket) {
   yield fork(read, socket);
   yield fork(syncUserToSocket, socket);
   yield fork(subscribeToJobTrack, socket);
+  yield fork(subscribeToDriversTracking, socket);
 }
 
 function* socketFlowMonitor() {

@@ -40,6 +40,8 @@ export const ACTION_TYPES = {
     '@company/drivers/SET_DRIVER_ONLINE_STATUS_FAILURE',
   SET_DRIVER_ONLINE_STATUS_SUCCESS:
     '@company/drivers/SET_DRIVER_ONLINE_STATUS_SUCCESS',
+
+  SUBSCRIBE_TO_DRIVER_TRACKINGS: '@company/SUBSCRIBE_TO_DRIVER_TRACKINGS',
 };
 
 function fetchUpcomingOrders(params) {
@@ -120,6 +122,12 @@ function setDriverOnlineStatus(params: object) {
   };
 }
 
+function subscribeToDriverTrackings() {
+  return {
+    type: ACTION_TYPES.SUBSCRIBE_TO_DRIVER_TRACKINGS,
+  };
+}
+
 export const ACTIONS = {
   fetchWorkingOrders,
   fetchWorkingOrdersRefresh,
@@ -132,4 +140,5 @@ export const ACTIONS = {
   fetchDriver,
   assignDriver,
   setDriverOnlineStatus,
+  subscribeToDriverTrackings,
 };

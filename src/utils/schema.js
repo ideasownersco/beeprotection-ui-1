@@ -8,6 +8,13 @@ const usersSchema = new schema.Entity('users');
 const driversSchema = new schema.Entity('drivers');
 const jobsSchema = new schema.Entity('jobs');
 
+const profileSchema = new schema.Union(
+  {
+    drivers: driversSchema,
+  },
+  input => input.schema,
+);
+
 categoriesSchema.define({
   packages: [packagesSchema],
 });
@@ -35,7 +42,7 @@ jobsSchema.define({
 
 usersSchema.define({
   orders: [ordersSchema],
-  profile: driversSchema,
+  profile: profileSchema,
 });
 
 driversSchema.define({

@@ -5,6 +5,7 @@ import {Schema} from 'utils/schema';
 const schemas = state => state.entities;
 const driversSchema = state => state.entities.drivers;
 const usersSchema = state => state.entities.users;
+const getTrackings = state => state.company.trackings;
 
 const getItemIdProp = (state, itemID) => itemID;
 
@@ -26,7 +27,20 @@ const getDrivers = createSelector(
     }),
 );
 
+const getDriverTrackings = createSelector(
+  [schemas, driversSchema, getTrackings],
+  (entities, drivers, trackings) =>
+    Object.keys(trackings).map(driverID => {
+      let driver = drivers[driverID];
+      return {
+        ...driver,
+        ...trackings[driverID],
+      };
+    }),
+);
+
 export const SELECTORS = {
   getDrivers,
   getDriverByID,
+  getDriverTrackings,
 };

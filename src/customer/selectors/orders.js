@@ -67,7 +67,7 @@ const getCartTotal = createSelector([cartItems], items => {
 const getLocationUpdatesForJob = () => {
   return createSelector(
     [getTrackings, getItemIdProp],
-    (tracking, order) => tracking[order] || {},
+    (tracking, jobID) => tracking[jobID] || {},
   );
 };
 

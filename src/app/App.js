@@ -51,16 +51,16 @@ class App extends Component {
   };
 
   onReceivePushNotifications = (notification: object) => {
-    console.log('notification', notification);
+    // console.log('notification', notification);
     let {foreground, data} = notification;
     let navigation = NavigatorService;
 
     if (!foreground) {
-      console.log('not foregorund');
+      // console.log('not foregorund');
       let {type} = data;
       switch (type) {
         case 'job.started':
-          console.log('job.started');
+          // console.log('job.started');
           let {order_id} = data;
           return navigation.navigate('OrderDetail', {
             orderID: order_id,

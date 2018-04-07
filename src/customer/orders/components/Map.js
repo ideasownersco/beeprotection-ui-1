@@ -38,9 +38,6 @@ export default class Map extends Component {
     const rotate =
       typeof heading === 'number' && heading >= 0 ? `${heading}deg` : undefined;
 
-    if (rotate) {
-    }
-
     return (
       <View style={styles.container}>
         <MapView

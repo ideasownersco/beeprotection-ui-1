@@ -68,7 +68,7 @@ const HomeStack = StackNavigator(
     },
   },
   {
-    // initialRouteName:'WorkingOrders'
+    // initialRouteName:'TrackDetail',
     navigationOptions: ({navigation}) => ({
       headerTintColor: colors.primary,
     }),
@@ -199,4 +199,5 @@ export const Router = DrawerNavigator(DrawerRoutes, {
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',
   drawerToggleRoute: 'DrawerToggle',
+  // initialRouteName:'TrackDriversStack'
 });

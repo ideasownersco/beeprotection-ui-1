@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Map from 'driver/orders/components/Map';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import BackgroundGeolocation from 'react-native-background-geolocation';
-import {View} from 'react-native';
+import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
 
 class CustomerLocationMapScene extends Component {
   static propTypes = {
@@ -27,10 +27,10 @@ class CustomerLocationMapScene extends Component {
     super(props);
     this.state = {
       origin: {
-        // latitude: 37.78825,
-        // longitude: -122.4324,
-        latitude: 29.3772392006689,
-        longitude: 47.98511826155676,
+        latitude: 37.78825,
+        longitude: -122.4324,
+        // latitude: 29.3772392006689,
+        // longitude: 47.98511826155676,
       },
     };
   }
@@ -77,6 +77,8 @@ class CustomerLocationMapScene extends Component {
     let {job} = this.props.navigation.state.params.order;
     let {origin} = this.state;
 
+    let {profile} = this.props;
+
     return (
       <Map
         origin={origin}
@@ -89,14 +91,15 @@ class CustomerLocationMapScene extends Component {
         updateLocation={this.onUpdateLocation}
         jobID={job.id}
         jobStatus={job.status}
+        driverID={profile.id}
       />
     );
   }
 }
 
-const mapStateToProps = state => {
-  return state;
-};
-
-// export default CustomerLocationMapScene;
+function mapStateToProps(state) {
+  return {
+    profile: AUTH_SELECTORS.getAuthUserProfile(state),
+  };
+}
 export default connect(mapStateToProps)(CustomerLocationMapScene);

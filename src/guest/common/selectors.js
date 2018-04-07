@@ -25,6 +25,7 @@ const getAuthUserProfile = createSelector(
   schemas,
   getAuthUser,
   (entities, user) => {
+    console.log('user', user);
     let {id, schema} = user.profile;
     return entities[schema][id];
   },
