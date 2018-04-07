@@ -59,6 +59,7 @@ class TrackScene extends PureComponent {
     //   },
     // ];
     //
+
     this.map.fitToCoordinates(this.props.drivers, {
       edgePadding: DEFAULT_PADDING,
       animated: true,
@@ -66,13 +67,13 @@ class TrackScene extends PureComponent {
 
   };
 
-  // componentDidUpdate(nextProps) {
-  //   if (this.props.drivers !== nextProps.drivers) {
-  //     if (!this.state.pauseTrackingUpdate) {
-  //       this.onMapLayout();
-  //     }
-  //   }
-  // }
+  componentDidUpdate(nextProps) {
+    if (this.props.drivers !== nextProps.drivers) {
+      if (!this.state.pauseTrackingUpdate) {
+        this.onMapLayout();
+      }
+    }
+  }
 
   resumeTrackingUpdate = () => {
     this.onMapLayout();
@@ -137,7 +138,7 @@ class TrackScene extends PureComponent {
     return (
       <View style={{flex: 1}}>
         <MapView
-          provider={PROVIDER_GOOGLE}
+          // provider={PROVIDER_GOOGLE}
           ref={ref => {
             this.map = ref;
           }}
