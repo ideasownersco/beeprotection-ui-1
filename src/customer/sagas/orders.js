@@ -112,24 +112,56 @@ function* fetchPastOrders() {
 
 function* fetchWorkingOrder() {
   try {
-    const response = yield call(API.fetchWorkingOrder);
+    const state = yield select();
 
-    if (response.data) {
-      const normalized = normalize(response.data, Schema.orders);
+    const {nextPage} = state.customer.working_order;
+
+    if (nextPage === null) {
       yield put({
-        type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
-        entities: normalized.entities,
-        result: normalized.result,
+        type: ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE,
+        error: I18n.t('no_more_records'),
       });
     } else {
+      const params = {
+        paginated: !!nextPage,
+        paginatedUrl: nextPage,
+      };
+      const response = yield call(API.fetchWorkingOrders, params);
+      const normalized = normalize(response.data, [Schema.orders]);
+      const {entities, result} = normalized;
       yield put({
         type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
+        entities: entities,
+        result: result,
+        nextPage: (response.links && response.links.next) || null,
       });
     }
   } catch (error) {
     yield put({type: ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE, error});
   }
 }
+
+
+// function* fetchWorkingOrder() {
+//   try {
+//     const response = yield call(API.fetchWorkingOrder);
+//
+//     if (response.data) {
+//       const normalized = normalize(response.data, [Schema.orders]);
+//       yield put({
+//         type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
+//         entities: normalized.entities,
+//         result: normalized.result,
+//       });
+//     } else {
+//       yield put({
+//         type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
+//       });
+//     }
+//   } catch (error) {
+//     yield put({type: ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE, error});
+//   }
+// }
 
 function* saveAddress(action) {
   try {

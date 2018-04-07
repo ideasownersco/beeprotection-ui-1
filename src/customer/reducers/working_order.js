@@ -1,9 +1,12 @@
 import {ACTION_TYPES} from 'customer/common/actions';
+import union from 'lodash/union';
 
 const initialState = {
   isFetching: false,
-  id: null,
+  id:null,
+  ids: [],
   error: null,
+  nextPage: undefined,
 };
 
 export function reducer(state = initialState, action = {}) {
@@ -19,7 +22,8 @@ export function reducer(state = initialState, action = {}) {
       return {
         ...state,
         isFetching: false,
-        id: action.result,
+        ids: union(state.ids, action.result),
+        nextPage: action.nextPage,
         error: null,
       };
     }

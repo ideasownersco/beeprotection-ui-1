@@ -59,6 +59,8 @@ class Home extends Component {
   render() {
     let {upcoming_orders, working_order} = this.props;
 
+    console.log('wo',working_order);
+
     return (
       <ScrollView style={{flex: 1}}>
         <WelcomeText />
@@ -68,14 +70,14 @@ class Home extends Component {
           onProtectionPress={this.onProtectionPress}
         />
 
-        {working_order &&
-          working_order.id && (
+        {/*{working_order &&*/}
+          {/*working_order.id && (*/}
             <StandingOrdersList
-              items={[working_order]}
+              items={working_order}
               onItemPress={this.onStandingOrderListItemPress}
               onItemTrackPress={this.onItemTrackPress}
             />
-          )}
+          // )}
       </ScrollView>
     );
   }

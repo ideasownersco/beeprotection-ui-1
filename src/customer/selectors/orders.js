@@ -11,7 +11,7 @@ const servicesEntity = state => state.entities.services;
 const schemas = state => state.entities;
 const timingsEntity = state => state.entities.timings;
 const upcomingOrders = state => state.customer.upcoming_orders.ids;
-const workingOrder = state => state.customer.working_order.id;
+const workingOrder = state => state.customer.working_order.ids;
 const pastOrders = state => state.customer.past_orders.ids;
 const getItemIdProp = (state, itemID) => itemID;
 const getTrackings = state => state.customer.trackings;
@@ -87,7 +87,14 @@ const getUpcomingOrders = createSelector(
 
 const getWorkingOrder = createSelector(
   [schemas, workingOrder],
-  (entities, orderID) => denormalize(orderID, Schema.orders, entities),
+  // (entities, orderID) => denormalize(orderID, Schema.orders, entities),
+  (entities, orders) => {
+    return (
+      (orders &&
+        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
+      []
+    );
+  },
 );
 
 const getPastOrders = createSelector(
