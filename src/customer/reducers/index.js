@@ -6,6 +6,7 @@ import {reducer as upcoming_orders} from 'customer/reducers/upcoming_orders';
 import {reducer as past_orders} from 'customer/reducers/past_orders';
 import {reducer as payment} from 'customer/reducers/payment';
 import {reducer as checkout} from 'customer/reducers/checkout';
+import {reducer as timings} from 'customer/reducers/timings';
 
 export const reducer = combineReducers({
   cart,
@@ -15,4 +16,5 @@ export const reducer = combineReducers({
   trackings,
   payment,
   checkout,
+  timings
 });

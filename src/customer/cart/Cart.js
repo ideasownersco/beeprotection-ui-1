@@ -54,6 +54,7 @@ class Cart extends PureComponent {
     this.setState({
       dates: dates,
     });
+    this.fetchTimings();
     this.props.actions.fetchCartItems();
     this.props.actions.fetchAddresses();
   }
@@ -96,8 +97,12 @@ class Cart extends PureComponent {
     }
   };
 
-  onDatePickerItemPress = (item: object) => {
-    this.props.actions.setCartItem('selectedDate', item);
+  onDatePickerItemPress = (date) => {
+    this.props.actions.setCartItems({
+      selectedDate:date,
+      selectedTimeID:null
+    });
+    this.fetchTimings(date);
   };
 
   onTimeChange = time => {
@@ -127,18 +132,6 @@ class Cart extends PureComponent {
     });
   };
 
-  showDateTimePickerModal = () => {
-    this.setState({
-      timePickerModalVisible: true,
-    });
-  };
-
-  hideDateTimePickerModal = () => {
-    this.setState({
-      timePickerModalVisible: false,
-    });
-  };
-
   onCartItemPress = (item: object) => {
     console.log('item', item);
 
@@ -162,14 +155,21 @@ class Cart extends PureComponent {
 
   onSuccessButtonPress = () => {
     this.hideSuccessModal();
-    this.props.actions.flushCart();
-    this.props.actions.fetchWorkingOrder();
-    this.props.navigation.popToTop();
+    // this.props.actions.flushCart();
+    // this.props.actions.fetchWorkingOrder();
+    // this.props.navigation.popToTop();
+  };
+
+  fetchTimings = (date = null) => {
+    this.props.actions.fetchTimings({
+      date:date ? date: null,
+      items:this.props.cart.items
+    });
   };
 
   render() {
-    let {cart, cartItems, user, cartTotal, checkout,timings} = this.props;
-    let {selectedDate, selectedTime, selectedAddressID,selectedTimeID} = cart;
+    let {cart, cartItems, user, cartTotal, checkout,timings,isFetchingTimings} = this.props;
+    let {selectedDate, selectedAddressID,selectedTimeID} = cart;
     let {
       dates,
       showPaymentModal,
@@ -211,6 +211,7 @@ class Cart extends PureComponent {
           items={timings}
           onItemPress={this.onTimeChange}
           activeItemID={selectedTimeID}
+          isFetching={isFetchingTimings}
         />
 
         {/*<DateTimePicker*/}
@@ -310,6 +311,7 @@ function mapStateToProps(state) {
     cart: SELECTORS.getCart(state),
     cartTotal: SELECTORS.getCartTotal(state),
     timings: ORDER_SELECTORS.getTimings(state) || [],
+    isFetchingTimings: state.customer.timings.isFetching,
     user: USER_SELECTORS.getAuthUser(state),
     isAuthenticated: USER_SELECTORS.isAuthenticated(state),
     checkout: state.customer.checkout,

@@ -6,6 +6,7 @@ import {reducer as driver} from 'driver/reducers';
 import {combineReducers} from 'redux';
 import {reducer as entities} from 'app/reducers/entities';
 import {reducer as notifications} from 'app/reducers/notifications';
+import {reducer as timings} from 'app/reducers/notifications';
 
 const rootReducer = combineReducers({
   app,

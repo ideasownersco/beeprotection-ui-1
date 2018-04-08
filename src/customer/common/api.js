@@ -12,7 +12,12 @@ function fetchCategories(params = {}) {
 
 function fetchTimings(params = {}) {
   const path = `timings`;
-  return request({path, params});
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
 }
 
 function fetchAddresses(params = {}) {

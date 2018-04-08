@@ -59,7 +59,7 @@ class CreateOrder extends PureComponent {
 
   componentDidMount() {
     this.props.actions.fetchCategories();
-    this.props.actions.fetchTimings();
+    // this.props.actions.fetchTimings();
     this.props.navigation.setParams({
       handleRightButtonPress: this.loadCartScene,
     });

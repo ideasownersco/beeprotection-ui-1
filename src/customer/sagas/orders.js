@@ -19,9 +19,17 @@ function* fetchCategories() {
   }
 }
 
-function* fetchTimings() {
+function* fetchTimings(action) {
+
   try {
-    const response = yield call(API.fetchTimings);
+
+    const params = {
+      body: {
+        ...action.params,
+      },
+    };
+
+    const response = yield call(API.fetchTimings,params);
     const normalized = normalize(response.data, [Schema.timings]);
     yield put({
       type: ACTION_TYPES.TIMINGS_SUCCESS,
