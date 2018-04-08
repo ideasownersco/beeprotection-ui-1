@@ -7,6 +7,7 @@ const initialState = {
   total: 0,
   selectedDate: moment(),
   selectedTime: moment(),
+  selectedTimeID: null,
   selectedAddressID: null,
   activeCategoryID: null,
   activePackageID: null,

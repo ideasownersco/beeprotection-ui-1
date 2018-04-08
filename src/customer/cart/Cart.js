@@ -27,6 +27,7 @@ import PaymentOptions from 'customer/cart/components/PaymentOptions';
 import OrderSuccess from 'customer/cart/components/OrderSuccess';
 import PaymentPage from 'customer/cart/components/PaymentPage';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import TimePicker from "./components/TimePicker";
 
 type State = {
   dates: Array,
@@ -61,16 +62,16 @@ class Cart extends PureComponent {
     const {user, isAuthenticated, cart} = this.props;
     const {paymentMode} = this.state;
 
-    const {selectedDate, selectedTime, selectedAddressID} = cart;
+    const {selectedDate, selectedAddressID,selectedTimeID,items,total} = cart;
     if (!isAuthenticated) {
       this.props.navigation.navigate('Login');
     } else {
       const item = {
         user_id: user.id,
         address_id: selectedAddressID,
-        items: this.props.cart.items,
-        total: this.props.cart.total,
-        time: selectedTime.format('HH:mm'),
+        items: items,
+        total: total,
+        time: selectedTimeID,
         date: selectedDate,
         payment_mode: paymentMode,
       };
@@ -100,7 +101,8 @@ class Cart extends PureComponent {
   };
 
   onTimeChange = time => {
-    this.props.actions.setCartItem('selectedTime', moment(time));
+    // this.props.actions.setCartItem('selectedTime', moment(time));
+    this.props.actions.setCartItem('selectedTimeID', time.id);
   };
 
   onPaymentOptionsItemPress = (option: string) => {
@@ -166,8 +168,8 @@ class Cart extends PureComponent {
   };
 
   render() {
-    let {cart, cartItems, user, cartTotal, checkout} = this.props;
-    let {selectedDate, selectedTime, selectedAddressID} = cart;
+    let {cart, cartItems, user, cartTotal, checkout,timings} = this.props;
+    let {selectedDate, selectedTime, selectedAddressID,selectedTimeID} = cart;
     let {
       dates,
       showPaymentModal,
@@ -195,42 +197,48 @@ class Cart extends PureComponent {
 
         <Separator style={{marginVertical: 10}} />
 
-        <Text style={{fontSize: 20, paddingHorizontal: 10}}>
-          {I18n.t('select_time')}
-        </Text>
+        {/*<Text style={{fontSize: 20, paddingHorizontal: 10}}>*/}
+          {/*{I18n.t('select_time')}*/}
+        {/*</Text>*/}
 
-        <Button
-          style={{flex: 1, alignItems: 'flex-start', backgroundColor: 'white'}}
-          onPress={this.showDateTimePickerModal}>
-          <Text style={{fontSize: 20}}>{selectedTime.format('h:mm a')}</Text>
-        </Button>
+        {/*<Button*/}
+          {/*style={{flex: 1, alignItems: 'flex-start', backgroundColor: 'white'}}*/}
+          {/*onPress={this.showDateTimePickerModal}>*/}
+          {/*<Text style={{fontSize: 20}}>{selectedTime.format('h:mm a')}</Text>*/}
+        {/*</Button>*/}
 
-        <DateTimePicker
-          titleIOS={I18n.t('select_time')}
-          date={selectedTime.toDate()}
-          isVisible={this.state.timePickerModalVisible}
-          neverDisableConfirmIOS={true}
-          mode="time"
-          confirmBtnText={I18n.t('confirm')}
-          cancelBtnText={I18n.t('cancel')}
-          onConfirm={this.hideDateTimePickerModal}
-          onCancel={this.hideDateTimePickerModal}
-          onDateChange={this.onTimeChange}
-          customStyles={{
-            dateTouchBody: {
-              padding: 10,
-              backgroundColor: 'white',
-            },
-            dateText: {
-              color: colors.primary,
-              fontWeight: '500',
-              fontSize: 25,
-            },
-          }}
-          titleStyle={{
-            fontSize: 20,
-          }}
+        <TimePicker
+          items={timings}
+          onItemPress={this.onTimeChange}
+          activeItemID={selectedTimeID}
         />
+
+        {/*<DateTimePicker*/}
+          {/*titleIOS={I18n.t('select_time')}*/}
+          {/*date={selectedTime.toDate()}*/}
+          {/*isVisible={this.state.timePickerModalVisible}*/}
+          {/*neverDisableConfirmIOS={true}*/}
+          {/*mode="time"*/}
+          {/*confirmBtnText={I18n.t('confirm')}*/}
+          {/*cancelBtnText={I18n.t('cancel')}*/}
+          {/*onConfirm={this.hideDateTimePickerModal}*/}
+          {/*onCancel={this.hideDateTimePickerModal}*/}
+          {/*onDateChange={this.onTimeChange}*/}
+          {/*customStyles={{*/}
+            {/*dateTouchBody: {*/}
+              {/*padding: 10,*/}
+              {/*backgroundColor: 'white',*/}
+            {/*},*/}
+            {/*dateText: {*/}
+              {/*color: colors.primary,*/}
+              {/*fontWeight: '500',*/}
+              {/*fontSize: 25,*/}
+            {/*},*/}
+          {/*}}*/}
+          {/*titleStyle={{*/}
+            {/*fontSize: 20,*/}
+          {/*}}*/}
+        {/*/>*/}
 
         <Separator style={{marginVertical: 10}} />
 
