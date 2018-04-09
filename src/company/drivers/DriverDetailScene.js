@@ -69,7 +69,6 @@ class DriverDetailScene extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.online !== this.state.online) {
-      console.log('did update');
       this.props.navigation.setParams({
         online: this.state.online,
       });
@@ -97,7 +96,6 @@ class DriverDetailScene extends PureComponent {
 
   render() {
     const {driver} = this.props;
-    console.log('online', this.state.online);
 
     const {image, name} = driver.user;
     return (

@@ -42,7 +42,7 @@ class Cart extends PureComponent {
     dates: [],
     showPaymentModal: false,
     showOrderSuccessModal: false,
-    paymentMode: 'knet',
+    paymentMode: 'cash',
     timePickerModalVisible: false,
   };
 
@@ -133,8 +133,6 @@ class Cart extends PureComponent {
   };
 
   onCartItemPress = (item: object) => {
-    console.log('item', item);
-
     return Alert.alert(`${I18n.t('cart_remove_item')} ?`, '', [
       {text: I18n.t('cancel')},
       {

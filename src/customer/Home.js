@@ -31,7 +31,6 @@ class Home extends Component {
       this.state.appState.match(/inactive|background/) &&
       nextAppState === 'active'
     ) {
-      console.log('referesssshinggggggg');
       this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrder());
     }
     this.setState({appState: nextAppState});
@@ -58,8 +57,6 @@ class Home extends Component {
 
   render() {
     let {upcoming_orders, working_order} = this.props;
-
-    console.log('wo',working_order);
 
     return (
       <ScrollView style={{flex: 1}}>

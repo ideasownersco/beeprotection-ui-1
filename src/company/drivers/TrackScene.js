@@ -40,7 +40,6 @@ class TrackScene extends PureComponent {
   };
 
   onMapLayout = () => {
-    console.log('onMp');
     // this.map.fitToElements(true);
     // let drivers = [
     //   {
@@ -84,7 +83,6 @@ class TrackScene extends PureComponent {
   };
 
   pauseTrackingUpdate = () => {
-    console.log('pausing');
     this.setState({
       pauseTrackingUpdate: true
     });
@@ -92,7 +90,6 @@ class TrackScene extends PureComponent {
 
   render() {
     let {drivers} = this.props;
-    console.log('drivers props', drivers);
 
     let origin = {
       latitude: 37.48522,
