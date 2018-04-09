@@ -54,9 +54,9 @@ class Cart extends PureComponent {
     this.setState({
       dates: dates,
     });
-    this.fetchTimings();
     this.props.actions.fetchCartItems();
     this.props.actions.fetchAddresses();
+    this.fetchTimings();
   }
 
   performCheckout = () => {
@@ -155,6 +155,7 @@ class Cart extends PureComponent {
 
   onSuccessButtonPress = () => {
     this.hideSuccessModal();
+    this.fetchTimings();
     // this.props.actions.flushCart();
     // this.props.actions.fetchWorkingOrder();
     // this.props.navigation.popToTop();
@@ -162,7 +163,7 @@ class Cart extends PureComponent {
 
   fetchTimings = (date = null) => {
     this.props.actions.fetchTimings({
-      date:date ? date: null,
+      date:date ? date: this.props.cart.selectedDate,
       items:this.props.cart.items
     });
   };
