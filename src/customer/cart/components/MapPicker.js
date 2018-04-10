@@ -133,19 +133,6 @@ export default class MapPicker extends Component {
   }
 
   onItemPress = (locationData, locationDetails) => {
-    // console.log('locationData', locationData);
-    // console.log('locationDetails', locationDetails);
-    // this.setState({
-    //   latitude_delta:0.0043
-    // });
-
-    // if (!locationData.terms[2]) {
-    //   alert(I18n.t('please_choose_precise_location'));
-    // } else {
-
-    this.setState({
-      latitude_delta:0.08
-    });
 
     let params = {
       latitude: locationDetails.geometry.location.lat,
@@ -153,14 +140,12 @@ export default class MapPicker extends Component {
       country: 'KW',
     };
 
-    // this.map.animateToRegion(params);
-
     this.map.fitToCoordinates([params,this.props.address], {
       edgePadding: DEFAULT_PADDING,
       animated: true,
     });
-    //
-    // this.props.updateAddress(params);
+
+    this.props.updateAddress(params);
     // this.geoCode(locationData, 'en');
     // this.geoCode(locationData, 'ar');
   };
