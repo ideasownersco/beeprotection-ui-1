@@ -30,6 +30,10 @@ export const ACTION_TYPES = {
   ADDRESSES_SUCCESS: '@customer/ADDRESSES_SUCCESS',
   ADDRESSES_FAILURE: '@customer/ADDRESSES_FAILURE',
 
+  AREAS_REQUEST: '@customer/AREAS_REQUEST',
+  AREAS_SUCCESS: '@customer/AREAS_SUCCESS',
+  AREAS_FAILURE: '@customer/AREAS_FAILURE',
+
   SAVE_ADDRESS_REQUEST: '@customer/SAVE_ADDRESS_REQUEST',
   SAVE_ADDRESS_SUCCESS: '@customer/SAVE_ADDRESS_SUCCESS',
   SAVE_ADDRESS_FAILURE: '@customer/SAVE_ADDRESS_FAILURE',
@@ -142,6 +146,12 @@ function fetchAddresses(params) {
     params,
   };
 }
+function fetchAreas(params) {
+  return {
+    type: ACTION_TYPES.AREAS_REQUEST,
+    params,
+  };
+}
 
 function saveAddress(params: object) {
   return {
@@ -208,6 +218,7 @@ export const ACTIONS = {
   fetchCategories,
   fetchTimings,
   fetchAddresses,
+  fetchAreas,
   saveAddress,
   checkout,
   setCartItems,

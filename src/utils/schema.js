@@ -7,6 +7,7 @@ const ordersSchema = new schema.Entity('orders');
 const usersSchema = new schema.Entity('users');
 const driversSchema = new schema.Entity('drivers');
 const jobsSchema = new schema.Entity('jobs');
+const areasSchema = new schema.Entity('areas');
 
 const profileSchema = new schema.Union(
   {
@@ -60,4 +61,5 @@ export const Schema = {
   users: usersSchema,
   drivers: driversSchema,
   jobs: jobsSchema,
+  areas:areasSchema
 };

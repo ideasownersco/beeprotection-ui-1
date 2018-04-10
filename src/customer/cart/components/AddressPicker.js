@@ -35,7 +35,7 @@ export default class AddressPicker extends PureComponent {
   };
 
   render() {
-    const {addresses, onAddressPickerItemPress, activeItemID} = this.props;
+    const {addresses, onAddressPickerItemPress, activeItemID,areas} = this.props;
     const {createAddressFormVisibility} = this.state;
 
     return (
@@ -59,6 +59,7 @@ export default class AddressPicker extends PureComponent {
           visible={createAddressFormVisibility}
           onPress={this.saveAddress}
           onClose={this.hideCreateAddressForm}
+          areas={areas}
         />
       </View>
     );

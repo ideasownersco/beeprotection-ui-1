@@ -129,6 +129,6 @@
   "customer_information" : "Customer Information",
 
   "invoice" : "Invoice",
-  "driver_status_update_failed" :"Could not update Driver's Status"
+  "driver_status_update_failed" :"Could not update Driver's Status",
 
 }

@@ -56,9 +56,8 @@ class Cart extends PureComponent {
     });
     this.props.actions.fetchCartItems();
     this.props.actions.fetchAddresses();
+    this.props.actions.fetchAreas();
     this.fetchTimings();
-
-
 
   }
 
@@ -170,7 +169,7 @@ class Cart extends PureComponent {
   };
 
   render() {
-    let {cart, cartItems, user, cartTotal, checkout,timings,isFetchingTimings} = this.props;
+    let {cart, cartItems, user, cartTotal, checkout,timings,isFetchingTimings,areas} = this.props;
     let {selectedDate, selectedAddressID,selectedTimeID} = cart;
     let {
       dates,
@@ -251,6 +250,7 @@ class Cart extends PureComponent {
           onAddressPickerItemPress={this.onAddressPickerItemPress}
           activeItemID={selectedAddressID}
           initialized={this.state.initialized}
+          areas={areas}
         />
 
         <Separator style={{marginVertical: 10}} />
@@ -318,6 +318,7 @@ function mapStateToProps(state) {
     user: USER_SELECTORS.getAuthUser(state),
     isAuthenticated: USER_SELECTORS.isAuthenticated(state),
     checkout: state.customer.checkout,
+    areas:SELECTORS.getAreas(state)
   };
 }
 

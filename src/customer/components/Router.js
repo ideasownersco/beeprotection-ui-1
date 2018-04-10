@@ -100,7 +100,7 @@ const HomeStack = StackNavigator(
       gesturesEnabled: false,
       headerTintColor: colors.primary,
     }),
-    initialRouteName:'Map'
+    // initialRouteName:'Map'
   },
 );
 

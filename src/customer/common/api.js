@@ -25,6 +25,11 @@ function fetchAddresses(params = {}) {
   return request({path, params});
 }
 
+function fetchAreas(params = {}) {
+  const path = `areas`;
+  return request({path, params});
+}
+
 function fetchUpcomingOrders(params = {}) {
   const path = `customer/orders/upcoming`;
   return request({path, params});
@@ -70,6 +75,7 @@ export const API = {
   fetchCategories,
   fetchTimings,
   fetchAddresses,
+  fetchAreas,
   saveAddress,
   checkout,
   fetchUpcomingOrders,

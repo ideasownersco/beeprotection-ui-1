@@ -53,6 +53,19 @@ function* fetchAddresses() {
   }
 }
 
+function* fetchAreas() {
+  try {
+    const response = yield call(API.fetchAreas);
+    const normalized = normalize(response.data, [Schema.areas]);
+    yield put({
+      type: ACTION_TYPES.AREAS_SUCCESS,
+      entities: normalized.entities,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.AREAS_FAILURE, error});
+  }
+}
+
 function* fetchUpcomingOrders() {
   try {
     const state = yield select();
@@ -290,6 +303,10 @@ function* fetchAddressesMonitor() {
   yield takeLatest(ACTION_TYPES.ADDRESSES_REQUEST, fetchAddresses);
 }
 
+function* fetchAreasMonitor() {
+  yield takeLatest(ACTION_TYPES.AREAS_REQUEST, fetchAreas);
+}
+
 function* fetchUpcomingOrdersMonitor() {
   yield takeLatest(
     ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST,
@@ -325,6 +342,7 @@ export const sagas = all([
   fork(fetchCategoriesMonitor),
   fork(fetchTimingsMonitor),
   fork(fetchAddressesMonitor),
+  fork(fetchAreasMonitor),
   fork(saveAddressMonitor),
   // fork(createOrderMonitor),
   fork(checkoutMonitor),

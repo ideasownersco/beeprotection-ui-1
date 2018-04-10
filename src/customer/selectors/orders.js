@@ -10,6 +10,7 @@ const packagesEntity = state => state.entities.packages;
 const servicesEntity = state => state.entities.services;
 const schemas = state => state.entities;
 const timingsEntity = state => state.entities.timings;
+const areasEntity = state => state.entities.areas;
 const upcomingOrders = state => state.customer.upcoming_orders.ids;
 const workingOrder = state => state.customer.working_order.ids;
 const pastOrders = state => state.customer.past_orders.ids;
@@ -30,6 +31,10 @@ const getParentCategories = createSelector([getCategories], categories => {
 });
 
 const getTimings = createSelector([timingsEntity], timings => {
+  return Object.keys(timings).map(timing => timings[timing]);
+});
+
+const getAreas = createSelector([areasEntity], timings => {
   return Object.keys(timings).map(timing => timings[timing]);
 });
 
@@ -120,4 +125,5 @@ export const SELECTORS = {
   getUpcomingOrders,
   getWorkingOrder,
   getPastOrders,
+  getAreas
 };

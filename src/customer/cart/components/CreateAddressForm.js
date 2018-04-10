@@ -38,30 +38,35 @@ export default class CreateAddressForm extends PureComponent {
     latitude: 29.3759,
     longitude: 47.9774,
     initialized: false,
+    area_id:null
   };
 
   componentDidMount() {
-    BackgroundGeolocation.getCurrentPosition(
-      location => {
-        let {latitude, longitude} = location.coords;
-        this.setState({
-          latitude: latitude,
-          longitude: longitude,
-          initialized: true
-        });
-      },
-      error => {
-        this.setState({
-          initialized: true
-        });
-        console.warn('- getCurrentPosition error: ', error);
-      },
-      {
-        persist: true,
-        samples: 1,
-        maximumAge: 5000,
-      },
-    )
+    // BackgroundGeolocation.getCurrentPosition(
+    //   location => {
+    //     let {latitude, longitude} = location.coords;
+    //     this.setState({
+    //       latitude: latitude,
+    //       longitude: longitude,
+    //       initialized: true
+    //     });
+    //   },
+    //   error => {
+    //     this.setState({
+    //       initialized: true
+    //     });
+    //     console.warn('- getCurrentPosition error: ', error);
+    //   },
+    //   {
+    //     persist: true,
+    //     samples: 1,
+    //     maximumAge: 5000,
+    //   },
+    // )
+
+    this.setState({
+      initialized:true
+    })
   }
 
   hideScreen = () => {
@@ -92,7 +97,7 @@ export default class CreateAddressForm extends PureComponent {
   };
 
   render() {
-    const {visible} = this.props;
+    const {visible,areas} = this.props;
     const {block, street, avenue, building, mapPickerVisibility} = this.state;
 
     return (
@@ -115,6 +120,7 @@ export default class CreateAddressForm extends PureComponent {
             updateAddress={this.updateAddressFields}
             address={{...this.state}}
             initialized={this.state.initialized}
+            areas={areas}
           />
 
           <View style={styles.buttonsContainer}>

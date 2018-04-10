@@ -10,6 +10,7 @@ export function reducer(
     addresses: {},
     drivers: {},
     jobs: {},
+    areas:{}
   },
   action = {},
 ) {

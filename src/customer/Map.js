@@ -11,6 +11,7 @@ class Home extends Component {
     latitude: 29.3759,
     longitude: 47.9774,
     country: 'KW',
+    area_id:7
   };
 
   componentDidMount() {
@@ -43,15 +44,21 @@ class Home extends Component {
     });
   };
 
+  setArea = (id) => {
+    this.setState({
+      area_id:id
+    })
+  };
+
   render() {
     return (
       <MapPicker
         initialized={this.state.initialized}
-        onClose={() => {
-        }}
+        onClose={() => {}}
         visible={true}
         updateAddress={this.saveAddress}
         address={{...this.state}}
+        areas={[{id: 7, name: "Abbasiya", active: 1, latitude: 29.2643154, longitude: 47.94439999999999},{id: 8, name: "Abdullah Al-Mubarak", active: 1, latitude: 29.3680874, longitude: 47.9805976}]}
       />
     );
   }

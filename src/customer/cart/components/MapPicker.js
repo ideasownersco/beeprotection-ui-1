@@ -3,171 +3,66 @@
  */
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {
-  Alert,
-  Dimensions,
-  StyleSheet,
-  TouchableHighlight,
-  View,
-} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Dimensions, StyleSheet, Text, View,} from 'react-native';
 import colors from 'assets/theme/colors';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {GOOGLE_MAPS_KEY} from 'utils/env.js';
 import I18n, {isRTL} from 'utils/locale';
 import Qs from 'qs';
-import BackgroundGeolocation from 'react-native-background-geolocation';
+import Touchable from 'react-native-platform-touchable';
+import List from "../../../components/List";
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const DEFAULT_PADDING = {top: 50, right: 50, bottom: 50, left: 50};
-
-// const LATITUDE_DELTA = 1;
-// const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class MapPicker extends Component {
 
   static propTypes = {
     updateAddress: PropTypes.func.isRequired,
     address: PropTypes.object.isRequired,
+    areas: PropTypes.array.isRequired
   };
 
-  shouldComponentUpdate(nextProps) {
-    return (
-      this.props.address.latitude !== nextProps.address.latitude ||
-      this.props.address.address_en !== nextProps.address.address_en
-    );
-  }
+  // shouldComponentUpdate(nextProps, prevState) {
+  //   return (
+  //     this.props.address.latitude !== nextProps.address.latitude ||
+  //     this.props.address.address_en !== nextProps.address.address_en,
+  //     this.state.isAreaListModalVisible !== prevState.isAreaListModalVisible
+  //   );
+  // }
 
   state = {
-    // latitude_delta:0.009,
-    latitude_delta:1,
+    latitude_delta: 1,
+    isAreaListModalVisible: false
   };
 
-  async geoCode(locationData, lang) {
-    const {updateAddress} = this.props;
-    let isNeighbourhood = false;
-    if (locationData.terms[3]) {
-      isNeighbourhood = true;
-    }
-    let urlParams = Qs.stringify({
-      key: GOOGLE_MAPS_KEY,
-      placeid: locationData.place_id,
-      language: lang,
-    });
-    let params;
-    let city = `city_${lang}`;
-    let state = `state_${lang}`;
-    let neighborhood = `address_${lang}`;
-    try {
-      let request = await fetch(
-        `https://maps.googleapis.com/maps/api/place/details/json?${urlParams}`,
-      );
-      let response = await request.json();
-      let {address_components, formatted_address} = response.result;
-      params = {
-        [neighborhood]: isNeighbourhood
-          ? formatted_address
-          : address_components[0].long_name,
-        [city]: isNeighbourhood
-          ? address_components[1].long_name
-          : address_components[0].long_name,
-        [state]: isNeighbourhood
-          ? address_components[2].long_name
-          : address_components[1].long_name,
-      };
-      updateAddress(params);
-    } catch (e) {
-      params = {
-        [neighborhood]: isNeighbourhood
-          ? locationData.description
-          : locationData.terms[0].value,
-        [city]: isNeighbourhood
-          ? locationData.terms[1].value
-          : locationData.terms[2].value,
-        [state]: isNeighbourhood
-          ? locationData.terms[2].value
-          : locationData.terms[1].value,
-      };
-      updateAddress(params);
-    }
-  }
-
-  async reverseGeoCode(coordinates, lang) {
-    const {updateAddress} = this.props;
-    let {latitude, longitude} = coordinates;
-
-    let isNeighbourhood = false;
-
-    let urlParams = Qs.stringify({
-      key: GOOGLE_MAPS_KEY,
-      language: lang,
-    });
-    let city = `city_${lang}`;
-    let state = `state_${lang}`;
-    let neighborhood = `address_${lang}`;
-    try {
-      let request = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&${urlParams}`,
-      );
-      let response = await request.json();
-      let {address_components, formatted_address} = response.results[0];
-      if (address_components[3]) {
-        isNeighbourhood = true;
-      }
-      let params = {
-        [neighborhood]: isNeighbourhood
-          ? formatted_address
-          : address_components[0].long_name,
-        [city]: isNeighbourhood
-          ? address_components[1].long_name
-          : address_components[0].long_name,
-        [state]: isNeighbourhood
-          ? address_components[2].long_name
-          : address_components[1].long_name,
-      };
-      updateAddress(params);
-    } catch (e) {
-    }
-  }
-
-  onItemPress = (locationData, locationDetails) => {
-
-    let params = {
-      latitude: locationDetails.geometry.location.lat,
-      longitude: locationDetails.geometry.location.lng,
-      country: 'KW',
-    };
-
-    this.map.fitToCoordinates([params,this.props.address], {
-      edgePadding: DEFAULT_PADDING,
-      animated: true,
-    });
-
-    this.props.updateAddress(params);
-    // this.geoCode(locationData, 'en');
-    // this.geoCode(locationData, 'ar');
-  };
+  // onItemPress = (locationData, locationDetails) => {
+  //
+  //   let params = {
+  //     latitude: locationDetails.geometry.location.lat,
+  //     longitude: locationDetails.geometry.location.lng,
+  //     country: 'KW',
+  //   };
+  //
+  //   this.map.fitToCoordinates([params, this.props.address], {
+  //     edgePadding: DEFAULT_PADDING,
+  //     animated: true,
+  //   });
+  //
+  //   this.props.updateAddress(params);
+  // };
 
   onDragEnd(e) {
     let {latitude, longitude} = e.nativeEvent.coordinate;
     let params = {
       latitude: latitude,
       longitude: longitude,
-      // country: 'KW',
     };
     this.props.updateAddress(params);
-    // this.reverseGeoCode({latitude, longitude}, 'en');
-    // this.reverseGeoCode({latitude, longitude}, 'ar');
   }
 
   onRegionChange = region => {
-    // console.log('onRegionChange',region);
-
-    this.setState({
-      latitude_delta:0.0001
-    });
 
     let {latitude, longitude} = region;
     let params = {
@@ -175,66 +70,76 @@ export default class MapPicker extends Component {
       longitude: longitude,
     };
     this.props.updateAddress(params);
-    // this.reverseGeoCode({latitude, longitude}, 'en');
-    // this.reverseGeoCode({latitude, longitude}, 'ar');
   };
 
   mapMarkerRegion = () => {
     let region = ({latitude, longitude} = this.props.address);
-    console.log('mapMarkerRegion',region);
+    console.log('mapMarkerRegion', region);
     return region;
   };
 
-  render() {
-    const {address,initialized} = this.props;
+  onAreaButtonPress = () => {
+    this.setState({
+      isAreaListModalVisible: true,
+    })
+  };
 
-    console.log('rendered MapPicker');
+  hideAreaListModal = () => {
+    this.setState({
+      isAreaListModalVisible: false,
+    })
+  };
+
+  setArea = (area) => {
+
+    console.log('area',area);
+
+    const {updateAddress, address} = this.props;
+
+    let {latitude, longitude} = area;
+
+    let params = {
+      latitude: latitude,
+      longitude: longitude,
+      area_id: area.id
+    };
+
+    updateAddress(params);
+
+    this.map.fitToCoordinates([params, address], {
+      edgePadding: DEFAULT_PADDING,
+      animated: true,
+    });
+
+  };
+
+  render() {
+    const {address, initialized, areas} = this.props;
+
+    let area = {};
+
+    if (address.area_id) {
+      area = areas.find(area => area.id === address.area_id) || {};
+    }
+
+    console.log('rendered MapPicker', this.props.address);
     // console.log('props', {...this.props.address});
 
     return (
       <View style={styles.container}>
         <View style={styles.searchInputContainer}>
-          <GooglePlacesAutocomplete
-            placeholder={I18n.t('select_area')}
-            minLength={1}
-            autoFocus={false}
-            fetchDetails={true}
-            listViewDisplayed={false}
-            enablePoweredByContainer={false}
-            renderDescription={row => row.description}
-            onPress={(data, details = null) => {
-              this.onItemPress(data, details);
-            }}
-            query={{
-              key: GOOGLE_MAPS_KEY,
-              language: 'en',
-              components: `country:${address.country}`,
-            }}
-            styles={autoCompleteStyle}
-            placeholderTextColor={colors.lightGrey}
-            // getDefaultValue={() => (isRTL ? address.address_ar : address.address_en)}
-            text={isRTL ? address.address_ar : address.address_en}
-            textInputProps={{
-              autoCapitalize: 'none',
-              autoCorrect: false,
-            }}
-          />
 
-          <TouchableHighlight
-            underlayColor="transparent"
-            onPress={() => this.jumpToRegion()}
-            style={styles.textInput}>
-            <Ionicons
-              name="ios-paper-plane"
-              color={colors.darkGrey}
-              size={25}
-              style={{
-                width: 25,
-                height: 25,
-                margin: 8,
-              }}
-            />
-          </TouchableHighlight>
+          <Touchable
+            style={{flex:1,padding: 10, alignItems: 'center', justifyContent: 'center'}}
+            onPress={this.onAreaButtonPress}
+          >
+            <Text style={{
+              fontSize: 20,
+              fontWeight: '500',
+              color: 'black'
+            }}>{area.id ? area.name : I18n.t('select_area')}</Text>
+          </Touchable>
+
         </View>
 
         <View style={styles.menuContainer}>
@@ -259,11 +164,24 @@ export default class MapPicker extends Component {
                   onDragEnd={e => this.onDragEnd(e)}
                   draggable
                 />
+
+
               </MapView>
             }
 
+            <List
+              title={I18n.t('select_area')}
+              activeIDs={[address.area_id]}
+              isVisible={this.state.isAreaListModalVisible}
+              onConfirm={this.setArea}
+              onCancel={this.hideAreaListModal}
+              items={areas}
+            />
           </View>
         </View>
+
+
+
       </View>
     );
   }
