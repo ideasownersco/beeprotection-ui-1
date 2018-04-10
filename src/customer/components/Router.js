@@ -5,6 +5,7 @@ import Register from 'guest/Register';
 import Forgot from 'guest/Forgot';
 import Drawer from 'customer/components/Drawer';
 import Home from 'customer/Home';
+import Map from 'customer/Map';
 import Settings from 'guest/Settings';
 import CreateOrder from 'customer/orders/CreateOrder';
 import DrawerIcon from 'components/DrawerIcon';
@@ -49,6 +50,7 @@ const AuthStack = StackNavigator(
 
 const HomeStack = StackNavigator(
   {
+
     Home: {
       screen: Home,
       navigationOptions: ({navigation}) => ({
@@ -89,12 +91,16 @@ const HomeStack = StackNavigator(
     },
     PastOrders: {screen: PastOrdersScene},
     UpcomingOrders: {screen: UpcomingOrdersScene},
+    Map:{
+      screen:Map,
+    },
   },
   {
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
       headerTintColor: colors.primary,
     }),
+    initialRouteName:'Map'
   },
 );
 

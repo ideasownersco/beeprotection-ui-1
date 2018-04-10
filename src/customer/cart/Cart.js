@@ -57,6 +57,9 @@ class Cart extends PureComponent {
     this.props.actions.fetchCartItems();
     this.props.actions.fetchAddresses();
     this.fetchTimings();
+
+
+
   }
 
   performCheckout = () => {
@@ -247,6 +250,7 @@ class Cart extends PureComponent {
           saveAddress={this.saveAddress}
           onAddressPickerItemPress={this.onAddressPickerItemPress}
           activeItemID={selectedAddressID}
+          initialized={this.state.initialized}
         />
 
         <Separator style={{marginVertical: 10}} />

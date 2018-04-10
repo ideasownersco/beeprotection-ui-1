@@ -12,48 +12,37 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from 'assets/theme/colors';
-import MapView from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {GOOGLE_MAPS_KEY} from 'utils/env.js';
 import I18n, {isRTL} from 'utils/locale';
 import Qs from 'qs';
+import BackgroundGeolocation from 'react-native-background-geolocation';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
+const DEFAULT_PADDING = {top: 50, right: 50, bottom: 50, left: 50};
 
-const LATITUDE_DELTA = 0.01;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+// const LATITUDE_DELTA = 1;
+// const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class MapPicker extends Component {
+
   static propTypes = {
     updateAddress: PropTypes.func.isRequired,
     address: PropTypes.object.isRequired,
   };
-  // shouldComponentUpdate(nextProps) {
-  //   return (
-  //     this.props.address.latitude !== nextProps.address.latitude ||
-  //     this.props.address.longitude !== nextProps.address.longitude ||
-  //     this.props.address.address_en !== nextProps.address.address_en
-  //   );
-  // }
 
-  constructor(props) {
-    super(props);
-    let {latitude, longitude} = this.props.address;
-
-    this.state = {
-      region: {
-        latitude: latitude,
-        longitude: longitude,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
-      },
-    };
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.address.latitude !== nextProps.address.latitude ||
+      this.props.address.address_en !== nextProps.address.address_en
+    );
   }
 
-  jumpToRegion = () => {
-    const region = this.mapMarkerRegion();
-    this.map.animateToRegion(region);
+  state = {
+    // latitude_delta:0.009,
+    latitude_delta:1,
   };
 
   async geoCode(locationData, lang) {
@@ -139,23 +128,41 @@ export default class MapPicker extends Component {
           : address_components[1].long_name,
       };
       updateAddress(params);
-    } catch (e) {}
+    } catch (e) {
+    }
   }
 
   onItemPress = (locationData, locationDetails) => {
-    if (!locationData.terms[2]) {
-      alert(I18n.t('please_choose_precise_location'));
-    } else {
-      let params = {
-        latitude: locationDetails.geometry.location.lat,
-        longitude: locationDetails.geometry.location.lng,
-        country: 'KW',
-      };
-      this.props.updateAddress(params);
-      this.jumpToRegion();
-      this.geoCode(locationData, 'en');
-      this.geoCode(locationData, 'ar');
-    }
+    // console.log('locationData', locationData);
+    // console.log('locationDetails', locationDetails);
+    // this.setState({
+    //   latitude_delta:0.0043
+    // });
+
+    // if (!locationData.terms[2]) {
+    //   alert(I18n.t('please_choose_precise_location'));
+    // } else {
+
+    this.setState({
+      latitude_delta:0.08
+    });
+
+    let params = {
+      latitude: locationDetails.geometry.location.lat,
+      longitude: locationDetails.geometry.location.lng,
+      country: 'KW',
+    };
+
+    // this.map.animateToRegion(params);
+
+    this.map.fitToCoordinates([params,this.props.address], {
+      edgePadding: DEFAULT_PADDING,
+      animated: true,
+    });
+    //
+    // this.props.updateAddress(params);
+    // this.geoCode(locationData, 'en');
+    // this.geoCode(locationData, 'ar');
   };
 
   onDragEnd(e) {
@@ -163,23 +170,41 @@ export default class MapPicker extends Component {
     let params = {
       latitude: latitude,
       longitude: longitude,
-      country: 'KW',
+      // country: 'KW',
     };
     this.props.updateAddress(params);
-    this.reverseGeoCode({latitude, longitude}, 'en');
-    this.reverseGeoCode({latitude, longitude}, 'ar');
+    // this.reverseGeoCode({latitude, longitude}, 'en');
+    // this.reverseGeoCode({latitude, longitude}, 'ar');
   }
 
   onRegionChange = region => {
-    this.setState({region});
+    // console.log('onRegionChange',region);
+
+    this.setState({
+      latitude_delta:0.0001
+    });
+
+    let {latitude, longitude} = region;
+    let params = {
+      latitude: latitude,
+      longitude: longitude,
+    };
+    this.props.updateAddress(params);
+    // this.reverseGeoCode({latitude, longitude}, 'en');
+    // this.reverseGeoCode({latitude, longitude}, 'ar');
   };
 
   mapMarkerRegion = () => {
-    return ({latitude, longitude} = this.props.address);
+    let region = ({latitude, longitude} = this.props.address);
+    console.log('mapMarkerRegion',region);
+    return region;
   };
 
   render() {
-    const {address} = this.props;
+    const {address,initialized} = this.props;
+
+    console.log('rendered MapPicker');
+    // console.log('props', {...this.props.address});
 
     return (
       <View style={styles.container}>
@@ -229,20 +254,29 @@ export default class MapPicker extends Component {
 
         <View style={styles.menuContainer}>
           <View style={styles.mapContainer}>
-            <MapView
-              ref={ref => {
-                this.map = ref;
-              }}
-              provider={this.props.provider}
-              style={styles.map}
-              initialRegion={this.state.region}
-              onRegionChangeComplete={this.onRegionChange}>
-              <MapView.Marker
-                coordinate={this.mapMarkerRegion()}
-                onDragEnd={e => this.onDragEnd(e)}
-                draggable
-              />
-            </MapView>
+            {
+              initialized &&
+              <MapView
+                ref={ref => {
+                  this.map = ref;
+                }}
+                // provider={PROVIDER_GOOGLE}
+                style={styles.map}
+                initialRegion={{
+                  ...address,
+                  latitudeDelta: this.state.latitude_delta,
+                  longitudeDelta: this.state.latitude_delta * ASPECT_RATIO,
+                }}
+                onRegionChangeComplete={this.onRegionChange}
+              >
+                <MapView.Marker
+                  coordinate={this.mapMarkerRegion()}
+                  onDragEnd={e => this.onDragEnd(e)}
+                  draggable
+                />
+              </MapView>
+            }
+
           </View>
         </View>
       </View>
