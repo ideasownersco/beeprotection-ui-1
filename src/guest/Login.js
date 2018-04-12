@@ -11,6 +11,8 @@ import FormContainer from "../components/FormContainer";
 import FormContent from "../components/FormContent";
 import FormTextInput from "../components/FormTextInput";
 import FormSubmit from "../components/FormSubmit";
+import colors from "../assets/theme/colors";
+import Separator from "../components/Separator";
 
 class Login extends Component {
   static propTypes = {
@@ -107,7 +109,6 @@ class Login extends Component {
       <FormContainer>
         <FormContent>
 
-
           <FormTextInput
             onValueChange={this.onFieldChange}
             value={email}
@@ -127,27 +128,30 @@ class Login extends Component {
           />
 
           <FormSubmit
-            onPress={() => this.handleRegister()}
+            onPress={this.handleLogin}
             disabled={auth.login.busy}
             title={auth.login.busy ? I18n.t('logging_in') : I18n.t('login')}
             style={{marginTop: 50}}
           />
 
+          <Separator style={{marginVertical:50}}/>
+
+          <FormSubmit
+            onPress={this.handleRegisterRoute}
+            style={{backgroundColor:colors.secondary}}
+            disabled={busy}
+            title={I18n.t('create_account')}
+          />
+
+          <TouchableHighlight
+            onPress={this.handleForgotPasswordRoute}
+            style={{paddingTop: 100}}
+            underlayColor="transparent"
+            disabled={busy}>
+            <Text style={{textAlign:'center'}}>{I18n.t('forgot_password')}</Text>
+          </TouchableHighlight>
+
         </FormContent>
-
-        <FormSubmit
-          onPress={this.handleRegisterRoute}
-          disabled={busy}
-          title={I18n.t('create_account')}
-        />
-
-        <TouchableHighlight
-          onPress={this.handleForgotPasswordRoute}
-          style={{paddingTop: 100}}
-          underlayColor="transparent"
-          disabled={busy}>
-          <Text>{I18n.t('forgot_password')}</Text>
-        </TouchableHighlight>
 
       </FormContainer>
     );
