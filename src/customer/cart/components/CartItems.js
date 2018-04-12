@@ -28,18 +28,20 @@ export default class CartItems extends Component {
           </View>
           {item.services.map((service, index) => (
             <View style={{flex: 1}} key={index}>
+              <Separator style={{marginVertical: 10}}/>
+
               <View style={styles.serviceListContainer}>
-                <Text style={styles.serviceTitle}>{service.name}</Text>
-                <Text style={styles.servicePrice}>{service.price} KD</Text>
+                <Text style={styles.packageTitle}>{service.name}</Text>
+                <Text style={styles.packagePrice}>{service.price} KD</Text>
               </View>
-              <Separator style={{flex: 1, marginVertical: 5}} />
+              {/*<Separator style={{marginVertical: 10}} />*/}
             </View>
           ))}
 
-          <View style={styles.packageItemContainer}>
-            {/*<Text style={styles.total}>{I18n.t('total')}</Text>*/}
-            <Text style={styles.totalPrice}>{item.total} KD</Text>
-          </View>
+          {/*<View style={styles.packageItemContainer}>*/}
+          {/*/!*<Text style={styles.total}>{I18n.t('total')}</Text>*!/*/}
+          {/*<Text style={styles.totalPrice}>{item.total} KD</Text>*/}
+          {/*</View>*/}
         </View>
       </Touchable>
     );
@@ -48,20 +50,14 @@ export default class CartItems extends Component {
   render() {
     const {items, activeItemID} = this.props;
     return (
-      <View style={styles.container}>
-        <SectionTitle
-          title={I18n.t('order_details')}
-          style={{paddingHorizontal: 5}}
-        />
-
-        <FlatList
-          data={items}
-          renderItem={this.renderItem}
-          style={styles.listContainer}
-          keyExtractor={(item, index) => `${index}`}
-          extraData={activeItemID}
-        />
-      </View>
+      <FlatList
+        data={items}
+        renderItem={this.renderItem}
+        style={styles.listContainer}
+        keyExtractor={(item, index) => `${index}`}
+        extraData={activeItemID}
+        ItemSeparatorComponent={() => <Separator style={{marginVertical: 15}}/>}
+      />
     );
   }
 }
@@ -72,57 +68,40 @@ CartItems.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 10,
-  },
   listContainer: {
-    paddingTop: 10,
+    paddingTop:0,
+    padding: 10,
   },
   itemContainer: {
-    padding: 5,
+    // padding: 5,
     marginHorizontal: 5,
     backgroundColor: 'white',
     marginBottom: 5,
   },
   categoryTitle: {
-    fontSize: 18,
-    color: '#aa2d29',
-    fontWeight: 'bold',
+    fontSize: 20,
+    color: colors.darkGrey
+    // color: '#aa2d29',
+    // fontWeight: 'bold',
   },
   packageItemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
+    marginTop: 10,
   },
   packageTitle: {
-    flex: 4,
-    fontSize: 20,
-    color: colors.darkGrey,
-    fontWeight: 'bold',
-    paddingLeft: 20,
+    flex: 1,
+    fontSize: 17,
+    color: colors.mediumGrey,
+    paddingLeft: 10,
   },
   packagePrice: {
-    flex: 1,
-    color: colors.darkGrey,
-    fontSize: 15,
+    color: colors.primary,
+    fontSize: 17,
     textAlign: 'right',
   },
   serviceListContainer: {
     flexDirection: 'row',
-  },
-  serviceTitle: {
-    flex: 3,
-    color: 'black',
-    fontSize: 16,
-    fontWeight: 'bold',
-    paddingLeft: 40,
-  },
-  servicePrice: {
-    flex: 1,
-    color: colors.darkGrey,
-    fontSize: 15,
-    textAlign: 'right',
   },
   total: {
     fontSize: 20,

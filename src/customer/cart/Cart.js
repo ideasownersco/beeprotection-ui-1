@@ -29,6 +29,7 @@ import PaymentPage from 'customer/cart/components/PaymentPage';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import TimePicker from './components/TimePicker';
 import {ACTIONS as APP_ACTIONS} from '../../app/common/actions';
+import SectionTitle from "../../components/SectionTitle";
 
 type State = {
   dates: Array,
@@ -222,11 +223,20 @@ class Cart extends PureComponent {
 
     return (
       <ScrollView contentInset={{bottom: 50}} style={{backgroundColor:'white'}}>
+
+        <SectionTitle
+          title={I18n.t('order_details')}
+          style={{padding: 10}}
+          icon="local-car-wash"
+        />
+
         <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
+
+        <Separator />
 
         <CartTotal total={cartTotal} />
 
-        <Separator style={{marginVertical: 10}} />
+        <Separator />
 
         <DatePicker
           items={dates}

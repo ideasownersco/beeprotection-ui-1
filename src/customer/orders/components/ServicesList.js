@@ -33,7 +33,7 @@ export default class ServicesList extends Component {
             resizeMode="contain"
           />
           <View style={{flexDirection: 'row'}}>
-            <LocalizedText
+            <Text
               style={[
                 styles.title,
                 activeItemIDs.indexOf(item.id) > -1 && {
@@ -41,9 +41,9 @@ export default class ServicesList extends Component {
                   fontWeight: 'bold',
                 },
               ]}
-              ar={item.name_ar}
-              en={item.name_en}
-            />
+            >
+              {item.name}
+            </Text>
             <Text style={styles.price}>{item.price} KD</Text>
           </View>
         </View>

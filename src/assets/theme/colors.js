@@ -1,7 +1,7 @@
 export default {
   darkGrey: '#5d5f63',
-  mediumGrey: '#959ba1',
-  lightGrey: '#dfdfdf',
+  mediumGrey: '#858b91',
+  lightGrey: '#f5f5f5',
   info: '#2196f3',
   error: '#f44336',
   success: '#4caf50',

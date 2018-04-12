@@ -19,7 +19,7 @@ export default class CartTotal extends Component {
 
   render() {
     return (
-      <View style={styles.itemContainer}>
+      <View style={styles.container}>
         <View style={styles.packageItemContainer}>
           <Text style={styles.total}>{I18n.t('total')}</Text>
           <Text style={styles.totalPrice}>{this.props.total} KD</Text>
@@ -31,64 +31,23 @@ export default class CartTotal extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 10,
-  },
-  listContainer: {
-    paddingTop: 10,
-  },
-  itemContainer: {
-    padding: 5,
-    marginHorizontal: 5,
-    backgroundColor: 'white',
+    padding: 10,
+    backgroundColor: colors.lightGrey,
     marginBottom: 5,
-  },
-  categoryTitle: {
-    fontSize: 18,
-    color: '#aa2d29',
-    fontWeight: 'bold',
   },
   packageItemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 10,
   },
-  packageTitle: {
-    flex: 4,
-    fontSize: 20,
-    color: colors.darkGrey,
-    fontWeight: 'bold',
-    paddingLeft: 20,
-  },
-  packagePrice: {
-    flex: 1,
-    color: colors.darkGrey,
-    fontSize: 15,
-    textAlign: 'right',
-  },
-  serviceListContainer: {
-    flexDirection: 'row',
-  },
-  serviceTitle: {
-    flex: 3,
-    color: 'black',
-    fontSize: 16,
-    fontWeight: 'bold',
-    paddingLeft: 40,
-  },
-  servicePrice: {
-    flex: 1,
-    color: colors.darkGrey,
-    fontSize: 15,
-    textAlign: 'right',
-  },
   total: {
+    flex:1,
     fontSize: 20,
     paddingHorizontal: 10,
   },
   totalPrice: {
-    flex: 1,
     fontSize: 18,
-    textAlign: 'right',
+    fontWeight:'700',
+    color:colors.primary
   },
 });

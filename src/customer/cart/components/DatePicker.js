@@ -70,32 +70,34 @@ DatePicker.propTypes = {
 const styles = StyleSheet.create({
   container: {
     // marginVertical:30,
+    paddingTop:10,
   },
   listContainer: {
     marginVertical: 10,
-    paddingHorizontal: 5,
     backgroundColor: colors.lightGrey,
+    borderWidth:1,
+    borderColor:colors.lightGrey
   },
   itemContainer: {
-    padding: 10,
+    padding: 15,
     alignItems: 'center',
   },
   day: {
     color: colors.darkGrey,
-    fontSize: 15,
+    fontSize: 13,
   },
   date: {
-    fontSize: 29,
+    fontSize: 50,
     color: colors.darkGrey,
   },
   itemContainerActive: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
   },
   dayActive: {
-    color: colors.white,
+    color: colors.primary,
   },
   dateActive: {
-    color: colors.white,
+    color: colors.primary,
   },
   sectionTitle: {
     fontSize: 20,

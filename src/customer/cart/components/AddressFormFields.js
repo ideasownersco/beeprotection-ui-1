@@ -11,10 +11,11 @@ export default class AddressFormFields extends PureComponent {
     return (
       <View style={styles.addressContainer}>
         <View style={styles.addressField}>
-          <Text style={styles.label}>{I18n.t('block')}</Text>
+          {/*<Text style={styles.label}>{I18n.t('block')}</Text>*/}
           <FormTextInput
-            onValueChange={value => updateFields('block', value)}
+            onValueChange={updateFields}
             value={block}
+            field="block"
             maxLength={40}
             keyboardType="numeric"
             autoFocus={false}
@@ -24,10 +25,11 @@ export default class AddressFormFields extends PureComponent {
         </View>
 
         <View style={styles.addressField}>
-          <Text style={styles.label}>{I18n.t('street')} </Text>
+          {/*<Text style={styles.label}>{I18n.t('street')} </Text>*/}
           <FormTextInput
-            onValueChange={value => updateFields('street', value)}
+            onValueChange={updateFields}
             value={street}
+            field="street"
             maxLength={40}
             keyboardType="numeric"
             autoFocus={false}
@@ -37,10 +39,11 @@ export default class AddressFormFields extends PureComponent {
         </View>
 
         <View style={styles.addressField}>
-          <Text style={styles.label}>{I18n.t('avenue')}</Text>
+          {/*<Text style={styles.label}>{I18n.t('avenue')}</Text>*/}
           <FormTextInput
-            onValueChange={value => updateFields('avenue', value)}
+            onValueChange={updateFields}
             value={avenue}
+            field="avenue"
             maxLength={40}
             keyboardType="numeric"
             autoFocus={false}
@@ -50,10 +53,11 @@ export default class AddressFormFields extends PureComponent {
         </View>
 
         <View style={styles.addressField}>
-          <Text style={styles.label}>{I18n.t('building')}</Text>
+          {/*<Text style={styles.label}>{I18n.t('building')}</Text>*/}
           <FormTextInput
-            onValueChange={value => updateFields('building', value)}
+            onValueChange={updateFields}
             value={building}
+            field="building"
             maxLength={40}
             keyboardType="numeric"
             autoFocus={false}
@@ -89,5 +93,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     textAlign: 'center',
     marginHorizontal: 2,
+    padding:5,
   },
 });
