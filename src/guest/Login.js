@@ -5,8 +5,12 @@ import {bindActionCreators} from 'redux';
 import {ACTIONS} from 'guest/common/actions';
 import LoginScene from 'guest/scenes/LoginScene';
 import {NavigationActions} from 'react-navigation';
-import {Alert} from 'react-native';
+import {Alert, Text, TouchableHighlight} from 'react-native';
 import I18n from 'utils/locale';
+import FormContainer from "../components/FormContainer";
+import FormContent from "../components/FormContent";
+import FormTextInput from "../components/FormTextInput";
+import FormSubmit from "../components/FormSubmit";
 
 class Login extends Component {
   static propTypes = {
@@ -17,6 +21,12 @@ class Login extends Component {
   // static navigationOptions = {
   //   header: null,
   // };
+
+  static navigationOptions = () => {
+    return {
+      header: null
+    }
+  };
 
   state = {
     email: 'customer@test.com',
@@ -81,18 +91,79 @@ class Login extends Component {
 
   render() {
     const {auth} = this.props;
+    const {
+      email,
+      password,
+      onFieldChange,
+      handleLogin,
+      handleRegisterRoute,
+      handleForgotPasswordRoute,
+      onSkip,
+      busy
+    } = this.state;
+
     return (
-      <LoginScene
-        {...this.state}
-        handleLogin={this.handleLogin}
-        handleRegisterRoute={this.handleRegisterRoute}
-        handleForgotPasswordRoute={this.handleForgotPasswordRoute}
-        onSkip={this.onSkip}
-        onFieldChange={this.onFieldChange}
-        busy={auth.login.busy}
-        onRightButtonPress={this.goBack}
-      />
+
+      <FormContainer>
+        <FormContent>
+
+
+          <FormTextInput
+            onValueChange={this.onFieldChange}
+            value={email}
+            field="email"
+            maxLength={40}
+            label={I18n.t('email')}
+            keyboardType="email-address"
+          />
+
+          <FormTextInput
+            onValueChange={this.onFieldChange}
+            value={password}
+            field="password"
+            maxLength={40}
+            label={I18n.t('password')}
+            secureTextEntry={true}
+          />
+
+          <FormSubmit
+            onPress={() => this.handleRegister()}
+            disabled={auth.login.busy}
+            title={auth.login.busy ? I18n.t('logging_in') : I18n.t('login')}
+            style={{marginTop: 50}}
+          />
+
+        </FormContent>
+
+        <FormSubmit
+          onPress={this.handleRegisterRoute}
+          disabled={busy}
+          title={I18n.t('create_account')}
+        />
+
+        <TouchableHighlight
+          onPress={this.handleForgotPasswordRoute}
+          style={{paddingTop: 100}}
+          underlayColor="transparent"
+          disabled={busy}>
+          <Text>{I18n.t('forgot_password')}</Text>
+        </TouchableHighlight>
+
+      </FormContainer>
     );
+
+    // return (
+    //   <LoginScene
+    //     {...this.state}
+    //     handleLogin={this.handleLogin}
+    //     handleRegisterRoute={this.handleRegisterRoute}
+    //     handleForgotPasswordRoute={this.handleForgotPasswordRoute}
+    //     onSkip={this.onSkip}
+    //     onFieldChange={this.onFieldChange}
+    //     busy={auth.login.busy}
+    //     onRightButtonPress={this.goBack}
+    //   />
+    // );
   }
 }
 

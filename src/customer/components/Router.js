@@ -45,7 +45,7 @@ const AuthStack = StackNavigator(
     navigationOptions: ({navigation}) => ({
       headerTintColor: colors.primary,
     }),
-    initialRouteName:'RegisterScreen'
+    // initialRouteName:'RegisterScreen'
   },
 );
 
