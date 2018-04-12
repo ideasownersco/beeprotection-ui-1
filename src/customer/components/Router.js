@@ -45,6 +45,7 @@ const AuthStack = StackNavigator(
     navigationOptions: ({navigation}) => ({
       headerTintColor: colors.primary,
     }),
+    initialRouteName:'RegisterScreen'
   },
 );
 
@@ -99,7 +100,7 @@ const HomeStack = StackNavigator(
       gesturesEnabled: false,
       headerTintColor: colors.primary,
     }),
-    // initialRouteName:'Map'
+    initialRouteName:'Login'
   },
 );
 
