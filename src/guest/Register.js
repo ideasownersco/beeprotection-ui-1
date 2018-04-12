@@ -7,14 +7,14 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {ACTIONS} from './common/actions';
 import RegisterScene from './scenes/RegisterScene';
-import {Text, View} from "react-native";
-import FormLabel from "../components/FormLabel";
-import FormTextInput from "../components/FormTextInput";
-import FormSubmit from "../components/FormSubmit";
+import {Text, View} from 'react-native';
+import FormLabel from '../components/FormLabel';
+import FormTextInput from '../components/FormTextInput';
+import FormSubmit from '../components/FormSubmit';
 import I18n from 'utils/locale';
 import Touchable from 'react-native-platform-touchable';
-import FormContainer from "../components/FormContainer";
-import FormContent from "../components/FormContent";
+import FormContainer from '../components/FormContainer';
+import FormContent from '../components/FormContent';
 
 type State = {
   name: string,
@@ -39,8 +39,8 @@ class Register extends Component {
 
   static navigationOptions = () => {
     return {
-      header: null
-    }
+      header: null,
+    };
   };
 
   handleRegister = () => {
@@ -69,8 +69,8 @@ class Register extends Component {
     } = this.state;
 
     return (
-     <FormContainer>
-       <FormContent>
+      <FormContainer>
+        <FormContent>
           <FormTextInput
             onValueChange={this.onFieldChange}
             value={name}
@@ -121,18 +121,18 @@ class Register extends Component {
             title={busy ? I18n.t('signing_up') : I18n.t('create_account')}
             style={{marginTop: 50}}
           />
-
-       </FormContent>
-
+        </FormContent>
 
         <Touchable onPress={this.onLoginPress}>
-          <Text style={{
-            color: 'white',
-            textAlign: 'center',
-            paddingVertical: 10
-          }}>{I18n.t('have_an_account')} {I18n.t('login')}</Text>
+          <Text
+            style={{
+              color: 'white',
+              textAlign: 'center',
+              paddingVertical: 10,
+            }}>
+            {I18n.t('have_an_account')} {I18n.t('login')}
+          </Text>
         </Touchable>
-
       </FormContainer>
     );
   }

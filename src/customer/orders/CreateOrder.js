@@ -186,7 +186,7 @@ class CreateOrder extends PureComponent {
     } = this.props.cart;
     const {categories} = this.props;
 
-    console.log('categ',categories);
+    console.log('categ', categories);
 
     const {showCartSuccessModal} = this.state;
 

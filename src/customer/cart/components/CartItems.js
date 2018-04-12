@@ -28,7 +28,7 @@ export default class CartItems extends Component {
           </View>
           {item.services.map((service, index) => (
             <View style={{flex: 1}} key={index}>
-              <Separator style={{marginVertical: 10}}/>
+              <Separator style={{marginVertical: 10}} />
 
               <View style={styles.serviceListContainer}>
                 <Text style={styles.packageTitle}>{service.name}</Text>
@@ -56,7 +56,9 @@ export default class CartItems extends Component {
         style={styles.listContainer}
         keyExtractor={(item, index) => `${index}`}
         extraData={activeItemID}
-        ItemSeparatorComponent={() => <Separator style={{marginVertical: 15}}/>}
+        ItemSeparatorComponent={() => (
+          <Separator style={{marginVertical: 15}} />
+        )}
       />
     );
   }
@@ -69,7 +71,7 @@ CartItems.propTypes = {
 
 const styles = StyleSheet.create({
   listContainer: {
-    paddingTop:0,
+    paddingTop: 0,
     padding: 10,
   },
   itemContainer: {
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
   },
   categoryTitle: {
     fontSize: 20,
-    color: colors.darkGrey
+    color: colors.darkGrey,
     // color: '#aa2d29',
     // fontWeight: 'bold',
   },

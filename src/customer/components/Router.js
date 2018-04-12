@@ -98,13 +98,12 @@ const HomeStack = StackNavigator(
   {
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
-      headerTintColor: colors.primary,
+      headerTintColor: colors.white,
       // headerTintColor: colors.primary,
-      // headerStyle:{
-      //   backgroundColor:colors.primary
-      // }
+      headerStyle:{
+        backgroundColor:colors.primary
+      }
     }),
-
     // initialRouteName:'Login'
   },
 );
@@ -164,9 +163,9 @@ const SettingsStack = StackNavigator(
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
       // headerTintColor: colors.primary,
-      headerStyle:{
-        backgroundColor:colors.primary
-      }
+      headerStyle: {
+        backgroundColor: colors.primary,
+      },
     }),
   },
 );

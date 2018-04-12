@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
   },
-  subText:{
-    fontSize:25,
+  subText: {
+    fontSize: 25,
     textAlign: 'center',
   },
   text: {
     fontSize: 30,
     textAlign: 'center',
-    fontWeight:'800'
+    fontWeight: '800',
   },
 });

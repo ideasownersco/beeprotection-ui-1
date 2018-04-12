@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   total: {
-    flex:1,
+    flex: 1,
     fontSize: 20,
     paddingHorizontal: 10,
   },
   totalPrice: {
     fontSize: 18,
-    fontWeight:'700',
-    color:colors.primary
+    fontWeight: '700',
+    color: colors.primary,
   },
 });

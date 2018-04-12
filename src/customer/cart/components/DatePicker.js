@@ -47,15 +47,14 @@ export default class DatePicker extends Component {
   render() {
     const {items, activeItem} = this.props;
     return (
-
-        <FlatList
-          data={items}
-          renderItem={this.renderItem}
-          style={styles.listContainer}
-          keyExtractor={(item, index) => `${index}`}
-          horizontal={true}
-          extraData={activeItem}
-        />
+      <FlatList
+        data={items}
+        renderItem={this.renderItem}
+        style={styles.listContainer}
+        keyExtractor={(item, index) => `${index}`}
+        horizontal={true}
+        extraData={activeItem}
+      />
     );
   }
 }
@@ -68,30 +67,30 @@ DatePicker.propTypes = {
 const styles = StyleSheet.create({
   container: {
     // marginVertical:30,
-    paddingTop:10,
+    paddingTop: 10,
   },
   listContainer: {
     backgroundColor: colors.lightGrey,
-    borderWidth:1,
-    borderColor:colors.lightGrey
+    borderWidth: 1,
+    borderColor: colors.lightGrey,
   },
   itemContainer: {
     padding: 15,
     alignItems: 'center',
   },
+  itemContainerActive: {
+    backgroundColor: colors.white,
+  },
   day: {
     color: colors.darkGrey,
     fontSize: 13,
   },
+  dayActive: {
+    color: colors.primary,
+  },
   date: {
     fontSize: 50,
     color: colors.darkGrey,
-  },
-  itemContainerActive: {
-    backgroundColor: colors.white,
-  },
-  dayActive: {
-    color: colors.primary,
   },
   dateActive: {
     color: colors.primary,

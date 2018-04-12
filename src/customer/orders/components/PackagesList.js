@@ -15,11 +15,7 @@ let SectionHeader = ({item}) => {
   return (
     <View style={[styles.sectionContainer]}>
       <View>
-        <Text
-          style={[styles.headerText]}
-        >
-          {item.name}
-        </Text>
+        <Text style={[styles.headerText]}>{item.name}</Text>
       </View>
       <View style={styles.line} />
     </View>
@@ -61,11 +57,7 @@ export default class PackagesList extends Component {
       <View>
         <View style={styles.contentContainer}>
           <View style={styles.rowContent}>
-            <Text
-              style={[styles.itemName]}
-            >
-              {item.name}
-            </Text>
+            <Text style={[styles.itemName]}>{item.name}</Text>
             {item.price && <Text style={styles.price}>{item.price} KD</Text>}
           </View>
         </View>

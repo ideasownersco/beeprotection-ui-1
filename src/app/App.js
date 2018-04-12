@@ -5,7 +5,7 @@ import CodePush from 'react-native-code-push';
 import PushNotificationManager from 'app/components/PushNotificationManager';
 import Notification from 'app/components/Notification';
 import Navigator from 'components/Navigator';
-import {SafeAreaView, AppState} from 'react-native';
+import {SafeAreaView, AppState, StatusBar, View,Platform, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {ACTIONS} from 'app/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
@@ -14,6 +14,7 @@ import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import PushNotification from 'react-native-push-notification';
 import NavigatorService from 'components/NavigatorService';
+import colors from "../assets/theme/colors";
 
 class App extends Component {
   static propTypes = {
@@ -50,7 +51,7 @@ class App extends Component {
     this.props.dispatch(ACTIONS.setPushToken(token));
   };
 
-  onReceivePushNotifications = (notification: object) => {
+    onReceivePushNotifications = (notification: object) => {
     // console.log('notification', notification);
     let {foreground, data} = notification;
     let navigation = NavigatorService;
@@ -94,6 +95,8 @@ class App extends Component {
     // });
   };
 
+
+
   render() {
     const {app, notifications, isAuthenticated, userType} = this.props;
 
@@ -105,6 +108,7 @@ class App extends Component {
 
     return (
       <SafeAreaView style={{flex: 1}}>
+
         <Notification
           {...notifications}
           dismissNotification={this.dismissNotification}
@@ -135,3 +139,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(App);
+

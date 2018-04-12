@@ -27,9 +27,9 @@ class Home extends Component {
         top: 0,
         left: 0,
         right: 0,
-        borderBottomWidth: 0
+        borderBottomWidth: 0,
       },
-    }
+    };
   };
 
   componentDidMount() {
@@ -74,7 +74,7 @@ class Home extends Component {
     let {upcoming_orders, working_order} = this.props;
 
     return (
-      <ScrollView style={{flex: 1,paddingTop:80}}>
+      <ScrollView style={{flex: 1, paddingTop: 80}}>
         <WelcomeText />
         <HomeActionButtons
           onCreateOrderPress={this.onCreateOrderPress}

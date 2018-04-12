@@ -45,8 +45,6 @@ export default class AddressPicker extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.sectionTitle}>{I18n.t('address')}</Text>
-
         <AddressesList
           items={addresses}
           onItemPress={onAddressPickerItemPress}
@@ -55,8 +53,8 @@ export default class AddressPicker extends PureComponent {
 
         <Touchable onPress={this.showCreateAddressForm}>
           <View style={styles.buttonContainer}>
+            <EvilIcons name="plus" color={colors.primary} size={35} />
             <Text style={styles.buttonText}>{I18n.t('add_address')}</Text>
-            <EvilIcons name="plus" color="black" size={35} />
           </View>
         </Touchable>
 
@@ -80,23 +78,20 @@ AddressPicker.propTypes = {
 
 const styles = StyleSheet.create({
   container: {},
-  sectionTitle: {
-    fontSize: 20,
-    paddingHorizontal: 10,
-  },
   buttonContainer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: colors.white,
-    borderRadius: 10,
+    // backgroundColor: colors.white,
+    // borderRadius: 10,
     margin: 10,
     alignItems: 'center',
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
     paddingVertical: 5,
+    justifyContent:'flex-start',
   },
   buttonText: {
     flex: 1,
     fontSize: 18,
-    textAlign: 'center',
+    color:colors.primary
   },
 });

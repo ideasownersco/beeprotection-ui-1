@@ -28,14 +28,15 @@ export default class TimePicker extends Component {
     );
   }
 
-  renderTime = (item) => {
-    const {onItemPress, activeItemID} = this.props;
-
+  renderTime = item => {
+    const {activeItemID} = this.props;
     return (
       <View
         style={[
           styles.itemContainer,
-          item.disabled ? {opacity:.3} : activeItemID === item.id && styles.itemContainerActive
+          item.disabled
+            ? {opacity: 0.3}
+            : activeItemID === item.id && styles.itemContainerActive,
         ]}>
         <Text
           style={[
@@ -44,7 +45,11 @@ export default class TimePicker extends Component {
           ]}>
           {item.name_short}
         </Text>
-        <Text>
+        <Text
+          style={[
+            styles.day,
+            !item.disabled && activeItemID === item.id && styles.timeActive,
+          ]}>
           {item.period}
         </Text>
       </View>
@@ -55,16 +60,12 @@ export default class TimePicker extends Component {
     const {onItemPress, activeItemID} = this.props;
 
     if (item.disabled) {
-      return (
-        this.renderTime(item)
-      );
+      return this.renderTime(item);
     }
 
     return (
       <Touchable onPress={() => onItemPress(item)} key={item.id}>
-        {
-          this.renderTime(item)
-        }
+        {this.renderTime(item)}
       </Touchable>
     );
   };
@@ -73,7 +74,6 @@ export default class TimePicker extends Component {
     const {items, activeItemID, isFetching} = this.props;
 
     return (
-
       <FlatList
         data={items}
         renderItem={this.renderItem}
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: colors.lightGrey
+    borderColor: colors.lightGrey,
   },
   sectionTitle: {
     fontSize: 20,
@@ -110,6 +110,13 @@ const styles = StyleSheet.create({
     color: colors.darkGrey,
   },
   timeActive: {
+    color: colors.primary,
+  },
+  day: {
+    color: colors.darkGrey,
+    fontSize: 13,
+  },
+  dayActive: {
     color: colors.primary,
   },
 });

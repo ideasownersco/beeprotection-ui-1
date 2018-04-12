@@ -2,7 +2,7 @@
  * @flow
  */
 import React, {PureComponent} from 'react';
-import {ScrollView, Text, Alert} from 'react-native';
+import {ScrollView, Text, Alert, View} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
@@ -29,7 +29,7 @@ import PaymentPage from 'customer/cart/components/PaymentPage';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import TimePicker from './components/TimePicker';
 import {ACTIONS as APP_ACTIONS} from '../../app/common/actions';
-import SectionTitle from "../../components/SectionTitle";
+import SectionTitle from '../../components/SectionTitle';
 
 type State = {
   dates: Array,
@@ -218,29 +218,30 @@ class Cart extends PureComponent {
     } = this.state;
 
     if (!cartItems.length) {
-      return <EmptyCart />;
+      return <EmptyCart/>;
     }
 
     return (
-      <ScrollView contentInset={{bottom: 50}} style={{backgroundColor:'white'}}>
-
+      <ScrollView
+        contentInset={{bottom: 50}}
+        style={{backgroundColor: 'white'}}>
         <SectionTitle
           title={I18n.t('order_details')}
           style={{padding: 10}}
           icon="local-car-wash"
         />
 
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
 
-        <Separator />
+        <Separator/>
 
-        <CartTotal total={cartTotal} />
+        <CartTotal total={cartTotal}/>
 
         {/*<Separator />*/}
 
         <SectionTitle
           title={I18n.t('date')}
-          style={{padding: 10,marginTop:10}}
+          style={{padding: 10, marginTop: 10}}
           icon="calendar"
           iconType="MaterialCommunityIcons"
         />
@@ -251,62 +252,34 @@ class Cart extends PureComponent {
           activeItem={selectedDate}
         />
 
-        {/*<Separator style={{marginVertical: 10}} />*/}
-
-        {/*<Text style={{fontSize: 20, paddingHorizontal: 10}}>*/}
-        {/*{I18n.t('select_time')}*/}
-        {/*</Text>*/}
-
-        {/*<Button*/}
-        {/*style={{flex: 1, alignItems: 'flex-start', backgroundColor: 'white'}}*/}
-        {/*onPress={this.showDateTimePickerModal}>*/}
-        {/*<Text style={{fontSize: 20}}>{selectedTime.format('h:mm a')}</Text>*/}
-        {/*</Button>*/}
-
         <SectionTitle
           title={I18n.t('time')}
-          style={{padding: 10,marginTop:10}}
+          style={{padding: 10, marginTop: 10}}
           icon="clock-fast"
           iconType="MaterialCommunityIcons"
           iconSize={33}
-          iconStyle={{height:33,width:33}}
+          iconStyle={{height: 33, width: 33}}
         />
 
-        <TimePicker
-          items={timings}
-          onItemPress={this.onTimeChange}
-          activeItemID={selectedTimeID}
-          isFetching={isFetchingTimings}
+        <View style={{paddingBottom: 20}}>
+          <TimePicker
+            items={timings}
+            onItemPress={this.onTimeChange}
+            activeItemID={selectedTimeID}
+            isFetching={isFetchingTimings}
+          />
+        </View>
+
+        <Separator
+          style={{flex: 1, padding: 10, backgroundColor: colors.lightGrey}}
         />
 
-        {/*<DateTimePicker*/}
-        {/*titleIOS={I18n.t('select_time')}*/}
-        {/*date={selectedTime.toDate()}*/}
-        {/*isVisible={this.state.timePickerModalVisible}*/}
-        {/*neverDisableConfirmIOS={true}*/}
-        {/*mode="time"*/}
-        {/*confirmBtnText={I18n.t('confirm')}*/}
-        {/*cancelBtnText={I18n.t('cancel')}*/}
-        {/*onConfirm={this.hideDateTimePickerModal}*/}
-        {/*onCancel={this.hideDateTimePickerModal}*/}
-        {/*onDateChange={this.onTimeChange}*/}
-        {/*customStyles={{*/}
-        {/*dateTouchBody: {*/}
-        {/*padding: 10,*/}
-        {/*backgroundColor: 'white',*/}
-        {/*},*/}
-        {/*dateText: {*/}
-        {/*color: colors.primary,*/}
-        {/*fontWeight: '500',*/}
-        {/*fontSize: 25,*/}
-        {/*},*/}
-        {/*}}*/}
-        {/*titleStyle={{*/}
-        {/*fontSize: 20,*/}
-        {/*}}*/}
-        {/*/>*/}
-
-        <Separator style={{marginVertical: 10}} />
+        <SectionTitle
+          title={I18n.t('address')}
+          style={{padding: 10, marginTop: 10}}
+          icon="pin"
+          iconType="MaterialCommunityIcons"
+        />
 
         <AddressPicker
           addresses={user ? (user.addresses ? user.addresses : []) : []}
@@ -317,16 +290,24 @@ class Cart extends PureComponent {
           areas={areas}
         />
 
-        <Separator style={{marginVertical: 10}} />
+        <Separator
+          style={{flex: 1, padding: 10, backgroundColor: colors.lightGrey}}
+        />
 
-        <SectionHeading
+        <SectionTitle
           title={I18n.t('payment_mode')}
-          style={{backgroundColor: 'transparent'}}
+          style={{padding: 10, marginTop: 10}}
+          icon="cash"
+          iconType="MaterialCommunityIcons"
         />
 
         <PaymentOptions
           onPress={this.onPaymentOptionsItemPress}
           selectedItem={paymentMode}
+        />
+
+        <Separator
+          style={{marginVertical: 20}}
         />
 
         <Button

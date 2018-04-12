@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
   listContainer: {
     // backgroundColor:'yellow',
     alignItems: 'flex-start',
-    padding: 10,
   },
   rowContainer: {
     // backgroundColor:'blue',

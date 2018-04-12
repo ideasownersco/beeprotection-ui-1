@@ -93,6 +93,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     textAlign: 'center',
     marginHorizontal: 2,
-    padding:5,
+    padding: 5,
   },
 });

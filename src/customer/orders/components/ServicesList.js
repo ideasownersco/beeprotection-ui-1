@@ -40,8 +40,7 @@ export default class ServicesList extends Component {
                   color: colors.primary,
                   fontWeight: 'bold',
                 },
-              ]}
-            >
+              ]}>
               {item.name}
             </Text>
             <Text style={styles.price}>{item.price} KD</Text>
