@@ -112,6 +112,7 @@ class CustomerLocationMapScene extends Component {
         jobID={job.id}
         jobStatus={job.status}
         driverID={profile.id}
+        address={address}
       />
     );
   }

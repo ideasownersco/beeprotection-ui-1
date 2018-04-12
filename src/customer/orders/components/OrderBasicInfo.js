@@ -7,6 +7,7 @@ import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import SectionTitle from 'components/SectionTitle';
 import Separator from 'components/Separator';
+import AddressInfo from "components/AddressInfo";
 
 const OrderBasicInfo = ({item, onPress, style}) => {
   return (
@@ -40,25 +41,8 @@ const OrderBasicInfo = ({item, onPress, style}) => {
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('address')}</Text>
 
-          <Text style={[styles.value]}>
-            <Text>{item.address.area.name + ','}</Text>
-            <Text>
-              {' '}
-              {I18n.t('block')} {item.address.block},{' '}
-            </Text>
-            <Text>
-              {' '}
-              {I18n.t('street')} {item.address.street},{' '}
-            </Text>
-            {item.avenue && (
-              <Text>
-                {I18n.t('avenue')} {item.address.avenue},{' '}
-              </Text>
-            )}
-            <Text>
-              {I18n.t('building')} {item.address.building}
-            </Text>
-          </Text>
+          <AddressInfo address={item.address} style={{flex:1,textAlign:'right'}} />
+
         </View>
 
         <Separator style={{marginVertical: 5}} />

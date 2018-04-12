@@ -25,6 +25,7 @@ const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 import {API_URL} from 'utils/env';
+import AddressInfo from "../../../components/AddressInfo";
 
 export default class Map extends Component {
 
@@ -42,6 +43,7 @@ export default class Map extends Component {
     startDriving: PropTypes.func.isRequired,
     stopDriving: PropTypes.func.isRequired,
     jobStatus: PropTypes.string,
+    address:PropTypes.object.isRequired,
     driverID: PropTypes.number.isRequired
   };
 
@@ -62,7 +64,14 @@ export default class Map extends Component {
     };
   }
 
-  async componentDidMount() {
+  // shouldComponentUpdate(nextProps,prevState) {
+  //   return nextProps.jobStatus !== this.props.jobStatus ||
+  //     nextProps.origin.latitude !== nextProps.origin.latitude ||
+  //     this.state.initialized !== prevState.initialized
+  //     ;
+  // }
+
+  componentDidMount() {
     const {jobID, jobStatus, driverID} = this.props;
 
     BackgroundGeolocation.on('location', this.onLocation);
@@ -87,10 +96,16 @@ export default class Map extends Component {
       state => {
         this.setState({
           enabled: state.enabled && jobStatus === 'driving',
-          // initialized: true
         });
       },
     );
+
+    setTimeout(() => {
+      this.setState({
+        initialized: true
+      })
+    }, 1000);
+
   }
 
   componentWillUnmount() {
@@ -98,7 +113,6 @@ export default class Map extends Component {
   }
 
   onLocation = location => {
-    // this.map.fitToElements(true);
     const lastPosition = this.state.origin;
     const currentLocation = {
       latitude: location.coords.latitude,
@@ -118,15 +132,10 @@ export default class Map extends Component {
 
   onHttp = response => {
     console.log('[event] http: ', response);
-    // this.addEvent('http', new Date(), response);
   };
 
-  onMotionChange(event) {
-    // console.log('[event] motionchange: ', event.isMoving, event.location);
-  }
-
   onMapLayout = () => {
-    // this.map.fitToElements(true);
+    this.map.fitToElements(true);
   };
 
   reCenterMap = () => {
@@ -134,10 +143,6 @@ export default class Map extends Component {
   };
 
   openInGoogleMaps = () => {
-    this.openMaps();
-  };
-
-  openMaps = () => {
     let {latitude, longitude} = this.props.destination;
     const nativeGoogleUrl = `comgooglemaps://?daddr=${latitude},${longitude}&center=${latitude},${longitude}&zoom=14&views=traffic&directionsmode=driving`;
     Linking.canOpenURL(nativeGoogleUrl).then(supported => {
@@ -179,7 +184,7 @@ export default class Map extends Component {
   };
 
   render() {
-    const {destination, jobStatus} = this.props;
+    const {destination, jobStatus, address} = this.props;
     console.log('jobStatus', jobStatus);
     const {origin, initialized} = this.state;
     const {heading} = origin;
@@ -188,6 +193,8 @@ export default class Map extends Component {
 
     return (
       <View style={styles.container}>
+
+
         {
           initialized &&
           <MapView
@@ -225,17 +232,16 @@ export default class Map extends Component {
             <Touchable onPress={this.reCenterMap}>
               <View style={{alignItems: 'center'}}>
                 <MaterialCommunityIcons name="arrow-all" size={35}/>
-                {/*<Text>Re center</Text>*/}
               </View>
             </Touchable>
             <Text style={styles.address}>
-              Salwa, Block 7, Street 5, House 22
+
+              <AddressInfo address={address} style={{textAlign:'center'}}/>
             </Text>
 
             <Touchable onPress={this.openInGoogleMaps}>
               <View style={{alignItems: 'center'}}>
                 <Ionicons name="ios-navigate-outline" size={35}/>
-                {/*<Text>Direction</Text>*/}
               </View>
             </Touchable>
           </View>
@@ -275,6 +281,7 @@ export default class Map extends Component {
               style={{marginBottom: 10}}
             />
           }
+
 
         </View>
       </View>
