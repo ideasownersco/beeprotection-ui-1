@@ -52,6 +52,7 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      initialized: false,
       enabled: false,
       origin: {
         latitude: this.props.origin.latitude,
@@ -61,7 +62,7 @@ export default class Map extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const {jobID, jobStatus, driverID} = this.props;
 
     BackgroundGeolocation.on('location', this.onLocation);
@@ -86,6 +87,7 @@ export default class Map extends Component {
       state => {
         this.setState({
           enabled: state.enabled && jobStatus === 'driving',
+          // initialized: true
         });
       },
     );
@@ -96,8 +98,7 @@ export default class Map extends Component {
   }
 
   onLocation = location => {
-    this.map.fitToElements(true);
-
+    // this.map.fitToElements(true);
     const lastPosition = this.state.origin;
     const currentLocation = {
       latitude: location.coords.latitude,
@@ -125,7 +126,7 @@ export default class Map extends Component {
   }
 
   onMapLayout = () => {
-    this.map.fitToElements(true);
+    // this.map.fitToElements(true);
   };
 
   reCenterMap = () => {
@@ -179,42 +180,45 @@ export default class Map extends Component {
 
   render() {
     const {destination, jobStatus} = this.props;
-    console.log('jobStatus',jobStatus);
-    const {origin} = this.state;
-    const {heading} = this.state.origin;
+    console.log('jobStatus', jobStatus);
+    const {origin, initialized} = this.state;
+    const {heading} = origin;
     const rotate =
       typeof heading === 'number' && heading >= 0 ? `${heading}deg` : undefined;
 
     return (
       <View style={styles.container}>
-        <MapView
-          // provider={PROVIDER_GOOGLE}
-          ref={ref => {
-            this.map = ref;
-          }}
-          style={styles.map}
-          initialRegion={{
-            ...destination,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-          }}
-          onLayout={this.onMapLayout}>
-          <MapView.Marker
-            style={styles.mapMarker}
-            anchor={{x: 0.5, y: 0.5, position: 'relative'}}
-            coordinate={origin}
-            identifier="MarkerOrigin">
-            <Image
-              source={images.car}
-              style={[styles.image, rotate && {transform: [{rotate}]}]}
-            />
-          </MapView.Marker>
+        {
+          initialized &&
+          <MapView
+            // provider={PROVIDER_GOOGLE}
+            ref={ref => {
+              this.map = ref;
+            }}
+            style={styles.map}
+            initialRegion={{
+              ...destination,
+              latitudeDelta: LATITUDE_DELTA,
+              longitudeDelta: LONGITUDE_DELTA,
+            }}
+            onLayout={this.onMapLayout}>
+            <MapView.Marker
+              style={styles.mapMarker}
+              anchor={{x: 0.5, y: 0.5, position: 'relative'}}
+              coordinate={origin}
+              identifier="MarkerOrigin">
+              <Image
+                source={images.car}
+                style={[styles.image, rotate && {transform: [{rotate}]}]}
+              />
+            </MapView.Marker>
 
-          <MapView.Marker
-            coordinate={destination}
-            identifier="MarkerDestination"
-          />
-        </MapView>
+            <MapView.Marker
+              coordinate={destination}
+              identifier="MarkerDestination"
+            />
+          </MapView>
+        }
 
         <View style={{backgroundColor: 'white'}}>
           <View style={styles.navContainer}>

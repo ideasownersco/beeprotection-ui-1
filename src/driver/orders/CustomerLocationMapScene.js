@@ -94,12 +94,8 @@ class CustomerLocationMapScene extends Component {
       return null;
     }
 
-    console.log('order',order);
-
     let {address,job} = order;
     let {origin} = this.state;
-
-    console.log('job',job);
 
     return (
       <Map
