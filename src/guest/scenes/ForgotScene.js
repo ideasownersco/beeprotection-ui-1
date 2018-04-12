@@ -30,10 +30,10 @@ export default class ForgotScene extends Component {
         <FormLabel title={I18n.t('email')} />
 
         <FormTextInput
-          onChangeText={value => onFieldChange('email', value)}
+          onValueChange={value => onFieldChange('email', value)}
           value={email}
           maxLength={40}
-          placeholder={I18n.t('email')}
+          label={I18n.t('email')}
           keyboardType="email-address"
         />
 

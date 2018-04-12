@@ -35,7 +35,7 @@ export default class LoginScene extends Component {
       <View style={styles.container}>
         <FormLabel title={I18n.t('email')} />
         <FormTextInput
-          onChangeText={value => onFieldChange('email', value)}
+          onValueChange={value => onFieldChange('email', value)}
           value={email}
           maxLength={40}
           keyboardType="email-address"
@@ -44,7 +44,7 @@ export default class LoginScene extends Component {
 
         <FormLabel title={I18n.t('password')} />
         <FormTextInput
-          onChangeText={value => onFieldChange('password', value)}
+          onValueChange={value => onFieldChange('password', value)}
           value={password}
           maxLength={40}
           secureTextEntry={true}

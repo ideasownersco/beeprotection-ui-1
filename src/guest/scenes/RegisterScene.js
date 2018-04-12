@@ -36,47 +36,47 @@ export default class RegisterScene extends Component {
       <View style={styles.container}>
         <FormLabel title={I18n.t('name')} />
         <FormTextInput
-          onChangeText={value => onFieldChange('name', value)}
+          onValueChange={value => onFieldChange('name', value)}
           value={name}
           maxLength={40}
-          placeholder={I18n.t('name')}
+          label={I18n.t('name')}
         />
 
         <FormLabel title={I18n.t('email')} />
         <FormTextInput
-          onChangeText={value => onFieldChange('email', value)}
+          onValueChange={value => onFieldChange('email', value)}
           value={email}
           maxLength={40}
-          placeholder={I18n.t('email')}
+          label={I18n.t('email')}
           keyboardType="email-address"
         />
 
         <FormLabel title={I18n.t('mobile')} />
 
         <FormTextInput
-          onChangeText={value => onFieldChange('mobile', value)}
+          onValueChange={value => onFieldChange('mobile', value)}
           value={mobile}
           maxLength={40}
-          placeholder={I18n.t('mobile')}
+          label={I18n.t('mobile')}
           keyboardType="phone-pad"
         />
 
         <FormLabel title={I18n.t('password')} />
         <FormTextInput
-          onChangeText={value => onFieldChange('password', value)}
+          onValueChange={value => onFieldChange('password', value)}
           value={password}
           maxLength={40}
-          placeholder={I18n.t('password')}
+          label={I18n.t('password')}
           secureTextEntry={true}
         />
 
         <FormLabel title={I18n.t('confirm_password')} />
         <FormTextInput
-          onChangeText={value => onFieldChange('password_confirmation', value)}
+          onValueChange={value => onFieldChange('password_confirmation', value)}
           value={password_confirmation}
           maxLength={40}
           secureTextEntry={true}
-          placeholder={I18n.t('password')}
+          label={I18n.t('password')}
         />
 
         <FormSubmit

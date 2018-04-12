@@ -13,52 +13,52 @@ export default class AddressFormFields extends PureComponent {
         <View style={styles.addressField}>
           <Text style={styles.label}>{I18n.t('block')}</Text>
           <FormTextInput
-            onChangeText={value => updateFields('block', value)}
+            onValueChange={value => updateFields('block', value)}
             value={block}
             maxLength={40}
             keyboardType="numeric"
             autoFocus={false}
             style={styles.textInput}
-            placeholder={I18n.t('block')}
+            label={I18n.t('block')}
           />
         </View>
 
         <View style={styles.addressField}>
           <Text style={styles.label}>{I18n.t('street')} </Text>
           <FormTextInput
-            onChangeText={value => updateFields('street', value)}
+            onValueChange={value => updateFields('street', value)}
             value={street}
             maxLength={40}
             keyboardType="numeric"
             autoFocus={false}
             style={styles.textInput}
-            placeholder={I18n.t('street')}
+            label={I18n.t('street')}
           />
         </View>
 
         <View style={styles.addressField}>
           <Text style={styles.label}>{I18n.t('avenue')}</Text>
           <FormTextInput
-            onChangeText={value => updateFields('avenue', value)}
+            onValueChange={value => updateFields('avenue', value)}
             value={avenue}
             maxLength={40}
             keyboardType="numeric"
             autoFocus={false}
             style={styles.textInput}
-            placeholder={I18n.t('avenue')}
+            label={I18n.t('avenue')}
           />
         </View>
 
         <View style={styles.addressField}>
           <Text style={styles.label}>{I18n.t('building')}</Text>
           <FormTextInput
-            onChangeText={value => updateFields('building', value)}
+            onValueChange={value => updateFields('building', value)}
             value={building}
             maxLength={40}
             keyboardType="numeric"
             autoFocus={false}
             style={styles.textInput}
-            placeholder={I18n.t('building')}
+            label={I18n.t('building')}
           />
         </View>
       </View>

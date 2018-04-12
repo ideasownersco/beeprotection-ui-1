@@ -1,22 +1,41 @@
 import React, {Component} from 'react';
-import {StyleSheet, TextInput} from 'react-native';
-import colors from 'theme/colors';
-import {isRTL} from 'utils/locale';
+import {StyleSheet} from 'react-native';
+import {TextInput} from 'react-native-paper';
+import PropTypes from 'prop-types';
+import colors from 'assets/theme/colors';
 
 export default class FormTextInput extends Component {
+  shouldComponentUpdate(nextProps) {
+    return (
+      nextProps.value !== this.props.value ||
+      nextProps.disabled !== this.props.disabled
+    );
+  }
+
   static propTypes = {
-    // style:PropTypes.object
+    field: PropTypes.string.isRequired,
+    onValueChange: PropTypes.func.isRequired,
+    label: PropTypes.string.isRequired,
+  };
+
+  onValueChange = value => {
+    let {field, onValueChange} = this.props;
+    onValueChange(field, value);
   };
 
   render() {
-    const {style, ...rest} = this.props;
+    const {style, label, placeholder, ...rest} = this.props;
     return (
       <TextInput
-        {...rest}
+        onChangeText={this.onValueChange}
+        label={label}
+        placeholder={placeholder ? placeholder : label}
         style={[styles.input, style]}
         placeholderTextColor={colors.mediumGrey}
         autoCorrect={false}
         autoCapitalize="none"
+        underlineColor={colors.primary}
+        {...rest}
       />
     );
   }
@@ -24,15 +43,6 @@ export default class FormTextInput extends Component {
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
-    borderRightColor: 'transparent',
-    borderTopColor: 'transparent',
-    borderBottomColor: colors.lightGrey,
-    borderBottomWidth: 0.5,
-    fontSize: 15,
-    color: 'black',
-    fontWeight: '500',
-    textAlign: isRTL ? 'right' : 'left',
     marginBottom: 10,
   },
 });
