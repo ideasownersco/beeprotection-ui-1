@@ -44,15 +44,21 @@ export default class OrdersList extends Component {
               </Text>
             </View>
 
-            <Separator />
+            <Separator/>
 
             <View style={styles.itemContentContainer}>
-              <Button
-                title={I18n.t('start')}
-                style={{borderRadius: 10, flex: 1, marginRight: 10}}
-                background="error"
-                onPress={() => onStartStopButtonPress(item)}
-              />
+
+              {
+                item.status === 'reached'
+                &&
+                <Button
+                  title={I18n.t('start')}
+                  style={{borderRadius: 10, flex: 1, marginRight: 10}}
+                  background="error"
+                  onPress={() => onStartStopButtonPress(item)}
+                />
+              }
+
               <Button
                 title={I18n.t('address')}
                 style={{borderRadius: 10, flex: 1}}
@@ -80,7 +86,7 @@ export default class OrdersList extends Component {
         renderItem={this.renderItem}
         style={styles.listContainer}
         keyExtractor={item => `${item.id}`}
-        ItemSeparatorComponent={() => <Separator />}
+        ItemSeparatorComponent={() => <Separator/>}
       />
     );
   }

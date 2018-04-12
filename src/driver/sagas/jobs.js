@@ -4,51 +4,100 @@ import {ACTION_TYPES} from 'driver/common/actions';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 
-function* startJob(action) {
+function* startWorking(action) {
   try {
     const params = {
       body: action.params,
     };
 
-    const response = yield call(API.startJob, action.job_id, params);
+    const response = yield call(API.startWorking, action.job_id, params);
 
     const normalized = normalize(response.data, Schema.orders);
 
     yield put({
-      type: ACTION_TYPES.START_JOB_SUCCESS,
+      type: ACTION_TYPES.START_WORKING_SUCCESS,
       entities: normalized.entities,
       result: normalized.result,
     });
   } catch (error) {
-    yield put({type: ACTION_TYPES.START_JOB_FAILURE, error});
+    yield put({type: ACTION_TYPES.START_WORKING_FAILURE, error});
   }
 }
 
-function* finishJob(action) {
+function* stopWorking(action) {
   try {
     const params = {
       body: action.params,
     };
 
-    const response = yield call(API.finishJob, action.job_id, params);
+    const response = yield call(API.stopWorking, action.job_id, params);
     const normalized = normalize(response.data, Schema.orders);
 
     yield put({
-      type: ACTION_TYPES.FINISH_JOB_SUCCESS,
+      type: ACTION_TYPES.STOP_WORKING_SUCCESS,
       entities: normalized.entities,
       result: normalized.result,
     });
   } catch (error) {
-    yield put({type: ACTION_TYPES.FINISH_JOB_FAILURE, error});
+    yield put({type: ACTION_TYPES.STOP_WORKING_FAILURE, error});
   }
 }
 
-function* startJobMonitor() {
-  yield takeLatest(ACTION_TYPES.START_JOB_REQUEST, startJob);
+
+function* startDriving(action) {
+  try {
+    const params = {
+      body: action.params,
+    };
+
+    const response = yield call(API.startDriving, action.job_id, params);
+
+    const normalized = normalize(response.data, Schema.orders);
+
+    yield put({
+      type: ACTION_TYPES.START_DRIVING_SUCCESS,
+      entities: normalized.entities,
+      result: normalized.result,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.START_DRIVING_FAILURE, error});
+  }
 }
 
-function* finishJobMonitor() {
-  yield takeLatest(ACTION_TYPES.FINISH_JOB_REQUEST, finishJob);
+function* stopDriving(action) {
+  try {
+    const params = {
+      body: action.params,
+    };
+
+    const response = yield call(API.stopDriving, action.job_id, params);
+    const normalized = normalize(response.data, Schema.orders);
+
+    yield put({
+      type: ACTION_TYPES.STOP_DRIVING_SUCCESS,
+      entities: normalized.entities,
+      result: normalized.result,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.STOP_DRIVING_FAILURE, error});
+  }
 }
 
-export const sagas = all([fork(startJobMonitor), fork(finishJobMonitor)]);
+
+function* startWorkingMonitor() {
+  yield takeLatest(ACTION_TYPES.START_WORKING_REQUEST, startWorking);
+}
+
+function* stopWorkingMonitor() {
+  yield takeLatest(ACTION_TYPES.STOP_WORKING_REQUEST, stopWorking);
+}
+
+function* startDrivingMonitor() {
+  yield takeLatest(ACTION_TYPES.START_DRIVING_REQUEST, startDriving);
+}
+
+function* stopDrivingMonitor() {
+  yield takeLatest(ACTION_TYPES.STOP_DRIVING_REQUEST, stopDriving);
+}
+
+export const sagas = all([fork(startWorkingMonitor), fork(stopWorkingMonitor),fork(startDrivingMonitor),fork(stopDrivingMonitor)]);

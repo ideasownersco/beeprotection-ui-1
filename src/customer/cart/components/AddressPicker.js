@@ -35,7 +35,12 @@ export default class AddressPicker extends PureComponent {
   };
 
   render() {
-    const {addresses, onAddressPickerItemPress, activeItemID,areas} = this.props;
+    const {
+      addresses,
+      onAddressPickerItemPress,
+      activeItemID,
+      areas,
+    } = this.props;
     const {createAddressFormVisibility} = this.state;
 
     return (

@@ -61,20 +61,18 @@ class Home extends Component {
     return (
       <ScrollView style={{flex: 1}}>
         <WelcomeText />
-
         <HomeActionButtons
           onCreateOrderPress={this.onCreateOrderPress}
           onProtectionPress={this.onProtectionPress}
         />
-
         {/*{working_order &&*/}
-          {/*working_order.id && (*/}
-            <StandingOrdersList
-              items={working_order}
-              onItemPress={this.onStandingOrderListItemPress}
-              onItemTrackPress={this.onItemTrackPress}
-            />
-          // )}
+        {/*working_order.id && (*/}
+        <StandingOrdersList
+          items={working_order}
+          onItemPress={this.onStandingOrderListItemPress}
+          onItemTrackPress={this.onItemTrackPress}
+        />
+        // )}
       </ScrollView>
     );
   }

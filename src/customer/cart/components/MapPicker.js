@@ -3,25 +3,24 @@
  */
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Dimensions, StyleSheet, Text, View,} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {GOOGLE_MAPS_KEY} from 'utils/env.js';
 import I18n, {isRTL} from 'utils/locale';
 import Qs from 'qs';
 import Touchable from 'react-native-platform-touchable';
-import List from "../../../components/List";
+import List from '../../../components/List';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const DEFAULT_PADDING = {top: 50, right: 50, bottom: 50, left: 50};
 
 export default class MapPicker extends Component {
-
   static propTypes = {
     updateAddress: PropTypes.func.isRequired,
     address: PropTypes.object.isRequired,
-    areas: PropTypes.array.isRequired
+    areas: PropTypes.array.isRequired,
   };
 
   // shouldComponentUpdate(nextProps, prevState) {
@@ -34,7 +33,7 @@ export default class MapPicker extends Component {
 
   state = {
     latitude_delta: 1,
-    isAreaListModalVisible: false
+    isAreaListModalVisible: false,
   };
 
   // onItemPress = (locationData, locationDetails) => {
@@ -63,7 +62,6 @@ export default class MapPicker extends Component {
   }
 
   onRegionChange = region => {
-
     let {latitude, longitude} = region;
     let params = {
       latitude: latitude,
@@ -81,18 +79,17 @@ export default class MapPicker extends Component {
   onAreaButtonPress = () => {
     this.setState({
       isAreaListModalVisible: true,
-    })
+    });
   };
 
   hideAreaListModal = () => {
     this.setState({
       isAreaListModalVisible: false,
-    })
+    });
   };
 
-  setArea = (area) => {
-
-    console.log('area',area);
+  setArea = area => {
+    console.log('area', area);
 
     const {updateAddress, address} = this.props;
 
@@ -101,7 +98,7 @@ export default class MapPicker extends Component {
     let params = {
       latitude: latitude,
       longitude: longitude,
-      area_id: area.id
+      area_id: area.id,
     };
 
     updateAddress(params);
@@ -110,7 +107,6 @@ export default class MapPicker extends Component {
       edgePadding: DEFAULT_PADDING,
       animated: true,
     });
-
   };
 
   render() {
@@ -128,24 +124,28 @@ export default class MapPicker extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.searchInputContainer}>
-
           <Touchable
-            style={{flex:1,padding: 10, alignItems: 'center', justifyContent: 'center'}}
-            onPress={this.onAreaButtonPress}
-          >
-            <Text style={{
-              fontSize: 20,
-              fontWeight: '500',
-              color: 'black'
-            }}>{area.id ? area.name : I18n.t('select_area')}</Text>
+            style={{
+              flex: 1,
+              padding: 10,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onPress={this.onAreaButtonPress}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: '500',
+                color: 'black',
+              }}>
+              {area.id ? area.name : I18n.t('select_area')}
+            </Text>
           </Touchable>
-
         </View>
 
         <View style={styles.menuContainer}>
           <View style={styles.mapContainer}>
-            {
-              initialized &&
+            {initialized && (
               <MapView
                 ref={ref => {
                   this.map = ref;
@@ -157,17 +157,14 @@ export default class MapPicker extends Component {
                   latitudeDelta: this.state.latitude_delta,
                   longitudeDelta: this.state.latitude_delta * ASPECT_RATIO,
                 }}
-                onRegionChangeComplete={this.onRegionChange}
-              >
+                onRegionChangeComplete={this.onRegionChange}>
                 <MapView.Marker
                   coordinate={this.mapMarkerRegion()}
                   onDragEnd={e => this.onDragEnd(e)}
                   draggable
                 />
-
-
               </MapView>
-            }
+            )}
 
             <List
               title={I18n.t('select_area')}
@@ -179,9 +176,6 @@ export default class MapPicker extends Component {
             />
           </View>
         </View>
-
-
-
       </View>
     );
   }

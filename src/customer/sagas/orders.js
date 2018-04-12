@@ -20,16 +20,14 @@ function* fetchCategories() {
 }
 
 function* fetchTimings(action) {
-
   try {
-
     const params = {
       body: {
         ...action.params,
       },
     };
 
-    const response = yield call(API.fetchTimings,params);
+    const response = yield call(API.fetchTimings, params);
     const normalized = normalize(response.data, [Schema.timings]);
     yield put({
       type: ACTION_TYPES.TIMINGS_SUCCESS,
@@ -162,7 +160,6 @@ function* fetchWorkingOrder() {
   }
 }
 
-
 // function* fetchWorkingOrder() {
 //   try {
 //     const response = yield call(API.fetchWorkingOrder);
@@ -191,7 +188,6 @@ function* saveAddress(action) {
         ...action.params,
       },
     };
-
     const response = yield call(API.saveAddress, params);
     const normalized = normalize(response.data, Schema.users);
     yield put({

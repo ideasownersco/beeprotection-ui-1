@@ -27,7 +27,8 @@ import PaymentOptions from 'customer/cart/components/PaymentOptions';
 import OrderSuccess from 'customer/cart/components/OrderSuccess';
 import PaymentPage from 'customer/cart/components/PaymentPage';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import TimePicker from "./components/TimePicker";
+import TimePicker from './components/TimePicker';
+import {ACTIONS as APP_ACTIONS} from "../../app/common/actions";
 
 type State = {
   dates: Array,
@@ -46,6 +47,16 @@ class Cart extends PureComponent {
     timePickerModalVisible: false,
   };
 
+  static defaultProps = {
+    user:{
+      addresses:[]
+    },
+    areas:[],
+    timings:[],
+    cartItems:[],
+    cart:{}
+  };
+
   componentDidMount() {
     const dates = [];
     for (let i = 0; i < 30; i++) {
@@ -58,17 +69,23 @@ class Cart extends PureComponent {
     this.props.actions.fetchAddresses();
     this.props.actions.fetchAreas();
     this.fetchTimings();
-
   }
 
   performCheckout = () => {
     const {user, isAuthenticated, cart} = this.props;
     const {paymentMode} = this.state;
 
-    const {selectedDate, selectedAddressID,selectedTimeID,items,total} = cart;
+    const {
+      selectedDate,
+      selectedAddressID,
+      selectedTimeID,
+      items,
+      total,
+    } = cart;
     if (!isAuthenticated) {
       this.props.navigation.navigate('Login');
     } else {
+
       const item = {
         user_id: user.id,
         address_id: selectedAddressID,
@@ -78,6 +95,15 @@ class Cart extends PureComponent {
         date: selectedDate,
         payment_mode: paymentMode,
       };
+
+      let address = user.addresses.find(address => address.id === selectedAddressID);
+
+      if(!address.area.active) {
+        return this.props.dispatch(APP_ACTIONS.setNotification({
+          type:'error',
+          message:`${I18n.t('address_disabled')}`
+        }));
+      }
 
       return new Promise((resolve, reject) => {
         this.props.actions.checkout({item, resolve, reject});
@@ -99,10 +125,10 @@ class Cart extends PureComponent {
     }
   };
 
-  onDatePickerItemPress = (date) => {
+  onDatePickerItemPress = date => {
     this.props.actions.setCartItems({
-      selectedDate:date,
-      selectedTimeID:null
+      selectedDate: date,
+      selectedTimeID: null,
     });
     this.fetchTimings(date);
   };
@@ -163,14 +189,23 @@ class Cart extends PureComponent {
 
   fetchTimings = (date = null) => {
     this.props.actions.fetchTimings({
-      date:date ? date: this.props.cart.selectedDate,
-      items:this.props.cart.items
+      date: date ? date : this.props.cart.selectedDate,
+      items: this.props.cart.items,
     });
   };
 
   render() {
-    let {cart, cartItems, user, cartTotal, checkout,timings,isFetchingTimings,areas} = this.props;
-    let {selectedDate, selectedAddressID,selectedTimeID} = cart;
+    let {
+      cart,
+      cartItems,
+      user,
+      cartTotal,
+      checkout,
+      timings,
+      isFetchingTimings,
+      areas,
+    } = this.props;
+    let {selectedDate, selectedAddressID, selectedTimeID} = cart;
     let {
       dates,
       showPaymentModal,
@@ -199,13 +234,13 @@ class Cart extends PureComponent {
         <Separator style={{marginVertical: 10}} />
 
         {/*<Text style={{fontSize: 20, paddingHorizontal: 10}}>*/}
-          {/*{I18n.t('select_time')}*/}
+        {/*{I18n.t('select_time')}*/}
         {/*</Text>*/}
 
         {/*<Button*/}
-          {/*style={{flex: 1, alignItems: 'flex-start', backgroundColor: 'white'}}*/}
-          {/*onPress={this.showDateTimePickerModal}>*/}
-          {/*<Text style={{fontSize: 20}}>{selectedTime.format('h:mm a')}</Text>*/}
+        {/*style={{flex: 1, alignItems: 'flex-start', backgroundColor: 'white'}}*/}
+        {/*onPress={this.showDateTimePickerModal}>*/}
+        {/*<Text style={{fontSize: 20}}>{selectedTime.format('h:mm a')}</Text>*/}
         {/*</Button>*/}
 
         <TimePicker
@@ -216,30 +251,30 @@ class Cart extends PureComponent {
         />
 
         {/*<DateTimePicker*/}
-          {/*titleIOS={I18n.t('select_time')}*/}
-          {/*date={selectedTime.toDate()}*/}
-          {/*isVisible={this.state.timePickerModalVisible}*/}
-          {/*neverDisableConfirmIOS={true}*/}
-          {/*mode="time"*/}
-          {/*confirmBtnText={I18n.t('confirm')}*/}
-          {/*cancelBtnText={I18n.t('cancel')}*/}
-          {/*onConfirm={this.hideDateTimePickerModal}*/}
-          {/*onCancel={this.hideDateTimePickerModal}*/}
-          {/*onDateChange={this.onTimeChange}*/}
-          {/*customStyles={{*/}
-            {/*dateTouchBody: {*/}
-              {/*padding: 10,*/}
-              {/*backgroundColor: 'white',*/}
-            {/*},*/}
-            {/*dateText: {*/}
-              {/*color: colors.primary,*/}
-              {/*fontWeight: '500',*/}
-              {/*fontSize: 25,*/}
-            {/*},*/}
-          {/*}}*/}
-          {/*titleStyle={{*/}
-            {/*fontSize: 20,*/}
-          {/*}}*/}
+        {/*titleIOS={I18n.t('select_time')}*/}
+        {/*date={selectedTime.toDate()}*/}
+        {/*isVisible={this.state.timePickerModalVisible}*/}
+        {/*neverDisableConfirmIOS={true}*/}
+        {/*mode="time"*/}
+        {/*confirmBtnText={I18n.t('confirm')}*/}
+        {/*cancelBtnText={I18n.t('cancel')}*/}
+        {/*onConfirm={this.hideDateTimePickerModal}*/}
+        {/*onCancel={this.hideDateTimePickerModal}*/}
+        {/*onDateChange={this.onTimeChange}*/}
+        {/*customStyles={{*/}
+        {/*dateTouchBody: {*/}
+        {/*padding: 10,*/}
+        {/*backgroundColor: 'white',*/}
+        {/*},*/}
+        {/*dateText: {*/}
+        {/*color: colors.primary,*/}
+        {/*fontWeight: '500',*/}
+        {/*fontSize: 25,*/}
+        {/*},*/}
+        {/*}}*/}
+        {/*titleStyle={{*/}
+        {/*fontSize: 20,*/}
+        {/*}}*/}
         {/*/>*/}
 
         <Separator style={{marginVertical: 10}} />
@@ -318,7 +353,7 @@ function mapStateToProps(state) {
     user: USER_SELECTORS.getAuthUser(state),
     isAuthenticated: USER_SELECTORS.isAuthenticated(state),
     checkout: state.customer.checkout,
-    areas:SELECTORS.getAreas(state)
+    areas: SELECTORS.getAreas(state),
   };
 }
 

@@ -9,8 +9,9 @@ function saveProfile(params) {
   };
   return request(requestParams);
 }
-function startJob(id) {
-  const path = `driver/jobs/${id}/start`;
+
+function startWorking(id) {
+  const path = `driver/jobs/${id}/start/work`;
   let requestParams = {
     path,
     method: 'POST',
@@ -18,8 +19,25 @@ function startJob(id) {
   return request(requestParams);
 }
 
-function finishJob(id) {
-  const path = `driver/jobs/${id}/finish`;
+function stopWorking(id) {
+  const path = `driver/jobs/${id}/stop/work`;
+  let requestParams = {
+    path,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+function startDriving(id) {
+  const path = `driver/jobs/${id}/start/drive`;
+  let requestParams = {
+    path,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
+function stopDriving(id) {
+  const path = `driver/jobs/${id}/stop/drive`;
   let requestParams = {
     path,
     method: 'POST',
@@ -59,6 +77,8 @@ export const API = {
   fetchWorkingOrder,
   fetchOrderDetails,
   fetchPastOrders,
-  startJob,
-  finishJob,
+  startWorking,
+  stopWorking,
+  startDriving,
+  stopDriving
 };

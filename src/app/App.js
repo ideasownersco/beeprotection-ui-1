@@ -56,15 +56,19 @@ class App extends Component {
     let navigation = NavigatorService;
 
     if (!foreground) {
-      // console.log('not foregorund');
       let {type} = data;
       switch (type) {
-        case 'job.started':
-          // console.log('job.started');
+        case 'started.working':
           let {order_id} = data;
           return navigation.navigate('OrderDetail', {
             orderID: order_id,
           });
+        case 'stopped.working':
+          break;
+        case 'started.driving':
+          break;
+        case 'stopped.driving':
+          break;
       }
     }
     //
@@ -96,7 +100,7 @@ class App extends Component {
     if (!app.booted) return null;
 
     if (!app.installed) {
-      return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
+      return <LanguageSelectScene onItemPress={this.onLanguageSelect}/>;
     }
 
     return (

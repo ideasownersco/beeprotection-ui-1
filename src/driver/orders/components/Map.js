@@ -18,6 +18,7 @@ import Touchable from 'react-native-platform-touchable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import I18n from 'utils/locale';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -26,6 +27,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 import {API_URL} from 'utils/env';
 
 export default class Map extends Component {
+
   static propTypes = {
     origin: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
@@ -35,16 +37,18 @@ export default class Map extends Component {
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
     }),
-    startJob: PropTypes.func.isRequired,
-    finishJob: PropTypes.func.isRequired,
+    startWorking: PropTypes.func.isRequired,
+    stopWorking: PropTypes.func.isRequired,
+    startDriving: PropTypes.func.isRequired,
+    stopDriving: PropTypes.func.isRequired,
     jobStatus: PropTypes.string,
+    driverID: PropTypes.number.isRequired
   };
-  //
+
   static defaultProps = {
     jobStatus: 'pending',
-    driverID: 1,
   };
-  //
+
   constructor(props) {
     super(props);
     this.state = {
@@ -70,7 +74,7 @@ export default class Map extends Component {
         preventSuspend: false,
         startOnBoot: true,
         foregroundService: true,
-        url: `http://${API_URL}/jobs/${jobID}/location/update`,
+        url: `http://${API_URL}/jobs/${jobID}/update/location`,
         autoSync: true,
         debug: true,
         logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
@@ -81,8 +85,7 @@ export default class Map extends Component {
       },
       state => {
         this.setState({
-          // enabled: jobStatus === 'working',
-          enabled: state.enabled && jobStatus === 'working',
+          enabled: state.enabled && jobStatus === 'driving',
         });
       },
     );
@@ -95,7 +98,6 @@ export default class Map extends Component {
   onLocation = location => {
     this.map.fitToElements(true);
 
-    // console.log('[event] location: ', location);
     const lastPosition = this.state.origin;
     const currentLocation = {
       latitude: location.coords.latitude,
@@ -120,10 +122,6 @@ export default class Map extends Component {
 
   onMotionChange(event) {
     // console.log('[event] motionchange: ', event.isMoving, event.location);
-    this.setState({
-      isMoving: event.isMoving,
-    });
-    // this.addEvent('motionchange', new Date(event.location.timestamp), event.location);
   }
 
   onMapLayout = () => {
@@ -140,7 +138,6 @@ export default class Map extends Component {
 
   openMaps = () => {
     let {latitude, longitude} = this.props.destination;
-
     const nativeGoogleUrl = `comgooglemaps://?daddr=${latitude},${longitude}&center=${latitude},${longitude}&zoom=14&views=traffic&directionsmode=driving`;
     Linking.canOpenURL(nativeGoogleUrl).then(supported => {
       const url = supported
@@ -150,32 +147,40 @@ export default class Map extends Component {
     });
   };
 
-  startTrip = () => {
+  startDriving = () => {
     this.map.fitToElements(true);
     if (!this.state.enabled) {
       this.setState({
         enabled: true,
       });
     }
-
-    this.props.startJob();
+    this.props.startDriving();
     BackgroundGeolocation.start();
   };
 
-  stopTrip = () => {
+  stopDriving = () => {
     this.map.fitToElements(true);
     if (this.state.enabled) {
       this.setState({
         enabled: false,
       });
     }
-    this.props.finishJob();
+    this.props.stopDriving();
     BackgroundGeolocation.stop();
   };
 
+  startWorking = () => {
+    this.props.startWorking();
+  };
+
+  stopWorking = () => {
+    this.props.stopWorking();
+  };
+
   render() {
-    const {destination} = this.props;
-    const {origin, enabled} = this.state;
+    const {destination, jobStatus} = this.props;
+    console.log('jobStatus',jobStatus);
+    const {origin} = this.state;
     const {heading} = this.state.origin;
     const rotate =
       typeof heading === 'number' && heading >= 0 ? `${heading}deg` : undefined;
@@ -215,7 +220,7 @@ export default class Map extends Component {
           <View style={styles.navContainer}>
             <Touchable onPress={this.reCenterMap}>
               <View style={{alignItems: 'center'}}>
-                <MaterialCommunityIcons name="arrow-all" size={35} />
+                <MaterialCommunityIcons name="arrow-all" size={35}/>
                 {/*<Text>Re center</Text>*/}
               </View>
             </Touchable>
@@ -225,17 +230,48 @@ export default class Map extends Component {
 
             <Touchable onPress={this.openInGoogleMaps}>
               <View style={{alignItems: 'center'}}>
-                <Ionicons name="ios-navigate-outline" size={35} />
+                <Ionicons name="ios-navigate-outline" size={35}/>
                 {/*<Text>Direction</Text>*/}
               </View>
             </Touchable>
           </View>
 
-          <Button
-            title={enabled ? 'Stop Trip' : 'Start Trip'}
-            onPress={enabled ? this.stopTrip : this.startTrip}
-            style={{marginBottom: 10}}
-          />
+          {
+            jobStatus == 'pending' &&
+            <Button
+              title={I18n.t('start_driving')}
+              onPress={this.startDriving}
+              style={{marginBottom: 10}}
+            />
+          }
+
+          {
+            jobStatus == 'driving' &&
+            <Button
+              title={I18n.t('stop_driving')}
+              onPress={this.stopDriving}
+              style={{marginBottom: 10}}
+            />
+          }
+
+          {
+            jobStatus == 'reached' &&
+            <Button
+              title={I18n.t('start_working')}
+              onPress={this.startWorking}
+              style={{marginBottom: 10}}
+            />
+          }
+
+          {
+            jobStatus == 'working' &&
+            <Button
+              title={I18n.t('stop_working')}
+              onPress={this.stopWorking}
+              style={{marginBottom: 10}}
+            />
+          }
+
         </View>
       </View>
     );

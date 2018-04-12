@@ -7,16 +7,17 @@ import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 
 export default class TimePicker extends Component {
-
   static propTypes = {
     onItemPress: PropTypes.func.isRequired,
     activeItemID: PropTypes.number,
     isFetching: PropTypes.bool.isRequired,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      disabled: PropTypes.bool
-    }).isRequired)
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        disabled: PropTypes.bool,
+      }).isRequired,
+    ),
   };
 
   shouldComponentUpdate(nextProps) {
@@ -30,17 +31,19 @@ export default class TimePicker extends Component {
   renderItem = ({item}) => {
     const {onItemPress, activeItemID} = this.props;
 
-    if(item.disabled) {
+    if (item.disabled) {
       return (
         <View
           style={[
             styles.itemContainer,
             activeItemID === item.id && styles.itemContainerActive,
-            {opacity:.1}
+            {opacity: 0.1},
           ]}>
           <Text
-            style={[styles.time, activeItemID === item.id && styles.timeActive]}
-          >
+            style={[
+              styles.time,
+              activeItemID === item.id && styles.timeActive,
+            ]}>
             {item.name}
           </Text>
         </View>
@@ -55,8 +58,10 @@ export default class TimePicker extends Component {
             activeItemID === item.id && styles.itemContainerActive,
           ]}>
           <Text
-            style={[styles.time, activeItemID === item.id && styles.timeActive]}
-          >
+            style={[
+              styles.time,
+              activeItemID === item.id && styles.timeActive,
+            ]}>
             {item.name}
           </Text>
         </View>
@@ -68,7 +73,7 @@ export default class TimePicker extends Component {
     const {items, activeItemID, isFetching} = this.props;
 
     return (
-      <View style={[styles.container, isFetching && {opacity: .1}]}>
+      <View style={[styles.container, isFetching && {opacity: 0.1}]}>
         <Text style={styles.sectionTitle}>{I18n.t('time')}</Text>
 
         <FlatList
@@ -83,7 +88,6 @@ export default class TimePicker extends Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {},

@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
 import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
-import MapPicker from "./cart/components/MapPicker";
+import MapPicker from './cart/components/MapPicker';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 
 class Home extends Component {
-
   state = {
     initialized: true,
     latitude: 29.3759,
     longitude: 47.9774,
     country: 'KW',
-    area_id:7
+    area_id: 7,
   };
 
   componentDidMount() {
@@ -38,16 +37,16 @@ class Home extends Component {
     // );
   }
 
-  saveAddress = (address) => {
+  saveAddress = address => {
     this.setState({
-        ...address
+      ...address,
     });
   };
 
-  setArea = (id) => {
+  setArea = id => {
     this.setState({
-      area_id:id
-    })
+      area_id: id,
+    });
   };
 
   render() {
@@ -58,7 +57,22 @@ class Home extends Component {
         visible={true}
         updateAddress={this.saveAddress}
         address={{...this.state}}
-        areas={[{id: 7, name: "Abbasiya", active: 1, latitude: 29.2643154, longitude: 47.94439999999999},{id: 8, name: "Abdullah Al-Mubarak", active: 1, latitude: 29.3680874, longitude: 47.9805976}]}
+        areas={[
+          {
+            id: 7,
+            name: 'Abbasiya',
+            active: 1,
+            latitude: 29.2643154,
+            longitude: 47.94439999999999,
+          },
+          {
+            id: 8,
+            name: 'Abdullah Al-Mubarak',
+            active: 1,
+            latitude: 29.3680874,
+            longitude: 47.9805976,
+          },
+        ]}
       />
     );
   }

@@ -125,5 +125,5 @@ export const SELECTORS = {
   getUpcomingOrders,
   getWorkingOrder,
   getPastOrders,
-  getAreas
+  getAreas,
 };

@@ -11,13 +11,21 @@ export const ACTION_TYPES = {
   FETCH_PROFILE_SUCCESS: '@driver/FETCH_PROFILE_SUCCESS',
   FETCH_PROFILE_FAILURE: '@driver/FETCH_PROFILE_FAILURE',
 
-  START_JOB_REQUEST: '@driver/START_JOB_REQUEST',
-  START_JOB_SUCCESS: '@driver/START_JOB_SUCCESS',
-  START_JOB_FAILURE: '@driver/START_JOB_FAILURE',
+  START_WORKING_REQUEST: '@driver/START_WORKING_REQUEST',
+  START_WORKING_SUCCESS: '@driver/START_WORKING_SUCCESS',
+  START_WORKING_FAILURE: '@driver/START_WORKING_FAILURE',
 
-  FINISH_JOB_REQUEST: '@driver/FINISH_JOB_REQUEST',
-  FINISH_JOB_SUCCESS: '@driver/FINISH_JOB_SUCCESS',
-  FINISH_JOB_FAILURE: '@driver/FINISH_JOB_FAILURE',
+  STOP_WORKING_REQUEST: '@driver/STOP_WORKING_REQUEST',
+  STOP_WORKING_SUCCESS: '@driver/STOP_WORKING_SUCCESS',
+  STOP_WORKING_FAILURE: '@driver/STOP_WORKING_FAILURE',
+
+  START_DRIVING_REQUEST: '@driver/START_DRIVING_REQUEST',
+  START_DRIVING_SUCCESS: '@driver/START_DRIVING_SUCCESS',
+  START_DRIVING_FAILURE: '@driver/START_DRIVING_FAILURE',
+
+  STOP_DRIVING_REQUEST: '@driver/STOP_DRIVING_REQUEST',
+  STOP_DRIVING_SUCCESS: '@driver/STOP_DRIVING_SUCCESS',
+  STOP_DRIVING_FAILURE: '@driver/STOP_DRIVING_FAILURE',
 
   FETCH_WORKING_ORDER_REQUEST: '@driver/FETCH_WORKING_ORDER_REQUEST',
   FETCH_WORKING_ORDER_SUCCESS: '@driver/FETCH_WORKING_ORDER_SUCCESS',
@@ -93,17 +101,33 @@ function saveProfile(params) {
   };
 }
 
-function startJob(id, params = {}) {
+function startWorking(id, params = {}) {
   return {
-    type: ACTION_TYPES.START_JOB_REQUEST,
+    type: ACTION_TYPES.START_WORKING_REQUEST,
     job_id: id,
     params,
   };
 }
 
-function finishJob(id, params = {}) {
+function stopWorking(id, params = {}) {
   return {
-    type: ACTION_TYPES.FINISH_JOB_REQUEST,
+    type: ACTION_TYPES.STOP_WORKING_REQUEST,
+    job_id: id,
+    params,
+  };
+}
+
+function startDriving(id, params = {}) {
+  return {
+    type: ACTION_TYPES.START_DRIVING_REQUEST,
+    job_id: id,
+    params,
+  };
+}
+
+function stopDriving(id, params = {}) {
+  return {
+    type: ACTION_TYPES.STOP_DRIVING_REQUEST,
     job_id: id,
     params,
   };
@@ -124,7 +148,9 @@ export const ACTIONS = {
   fetchWorkingOrder,
   fetchPastOrders,
   fetchPastOrdersRefresh,
-  startJob,
-  finishJob,
+  startWorking,
+  stopWorking,
+  startDriving,
+  stopDriving,
   fetchOrderDetails,
 };

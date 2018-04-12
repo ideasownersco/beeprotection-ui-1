@@ -16,5 +16,5 @@ export const reducer = combineReducers({
   trackings,
   payment,
   checkout,
-  timings
+  timings,
 });

@@ -6,7 +6,6 @@ import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 
 export default class DatePicker extends Component {
-
   shouldComponentUpdate(nextProps) {
     return (
       nextProps.items !== this.props.items ||

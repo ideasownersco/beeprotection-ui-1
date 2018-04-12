@@ -28,20 +28,21 @@ export default class CreateAddressForm extends PureComponent {
     street: '',
     avenue: '',
     building: '',
-    city_en: '',
-    city_ar: '',
-    address_en: '',
-    address_ar: '',
-    state_en: '',
-    state_ar: '',
+    // city_en: '',
+    // city_ar: '',
+    // address_en: '',
+    // address_ar: '',
+    // state_en: '',
+    // state_ar: '',
     country: 'KW',
     latitude: 29.3759,
     longitude: 47.9774,
     initialized: false,
-    area_id:null
+    area_id: null,
   };
 
   componentDidMount() {
+    //@todo:uncomment in production
     // BackgroundGeolocation.getCurrentPosition(
     //   location => {
     //     let {latitude, longitude} = location.coords;
@@ -63,10 +64,9 @@ export default class CreateAddressForm extends PureComponent {
     //     maximumAge: 5000,
     //   },
     // )
-
     this.setState({
-      initialized:true
-    })
+      initialized: true,
+    });
   }
 
   hideScreen = () => {
@@ -97,7 +97,7 @@ export default class CreateAddressForm extends PureComponent {
   };
 
   render() {
-    const {visible,areas} = this.props;
+    const {visible, areas} = this.props;
     const {block, street, avenue, building, mapPickerVisibility} = this.state;
 
     return (

@@ -2,11 +2,11 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ACTIONS as DRIVER_ACTIONS} from 'company/common/actions';
-import MapView,{PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {Image, Dimensions, View} from 'react-native';
 import images from 'assets/theme/images';
 import {SELECTORS as COMPANY__DRIVER_SELECTORS} from 'company/selectors/drivers';
-import {Button} from "react-native-paper";
+import {Button} from 'react-native-paper';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -25,7 +25,7 @@ class TrackScene extends PureComponent {
   };
 
   state = {
-    pauseTrackingUpdate: false
+    pauseTrackingUpdate: false,
   };
 
   componentDidMount() {
@@ -63,7 +63,6 @@ class TrackScene extends PureComponent {
       edgePadding: DEFAULT_PADDING,
       animated: true,
     });
-
   };
 
   componentDidUpdate(nextProps) {
@@ -78,13 +77,13 @@ class TrackScene extends PureComponent {
     this.onMapLayout();
 
     this.setState({
-      pauseTrackingUpdate: false
+      pauseTrackingUpdate: false,
     });
   };
 
   pauseTrackingUpdate = () => {
     this.setState({
-      pauseTrackingUpdate: true
+      pauseTrackingUpdate: true,
     });
   };
 
@@ -147,8 +146,7 @@ class TrackScene extends PureComponent {
           showsUserLocation={true}
           showsMyLocationButton={true}
           onLongPress={this.pauseTrackingUpdate}
-          onPress={this.pauseTrackingUpdate}
-        >
+          onPress={this.pauseTrackingUpdate}>
           {drivers.map((driver, index) => {
             const {heading} = driver;
             const rotate =
@@ -162,8 +160,7 @@ class TrackScene extends PureComponent {
                 anchor={{x: 0.5, y: 0.5, position: 'relative'}}
                 coordinate={{...driver}}
                 identifier="MarkerOrigin"
-                mapPadding={5}
-              >
+                mapPadding={5}>
                 <Image
                   source={images.car}
                   style={[
@@ -177,14 +174,13 @@ class TrackScene extends PureComponent {
               </MapView.Marker>
             );
           })}
-
         </MapView>
 
-        {
-          this.state.pauseTrackingUpdate &&
-          <Button raised primary dark onPress={this.resumeTrackingUpdate}>Resume</Button>
-        }
-
+        {this.state.pauseTrackingUpdate && (
+          <Button raised primary dark onPress={this.resumeTrackingUpdate}>
+            Resume
+          </Button>
+        )}
       </View>
     );
   }

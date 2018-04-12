@@ -54,7 +54,7 @@ class Home extends Component {
   onAddressButtonPress = (order: object) => {
     return this.props.navigation.navigate('CustomerLocationMap', {
       orderID: order.id,
-      order: order,
+      // order: order,
     });
     //
     // return this.props.navigation.navigate('OrderDetail', {

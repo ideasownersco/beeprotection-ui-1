@@ -131,4 +131,10 @@
   "invoice" : "Invoice",
   "driver_status_update_failed" :"Could not update Driver's Status",
 
+  "address_disabled" : "Sorry, Service to the selected area cannot be delivered at this time",
+
+  "start_working" : "Start Working",
+  "stop_working" : "Stop Working",
+  "start_driving" : "Start Driving",
+  "stop_driving" : "Stop Driving",
 }

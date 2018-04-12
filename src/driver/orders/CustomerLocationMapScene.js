@@ -8,16 +8,19 @@ import Map from 'driver/orders/components/Map';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
+import {SELECTORS as DRIVER_SELECTORS} from "../selectors/orders";
 
 class CustomerLocationMapScene extends Component {
+
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
         params: PropTypes.shape({
-          order: PropTypes.shape({
-            address: PropTypes.object.isRequired,
-            job: PropTypes.object.isRequired,
-          }),
+          orderID:PropTypes.number
+          // order: PropTypes.shape({
+          //   address: PropTypes.object.isRequired,
+          //   job: PropTypes.object.isRequired,
+          // }),
         }),
       }),
     }).isRequired,
@@ -36,6 +39,9 @@ class CustomerLocationMapScene extends Component {
   }
 
   componentDidMount() {
+
+    this.props.dispatch(DRIVER_ACTIONS.fetchOrderDetails(this.props.navigation.state.params.orderID));
+
     BackgroundGeolocation.getCurrentPosition(
       location => {
         let {latitude, longitude} = location.coords;
@@ -57,14 +63,24 @@ class CustomerLocationMapScene extends Component {
     );
   }
 
-  onStartJobPress = () => {
-    let {job} = this.props.navigation.state.params.order;
-    this.props.dispatch(DRIVER_ACTIONS.startJob(job.id));
+  onStartWorkingPress = () => {
+    let {job} = this.props.order;
+    this.props.dispatch(DRIVER_ACTIONS.startWorking(job.id));
   };
 
-  onFinishJobPress = () => {
-    let {job} = this.props.navigation.state.params.order;
-    this.props.dispatch(DRIVER_ACTIONS.finishJob(job.id));
+  onStopWorkingPress = () => {
+    let {job} = this.props.order;
+    this.props.dispatch(DRIVER_ACTIONS.stopWorking(job.id));
+  };
+
+  onStartDrivingPress = () => {
+    let {job} = this.props.order;
+    this.props.dispatch(DRIVER_ACTIONS.startDriving(job.id));
+  };
+
+  onStopDrivingPress = () => {
+    let {job} = this.props.order;
+    this.props.dispatch(DRIVER_ACTIONS.stopDriving(job.id));
   };
 
   onUpdateLocation = () => {
@@ -72,12 +88,18 @@ class CustomerLocationMapScene extends Component {
   };
 
   render() {
-    let {order} = this.props.navigation.state.params;
-    let {address} = order;
-    let {job} = this.props.navigation.state.params.order;
+    let {order,profile} = this.props;
+
+    if(!order.id) {
+      return null;
+    }
+
+    console.log('order',order);
+
+    let {address,job} = order;
     let {origin} = this.state;
 
-    let {profile} = this.props;
+    console.log('job',job);
 
     return (
       <Map
@@ -86,8 +108,10 @@ class CustomerLocationMapScene extends Component {
           latitude: address.latitude,
           longitude: address.longitude,
         }}
-        startJob={this.onStartJobPress}
-        finishJob={this.onFinishJobPress}
+        startWorking={this.onStartWorkingPress}
+        stopWorking={this.onStopWorkingPress}
+        startDriving={this.onStartDrivingPress}
+        stopDriving={this.onStopDrivingPress}
         updateLocation={this.onUpdateLocation}
         jobID={job.id}
         jobStatus={job.status}
@@ -97,9 +121,17 @@ class CustomerLocationMapScene extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    profile: AUTH_SELECTORS.getAuthUserProfile(state),
-  };
-}
-export default connect(mapStateToProps)(CustomerLocationMapScene);
+const makeMapStateToProps = () => {
+  let getOrderByID = DRIVER_SELECTORS.getOrderByID();
+
+  return function mapStateToProps(state,ownProps) {
+    return {
+      profile: AUTH_SELECTORS.getAuthUserProfile(state),
+      order:getOrderByID(state,ownProps.navigation.state.params.orderID)
+    };
+  }
+
+};
+
+
+export default connect(makeMapStateToProps)(CustomerLocationMapScene);

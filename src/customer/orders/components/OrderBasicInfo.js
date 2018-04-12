@@ -41,7 +41,7 @@ const OrderBasicInfo = ({item, onPress, style}) => {
           <Text style={styles.label}>{I18n.t('address')}</Text>
 
           <Text style={[styles.value]}>
-            <Text>{item.address.city + ','}</Text>
+            <Text>{item.address.area.name + ','}</Text>
             <Text>
               {' '}
               {I18n.t('block')} {item.address.block},{' '}

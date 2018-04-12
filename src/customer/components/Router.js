@@ -50,7 +50,6 @@ const AuthStack = StackNavigator(
 
 const HomeStack = StackNavigator(
   {
-
     Home: {
       screen: Home,
       navigationOptions: ({navigation}) => ({
@@ -91,8 +90,8 @@ const HomeStack = StackNavigator(
     },
     PastOrders: {screen: PastOrdersScene},
     UpcomingOrders: {screen: UpcomingOrdersScene},
-    Map:{
-      screen:Map,
+    Map: {
+      screen: Map,
     },
   },
   {
