@@ -54,7 +54,7 @@ const HomeStack = StackNavigator(
     Home: {
       screen: Home,
       navigationOptions: ({navigation}) => ({
-        title: I18n.t('customer_home'),
+        // title: I18n.t('customer_home'),
         ...getDrawerIcon(navigation),
       }),
     },
@@ -99,8 +99,13 @@ const HomeStack = StackNavigator(
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
       headerTintColor: colors.primary,
+      // headerTintColor: colors.primary,
+      // headerStyle:{
+      //   backgroundColor:colors.primary
+      // }
     }),
-    initialRouteName:'Login'
+
+    // initialRouteName:'Login'
   },
 );
 
@@ -158,7 +163,10 @@ const SettingsStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      // headerTintColor: colors.primary,
+      headerStyle:{
+        backgroundColor:colors.primary
+      }
     }),
   },
 );

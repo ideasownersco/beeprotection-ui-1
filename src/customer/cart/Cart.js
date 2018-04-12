@@ -221,7 +221,7 @@ class Cart extends PureComponent {
     }
 
     return (
-      <ScrollView contentInset={{bottom: 50}}>
+      <ScrollView contentInset={{bottom: 50}} style={{backgroundColor:'white'}}>
         <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
 
         <CartTotal total={cartTotal} />
