@@ -3,21 +3,20 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ACTIONS as DRIVER_ACTIONS} from 'company/common/actions';
-import {ACTIONS as ORDER_ACTIONS} from 'company/common/actions';
+import {
+  ACTIONS as DRIVER_ACTIONS,
+  ACTIONS as ORDER_ACTIONS,
+} from 'company/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
 import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
-import {ScrollView, View, Linking} from 'react-native';
+import {Linking, ScrollView, View} from 'react-native';
 import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
-import DriverAssign from 'company/orders/components/DriverAssign';
 import PropTypes from 'prop-types';
 import OrderTotal from 'customer/orders/components/OrderTotal';
-import SectionHeading from '../components/SectionHeading';
-import DriverInfo from '../drivers/components/DriverInfo';
-import OrderTrackButton from '../../customer/orders/components/OrderTrackButton';
-import I18n from 'utils/locale';
-import UserInfo from '../../customer/components/UserInfo';
+import DriverInfo from 'driver/components/DriverInfo';
+import OrderTrackButton from 'customer/orders/components/OrderTrackButton';
+import UserInfo from 'customer/components/UserInfo';
 
 class OrderDetailScene extends Component {
   static propTypes = {

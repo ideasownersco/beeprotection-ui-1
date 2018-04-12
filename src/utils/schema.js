@@ -46,7 +46,6 @@ usersSchema.define({
   profile: profileSchema,
 });
 
-
 driversSchema.define({
   user: usersSchema,
   working_order: ordersSchema,

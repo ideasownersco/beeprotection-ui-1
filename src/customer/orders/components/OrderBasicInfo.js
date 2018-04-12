@@ -7,7 +7,7 @@ import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import SectionTitle from 'components/SectionTitle';
 import Separator from 'components/Separator';
-import AddressInfo from "components/AddressInfo";
+import AddressInfo from 'components/AddressInfo';
 
 const OrderBasicInfo = ({item, onPress, style}) => {
   return (
@@ -41,8 +41,10 @@ const OrderBasicInfo = ({item, onPress, style}) => {
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('address')}</Text>
 
-          <AddressInfo address={item.address} style={{flex:1,textAlign:'right'}} />
-
+          <AddressInfo
+            address={item.address}
+            style={{flex: 1, textAlign: 'right'}}
+          />
         </View>
 
         <Separator style={{marginVertical: 5}} />

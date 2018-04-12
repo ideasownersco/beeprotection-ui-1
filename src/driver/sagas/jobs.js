@@ -43,7 +43,6 @@ function* stopWorking(action) {
   }
 }
 
-
 function* startDriving(action) {
   try {
     const params = {
@@ -83,7 +82,6 @@ function* stopDriving(action) {
   }
 }
 
-
 function* startWorkingMonitor() {
   yield takeLatest(ACTION_TYPES.START_WORKING_REQUEST, startWorking);
 }
@@ -100,4 +98,9 @@ function* stopDrivingMonitor() {
   yield takeLatest(ACTION_TYPES.STOP_DRIVING_REQUEST, stopDriving);
 }
 
-export const sagas = all([fork(startWorkingMonitor), fork(stopWorkingMonitor),fork(startDrivingMonitor),fork(stopDrivingMonitor)]);
+export const sagas = all([
+  fork(startWorkingMonitor),
+  fork(stopWorkingMonitor),
+  fork(startDrivingMonitor),
+  fork(stopDrivingMonitor),
+]);

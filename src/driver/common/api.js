@@ -80,5 +80,5 @@ export const API = {
   startWorking,
   stopWorking,
   startDriving,
-  stopDriving
+  stopDriving,
 };

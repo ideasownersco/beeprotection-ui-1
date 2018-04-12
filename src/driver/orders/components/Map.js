@@ -25,10 +25,9 @@ const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 import {API_URL} from 'utils/env';
-import AddressInfo from "../../../components/AddressInfo";
+import AddressInfo from '../../../components/AddressInfo';
 
 export default class Map extends Component {
-
   static propTypes = {
     origin: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
@@ -43,8 +42,8 @@ export default class Map extends Component {
     startDriving: PropTypes.func.isRequired,
     stopDriving: PropTypes.func.isRequired,
     jobStatus: PropTypes.string,
-    address:PropTypes.object.isRequired,
-    driverID: PropTypes.number.isRequired
+    address: PropTypes.object.isRequired,
+    driverID: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -102,10 +101,9 @@ export default class Map extends Component {
 
     setTimeout(() => {
       this.setState({
-        initialized: true
-      })
+        initialized: true,
+      });
     }, 1000);
-
   }
 
   componentWillUnmount() {
@@ -193,10 +191,7 @@ export default class Map extends Component {
 
     return (
       <View style={styles.container}>
-
-
-        {
-          initialized &&
+        {initialized && (
           <MapView
             // provider={PROVIDER_GOOGLE}
             ref={ref => {
@@ -225,64 +220,57 @@ export default class Map extends Component {
               identifier="MarkerDestination"
             />
           </MapView>
-        }
+        )}
 
         <View style={{backgroundColor: 'white'}}>
           <View style={styles.navContainer}>
             <Touchable onPress={this.reCenterMap}>
               <View style={{alignItems: 'center'}}>
-                <MaterialCommunityIcons name="arrow-all" size={35}/>
+                <MaterialCommunityIcons name="arrow-all" size={35} />
               </View>
             </Touchable>
             <Text style={styles.address}>
-
-              <AddressInfo address={address} style={{textAlign:'center'}}/>
+              <AddressInfo address={address} style={{textAlign: 'center'}} />
             </Text>
 
             <Touchable onPress={this.openInGoogleMaps}>
               <View style={{alignItems: 'center'}}>
-                <Ionicons name="ios-navigate-outline" size={35}/>
+                <Ionicons name="ios-navigate-outline" size={35} />
               </View>
             </Touchable>
           </View>
 
-          {
-            jobStatus == 'pending' &&
+          {jobStatus == 'pending' && (
             <Button
               title={I18n.t('start_driving')}
               onPress={this.startDriving}
               style={{marginBottom: 10}}
             />
-          }
+          )}
 
-          {
-            jobStatus == 'driving' &&
+          {jobStatus == 'driving' && (
             <Button
               title={I18n.t('stop_driving')}
               onPress={this.stopDriving}
               style={{marginBottom: 10}}
             />
-          }
+          )}
 
-          {
-            jobStatus == 'reached' &&
+          {jobStatus == 'reached' && (
             <Button
               title={I18n.t('start_working')}
               onPress={this.startWorking}
               style={{marginBottom: 10}}
             />
-          }
+          )}
 
-          {
-            jobStatus == 'working' &&
+          {jobStatus == 'working' && (
             <Button
               title={I18n.t('stop_working')}
               onPress={this.stopWorking}
               style={{marginBottom: 10}}
             />
-          }
-
-
+          )}
         </View>
       </View>
     );

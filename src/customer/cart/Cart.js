@@ -28,7 +28,7 @@ import OrderSuccess from 'customer/cart/components/OrderSuccess';
 import PaymentPage from 'customer/cart/components/PaymentPage';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import TimePicker from './components/TimePicker';
-import {ACTIONS as APP_ACTIONS} from "../../app/common/actions";
+import {ACTIONS as APP_ACTIONS} from '../../app/common/actions';
 
 type State = {
   dates: Array,
@@ -48,13 +48,13 @@ class Cart extends PureComponent {
   };
 
   static defaultProps = {
-    user:{
-      addresses:[]
+    user: {
+      addresses: [],
     },
-    areas:[],
-    timings:[],
-    cartItems:[],
-    cart:{}
+    areas: [],
+    timings: [],
+    cartItems: [],
+    cart: {},
   };
 
   componentDidMount() {
@@ -85,7 +85,6 @@ class Cart extends PureComponent {
     if (!isAuthenticated) {
       this.props.navigation.navigate('Login');
     } else {
-
       const item = {
         user_id: user.id,
         address_id: selectedAddressID,
@@ -96,13 +95,17 @@ class Cart extends PureComponent {
         payment_mode: paymentMode,
       };
 
-      let address = user.addresses.find(address => address.id === selectedAddressID);
+      let address = user.addresses.find(
+        address => address.id === selectedAddressID,
+      );
 
-      if(!address.area.active) {
-        return this.props.dispatch(APP_ACTIONS.setNotification({
-          type:'error',
-          message:`${I18n.t('address_disabled')}`
-        }));
+      if (!address.area.active) {
+        return this.props.dispatch(
+          APP_ACTIONS.setNotification({
+            type: 'error',
+            message: `${I18n.t('address_disabled')}`,
+          }),
+        );
       }
 
       return new Promise((resolve, reject) => {

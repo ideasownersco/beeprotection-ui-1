@@ -6,11 +6,9 @@ import React, {Component} from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
-import {GOOGLE_MAPS_KEY} from 'utils/env.js';
 import I18n, {isRTL} from 'utils/locale';
-import Qs from 'qs';
 import Touchable from 'react-native-platform-touchable';
-import List from '../../../components/List';
+import List from 'components/List';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;

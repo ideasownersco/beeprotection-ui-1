@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView, View, AppState} from 'react-native';
+import {AppState, ScrollView} from 'react-native';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {connect} from 'react-redux';
 import OrdersList from 'driver/orders/components/OrdersList';
 import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
-import {SELECTORS as AUTH_SELECTORS} from '../guest/common/selectors';
 
 class Home extends Component {
   static propTypes = {

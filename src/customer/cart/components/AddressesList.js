@@ -7,7 +7,6 @@ import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 
 export default class AddressesList extends Component {
-
   shouldComponentUpdate(nextProps) {
     return (
       nextProps.items !== this.props.items ||
@@ -18,11 +17,15 @@ export default class AddressesList extends Component {
   renderItem = ({item}) => {
     const {onItemPress, activeItemID} = this.props;
     return (
-      <Touchable onPress={() => !item.area.active ? {} : onItemPress(item)} key={item.id}>
+      <Touchable
+        onPress={() => (!item.area.active ? {} : onItemPress(item))}
+        key={item.id}>
         <View
           style={[
             styles.itemContainer,
-            item.area.active ? activeItemID === item.id && styles.itemContainerActive : {opacity:.5}
+            item.area.active
+              ? activeItemID === item.id && styles.itemContainerActive
+              : {opacity: 0.5},
           ]}>
           <Text
             style={[

@@ -8,15 +8,14 @@ import Map from 'driver/orders/components/Map';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
-import {SELECTORS as DRIVER_SELECTORS} from "../selectors/orders";
+import {SELECTORS as DRIVER_SELECTORS} from '../selectors/orders';
 
 class CustomerLocationMapScene extends Component {
-
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
         params: PropTypes.shape({
-          orderID:PropTypes.number
+          orderID: PropTypes.number,
           // order: PropTypes.shape({
           //   address: PropTypes.object.isRequired,
           //   job: PropTypes.object.isRequired,
@@ -39,8 +38,11 @@ class CustomerLocationMapScene extends Component {
   }
 
   componentDidMount() {
-
-    this.props.dispatch(DRIVER_ACTIONS.fetchOrderDetails(this.props.navigation.state.params.orderID));
+    this.props.dispatch(
+      DRIVER_ACTIONS.fetchOrderDetails(
+        this.props.navigation.state.params.orderID,
+      ),
+    );
 
     BackgroundGeolocation.getCurrentPosition(
       location => {
@@ -88,13 +90,13 @@ class CustomerLocationMapScene extends Component {
   };
 
   render() {
-    let {order,profile} = this.props;
+    let {order, profile} = this.props;
 
-    if(!order.id) {
+    if (!order.id) {
       return null;
     }
 
-    let {address,job} = order;
+    let {address, job} = order;
     let {origin} = this.state;
 
     return (
@@ -121,14 +123,12 @@ class CustomerLocationMapScene extends Component {
 const makeMapStateToProps = () => {
   let getOrderByID = DRIVER_SELECTORS.getOrderByID();
 
-  return function mapStateToProps(state,ownProps) {
+  return function mapStateToProps(state, ownProps) {
     return {
       profile: AUTH_SELECTORS.getAuthUserProfile(state),
-      order:getOrderByID(state,ownProps.navigation.state.params.orderID)
+      order: getOrderByID(state, ownProps.navigation.state.params.orderID),
     };
-  }
-
+  };
 };
-
 
 export default connect(makeMapStateToProps)(CustomerLocationMapScene);
