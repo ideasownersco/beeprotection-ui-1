@@ -236,7 +236,14 @@ class Cart extends PureComponent {
 
         <CartTotal total={cartTotal} />
 
-        <Separator />
+        {/*<Separator />*/}
+
+        <SectionTitle
+          title={I18n.t('date')}
+          style={{padding: 10,marginTop:10}}
+          icon="calendar"
+          iconType="MaterialCommunityIcons"
+        />
 
         <DatePicker
           items={dates}
@@ -244,7 +251,7 @@ class Cart extends PureComponent {
           activeItem={selectedDate}
         />
 
-        <Separator style={{marginVertical: 10}} />
+        {/*<Separator style={{marginVertical: 10}} />*/}
 
         {/*<Text style={{fontSize: 20, paddingHorizontal: 10}}>*/}
         {/*{I18n.t('select_time')}*/}
@@ -255,6 +262,15 @@ class Cart extends PureComponent {
         {/*onPress={this.showDateTimePickerModal}>*/}
         {/*<Text style={{fontSize: 20}}>{selectedTime.format('h:mm a')}</Text>*/}
         {/*</Button>*/}
+
+        <SectionTitle
+          title={I18n.t('time')}
+          style={{padding: 10,marginTop:10}}
+          icon="clock-fast"
+          iconType="MaterialCommunityIcons"
+          iconSize={33}
+          iconStyle={{height:33,width:33}}
+        />
 
         <TimePicker
           items={timings}

@@ -47,8 +47,7 @@ export default class DatePicker extends Component {
   render() {
     const {items, activeItem} = this.props;
     return (
-      <View style={styles.container}>
-        <Text style={styles.sectionTitle}>{I18n.t('date')}</Text>
+
         <FlatList
           data={items}
           renderItem={this.renderItem}
@@ -57,7 +56,6 @@ export default class DatePicker extends Component {
           horizontal={true}
           extraData={activeItem}
         />
-      </View>
     );
   }
 }
@@ -73,7 +71,6 @@ const styles = StyleSheet.create({
     paddingTop:10,
   },
   listContainer: {
-    marginVertical: 10,
     backgroundColor: colors.lightGrey,
     borderWidth:1,
     borderColor:colors.lightGrey

@@ -10,12 +10,12 @@ import {Text, View, StyleSheet} from 'react-native';
 import {Title} from "react-native-paper";
 import IconFactory from "./IconFactory";
 
-const SectionTitle = ({titleStyle, title, style, icon, iconType}) => {
+const SectionTitle = ({titleStyle, title, style, icon, iconType, iconSize, iconStyle}) => {
   return (
     <View style={[styles.container,style]}>
       {
         icon &&
-          <IconFactory type={iconType ? iconType : 'MaterialIcons'} name={icon} color={colors.darkGrey} style={styles.icon} />
+          <IconFactory type={iconType ? iconType : 'MaterialIcons'} name={icon} color={colors.darkGrey} style={[styles.icon,iconStyle]} size={iconSize ? iconSize : 30}/>
       }
       <Title style={[styles.title, {color: colors.darkGrey}, titleStyle, ]}>{title}</Title>
     </View>

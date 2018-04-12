@@ -28,43 +28,43 @@ export default class TimePicker extends Component {
     );
   }
 
+  renderTime = (item) => {
+    const {onItemPress, activeItemID} = this.props;
+
+    return (
+      <View
+        style={[
+          styles.itemContainer,
+          item.disabled ? {opacity:.3} : activeItemID === item.id && styles.itemContainerActive
+        ]}>
+        <Text
+          style={[
+            styles.time,
+            !item.disabled && activeItemID === item.id && styles.timeActive,
+          ]}>
+          {item.name_short}
+        </Text>
+        <Text>
+          {item.period}
+        </Text>
+      </View>
+    );
+  };
+
   renderItem = ({item}) => {
     const {onItemPress, activeItemID} = this.props;
 
     if (item.disabled) {
       return (
-        <View
-          style={[
-            styles.itemContainer,
-            activeItemID === item.id && styles.itemContainerActive,
-            {opacity: 0.1},
-          ]}>
-          <Text
-            style={[
-              styles.time,
-              activeItemID === item.id && styles.timeActive,
-            ]}>
-            {item.name}
-          </Text>
-        </View>
+        this.renderTime(item)
       );
     }
 
     return (
       <Touchable onPress={() => onItemPress(item)} key={item.id}>
-        <View
-          style={[
-            styles.itemContainer,
-            activeItemID === item.id && styles.itemContainerActive,
-          ]}>
-          <Text
-            style={[
-              styles.time,
-              activeItemID === item.id && styles.timeActive,
-            ]}>
-            {item.name}
-          </Text>
-        </View>
+        {
+          this.renderTime(item)
+        }
       </Touchable>
     );
   };
@@ -73,18 +73,15 @@ export default class TimePicker extends Component {
     const {items, activeItemID, isFetching} = this.props;
 
     return (
-      <View style={[styles.container, isFetching && {opacity: 0.1}]}>
-        <Text style={styles.sectionTitle}>{I18n.t('time')}</Text>
 
-        <FlatList
-          data={items}
-          renderItem={this.renderItem}
-          style={styles.listContainer}
-          keyExtractor={(item, index) => `${index}`}
-          horizontal={true}
-          extraData={activeItemID}
-        />
-      </View>
+      <FlatList
+        data={items}
+        renderItem={this.renderItem}
+        style={styles.listContainer}
+        keyExtractor={(item, index) => `${index}`}
+        horizontal={true}
+        extraData={activeItemID}
+      />
     );
   }
 }
@@ -92,26 +89,27 @@ export default class TimePicker extends Component {
 const styles = StyleSheet.create({
   container: {},
   listContainer: {
-    marginVertical: 10,
     paddingHorizontal: 5,
     backgroundColor: colors.lightGrey,
   },
   itemContainer: {
-    padding: 10,
+    padding: 15,
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.lightGrey
   },
   sectionTitle: {
     fontSize: 20,
     paddingHorizontal: 10,
   },
   itemContainerActive: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
   },
   time: {
-    fontSize: 29,
+    fontSize: 50,
     color: colors.darkGrey,
   },
   timeActive: {
-    color: colors.white,
+    color: colors.primary,
   },
 });
