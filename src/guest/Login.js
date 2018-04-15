@@ -38,9 +38,9 @@ class Login extends Component {
     // };
     // this.props.actions.login(credentials, this.props.navigation);
 
-    let {scene} = this.props.navigation.state.params || {};
+    let {redirectRoute} = this.props.navigation.state.params || {};
 
-    console.log('sce',scene);
+    console.log('redirectRoute',redirectRoute);
 
     return new Promise((resolve, reject) => {
       // this.props.actions.checkout({item, resolve, reject});
@@ -53,7 +53,7 @@ class Login extends Component {
       // if(scene && scene === 'checkout') {
       //   this.props.navigation.navigate('Cart');
       // }
-      this.props.actions.login({credentials,resolve,reject,scene});
+      this.props.actions.login({credentials,resolve,reject,redirectRoute});
     })
       .then(user => {
         console.log('u',user);

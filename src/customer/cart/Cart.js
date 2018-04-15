@@ -85,7 +85,7 @@ class Cart extends PureComponent {
     } = cart;
     if (!isAuthenticated) {
       this.props.navigation.navigate('Login',{
-        scene:'Cart'
+        redirectRoute:'Cart'
       });
     } else {
       const item = {
@@ -98,7 +98,7 @@ class Cart extends PureComponent {
         payment_mode: paymentMode,
       };
 
-      let address = user.addresses.find(
+      let address = user && user.addresses.find(
         address => address.id === selectedAddressID,
       );
 
@@ -179,7 +179,9 @@ class Cart extends PureComponent {
   saveAddress = address => {
     const {isAuthenticated} = this.props;
     if (!isAuthenticated) {
-      this.props.navigation.navigate('Login');
+      this.props.navigation.navigate('Login',{
+        redirectRoute:'Cart'
+      });
     } else {
       this.props.actions.saveAddress(address);
     }
@@ -218,6 +220,8 @@ class Cart extends PureComponent {
       showOrderSuccessModal,
       paymentMode,
     } = this.state;
+
+    console.log('props',this.props.user);
 
     if (!cartItems.length) {
       return <EmptyCart/>;

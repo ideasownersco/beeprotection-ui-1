@@ -19,9 +19,7 @@ import {normalize} from 'normalizr';
 
 function* login(action) {
 
-  console.log('action',action);
-
-  const {credentials, resolve, reject, scene} = action.payload;
+  const {credentials, resolve, reject, redirectRoute} = action.payload;
 
   try {
     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
@@ -51,8 +49,8 @@ function* login(action) {
       payload: response.data,
     });
 
-    if(scene) {
-      yield NavigatorService.navigate(scene);
+    if(redirectRoute) {
+      yield NavigatorService.navigate(redirectRoute);
     }
 
     yield resolve(response.data);
