@@ -24,10 +24,10 @@ export const ACTION_TYPES = {
   SYNC_USER_TO_SOCKET: '@user/SYNC_USER_TO_SOCKET',
 };
 
-function login(credentials) {
+function login(payload) {
   return {
     type: ACTION_TYPES.LOGIN_REQUEST,
-    credentials,
+    payload,
   };
 }
 

@@ -16,7 +16,7 @@ const BackButton = ({onPress}) => {
       <Ionicons
         name="ios-arrow-back"
         size={34}
-        color={colors.primary}
+        color={colors.white}
         style={{width: 15, height: 34}}
       />
     </Touchable>

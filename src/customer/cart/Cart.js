@@ -84,7 +84,9 @@ class Cart extends PureComponent {
       total,
     } = cart;
     if (!isAuthenticated) {
-      this.props.navigation.navigate('Login');
+      this.props.navigation.navigate('Login',{
+        scene:'Cart'
+      });
     } else {
       const item = {
         user_id: user.id,
@@ -247,7 +249,7 @@ class Cart extends PureComponent {
         />
 
         <DatePicker
-          items={dates}
+          items={dates || []}
           onItemPress={this.onDatePickerItemPress}
           activeItem={selectedDate}
         />
@@ -263,7 +265,7 @@ class Cart extends PureComponent {
 
         <View style={{paddingBottom: 20}}>
           <TimePicker
-            items={timings}
+            items={timings || []}
             onItemPress={this.onTimeChange}
             activeItemID={selectedTimeID}
             isFetching={isFetchingTimings}
@@ -285,7 +287,7 @@ class Cart extends PureComponent {
           addresses={user ? (user.addresses ? user.addresses : []) : []}
           saveAddress={this.saveAddress}
           onAddressPickerItemPress={this.onAddressPickerItemPress}
-          activeItemID={selectedAddressID}
+          activeItemID={selectedAddressID || null}
           initialized={this.state.initialized}
           areas={areas}
         />

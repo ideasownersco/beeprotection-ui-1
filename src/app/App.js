@@ -5,7 +5,7 @@ import CodePush from 'react-native-code-push';
 import PushNotificationManager from 'app/components/PushNotificationManager';
 import Notification from 'app/components/Notification';
 import Navigator from 'components/Navigator';
-import {SafeAreaView, AppState, StatusBar, View,Platform, StyleSheet} from 'react-native';
+import {SafeAreaView, AppState, StatusBar, View, Platform, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {ACTIONS} from 'app/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
@@ -51,7 +51,7 @@ class App extends Component {
     this.props.dispatch(ACTIONS.setPushToken(token));
   };
 
-    onReceivePushNotifications = (notification: object) => {
+  onReceivePushNotifications = (notification: object) => {
     // console.log('notification', notification);
     let {foreground, data} = notification;
     let navigation = NavigatorService;
@@ -96,18 +96,22 @@ class App extends Component {
   };
 
 
-
   render() {
     const {app, notifications, isAuthenticated, userType} = this.props;
 
     if (!app.booted) return null;
 
     if (!app.installed) {
-      return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
+      return <LanguageSelectScene onItemPress={this.onLanguageSelect}/>;
     }
 
     return (
-      <SafeAreaView style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: colors.primary}}>
+
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={colors.primary}
+        />
 
         <Notification
           {...notifications}
@@ -124,7 +128,7 @@ class App extends Component {
           userType={userType}
           logout={this.logout}
         />
-      </SafeAreaView>
+      </View>
     );
   }
 }

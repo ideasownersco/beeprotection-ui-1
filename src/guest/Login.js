@@ -20,15 +20,11 @@ class Login extends Component {
     auth: PropTypes.object.isRequired,
   };
 
-  // static navigationOptions = {
-  //   header: null,
+  // static navigationOptions = () => {
+  //   return {
+  //     header: null,
+  //   };
   // };
-
-  static navigationOptions = () => {
-    return {
-      header: null,
-    };
-  };
 
   state = {
     email: 'customer@test.com',
@@ -36,16 +32,43 @@ class Login extends Component {
   };
 
   handleLogin = () => {
-    const credentials = {
-      email: this.state.email,
-      password: this.state.password,
-    };
-    this.props.actions.login(credentials, this.props.navigation);
+    // const credentials = {
+    //   email: this.state.email,
+    //   password: this.state.password,
+    // };
+    // this.props.actions.login(credentials, this.props.navigation);
+
+    let {scene} = this.props.navigation.state.params || {};
+
+    console.log('sce',scene);
+
+    return new Promise((resolve, reject) => {
+      // this.props.actions.checkout({item, resolve, reject});
+
+      const credentials = {
+        email: this.state.email,
+        password: this.state.password,
+      };
+
+      // if(scene && scene === 'checkout') {
+      //   this.props.navigation.navigate('Cart');
+      // }
+      this.props.actions.login({credentials,resolve,reject,scene});
+    })
+      .then(user => {
+        console.log('u',user);
+        // if(scene && scene === 'checkout') {
+        //   this.props.navigation.navigate('Cart');
+        // }
+      })
+      .catch(e => {
+        console.log('e');
+      });
+
   };
 
   handleRegisterRoute = () => {
     return this.props.navigation.navigate('RegisterScreen');
-
     // return Alert.alert(I18n.t('choose_account_type'), '', [
     //   {
     //     text: I18n.t('yes'),
@@ -104,6 +127,8 @@ class Login extends Component {
       busy,
     } = this.state;
 
+    console.log('props',this.props);
+
     return (
       <FormContainer>
         <FormContent>
@@ -129,10 +154,10 @@ class Login extends Component {
             onPress={this.handleLogin}
             disabled={auth.login.busy}
             title={auth.login.busy ? I18n.t('logging_in') : I18n.t('login')}
-            style={{marginTop: 50}}
+            style={{marginTop: 20}}
           />
 
-          <Separator style={{marginVertical: 50}} />
+          <Separator style={{marginVertical: 30}} />
 
           <FormSubmit
             onPress={this.handleRegisterRoute}

@@ -8,6 +8,8 @@ import ForgotScene from './scenes/ForgotScene';
 import ConfirmScene from './scenes/ConfirmScene';
 import PasswordUpdateScene from './scenes/PasswordUpdateScene';
 import {ACTIONS} from './common/actions';
+import FormContainer from "../components/FormContainer";
+import FormContent from "../components/FormContent";
 
 class Forgot extends Component {
   static propTypes = {
@@ -17,8 +19,8 @@ class Forgot extends Component {
 
   state = {
     email: '',
-    confirmationCode: '',
     password: '',
+    confirmation_code: '',
     password_confirmation: '',
   };
 
@@ -30,7 +32,7 @@ class Forgot extends Component {
   onRecoverPassword = () => {
     this.props.actions.recoverPassword({
       email: this.state.email,
-      confirmation_code: this.state.confirmationCode,
+      confirmation_code: this.state.confirmation_code,
     });
   };
 
@@ -53,8 +55,9 @@ class Forgot extends Component {
 
   render() {
     const {auth} = this.props;
-    const {confirmationCode, password} = this.state;
-    const confirmedPassword = this.state.password_confirmation;
+    const {email,password_confirmation,confirmation_code, password} = this.state;
+
+    console.log('state',this.state);
 
     let renderingComponent;
 
@@ -63,7 +66,7 @@ class Forgot extends Component {
         <PasswordUpdateScene
           onFieldChange={this.onFieldChange}
           password={password}
-          confirmedPassword={confirmedPassword}
+          password_confirmation={password_confirmation}
           onUpdatePassword={this.onUpdatePassword}
           onRightButtonPress={this.goBack}
         />
@@ -73,7 +76,7 @@ class Forgot extends Component {
         <ConfirmScene
           onRecoverPassword={this.onRecoverPassword}
           onFieldChange={this.onFieldChange}
-          confirmationCode={confirmationCode}
+          confirmation_code={confirmation_code}
           onForgotPassword={this.onForgotPassword}
           onRightButtonPress={this.goBack}
         />
@@ -81,7 +84,7 @@ class Forgot extends Component {
     } else {
       renderingComponent = (
         <ForgotScene
-          {...this.state}
+          email={email}
           onForgotPassword={this.onForgotPassword}
           onFieldChange={this.onFieldChange}
           busy={auth.login.busy}
@@ -90,7 +93,15 @@ class Forgot extends Component {
       );
     }
 
-    return renderingComponent;
+    return (
+
+      <FormContainer>
+        <FormContent>
+          {renderingComponent}
+        </FormContent>
+      </FormContainer>
+
+    );
   }
 }
 

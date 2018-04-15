@@ -15,13 +15,13 @@ export default class ConfirmScene extends Component {
     onRecoverPassword: PropTypes.func.isRequired,
     onForgotPassword: PropTypes.func.isRequired,
     onRightButtonPress: PropTypes.func.isRequired,
-    confirmationCode: PropTypes.string.isRequired,
+    confirmation_code: PropTypes.string.isRequired,
   };
 
   render() {
     const {
       onFieldChange,
-      confirmationCode,
+      confirmation_code,
       onRecoverPassword,
       onForgotPassword,
       onRightButtonPress,
@@ -29,11 +29,11 @@ export default class ConfirmScene extends Component {
 
     return (
       <View style={styles.container}>
-        <FormLabel title={I18n.t('confirmation_code')} />
 
         <FormTextInput
-          onValueChange={value => onFieldChange('confirmationCode', value)}
-          value={confirmationCode}
+          onValueChange={onFieldChange}
+          value={confirmation_code}
+          field="confirmation_code"
           maxLength={40}
           label={I18n.t('confirmation_code')}
         />
@@ -41,7 +41,7 @@ export default class ConfirmScene extends Component {
         <FormSubmit
           onPress={() => onRecoverPassword()}
           underlayColor="transparent"
-          disabled={!confirmationCode}
+          disabled={!confirmation_code}
           title={I18n.t('confirm')}
           style={{marginTop: 50}}
         />
@@ -61,10 +61,10 @@ export default class ConfirmScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'white',
-    padding: 10,
-    paddingTop: 20,
+    // flex: 1,
+    // backgroundColor: 'white',
+    // padding: 10,
+    // paddingTop: 20,
   },
   link: {
     marginTop: 20,

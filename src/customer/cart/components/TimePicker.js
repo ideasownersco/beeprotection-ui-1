@@ -77,7 +77,7 @@ export default class TimePicker extends Component {
       <FlatList
         data={items}
         renderItem={this.renderItem}
-        style={styles.listContainer}
+        style={[styles.listContainer,isFetching && {opacity:.5}]}
         keyExtractor={(item, index) => `${index}`}
         horizontal={true}
         extraData={activeItemID}

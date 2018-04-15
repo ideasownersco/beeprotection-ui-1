@@ -19,7 +19,7 @@ const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const Root = () => {
   return (
     <View style={{flex: 1}}>
-      <MyStatusBar backgroundColor={colors.primary} barStyle="light-content"/>
+      {/*<MyStatusBar backgroundColor={colors.primary} barStyle="light-content"/>*/}
       <Provider store={Store}>
         <App/>
       </Provider>

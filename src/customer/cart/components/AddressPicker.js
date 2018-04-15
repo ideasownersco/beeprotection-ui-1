@@ -45,6 +45,7 @@ export default class AddressPicker extends PureComponent {
 
     return (
       <View style={styles.container}>
+
         <AddressesList
           items={addresses}
           onItemPress={onAddressPickerItemPress}

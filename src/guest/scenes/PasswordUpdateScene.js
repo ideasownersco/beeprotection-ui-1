@@ -13,24 +13,23 @@ export default class PasswordUpdateScene extends Component {
   static propTypes = {
     onFieldChange: PropTypes.func.isRequired,
     onUpdatePassword: PropTypes.func.isRequired,
-    onRightButtonPress: PropTypes.func.isRequired,
     password: PropTypes.string.isRequired,
-    confirmedPassword: PropTypes.string.isRequired,
+    password_confirmation: PropTypes.string.isRequired,
   };
 
   render() {
     const {
       onFieldChange,
       password,
-      confirmedPassword,
+      password_confirmation,
       onUpdatePassword,
-      onRightButtonPress,
     } = this.props;
 
     return (
       <View style={styles.container}>
+
         <FormTextInput
-          onValueChange={this.onFieldChange}
+          onValueChange={onFieldChange}
           label={I18n.t('new_password')}
           value={password}
           field="password"
@@ -38,20 +37,19 @@ export default class PasswordUpdateScene extends Component {
           secureTextEntry={true}
         />
 
-        <FormLabel title={I18n.t('confirm_new_password')} />
         <FormTextInput
-          onValueChange={this.onFieldChange}
-          value={confirmedPassword}
+          onValueChange={onFieldChange}
+          value={password_confirmation}
           maxLength={40}
           label={I18n.t('confirm_new_password')}
-          field="confirm_new_password"
+          field="password_confirmation"
           secureTextEntry={true}
         />
 
         <FormSubmit
           onPress={() => onUpdatePassword()}
           underlayColor="transparent"
-          disabled={!password || !confirmedPassword}
+          disabled={!password || !password_confirmation}
           title={I18n.t('confirm')}
           style={{marginTop: 50}}
         />
@@ -62,10 +60,5 @@ export default class PasswordUpdateScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: null,
-    height: null,
-    backgroundColor: 'white',
-    padding: 20,
   },
 });

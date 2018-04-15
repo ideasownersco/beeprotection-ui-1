@@ -15,6 +15,7 @@ export default class AddressesList extends Component {
   }
 
   renderItem = ({item}) => {
+
     const {onItemPress, activeItemID} = this.props;
     return (
       <Touchable

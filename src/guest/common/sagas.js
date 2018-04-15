@@ -18,12 +18,17 @@ import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 
 function* login(action) {
+
+  console.log('action',action);
+
+  const {credentials, resolve, reject, scene} = action.payload;
+
   try {
     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
 
     const params = {
       body: {
-        ...action.credentials,
+        ...credentials,
         push_token: pushTokenStorageKey,
       },
     };
@@ -45,7 +50,15 @@ function* login(action) {
       entities: normalized.entities,
       payload: response.data,
     });
+
+    if(scene) {
+      yield NavigatorService.navigate(scene);
+    }
+
+    yield resolve(response.data);
+
   } catch (error) {
+
     yield put({type: ACTION_TYPES.LOGIN_FAILURE, error});
 
     yield put(
@@ -54,8 +67,98 @@ function* login(action) {
         type: 'error',
       }),
     );
+
+    yield reject(error);
   }
 }
+
+
+// function* login(action) {
+//
+//   try {
+//     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
+//
+//     const params = {
+//       body: {
+//         ...action.credentials,
+//         push_token: pushTokenStorageKey,
+//       },
+//     };
+//
+//     const response = yield call(API.login, params);
+//
+//     if (response.meta) {
+//       yield call(setStorageItem, AUTH_KEY, response.meta.api_token || '');
+//     }
+//
+//     const normalized = normalize(response.data, Schema.users);
+//
+//     yield put({
+//       type: ACTION_TYPES.SYNC_USER_TO_SOCKET,
+//     });
+//
+//     yield put({
+//       type: ACTION_TYPES.LOGIN_SUCCESS,
+//       entities: normalized.entities,
+//       payload: response.data,
+//     });
+//
+//     // yield NavigatorService.back();
+//
+//   } catch (error) {
+//     yield put({type: ACTION_TYPES.LOGIN_FAILURE, error});
+//
+//     yield put(
+//       APP_ACTIONS.setNotification({
+//         message: error,
+//         type: 'error',
+//       }),
+//     );
+//   }
+// }
+// function* login(action) {
+//
+//   try {
+//     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
+//
+//     const params = {
+//       body: {
+//         ...action.credentials,
+//         push_token: pushTokenStorageKey,
+//       },
+//     };
+//
+//     const response = yield call(API.login, params);
+//
+//     if (response.meta) {
+//       yield call(setStorageItem, AUTH_KEY, response.meta.api_token || '');
+//     }
+//
+//     const normalized = normalize(response.data, Schema.users);
+//
+//     yield put({
+//       type: ACTION_TYPES.SYNC_USER_TO_SOCKET,
+//     });
+//
+//     yield put({
+//       type: ACTION_TYPES.LOGIN_SUCCESS,
+//       entities: normalized.entities,
+//       payload: response.data,
+//     });
+//
+//     // yield NavigatorService.back();
+//
+//   } catch (error) {
+//     yield put({type: ACTION_TYPES.LOGIN_FAILURE, error});
+//
+//     yield put(
+//       APP_ACTIONS.setNotification({
+//         message: error,
+//         type: 'error',
+//       }),
+//     );
+//   }
+// }
 
 function* register(action) {
   try {

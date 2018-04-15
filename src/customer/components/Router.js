@@ -43,7 +43,7 @@ const AuthStack = StackNavigator(
   {
     headerMode: 'none',
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      headerTintColor: colors.white,
     }),
     // initialRouteName:'RegisterScreen'
   },
@@ -99,7 +99,6 @@ const HomeStack = StackNavigator(
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
       headerTintColor: colors.white,
-      // headerTintColor: colors.primary,
       headerStyle:{
         backgroundColor:colors.primary
       }

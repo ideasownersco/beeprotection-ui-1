@@ -22,16 +22,16 @@ export default class ForgotScene extends Component {
       email,
       onFieldChange,
       onForgotPassword,
-      onRightButtonPress,
     } = this.props;
 
     return (
       <View style={styles.container}>
-        <FormLabel title={I18n.t('email')} />
+        {/*<FormLabel title={I18n.t('email')} />*/}
 
         <FormTextInput
-          onValueChange={value => onFieldChange('email', value)}
+          onValueChange={onFieldChange}
           value={email}
+          field="email"
           maxLength={40}
           label={I18n.t('email')}
           keyboardType="email-address"
@@ -49,9 +49,9 @@ export default class ForgotScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'white',
-    padding: 10,
-    paddingTop: 20,
+    // flex: 1,
+    // backgroundColor: 'white',
+    // padding: 10,
+    // paddingTop: 20,
   },
 });
