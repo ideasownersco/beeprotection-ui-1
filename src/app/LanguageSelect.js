@@ -14,7 +14,10 @@ class LanguageSelect extends Component {
   };
 
   render() {
-    return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
+    let active = this.props.app.language;
+    console.log('active',active);
+
+    return <LanguageSelectScene active={active} onItemPress={this.onLanguageSelect} />;
   }
 }
 

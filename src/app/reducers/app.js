@@ -3,6 +3,7 @@ import {ACTION_TYPES} from 'app/common/actions';
 const initialState = {
   installed: false,
   booted: false,
+  language:'en'
 };
 
 export function reducer(state = initialState, action = {}) {
@@ -13,6 +14,11 @@ export function reducer(state = initialState, action = {}) {
       return {...state, booted: false};
     case ACTION_TYPES.BOOT_SUCCESS:
       return {...state, booted: true};
+    case ACTION_TYPES.SET_LANGUAGE_SUCCESS:
+      return {
+        ...state,
+        language: action.language,
+      };
     default:
       return state;
   }
