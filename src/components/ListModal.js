@@ -34,7 +34,7 @@ export default class ListModal extends Component {
             {
               backgroundColor: 'white',
               paddingTop: 64,
-              paddingHorizontal: 20,
+              // paddingHorizontal: 20,
             },
             style,
           ]}
@@ -57,7 +57,12 @@ export default class ListModal extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    margin: 0,
+    backgroundColor: 'white',
+    opacity: 0.95,
+    paddingTop: 40,
+    paddingHorizontal: 0,
+    justifyContent: 'flex-start',
   },
   headline: {
     textAlign: 'center',

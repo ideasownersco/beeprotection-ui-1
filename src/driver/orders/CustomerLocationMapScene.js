@@ -9,8 +9,13 @@ import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
 import {SELECTORS as DRIVER_SELECTORS} from '../selectors/orders';
+import {View} from "react-native";
+import UploadImage from "../components/UploadImage";
+import ListModal from "../../components/ListModal";
+import union from 'lodash';
 
 class CustomerLocationMapScene extends Component {
+
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -28,6 +33,8 @@ class CustomerLocationMapScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isUploadImageModalVisible:false,
+      images:[],
       origin: {
         latitude: 37.78825,
         longitude: -122.4324,
@@ -89,6 +96,34 @@ class CustomerLocationMapScene extends Component {
     // let {job} = this.props.navigation.state.params.order;
   };
 
+  uploadImages = () =>{
+    this.showUploadImageModal();
+  };
+
+  uploadImage = (images) => {
+    this.setState({
+      images:images
+    })
+  };
+
+  deleteImage = (image) => {
+    this.setState({
+      images:this.state.images.filter(uploadedImage => uploadedImage !== image)
+    })
+  };
+
+  showUploadImageModal = () => {
+    this.setState({
+      isUploadImageModalVisible:true
+    })
+  };
+
+  hideUploadImageModal = () => {
+    this.setState({
+      isUploadImageModalVisible:false
+    })
+  };
+
   render() {
     let {order, profile} = this.props;
 
@@ -97,25 +132,37 @@ class CustomerLocationMapScene extends Component {
     }
 
     let {address, job} = order;
-    let {origin} = this.state;
+    let {origin,images} = this.state;
+
+    console.log('images',images);
+
+
 
     return (
-      <Map
-        origin={origin}
-        destination={{
-          latitude: address.latitude,
-          longitude: address.longitude,
-        }}
-        startWorking={this.onStartWorkingPress}
-        stopWorking={this.onStopWorkingPress}
-        startDriving={this.onStartDrivingPress}
-        stopDriving={this.onStopDrivingPress}
-        updateLocation={this.onUpdateLocation}
-        jobID={job.id}
-        jobStatus={job.status}
-        driverID={profile.id}
-        address={address}
-      />
+      <View style={{flex:1}}>
+        <Map
+          origin={origin}
+          destination={{
+            latitude: address.latitude,
+            longitude: address.longitude,
+          }}
+          startWorking={this.onStartWorkingPress}
+          stopWorking={this.onStopWorkingPress}
+          startDriving={this.onStartDrivingPress}
+          stopDriving={this.onStopDrivingPress}
+          updateLocation={this.onUpdateLocation}
+          jobID={job.id}
+          jobStatus={job.status}
+          driverID={profile.id}
+          address={address}
+          uploadImages={this.uploadImages}
+        />
+
+        <ListModal isVisible={this.state.isUploadImageModalVisible} onCancel={this.hideUploadImageModal}>
+          <UploadImage images={images} updateImage={this.uploadImage} deleteImage={this.deleteImage}/>
+        </ListModal>
+
+      </View>
     );
   }
 }

@@ -1,9 +1,9 @@
 PODS:
-  - CocoaLumberjack (3.4.1):
-    - CocoaLumberjack/Default (= 3.4.1)
-    - CocoaLumberjack/Extensions (= 3.4.1)
-  - CocoaLumberjack/Default (3.4.1)
-  - CocoaLumberjack/Extensions (3.4.1):
+  - CocoaLumberjack (3.4.2):
+    - CocoaLumberjack/Default (= 3.4.2)
+    - CocoaLumberjack/Extensions (= 3.4.2)
+  - CocoaLumberjack/Default (3.4.2)
+  - CocoaLumberjack/Extensions (3.4.2):
     - CocoaLumberjack/Default
   - Google-Maps-iOS-Utils (2.1.0):
     - Google-Maps-iOS-Utils/Clustering (= 2.1.0)
@@ -26,13 +26,14 @@ PODS:
   - GoogleMaps/Base (2.5.0)
   - GoogleMaps/Maps (2.5.0):
     - GoogleMaps/Base
+  - QBImagePickerController (3.4.0)
   - React (0.54.4):
     - React/Core (= 0.54.4)
-  - react-native-google-maps (0.20.1):
+  - react-native-google-maps (0.21.0):
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 2.5.0)
     - React
-  - react-native-maps (0.20.1):
+  - react-native-maps (0.21.0):
     - React
   - React/Core (0.54.4):
     - yoga (= 0.54.4.React)
@@ -69,6 +70,11 @@ PODS:
     - React
   - RNI18n (2.0.12):
     - React
+  - RNImageCropPicker (0.20.1):
+    - QBImagePickerController
+    - React/Core
+    - RSKImageCropper
+  - RSKImageCropper (2.0.1)
   - yoga (0.54.4.React)
 
 DEPENDENCIES:
@@ -89,6 +95,7 @@ DEPENDENCIES:
   - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
   - RNBackgroundGeolocation (from `../node_modules/react-native-background-geolocation`)
   - RNI18n (from `../node_modules/react-native-i18n`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 EXTERNAL SOURCES:
@@ -104,21 +111,26 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-background-geolocation
   RNI18n:
     :path: ../node_modules/react-native-i18n
+  RNImageCropPicker:
+    :path: ../node_modules/react-native-image-crop-picker
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 2e258a064cacc8eb9a2aca318e24d02a0a7fd56d
+  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: c237e42de9c70e5cac6eeb52b4cfd3a0910c1f00
   react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNBackgroundFetch: 8c4f77f83c398c659bce82af2f0a885079417b9e
   RNBackgroundGeolocation: c9bbf69b9aa277f0b46754cc5f853bd26051a18f
   RNI18n: db9be06a40336f04d136f24dd5de3f5eb9f3207c
+  RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
+  RSKImageCropper: 50d5a3e4160f0309b14d75b89d5ae2f496d56e0d
   yoga: 55da126afc384965b96bff46652464373b330add
 
-PODFILE CHECKSUM: 8d5de814c1c05b33585a30cee44a819c9f222c4f
+PODFILE CHECKSUM: a47b90758b520eec9de86a73f786315e96613de8
 
 COCOAPODS: 1.4.0

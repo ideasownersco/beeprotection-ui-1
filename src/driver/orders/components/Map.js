@@ -25,7 +25,7 @@ const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 import {API_URL} from 'utils/env';
-import AddressInfo from '../../../components/AddressInfo';
+import AddressInfo from 'components/AddressInfo';
 
 export default class Map extends Component {
   static propTypes = {
@@ -182,7 +182,7 @@ export default class Map extends Component {
   };
 
   uploadImages = () => {
-
+    this.props.uploadImages();
   };
 
   render() {
@@ -230,16 +230,16 @@ export default class Map extends Component {
           <View style={styles.navContainer}>
             <Touchable onPress={this.reCenterMap}>
               <View style={{alignItems: 'center'}}>
-                <MaterialCommunityIcons name="arrow-all" size={35} />
+                <MaterialCommunityIcons name="arrow-all" size={35}/>
               </View>
             </Touchable>
             <Text style={styles.address}>
-              <AddressInfo address={address} style={{textAlign: 'center'}} />
+              <AddressInfo address={address} style={{textAlign: 'center'}}/>
             </Text>
 
             <Touchable onPress={this.openInGoogleMaps}>
               <View style={{alignItems: 'center'}}>
-                <Ionicons name="ios-navigate-outline" size={35} />
+                <Ionicons name="ios-navigate-outline" size={35}/>
               </View>
             </Touchable>
           </View>
@@ -261,19 +261,19 @@ export default class Map extends Component {
           )}
 
           {jobStatus == 'reached' && (
-            <View>
+            <View style={{flexDirection: 'row',justifyContent:'space-around'}}>
 
-            <Button
-              title={I18n.t('start_working')}
-              onPress={this.startWorking}
-              style={{marginBottom: 10}}
-            />
+              <Button
+                title={I18n.t('start_working')}
+                onPress={this.startWorking}
+                style={{marginBottom: 10,width:150}}
+              />
 
 
               <Button
                 title={I18n.t('upload_images')}
                 onPress={this.uploadImages}
-                style={{marginBottom: 10}}
+                style={{marginBottom: 10, width:150}}
               />
 
 
