@@ -214,6 +214,7 @@ export default class MapPicker extends Component {
               isVisible={this.state.isAreaListModalVisible}
               onConfirm={this.setArea}
               onCancel={this.hideAreaListModal}
+              onSave={this.hideAreaListModal}
               items={areas}
             />
           </View>

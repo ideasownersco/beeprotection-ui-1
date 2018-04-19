@@ -46,14 +46,16 @@ export default class List extends Component {
   };
 
   render() {
-    let {isVisible, onCancel, items, title} = this.props;
+    let {isVisible, onCancel, items, title, onSave} = this.props;
     return (
       <ListModal
         isVisible={isVisible}
         transparent={false}
         onBackdropPress={onCancel}
         title={title}
-        onCancel={onCancel}>
+        onCancel={onCancel}
+        onSave={onSave}
+      >
         <FlatList
           data={items}
           style={styles.listContainer}

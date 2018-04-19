@@ -57,7 +57,7 @@ export default class PackagesList extends Component {
       <View>
         <View style={styles.contentContainer}>
           <View style={styles.rowContent}>
-            <Text style={[styles.itemName]}>{item.name}</Text>
+            <Text style={[styles.itemName]}>{item.description}</Text>
             {item.price && <Text style={styles.price}>{item.price} KD</Text>}
           </View>
         </View>

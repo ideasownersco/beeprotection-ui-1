@@ -7,12 +7,13 @@ import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 
 export default class AddressesList extends Component {
-  shouldComponentUpdate(nextProps) {
-    return (
-      nextProps.items !== this.props.items ||
-      nextProps.activeItemID !== this.props.activeItemID
-    );
-  }
+
+  // shouldComponentUpdate(nextProps) {
+  //   return (
+  //     nextProps.items !== this.props.items ||
+  //     nextProps.activeItemID !== this.props.activeItemID
+  //   );
+  // }
 
   renderItem = ({item}) => {
 

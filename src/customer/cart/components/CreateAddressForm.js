@@ -106,6 +106,7 @@ export default class CreateAddressForm extends PureComponent {
         visible={visible}
         presentationStyle="fullScreen">
         <View style={styles.container}>
+
           <AddressFormFields
             block={block}
             avenue={avenue}
