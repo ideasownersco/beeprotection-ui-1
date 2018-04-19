@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     margin: 5,
-    marginTop: 20,
+    marginTop: 10,
   },
   itemContainer: {
     backgroundColor: 'white',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   viewDetails: {
     flex: 1,
     fontSize: 18,
-    color: colors.darkBlue,
+    color: colors.primary,
     fontWeight: '500',
   },
   headline: {

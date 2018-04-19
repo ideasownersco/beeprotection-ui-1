@@ -86,8 +86,6 @@ export default class UploadImage extends Component {
 
     return (
       <View style={styles.container}>
-        {header}
-
         <TouchableHighlight
           style={styles.cameraIcon}
           onPress={() => this.pickImage()}
@@ -108,8 +106,6 @@ export default class UploadImage extends Component {
             numColumns={2}
           />
         </View>
-
-        {images.length > 0 && footer}
       </View>
     );
   }

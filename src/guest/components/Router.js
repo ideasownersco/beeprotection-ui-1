@@ -5,13 +5,21 @@ import Register from 'guest/Register';
 import Forgot from 'guest/Forgot';
 
 export const Router = StackNavigator({
-  LoginScreen: {
-    screen: Login,
+    LoginScreen: {
+      screen: Login,
+    },
+    RegisterScreen: {
+      screen: Register,
+    },
+    ForgotScreen: {
+      screen: Forgot,
+    },
   },
-  RegisterScreen: {
-    screen: Register,
-  },
-  ForgotScreen: {
-    screen: Forgot,
-  },
-});
+  {
+    navigationOptions: {
+      gesturesEnabled: false,
+      headerStyle: {
+        borderBottomWidth: 0,
+      },
+    },
+  });

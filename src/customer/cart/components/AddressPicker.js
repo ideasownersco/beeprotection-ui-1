@@ -18,6 +18,13 @@ export default class AddressPicker extends PureComponent {
   };
 
   showCreateAddressForm = () => {
+
+    let {isAuthenticated,redirectToLogin} = this.props;
+
+    if(!isAuthenticated) {
+      return redirectToLogin();
+    }
+
     this.setState({
       createAddressFormVisibility: true,
     });

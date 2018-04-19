@@ -31,14 +31,11 @@ export default class ListModal extends Component {
           isVisible={isVisible}
           transparent={false}
           style={[
-            {
-              backgroundColor: 'white',
-              paddingTop: 64,
-              // paddingHorizontal: 20,
-            },
+            styles.container,
             style,
           ]}
-          onBackdropPress={onCancel}>
+          onSwipe={onCancel}
+          swipeDirection="down">
           <Headline style={styles.headline}>{title}</Headline>
           {children}
           <Button

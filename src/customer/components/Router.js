@@ -23,7 +23,7 @@ import colors from 'assets/theme/colors';
 const getDrawerIcon = navigation => {
   return {
     headerLeft: (
-      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
+      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')}/>
     ),
   };
 };
@@ -44,6 +44,9 @@ const AuthStack = StackNavigator(
     headerMode: 'none',
     navigationOptions: ({navigation}) => ({
       headerTintColor: colors.white,
+      headerStyle: {
+        borderBottomWidth: 0,
+      },
     }),
     // initialRouteName:'RegisterScreen'
   },
@@ -80,7 +83,7 @@ const HomeStack = StackNavigator(
     Login: {
       screen: AuthStack,
       navigationOptions: ({navigation}) => ({
-        headerLeft: <BackButton onPress={() => navigation.goBack(null)} />,
+        headerLeft: <BackButton onPress={() => navigation.goBack(null)}/>,
       }),
     },
     // DriverLocationMap: {
@@ -99,8 +102,9 @@ const HomeStack = StackNavigator(
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
       headerTintColor: colors.white,
-      headerStyle:{
-        backgroundColor:colors.primary
+      headerStyle: {
+        backgroundColor: colors.primary,
+        borderBottomWidth: 0,
       }
     }),
     // initialRouteName:'Map'

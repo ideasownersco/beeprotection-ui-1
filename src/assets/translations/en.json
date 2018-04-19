@@ -140,5 +140,6 @@
   "stop_driving" : "Stop Driving",
 
   "have_an_account" : "Have an account ?",
-  "upload_images" : "Upload Images"
+  "upload_images" : "Upload Images",
+  "login_required" : "You must login to perform this action"
 }

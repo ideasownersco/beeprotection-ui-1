@@ -174,14 +174,13 @@ class Cart extends PureComponent {
         onPress: () => this.props.actions.removeCartItem(item.id),
       },
     ]);
+
   };
 
   saveAddress = address => {
     const {isAuthenticated} = this.props;
     if (!isAuthenticated) {
-      this.props.navigation.navigate('Login',{
-        redirectRoute:'Cart'
-      });
+      this.redirectToLogin();
     } else {
       this.props.actions.saveAddress(address);
     }
@@ -202,6 +201,19 @@ class Cart extends PureComponent {
     });
   };
 
+  redirectToLogin = () => {
+
+    return Alert.alert(`${I18n.t('login_required')}`, '', [
+      {text: I18n.t('cancel')},
+      {
+        text: I18n.t('login'),
+        onPress: () => this.props.navigation.navigate('Login',{
+          redirectRoute:'Cart'
+        }),
+      },
+    ]);
+  };
+
   render() {
     let {
       cart,
@@ -212,6 +224,7 @@ class Cart extends PureComponent {
       timings,
       isFetchingTimings,
       areas,
+      isAuthenticated
     } = this.props;
     let {selectedDate, selectedAddressID, selectedTimeID} = cart;
     let {
@@ -290,6 +303,8 @@ class Cart extends PureComponent {
         />
 
         <AddressPicker
+          redirectToLogin={this.redirectToLogin}
+          isAuthenticated={isAuthenticated}
           addresses={user ? (user.addresses ? user.addresses : []) : []}
           saveAddress={this.saveAddress}
           onAddressPickerItemPress={this.onAddressPickerItemPress}
