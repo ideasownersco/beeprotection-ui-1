@@ -45,7 +45,7 @@ class CreateOrder extends PureComponent {
             <MaterialCommunityIcons
               name="cart-outline"
               size={30}
-              color={colors.primary}
+              color={colors.white}
             />
           }
           onPress={() =>
@@ -244,6 +244,7 @@ class CreateOrder extends PureComponent {
           onPress={this.onAddToCartPress}
           disabled={!activePackageID}
           raised
+          dark
           style={{
             backgroundColor: colors.primary,
             padding: 10,

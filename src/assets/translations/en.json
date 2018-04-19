@@ -141,5 +141,7 @@
 
   "have_an_account" : "Have an account ?",
   "upload_images" : "Upload Images",
-  "login_required" : "You must login to perform this action"
+  "login_required" : "You must login to perform this action",
+  "confirm_order" : "Confirm Order",
+  "amount" : "Amount"
 }

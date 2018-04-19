@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    color: colors.primary,
+    color: colors.white,
     fontSize: 15,
     fontWeight: '700',
     paddingHorizontal: isRTL ? 15 : 10,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 40,
     height: 40,
-    color: colors.primary,
+    color: colors.white,
     // paddingHorizontal:isRTL ? 15 : 5,
   },
 });

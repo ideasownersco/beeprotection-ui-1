@@ -30,6 +30,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import TimePicker from './components/TimePicker';
 import {ACTIONS as APP_ACTIONS} from '../../app/common/actions';
 import SectionTitle from '../../components/SectionTitle';
+import CheckoutAlert from "./components/CheckoutAlert";
 
 type State = {
   dates: Array,
@@ -46,6 +47,8 @@ class Cart extends PureComponent {
     showOrderSuccessModal: false,
     paymentMode: 'cash',
     timePickerModalVisible: false,
+    checkoutAlertModalVisible:false,
+    performingCheckout:false
   };
 
   static defaultProps = {
@@ -72,7 +75,14 @@ class Cart extends PureComponent {
     this.fetchTimings();
   }
 
+  checkout = () => {
+    this.setState({
+      checkoutAlertModalVisible:true
+    })
+  };
+
   performCheckout = () => {
+
     const {user, isAuthenticated, cart} = this.props;
     const {paymentMode} = this.state;
 
@@ -84,8 +94,8 @@ class Cart extends PureComponent {
       total,
     } = cart;
     if (!isAuthenticated) {
-      this.props.navigation.navigate('Login',{
-        redirectRoute:'Cart'
+      this.props.navigation.navigate('Login', {
+        redirectRoute: 'Cart'
       });
     } else {
       const item = {
@@ -118,15 +128,19 @@ class Cart extends PureComponent {
           if (order.status == 'Success') {
             this.setState({
               showOrderSuccessModal: true,
+              checkoutAlertModalVisible:false
             });
           } else if (order.status == 'Checkout') {
             this.setState({
               showPaymentModal: true,
+              checkoutAlertModalVisible:false
             });
           }
         })
         .catch(e => {
-          console.log('e');
+          this.setState({
+            checkoutAlertModalVisible:false
+          });
         });
     }
   };
@@ -207,8 +221,8 @@ class Cart extends PureComponent {
       {text: I18n.t('cancel')},
       {
         text: I18n.t('login'),
-        onPress: () => this.props.navigation.navigate('Login',{
-          redirectRoute:'Cart'
+        onPress: () => this.props.navigation.navigate('Login', {
+          redirectRoute: 'Cart'
         }),
       },
     ]);
@@ -227,6 +241,7 @@ class Cart extends PureComponent {
       isAuthenticated
     } = this.props;
     let {selectedDate, selectedAddressID, selectedTimeID} = cart;
+
     let {
       dates,
       showPaymentModal,
@@ -234,7 +249,7 @@ class Cart extends PureComponent {
       paymentMode,
     } = this.state;
 
-    console.log('props',this.props.user);
+    console.log('props', this.props.user);
 
     if (!cartItems.length) {
       return <EmptyCart/>;
@@ -243,7 +258,8 @@ class Cart extends PureComponent {
     return (
       <ScrollView
         contentInset={{bottom: 50}}
-        style={{backgroundColor: 'white'}}>
+        style={[{backgroundColor: 'white'},checkout.isFetching && {opacity:.4}]}
+      >
 
         <SectionTitle
           title={I18n.t('order_details')}
@@ -252,7 +268,6 @@ class Cart extends PureComponent {
         />
 
         <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
-
 
         <Separator/>
 
@@ -334,10 +349,11 @@ class Cart extends PureComponent {
         />
 
         <Button
-          onPress={this.performCheckout}
+          onPress={this.checkout}
           disabled={checkout.isFetching}
           raised
           primary
+          dark
           loading={checkout.isFetching}
           style={{
             justifyContent: 'center',
@@ -362,6 +378,9 @@ class Cart extends PureComponent {
           visible={showPaymentModal}
           onHide={this.hideCheckoutModal}
         />
+
+        <CheckoutAlert disabled={checkout.isFetching} address={user && user.addresses && user.addresses[selectedAddressID]} total={cartTotal} date={selectedDate} time={timings.length && timings[selectedTimeID]} visible={this.state.checkoutAlertModalVisible} close={()=>this.setState({checkoutAlertModalVisible:false})} checkout={this.performCheckout}/>
+
       </ScrollView>
     );
   }

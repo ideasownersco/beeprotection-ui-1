@@ -4,8 +4,18 @@ import Store from './src/utils/store';
 import App from './src/app/App';
 import {Provider} from 'react-redux';
 import colors from "./src/assets/theme/colors";
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 
 console.disableYellowBox = true;
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: colors.primary,
+    accent: colors.secondary,
+  },
+};
 
 const MyStatusBar = ({backgroundColor, ...props}) => (
   <View style={[styles.statusBar, {backgroundColor}]}>
@@ -21,7 +31,10 @@ const Root = () => {
     <View style={{flex: 1}}>
       {/*<MyStatusBar backgroundColor={colors.primary} barStyle="light-content"/>*/}
       <Provider store={Store}>
+        <PaperProvider theme={theme}>
+
         <App/>
+        </PaperProvider>
       </Provider>
     </View>
   );
