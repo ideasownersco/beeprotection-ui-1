@@ -23,7 +23,7 @@ export default class ListModal extends Component {
   };
 
   render() {
-    let {isVisible, onCancel, title, children, style} = this.props;
+    let {isVisible, onCancel, onSave, title, children, style} = this.props;
 
     return (
       <Modal
@@ -38,7 +38,7 @@ export default class ListModal extends Component {
         <Headline style={styles.headline}>{title}</Headline>
         {children}
         <Button
-          onPress={onCancel}
+          onPress={onSave}
           raised
           primary
           dark

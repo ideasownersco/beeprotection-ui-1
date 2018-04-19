@@ -185,8 +185,12 @@ export default class Map extends Component {
     this.props.uploadImages();
   };
 
+  approveImages = () => {
+    this.props.approveImages();
+  }
+
   render() {
-    const {destination, jobStatus, address} = this.props;
+    const {destination, jobStatus, address, imagesUploaded, imagesApproved} = this.props;
     console.log('jobStatus', jobStatus);
     const {origin, initialized} = this.state;
     const {heading} = origin;
@@ -263,19 +267,33 @@ export default class Map extends Component {
           {jobStatus == 'reached' && (
             <View style={{flexDirection: 'row',justifyContent:'space-around'}}>
 
-              <Button
-                title={I18n.t('start_working')}
-                onPress={this.startWorking}
-                style={{marginBottom: 10,width:150}}
-              />
+              {
+                imagesUploaded && imagesApproved &&
+                <Button
+                  title={I18n.t('start_working')}
+                  onPress={this.startWorking}
+                  style={{marginBottom: 10,width:150}}
+                />
+              }
 
+              {
+                imagesUploaded && !imagesApproved &&
+                <Button
+                  title={I18n.t('approve_images')}
+                  onPress={this.approveImages}
+                  style={{marginBottom: 10, width:150}}
+                />
+              }
 
-              <Button
-                title={I18n.t('upload_images')}
-                onPress={this.uploadImages}
-                style={{marginBottom: 10, width:150}}
-              />
+              {
 
+                !imagesUploaded &&
+                <Button
+                  title={I18n.t('upload_images')}
+                  onPress={this.uploadImages}
+                  style={{marginBottom: 10, width:150}}
+                />
+              }
 
             </View>
           )}

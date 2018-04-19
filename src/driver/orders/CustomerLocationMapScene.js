@@ -35,6 +35,8 @@ class CustomerLocationMapScene extends Component {
     this.state = {
       isUploadImageModalVisible:false,
       images:[],
+      imagesUploaded:false,
+      imagesApproved:false,
       origin: {
         latitude: 37.78825,
         longitude: -122.4324,
@@ -100,9 +102,22 @@ class CustomerLocationMapScene extends Component {
     this.showUploadImageModal();
   };
 
+  approveImages = () => {
+    this.setState({
+      imagesApproved:true
+    });
+  };
+
+  onSaveUploadedImage = () => {
+    this.setState({
+      imagesUploaded:true,
+      isUploadImageModalVisible:false
+    });
+  };
+
   uploadImage = (images) => {
     this.setState({
-      images:images
+      images:images,
     })
   };
 
@@ -156,10 +171,13 @@ class CustomerLocationMapScene extends Component {
           driverID={profile.id}
           address={address}
           uploadImages={this.uploadImages}
+          approveImages={this.approveImages}
+          imagesUploaded={this.state.imagesUploaded}
+          imagesApproved={this.state.imagesApproved}
         />
 
-        <ListModal isVisible={this.state.isUploadImageModalVisible} onCancel={this.hideUploadImageModal}>
-          <UploadImage images={images} updateImage={this.uploadImage} deleteImage={this.deleteImage}/>
+        <ListModal isVisible={this.state.isUploadImageModalVisible} onCancel={this.hideUploadImageModal} onSave={this.onSaveUploadedImage}>
+          <UploadImage images={images} updateImage={this.uploadImage} deleteImage={this.deleteImage} />
         </ListModal>
 
       </View>

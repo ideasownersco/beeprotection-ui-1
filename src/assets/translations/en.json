@@ -143,5 +143,6 @@
   "upload_images" : "Upload Images",
   "login_required" : "You must login to perform this action",
   "confirm_order" : "Confirm Order",
-  "amount" : "Amount"
+  "amount" : "Amount",
+  "approve_images" : "Approve Images",
 }
