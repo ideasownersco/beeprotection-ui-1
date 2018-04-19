@@ -7,8 +7,8 @@ import BackgroundGeolocation from 'react-native-background-geolocation';
 class Home extends Component {
   state = {
     initialized: true,
-    latitude: 29.3759,
-    longitude: 47.9774,
+    latitude: 29.26,
+    longitude: 47.94,
     country: 'KW',
     area_id: 7,
   };
@@ -62,15 +62,15 @@ class Home extends Component {
             id: 7,
             name: 'Abbasiya',
             active: 1,
-            latitude: 29.2643154,
-            longitude: 47.94439999999999,
+            latitude: 29.264,
+            longitude: 47.944,
           },
           {
             id: 8,
             name: 'Abdullah Al-Mubarak',
             active: 1,
-            latitude: 29.3680874,
-            longitude: 47.9805976,
+            latitude: 29.368,
+            longitude: 47.980,
           },
         ]}
       />

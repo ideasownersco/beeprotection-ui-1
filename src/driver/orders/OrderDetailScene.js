@@ -64,6 +64,7 @@ const makeMapStateToProps = () => {
   const mapStateToProps = (state, props) => {
     return {
       order: getOrderByID(state, props.navigation.state.params.orderID),
+      orders: ORDER_SELECTORS.getUpcomingOrders(state),
     };
   };
   return mapStateToProps;

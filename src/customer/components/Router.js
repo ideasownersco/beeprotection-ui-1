@@ -103,7 +103,7 @@ const HomeStack = StackNavigator(
         backgroundColor:colors.primary
       }
     }),
-    // initialRouteName:'Login'
+    // initialRouteName:'Map'
   },
 );
 

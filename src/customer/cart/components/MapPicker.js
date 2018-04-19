@@ -30,8 +30,34 @@ export default class MapPicker extends Component {
   // }
 
   state = {
-    latitude_delta: 1,
+    latitude_delta: .1,
     isAreaListModalVisible: false,
+    initialized:false
+  };
+
+  componentDidMount() {
+    setTimeout(()=> {
+      this.setState({
+        initialized:true
+      });
+      // this.map.fitToSuppliedMarkers(["MARKER_1"],false);
+
+      let {latitude,longitude} = this.props.address;
+      let params = {
+        latitude:latitude,
+        longitude:longitude
+      };
+      // this.map.fitToElements(false);
+
+      // this.setState({
+      //   latitude_delta:1
+      // })
+      this.map.fitToCoordinates([params,params], {
+        edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
+        animated: false,
+      });
+
+    },1000);
   };
 
   // onItemPress = (locationData, locationDetails) => {
@@ -60,17 +86,22 @@ export default class MapPicker extends Component {
   }
 
   onRegionChange = region => {
-    let {latitude, longitude} = region;
-    let params = {
-      latitude: latitude,
-      longitude: longitude,
-    };
-    this.props.updateAddress(params);
+
+    if(!this.state.initialized) {
+      return null;
+    }
+
+    // let {latitude, longitude} = region;
+    // let params = {
+    //   latitude: latitude,
+    //   longitude: longitude,
+    // };
+    // this.props.updateAddress(params);
   };
 
   mapMarkerRegion = () => {
     let region = ({latitude, longitude} = this.props.address);
-    console.log('mapMarkerRegion', region);
+    // console.log('mapMarkerRegion', region);
     return region;
   };
 
@@ -88,23 +119,30 @@ export default class MapPicker extends Component {
 
   setArea = area => {
     console.log('area', area);
-
     const {updateAddress, address} = this.props;
 
     let {latitude, longitude} = area;
 
     let params = {
-      latitude: latitude,
-      longitude: longitude,
+      latitude: +latitude.toFixed(4),
+      longitude: +longitude.toFixed(4),
       area_id: area.id,
     };
 
+    console.log('paramas',params);
+
+
     updateAddress(params);
 
-    this.map.fitToCoordinates([params, address], {
+    // this.map.fitToSuppliedMarkers(["MARKER_1"],false);
+
+    // this.map.fitToElements(true);
+
+    this.map.fitToCoordinates([params], {
       edgePadding: DEFAULT_PADDING,
       animated: true,
     });
+
   };
 
   render() {
@@ -116,7 +154,10 @@ export default class MapPicker extends Component {
       area = areas.find(area => area.id === address.area_id) || {};
     }
 
-    console.log('rendered MapPicker', this.props.address);
+    console.log('state',this.state);
+    console.log('mapMarkerCoordinate',this.mapMarkerRegion());
+
+    // console.log('rendered MapPicker', this.props.address);
     // console.log('props', {...this.props.address});
 
     return (
@@ -155,10 +196,13 @@ export default class MapPicker extends Component {
                   latitudeDelta: this.state.latitude_delta,
                   longitudeDelta: this.state.latitude_delta * ASPECT_RATIO,
                 }}
-                onRegionChangeComplete={this.onRegionChange}>
+                onRegionChangeComplete={this.onRegionChange}
+                // minZoomLevel={8}
+              >
                 <MapView.Marker
                   coordinate={this.mapMarkerRegion()}
                   onDragEnd={e => this.onDragEnd(e)}
+                  identifier="MARKER_1"
                   draggable
                 />
               </MapView>

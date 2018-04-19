@@ -38,7 +38,7 @@ class Home extends PureComponent {
     this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
   };
 
-  _onRefresh() {
+  _onRefresh = () => {
     this.setState({refreshing: true});
     setTimeout(() => {
       this.fetchData();

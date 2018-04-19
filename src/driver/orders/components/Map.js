@@ -181,6 +181,10 @@ export default class Map extends Component {
     this.props.stopWorking();
   };
 
+  uploadImages = () => {
+
+  };
+
   render() {
     const {destination, jobStatus, address} = this.props;
     console.log('jobStatus', jobStatus);
@@ -257,11 +261,23 @@ export default class Map extends Component {
           )}
 
           {jobStatus == 'reached' && (
+            <View>
+
             <Button
               title={I18n.t('start_working')}
               onPress={this.startWorking}
               style={{marginBottom: 10}}
             />
+
+
+              <Button
+                title={I18n.t('upload_images')}
+                onPress={this.uploadImages}
+                style={{marginBottom: 10}}
+              />
+
+
+            </View>
           )}
 
           {jobStatus == 'working' && (

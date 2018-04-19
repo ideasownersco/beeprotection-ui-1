@@ -88,11 +88,10 @@ const styles = StyleSheet.create({
   },
   addressField: {
     flex: 1,
+    padding:5,
+    backgroundColor: 'white',
+    marginHorizontal: 1,
   },
   textInput: {
-    backgroundColor: 'white',
-    textAlign: 'center',
-    marginHorizontal: 2,
-    padding: 5,
   },
 });

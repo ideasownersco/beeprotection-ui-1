@@ -231,6 +231,7 @@ class Cart extends PureComponent {
       <ScrollView
         contentInset={{bottom: 50}}
         style={{backgroundColor: 'white'}}>
+
         <SectionTitle
           title={I18n.t('order_details')}
           style={{padding: 10}}
@@ -238,6 +239,7 @@ class Cart extends PureComponent {
         />
 
         <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
+
 
         <Separator/>
 
