@@ -19,6 +19,7 @@ import PastOrdersScene from 'customer/orders/PastOrdersScene';
 import UpcomingOrdersScene from 'customer/orders/UpcomingOrdersScene';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
+import LanguageSelect from "app/LanguageSelect";
 
 const getDrawerIcon = navigation => {
   return {
@@ -97,6 +98,9 @@ const HomeStack = StackNavigator(
     Map: {
       screen: Map,
     },
+    LanguageSelect:{
+      screen:LanguageSelect
+    }
   },
   {
     navigationOptions: ({navigation}) => ({

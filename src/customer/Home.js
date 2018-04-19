@@ -6,6 +6,9 @@ import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import WelcomeText from './components/WelcomeText';
+import NavButton from "../components/NavButton";
+import IconFactory from "../components/IconFactory";
+import colors from "../assets/theme/colors";
 
 class Home extends Component {
   static defaultProps = {
@@ -17,7 +20,25 @@ class Home extends Component {
     appState: AppState.currentState,
   };
 
-  static navigationOptions = () => {
+
+  // static navigationOptions = ({navigation}) => {
+  //
+  //   return {
+  //     headerRight: (
+  //       <NavButton
+  //         icon={
+  //           <IconFactory type="MaterialCommunityIcons" name="cart-outline" color="white" size={26}/>
+  //         }
+  //         onPress={() =>
+  //           navigation.state.params &&
+  //           navigation.state.params.handleRightButtonPress()
+  //         }
+  //       />
+  //     ),
+  //   };
+  // };
+
+  static navigationOptions = ({navigation}) => {
     return {
       // headerTransparent:true,
       headerStyle: {
@@ -29,10 +50,25 @@ class Home extends Component {
         right: 0,
         borderBottomWidth: 0,
       },
+      headerRight: (
+        <NavButton
+          icon={
+            <IconFactory type="Ionicons" name="md-globe" color={colors.primary} size={26}/>
+          }
+          onPress={() =>
+            navigation.state.params &&
+            navigation.state.params.handleRightButtonPress()
+          }
+        />
+      ),
+
     };
   };
 
   componentDidMount() {
+    this.props.navigation.setParams({
+      handleRightButtonPress: this.changeLanguage,
+    });
     this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrder());
     AppState.addEventListener('change', this.handleAppStateChange);
   }
@@ -40,6 +76,10 @@ class Home extends Component {
   componentWillUnmount() {
     AppState.removeEventListener('change', this.handleAppStateChange);
   }
+
+  changeLanguage = () => {
+    this.props.navigation.navigate('LanguageSelect');
+  };
 
   handleAppStateChange = nextAppState => {
     if (

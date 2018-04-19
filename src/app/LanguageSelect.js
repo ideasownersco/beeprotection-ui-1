@@ -14,7 +14,7 @@ class LanguageSelect extends Component {
   };
 
   render() {
-    return <LanguageSelectScene onLanguageSelect={this.onLanguageSelect} />;
+    return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
   }
 }
 
