@@ -5,6 +5,15 @@ import FormTextInput from 'components/FormTextInput';
 import I18n from 'utils/locale';
 
 export default class AddressFormFields extends PureComponent {
+
+  static propTypes = {
+    block: PropTypes.string,
+    street: PropTypes.string,
+    avenue: PropTypes.string,
+    building: PropTypes.string,
+    updateFields: PropTypes.func.isRequired,
+  };
+
   render() {
     const {block, street, avenue, building, updateFields} = this.props;
 
@@ -70,13 +79,6 @@ export default class AddressFormFields extends PureComponent {
   }
 }
 
-AddressFormFields.propTypes = {
-  block: PropTypes.string.isRequired,
-  street: PropTypes.string.isRequired,
-  avenue: PropTypes.string.isRequired,
-  building: PropTypes.string.isRequired,
-  updateFields: PropTypes.func.isRequired,
-};
 
 const styles = StyleSheet.create({
   label: {

@@ -21,23 +21,25 @@ type State = {
 };
 
 export default class CreateAddressForm extends PureComponent {
+
+  static propTypes = {
+    areas:PropTypes.array.isRequired,
+    visible: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onPress: PropTypes.func.isRequired,
+    area_id:PropTypes.number
+  };
+
   state: State = {
     label: null,
     mapPickerVisibility: false,
-    block: '',
-    street: '',
-    avenue: '',
-    building: '',
-    // city_en: '',
-    // city_ar: '',
-    // address_en: '',
-    // address_ar: '',
-    // state_en: '',
-    // state_ar: '',
+    block: null,
+    street: null,
+    avenue: null,
+    building: null,
     country: 'KW',
     latitude: 29.3759,
     longitude: 47.9774,
-    initialized: false,
     area_id: null,
   };
 
@@ -64,9 +66,6 @@ export default class CreateAddressForm extends PureComponent {
     //     maximumAge: 5000,
     //   },
     // )
-    this.setState({
-      initialized: true,
-    });
   }
 
   hideScreen = () => {
@@ -98,6 +97,7 @@ export default class CreateAddressForm extends PureComponent {
 
   render() {
     const {visible, areas} = this.props;
+
     const {block, street, avenue, building, mapPickerVisibility} = this.state;
 
     return (
@@ -120,7 +120,6 @@ export default class CreateAddressForm extends PureComponent {
             visible={mapPickerVisibility}
             updateAddress={this.updateAddressFields}
             address={{...this.state}}
-            initialized={this.state.initialized}
             areas={areas}
           />
 
@@ -144,12 +143,6 @@ export default class CreateAddressForm extends PureComponent {
     );
   }
 }
-
-CreateAddressForm.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onPress: PropTypes.func.isRequired,
-};
 
 const styles = StyleSheet.create({
   container: {

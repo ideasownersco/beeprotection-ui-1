@@ -3,12 +3,13 @@ import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
 import MapPicker from './cart/components/MapPicker';
 import BackgroundGeolocation from 'react-native-background-geolocation';
+import CreateAddressForm from "./cart/components/CreateAddressForm";
 
 class Home extends Component {
   state = {
     initialized: true,
-    latitude: 29.26,
-    longitude: 47.94,
+    latitude: 29.3059631,
+    longitude: 48.0718422,
     country: 'KW',
     area_id: 7,
   };
@@ -38,6 +39,9 @@ class Home extends Component {
   }
 
   saveAddress = address => {
+
+    console.log('addressss',address);
+
     this.setState({
       ...address,
     });
@@ -49,14 +53,16 @@ class Home extends Component {
     });
   };
 
+  hideCreateAddressForm = () => {
+
+  };
+
   render() {
     return (
-      <MapPicker
-        initialized={this.state.initialized}
-        onClose={() => {}}
+      <CreateAddressForm
         visible={true}
-        updateAddress={this.saveAddress}
-        address={{...this.state}}
+        onPress={this.saveAddress}
+        onClose={this.hideCreateAddressForm}
         areas={[
           {
             id: 7,

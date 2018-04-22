@@ -14,7 +14,11 @@ const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const DEFAULT_PADDING = {top: 50, right: 50, bottom: 50, left: 50};
 
+const LATITUDE_DELTA = .1;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
 export default class MapPicker extends Component {
+
   static propTypes = {
     updateAddress: PropTypes.func.isRequired,
     address: PropTypes.object.isRequired,
@@ -30,7 +34,6 @@ export default class MapPicker extends Component {
   // }
 
   state = {
-    latitude_delta: .1,
     isAreaListModalVisible: false,
     initialized:false
   };
@@ -40,41 +43,8 @@ export default class MapPicker extends Component {
       this.setState({
         initialized:true
       });
-      // this.map.fitToSuppliedMarkers(["MARKER_1"],false);
-
-      let {latitude,longitude} = this.props.address;
-      let params = {
-        latitude:latitude,
-        longitude:longitude
-      };
-      // this.map.fitToElements(false);
-
-      // this.setState({
-      //   latitude_delta:1
-      // })
-      this.map.fitToCoordinates([params,params], {
-        edgePadding: { top: 100, right: 100, bottom: 100, left: 100 },
-        animated: false,
-      });
-
     },1000);
   };
-
-  // onItemPress = (locationData, locationDetails) => {
-  //
-  //   let params = {
-  //     latitude: locationDetails.geometry.location.lat,
-  //     longitude: locationDetails.geometry.location.lng,
-  //     country: 'KW',
-  //   };
-  //
-  //   this.map.fitToCoordinates([params, this.props.address], {
-  //     edgePadding: DEFAULT_PADDING,
-  //     animated: true,
-  //   });
-  //
-  //   this.props.updateAddress(params);
-  // };
 
   onDragEnd(e) {
     let {latitude, longitude} = e.nativeEvent.coordinate;
@@ -91,17 +61,17 @@ export default class MapPicker extends Component {
       return null;
     }
 
-    // let {latitude, longitude} = region;
-    // let params = {
-    //   latitude: latitude,
-    //   longitude: longitude,
-    // };
-    // this.props.updateAddress(params);
+    let {latitude, longitude} = region;
+    let params = {
+      latitude: latitude,
+      longitude: longitude,
+    };
+
+    this.props.updateAddress(params);
   };
 
   mapMarkerRegion = () => {
     let region = ({latitude, longitude} = this.props.address);
-    // console.log('mapMarkerRegion', region);
     return region;
   };
 
@@ -118,47 +88,24 @@ export default class MapPicker extends Component {
   };
 
   setArea = area => {
-    console.log('area', area);
-    const {updateAddress, address} = this.props;
-
     let {latitude, longitude} = area;
-
     let params = {
-      latitude: +latitude.toFixed(4),
-      longitude: +longitude.toFixed(4),
+      latitude: latitude,
+      longitude: longitude,
       area_id: area.id,
     };
-
-    console.log('paramas',params);
-
-
-    updateAddress(params);
-
-    // this.map.fitToSuppliedMarkers(["MARKER_1"],false);
-
-    // this.map.fitToElements(true);
-
-    this.map.fitToCoordinates([params], {
-      edgePadding: DEFAULT_PADDING,
-      animated: true,
-    });
-
+    this.map.animateToCoordinate(params,500);
+    this.props.updateAddress(params);
   };
 
   render() {
-    const {address, initialized, areas} = this.props;
-
+    const {initialized} = this.state;
+    const {address, areas} = this.props;
+    console.log('address',address);
     let area = {};
-
     if (address.area_id) {
       area = areas.find(area => area.id === address.area_id) || {};
     }
-
-    console.log('state',this.state);
-    console.log('mapMarkerCoordinate',this.mapMarkerRegion());
-
-    // console.log('rendered MapPicker', this.props.address);
-    // console.log('props', {...this.props.address});
 
     return (
       <View style={styles.container}>
@@ -183,21 +130,21 @@ export default class MapPicker extends Component {
         </View>
 
         <View style={styles.menuContainer}>
-          <View style={styles.mapContainer}>
+          <View style={[styles.mapContainer,!address.area_id && {opacity:.3}]}>
             {initialized && (
               <MapView
                 ref={ref => {
                   this.map = ref;
                 }}
+                // provider="google"
                 // provider={PROVIDER_GOOGLE}
-                style={styles.map}
+                style={[styles.map,]}
                 initialRegion={{
                   ...address,
-                  latitudeDelta: this.state.latitude_delta,
-                  longitudeDelta: this.state.latitude_delta * ASPECT_RATIO,
+                  latitudeDelta: LATITUDE_DELTA,
+                  longitudeDelta: LONGITUDE_DELTA,
                 }}
                 onRegionChangeComplete={this.onRegionChange}
-                // minZoomLevel={8}
               >
                 <MapView.Marker
                   coordinate={this.mapMarkerRegion()}
