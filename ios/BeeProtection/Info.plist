@@ -31,14 +31,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Location Always And When In Use Usage Description</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Location Always Usage Description</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string></string>
-    <key>NSMotionUsageDescription</key>
-    <string>Motion updates increase battery efficiency by intelligently toggling location-services when device is detected to be moving</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location Always And When In Use Usage Description</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location Always Usage Description</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app is using location service to pin point your delivery address </string>
+	<key>NSMotionUsageDescription</key>
+	<string>Motion updates increase battery efficiency by intelligently toggling location-services when device is detected to be moving</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -53,8 +53,8 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>This app requires access to the photo library.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -77,13 +77,13 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>comgooglemaps-x-callback</string>
-        <string>snapchat</string>
-        <string>fb</string>
-        <string>twitter</string>
-        <string>instagram</string>
-        <string>comgooglemaps</string>
-    </array>
+	<array>
+		<string>comgooglemaps-x-callback</string>
+		<string>snapchat</string>
+		<string>fb</string>
+		<string>twitter</string>
+		<string>instagram</string>
+		<string>comgooglemaps</string>
+	</array>
 </dict>
 </plist>

@@ -20,7 +20,6 @@ export default class AddressFormFields extends PureComponent {
     return (
       <View style={styles.addressContainer}>
         <View style={styles.addressField}>
-          {/*<Text style={styles.label}>{I18n.t('block')}</Text>*/}
           <FormTextInput
             onValueChange={updateFields}
             value={block}
@@ -33,8 +32,7 @@ export default class AddressFormFields extends PureComponent {
           />
         </View>
 
-        <View style={styles.addressField}>
-          {/*<Text style={styles.label}>{I18n.t('street')} </Text>*/}
+        <View style={[styles.addressField,{flex:3}]}>
           <FormTextInput
             onValueChange={updateFields}
             value={street}
@@ -44,36 +42,36 @@ export default class AddressFormFields extends PureComponent {
             autoFocus={false}
             style={styles.textInput}
             label={I18n.t('street')}
+            multiline
           />
         </View>
 
-        <View style={styles.addressField}>
-          {/*<Text style={styles.label}>{I18n.t('avenue')}</Text>*/}
-          <FormTextInput
-            onValueChange={updateFields}
-            value={avenue}
-            field="avenue"
-            maxLength={40}
-            keyboardType="numeric"
-            autoFocus={false}
-            style={styles.textInput}
-            label={I18n.t('avenue')}
-          />
-        </View>
+        {/*<View style={styles.addressField}>*/}
+          {/*<FormTextInput*/}
+            {/*onValueChange={updateFields}*/}
+            {/*value={avenue}*/}
+            {/*field="avenue"*/}
+            {/*maxLength={40}*/}
+            {/*keyboardType="numeric"*/}
+            {/*autoFocus={false}*/}
+            {/*style={styles.textInput}*/}
+            {/*label={I18n.t('avenue')}*/}
+          {/*/>*/}
+        {/*</View>*/}
 
-        <View style={styles.addressField}>
-          {/*<Text style={styles.label}>{I18n.t('building')}</Text>*/}
-          <FormTextInput
-            onValueChange={updateFields}
-            value={building}
-            field="building"
-            maxLength={40}
-            keyboardType="numeric"
-            autoFocus={false}
-            style={styles.textInput}
-            label={I18n.t('building')}
-          />
-        </View>
+        {/*<View style={styles.addressField}>*/}
+          {/*<FormTextInput*/}
+            {/*onValueChange={updateFields}*/}
+            {/*value={building}*/}
+            {/*field="building"*/}
+            {/*maxLength={40}*/}
+            {/*keyboardType="numeric"*/}
+            {/*autoFocus={false}*/}
+            {/*style={styles.textInput}*/}
+            {/*label={I18n.t('building')}*/}
+          {/*/>*/}
+        {/*</View>*/}
+
       </View>
     );
   }

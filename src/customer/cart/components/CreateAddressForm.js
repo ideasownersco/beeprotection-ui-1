@@ -1,12 +1,14 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Modal, StyleSheet, View} from 'react-native';
+import {Modal, StyleSheet, Text, View} from 'react-native';
 import I18n from 'utils/locale';
-import Button from 'components/Button';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
 import AddressFormFields from 'customer/cart/components/AddressFormFields';
 import BackgroundGeolocation from 'react-native-background-geolocation';
+import {Button} from "react-native-paper";
+import Touchable from 'react-native-platform-touchable';
+import List from "../../../components/List";
 
 type State = {
   label: string,
@@ -23,11 +25,11 @@ type State = {
 export default class CreateAddressForm extends PureComponent {
 
   static propTypes = {
-    areas:PropTypes.array.isRequired,
+    areas: PropTypes.array.isRequired,
     visible: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     onPress: PropTypes.func.isRequired,
-    area_id:PropTypes.number
+    area_id: PropTypes.number
   };
 
   state: State = {
@@ -41,31 +43,29 @@ export default class CreateAddressForm extends PureComponent {
     latitude: 29.3759,
     longitude: 47.9774,
     area_id: null,
+    isAreaListModalVisible: false,
   };
 
   componentDidMount() {
     //@todo:uncomment in production
-    // BackgroundGeolocation.getCurrentPosition(
-    //   location => {
-    //     let {latitude, longitude} = location.coords;
-    //     this.setState({
-    //       latitude: latitude,
-    //       longitude: longitude,
-    //       initialized: true
-    //     });
-    //   },
-    //   error => {
-    //     this.setState({
-    //       initialized: true
-    //     });
-    //     console.warn('- getCurrentPosition error: ', error);
-    //   },
-    //   {
-    //     persist: true,
-    //     samples: 1,
-    //     maximumAge: 5000,
-    //   },
-    // )
+    BackgroundGeolocation.getCurrentPosition(
+      location => {
+        let {latitude, longitude} = location.coords;
+        this.setState({
+          latitude: latitude,
+          longitude: longitude,
+          initialized: true
+        });
+      },
+      error => {
+        console.warn('- getCurrentPosition error: ', error);
+      },
+      {
+        persist: true,
+        samples: 1,
+        maximumAge: 5000,
+      },
+    )
   }
 
   hideScreen = () => {
@@ -95,10 +95,39 @@ export default class CreateAddressForm extends PureComponent {
     });
   };
 
+
+  setArea = area => {
+    let {latitude, longitude} = area;
+    let params = {
+      latitude: latitude,
+      longitude: longitude,
+      area_id: area.id,
+    };
+    this.updateAddressFields(params);
+  };
+
+
+  onAreaButtonPress = () => {
+    this.setState({
+      isAreaListModalVisible: true,
+    });
+  };
+
+  hideAreaListModal = () => {
+    this.setState({
+      isAreaListModalVisible: false,
+    });
+  };
+
   render() {
     const {visible, areas} = this.props;
 
-    const {block, street, avenue, building, mapPickerVisibility} = this.state;
+    const {latitude, longitude, block, street, avenue, building, area_id, mapPickerVisibility, isAreaListModalVisible} = this.state;
+
+    let area = {};
+    if (area_id) {
+      area = areas.find(area => area.id === area_id) || {};
+    }
 
     return (
       <Modal
@@ -109,34 +138,78 @@ export default class CreateAddressForm extends PureComponent {
 
           <AddressFormFields
             block={block}
-            avenue={avenue}
+            // avenue={avenue}
             street={street}
-            building={building}
+            // building={building}
             updateFields={this.updateFormFields}
           />
 
-          <MapPicker
-            onClose={this.hideMapPicker}
-            visible={mapPickerVisibility}
-            updateAddress={this.updateAddressFields}
-            address={{...this.state}}
-            areas={areas}
-          />
+          <View style={styles.mapContainer}>
+            <View style={styles.searchInputContainer}>
+              <Touchable
+                style={{
+                  flex: 1,
+                  padding: 10,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                onPress={this.onAreaButtonPress}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: '500',
+                    color: 'black',
+                  }}>
+                  {area.id ? area.name : I18n.t('select_area')}
+                </Text>
+              </Touchable>
+            </View>
+
+            <MapPicker
+              onClose={this.hideMapPicker}
+              visible={mapPickerVisibility}
+              updateAddress={this.updateAddressFields}
+              areas={areas}
+              address={{
+                latitude: latitude,
+                longitude: longitude,
+                area_id: area_id,
+              }}
+            />
+
+            <List
+              title={I18n.t('select_area')}
+              activeIDs={[area_id]}
+              isVisible={isAreaListModalVisible}
+              onConfirm={this.setArea}
+              onCancel={this.hideAreaListModal}
+              onSave={this.hideAreaListModal}
+              items={areas}
+            />
+          </View>
+
 
           <View style={styles.buttonsContainer}>
-            <Button
-              title="Save"
-              onPress={this.saveAddress}
-              style={styles.button}
-              background="success"
-            />
 
             <Button
-              title={I18n.t('close')}
               onPress={this.hideScreen}
               style={styles.button}
-              background="error"
-            />
+              background="transparent"
+              raised
+            >
+              {I18n.t('cancel')}
+            </Button>
+
+            <Button
+              onPress={this.saveAddress}
+              style={styles.button}
+              raised
+              primary
+              dark
+            >
+              {I18n.t('save')}
+            </Button>
+
           </View>
         </View>
       </Modal>
@@ -161,4 +234,16 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 0,
   },
+  mapContainer:{
+    flex: 1,
+    backgroundColor: colors.lightGrey,
+  },
+  searchInputContainer: {
+    position: 'absolute',
+    top: 20,
+    margin: 5,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    zIndex: 5000,
+  }
 });
