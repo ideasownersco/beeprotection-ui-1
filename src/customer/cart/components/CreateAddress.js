@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Modal, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import I18n from 'utils/locale';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
@@ -9,28 +9,16 @@ import BackgroundGeolocation from 'react-native-background-geolocation';
 import {Button} from 'react-native-paper';
 import Touchable from 'react-native-platform-touchable';
 import List from 'components/List';
-import {GOOGLE_MAPS_KEY} from 'utils/env';
 
-type State = {
-  label: string,
-  block: string,
-  street: string,
-  avenue: string,
-  building: string,
-  latitude: string,
-  longitude: string,
-  mapPickerVisibility: boolean,
-  address: Object,
-};
+export default class extends Component {
 
-export default class extends PureComponent {
   static propTypes = {
     areas: PropTypes.array.isRequired,
-    visible: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    onPress: PropTypes.func.isRequired,
-    area_id: PropTypes.number,
+    onCancel: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
   };
+
+
 
   constructor(props) {
     super(props);
@@ -49,8 +37,11 @@ export default class extends PureComponent {
     };
   }
 
+  shouldComponentUpdate(nextProps,prevState) {
+    return nextProps.items !== this.props.items || prevState !== this.state ;
+  }
+
   componentDidMount() {
-    //@todo:uncomment in production
     BackgroundGeolocation.getCurrentPosition(
       location => {
         let {latitude, longitude} = location.coords;
@@ -71,12 +62,13 @@ export default class extends PureComponent {
     );
   }
 
+
   hideScreen = () => {
-    this.props.onClose();
+    this.props.onCancel();
   };
 
   saveAddress = () => {
-    this.props.onPress(this.state);
+    this.props.onSave(this.state);
   };
 
   hideMapPicker = () => {
@@ -115,7 +107,6 @@ export default class extends PureComponent {
       area_id: area.id,
     };
     this.updateAddressFields(params);
-    // this.ref.current.animateToRegion(params);
   };
 
   onAreaButtonPress = () => {
@@ -131,7 +122,8 @@ export default class extends PureComponent {
   };
 
   render() {
-    const {visible, areas} = this.props;
+
+    const {areas} = this.props;
 
     const {
       latitude,
@@ -145,90 +137,83 @@ export default class extends PureComponent {
       isAreaListModalVisible,
     } = this.state;
 
-    let area = {};
-    if (area_id) {
-      area = areas.find(area => area.id === area_id) || {};
-    }
-
     return (
-      <Modal
-        animationType="slide"
-        visible={visible}
-        presentationStyle="fullScreen">
-        <View style={styles.container}>
-          <AddressFormFields
-            block={block}
-            avenue={avenue}
-            street={street}
-            building={building}
-            updateFields={this.updateFormFields}
+      <View style={styles.container}>
+
+        <AddressFormFields
+          block={block}
+          avenue={avenue}
+          street={street}
+          building={building}
+          updateFields={this.updateFormFields}
+        />
+
+        <View style={styles.mapContainer}>
+
+          <View style={styles.searchInputContainer}>
+            <Touchable
+              style={{
+                flex: 1,
+                padding: 10,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              onPress={this.onAreaButtonPress}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: '500',
+                  color: 'black',
+                }}>
+                {area_id ? areas.find(area => area.id === area_id).name : I18n.t('select_area')}
+              </Text>
+            </Touchable>
+          </View>
+
+          <MapPicker
+            onCancel={this.hideMapPicker}
+            visible={mapPickerVisibility}
+            updateAddress={this.updateAddressFields}
+            areas={areas}
+            address={{
+              latitude: latitude,
+              longitude: longitude,
+              area_id: area_id,
+            }}
           />
 
-          <View style={styles.mapContainer}>
-
-            <View style={styles.searchInputContainer}>
-              <Touchable
-                style={{
-                  flex: 1,
-                  padding: 10,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                onPress={this.onAreaButtonPress}>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    fontWeight: '500',
-                    color: 'black',
-                  }}>
-                  {area.id ? area.name : I18n.t('select_area')}
-                </Text>
-              </Touchable>
-            </View>
-
-            <MapPicker
-              onClose={this.hideMapPicker}
-              visible={mapPickerVisibility}
-              updateAddress={this.updateAddressFields}
-              areas={areas}
-              address={{
-                latitude: latitude,
-                longitude: longitude,
-                area_id: area_id,
-              }}
-            />
-
-            <List
-              title={I18n.t('select_area')}
-              activeIDs={[area_id]}
-              isVisible={isAreaListModalVisible}
-              onConfirm={this.setArea}
-              onCancel={this.hideAreaListModal}
-              onSave={this.hideAreaListModal}
-              items={areas}
-            />
-          </View>
-
-          <View style={styles.buttonsContainer}>
-            <Button
-              onPress={this.hideScreen}
-              style={styles.button}
-              background="transparent"
-              raised>
-              {I18n.t('cancel')}
-            </Button>
-
-            <Button
-              onPress={this.saveAddress}
-              style={styles.button}
-              raised
-              primary
-              dark>
-              {I18n.t('save')}
-            </Button>
-          </View>
         </View>
-      </Modal>
+
+        <View style={styles.buttonsContainer}>
+          <Button
+            onPress={this.hideScreen}
+            style={styles.button}
+            background="transparent"
+            raised>
+            {I18n.t('cancel')}
+          </Button>
+
+          <Button
+            onPress={this.saveAddress}
+            style={styles.button}
+            raised
+            primary
+            dark>
+            {I18n.t('save')}
+          </Button>
+        </View>
+
+        <List
+          title={I18n.t('select_area')}
+          activeIDs={[area_id]}
+          isVisible={isAreaListModalVisible}
+          onConfirm={this.setArea}
+          onCancel={this.hideAreaListModal}
+          onSave={this.hideAreaListModal}
+          items={areas}
+        />
+
+      </View>
     );
   }
 }
@@ -236,10 +221,11 @@ export default class extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
+    margin: 0,
     marginVertical: 20,
     padding: 10,
     opacity: 1,
+    // backgroundColor: colors.fadedWhite,
     backgroundColor: colors.fadedWhite,
   },
   buttonsContainer: {

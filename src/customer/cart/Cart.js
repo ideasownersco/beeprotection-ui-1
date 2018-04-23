@@ -12,7 +12,7 @@ import {
   SELECTORS as ORDER_SELECTORS,
 } from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
-import {Button} from 'react-native-paper';
+import {Button, } from 'react-native-paper';
 import I18n from 'utils/locale';
 import CartItems from 'customer/cart/components/CartItems';
 import DatePicker from 'customer/cart/components/DatePicker';
@@ -31,6 +31,7 @@ import CheckoutAlert from 'customer/cart/components/CheckoutAlert';
 import AddressesList from 'customer/cart/components/AddressesList';
 import CreateAddress from 'customer/cart/components/CreateAddress';
 import IconFactory from 'components/IconFactory';
+import Modal from 'react-native-modal';
 
 type State = {
   dates: Array,
@@ -347,13 +348,21 @@ class Cart extends PureComponent {
           activeItemID={selectedAddressID || null}
         />
 
-        <CreateAddress
-          visible={showAddressCreateModal}
-          onPress={this.saveAddress}
-          onClose={this.hideAddressCreateModal}
-          onSave={this.hideAddressCreateModal}
-          areas={areas}
-        />
+        <Modal
+          animationType="slide"
+          isVisible={showAddressCreateModal}
+          onSwipe={this.hideAddressCreateModal}
+          swipeDirection="down"
+          style={{margin:0,padding:0,backgroundColor:'white'}}
+          transparent={true}
+          presentationStyle="fullScreen"
+        >
+          <CreateAddress
+            onCancel={this.hideAddressCreateModal}
+            onSave={this.saveAddress}
+            areas={areas}
+          />
+        </Modal>
 
         <Button onPress={this.showAddressCreateModal} color={colors.primary} style={{alignItems: 'flex-start'}}>
           <View
@@ -410,7 +419,6 @@ class Cart extends PureComponent {
 
         <OrderSuccess
           onPress={this.onSuccessButtonPress}
-          // visible={true}
           visible={showOrderSuccessModal}
           onHide={this.hideSuccessModal}
           cart={cart}
