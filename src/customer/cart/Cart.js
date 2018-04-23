@@ -226,7 +226,7 @@ class Cart extends PureComponent {
   };
 
   showAddressCreateModal = () => {
-    let {isAuthenticated, redirectToLogin} = this.props;
+    let {isAuthenticated} = this.props;
 
     if (!isAuthenticated) {
       return this.redirectToLogin();
@@ -266,7 +266,6 @@ class Cart extends PureComponent {
       timings,
       isFetchingTimings,
       areas,
-      isAuthenticated,
     } = this.props;
     let {selectedDate, selectedAddressID, selectedTimeID} = cart;
 
@@ -436,6 +435,7 @@ class Cart extends PureComponent {
           close={this.hideCheckoutConfirmDialog}
           checkout={this.performCheckout}
         />
+
       </ScrollView>
     );
   }

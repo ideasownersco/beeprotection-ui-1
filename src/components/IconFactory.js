@@ -26,8 +26,8 @@ class IconFactory extends Component {
     size: PropTypes.number,
   };
 
-  shouldComponentUpdate() {
-    return false;
+  shouldComponentUpdate(nextProps) {
+    return nextProps.color !== this.props.color;
   }
 
   static defaultProps = {

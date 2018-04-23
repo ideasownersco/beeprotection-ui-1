@@ -90,7 +90,7 @@ class CreateOrder extends PureComponent {
   onPackagesListItemPress = (item: object) => {
     let params = {
       activePackageID: item.id,
-      total: parseInt(item.price),
+      total: parseFloat(item.price),
     };
 
     if (this.props.cart.activePackageID !== item.id) {
@@ -111,9 +111,9 @@ class CreateOrder extends PureComponent {
     let index = activeServicesIDs.indexOf(item.id);
 
     if (index > -1) {
-      currentAmount = parseInt(total) - parseInt(item.price);
+      currentAmount = parseFloat(total) - parseFloat(item.price);
     } else {
-      currentAmount = parseInt(total) + parseInt(item.price);
+      currentAmount = parseFloat(total) + parseFloat(item.price);
     }
 
     let params = {

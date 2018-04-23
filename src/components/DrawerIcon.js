@@ -26,7 +26,7 @@ export default class DrawerIcon extends Component {
           name="bars"
           size={28}
           style={{paddingLeft: 10}}
-          color={colors.primary}
+          color={colors.white}
         />
       </Touchable>
     );

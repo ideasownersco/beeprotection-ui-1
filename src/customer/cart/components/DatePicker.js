@@ -6,6 +6,12 @@ import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 
 export default class DatePicker extends Component {
+
+  static propTypes = {
+    onItemPress: PropTypes.func.isRequired,
+    activeItem: PropTypes.object,
+  };
+
   shouldComponentUpdate(nextProps) {
     return (
       nextProps.items !== this.props.items ||
@@ -60,11 +66,6 @@ export default class DatePicker extends Component {
     );
   }
 }
-
-DatePicker.propTypes = {
-  onItemPress: PropTypes.func.isRequired,
-  activeItem: PropTypes.object,
-};
 
 const styles = StyleSheet.create({
   listContainer: {

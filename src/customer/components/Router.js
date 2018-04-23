@@ -29,6 +29,14 @@ const getDrawerIcon = navigation => {
   };
 };
 
+const navStyle = {
+  headerTintColor: colors.white,
+  headerStyle: {
+    backgroundColor: colors.primary,
+    borderBottomWidth: 0,
+  },
+};
+
 const AuthStack = StackNavigator(
   {
     LoginScreen: {
@@ -44,10 +52,7 @@ const AuthStack = StackNavigator(
   {
     headerMode: 'none',
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.white,
-      headerStyle: {
-        borderBottomWidth: 0,
-      },
+      ...navStyle
     }),
     // initialRouteName:'RegisterScreen'
   },
@@ -105,11 +110,7 @@ const HomeStack = StackNavigator(
   {
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
-      headerTintColor: colors.white,
-      headerStyle: {
-        backgroundColor: colors.primary,
-        borderBottomWidth: 0,
-      },
+      ...navStyle
     }),
     // initialRouteName:'Map'
   },
@@ -131,7 +132,7 @@ const PastOrdersStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      ...navStyle
     }),
   },
 );
@@ -152,7 +153,7 @@ const UpcomingOrdersStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      ...navStyle
     }),
   },
 );
@@ -169,10 +170,7 @@ const SettingsStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      // headerTintColor: colors.primary,
-      headerStyle: {
-        backgroundColor: colors.primary,
-      },
+      ...navStyle
     }),
   },
 );
