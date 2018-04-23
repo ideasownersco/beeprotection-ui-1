@@ -18,8 +18,6 @@ export default class extends Component {
     onSave: PropTypes.func.isRequired,
   };
 
-
-
   constructor(props) {
     super(props);
     this.state = {
@@ -137,6 +135,8 @@ export default class extends Component {
       isAreaListModalVisible,
     } = this.state;
 
+    // console.log('state',{...this.state});
+
     return (
       <View style={styles.container}>
 
@@ -171,10 +171,7 @@ export default class extends Component {
           </View>
 
           <MapPicker
-            onCancel={this.hideMapPicker}
-            visible={mapPickerVisibility}
             updateAddress={this.updateAddressFields}
-            areas={areas}
             address={{
               latitude: latitude,
               longitude: longitude,

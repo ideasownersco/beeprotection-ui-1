@@ -351,11 +351,9 @@ class Cart extends PureComponent {
         <Modal
           animationType="slide"
           isVisible={showAddressCreateModal}
-          onSwipe={this.hideAddressCreateModal}
-          swipeDirection="down"
           style={{margin:0,padding:0,backgroundColor:'white'}}
-          transparent={true}
           presentationStyle="fullScreen"
+          transparent={false}
         >
           <CreateAddress
             onCancel={this.hideAddressCreateModal}
