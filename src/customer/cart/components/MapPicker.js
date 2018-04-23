@@ -65,14 +65,12 @@ export default class MapPicker extends Component {
   }
 
   updateAddress = (address: object) => {
-    console.log('updateAddress', address);
     if (this.state.initialized) {
       this.props.updateAddress(address);
     }
   };
 
   onDragEnd = e => {
-    console.log('onDragEnd', e);
     let {latitude, longitude} = e.nativeEvent.coordinate;
     let params = {
       latitude: latitude,
@@ -82,7 +80,6 @@ export default class MapPicker extends Component {
   };
 
   onRegionChange = region => {
-    console.log('onRegionChange', region.latitude);
     this.setState({
       latitude: region.latitude,
       longitude: region.longitude,

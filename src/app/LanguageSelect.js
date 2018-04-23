@@ -15,7 +15,6 @@ class LanguageSelect extends Component {
 
   render() {
     let active = this.props.app.language;
-    console.log('active', active);
 
     return (
       <LanguageSelectScene

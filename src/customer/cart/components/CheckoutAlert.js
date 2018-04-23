@@ -27,8 +27,6 @@ export default class CheckoutAlert extends Component {
       disabled,
     } = this.props;
 
-    console.log('props', this.props);
-
     return (
       <Dialog
         onDismiss={close}

@@ -9,7 +9,7 @@ import IconFactory from 'components/IconFactory';
 
 export default class ListItem extends Component {
   static propTypes = {
-    onItemPress: PropTypes.func.isRequired,
+    onItemPress: PropTypes.func,
     name: PropTypes.string,
     title: PropTypes.string.isRequired,
     iconProps: PropTypes.object,
@@ -20,7 +20,7 @@ export default class ListItem extends Component {
   }
 
   render() {
-    let {onItemPress, name, title, icon, iconProps, description, style, ...rest} = this.props;
+    let {onItemPress, name, title, iconProps, description, style, ...rest} = this.props;
     return (
       <PaperListItem
         onPress={name ? () => onItemPress(name) : onItemPress}

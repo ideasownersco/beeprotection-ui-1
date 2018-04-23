@@ -278,8 +278,6 @@ class Cart extends PureComponent {
       showCheckoutConfirmDialog,
     } = this.state;
 
-    console.log('props', this.props.user);
-
     if (!cartItems.length) {
       return <EmptyCart/>;
     }
