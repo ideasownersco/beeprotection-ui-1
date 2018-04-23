@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
-import Touchable from 'react-native-platform-touchable';
+import {FlatList, StyleSheet} from 'react-native';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
+import {ListItem} from "react-native-paper";
+import Divider from "components/Divider";
+import CheckedListItem from "../../../components/CheckedListItem";
 
 export default class AddressesList extends Component {
   // shouldComponentUpdate(nextProps) {
@@ -17,42 +18,51 @@ export default class AddressesList extends Component {
   renderItem = ({item}) => {
     const {onItemPress, activeItemID} = this.props;
     return (
-      <Touchable
+
+      <CheckedListItem
+        checked={activeItemID === item.id}
         onPress={() => (!item.area.active ? {} : onItemPress(item))}
-        key={item.id}>
-        <View
-          style={[
-            styles.itemContainer,
-            item.area.active
-              ? activeItemID === item.id && styles.itemContainerActive
-              : {opacity: 0.5},
-          ]}>
-          <Text
-            style={[
-              styles.addressField,
-              activeItemID === item.id && styles.addressFieldActive,
-            ]}>
-            <Text>{item.area.name} ,</Text>
-            <Text>
-              {' '}
-              {I18n.t('block')} {item.block},{' '}
-            </Text>
-            <Text>
-              {' '}
-              {I18n.t('street')} {item.street},{' '}
-            </Text>
-            {item.avenue && (
-              <Text>
-                {I18n.t('avenue')} {item.avenue},{' '}
-              </Text>
-            )}
-            <Text>
-              {I18n.t('building')} {item.building}
-            </Text>
-          </Text>
-        </View>
-      </Touchable>
+        title={item.area.name}
+        description={`${I18n.t('block')} ${item.block}, ${I18n.t('street')} ${item.street}, ${I18n.t('avenue')} ${item.avenue}, ${I18n.t('building')} ${item.building}`}
+      />
     );
+    // return (
+    //   <Touchable
+    //     onPress={() => (!item.area.active ? {} : onItemPress(item))}
+    //     key={item.id}>
+    //     <View
+    //       style={[
+    //         styles.itemContainer,
+    //         item.area.active
+    //           ? activeItemID === item.id && styles.itemContainerActive
+    //           : {opacity: 0.5},
+    //       ]}>
+    //       <Text
+    //         style={[
+    //           styles.addressField,
+    //           activeItemID === item.id && styles.addressFieldActive,
+    //         ]}>
+    //         <Text>{item.area.name} ,</Text>
+    //         <Text>
+    //           {' '}
+    //           {I18n.t('block')} {item.block},{' '}
+    //         </Text>
+    //         <Text>
+    //           {' '}
+    //           {I18n.t('street')} {item.street},{' '}
+    //         </Text>
+    //         {item.avenue && (
+    //           <Text>
+    //             {I18n.t('avenue')} {item.avenue},{' '}
+    //           </Text>
+    //         )}
+    //         <Text>
+    //           {I18n.t('building')} {item.building}
+    //         </Text>
+    //       </Text>
+    //     </View>
+    //   </Touchable>
+    // );
   };
 
   render() {
@@ -64,6 +74,7 @@ export default class AddressesList extends Component {
         style={styles.listContainer}
         keyExtractor={(item, index) => `${index}`}
         extraData={activeItemID}
+        ItemSeparatorComponent={() => <Divider />}
       />
     );
   }
@@ -77,11 +88,10 @@ AddressesList.propTypes = {
 
 const styles = StyleSheet.create({
   listContainer: {
-    margin: 5,
   },
   itemContainer: {
     flexDirection: 'row',
-    padding: 10,
+    padding: 5,
     marginHorizontal: 5,
     backgroundColor: colors.lightGrey,
     borderRadius: 5,

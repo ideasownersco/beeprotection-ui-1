@@ -3,42 +3,49 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import colors from 'assets/theme/colors';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Octicons from 'react-native-vector-icons/Octicons';
 
 const components = {
-  Ionicons,
   MaterialCommunityIcons,
+  MaterialIcons,
+  Ionicons,
   Entypo,
   FontAwesome,
   Octicons,
-  MaterialIcons,
 };
 
 class IconFactory extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    size: PropTypes.number,
   };
 
-  static defaultProps = {
-    type: 'Ionicons',
-    name: 'bug',
-  };
-
-  shouldComponentUpdate(nextProps) {
-    return nextProps.color !== this.props.color;
+  shouldComponentUpdate() {
+    return false;
   }
 
+  static defaultProps = {
+    size: 24,
+    color: 'rgba(0,0,0,0.87)',
+  };
+
   render() {
-    let {type, name, ...rest} = this.props;
+    let {type, style, color, size, name} = this.props;
     const Icon = components[type];
-    return <Icon color={colors.fadedGrey} size={30} name={name} {...rest} />;
+    return (
+      <Icon
+        name={name}
+        color={color}
+        size={size}
+        style={[{width: size, height: size}, style]}
+      />
+    );
   }
 }
 

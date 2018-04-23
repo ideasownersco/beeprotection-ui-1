@@ -297,6 +297,7 @@ class Cart extends PureComponent {
           title={I18n.t('order_details')}
           style={{padding: 10}}
           icon="local-car-wash"
+          iconType="MaterialIcons"
         />
 
         <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
@@ -322,7 +323,6 @@ class Cart extends PureComponent {
           icon="clock-fast"
           iconType="MaterialCommunityIcons"
           iconSize={33}
-          iconStyle={{height: 33, width: 33}}
         />
 
         <TimePicker
@@ -338,9 +338,10 @@ class Cart extends PureComponent {
 
         <SectionTitle
           title={I18n.t('address')}
-          style={{padding: 10, marginTop: 10}}
+          style={{padding: 10}}
           icon="location-pin"
           iconType="Entypo"
+          iconSize={28}
         />
 
         <AddressesList
@@ -357,13 +358,11 @@ class Cart extends PureComponent {
           areas={areas}
         />
 
-        <Button onPress={this.showAddressCreateModal} color={colors.primary}>
+        <Button onPress={this.showAddressCreateModal} color={colors.primary} style={{alignItems: 'flex-start'}}>
           <View
             style={{
-              flex: 1,
               flexDirection: 'row',
               alignItems: 'center',
-              justifyContent: 'flex-start',
             }}>
             <IconFactory
               type="MaterialIcons"

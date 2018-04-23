@@ -17,17 +17,15 @@ const SectionTitle = ({
   icon,
   iconType,
   iconSize,
-  iconStyle,
 }) => {
   return (
     <View style={[styles.container, style]}>
       {icon && (
         <IconFactory
-          type={iconType ? iconType : 'MaterialIcons'}
+          type={iconType}
           name={icon}
           color={colors.primary}
-          style={[styles.icon, iconStyle]}
-          size={iconSize ? iconSize : 25}
+          size={iconSize}
         />
       )}
       <Title style={[styles.title, {color: colors.darkGrey}, titleStyle]}>
@@ -49,10 +47,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     paddingHorizontal:5
-  },
-  icon: {
-    height: 25,
-    width: 25,
   },
 });
 export default SectionTitle;
