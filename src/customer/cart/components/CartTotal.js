@@ -31,9 +31,8 @@ export default class CartTotal extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingHorizontal: 10,
     backgroundColor: colors.lightGrey,
-    marginBottom: 5,
   },
   packageItemContainer: {
     flexDirection: 'row',

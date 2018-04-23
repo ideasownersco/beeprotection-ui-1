@@ -67,17 +67,14 @@ DatePicker.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // marginVertical:30,
-    paddingTop: 10,
-  },
   listContainer: {
     backgroundColor: colors.lightGrey,
     borderWidth: 1,
     borderColor: colors.lightGrey,
   },
   itemContainer: {
-    padding: 15,
+    paddingVertical: 5,
+    paddingHorizontal:15,
     alignItems: 'center',
   },
   itemContainerActive: {

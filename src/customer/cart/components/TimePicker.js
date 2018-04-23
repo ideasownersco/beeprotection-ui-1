@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGrey,
   },
   itemContainer: {
-    padding: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 5,
+    paddingHorizontal:15,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.lightGrey,
@@ -128,7 +128,9 @@ const styles = StyleSheet.create({
   },
   day: {
     color: colors.darkGrey,
-    fontSize: 13,
+    fontSize: 12,
+    fontWeight:'700',
+    marginTop:-5
   },
   dayActive: {
     color: colors.primary,

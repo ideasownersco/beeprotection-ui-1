@@ -282,7 +282,7 @@ class Cart extends PureComponent {
     console.log('props', this.props.user);
 
     if (!cartItems.length) {
-      return <EmptyCart />;
+      return <EmptyCart/>;
     }
 
     return (
@@ -299,13 +299,9 @@ class Cart extends PureComponent {
           icon="local-car-wash"
         />
 
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
 
-        <Divider />
-
-        <CartTotal total={cartTotal} />
-
-        {/*<Divider />*/}
+        <CartTotal total={cartTotal}/>
 
         <SectionTitle
           title={I18n.t('date')}
@@ -329,17 +325,15 @@ class Cart extends PureComponent {
           iconStyle={{height: 33, width: 33}}
         />
 
-        <View style={{paddingBottom: 20}}>
-          <TimePicker
-            items={timings || []}
-            onItemPress={this.onTimeChange}
-            activeItemID={selectedTimeID}
-            isFetching={isFetchingTimings}
-          />
-        </View>
+        <TimePicker
+          items={timings || []}
+          onItemPress={this.onTimeChange}
+          activeItemID={selectedTimeID}
+          isFetching={isFetchingTimings}
+        />
 
         <Divider
-          style={{flex: 1, padding: 10, backgroundColor: colors.lightGrey}}
+          style={{flex: 1, marginTop: 20, padding: 10, backgroundColor: colors.lightGrey}}
         />
 
         <SectionTitle
@@ -400,7 +394,7 @@ class Cart extends PureComponent {
           selectedItem={paymentMode}
         />
 
-        <Divider style={{marginVertical: 20}} />
+        <Divider style={{marginVertical: 20}}/>
 
         <Button
           onPress={this.checkout}

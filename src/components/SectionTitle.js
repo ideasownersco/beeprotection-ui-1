@@ -27,7 +27,7 @@ const SectionTitle = ({
           name={icon}
           color={colors.primary}
           style={[styles.icon, iconStyle]}
-          size={iconSize ? iconSize : 30}
+          size={iconSize ? iconSize : 25}
         />
       )}
       <Title style={[styles.title, {color: colors.darkGrey}, titleStyle]}>
@@ -43,17 +43,16 @@ SectionTitle.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    // flex:1,
     flexDirection: 'row',
     alignItems: 'center',
   },
   title: {
-    fontSize: 20,
-    paddingHorizontal: 5,
+    fontSize: 18,
+    paddingHorizontal:5
   },
   icon: {
-    height: 30,
-    width: 30,
+    height: 25,
+    width: 25,
   },
 });
 export default SectionTitle;
