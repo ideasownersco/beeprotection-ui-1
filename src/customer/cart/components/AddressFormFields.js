@@ -31,7 +31,7 @@ export default class AddressFormFields extends PureComponent {
           />
         </View>
 
-        <View style={[styles.addressField, {flex: 3}]}>
+        <View style={[styles.addressField]}>
           <FormTextInput
             onValueChange={updateFields}
             value={street}
@@ -45,31 +45,31 @@ export default class AddressFormFields extends PureComponent {
           />
         </View>
 
-        {/*<View style={styles.addressField}>*/}
-        {/*<FormTextInput*/}
-        {/*onValueChange={updateFields}*/}
-        {/*value={avenue}*/}
-        {/*field="avenue"*/}
-        {/*maxLength={40}*/}
-        {/*keyboardType="numeric"*/}
-        {/*autoFocus={false}*/}
-        {/*style={styles.textInput}*/}
-        {/*label={I18n.t('avenue')}*/}
-        {/*/>*/}
-        {/*</View>*/}
+        <View style={styles.addressField}>
+          <FormTextInput
+            onValueChange={updateFields}
+            value={avenue}
+            field="avenue"
+            maxLength={40}
+            keyboardType="numeric"
+            autoFocus={false}
+            style={styles.textInput}
+            label={I18n.t('avenue')}
+          />
+        </View>
 
-        {/*<View style={styles.addressField}>*/}
-        {/*<FormTextInput*/}
-        {/*onValueChange={updateFields}*/}
-        {/*value={building}*/}
-        {/*field="building"*/}
-        {/*maxLength={40}*/}
-        {/*keyboardType="numeric"*/}
-        {/*autoFocus={false}*/}
-        {/*style={styles.textInput}*/}
-        {/*label={I18n.t('building')}*/}
-        {/*/>*/}
-        {/*</View>*/}
+        <View style={styles.addressField}>
+          <FormTextInput
+            onValueChange={updateFields}
+            value={building}
+            field="building"
+            maxLength={40}
+            keyboardType="numeric"
+            autoFocus={false}
+            style={styles.textInput}
+            label={I18n.t('building')}
+          />
+        </View>
       </View>
     );
   }

@@ -158,13 +158,14 @@ export default class extends PureComponent {
         <View style={styles.container}>
           <AddressFormFields
             block={block}
-            // avenue={avenue}
+            avenue={avenue}
             street={street}
-            // building={building}
+            building={building}
             updateFields={this.updateFormFields}
           />
 
           <View style={styles.mapContainer}>
+
             <View style={styles.searchInputContainer}>
               <Touchable
                 style={{

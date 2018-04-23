@@ -3,22 +3,21 @@ import PropTypes from 'prop-types';
 import {FlatList, StyleSheet} from 'react-native';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
-import {ListItem} from "react-native-paper";
 import Divider from "components/Divider";
-import CheckedListItem from "../../../components/CheckedListItem";
+import CheckedListItem from "components/CheckedListItem";
 
 export default class AddressesList extends Component {
-  // shouldComponentUpdate(nextProps) {
-  //   return (
-  //     nextProps.items !== this.props.items ||
-  //     nextProps.activeItemID !== this.props.activeItemID
-  //   );
-  // }
+
+  shouldComponentUpdate(nextProps) {
+    return (
+      nextProps.items !== this.props.items ||
+      nextProps.activeItemID !== this.props.activeItemID
+    );
+  }
 
   renderItem = ({item}) => {
     const {onItemPress, activeItemID} = this.props;
     return (
-
       <CheckedListItem
         checked={activeItemID === item.id}
         onPress={() => (!item.area.active ? {} : onItemPress(item))}
@@ -26,43 +25,6 @@ export default class AddressesList extends Component {
         description={`${I18n.t('block')} ${item.block}, ${I18n.t('street')} ${item.street}, ${I18n.t('avenue')} ${item.avenue}, ${I18n.t('building')} ${item.building}`}
       />
     );
-    // return (
-    //   <Touchable
-    //     onPress={() => (!item.area.active ? {} : onItemPress(item))}
-    //     key={item.id}>
-    //     <View
-    //       style={[
-    //         styles.itemContainer,
-    //         item.area.active
-    //           ? activeItemID === item.id && styles.itemContainerActive
-    //           : {opacity: 0.5},
-    //       ]}>
-    //       <Text
-    //         style={[
-    //           styles.addressField,
-    //           activeItemID === item.id && styles.addressFieldActive,
-    //         ]}>
-    //         <Text>{item.area.name} ,</Text>
-    //         <Text>
-    //           {' '}
-    //           {I18n.t('block')} {item.block},{' '}
-    //         </Text>
-    //         <Text>
-    //           {' '}
-    //           {I18n.t('street')} {item.street},{' '}
-    //         </Text>
-    //         {item.avenue && (
-    //           <Text>
-    //             {I18n.t('avenue')} {item.avenue},{' '}
-    //           </Text>
-    //         )}
-    //         <Text>
-    //           {I18n.t('building')} {item.building}
-    //         </Text>
-    //       </Text>
-    //     </View>
-    //   </Touchable>
-    // );
   };
 
   render() {
