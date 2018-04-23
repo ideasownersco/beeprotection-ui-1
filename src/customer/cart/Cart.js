@@ -2,7 +2,7 @@
  * @flow
  */
 import React, {PureComponent} from 'react';
-import {ScrollView, Text, Alert, View} from 'react-native';
+import {Alert, ScrollView, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
@@ -12,25 +12,25 @@ import {
   SELECTORS as ORDER_SELECTORS,
 } from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
-import {Button, Title} from 'react-native-paper';
+import {Button} from 'react-native-paper';
 import I18n from 'utils/locale';
 import CartItems from 'customer/cart/components/CartItems';
 import DatePicker from 'customer/cart/components/DatePicker';
-import AddressPicker from 'customer/cart/components/AddressPicker';
 import EmptyCart from 'customer/cart/components/EmptyCart';
 import moment from 'moment';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 import colors from 'assets/theme/colors';
-import SectionHeading from 'company/components/SectionHeading';
 import CartTotal from 'customer/cart/components/CartTotal';
 import PaymentOptions from 'customer/cart/components/PaymentOptions';
 import OrderSuccess from 'customer/cart/components/OrderSuccess';
 import PaymentPage from 'customer/cart/components/PaymentPage';
-import DateTimePicker from 'react-native-modal-datetime-picker';
 import TimePicker from './components/TimePicker';
-import {ACTIONS as APP_ACTIONS} from '../../app/common/actions';
-import SectionTitle from '../../components/SectionTitle';
-import CheckoutAlert from "./components/CheckoutAlert";
+import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
+import SectionTitle from 'components/SectionTitle';
+import CheckoutAlert from 'customer/cart/components/CheckoutAlert';
+import AddressesList from 'customer/cart/components/AddressesList';
+import CreateAddress from 'customer/cart/components/CreateAddress';
+import IconFactory from 'components/IconFactory';
 
 type State = {
   dates: Array,
@@ -45,10 +45,11 @@ class Cart extends PureComponent {
     dates: [],
     showPaymentModal: false,
     showOrderSuccessModal: false,
-    paymentMode: 'cash',
+    showAddressCreateModal: false,
+    showCheckoutConfirmDialog: false,
     timePickerModalVisible: false,
-    checkoutAlertModalVisible:false,
-    performingCheckout:false
+    performingCheckout: false,
+    paymentMode: 'cash',
   };
 
   static defaultProps = {
@@ -76,13 +77,22 @@ class Cart extends PureComponent {
   }
 
   checkout = () => {
+    this.showCheckoutConfirmDialog();
+  };
+
+  showCheckoutConfirmDialog = () => {
     this.setState({
-      checkoutAlertModalVisible:true
-    })
+      showCheckoutConfirmDialog: true,
+    });
+  };
+
+  hideCheckoutConfirmDialog = () => {
+    this.setState({
+      showCheckoutConfirmDialog: false,
+    });
   };
 
   performCheckout = () => {
-
     const {user, isAuthenticated, cart} = this.props;
     const {paymentMode} = this.state;
 
@@ -95,7 +105,7 @@ class Cart extends PureComponent {
     } = cart;
     if (!isAuthenticated) {
       this.props.navigation.navigate('Login', {
-        redirectRoute: 'Cart'
+        redirectRoute: 'Cart',
       });
     } else {
       const item = {
@@ -108,9 +118,9 @@ class Cart extends PureComponent {
         payment_mode: paymentMode,
       };
 
-      let address = user && user.addresses.find(
-        address => address.id === selectedAddressID,
-      );
+      let address =
+        user &&
+        user.addresses.find(address => address.id === selectedAddressID);
 
       if (!address.area.active) {
         return this.props.dispatch(
@@ -128,18 +138,18 @@ class Cart extends PureComponent {
           if (order.status == 'Success') {
             this.setState({
               showOrderSuccessModal: true,
-              checkoutAlertModalVisible:false
+              showCheckoutConfirmDialog: false,
             });
           } else if (order.status == 'Checkout') {
             this.setState({
               showPaymentModal: true,
-              checkoutAlertModalVisible:false
+              showCheckoutConfirmDialog: false,
             });
           }
         })
         .catch(e => {
           this.setState({
-            checkoutAlertModalVisible:false
+            showCheckoutConfirmDialog: false,
           });
         });
     }
@@ -164,7 +174,7 @@ class Cart extends PureComponent {
     });
   };
 
-  onAddressPickerItemPress = (item: object) => {
+  onAddressesListItemPress = (item: object) => {
     this.props.actions.setCartItem('selectedAddressID', item.id);
   };
 
@@ -188,10 +198,10 @@ class Cart extends PureComponent {
         onPress: () => this.props.actions.removeCartItem(item.id),
       },
     ]);
-
   };
 
   saveAddress = address => {
+    console.log('save address');
     const {isAuthenticated} = this.props;
     if (!isAuthenticated) {
       this.redirectToLogin();
@@ -215,15 +225,33 @@ class Cart extends PureComponent {
     });
   };
 
-  redirectToLogin = () => {
+  showAddressCreateModal = () => {
+    let {isAuthenticated, redirectToLogin} = this.props;
 
+    if (!isAuthenticated) {
+      return this.redirectToLogin();
+    }
+
+    this.setState({
+      showAddressCreateModal: true,
+    });
+  };
+
+  hideAddressCreateModal = () => {
+    this.setState({
+      showAddressCreateModal: false,
+    });
+  };
+
+  redirectToLogin = () => {
     return Alert.alert(`${I18n.t('login_required')}`, '', [
       {text: I18n.t('cancel')},
       {
         text: I18n.t('login'),
-        onPress: () => this.props.navigation.navigate('Login', {
-          redirectRoute: 'Cart'
-        }),
+        onPress: () =>
+          this.props.navigation.navigate('Login', {
+            redirectRoute: 'Cart',
+          }),
       },
     ]);
   };
@@ -238,7 +266,7 @@ class Cart extends PureComponent {
       timings,
       isFetchingTimings,
       areas,
-      isAuthenticated
+      isAuthenticated,
     } = this.props;
     let {selectedDate, selectedAddressID, selectedTimeID} = cart;
 
@@ -246,20 +274,24 @@ class Cart extends PureComponent {
       dates,
       showPaymentModal,
       showOrderSuccessModal,
+      showAddressCreateModal,
       paymentMode,
+      showCheckoutConfirmDialog,
     } = this.state;
 
     console.log('props', this.props.user);
 
     if (!cartItems.length) {
-      return <EmptyCart/>;
+      return <EmptyCart />;
     }
 
     return (
       <ScrollView
         contentInset={{bottom: 50}}
-        style={[{backgroundColor: 'white'},checkout.isFetching && {opacity:.4}]}
-      >
+        style={[
+          {backgroundColor: 'white'},
+          checkout.isFetching && {opacity: 0.4},
+        ]}>
 
         <SectionTitle
           title={I18n.t('order_details')}
@@ -267,13 +299,13 @@ class Cart extends PureComponent {
           icon="local-car-wash"
         />
 
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
 
-        <Separator/>
+        <Divider />
 
-        <CartTotal total={cartTotal}/>
+        <CartTotal total={cartTotal} />
 
-        {/*<Separator />*/}
+        {/*<Divider />*/}
 
         <SectionTitle
           title={I18n.t('date')}
@@ -306,29 +338,53 @@ class Cart extends PureComponent {
           />
         </View>
 
-        <Separator
+        <Divider
           style={{flex: 1, padding: 10, backgroundColor: colors.lightGrey}}
         />
 
         <SectionTitle
           title={I18n.t('address')}
           style={{padding: 10, marginTop: 10}}
-          icon="pin"
-          iconType="MaterialCommunityIcons"
+          icon="location-pin"
+          iconType="Entypo"
         />
 
-        <AddressPicker
-          redirectToLogin={this.redirectToLogin}
-          isAuthenticated={isAuthenticated}
-          addresses={user ? (user.addresses ? user.addresses : []) : []}
-          saveAddress={this.saveAddress}
-          onAddressPickerItemPress={this.onAddressPickerItemPress}
+        <AddressesList
+          items={user ? (user.addresses ? user.addresses : []) : []}
+          onItemPress={this.onAddressesListItemPress}
           activeItemID={selectedAddressID || null}
-          initialized={this.state.initialized}
+        />
+
+        <CreateAddress
+          visible={showAddressCreateModal}
+          onPress={this.saveAddress}
+          onClose={this.hideAddressCreateModal}
+          onSave={this.hideAddressCreateModal}
           areas={areas}
         />
 
-        <Separator
+        <Button onPress={this.showAddressCreateModal} color={colors.primary}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+            }}>
+            <IconFactory
+              type="MaterialIcons"
+              name="add"
+              size={22}
+              color={colors.primary}
+            />
+            <Text
+              style={{color: colors.primary, fontSize: 18, fontWeight: '700'}}>
+              {I18n.t('add_address')}
+            </Text>
+          </View>
+        </Button>
+
+        <Divider
           style={{flex: 1, padding: 10, backgroundColor: colors.lightGrey}}
         />
 
@@ -344,9 +400,7 @@ class Cart extends PureComponent {
           selectedItem={paymentMode}
         />
 
-        <Separator
-          style={{marginVertical: 20}}
-        />
+        <Divider style={{marginVertical: 20}} />
 
         <Button
           onPress={this.checkout}
@@ -379,8 +433,16 @@ class Cart extends PureComponent {
           onHide={this.hideCheckoutModal}
         />
 
-        <CheckoutAlert disabled={checkout.isFetching} address={user && user.addresses && user.addresses[selectedAddressID]} total={cartTotal} date={selectedDate} time={timings.length && timings[selectedTimeID]} visible={this.state.checkoutAlertModalVisible} close={()=>this.setState({checkoutAlertModalVisible:false})} checkout={this.performCheckout}/>
-
+        <CheckoutAlert
+          disabled={checkout.isFetching}
+          address={user && user.addresses && user.addresses[selectedAddressID]}
+          total={cartTotal}
+          date={selectedDate}
+          time={timings.length && timings[selectedTimeID]}
+          visible={showCheckoutConfirmDialog}
+          close={this.hideCheckoutConfirmDialog}
+          checkout={this.performCheckout}
+        />
       </ScrollView>
     );
   }

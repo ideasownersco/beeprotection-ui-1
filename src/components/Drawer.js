@@ -7,7 +7,7 @@ import {NavigationActions} from 'react-navigation';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import DrawerItem from 'components/DrawerItem';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 
 export default class Drawer extends Component {
   onItemPress = (routeName: string) => {
@@ -32,7 +32,7 @@ export default class Drawer extends Component {
           active={this.state.activeRoute === 'HomeStack'}
         />
 
-        <Separator />
+        <Divider />
 
         <DrawerItem
           title={I18n.t('create_order')}
@@ -42,7 +42,7 @@ export default class Drawer extends Component {
           active={this.state.activeRoute === 'CreateOrderStack'}
         />
 
-        <Separator />
+        <Divider />
 
         <DrawerItem
           title={I18n.t('cart')}
@@ -52,7 +52,7 @@ export default class Drawer extends Component {
           active={this.state.activeRoute === 'CartStack'}
         />
 
-        <Separator />
+        <Divider />
 
         <DrawerItem
           title={I18n.t('settings')}

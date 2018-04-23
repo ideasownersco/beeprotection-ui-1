@@ -25,7 +25,7 @@ const SectionTitle = ({
         <IconFactory
           type={iconType ? iconType : 'MaterialIcons'}
           name={icon}
-          color={colors.darkGrey}
+          color={colors.primary}
           style={[styles.icon, iconStyle]}
           size={iconSize ? iconSize : 30}
         />

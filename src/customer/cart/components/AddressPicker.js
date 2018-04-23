@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, View} from 'react-native';
 import AddressesList from 'customer/cart/components/AddressesList';
-import CreateAddressForm from 'customer/cart/components/CreateAddressForm';
+import CreateAddress from 'customer/cart/components/CreateAddress';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -18,10 +18,9 @@ export default class AddressPicker extends PureComponent {
   };
 
   showCreateAddressForm = () => {
+    let {isAuthenticated, redirectToLogin} = this.props;
 
-    let {isAuthenticated,redirectToLogin} = this.props;
-
-    if(!isAuthenticated) {
+    if (!isAuthenticated) {
       return redirectToLogin();
     }
 
@@ -52,13 +51,6 @@ export default class AddressPicker extends PureComponent {
 
     return (
       <View style={styles.container}>
-
-        <AddressesList
-          items={addresses}
-          onItemPress={onAddressPickerItemPress}
-          activeItemID={activeItemID}
-        />
-
         <Touchable onPress={this.showCreateAddressForm}>
           <View style={styles.buttonContainer}>
             <EvilIcons name="plus" color={colors.primary} size={35} />
@@ -66,7 +58,7 @@ export default class AddressPicker extends PureComponent {
           </View>
         </Touchable>
 
-        <CreateAddressForm
+        <CreateAddress
           visible={createAddressFormVisibility}
           onPress={this.saveAddress}
           onClose={this.hideCreateAddressForm}
@@ -95,11 +87,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // paddingHorizontal: 10,
     paddingVertical: 5,
-    justifyContent:'flex-start',
+    justifyContent: 'flex-start',
   },
   buttonText: {
     flex: 1,
     fontSize: 18,
-    color:colors.primary
+    color: colors.primary,
   },
 });

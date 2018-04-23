@@ -3,6 +3,7 @@ import {StyleSheet, Text, TouchableHighlight} from 'react-native';
 import PropTypes from 'prop-types';
 import colors from 'theme/colors';
 import Touchable from 'react-native-platform-touchable';
+import {TouchableRipple} from 'react-native-paper';
 
 export default class Button extends Component {
   shouldComponentUpdate(nextProps) {
@@ -34,7 +35,7 @@ export default class Button extends Component {
     } = this.props;
 
     return (
-      <TouchableHighlight
+      <TouchableRipple
         {...rest}
         disabled={disabled}
         underlayColor={underlayColor}
@@ -45,7 +46,7 @@ export default class Button extends Component {
           style,
         ]}>
         <Text style={[styles.buttonText, titleStyle]}>{title}</Text>
-      </TouchableHighlight>
+      </TouchableRipple>
     );
   }
 }

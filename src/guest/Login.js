@@ -12,7 +12,7 @@ import FormContent from '../components/FormContent';
 import FormTextInput from '../components/FormTextInput';
 import FormSubmit from '../components/FormSubmit';
 import colors from '../assets/theme/colors';
-import Separator from '../components/Separator';
+import Divider from '../components/Divider';
 
 class Login extends Component {
   static propTypes = {
@@ -40,7 +40,7 @@ class Login extends Component {
 
     let {redirectRoute} = this.props.navigation.state.params || {};
 
-    console.log('redirectRoute',redirectRoute);
+    console.log('redirectRoute', redirectRoute);
 
     return new Promise((resolve, reject) => {
       // this.props.actions.checkout({item, resolve, reject});
@@ -53,10 +53,10 @@ class Login extends Component {
       // if(scene && scene === 'checkout') {
       //   this.props.navigation.navigate('Cart');
       // }
-      this.props.actions.login({credentials,resolve,reject,redirectRoute});
+      this.props.actions.login({credentials, resolve, reject, redirectRoute});
     })
       .then(user => {
-        console.log('u',user);
+        console.log('u', user);
         // if(scene && scene === 'checkout') {
         //   this.props.navigation.navigate('Cart');
         // }
@@ -64,7 +64,6 @@ class Login extends Component {
       .catch(e => {
         console.log('e');
       });
-
   };
 
   handleRegisterRoute = () => {
@@ -127,7 +126,7 @@ class Login extends Component {
       busy,
     } = this.state;
 
-    console.log('props',this.props);
+    console.log('props', this.props);
 
     return (
       <FormContainer>
@@ -157,7 +156,7 @@ class Login extends Component {
             style={{marginTop: 20}}
           />
 
-          <Separator style={{marginVertical: 30}} />
+          <Divider style={{marginVertical: 30}} />
 
           <FormSubmit
             onPress={this.handleRegisterRoute}

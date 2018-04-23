@@ -46,8 +46,7 @@ export default class UploadImage extends Component {
         return allowedImages;
       })
       .then(pendingImages => this.props.updateImage(pendingImages))
-      .catch(e => {
-      });
+      .catch(e => {});
   };
 
   removeImage = image => {
@@ -76,7 +75,7 @@ export default class UploadImage extends Component {
             size={30}
           />
         </TouchableHighlight>
-        <Image key={index} source={{uri: item}} style={styles.image}/>
+        <Image key={index} source={{uri: item}} style={styles.image} />
       </View>
     );
   };
@@ -90,7 +89,7 @@ export default class UploadImage extends Component {
           style={styles.cameraIcon}
           onPress={() => this.pickImage()}
           underlayColor="transparent">
-          <FontAwesome name="camera" size={100} color="white"/>
+          <FontAwesome name="camera" size={100} color="white" />
         </TouchableHighlight>
 
         <View style={styles.menuContainer}>

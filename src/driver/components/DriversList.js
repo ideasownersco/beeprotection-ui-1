@@ -4,7 +4,7 @@ import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import Feather from 'react-native-vector-icons/Feather';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 
 export default class DriversList extends Component {
   static propTypes = {
@@ -67,7 +67,7 @@ export default class DriversList extends Component {
         style={styles.listContainer}
         keyExtractor={item => `${item.id}`}
         extraData={activeItemID}
-        ItemSeparatorComponent={() => <Separator style={{marginVertical: 5}} />}
+        ItemSeparatorComponent={() => <Divider style={{marginVertical: 5}} />}
       />
     );
   }

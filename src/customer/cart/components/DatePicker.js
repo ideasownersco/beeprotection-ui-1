@@ -54,6 +54,8 @@ export default class DatePicker extends Component {
         keyExtractor={(item, index) => `${index}`}
         horizontal={true}
         extraData={activeItem}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       />
     );
   }

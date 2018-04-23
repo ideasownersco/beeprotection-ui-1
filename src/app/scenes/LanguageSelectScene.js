@@ -1,26 +1,39 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import colors from "assets/theme/colors";
+import colors from 'assets/theme/colors';
 
-const LanguageSelectScene = ({active,onItemPress}) => {
-  console.log('active',active);
+const LanguageSelectScene = ({active, onItemPress}) => {
+  console.log('active', active);
   return (
     <View style={[styles.container]}>
       <TouchableHighlight
         onPress={() => onItemPress('en')}
         style={styles.selectLanguageWrapper}
         underlayColor="transparent"
-        activeOpacity={0.6}
-      >
-        <Text style={[styles.languageTitle,active && active === 'en' && styles.active]}> English </Text>
+        activeOpacity={0.6}>
+        <Text
+          style={[
+            styles.languageTitle,
+            active && active === 'en' && styles.active,
+          ]}>
+          {' '}
+          English{' '}
+        </Text>
       </TouchableHighlight>
       <TouchableHighlight
         onPress={() => onItemPress('ar')}
         style={styles.selectLanguageWrapper}
         underlayColor="transparent"
         activeOpacity={0.6}>
-        <Text style={[styles.languageTitle,active && active === 'ar' && styles.active]}> العربي </Text>
+        <Text
+          style={[
+            styles.languageTitle,
+            active && active === 'ar' && styles.active,
+          ]}>
+          {' '}
+          العربي{' '}
+        </Text>
       </TouchableHighlight>
     </View>
   );
@@ -45,9 +58,9 @@ const styles = StyleSheet.create({
     fontSize: 70,
     textAlign: 'center',
   },
-  active:{
-    color:colors.primary
-  }
+  active: {
+    color: colors.primary,
+  },
 });
 
 export default LanguageSelectScene;

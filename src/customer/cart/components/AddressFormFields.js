@@ -5,7 +5,6 @@ import FormTextInput from 'components/FormTextInput';
 import I18n from 'utils/locale';
 
 export default class AddressFormFields extends PureComponent {
-
   static propTypes = {
     block: PropTypes.string,
     street: PropTypes.string,
@@ -32,7 +31,7 @@ export default class AddressFormFields extends PureComponent {
           />
         </View>
 
-        <View style={[styles.addressField,{flex:3}]}>
+        <View style={[styles.addressField, {flex: 3}]}>
           <FormTextInput
             onValueChange={updateFields}
             value={street}
@@ -47,36 +46,34 @@ export default class AddressFormFields extends PureComponent {
         </View>
 
         {/*<View style={styles.addressField}>*/}
-          {/*<FormTextInput*/}
-            {/*onValueChange={updateFields}*/}
-            {/*value={avenue}*/}
-            {/*field="avenue"*/}
-            {/*maxLength={40}*/}
-            {/*keyboardType="numeric"*/}
-            {/*autoFocus={false}*/}
-            {/*style={styles.textInput}*/}
-            {/*label={I18n.t('avenue')}*/}
-          {/*/>*/}
+        {/*<FormTextInput*/}
+        {/*onValueChange={updateFields}*/}
+        {/*value={avenue}*/}
+        {/*field="avenue"*/}
+        {/*maxLength={40}*/}
+        {/*keyboardType="numeric"*/}
+        {/*autoFocus={false}*/}
+        {/*style={styles.textInput}*/}
+        {/*label={I18n.t('avenue')}*/}
+        {/*/>*/}
         {/*</View>*/}
 
         {/*<View style={styles.addressField}>*/}
-          {/*<FormTextInput*/}
-            {/*onValueChange={updateFields}*/}
-            {/*value={building}*/}
-            {/*field="building"*/}
-            {/*maxLength={40}*/}
-            {/*keyboardType="numeric"*/}
-            {/*autoFocus={false}*/}
-            {/*style={styles.textInput}*/}
-            {/*label={I18n.t('building')}*/}
-          {/*/>*/}
+        {/*<FormTextInput*/}
+        {/*onValueChange={updateFields}*/}
+        {/*value={building}*/}
+        {/*field="building"*/}
+        {/*maxLength={40}*/}
+        {/*keyboardType="numeric"*/}
+        {/*autoFocus={false}*/}
+        {/*style={styles.textInput}*/}
+        {/*label={I18n.t('building')}*/}
+        {/*/>*/}
         {/*</View>*/}
-
       </View>
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   label: {
@@ -88,10 +85,9 @@ const styles = StyleSheet.create({
   },
   addressField: {
     flex: 1,
-    padding:5,
+    padding: 5,
     backgroundColor: 'white',
     marginHorizontal: 1,
   },
-  textInput: {
-  },
+  textInput: {},
 });

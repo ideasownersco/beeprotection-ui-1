@@ -4,7 +4,7 @@ import {StyleSheet, FlatList, View, Text} from 'react-native';
 import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 import SectionTitle from 'components/SectionTitle';
 import I18n from 'utils/locale';
 
@@ -28,13 +28,13 @@ export default class CartItems extends Component {
           </View>
           {item.services.map((service, index) => (
             <View style={{flex: 1}} key={index}>
-              <Separator style={{marginVertical: 10}} />
+              <Divider style={{marginVertical: 10}} />
 
               <View style={styles.serviceListContainer}>
                 <Text style={styles.packageTitle}>{service.name}</Text>
                 <Text style={styles.packagePrice}>{service.price} KD</Text>
               </View>
-              {/*<Separator style={{marginVertical: 10}} />*/}
+              {/*<Divider style={{marginVertical: 10}} />*/}
             </View>
           ))}
 
@@ -57,7 +57,7 @@ export default class CartItems extends Component {
         keyExtractor={(item, index) => `${index}`}
         extraData={activeItemID}
         ItemSeparatorComponent={() => (
-          <Separator style={{marginVertical: 15}} />
+          <Divider style={{marginVertical: 15}} />
         )}
       />
     );

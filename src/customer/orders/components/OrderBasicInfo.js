@@ -6,7 +6,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import SectionTitle from 'components/SectionTitle';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 import AddressInfo from 'components/AddressInfo';
 
 const OrderBasicInfo = ({item, onPress, style}) => {
@@ -20,14 +20,14 @@ const OrderBasicInfo = ({item, onPress, style}) => {
           <Text style={styles.value}>{item.id}</Text>
         </View>
 
-        <Separator style={{marginVertical: 5}} />
+        <Divider style={{marginVertical: 5}} />
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('invoice')}</Text>
           <Text style={styles.value}>{item.invoice}</Text>
         </View>
 
-        <Separator style={{marginVertical: 5}} />
+        <Divider style={{marginVertical: 5}} />
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('requested_date')}</Text>
@@ -36,7 +36,7 @@ const OrderBasicInfo = ({item, onPress, style}) => {
           </Text>
         </View>
 
-        <Separator style={{marginVertical: 5}} />
+        <Divider style={{marginVertical: 5}} />
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('address')}</Text>
@@ -47,14 +47,14 @@ const OrderBasicInfo = ({item, onPress, style}) => {
           />
         </View>
 
-        <Separator style={{marginVertical: 5}} />
+        <Divider style={{marginVertical: 5}} />
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('payment_mode')}</Text>
           <Text style={[styles.value]}>{item.payment_mode}</Text>
         </View>
 
-        <Separator style={{marginVertical: 5}} />
+        <Divider style={{marginVertical: 5}} />
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('job_status')}</Text>

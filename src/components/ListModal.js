@@ -29,10 +29,7 @@ export default class ListModal extends Component {
       <Modal
         isVisible={isVisible}
         transparent={false}
-        style={[
-          styles.container,
-          style,
-        ]}
+        style={[styles.container, style]}
         onSwipe={onCancel}
         swipeDirection="down">
         <Headline style={styles.headline}>{title}</Headline>

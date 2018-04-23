@@ -27,7 +27,6 @@ export default class PasswordUpdateScene extends Component {
 
     return (
       <View style={styles.container}>
-
         <FormTextInput
           onValueChange={onFieldChange}
           label={I18n.t('new_password')}
@@ -59,6 +58,5 @@ export default class PasswordUpdateScene extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
 });

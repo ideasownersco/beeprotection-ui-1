@@ -7,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from 'utils/locale';
 import SectionTitle from 'components/SectionTitle';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 import Button from 'components/Button';
 
 export default class OrdersList extends Component {
@@ -44,7 +44,7 @@ export default class OrdersList extends Component {
               </Text>
             </View>
 
-            <Separator />
+            <Divider />
 
             <View style={styles.itemContentContainer}>
               {item.status === 'reached' && (
@@ -83,7 +83,7 @@ export default class OrdersList extends Component {
         renderItem={this.renderItem}
         style={styles.listContainer}
         keyExtractor={item => `${item.id}`}
-        ItemSeparatorComponent={() => <Separator />}
+        ItemSeparatorComponent={() => <Divider />}
       />
     );
   }

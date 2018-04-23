@@ -3,7 +3,7 @@ import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
 import MapPicker from './cart/components/MapPicker';
 import BackgroundGeolocation from 'react-native-background-geolocation';
-import CreateAddressForm from "./cart/components/CreateAddressForm";
+import CreateAddressForm from './cart/components/CreateAddress';
 
 class Home extends Component {
   state = {
@@ -39,8 +39,7 @@ class Home extends Component {
   }
 
   saveAddress = address => {
-
-    console.log('addressss',address);
+    console.log('addressss', address);
 
     this.setState({
       ...address,
@@ -53,9 +52,7 @@ class Home extends Component {
     });
   };
 
-  hideCreateAddressForm = () => {
-
-  };
+  hideCreateAddressForm = () => {};
 
   render() {
     return (
@@ -76,7 +73,7 @@ class Home extends Component {
             name: 'Abdullah Al-Mubarak',
             active: 1,
             latitude: 29.368,
-            longitude: 47.980,
+            longitude: 47.98,
           },
         ]}
       />

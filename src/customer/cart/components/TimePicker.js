@@ -5,6 +5,7 @@ import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
+import IconFactory from "../../../components/IconFactory";
 
 export default class TimePicker extends Component {
   static propTypes = {
@@ -38,6 +39,15 @@ export default class TimePicker extends Component {
             ? {opacity: 0.3}
             : activeItemID === item.id && styles.itemContainerActive,
         ]}>
+
+        <IconFactory
+          name={item.isDay ? 'ios-sunny' : 'ios-moon'}
+          type='Ionicons'
+          color={item.isDay ? '#ebbd21' : colors.darkGrey}
+          size={22}
+        >
+        </IconFactory>
+
         <Text
           style={[
             styles.time,
@@ -52,6 +62,7 @@ export default class TimePicker extends Component {
           ]}>
           {item.period}
         </Text>
+
       </View>
     );
   };
@@ -77,10 +88,12 @@ export default class TimePicker extends Component {
       <FlatList
         data={items}
         renderItem={this.renderItem}
-        style={[styles.listContainer,isFetching && {opacity:.5}]}
+        style={[styles.listContainer, isFetching && {opacity: 0.5}]}
         keyExtractor={(item, index) => `${index}`}
         horizontal={true}
         extraData={activeItemID}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       />
     );
   }
@@ -93,7 +106,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGrey,
   },
   itemContainer: {
-    padding: 15,
+    padding: 10,
+    paddingHorizontal: 20,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.lightGrey,

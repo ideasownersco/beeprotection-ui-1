@@ -4,7 +4,8 @@ import Login from 'guest/Login';
 import Register from 'guest/Register';
 import Forgot from 'guest/Forgot';
 
-export const Router = StackNavigator({
+export const Router = StackNavigator(
+  {
     LoginScreen: {
       screen: Login,
     },
@@ -22,4 +23,5 @@ export const Router = StackNavigator({
         borderBottomWidth: 0,
       },
     },
-  });
+  },
+);

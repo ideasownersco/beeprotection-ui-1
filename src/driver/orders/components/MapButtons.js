@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View,} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Button from 'components/Button';
 import Touchable from 'react-native-platform-touchable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -9,7 +9,6 @@ import I18n from 'utils/locale';
 import AddressInfo from 'components/AddressInfo';
 
 export default class MapButtons extends Component {
-
   static propTypes = {
     jobStatus: PropTypes.string,
   };
@@ -48,7 +47,6 @@ export default class MapButtons extends Component {
     this.props.stopWorking();
   };
 
-
   render() {
     const {jobStatus} = this.props;
     return (
@@ -57,16 +55,16 @@ export default class MapButtons extends Component {
           <View style={styles.navContainer}>
             <Touchable onPress={this.reCenterMap}>
               <View style={{alignItems: 'center'}}>
-                <MaterialCommunityIcons name="arrow-all" size={35}/>
+                <MaterialCommunityIcons name="arrow-all" size={35} />
               </View>
             </Touchable>
             <Text style={styles.address}>
-              <AddressInfo address={address} style={{textAlign: 'center'}}/>
+              <AddressInfo address={address} style={{textAlign: 'center'}} />
             </Text>
 
             <Touchable onPress={this.openInGoogleMaps}>
               <View style={{alignItems: 'center'}}>
-                <Ionicons name="ios-navigate-outline" size={35}/>
+                <Ionicons name="ios-navigate-outline" size={35} />
               </View>
             </Touchable>
           </View>

@@ -18,7 +18,6 @@ import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 
 function* login(action) {
-
   const {credentials, resolve, reject, redirectRoute} = action.payload;
 
   try {
@@ -49,14 +48,12 @@ function* login(action) {
       payload: response.data,
     });
 
-    if(redirectRoute) {
+    if (redirectRoute) {
       yield NavigatorService.navigate(redirectRoute);
     }
 
     yield resolve(response.data);
-
   } catch (error) {
-
     yield put({type: ACTION_TYPES.LOGIN_FAILURE, error});
 
     yield put(
@@ -69,7 +66,6 @@ function* login(action) {
     yield reject(error);
   }
 }
-
 
 // function* login(action) {
 //

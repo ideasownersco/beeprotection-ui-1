@@ -44,7 +44,7 @@ class Home extends PureComponent {
       this.fetchData();
       this.setState({refreshing: false});
     }, 1000);
-  }
+  };
 
   onOrdersListItemPress = (item: object) => {
     this.props.navigation.navigate('OrderDetail', {

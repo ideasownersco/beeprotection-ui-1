@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
   },
-  separator: {
+  Divider: {
     height: 50,
     width: 0.5,
     backgroundColor: colors.mediumGrey,

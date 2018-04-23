@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import Touchable from 'react-native-platform-touchable';
 import PropTypes from 'prop-types';
 import {FlatList, Text, View, StyleSheet} from 'react-native';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 import colors from 'assets/theme/colors';
 import {Button, Checkbox, Headline} from 'react-native-paper';
 import I18n from 'utils/locale';
@@ -54,15 +54,14 @@ export default class List extends Component {
         onBackdropPress={onCancel}
         title={title}
         onCancel={onCancel}
-        onSave={onSave}
-      >
+        onSave={onSave}>
         <FlatList
           data={items}
           style={styles.listContainer}
           renderItem={this.renderItem}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => (
-            <Separator style={{marginVertical: 10}} />
+            <Divider style={{marginVertical: 10}} />
           )}
           keyExtractor={(item, index) => `${index}`}
         />

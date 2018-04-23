@@ -5,7 +5,7 @@ import Modal from 'react-native-modal';
 import colors from 'assets/theme/colors';
 import {Button, Title} from 'react-native-paper';
 import I18n from 'utils/locale';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 
 export default class OrderSuccess extends Component {
   // shouldComponentUpdate(nextProps) {
@@ -49,7 +49,7 @@ export default class OrderSuccess extends Component {
             </View>
           </View>
 
-          <Separator />
+          <Divider />
 
           <View style={styles.rowContainer}>
             <View style={styles.leftCol}>{I18n.t('order_time')}</View>
@@ -58,7 +58,7 @@ export default class OrderSuccess extends Component {
             </View>
           </View>
 
-          <Separator />
+          <Divider />
 
           <View style={styles.rowContainer}>
             <View style={styles.leftCol}>{I18n.t('total')}</View>

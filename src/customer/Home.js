@@ -6,9 +6,9 @@ import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import WelcomeText from './components/WelcomeText';
-import NavButton from "../components/NavButton";
-import IconFactory from "../components/IconFactory";
-import colors from "../assets/theme/colors";
+import NavButton from '../components/NavButton';
+import IconFactory from '../components/IconFactory';
+import colors from '../assets/theme/colors';
 
 class Home extends Component {
   static defaultProps = {
@@ -19,7 +19,6 @@ class Home extends Component {
   state = {
     appState: AppState.currentState,
   };
-
 
   // static navigationOptions = ({navigation}) => {
   //
@@ -53,7 +52,12 @@ class Home extends Component {
       headerRight: (
         <NavButton
           icon={
-            <IconFactory type="Ionicons" name="md-globe" color={colors.primary} size={26}/>
+            <IconFactory
+              type="Ionicons"
+              name="md-globe"
+              color={colors.primary}
+              size={26}
+            />
           }
           onPress={() =>
             navigation.state.params &&
@@ -61,7 +65,6 @@ class Home extends Component {
           }
         />
       ),
-
     };
   };
 

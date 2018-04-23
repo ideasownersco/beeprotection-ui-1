@@ -6,9 +6,10 @@ import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
 import AddressFormFields from 'customer/cart/components/AddressFormFields';
 import BackgroundGeolocation from 'react-native-background-geolocation';
-import {Button} from "react-native-paper";
+import {Button} from 'react-native-paper';
 import Touchable from 'react-native-platform-touchable';
-import List from "../../../components/List";
+import List from 'components/List';
+import {GOOGLE_MAPS_KEY} from 'utils/env';
 
 type State = {
   label: string,
@@ -22,29 +23,31 @@ type State = {
   address: Object,
 };
 
-export default class CreateAddressForm extends PureComponent {
-
+export default class extends PureComponent {
   static propTypes = {
     areas: PropTypes.array.isRequired,
     visible: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     onPress: PropTypes.func.isRequired,
-    area_id: PropTypes.number
+    area_id: PropTypes.number,
   };
 
-  state: State = {
-    label: null,
-    mapPickerVisibility: false,
-    block: null,
-    street: null,
-    avenue: null,
-    building: null,
-    country: 'KW',
-    latitude: 29.3759,
-    longitude: 47.9774,
-    area_id: null,
-    isAreaListModalVisible: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      label: null,
+      mapPickerVisibility: false,
+      block: null,
+      street: null,
+      avenue: null,
+      building: null,
+      country: 'KW',
+      latitude: 29.3759,
+      longitude: 47.9774,
+      area_id: null,
+      isAreaListModalVisible: false,
+    };
+  }
 
   componentDidMount() {
     //@todo:uncomment in production
@@ -54,7 +57,7 @@ export default class CreateAddressForm extends PureComponent {
         this.setState({
           latitude: latitude,
           longitude: longitude,
-          initialized: true
+          initialized: true,
         });
       },
       error => {
@@ -65,7 +68,7 @@ export default class CreateAddressForm extends PureComponent {
         samples: 1,
         maximumAge: 5000,
       },
-    )
+    );
   }
 
   hideScreen = () => {
@@ -88,13 +91,21 @@ export default class CreateAddressForm extends PureComponent {
     });
   };
 
+  // async reverseGeoCode(coordinate) {
+  //   let urlParams = `key=${GOOGLE_MAPS_KEY}`;
+  //   let request = await fetch(
+  //     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinate.latitude},${coordinate.longitude}&${urlParams}`,
+  //   );
+  //   let response = await request.json();
+  //   console.log('res', response);
+  // }
+
   updateAddressFields = (address: object) => {
     this.setState({
       ...this.state.address,
       ...address,
     });
   };
-
 
   setArea = area => {
     let {latitude, longitude} = area;
@@ -104,8 +115,8 @@ export default class CreateAddressForm extends PureComponent {
       area_id: area.id,
     };
     this.updateAddressFields(params);
+    // this.ref.current.animateToRegion(params);
   };
-
 
   onAreaButtonPress = () => {
     this.setState({
@@ -122,7 +133,17 @@ export default class CreateAddressForm extends PureComponent {
   render() {
     const {visible, areas} = this.props;
 
-    const {latitude, longitude, block, street, avenue, building, area_id, mapPickerVisibility, isAreaListModalVisible} = this.state;
+    const {
+      latitude,
+      longitude,
+      block,
+      street,
+      avenue,
+      building,
+      area_id,
+      mapPickerVisibility,
+      isAreaListModalVisible,
+    } = this.state;
 
     let area = {};
     if (area_id) {
@@ -135,7 +156,6 @@ export default class CreateAddressForm extends PureComponent {
         visible={visible}
         presentationStyle="fullScreen">
         <View style={styles.container}>
-
           <AddressFormFields
             block={block}
             // avenue={avenue}
@@ -188,15 +208,12 @@ export default class CreateAddressForm extends PureComponent {
             />
           </View>
 
-
           <View style={styles.buttonsContainer}>
-
             <Button
               onPress={this.hideScreen}
               style={styles.button}
               background="transparent"
-              raised
-            >
+              raised>
               {I18n.t('cancel')}
             </Button>
 
@@ -205,11 +222,9 @@ export default class CreateAddressForm extends PureComponent {
               style={styles.button}
               raised
               primary
-              dark
-            >
+              dark>
               {I18n.t('save')}
             </Button>
-
           </View>
         </View>
       </Modal>
@@ -234,7 +249,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 0,
   },
-  mapContainer:{
+  mapContainer: {
     flex: 1,
     backgroundColor: colors.lightGrey,
   },
@@ -245,5 +260,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'row',
     zIndex: 5000,
-  }
+  },
 });

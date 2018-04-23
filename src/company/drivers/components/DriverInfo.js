@@ -7,7 +7,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import SectionTitle from 'components/SectionTitle';
 import I18n from 'utils/locale';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 import Touchable from 'react-native-platform-touchable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -33,7 +33,7 @@ export default class DriverInfo extends Component {
           <Text style={styles.value}>{driver.user.email}</Text>
         </View>
 
-        <Separator style={{flex: 1}} />
+        <Divider style={{flex: 1}} />
 
         <View style={styles.itemContainer}>
           <Text style={styles.label}>Mobile</Text>
@@ -46,7 +46,7 @@ export default class DriverInfo extends Component {
           </Touchable>
         </View>
 
-        <Separator style={{flex: 1}} />
+        <Divider style={{flex: 1}} />
 
         <View style={styles.itemContainer}>
           <Text style={styles.label}>Status</Text>

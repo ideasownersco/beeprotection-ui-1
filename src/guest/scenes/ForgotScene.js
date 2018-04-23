@@ -18,11 +18,7 @@ export default class ForgotScene extends Component {
   };
 
   render() {
-    const {
-      email,
-      onFieldChange,
-      onForgotPassword,
-    } = this.props;
+    const {email, onFieldChange, onForgotPassword} = this.props;
 
     return (
       <View style={styles.container}>

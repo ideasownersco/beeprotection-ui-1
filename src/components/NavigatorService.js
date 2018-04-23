@@ -40,7 +40,6 @@ function popToTop() {
   _container.dispatch(NavigationActions.popToTop());
 }
 
-
 function navigateDeep(
   actions: {routeName: string, params?: NavigationParams}[],
 ) {
@@ -73,5 +72,5 @@ export default {
   reset,
   getCurrentRoute,
   back,
-  popToTop
+  popToTop,
 };

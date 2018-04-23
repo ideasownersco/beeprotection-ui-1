@@ -8,8 +8,8 @@ import ForgotScene from './scenes/ForgotScene';
 import ConfirmScene from './scenes/ConfirmScene';
 import PasswordUpdateScene from './scenes/PasswordUpdateScene';
 import {ACTIONS} from './common/actions';
-import FormContainer from "../components/FormContainer";
-import FormContent from "../components/FormContent";
+import FormContainer from '../components/FormContainer';
+import FormContent from '../components/FormContent';
 
 class Forgot extends Component {
   static propTypes = {
@@ -55,9 +55,14 @@ class Forgot extends Component {
 
   render() {
     const {auth} = this.props;
-    const {email,password_confirmation,confirmation_code, password} = this.state;
+    const {
+      email,
+      password_confirmation,
+      confirmation_code,
+      password,
+    } = this.state;
 
-    console.log('state',this.state);
+    console.log('state', this.state);
 
     let renderingComponent;
 
@@ -94,13 +99,9 @@ class Forgot extends Component {
     }
 
     return (
-
       <FormContainer>
-        <FormContent>
-          {renderingComponent}
-        </FormContent>
+        <FormContent>{renderingComponent}</FormContent>
       </FormContainer>
-
     );
   }
 }

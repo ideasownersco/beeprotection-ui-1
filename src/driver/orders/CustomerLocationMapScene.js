@@ -9,13 +9,12 @@ import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
 import {SELECTORS as DRIVER_SELECTORS} from '../selectors/orders';
-import {View} from "react-native";
-import UploadImage from "../components/UploadImage";
-import ListModal from "../../components/ListModal";
+import {View} from 'react-native';
+import UploadImage from '../components/UploadImage';
+import ListModal from '../../components/ListModal';
 import union from 'lodash';
 
 class CustomerLocationMapScene extends Component {
-
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -33,10 +32,10 @@ class CustomerLocationMapScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isUploadImageModalVisible:false,
-      images:[],
-      imagesUploaded:false,
-      imagesApproved:false,
+      isUploadImageModalVisible: false,
+      images: [],
+      imagesUploaded: false,
+      imagesApproved: false,
       origin: {
         latitude: 37.78825,
         longitude: -122.4324,
@@ -98,45 +97,47 @@ class CustomerLocationMapScene extends Component {
     // let {job} = this.props.navigation.state.params.order;
   };
 
-  uploadImages = () =>{
+  uploadImages = () => {
     this.showUploadImageModal();
   };
 
   approveImages = () => {
     this.setState({
-      imagesApproved:true
+      imagesApproved: true,
     });
   };
 
   onSaveUploadedImage = () => {
     this.setState({
-      imagesUploaded:true,
-      isUploadImageModalVisible:false
+      imagesUploaded: true,
+      isUploadImageModalVisible: false,
     });
   };
 
-  uploadImage = (images) => {
+  uploadImage = images => {
     this.setState({
-      images:images,
-    })
+      images: images,
+    });
   };
 
-  deleteImage = (image) => {
+  deleteImage = image => {
     this.setState({
-      images:this.state.images.filter(uploadedImage => uploadedImage !== image)
-    })
+      images: this.state.images.filter(
+        uploadedImage => uploadedImage !== image,
+      ),
+    });
   };
 
   showUploadImageModal = () => {
     this.setState({
-      isUploadImageModalVisible:true
-    })
+      isUploadImageModalVisible: true,
+    });
   };
 
   hideUploadImageModal = () => {
     this.setState({
-      isUploadImageModalVisible:false
-    })
+      isUploadImageModalVisible: false,
+    });
   };
 
   render() {
@@ -147,14 +148,12 @@ class CustomerLocationMapScene extends Component {
     }
 
     let {address, job} = order;
-    let {origin,images} = this.state;
+    let {origin, images} = this.state;
 
-    console.log('images',images);
-
-
+    console.log('images', images);
 
     return (
-      <View style={{flex:1}}>
+      <View style={{flex: 1}}>
         <Map
           origin={origin}
           destination={{
@@ -176,10 +175,16 @@ class CustomerLocationMapScene extends Component {
           imagesApproved={this.state.imagesApproved}
         />
 
-        <ListModal isVisible={this.state.isUploadImageModalVisible} onCancel={this.hideUploadImageModal} onSave={this.onSaveUploadedImage}>
-          <UploadImage images={images} updateImage={this.uploadImage} deleteImage={this.deleteImage} />
+        <ListModal
+          isVisible={this.state.isUploadImageModalVisible}
+          onCancel={this.hideUploadImageModal}
+          onSave={this.onSaveUploadedImage}>
+          <UploadImage
+            images={images}
+            updateImage={this.uploadImage}
+            deleteImage={this.deleteImage}
+          />
         </ListModal>
-
       </View>
     );
   }

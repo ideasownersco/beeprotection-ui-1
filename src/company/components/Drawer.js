@@ -6,7 +6,7 @@ import {StyleSheet, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import DrawerItem from 'components/DrawerItem';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 
 export default class Drawer extends Component {
   state = {
@@ -46,7 +46,7 @@ export default class Drawer extends Component {
           active={activeRoute === 'HomeStack'}
         />
 
-        <Separator />
+        <Divider />
         <DrawerItem
           title={I18n.t('working_orders')}
           routeName="WorkingOrdersStack"
@@ -59,7 +59,7 @@ export default class Drawer extends Component {
           active={activeRoute === 'WorkingOrdersStack'}
         />
 
-        <Separator />
+        <Divider />
         <DrawerItem
           title={I18n.t('upcoming_orders')}
           routeName="UpcomingOrdersStack"
@@ -68,7 +68,7 @@ export default class Drawer extends Component {
           active={activeRoute === 'UpcomingOrdersStack'}
         />
 
-        <Separator />
+        <Divider />
         <DrawerItem
           title={I18n.t('past_orders')}
           routeName="PastOrdersStack"
@@ -77,7 +77,7 @@ export default class Drawer extends Component {
           active={activeRoute === 'PastOrdersStack'}
         />
 
-        <Separator />
+        <Divider />
         <DrawerItem
           title={I18n.t('drivers')}
           routeName="DriversStack"
@@ -86,7 +86,7 @@ export default class Drawer extends Component {
           active={activeRoute === 'DriversStack'}
         />
 
-        <Separator />
+        <Divider />
         <DrawerItem
           title={I18n.t('track_drivers')}
           routeName="TrackDriversStack"
@@ -99,7 +99,7 @@ export default class Drawer extends Component {
           active={activeRoute === 'TrackDriversStack'}
         />
 
-        {/*<Separator />*/}
+        {/*<Divider />*/}
         {/*<DrawerItem*/}
         {/*title={I18n.t('settings')}*/}
         {/*routeName="SettingsStack"*/}
@@ -112,7 +112,7 @@ export default class Drawer extends Component {
         {/*active={activeRoute === 'SettingsStack'}*/}
         {/*/>*/}
 
-        <Separator />
+        <Divider />
         <DrawerItem
           title={I18n.t('logout')}
           routeName="Logout"

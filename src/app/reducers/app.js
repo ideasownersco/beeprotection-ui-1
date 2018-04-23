@@ -3,7 +3,7 @@ import {ACTION_TYPES} from 'app/common/actions';
 const initialState = {
   installed: false,
   booted: false,
-  language:'en'
+  language: 'en',
 };
 
 export function reducer(state = initialState, action = {}) {

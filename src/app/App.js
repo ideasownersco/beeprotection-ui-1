@@ -12,7 +12,7 @@ import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
 import {CODE_PUSH_ENABLED} from 'utils/env';
 import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import NavigatorService from 'components/NavigatorService';
-import colors from "../assets/theme/colors";
+import colors from '../assets/theme/colors';
 
 class App extends Component {
   static propTypes = {
@@ -91,23 +91,18 @@ class App extends Component {
     // });
   };
 
-
   render() {
     const {app, notifications, isAuthenticated, userType} = this.props;
 
     if (!app.booted) return null;
 
     if (!app.installed) {
-      return <LanguageSelectScene onItemPress={this.onLanguageSelect}/>;
+      return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
     }
 
     return (
       <View style={{flex: 1, backgroundColor: colors.primary}}>
-
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={colors.primary}
-        />
+        <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
 
         <Notification
           {...notifications}
@@ -139,4 +134,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(App);
-

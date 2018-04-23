@@ -6,7 +6,7 @@ import I18n, {isRTL} from 'utils/locale';
 import FormLabel from 'components/FormLabel';
 import FormTextInput from 'components/FormTextInput';
 import FormSubmit from 'components/FormSubmit';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 
 export default class LoginScene extends Component {
   static propTypes = {
@@ -57,7 +57,7 @@ export default class LoginScene extends Component {
           style={{marginTop: 50}}
         />
 
-        <Separator style={{marginVertical: 30}} />
+        <Divider style={{marginVertical: 30}} />
 
         <FormSubmit
           onPress={() => handleRegisterRoute()}

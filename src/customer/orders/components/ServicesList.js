@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {StyleSheet, FlatList, View, Text, Image} from 'react-native';
 import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 
@@ -55,7 +55,7 @@ export default class ServicesList extends Component {
 
     return (
       <View style={styles.container}>
-        <Separator style={{marginVertical: 10}} />
+        <Divider style={{marginVertical: 10}} />
 
         <Text style={styles.sectionTitle}>{I18n.t('addons')}</Text>
 

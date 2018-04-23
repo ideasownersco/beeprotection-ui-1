@@ -19,12 +19,12 @@ import PastOrdersScene from 'customer/orders/PastOrdersScene';
 import UpcomingOrdersScene from 'customer/orders/UpcomingOrdersScene';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
-import LanguageSelect from "app/LanguageSelect";
+import LanguageSelect from 'app/LanguageSelect';
 
 const getDrawerIcon = navigation => {
   return {
     headerLeft: (
-      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')}/>
+      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
     ),
   };
 };
@@ -84,7 +84,7 @@ const HomeStack = StackNavigator(
     Login: {
       screen: AuthStack,
       navigationOptions: ({navigation}) => ({
-        headerLeft: <BackButton onPress={() => navigation.goBack(null)}/>,
+        headerLeft: <BackButton onPress={() => navigation.goBack(null)} />,
       }),
     },
     // DriverLocationMap: {
@@ -98,9 +98,9 @@ const HomeStack = StackNavigator(
     Map: {
       screen: Map,
     },
-    LanguageSelect:{
-      screen:LanguageSelect
-    }
+    LanguageSelect: {
+      screen: LanguageSelect,
+    },
   },
   {
     navigationOptions: ({navigation}) => ({
@@ -109,9 +109,9 @@ const HomeStack = StackNavigator(
       headerStyle: {
         backgroundColor: colors.primary,
         borderBottomWidth: 0,
-      }
+      },
     }),
-    initialRouteName:'Map'
+    // initialRouteName:'Map'
   },
 );
 

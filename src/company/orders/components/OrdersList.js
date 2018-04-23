@@ -6,7 +6,7 @@ import colors from 'assets/theme/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from 'utils/locale';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 
 export default class OrdersList extends Component {
   static propTypes = {
@@ -78,7 +78,7 @@ export default class OrdersList extends Component {
         renderItem={this.renderItem}
         style={styles.listContainer}
         keyExtractor={item => `${item.id}`}
-        ItemSeparatorComponent={() => <Separator />}
+        ItemSeparatorComponent={() => <Divider />}
         onRefresh={() => onPullToRefresh()}
         scrollEventThrottle={120}
         ref="listView"

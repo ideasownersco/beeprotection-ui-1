@@ -7,17 +7,14 @@ import {Dimensions, StyleSheet, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import MapView from 'react-native-maps';
 import {isRTL} from 'utils/locale';
-import {GOOGLE_MAPS_KEY} from 'utils/env';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 
-const LATITUDE_DELTA = .1;
+const LATITUDE_DELTA = 0.1;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-
 export default class MapPicker extends Component {
-
   static propTypes = {
     updateAddress: PropTypes.func.isRequired,
     address: PropTypes.object.isRequired,
@@ -30,66 +27,51 @@ export default class MapPicker extends Component {
       useCurrentLocation: false,
       initialized: false,
       latitude: props.address.latitude,
-      longitude: props.address.longitude
+      longitude: props.address.longitude,
     };
   }
 
-  // shouldComponentUpdate(nextProps, prevState) {
-  //   return (
-  //     this.state.latitude !== prevState.latitude || this.state.initialized !== prevState.initialized
-  //   );
-  // }
+  shouldComponentUpdate(nextProps, prevState) {
+    return this.state !== prevState;
+  }
 
   componentDidUpdate(nextProps) {
-    if(this.state.initialized) {
-      if(nextProps.address.latitude !== this.props.latitude) {
-        // this.map.animateToRegion(nextProps.address)
-      }
+    if (nextProps.address.area_id !== this.props.address.area_id) {
+      this.map.animateToRegion(this.state);
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-
     if (nextProps.address.latitude === prevState.latitude) {
       return null;
     }
-
     return {
       latitude: nextProps.address.latitude,
-      longitude: nextProps.address.longitude
-    }
-
+      longitude: nextProps.address.longitude,
+    };
   }
 
   componentDidMount() {
     setTimeout(() => {
-      this.setState({
-        initialized: true
-      }, () => {
-        // this.reverseGeoCode(this.props.address);
-      });
+      this.setState(
+        {
+          initialized: true,
+        },
+        () => {
+          // this.reverseGeoCode(this.props.address);
+        },
+      );
     }, 1000);
-  };
-
-  async reverseGeoCode(coordinate) {
-    console.log('reverseGeoCode', coordinate);
-    // let urlParams = `key=${GOOGLE_MAPS_KEY}`;
-    // let request = await fetch(
-    //   `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinate.latitude},${coordinate.longitude}&${urlParams}`,
-    // );
-    // let response = await request.json();
-    // console.log('res', response);
   }
 
   updateAddress = (address: object) => {
     console.log('updateAddress', address);
     if (this.state.initialized) {
       this.props.updateAddress(address);
-      this.reverseGeoCode(address);
     }
   };
 
-  onDragEnd = (e) => {
+  onDragEnd = e => {
     console.log('onDragEnd', e);
     let {latitude, longitude} = e.nativeEvent.coordinate;
     let params = {
@@ -99,63 +81,62 @@ export default class MapPicker extends Component {
     this.updateAddress(params);
   };
 
-  onRegionChange = (region) => {
-    console.log('region');
-    // this.setState({
-    //   latitude: region.latitude,
-    //   longitude: region.longitude
-    // });
+  onRegionChange = region => {
+    console.log('onRegionChange', region.latitude);
+    this.setState({
+      latitude: region.latitude,
+      longitude: region.longitude,
+    });
   };
 
-  onRegionChangeComplete = (region) => {
-
-    if (!this.state.initialized || this.props.address.latitude === region.latitude) {
+  onRegionChangeComplete = region => {
+    if (
+      !this.props.address.area_id ||
+      this.props.address.latitude === region.latitude
+    ) {
       return null;
     }
-
     let {latitude, longitude} = region;
     let params = {
       latitude: latitude,
       longitude: longitude,
     };
-
-    // this.updateAddress(params);
+    this.updateAddress(params);
   };
 
   render() {
-
-    const {initialized} = this.state;
+    const {initialized, latitude, longitude} = this.state;
     const {address} = this.props;
-
-    console.log('rendered new address',address);
-
+    // console.log('rendered new address');
+    // console.log('this.state.latitude',this.state.latitude);
     return (
-      <View style={[styles.container, !address.area_id && {opacity: .3}]}>
+      <View style={[styles.container, !address.area_id && {opacity: 0.3}]}>
         {initialized && (
           <MapView
             ref={ref => {
               this.map = ref;
             }}
-            style={[styles.map,]}
+            style={[styles.map]}
             initialRegion={{
-              ...address,
+              latitude: latitude,
+              longitude: longitude,
               latitudeDelta: LATITUDE_DELTA,
               longitudeDelta: LONGITUDE_DELTA,
             }}
             onRegionChange={this.onRegionChange}
             onRegionChangeComplete={this.onRegionChangeComplete}
-            showsUserLocation={true}
-          >
+            showsUserLocation={true}>
             <MapView.Marker
-              coordinate={this.state}
+              coordinate={{
+                latitude: latitude,
+                longitude: longitude,
+              }}
               onDragEnd={e => this.onDragEnd(e)}
               identifier="MARKER_1"
               draggable
             />
           </MapView>
         )}
-
-
       </View>
     );
   }

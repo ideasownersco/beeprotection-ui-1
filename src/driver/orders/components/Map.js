@@ -187,10 +187,16 @@ export default class Map extends Component {
 
   approveImages = () => {
     this.props.approveImages();
-  }
+  };
 
   render() {
-    const {destination, jobStatus, address, imagesUploaded, imagesApproved} = this.props;
+    const {
+      destination,
+      jobStatus,
+      address,
+      imagesUploaded,
+      imagesApproved,
+    } = this.props;
     console.log('jobStatus', jobStatus);
     const {origin, initialized} = this.state;
     const {heading} = origin;
@@ -234,16 +240,16 @@ export default class Map extends Component {
           <View style={styles.navContainer}>
             <Touchable onPress={this.reCenterMap}>
               <View style={{alignItems: 'center'}}>
-                <MaterialCommunityIcons name="arrow-all" size={35}/>
+                <MaterialCommunityIcons name="arrow-all" size={35} />
               </View>
             </Touchable>
             <Text style={styles.address}>
-              <AddressInfo address={address} style={{textAlign: 'center'}}/>
+              <AddressInfo address={address} style={{textAlign: 'center'}} />
             </Text>
 
             <Touchable onPress={this.openInGoogleMaps}>
               <View style={{alignItems: 'center'}}>
-                <Ionicons name="ios-navigate-outline" size={35}/>
+                <Ionicons name="ios-navigate-outline" size={35} />
               </View>
             </Touchable>
           </View>
@@ -265,36 +271,33 @@ export default class Map extends Component {
           )}
 
           {jobStatus == 'reached' && (
-            <View style={{flexDirection: 'row',justifyContent:'space-around'}}>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+              {imagesUploaded &&
+                imagesApproved && (
+                  <Button
+                    title={I18n.t('start_working')}
+                    onPress={this.startWorking}
+                    style={{marginBottom: 10, width: 150}}
+                  />
+                )}
 
-              {
-                imagesUploaded && imagesApproved &&
-                <Button
-                  title={I18n.t('start_working')}
-                  onPress={this.startWorking}
-                  style={{marginBottom: 10,width:150}}
-                />
-              }
+              {imagesUploaded &&
+                !imagesApproved && (
+                  <Button
+                    title={I18n.t('approve_images')}
+                    onPress={this.approveImages}
+                    style={{marginBottom: 10, width: 150}}
+                  />
+                )}
 
-              {
-                imagesUploaded && !imagesApproved &&
-                <Button
-                  title={I18n.t('approve_images')}
-                  onPress={this.approveImages}
-                  style={{marginBottom: 10, width:150}}
-                />
-              }
-
-              {
-
-                !imagesUploaded &&
+              {!imagesUploaded && (
                 <Button
                   title={I18n.t('upload_images')}
                   onPress={this.uploadImages}
-                  style={{marginBottom: 10, width:150}}
+                  style={{marginBottom: 10, width: 150}}
                 />
-              }
-
+              )}
             </View>
           )}
 

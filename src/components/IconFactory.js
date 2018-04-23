@@ -28,7 +28,7 @@ class IconFactory extends Component {
 
   static defaultProps = {
     type: 'Ionicons',
-    name: 'Home',
+    name: 'bug',
   };
 
   shouldComponentUpdate(nextProps) {
@@ -36,9 +36,9 @@ class IconFactory extends Component {
   }
 
   render() {
-    let {type, ...rest} = this.props;
+    let {type, name, ...rest} = this.props;
     const Icon = components[type];
-    return <Icon color={colors.fadedGrey} size={30} {...rest} />;
+    return <Icon color={colors.fadedGrey} size={30} name={name} {...rest} />;
   }
 }
 

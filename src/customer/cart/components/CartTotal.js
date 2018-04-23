@@ -4,7 +4,7 @@ import {StyleSheet, FlatList, View, Text} from 'react-native';
 import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 import SectionTitle from 'components/SectionTitle';
 import I18n from 'utils/locale';
 

@@ -29,7 +29,6 @@ export default class ConfirmScene extends Component {
 
     return (
       <View style={styles.container}>
-
         <FormTextInput
           onValueChange={onFieldChange}
           value={confirmation_code}

@@ -7,7 +7,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import SectionTitle from 'components/SectionTitle';
-import Separator from 'components/Separator';
+import Divider from 'components/Divider';
 import Touchable from 'react-native-platform-touchable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -22,14 +22,14 @@ const UserInfo = ({user, style, makeCall}) => {
           <Text style={styles.value}>{user.name}</Text>
         </View>
 
-        <Separator style={{marginVertical: 5}} />
+        <Divider style={{marginVertical: 5}} />
 
         <View style={styles.content}>
           <Text style={styles.label}>{I18n.t('email')}</Text>
           <Text style={styles.value}>{user.email}</Text>
         </View>
 
-        <Separator style={{marginVertical: 5}} />
+        <Divider style={{marginVertical: 5}} />
 
         <View style={styles.content}>
           <Text style={[styles.label, {flex: 1}]}>{I18n.t('mobile')}</Text>
