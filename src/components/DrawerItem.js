@@ -2,15 +2,13 @@
  * @flow
  */
 import React, {Component} from 'react';
-import Touchable from 'react-native-platform-touchable';
 import PropTypes from 'prop-types';
-import colors from 'assets/theme/colors';
 import IconFactory from 'components/IconFactory';
-import {StyleSheet, Text, View} from 'react-native';
+import {DrawerItem as PaperDrawerItem} from 'react-native-paper';
 
 export default class DrawerItem extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     onItemPress: PropTypes.func.isRequired,
     active: PropTypes.bool,
     iconProps: PropTypes.shape({
@@ -26,38 +24,13 @@ export default class DrawerItem extends Component {
   }
 
   render() {
-    const {title, onItemPress, active, routeName, iconProps} = this.props;
+    const {onItemPress, routeName, iconProps, ...rest} = this.props;
     return (
-      <Touchable
+      <PaperDrawerItem
+        {...rest}
         onPress={() => onItemPress(routeName)}
-        background={Touchable.Ripple(colors.primary, false)}>
-        <View style={styles.container}>
-          <IconFactory
-            color={active ? colors.primary : colors.fadedBlack}
-            {...iconProps}
-          />
-          <Text style={[styles.itemTitle, active && styles.activeTitle]}>
-            {title}
-          </Text>
-        </View>
-      </Touchable>
+        icon={<IconFactory {...iconProps} />}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
-  },
-  itemTitle: {
-    fontSize: 18,
-    color: colors.fadedBlack,
-    paddingHorizontal: 10,
-    textAlign: 'left',
-  },
-  activeTitle: {
-    color: colors.primary,
-  },
-});
