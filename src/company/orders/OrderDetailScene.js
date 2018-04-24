@@ -17,6 +17,7 @@ import OrderTotal from 'customer/orders/components/OrderTotal';
 import DriverInfo from 'driver/components/DriverInfo';
 import OrderTrackButton from 'customer/orders/components/OrderTrackButton';
 import UserInfo from 'customer/components/UserInfo';
+import DriverAssign from "./components/DriverAssign";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -74,33 +75,33 @@ class OrderDetailScene extends Component {
 
     return (
       <ScrollView style={{flex: 1}} keyboardShouldPersistTap="always">
-        <OrderBasicInfo item={order} />
-        <OrderItems order={order} />
-        <OrderTotal total={order.total} />
+        <OrderBasicInfo item={order}/>
+        <OrderItems order={order}/>
+        <OrderTotal total={order.total}/>
 
         {order.user &&
-          order.user.id && (
-            <UserInfo user={order.user} makeCall={this.makeCall} />
-          )}
+        order.user.id && (
+          <UserInfo user={order.user} makeCall={this.makeCall}/>
+        )}
 
-        {/*<DriverAssign*/}
-        {/*order={order}*/}
-        {/*drivers={drivers}*/}
-        {/*onDriversListItemPress={this.selectDriver}*/}
-        {/*/>*/}
+        <DriverAssign
+          order={order}
+          drivers={drivers}
+          onDriversListItemPress={this.selectDriver}
+        />
 
         {order.job &&
-          order.job.driver &&
-          order.job.driver &&
-          order.job.driver.user && (
-            <View>
-              <DriverInfo driver={order.job.driver} />
-              <OrderTrackButton
-                onPress={this.trackOrder}
-                disabled={!order.trackeable}
-              />
-            </View>
-          )}
+        order.job.driver &&
+        order.job.driver &&
+        order.job.driver.user && (
+          <View>
+            <DriverInfo driver={order.job.driver}/>
+            <OrderTrackButton
+              onPress={this.trackOrder}
+              disabled={!order.trackeable}
+            />
+          </View>
+        )}
       </ScrollView>
     );
   }

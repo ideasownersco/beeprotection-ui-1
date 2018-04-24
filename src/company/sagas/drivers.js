@@ -64,7 +64,7 @@ function* assignDriver(action) {
     yield put({type: ACTION_TYPES.ASSIGN_DRIVER_FAILURE, error});
     yield put(
       APP_ACTIONS.setNotification({
-        message: I18n.t('driver_assigned'),
+        message: error,
         type: 'error',
       }),
     );
