@@ -43,7 +43,7 @@ const HomeStack = StackNavigator(
       }),
     },
     OrderDetail: {screen: OrderDetailScene},
-    AddDriver: {
+    DriverAdd: {
       screen: Register,
       navigationOptions: ({navigation}) => ({
         title: I18n.t('driver_add'),
@@ -93,6 +93,12 @@ const DriversStack = StackNavigator(
       }),
     },
     DriverDetail: {screen: DriverDetailScene},
+    DriverAdd: {
+      screen: Register,
+      navigationOptions: ({navigation}) => ({
+        title: I18n.t('driver_add'),
+      }),
+    },
     OrderDetail: {screen: OrderDetailScene},
   },
   {

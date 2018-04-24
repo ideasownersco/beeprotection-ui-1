@@ -4,6 +4,9 @@ import {connect} from 'react-redux';
 import DriversList from 'driver/components/DriversList';
 import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 import {ACTIONS as DRIVER_ACTIONS} from 'company/common/actions';
+import {View} from "react-native";
+import {FAB} from "react-native-paper";
+import colors from "assets/theme/colors";
 
 class DriversListScene extends PureComponent {
   static propTypes = {
@@ -24,15 +27,34 @@ class DriversListScene extends PureComponent {
     });
   };
 
+  onAddPress = () => {
+    this.props.navigation.navigate('DriverAdd', {
+      userType: 'driver',
+    });
+  };
+
   render() {
     const {drivers} = this.props;
 
     return (
+      <View style={{flex:1}}>
       <DriversList
         items={drivers}
         onItemPress={this.onDriversListItemPress}
         activeItemID={0}
       />
+        <FAB
+          icon="add"
+          dark
+          onPress={this.onAddPress}
+          medium
+          style={{
+            left: 20,
+            bottom: 20,
+            backgroundColor: colors.primary,
+          }}
+        />
+      </View>
     );
   }
 }
