@@ -5,7 +5,7 @@ import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
-import IconFactory from '../../../components/IconFactory';
+import IconFactory from 'components/IconFactory';
 
 export default class TimePicker extends Component {
   static propTypes = {
@@ -65,7 +65,7 @@ export default class TimePicker extends Component {
   };
 
   renderItem = ({item}) => {
-    const {onItemPress, activeItemID} = this.props;
+    const {onItemPress} = this.props;
 
     if (item.disabled) {
       return this.renderTime(item);

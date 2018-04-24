@@ -50,7 +50,7 @@ export default class DriverInfo extends Component {
 
         <View style={styles.itemContainer}>
           <Text style={styles.label}>Status</Text>
-          <Text style={styles.value}>Available</Text>
+          <Text style={styles.value}>{driver.offline ? I18n.t('offline') : I18n.t('online')}</Text>
         </View>
       </View>
     );
@@ -60,7 +60,7 @@ export default class DriverInfo extends Component {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    marginVertical: 20,
+    // marginVertical: 20,
     backgroundColor: 'white',
   },
   itemContainer: {

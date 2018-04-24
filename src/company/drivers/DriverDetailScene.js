@@ -14,6 +14,12 @@ import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 
 import I18n from 'utils/locale';
 import {Switch} from 'react-native-paper';
+import DriverStartEndTime from "./components/DriverStartEndTime";
+import {SELECTORS as ORDER_SELECTORS} from "company/selectors/orders";
+import Divider from "../../components/Divider";
+import Modal from 'react-native-modal';
+import DriverTimePicker from "./components/DriverTimePicker";
+import Button from "../../components/Button";
 
 class DriverDetailScene extends PureComponent {
   static propTypes = {
@@ -30,10 +36,14 @@ class DriverDetailScene extends PureComponent {
   static defaultProps = {
     navigation: {state: {params: {driverID: 0}}},
     driver: {user: {}},
+    timings: []
   };
 
   state = {
     online: true,
+    showStartEndTimeModal: false,
+    start_time_id: null,
+    end_time_id: null
   };
 
   static navigationOptions = ({navigation}) => {
@@ -62,8 +72,11 @@ class DriverDetailScene extends PureComponent {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    let {driver, timings} = nextProps;
     return {
-      online: nextProps.driver.online,
+      online: driver.online,
+      start_time_id: timings && nextProps.timings.find(timing => timing.name === driver.start_time).id,
+      end_time_id: timings && nextProps.timings.find(timing => timing.name === driver.end_time).id,
     };
   }
 
@@ -94,8 +107,41 @@ class DriverDetailScene extends PureComponent {
     });
   };
 
+  showStartEndTimeModal = () => {
+    this.setState({
+      showStartEndTimeModal: true
+    });
+  };
+
+  hideStartEndTimeModal = () => {
+    this.setState({
+      showStartEndTimeModal: false
+    });
+  };
+
+  onDriverStartTimePress = (item) => {
+    console.log('item', item);
+    this.setState({
+      start_time_id: item.id
+    });
+  };
+
+  onDriverEndTimePress = (item) => {
+    console.log('item', item);
+    this.setState({
+      end_time_id: item.id
+    });
+  };
+
+  saveTimings = () => {
+    this.hideStartEndTimeModal();
+  };
+
   render() {
-    const {driver} = this.props;
+    const {driver, timings} = this.props;
+    console.log('timings', timings);
+    console.log('driver', driver);
+    console.log('state', this.state);
 
     const {image, name} = driver.user;
     return (
@@ -103,39 +149,62 @@ class DriverDetailScene extends PureComponent {
         style={{flex: 1}}
         keyboardShouldPersistTap="always"
         contentInset={{bottom: 150}}>
-        <DriverThumb image={image} name={name} />
 
-        <DriverInfo driver={driver} />
+        <DriverThumb image={image} name={name}/>
+
+        <DriverInfo driver={driver}/>
+
+        <Divider/>
+
+        <DriverStartEndTime onPress={this.showStartEndTimeModal} driver={driver}/>
 
         {driver.working_order &&
-          driver.working_order.id && (
-            <View>
-              <SectionHeading
-                title={I18n.t('working_order')}
-                onButtonPress={this.loadCurrentOrders}
-              />
+        driver.working_order.id && (
+          <View>
+            <SectionHeading
+              title={I18n.t('working_order')}
+              onButtonPress={this.loadCurrentOrders}
+            />
 
-              <OrdersList
-                items={[driver.working_order]}
-                onItemPress={this.onOrdersListItemPress}
-              />
-            </View>
-          )}
+            <OrdersList
+              items={[driver.working_order]}
+              onItemPress={this.onOrdersListItemPress}
+            />
+          </View>
+        )}
 
         {driver.upcoming_orders &&
-          driver.upcoming_orders.length && (
-            <View>
-              <SectionHeading
-                title={I18n.t('upcoming_orders')}
-                onButtonPress={this.loadCurrentOrders}
-              />
+        driver.upcoming_orders.length && (
+          <View>
+            <SectionHeading
+              title={I18n.t('upcoming_orders')}
+              onButtonPress={this.loadCurrentOrders}
+            />
 
-              <OrdersList
-                items={driver.upcoming_orders}
-                onItemPress={this.onOrdersListItemPress}
-              />
-            </View>
-          )}
+            <OrdersList
+              items={driver.upcoming_orders}
+              onItemPress={this.onOrdersListItemPress}
+            />
+          </View>
+        )}
+
+        <Modal
+          isVisible={this.state.showStartEndTimeModal}
+          onBackdropPress={this.hideStartEndTimeModal}
+          style={{flex: 1, backgroundColor: 'white', padding: 0}}
+        >
+          <DriverTimePicker timings={timings}
+                            onStartTimePress={this.onDriverStartTimePress}
+                            onEndTimePress={this.onDriverEndTimePress}
+                            start_time_id={this.state.start_time_id}
+                            end_time_id={this.state.end_time_id}
+          />
+
+          <Button title={I18n.t('save')} style={{marginTop: 20}} onPress={this.saveTimings}/>
+
+        </Modal>
+
+
       </ScrollView>
     );
   }
@@ -146,6 +215,7 @@ const makeMapStateToProps = () => {
   const mapStateToProps = (state, props) => {
     return {
       driver: getDriverByID(state, props.navigation.state.params.driverID),
+      timings: ORDER_SELECTORS.getTimings(state) || [],
     };
   };
   return mapStateToProps;

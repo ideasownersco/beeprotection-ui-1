@@ -6,10 +6,11 @@ import {ACTIONS as ORDER_ACTIONS} from 'company/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
 import DriversList from 'driver/components/DriversList';
 import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
-import {ACTIONS as DRIVER_ACTIONS} from 'company/common/actions';
+import {ACTIONS as COMPANY_ACTIONS} from 'company/common/actions';
 import I18n from 'utils/locale';
 import SectionHeading from 'company/components/SectionHeading';
 import OrdersList from 'company/orders/components/OrdersList';
+import {ACTIONS as CUSTOMER_ACTIONS} from "customer/common/actions";
 
 class Home extends PureComponent {
   static propTypes = {
@@ -35,7 +36,8 @@ class Home extends PureComponent {
   fetchData = () => {
     this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
     this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders());
-    this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
+    this.props.dispatch(COMPANY_ACTIONS.fetchDrivers());
+    this.props.dispatch(COMPANY_ACTIONS.fetchTimings());
   };
 
   _onRefresh = () => {

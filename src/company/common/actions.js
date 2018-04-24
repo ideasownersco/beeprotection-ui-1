@@ -30,6 +30,10 @@ export const ACTION_TYPES = {
   FETCH_DRIVER_SUCCESS: '@company/drivers/FETCH_DRIVER_SUCCESS',
   FETCH_DRIVER_FAILURE: '@company/drivers/FETCH_DRIVER_FAILURE',
 
+  FETCH_TIMINGS_REQUEST: '@company/drivers/FETCH_TIMINGS_REQUEST',
+  FETCH_TIMINGS_SUCCESS: '@company/drivers/FETCH_TIMINGS_SUCCESS',
+  FETCH_TIMINGS_FAILURE: '@company/drivers/FETCH_TIMINGS_FAILURE',
+
   ASSIGN_DRIVER_REQUEST: '@company/drivers/ASSIGN_DRIVER_REQUEST',
   ASSIGN_DRIVER_SUCCESS: '@company/drivers/ASSIGN_DRIVER_SUCCESS',
   ASSIGN_DRIVER_FAILURE: '@company/drivers/ASSIGN_DRIVER_FAILURE',
@@ -107,6 +111,13 @@ function fetchDrivers(params) {
   };
 }
 
+function fetchTimings(params) {
+  return {
+    type: ACTION_TYPES.FETCH_TIMINGS_REQUEST,
+    params,
+  };
+}
+
 function assignDriver(id, params) {
   return {
     type: ACTION_TYPES.ASSIGN_DRIVER_REQUEST,
@@ -137,6 +148,7 @@ export const ACTIONS = {
   fetchPastOrdersRefresh,
   fetchOrderDetails,
   fetchDrivers,
+  fetchTimings,
   fetchDriver,
   assignDriver,
   setDriverOnlineStatus,

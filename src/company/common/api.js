@@ -30,6 +30,11 @@ function fetchOrderDetails(id) {
   return request({path, requiresAuthentication: true});
 }
 
+function fetchTimings() {
+  const path = `company/timings`;
+  return request({path});
+}
+
 function assignDriver(id, params) {
   const path = `company/orders/${id}/drivers/assign`;
   let requestParams = {
@@ -55,6 +60,7 @@ export const API = {
   fetchWorkingOrders,
   fetchPastOrders,
   fetchOrderDetails,
+  fetchTimings,
   fetchDrivers,
   fetchDriver,
   assignDriver,

@@ -146,5 +146,9 @@
   "amount" : "Amount",
   "approve_images" : "Approve Images",
   "confirm_location" : "Confirm Location",
-  "confirm_location_confirmation" : "Are you sure that this is the right location ?"
+  "confirm_location_confirmation" : "Are you sure that this is the right location ?",
+
+  "timings" : "Timings",
+  "offline" : "Offline",
+  "online" : "Online"
 }
