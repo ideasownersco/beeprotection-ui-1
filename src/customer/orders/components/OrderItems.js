@@ -25,12 +25,11 @@ export default class OrderItems extends Component {
         <SectionTitle title={I18n.t('order_details')} />
 
         {packages.map((packageModel, index) => (
-          <View key={packageModel.id}>
-            <View style={styles.packageItemContainer}>
+          <View style={styles.itemContainer} key={packageModel.id}>
+
               <Text style={styles.categoryTitle}>
                 {packageModel.category.name}
               </Text>
-            </View>
 
             <View style={styles.packageItemContainer}>
               <Text style={styles.packageTitle}>{packageModel.name}</Text>
@@ -46,13 +45,14 @@ export default class OrderItems extends Component {
                 .map(service => {
                   return (
                     <View style={{flex: 1}} key={service.id}>
+                      <Divider style={{marginVertical: 10}} />
+
                       <View style={styles.serviceListContainer}>
-                        <Text style={styles.serviceTitle}>{service.name} </Text>
-                        <Text style={styles.servicePrice}>
+                        <Text style={styles.packageTitle}>{service.name} </Text>
+                        <Text style={styles.packagePrice}>
                           {service.price} KD
                         </Text>
                       </View>
-                      <Divider style={{flex: 1, marginVertical: 5}} />
                     </View>
                   );
                 })}
@@ -69,44 +69,48 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: 'white',
   },
+  listContainer: {
+    paddingTop: 0,
+    padding: 10,
+  },
+  itemContainer: {
+    // padding: 5,
+    marginHorizontal: 5,
+    backgroundColor: 'white',
+    marginBottom: 5,
+  },
   categoryTitle: {
-    fontSize: 18,
-    color: '#aa2d29',
-    fontWeight: 'bold',
+    fontSize: 20,
+    color: colors.darkGrey,
+    // color: '#aa2d29',
+    // fontWeight: 'bold',
   },
   packageItemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
+    marginTop: 10,
   },
   packageTitle: {
-    flex: 4,
-    fontSize: 20,
-    color: colors.darkGrey,
-    fontWeight: 'bold',
-    paddingLeft: 20,
+    flex: 1,
+    fontSize: 17,
+    color: colors.mediumGrey,
+    paddingLeft: 10,
   },
   packagePrice: {
-    flex: 1,
-    color: colors.darkGrey,
-    fontSize: 15,
+    color: colors.primary,
+    fontSize: 17,
     textAlign: 'right',
   },
   serviceListContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
   },
-  servicePrice: {
+  total: {
+    fontSize: 20,
+    paddingHorizontal: 10,
+  },
+  totalPrice: {
     flex: 1,
-    color: colors.primary,
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'right',
-  },
-  serviceTitle: {
-    flex: 3,
-    color: colors.darkGrey,
-    fontSize: 16,
-    fontWeight: 'bold',
-    paddingLeft: 40,
   },
 });

@@ -13,6 +13,10 @@ export default class CartItems extends Component {
     return nextProps.items !== this.props.items;
   }
 
+  static propTypes = {
+    items: PropTypes.array.isRequired,
+    onItemPress: PropTypes.func.isRequired,
+  };
   renderItem = ({item}) => {
     const {onItemPress} = this.props;
     const {category, services} = item;
@@ -61,11 +65,6 @@ export default class CartItems extends Component {
     );
   }
 }
-
-CartItems.propTypes = {
-  items: PropTypes.array.isRequired,
-  onItemPress: PropTypes.func.isRequired,
-};
 
 const styles = StyleSheet.create({
   listContainer: {

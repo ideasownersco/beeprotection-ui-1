@@ -49,29 +49,29 @@ class Home extends Component {
       //   right: 0,
       //   borderBottomWidth: 0,
       // },
-      headerRight: (
-        <NavButton
-          icon={
-            <IconFactory
-              type="Ionicons"
-              name="md-globe"
-              color={colors.white}
-              size={26}
-            />
-          }
-          onPress={() =>
-            navigation.state.params &&
-            navigation.state.params.handleRightButtonPress()
-          }
-        />
-      ),
+      // headerRight: (
+      //   <NavButton
+      //     icon={
+      //       <IconFactory
+      //         type="Ionicons"
+      //         name="md-globe"
+      //         color={colors.white}
+      //         size={26}
+      //       />
+      //     }
+      //     onPress={() =>
+      //       navigation.state.params &&
+      //       navigation.state.params.handleRightButtonPress()
+      //     }
+      //   />
+      // ),
     };
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({
-      handleRightButtonPress: this.changeLanguage,
-    });
+    // this.props.navigation.setParams({
+    //   handleRightButtonPress: this.changeLanguage,
+    // });
     this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrder());
     AppState.addEventListener('change', this.handleAppStateChange);
   }

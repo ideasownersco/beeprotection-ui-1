@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import I18n from 'utils/locale';
 import DrawerItem from 'components/DrawerItem';
 import {DrawerSection} from 'react-native-paper';
+import DrawerHeader from 'components/DrawerHeader';
 
 export default class Drawer extends Component {
   onItemPress = (routeName: string) => {
@@ -19,11 +20,13 @@ export default class Drawer extends Component {
   };
 
   render() {
-    let {isAuthenticated, logout} = this.props.screenProps;
+    let {isAuthenticated, logout, user} = this.props.screenProps;
     let {activeRoute} = this.state;
 
     return (
-      <DrawerSection style={{paddingTop: 30}}>
+      <DrawerSection>
+        <DrawerHeader user={user} />
+
         <DrawerItem
           label={I18n.t('home')}
           routeName="HomeStack"
@@ -39,7 +42,10 @@ export default class Drawer extends Component {
           label={I18n.t('upcoming_orders')}
           routeName="UpcomingOrdersStack"
           onItemPress={this.onItemPress}
-          iconProps={{name: 'back-in-time', type: 'Entypo'}}
+          iconProps={{
+            name: 'car-estate',
+            type: 'MaterialCommunityIcons',
+          }}
           active={activeRoute === 'UpcomingOrdersStack'}
         />
 

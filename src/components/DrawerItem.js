@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import IconFactory from 'components/IconFactory';
 import {DrawerItem as PaperDrawerItem} from 'react-native-paper';
+import colors from 'assets/theme/colors';
 
 export default class DrawerItem extends Component {
   static propTypes = {
@@ -29,7 +30,13 @@ export default class DrawerItem extends Component {
       <PaperDrawerItem
         {...rest}
         onPress={() => onItemPress(routeName)}
-        icon={<IconFactory {...iconProps} />}
+        icon={
+          <IconFactory
+            {...iconProps}
+            color={this.props.active ? colors.secondary : colors.fadedBlack}
+          />
+        }
+        color={this.props.active ? colors.secondary : colors.fadedBlack}
       />
     );
   }

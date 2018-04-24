@@ -9,13 +9,13 @@ import PastOrdersScene from 'company/orders/PastOrdersScene';
 import UpcomingOrdersScene from 'company/orders/UpcomingOrdersScene';
 import WorkingOrdersScene from 'company/orders/WorkingOrdersScene';
 import DriversListScene from 'company/drivers/DriversListScene';
-import AddDriverScene from 'company/drivers/AddDriverScene';
 import DriverDetailScene from 'company/drivers/DriverDetailScene';
 import SettingsScene from 'company/SettingsScene';
 import TrackDriversScene from 'company/drivers/TrackScene';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 import TrackDetailScene from 'company/orders/TrackDetailScene';
+import Register from "guest/Register";
 
 const getDrawerIcon = navigation => {
   return {
@@ -23,6 +23,14 @@ const getDrawerIcon = navigation => {
       <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
     ),
   };
+};
+
+const navStyle = {
+  headerTintColor: colors.white,
+  headerStyle: {
+    backgroundColor: colors.primary,
+    borderBottomWidth: 0,
+  },
 };
 
 const HomeStack = StackNavigator(
@@ -36,7 +44,7 @@ const HomeStack = StackNavigator(
     },
     OrderDetail: {screen: OrderDetailScene},
     AddDriver: {
-      screen: AddDriverScene,
+      screen: Register,
       navigationOptions: ({navigation}) => ({
         title: I18n.t('driver_add'),
       }),
@@ -70,7 +78,7 @@ const HomeStack = StackNavigator(
   {
     // initialRouteName:'TrackDetail',
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      ...navStyle,
     }),
   },
 );
@@ -90,7 +98,7 @@ const DriversStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      ...navStyle,
     }),
   },
 );
@@ -109,7 +117,7 @@ const PastOrdersStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      ...navStyle,
     }),
   },
 );
@@ -128,7 +136,7 @@ const UpcomingOrdersStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      ...navStyle,
     }),
   },
 );
@@ -147,7 +155,7 @@ const WorkingOrdersStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      ...navStyle,
     }),
   },
 );
@@ -162,7 +170,7 @@ const SettingsStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      ...navStyle,
     }),
   },
 );
@@ -176,7 +184,7 @@ const TrackDriversStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      headerTintColor: colors.primary,
+      ...navStyle,
     }),
   },
 );

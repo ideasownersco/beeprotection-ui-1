@@ -26,7 +26,7 @@ export default class Navigator extends Component {
   };
 
   render() {
-    let {isAuthenticated, userType, logout} = this.props;
+    let {isAuthenticated, user, userType, logout} = this.props;
     const screen = this.resolveScreenForUser(userType);
 
     const AppNavigator = StackNavigator(
@@ -47,7 +47,7 @@ export default class Navigator extends Component {
         ref={navigatorRef => {
           NavigatorService.setContainer(navigatorRef);
         }}
-        screenProps={{isAuthenticated, logout}}
+        screenProps={{isAuthenticated, user, logout}}
       />
     );
   }

@@ -53,7 +53,9 @@ class Home extends PureComponent {
   };
 
   addDriver = () => {
-    this.props.navigation.navigate('AddDriver');
+    this.props.navigation.navigate('AddDriver',{
+      userType:'driver'
+    });
   };
 
   onDriversListItemPress = (driver: object) => {

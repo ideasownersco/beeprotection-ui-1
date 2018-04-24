@@ -45,7 +45,10 @@ class Register extends Component {
 
   handleRegister = () => {
     let credentials = this.state;
-    this.props.actions.register(credentials);
+    this.props.actions.register({
+      ...credentials,
+      driver: this.props.navigation.state.params && this.props.navigation.state.params.userType && this.props.navigation.state.params.userType === 'driver' || false ,
+    });
   };
 
   onFieldChange = (field, value) => {
@@ -116,7 +119,7 @@ class Register extends Component {
           />
 
           <FormSubmit
-            onPress={() => this.handleRegister()}
+            onPress={this.handleRegister}
             disabled={busy}
             title={busy ? I18n.t('signing_up') : I18n.t('create_account')}
             style={{marginTop: 50}}

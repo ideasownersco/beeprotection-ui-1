@@ -2,13 +2,11 @@
  * @flow
  */
 import React from 'react';
-import Touchable from 'react-native-platform-touchable';
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import colors from 'assets/theme/colors';
-import {Text, View, StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Title} from 'react-native-paper';
-import IconFactory from './IconFactory';
+import IconFactory from 'components/IconFactory';
 
 const SectionTitle = ({titleStyle, title, style, icon, iconType, iconSize}) => {
   return (

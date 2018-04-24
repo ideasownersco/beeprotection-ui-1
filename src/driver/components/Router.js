@@ -19,6 +19,14 @@ const getDrawerIcon = navigation => {
   };
 };
 
+const navStyle = {
+  headerTintColor: colors.white,
+  headerStyle: {
+    backgroundColor: colors.primary,
+    borderBottomWidth: 0,
+  },
+};
+
 const HomeStack = StackNavigator(
   {
     Home: {
@@ -38,7 +46,7 @@ const HomeStack = StackNavigator(
   {
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
-      headerTintColor: colors.primary,
+      ...navStyle,
     }),
   },
 );
@@ -58,7 +66,7 @@ const PastOrdersStack = StackNavigator(
   {
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
-      headerTintColor: colors.primary,
+      ...navStyle,
     }),
   },
 );
@@ -77,7 +85,7 @@ const UpcomingOrdersStack = StackNavigator(
   {
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
-      headerTintColor: colors.primary,
+      ...navStyle,
     }),
   },
 );
