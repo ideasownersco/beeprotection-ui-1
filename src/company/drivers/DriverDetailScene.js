@@ -148,8 +148,8 @@ class DriverDetailScene extends PureComponent {
       <ScrollView
         style={{flex: 1}}
         keyboardShouldPersistTap="always"
-        contentInset={{bottom: 150}}>
-
+        contentContainerStyle={{paddingBottom:100}}
+      >
         <DriverThumb image={image} name={name}/>
 
         <DriverInfo driver={driver}/>

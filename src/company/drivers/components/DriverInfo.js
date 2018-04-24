@@ -59,13 +59,14 @@ export default class DriverInfo extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    // padding: 10,
     // marginVertical: 20,
     backgroundColor: 'white',
   },
   itemContainer: {
     flexDirection: 'row',
     marginVertical: 10,
+    padding: 10,
   },
   content: {
     flexDirection: 'row',

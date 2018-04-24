@@ -38,7 +38,6 @@ export default class DriverThumb extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 150,
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 40,
