@@ -73,10 +73,13 @@ class DriverDetailScene extends PureComponent {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     let {driver, timings} = nextProps;
+
+    let startTime = timings.find(timing => timing.name === driver.start_time);
+    let endTime = timings.find(timing => timing.name === driver.end_time);
     return {
       online: driver.online,
-      start_time_id: timings && nextProps.timings.find(timing => timing.name === driver.start_time).id,
-      end_time_id: timings && nextProps.timings.find(timing => timing.name === driver.end_time).id,
+      start_time_id: startTime ? startTime.id : null,
+      end_time_id: endTime ? endTime.id : null,
     };
   }
 
@@ -148,7 +151,7 @@ class DriverDetailScene extends PureComponent {
       <ScrollView
         style={{flex: 1}}
         keyboardShouldPersistTap="always"
-        contentContainerStyle={{paddingBottom:100}}
+        contentContainerStyle={{paddingBottom: 100}}
       >
         <DriverThumb image={image} name={name}/>
 

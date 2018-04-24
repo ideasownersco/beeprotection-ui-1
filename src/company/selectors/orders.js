@@ -33,9 +33,7 @@ const getWorkingOrders = createSelector(
   (entities, orders) => {
     return (
       (orders &&
-        orders
-          .map(orderId => denormalize(orderId, Schema.orders, entities))
-          .filter(order => order.is_working)) ||
+        orders.map(orderId => denormalize(orderId, Schema.orders, entities))) ||
       []
     );
   },
