@@ -2,12 +2,9 @@
  * @flow
  */
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
-import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import DrawerItem from 'components/DrawerItem';
-import Divider from 'components/Divider';
-import {DrawerSection} from "react-native-paper";
+import {DrawerSection} from 'react-native-paper';
 
 export default class Drawer extends Component {
   onItemPress = (routeName: string) => {
@@ -27,7 +24,6 @@ export default class Drawer extends Component {
 
     return (
       <DrawerSection style={{paddingTop: 30}}>
-
         <DrawerItem
           label={I18n.t('home')}
           routeName="HomeStack"
@@ -93,12 +89,3 @@ export default class Drawer extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.fadedWhite,
-    paddingHorizontal: 10,
-    paddingTop: 30,
-  },
-});

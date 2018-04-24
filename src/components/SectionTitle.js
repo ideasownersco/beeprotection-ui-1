@@ -10,14 +10,7 @@ import {Text, View, StyleSheet} from 'react-native';
 import {Title} from 'react-native-paper';
 import IconFactory from './IconFactory';
 
-const SectionTitle = ({
-  titleStyle,
-  title,
-  style,
-  icon,
-  iconType,
-  iconSize,
-}) => {
+const SectionTitle = ({titleStyle, title, style, icon, iconType, iconSize}) => {
   return (
     <View style={[styles.container, style]}>
       {icon && (
@@ -46,7 +39,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    paddingHorizontal:5
+    paddingHorizontal: 5,
   },
 });
 export default SectionTitle;

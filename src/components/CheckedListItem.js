@@ -27,11 +27,7 @@ export default class CheckedListItem extends Component {
       <Touchable onPress={onPress}>
         <View
           style={[styles.itemRowContainer, style, disabled && {opacity: 0.4}]}>
-          <ListItem
-            style={{flex: 1}}
-            title={title}
-            description={description}
-          />
+          <ListItem style={{flex: 1}} title={title} description={description} />
           <Checkbox checked={checked} color={colors.primary} />
         </View>
       </Touchable>

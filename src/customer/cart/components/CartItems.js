@@ -56,9 +56,7 @@ export default class CartItems extends Component {
         style={styles.listContainer}
         keyExtractor={(item, index) => `${index}`}
         extraData={activeItemID}
-        ItemSeparatorComponent={() => (
-          <Divider style={{marginVertical: 15}} />
-        )}
+        ItemSeparatorComponent={() => <Divider style={{marginVertical: 15}} />}
       />
     );
   }

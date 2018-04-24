@@ -6,7 +6,6 @@ import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 
 export default class DatePicker extends Component {
-
   static propTypes = {
     onItemPress: PropTypes.func.isRequired,
     activeItem: PropTypes.object,
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     paddingVertical: 5,
-    paddingHorizontal:15,
+    paddingHorizontal: 15,
     alignItems: 'center',
   },
   itemContainerActive: {

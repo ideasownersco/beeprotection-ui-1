@@ -52,7 +52,7 @@ const AuthStack = StackNavigator(
   {
     headerMode: 'none',
     navigationOptions: ({navigation}) => ({
-      ...navStyle
+      ...navStyle,
     }),
     // initialRouteName:'RegisterScreen'
   },
@@ -110,7 +110,7 @@ const HomeStack = StackNavigator(
   {
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
-      ...navStyle
+      ...navStyle,
     }),
     // initialRouteName:'Map'
   },
@@ -132,7 +132,7 @@ const PastOrdersStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      ...navStyle
+      ...navStyle,
     }),
   },
 );
@@ -153,7 +153,7 @@ const UpcomingOrdersStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      ...navStyle
+      ...navStyle,
     }),
   },
 );
@@ -170,7 +170,7 @@ const SettingsStack = StackNavigator(
   {
     // initialRouteName:'WorkingOrders'
     navigationOptions: ({navigation}) => ({
-      ...navStyle
+      ...navStyle,
     }),
   },
 );

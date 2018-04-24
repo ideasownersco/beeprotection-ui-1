@@ -4,7 +4,6 @@ import {StyleSheet} from 'react-native';
 import {Divider as PaperDivider} from 'react-native-paper';
 
 class Divider extends Component {
-
   shouldComponentUpdate() {
     return false;
   }
@@ -23,7 +22,6 @@ Divider.propTyes = {
   style: PropTypes.style,
 };
 
-const styles = StyleSheet.create({
-});
+const styles = StyleSheet.create({});
 
 export default Divider;

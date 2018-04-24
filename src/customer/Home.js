@@ -117,7 +117,7 @@ class Home extends Component {
     let {upcoming_orders, working_order} = this.props;
 
     return (
-      <ScrollView style={{flex: 1}} contentContainer={{paddingVertical:100}}>
+      <ScrollView style={{flex: 1}} contentContainer={{paddingVertical: 100}}>
         <WelcomeText />
         <HomeActionButtons
           onCreateOrderPress={this.onCreateOrderPress}

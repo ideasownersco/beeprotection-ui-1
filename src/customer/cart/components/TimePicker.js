@@ -5,7 +5,7 @@ import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
-import IconFactory from "../../../components/IconFactory";
+import IconFactory from '../../../components/IconFactory';
 
 export default class TimePicker extends Component {
   static propTypes = {
@@ -39,14 +39,12 @@ export default class TimePicker extends Component {
             ? {opacity: 0.3}
             : activeItemID === item.id && styles.itemContainerActive,
         ]}>
-
         <IconFactory
           name={item.isDay ? 'ios-sunny' : 'ios-moon'}
-          type='Ionicons'
+          type="Ionicons"
           color={item.isDay ? '#ebbd21' : colors.darkGrey}
           size={22}
-        >
-        </IconFactory>
+        />
 
         <Text
           style={[
@@ -62,7 +60,6 @@ export default class TimePicker extends Component {
           ]}>
           {item.period}
         </Text>
-
       </View>
     );
   };
@@ -107,7 +104,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     paddingVertical: 5,
-    paddingHorizontal:15,
+    paddingHorizontal: 15,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.lightGrey,
@@ -129,8 +126,8 @@ const styles = StyleSheet.create({
   day: {
     color: colors.darkGrey,
     fontSize: 12,
-    fontWeight:'700',
-    marginTop:-5
+    fontWeight: '700',
+    marginTop: -5,
   },
   dayActive: {
     color: colors.primary,

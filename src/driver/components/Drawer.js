@@ -2,11 +2,9 @@
  * @flow
  */
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
-import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import DrawerItem from 'components/DrawerItem';
-import Divider from 'components/Divider';
+import {DrawerSection} from 'react-native-paper';
 
 export default class Drawer extends Component {
   onItemPress = (routeName: string) => {
@@ -25,56 +23,42 @@ export default class Drawer extends Component {
     let {activeRoute} = this.state;
 
     return (
-      <View style={styles.container}>
+      <DrawerSection>
         <DrawerItem
-          title={I18n.t('home')}
+          label={I18n.t('home')}
           routeName="HomeStack"
           onItemPress={this.onItemPress}
           iconProps={{
             name: 'home-outline',
             type: 'MaterialCommunityIcons',
-            size: 30,
           }}
           active={activeRoute === 'HomeStack'}
         />
 
-        <Divider />
         <DrawerItem
-          title={I18n.t('upcoming_orders')}
+          label={I18n.t('upcoming_orders')}
           routeName="UpcomingOrdersStack"
           onItemPress={this.onItemPress}
-          iconProps={{name: 'back-in-time', type: 'Entypo', size: 30}}
+          iconProps={{name: 'back-in-time', type: 'Entypo'}}
           active={activeRoute === 'UpcomingOrdersStack'}
         />
 
-        <Divider />
         <DrawerItem
-          title={I18n.t('past_orders')}
+          label={I18n.t('past_orders')}
           routeName="PastOrdersStack"
           onItemPress={this.onItemPress}
-          iconProps={{name: 'timelapse', type: 'MaterialIcons', size: 30}}
+          iconProps={{name: 'timelapse', type: 'MaterialIcons'}}
           active={activeRoute === 'PastOrdersStack'}
         />
 
-        <Divider />
-
         <DrawerItem
-          title={I18n.t('logout')}
+          label={I18n.t('logout')}
           routeName="Logout"
           onItemPress={logout}
-          iconProps={{name: 'logout', type: 'MaterialCommunityIcons', size: 30}}
+          iconProps={{name: 'logout', type: 'MaterialCommunityIcons'}}
           active={activeRoute === 'Logout'}
         />
-      </View>
+      </DrawerSection>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.fadedWhite,
-    paddingHorizontal: 10,
-    paddingTop: 30,
-  },
-});

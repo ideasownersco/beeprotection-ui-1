@@ -30,10 +30,13 @@ export default class MapPicker extends Component {
   }
 
   shouldComponentUpdate(nextProps, prevState) {
-    return nextProps.address.area_id !== this.props.address.area_id || this.state.latitude != prevState.latitude;
+    return (
+      nextProps.address.area_id !== this.props.address.area_id ||
+      this.state.latitude != prevState.latitude
+    );
   }
 
-  componentDidUpdate(nextProps,prevState) {
+  componentDidUpdate(nextProps, prevState) {
     if (nextProps.address.area_id !== this.props.address.area_id) {
       this.map.animateToRegion(this.state);
     }
@@ -45,7 +48,7 @@ export default class MapPicker extends Component {
     }
     return {
       latitude: nextProps.address.latitude,
-      longitude: nextProps.address.longitude
+      longitude: nextProps.address.longitude,
     };
   }
 
@@ -72,7 +75,7 @@ export default class MapPicker extends Component {
   // };
 
   onRegionChangeComplete = region => {
-    console.log('onRegionChangeComplete',region);
+    console.log('onRegionChangeComplete', region);
 
     if (
       !this.props.address.area_id ||
@@ -93,12 +96,13 @@ export default class MapPicker extends Component {
     const {address} = this.props;
     // !address.area_id && {opacity: 0.3}
     return (
-      <View style={[styles.container, ]}>
-
+      <View style={[styles.container]}>
         <View style={styles.searchInputContainer}>
-          <Image source={require('./../../../assets/images/pin.png')}
-                 style={{width: 50, height: 50}}
-                 resizeMode="contain"/>
+          <Image
+            source={require('./../../../assets/images/pin.png')}
+            style={{width: 50, height: 50}}
+            resizeMode="contain"
+          />
         </View>
 
         <MapView
@@ -116,13 +120,13 @@ export default class MapPicker extends Component {
           onRegionChangeComplete={this.onRegionChangeComplete}
           showsUserLocation={true}>
           {/*<MapView.Marker*/}
-            {/*coordinate={{*/}
-              {/*latitude: latitude,*/}
-              {/*longitude: longitude,*/}
-            {/*}}*/}
-            {/*onDragEnd={e => this.onDragEnd(e)}*/}
-            {/*identifier="MARKER_1"*/}
-            {/*draggable*/}
+          {/*coordinate={{*/}
+          {/*latitude: latitude,*/}
+          {/*longitude: longitude,*/}
+          {/*}}*/}
+          {/*onDragEnd={e => this.onDragEnd(e)}*/}
+          {/*identifier="MARKER_1"*/}
+          {/*draggable*/}
           {/*/>*/}
         </MapView>
       </View>

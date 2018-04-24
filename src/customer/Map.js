@@ -6,7 +6,6 @@ import BackgroundGeolocation from 'react-native-background-geolocation';
 import CreateAddressForm from './cart/components/CreateAddress';
 
 class Home extends Component {
-
   componentDidMount() {
     // BackgroundGeolocation.getCurrentPosition(
     //   location => {

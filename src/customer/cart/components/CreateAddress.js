@@ -11,7 +11,6 @@ import Touchable from 'react-native-platform-touchable';
 import List from 'components/List';
 
 export default class extends Component {
-
   static propTypes = {
     areas: PropTypes.array.isRequired,
     onCancel: PropTypes.func.isRequired,
@@ -35,8 +34,8 @@ export default class extends Component {
     };
   }
 
-  shouldComponentUpdate(nextProps,prevState) {
-    return nextProps.items !== this.props.items || prevState !== this.state ;
+  shouldComponentUpdate(nextProps, prevState) {
+    return nextProps.items !== this.props.items || prevState !== this.state;
   }
 
   componentDidMount() {
@@ -59,7 +58,6 @@ export default class extends Component {
       },
     );
   }
-
 
   hideScreen = () => {
     this.props.onCancel();
@@ -120,7 +118,6 @@ export default class extends Component {
   };
 
   render() {
-
     const {areas} = this.props;
 
     const {
@@ -139,7 +136,6 @@ export default class extends Component {
 
     return (
       <View style={styles.container}>
-
         <AddressFormFields
           block={block}
           avenue={avenue}
@@ -149,7 +145,6 @@ export default class extends Component {
         />
 
         <View style={styles.mapContainer}>
-
           <View style={styles.searchInputContainer}>
             <Touchable
               style={{
@@ -165,7 +160,9 @@ export default class extends Component {
                   fontWeight: '500',
                   color: 'black',
                 }}>
-                {area_id ? areas.find(area => area.id === area_id).name : I18n.t('select_area')}
+                {area_id
+                  ? areas.find(area => area.id === area_id).name
+                  : I18n.t('select_area')}
               </Text>
             </Touchable>
           </View>
@@ -178,7 +175,6 @@ export default class extends Component {
               area_id: area_id,
             }}
           />
-
         </View>
 
         <View style={styles.buttonsContainer}>
@@ -209,7 +205,6 @@ export default class extends Component {
           onSave={this.hideAreaListModal}
           items={areas}
         />
-
       </View>
     );
   }

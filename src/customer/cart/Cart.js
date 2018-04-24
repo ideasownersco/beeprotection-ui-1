@@ -12,7 +12,7 @@ import {
   SELECTORS as ORDER_SELECTORS,
 } from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
-import {Button,} from 'react-native-paper';
+import {Button} from 'react-native-paper';
 import I18n from 'utils/locale';
 import CartItems from 'customer/cart/components/CartItems';
 import DatePicker from 'customer/cart/components/DatePicker';
@@ -207,18 +207,20 @@ class Cart extends PureComponent {
     if (!isAuthenticated) {
       this.redirectToLogin();
     } else {
-
-      return Alert.alert(`${I18n.t('confirm_location')}`, `${I18n.t('confirm_location_confirmation')}`, [
-        {text: I18n.t('cancel')},
-        {
-          text: I18n.t('yes'),
-          onPress: () => {
-            this.props.actions.saveAddress(address);
-            this.hideAddressCreateModal();
-          }
-        },
-      ]);
-
+      return Alert.alert(
+        `${I18n.t('confirm_location')}`,
+        `${I18n.t('confirm_location_confirmation')}`,
+        [
+          {text: I18n.t('cancel')},
+          {
+            text: I18n.t('yes'),
+            onPress: () => {
+              this.props.actions.saveAddress(address);
+              this.hideAddressCreateModal();
+            },
+          },
+        ],
+      );
     }
   };
 
@@ -291,7 +293,7 @@ class Cart extends PureComponent {
     } = this.state;
 
     if (!cartItems.length) {
-      return <EmptyCart/>;
+      return <EmptyCart />;
     }
 
     return (
@@ -301,7 +303,6 @@ class Cart extends PureComponent {
           {backgroundColor: 'white'},
           checkout.isFetching && {opacity: 0.4},
         ]}>
-
         <SectionTitle
           title={I18n.t('order_details')}
           style={{padding: 10}}
@@ -309,9 +310,9 @@ class Cart extends PureComponent {
           iconType="MaterialIcons"
         />
 
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
 
-        <CartTotal total={cartTotal}/>
+        <CartTotal total={cartTotal} />
 
         <SectionTitle
           title={I18n.t('date')}
@@ -342,7 +343,12 @@ class Cart extends PureComponent {
         />
 
         <Divider
-          style={{flex: 1, marginTop: 20, padding: 10, backgroundColor: colors.lightGrey}}
+          style={{
+            flex: 1,
+            marginTop: 20,
+            padding: 10,
+            backgroundColor: colors.lightGrey,
+          }}
         />
 
         <SectionTitle
@@ -364,8 +370,7 @@ class Cart extends PureComponent {
           isVisible={showAddressCreateModal}
           style={{margin: 0, padding: 0, backgroundColor: 'white'}}
           presentationStyle="fullScreen"
-          transparent={false}
-        >
+          transparent={false}>
           <CreateAddress
             onCancel={this.hideAddressCreateModal}
             onSave={this.saveAddress}
@@ -373,7 +378,10 @@ class Cart extends PureComponent {
           />
         </Modal>
 
-        <Button onPress={this.showAddressCreateModal} color={colors.primary} style={{alignItems: 'flex-start'}}>
+        <Button
+          onPress={this.showAddressCreateModal}
+          color={colors.primary}
+          style={{alignItems: 'flex-start'}}>
           <View
             style={{
               flexDirection: 'row',
@@ -408,7 +416,7 @@ class Cart extends PureComponent {
           selectedItem={paymentMode}
         />
 
-        <Divider style={{marginVertical: 20}}/>
+        <Divider style={{marginVertical: 20}} />
 
         <Button
           onPress={this.checkout}
@@ -450,7 +458,6 @@ class Cart extends PureComponent {
           close={this.hideCheckoutConfirmDialog}
           checkout={this.performCheckout}
         />
-
       </ScrollView>
     );
   }

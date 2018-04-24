@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import {FlatList, StyleSheet} from 'react-native';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
-import Divider from "components/Divider";
-import CheckedListItem from "components/CheckedListItem";
+import Divider from 'components/Divider';
+import CheckedListItem from 'components/CheckedListItem';
 
 export default class AddressesList extends Component {
-
   shouldComponentUpdate(nextProps) {
     return (
       nextProps.items !== this.props.items ||
@@ -23,7 +22,11 @@ export default class AddressesList extends Component {
         checked={activeItemID === item.id}
         onPress={() => (!item.area.active ? {} : onItemPress(item))}
         title={item.area.name || item.area.name_en}
-        description={`${I18n.t('block')} ${item.block}, ${I18n.t('street')} ${item.street}, ${I18n.t('avenue')} ${item.avenue}, ${I18n.t('building')} ${item.building}`}
+        description={`${I18n.t('block')} ${item.block}, ${I18n.t('street')} ${
+          item.street
+        }, ${I18n.t('avenue')} ${item.avenue}, ${I18n.t('building')} ${
+          item.building
+        }`}
       />
     );
   };
@@ -50,8 +53,7 @@ AddressesList.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  listContainer: {
-  },
+  listContainer: {},
   itemContainer: {
     flexDirection: 'row',
     padding: 5,
