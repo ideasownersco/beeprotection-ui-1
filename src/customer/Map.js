@@ -6,13 +6,6 @@ import BackgroundGeolocation from 'react-native-background-geolocation';
 import CreateAddressForm from './cart/components/CreateAddress';
 
 class Home extends Component {
-  state = {
-    initialized: true,
-    latitude: 29.3059631,
-    longitude: 48.0718422,
-    country: 'KW',
-    area_id: 7,
-  };
 
   componentDidMount() {
     // BackgroundGeolocation.getCurrentPosition(

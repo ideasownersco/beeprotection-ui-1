@@ -64,14 +64,16 @@ export default class MapPicker extends Component {
     this.updateAddress(params);
   };
 
-  onRegionChange = region => {
-    this.setState({
-      latitude: region.latitude,
-      longitude: region.longitude,
-    });
-  };
+  // onRegionChange = region => {
+  //   this.setState({
+  //     latitude: region.latitude,
+  //     longitude: region.longitude,
+  //   });
+  // };
 
   onRegionChangeComplete = region => {
+    console.log('onRegionChangeComplete',region);
+
     if (
       !this.props.address.area_id ||
       this.props.address.latitude === region.latitude
@@ -110,7 +112,7 @@ export default class MapPicker extends Component {
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }}
-          onRegionChange={this.onRegionChange}
+          // onRegionChange={this.onRegionChange}
           onRegionChangeComplete={this.onRegionChangeComplete}
           showsUserLocation={true}>
           {/*<MapView.Marker*/}
@@ -161,7 +163,7 @@ const styles = StyleSheet.create({
   },
   searchInputContainer: {
     position: 'absolute',
-    top: 150,
+    top: 180,
     flexDirection: 'row',
     zIndex: 5000,
   },

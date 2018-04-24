@@ -112,7 +112,7 @@ const HomeStack = StackNavigator(
       gesturesEnabled: false,
       ...navStyle
     }),
-    initialRouteName:'Map'
+    // initialRouteName:'Map'
   },
 );
 

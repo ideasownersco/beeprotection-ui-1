@@ -12,7 +12,7 @@ import {
   SELECTORS as ORDER_SELECTORS,
 } from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
-import {Button, } from 'react-native-paper';
+import {Button,} from 'react-native-paper';
 import I18n from 'utils/locale';
 import CartItems from 'customer/cart/components/CartItems';
 import DatePicker from 'customer/cart/components/DatePicker';
@@ -207,7 +207,18 @@ class Cart extends PureComponent {
     if (!isAuthenticated) {
       this.redirectToLogin();
     } else {
-      this.props.actions.saveAddress(address);
+
+      return Alert.alert(`${I18n.t('confirm_location')}`, `${I18n.t('confirm_location_confirmation')}`, [
+        {text: I18n.t('cancel')},
+        {
+          text: I18n.t('yes'),
+          onPress: () => {
+            this.props.actions.saveAddress(address);
+            this.hideAddressCreateModal();
+          }
+        },
+      ]);
+
     }
   };
 
@@ -351,7 +362,7 @@ class Cart extends PureComponent {
         <Modal
           animationType="slide"
           isVisible={showAddressCreateModal}
-          style={{margin:0,padding:0,backgroundColor:'white'}}
+          style={{margin: 0, padding: 0, backgroundColor: 'white'}}
           presentationStyle="fullScreen"
           transparent={false}
         >
