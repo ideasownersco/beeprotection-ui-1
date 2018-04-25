@@ -32,11 +32,11 @@ class TrackOrderScene extends Component {
     images: [],
     imagesUploaded: false,
     imagesApproved: false,
-    latitude: 37.78825,
-    longitude: -122.4324,
+    // latitude: 37.78825,
+    // longitude: -122.4324,
+    latitude: 29.3772392006689,
+    longitude: 47.98511826155676,
     heading: 0,
-    // latitude: 29.3772392006689,
-    // longitude: 47.98511826155676,
   };
 
   componentDidMount() {

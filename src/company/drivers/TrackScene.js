@@ -91,8 +91,11 @@ class TrackScene extends PureComponent {
     let {drivers} = this.props;
 
     let origin = {
-      latitude: 37.48522,
-      longitude: -122.23635,
+      // latitude: 37.48522,
+      // longitude: -122.23635,
+      latitude: 29.3772392006689,
+      longitude: 47.98511826155676,
+      heading: 0,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
     };
