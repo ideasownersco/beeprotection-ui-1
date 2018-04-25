@@ -57,7 +57,6 @@ export default class Map extends Component {
     if (initialized) {
       return (
         <View style={styles.container}>
-
           <MapView
             ref={ref => {
               this.map = ref;
