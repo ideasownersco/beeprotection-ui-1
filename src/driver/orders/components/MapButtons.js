@@ -73,14 +73,11 @@ export default class MapButtons extends Component {
 
         {jobStatus == 'reached' && (
           <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-            {imagesUploaded &&
-              imagesApproved && (
-                <Button
-                  title={I18n.t('start_working')}
-                  onPress={startWorking}
-                  style={{marginBottom: 10, width: 150}}
-                />
-              )}
+            <Button
+              title={I18n.t('start_working')}
+              onPress={startWorking}
+              style={{marginBottom: 10, width: 150}}
+            />
 
             {imagesUploaded &&
               !imagesApproved && (
