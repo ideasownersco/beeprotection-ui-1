@@ -9,6 +9,7 @@ import BackgroundGeolocation from 'react-native-background-geolocation';
 import {Button} from 'react-native-paper';
 import Touchable from 'react-native-platform-touchable';
 import List from 'components/List';
+import Divider from "../../../components/Divider";
 
 export default class extends Component {
   static propTypes = {
@@ -70,7 +71,7 @@ export default class extends Component {
     this.hideMap();
     this.props.onSave({
       ...this.state,
-      area_id:99
+      area_id: 99
     });
   };
 
@@ -147,15 +148,8 @@ export default class extends Component {
     return (
       <View style={styles.container}>
 
-        <AddressFormFields
-          block={block}
-          avenue={avenue}
-          street={street}
-          building={building}
-          updateFields={this.updateFormFields}
-        />
+        <View style={styles.searchInputWrapper}>
 
-        <View style={styles.mapContainer}>
           <View style={styles.searchInputContainer}>
             <Touchable
               style={{
@@ -178,19 +172,26 @@ export default class extends Component {
             </Touchable>
           </View>
 
-          {
-            !this.state.hideMap &&
-            <MapPicker
-              updateAddress={this.updateAddressFields}
-              address={{
-                latitude: latitude,
-                longitude: longitude,
-                area_id: area_id,
-              }}
-            />
-          }
+          <Divider/>
 
+          <AddressFormFields
+            block={block}
+            avenue={avenue}
+            street={street}
+            building={building}
+            updateFields={this.updateFormFields}
+          />
         </View>
+
+
+        <MapPicker
+          updateAddress={this.updateAddressFields}
+          address={{
+            latitude: latitude,
+            longitude: longitude,
+            area_id: area_id,
+          }}
+        />
 
         <View style={styles.buttonsContainer}>
           <Button
@@ -229,15 +230,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 0,
-    marginVertical: 20,
-    padding: 10,
+    // marginVertical: 20,
+    // padding: 10,
     opacity: 1,
-    // backgroundColor: colors.fadedWhite,
     backgroundColor: colors.fadedWhite,
   },
   buttonsContainer: {
-    marginTop: 10,
+    position: 'absolute',
+    bottom: 20,
+    margin: 5,
     flexDirection: 'row',
+    zIndex: 5000,
   },
   button: {
     flex: 1,
@@ -245,14 +248,15 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     flex: 1,
-    backgroundColor: colors.lightGrey,
+  },
+  searchInputWrapper: {
+    zIndex: 5000,
+    top: 20,
+    margin: 10,
+    backgroundColor: colors.white,
   },
   searchInputContainer: {
-    position: 'absolute',
-    top: 20,
-    margin: 5,
-    backgroundColor: 'white',
     flexDirection: 'row',
-    zIndex: 5000,
   },
+  areaContainer: {},
 });
