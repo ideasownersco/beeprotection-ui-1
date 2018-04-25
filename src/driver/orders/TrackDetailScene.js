@@ -27,7 +27,6 @@ class TrackOrderScene extends Component {
   };
 
   state = {
-
     tracking_enabled: false,
     showUploadImageModal: false,
     images: [],
@@ -176,7 +175,7 @@ class TrackOrderScene extends Component {
     });
   };
 
-  showUploadImageModal = () => {
+  showUploadImage = () => {
     this.setState({
       showUploadImageModal: true,
     });
@@ -208,7 +207,7 @@ class TrackOrderScene extends Component {
     }
 
     let {address, job} = order;
-    let {latitude, longitude, heading, images, imagesUploaded, imagesApproved, showUploadImageModal,showStartWorkingDialog,showStartDrivingDialog,showStopDrivingDialog,showStopWorkingDialog} = this.state;
+    let {latitude, longitude, heading, images, imagesUploaded, imagesApproved, showUploadImageModal} = this.state;
 
     return (
       <View style={{flex: 1}}>
@@ -227,13 +226,13 @@ class TrackOrderScene extends Component {
 
         <MapButtons
           address={address}
-          uploadImages={this.showUploadImageModal}
-          approveImages={this.approveImages}
           onDirectionPress={this.openInGoogleMaps}
           startDriving={this.startDriving}
           stopDriving={this.stopDriving}
           startWorking={this.startWorking}
           stopWorking={this.stopWorking}
+          uploadImages={this.showUploadImage}
+          approveImages={this.approveImages}
           imagesUploaded={imagesUploaded}
           imagesApproved={imagesApproved}
           jobStatus={job.status}
@@ -241,15 +240,15 @@ class TrackOrderScene extends Component {
 
         <ListModal
           onCancel={this.hideUploadImageModal}
-          onSave={this.onSaveUploadedImage}>
+          onSave={this.onSaveUploadedImage}
           isVisible={showUploadImageModal}
+        >
           <UploadImage
             images={images}
             updateImage={this.uploadImage}
             deleteImage={this.deleteImage}
           />
         </ListModal>
-
 
       </View>
     );
