@@ -12,7 +12,7 @@ import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
 import {CODE_PUSH_ENABLED} from 'utils/env';
 import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import NavigatorService from 'components/NavigatorService';
-import colors from '../assets/theme/colors';
+import colors from 'assets/theme/colors';
 
 class App extends Component {
   static propTypes = {

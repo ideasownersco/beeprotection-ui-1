@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import colors from '../assets/theme/colors';
+import colors from 'assets/theme/colors';
 
 export default class FormContainer extends Component {
   // shouldComponentUpdate(nextProps) {

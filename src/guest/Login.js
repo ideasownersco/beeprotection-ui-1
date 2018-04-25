@@ -7,12 +7,12 @@ import LoginScene from 'guest/scenes/LoginScene';
 import {NavigationActions} from 'react-navigation';
 import {Alert, Text, TouchableHighlight} from 'react-native';
 import I18n from 'utils/locale';
-import FormContainer from '../components/FormContainer';
-import FormContent from '../components/FormContent';
-import FormTextInput from '../components/FormTextInput';
-import FormSubmit from '../components/FormSubmit';
-import colors from '../assets/theme/colors';
-import Divider from '../components/Divider';
+import FormContainer from 'components/FormContainer';
+import FormContent from 'components/FormContent';
+import FormTextInput from 'components/FormTextInput';
+import FormSubmit from 'components/FormSubmit';
+import colors from 'assets/theme/colors';
+import Divider from 'components/Divider';
 
 class Login extends Component {
   static propTypes = {

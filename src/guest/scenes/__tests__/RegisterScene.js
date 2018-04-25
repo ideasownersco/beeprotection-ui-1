@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import RegisterScene from '../RegisterScene';
+import RegisterScene from 'RegisterScene';
 
 test('renders Notification Component', () => {
   const tree = renderer.create(

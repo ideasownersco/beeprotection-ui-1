@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
-import Touchable from 'react-native-platform-touchable';
-import I18n from 'utils/locale';
+import {StyleSheet, View} from 'react-native';
 import colors from 'assets/theme/colors';
-import IconFactory from 'components/IconFactory';
 import TimePicker from 'customer/cart/components/TimePicker';
 import {Title} from 'react-native-paper';
-import Divider from '../../../components/Divider';
+import Divider from 'components/Divider';
 
 export default class DriverTimePicker extends Component {
   static propTypes = {

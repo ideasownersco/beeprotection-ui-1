@@ -7,7 +7,7 @@ import I18n from 'utils/locale';
 import Divider from 'components/Divider';
 import IconFactory from 'components/IconFactory';
 import {Caption, Paragraph, Title} from 'react-native-paper';
-import ListItem from '../../../components/ListItem';
+import ListItem from 'components/ListItem';
 
 export default class OrdersList extends Component {
   static propTypes = {

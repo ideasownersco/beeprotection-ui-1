@@ -8,13 +8,13 @@ import {connect} from 'react-redux';
 import {ACTIONS} from './common/actions';
 import RegisterScene from './scenes/RegisterScene';
 import {Text, View} from 'react-native';
-import FormLabel from '../components/FormLabel';
-import FormTextInput from '../components/FormTextInput';
-import FormSubmit from '../components/FormSubmit';
+import FormLabel from 'components/FormLabel';
+import FormTextInput from 'components/FormTextInput';
+import FormSubmit from 'components/FormSubmit';
 import I18n from 'utils/locale';
 import Touchable from 'react-native-platform-touchable';
-import FormContainer from '../components/FormContainer';
-import FormContent from '../components/FormContent';
+import FormContainer from 'components/FormContainer';
+import FormContent from 'components/FormContent';
 
 type State = {
   name: string,

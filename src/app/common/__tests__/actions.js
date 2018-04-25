@@ -1,4 +1,4 @@
-import {ACTION_TYPES, ACTIONS} from '../actions';
+import {ACTION_TYPES, ACTIONS} from 'actions';
 
 describe('App Component Actions', () => {
   test('returns expected action', () => {
