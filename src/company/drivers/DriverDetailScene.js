@@ -16,10 +16,11 @@ import I18n from 'utils/locale';
 import {Switch} from 'react-native-paper';
 import DriverStartEndTime from "./components/DriverStartEndTime";
 import {SELECTORS as ORDER_SELECTORS} from "company/selectors/orders";
-import Divider from "../../components/Divider";
+import Divider from "components/Divider";
 import Modal from 'react-native-modal';
-import DriverTimePicker from "./components/DriverTimePicker";
-import Button from "../../components/Button";
+import DriverTimePicker from "company/drivers/components/DriverTimePicker";
+import Button from "components/Button";
+import colors from "assets/theme/colors";
 
 class DriverDetailScene extends PureComponent {
   static propTypes = {
@@ -56,6 +57,7 @@ class DriverDetailScene extends PureComponent {
             navigation.state.params &&
             navigation.state.params.handleRightButtonPress(value)
           }
+          color={colors.success}
         />
       ),
     };
@@ -97,7 +99,7 @@ class DriverDetailScene extends PureComponent {
     });
 
     this.props.dispatch(
-      COMPANY_ACTIONS.setDriverOnlineStatus({
+      COMPANY_ACTIONS.saveDriverAttributes({
         driver_id: this.props.driver.id,
         status: status,
       }),
@@ -123,21 +125,25 @@ class DriverDetailScene extends PureComponent {
   };
 
   onDriverStartTimePress = (item) => {
-    console.log('item', item);
     this.setState({
       start_time_id: item.id
     });
   };
 
   onDriverEndTimePress = (item) => {
-    console.log('item', item);
     this.setState({
       end_time_id: item.id
     });
   };
 
-  saveTimings = () => {
+  setTimings = () => {
     this.hideStartEndTimeModal();
+
+    this.props.dispatch(COMPANY_ACTIONS.saveDriverAttributes({
+      driver_id:this.props.driver.id,
+      start_time_id:this.state.start_time_id,
+      end_time_id:this.state.end_time_id,
+    }));
   };
 
   render() {
@@ -203,7 +209,7 @@ class DriverDetailScene extends PureComponent {
                             end_time_id={this.state.end_time_id}
           />
 
-          <Button title={I18n.t('save')} style={{marginTop: 20}} onPress={this.saveTimings}/>
+          <Button title={I18n.t('save')} style={{marginTop: 20}} onPress={this.setTimings}/>
 
         </Modal>
 

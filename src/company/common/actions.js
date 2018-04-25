@@ -38,12 +38,12 @@ export const ACTION_TYPES = {
   ASSIGN_DRIVER_SUCCESS: '@company/drivers/ASSIGN_DRIVER_SUCCESS',
   ASSIGN_DRIVER_FAILURE: '@company/drivers/ASSIGN_DRIVER_FAILURE',
 
-  SET_DRIVER_ONLINE_STATUS_REQUEST:
-    '@company/drivers/SET_DRIVER_ONLINE_STATUS_REQUEST',
-  SET_DRIVER_ONLINE_STATUS_FAILURE:
-    '@company/drivers/SET_DRIVER_ONLINE_STATUS_FAILURE',
-  SET_DRIVER_ONLINE_STATUS_SUCCESS:
-    '@company/drivers/SET_DRIVER_ONLINE_STATUS_SUCCESS',
+  SAVE_DRIVER_ATTRIBUTES_REQUEST:
+    '@company/drivers/SAVE_DRIVER_ATTRIBUTES_REQUEST',
+  SAVE_DRIVER_ATTRIBUTES_FAILURE:
+    '@company/drivers/SAVE_DRIVER_ATTRIBUTES_FAILURE',
+  SAVE_DRIVER_ATTRIBUTES_SUCCESS:
+    '@company/drivers/SAVE_DRIVER_ATTRIBUTES_SUCCESS',
 
   SUBSCRIBE_TO_DRIVER_TRACKINGS: '@company/SUBSCRIBE_TO_DRIVER_TRACKINGS',
 };
@@ -126,9 +126,16 @@ function assignDriver(id, params) {
   };
 }
 
-function setDriverOnlineStatus(params: object) {
+function setTimings(params) {
   return {
-    type: ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_REQUEST,
+    type: ACTION_TYPES.DRIVER_SET_TIMINGS_REQUEST,
+    params,
+  };
+}
+
+function saveDriverAttributes(params: object) {
+  return {
+    type: ACTION_TYPES.SAVE_DRIVER_ATTRIBUTES_REQUEST,
     params,
   };
 }
@@ -151,6 +158,6 @@ export const ACTIONS = {
   fetchTimings,
   fetchDriver,
   assignDriver,
-  setDriverOnlineStatus,
+  saveDriverAttributes,
   subscribeToDriverTrackings,
 };

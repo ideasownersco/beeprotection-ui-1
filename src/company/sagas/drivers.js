@@ -71,21 +71,21 @@ function* assignDriver(action) {
   }
 }
 
-function* setDriverOnlineStatus(action) {
+function* saveDriverAttributes(action) {
   try {
     const params = {
       body: action.params,
     };
 
-    const response = yield call(API.setDriverOnlineStatus, params);
+    const response = yield call(API.saveDriverAttributes, params);
     const normalized = normalize(response.data, Schema.drivers);
 
     yield put({
-      type: ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_SUCCESS,
+      type: ACTION_TYPES.SAVE_DRIVER_ATTRIBUTES_SUCCESS,
       entities: normalized.entities,
     });
   } catch (error) {
-    yield put({type: ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_FAILURE, error});
+    yield put({type: ACTION_TYPES.SAVE_DRIVER_ATTRIBUTES_FAILURE, error});
     yield put(
       APP_ACTIONS.setNotification({
         message: I18n.t('driver_status_update_failed'),
@@ -107,10 +107,10 @@ function* assignDriverMonitor() {
   yield takeLatest(ACTION_TYPES.ASSIGN_DRIVER_REQUEST, assignDriver);
 }
 
-function* setDriverOnlineStatusMonitor() {
+function* saveDriverAttributesMonitor() {
   yield takeLatest(
-    ACTION_TYPES.SET_DRIVER_ONLINE_STATUS_REQUEST,
-    setDriverOnlineStatus,
+    ACTION_TYPES.SAVE_DRIVER_ATTRIBUTES_REQUEST,
+    saveDriverAttributes,
   );
 }
 
@@ -118,5 +118,5 @@ export const sagas = all([
   fork(fetchDriversMonitor),
   fork(fetchDriverMonitor),
   fork(assignDriverMonitor),
-  fork(setDriverOnlineStatusMonitor),
+  fork(saveDriverAttributesMonitor),
 ]);

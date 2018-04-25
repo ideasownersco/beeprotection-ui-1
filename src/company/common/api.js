@@ -45,8 +45,8 @@ function assignDriver(id, params) {
   return request(requestParams);
 }
 
-function setDriverOnlineStatus(params) {
-  const path = `company/drivers/status/update`;
+function saveDriverAttributes(params) {
+  const path = `company/drivers/update`;
   let requestParams = {
     path,
     method: 'POST',
@@ -64,5 +64,5 @@ export const API = {
   fetchDrivers,
   fetchDriver,
   assignDriver,
-  setDriverOnlineStatus,
+  saveDriverAttributes,
 };
