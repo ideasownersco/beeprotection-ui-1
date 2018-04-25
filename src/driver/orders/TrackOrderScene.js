@@ -15,7 +15,7 @@ import ListModal from 'components/ListModal';
 import MapButtons from "driver/orders/components/MapButtons";
 import {API_URL} from 'utils/env';
 
-class CustomerLocationMapScene extends Component {
+class TrackOrderScene extends Component {
 
   static propTypes = {
     navigation: PropTypes.shape({
@@ -286,4 +286,4 @@ const makeMapStateToProps = () => {
   };
 };
 
-export default connect(makeMapStateToProps)(CustomerLocationMapScene);
+export default connect(makeMapStateToProps)(TrackOrderScene);

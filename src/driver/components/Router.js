@@ -5,7 +5,7 @@ import Home from 'driver/Home';
 import Login from 'guest/Login';
 import DrawerIcon from 'components/DrawerIcon';
 import OrderDetailScene from 'driver/orders/OrderDetailScene';
-import CustomerLocationMapScene from 'driver/orders/CustomerLocationMapScene';
+import TrackOrderScene from 'driver/orders/TrackOrderScene';
 import PastOrdersScene from 'driver/orders/PastOrdersScene';
 import UpcomingOrdersScene from 'driver/orders/UpcomingOrdersScene';
 import I18n from 'utils/locale';
@@ -37,8 +37,8 @@ const HomeStack = StackNavigator(
       }),
     },
     OrderDetail: {screen: OrderDetailScene},
-    CustomerLocationMap: {
-      screen: CustomerLocationMapScene,
+    TrackOrder: {
+      screen: TrackOrderScene,
     },
     PastOrders: {screen: PastOrdersScene},
     UpcomingOrders: {screen: UpcomingOrdersScene},

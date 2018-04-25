@@ -55,12 +55,12 @@ export default class Map extends Component {
 
     if (initialized) {
       return (
-        <View>
-          <Touchable onPress={this.reCenterMap}>
-            <View style={{alignItems: 'center'}}>
-              <MaterialCommunityIcons name="arrow-all" size={35} />
-            </View>
-          </Touchable>
+        <View style={{flex:1}}>
+          {/*<Touchable onPress={this.reCenterMap}>*/}
+            {/*<View style={{alignItems: 'center'}}>*/}
+              {/*<MaterialCommunityIcons name="arrow-all" size={35} />*/}
+            {/*</View>*/}
+          {/*</Touchable>*/}
           <MapView
             ref={ref => {
               this.map = ref;
