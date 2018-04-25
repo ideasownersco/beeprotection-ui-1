@@ -6,6 +6,7 @@ import Touchable from 'react-native-platform-touchable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from 'utils/locale';
 import AddressInfo from 'components/AddressInfo';
+import Dialog from "components/Dialog";
 
 export default class MapButtons extends Component {
   static propTypes = {
@@ -22,14 +23,88 @@ export default class MapButtons extends Component {
     imagesUploaded: PropTypes.bool.isRequired,
   };
 
+  state = {
+    showStartWorkingDialog:false,
+    showStartDrivingDialog:false,
+    showStopWorkingDialog:false,
+    showStopDrivingDialog:false,
+  };
+
+  showStartDrivingDialog = () => {
+    this.setState({
+      showStartDrivingDialog: true,
+    });
+  };
+
+  hideStartDrivingDialog = () => {
+    this.setState({
+      showStartDrivingDialog: false,
+    });
+  };
+
+  showStopDrivingDialog = () => {
+    this.setState({
+      showStopDrivingDialog: true,
+    });
+  };
+
+  hideStopDrivingDialog = () => {
+    this.setState({
+      showStopDrivingDialog: false,
+    });
+  };
+
+  showStartWorkingDialog = () => {
+    this.setState({
+      showStartWorkingDialog: true,
+    });
+  };
+
+  hideStartWorkingDialog = () => {
+    this.setState({
+      showStartWorkingDialog: false,
+    });
+  };
+
+  showStopWorkingDialog = () => {
+    this.setState({
+      showStopWorkingDialog: true,
+    });
+  };
+
+  hideStopWorkingDialog = () => {
+    this.setState({
+      showStopWorkingDialog: false,
+    });
+  };
+
+  startDriving = () => {
+    this.props.startDriving();
+    this.hideStartDrivingDialog();
+  };
+
+  stopDriving = () => {
+    this.props.stopDriving();
+    this.hideStopDrivingDialog();
+  };
+
+  startWorking = () => {
+    this.props.startWorking();
+    this.hideStartWorkingDialog();
+  };
+
+  stopWorking = () => {
+    this.props.stopWorking();
+    this.hideStopWorkingDialog();
+  };
+
   render() {
+
+    let {showStartWorkingDialog,showStartDrivingDialog,showStopDrivingDialog,showStopWorkingDialog} = this.state;
+
     const {
       jobStatus,
       address,
-      startDriving,
-      stopDriving,
-      startWorking,
-      stopWorking,
       onDirectionPress,
       approveImages,
       uploadImages,
@@ -39,11 +114,7 @@ export default class MapButtons extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.navContainer}>
-          {/*<Touchable onPress={this.reCenterMap}>*/}
-          {/*<View style={{alignItems: 'center'}}>*/}
-          {/*<MaterialCommunityIcons name="arrow-all" size={35} />*/}
-          {/*</View>*/}
-          {/*</Touchable>*/}
+
           <Text style={styles.address}>
             <AddressInfo address={address} style={{textAlign: 'center'}} />
           </Text>
@@ -58,7 +129,7 @@ export default class MapButtons extends Component {
         {jobStatus == 'pending' && (
           <Button
             title={I18n.t('start_driving')}
-            onPress={startDriving}
+            onPress={this.showStartDrivingDialog}
             style={{marginBottom: 10}}
           />
         )}
@@ -66,7 +137,7 @@ export default class MapButtons extends Component {
         {jobStatus == 'driving' && (
           <Button
             title={I18n.t('stop_driving')}
-            onPress={stopDriving}
+            onPress={this.showStopDrivingDialog}
             style={{marginBottom: 10}}
           />
         )}
@@ -75,7 +146,7 @@ export default class MapButtons extends Component {
           <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
             <Button
               title={I18n.t('start_working')}
-              onPress={startWorking}
+              onPress={this.showStartWorkingDialog}
               style={{marginBottom: 10, width: 150}}
             />
 
@@ -101,10 +172,16 @@ export default class MapButtons extends Component {
         {jobStatus == 'working' && (
           <Button
             title={I18n.t('stop_working')}
-            onPress={stopWorking}
+            onPress={this.showStopWorkingDialog}
             style={{marginBottom: 10}}
           />
         )}
+
+        <Dialog description='You are about to start driving to the destination' close={this.hideStartDrivingDialog} confirm={this.startDriving} visible={showStartDrivingDialog}/>
+        <Dialog description='Have you reached the destination ?' close={this.hideStopDrivingDialog} confirm={this.stopDriving} visible={showStopDrivingDialog}/>
+        <Dialog description='Do you want to start working on the Job ?' close={this.hideStartWorkingDialog} confirm={this.startWorking} visible={showStartWorkingDialog}/>
+        <Dialog description='Have you completed the Job ?' close={this.hideStopWorkingDialog} confirm={this.stopWorking} visible={showStopWorkingDialog}/>
+
       </View>
     );
   }

@@ -14,7 +14,6 @@ import UploadImage from 'driver/components/UploadImage';
 import ListModal from 'components/ListModal';
 import MapButtons from 'driver/orders/components/MapButtons';
 import {API_URL} from 'utils/env';
-import Dialog from "../../components/Dialog";
 
 class TrackOrderScene extends Component {
   static propTypes = {
@@ -28,10 +27,7 @@ class TrackOrderScene extends Component {
   };
 
   state = {
-    showStartWorkingDialog:false,
-    showStartDrivingDialog:false,
-    showStopWorkingDialog:false,
-    showStopDrivingDialog:false,
+
     tracking_enabled: false,
     showUploadImageModal: false,
     images: [],
@@ -126,7 +122,6 @@ class TrackOrderScene extends Component {
     let {job} = this.props.order;
     BackgroundGeolocation.start();
     this.props.dispatch(DRIVER_ACTIONS.startDriving(job.id));
-    this.hideStartDrivingDialog();
   };
 
   stopDriving = () => {
@@ -138,66 +133,16 @@ class TrackOrderScene extends Component {
     let {job} = this.props.order;
     BackgroundGeolocation.stop();
     this.props.dispatch(DRIVER_ACTIONS.stopDriving(job.id));
-    this.hideStopDrivingDialog();
   };
 
   startWorking = () => {
     let {job} = this.props.order;
     this.props.dispatch(DRIVER_ACTIONS.startWorking(job.id));
-    this.hideStartWorkingDialog();
   };
 
   stopWorking = () => {
     let {job} = this.props.order;
     this.props.dispatch(DRIVER_ACTIONS.stopWorking(job.id));
-    this.hideStopWorkingDialog();
-  };
-
-  onStartDrivingPress = () => {
-    this.setState({
-      showStartDrivingDialog: true,
-    });
-  };
-
-  onStopDrivingPress = () => {
-    this.setState({
-      showStopDrivingDialog: true,
-    });
-  };
-
-  onStartWorkingPress = () => {
-    this.setState({
-      showStartWorkingDialog: true,
-    });
-  };
-
-  onStopWorkingPress = () => {
-    this.setState({
-      showStopWorkingDialog: true,
-    });
-  };
-
-  hideStopDrivingDialog = () => {
-    this.setState({
-      showStopDrivingDialog: false,
-    });
-  };
-
-  hideStartDrivingDialog = () => {
-    this.setState({
-      showStartDrivingDialog: false,
-    });
-  };
-  hideStopWorkingDialog = () => {
-    this.setState({
-      showStopWorkingDialog: false,
-    });
-  };
-
-  hideStartWorkingDialog = () => {
-    this.setState({
-      showStartWorkingDialog: false,
-    });
   };
 
   onUpdateLocation = () => {
@@ -285,10 +230,10 @@ class TrackOrderScene extends Component {
           uploadImages={this.showUploadImageModal}
           approveImages={this.approveImages}
           onDirectionPress={this.openInGoogleMaps}
-          startDriving={this.onStartDrivingPress}
-          stopDriving={this.onStopDrivingPress}
-          startWorking={this.onStartWorkingPress}
-          stopWorking={this.onStopWorkingPress}
+          startDriving={this.startDriving}
+          stopDriving={this.stopDriving}
+          startWorking={this.startWorking}
+          stopWorking={this.stopWorking}
           imagesUploaded={imagesUploaded}
           imagesApproved={imagesApproved}
           jobStatus={job.status}
@@ -305,10 +250,6 @@ class TrackOrderScene extends Component {
           />
         </ListModal>
 
-        <Dialog description='You are about to start driving to the destination' close={this.hideStartDrivingDialog} confirm={this.startDriving} visible={showStartDrivingDialog}/>
-        <Dialog description='Have you reached the destination ?' close={this.hideStopDrivingDialog} confirm={this.stopDriving} visible={showStopDrivingDialog}/>
-        <Dialog description='Do you want to start working on the Job ?' close={this.hideStartWorkingDialog} confirm={this.startWorking} visible={showStartWorkingDialog}/>
-        <Dialog description='Have you completed the Job ?' close={this.hideStopWorkingDialog} confirm={this.stopWorking} visible={showStopWorkingDialog}/>
 
       </View>
     );
