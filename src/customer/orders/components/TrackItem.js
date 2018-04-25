@@ -10,17 +10,28 @@ import SectionTitle from 'components/SectionTitle';
 import IconFactory from 'components/IconFactory';
 import Touchable from 'react-native-platform-touchable';
 
-const TrackItem = ({title, onPress, description, iconBackground, iconProps, style}) => {
-  console.log('iconBackground',iconBackground);
+const TrackItem = ({
+  title,
+  onPress,
+  description,
+  iconBackground,
+  iconProps,
+  style,
+}) => {
+  console.log('iconBackground', iconBackground);
   return (
     <Touchable onPress={onPress}>
       <View style={[styles.container, style]}>
-        <View style={[styles.iconContainer,{backgroundColor:iconBackground}]}>{<IconFactory {...iconProps}/>}</View>
+        <View style={[styles.iconContainer, {backgroundColor: iconBackground}]}>
+          {<IconFactory {...iconProps} />}
+        </View>
         <View style={styles.contentContainerStyle}>
           <SectionTitle title={title} style={styles.title} />
-          {description && typeof (description) === 'string' ? <Text style={styles.description}>{description}</Text> :
+          {description && typeof description === 'string' ? (
+            <Text style={styles.description}>{description}</Text>
+          ) : (
             description
-          }
+          )}
         </View>
       </View>
     </Touchable>
@@ -28,7 +39,7 @@ const TrackItem = ({title, onPress, description, iconBackground, iconProps, styl
 };
 
 TrackItem.propTypes = {
-  iconProps:PropTypes.object,
+  iconProps: PropTypes.object,
   title: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
   description: PropTypes.string,

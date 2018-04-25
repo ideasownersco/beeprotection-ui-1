@@ -15,8 +15,8 @@ import TrackDriversScene from 'company/drivers/TrackScene';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 import TrackDetailScene from 'company/orders/TrackDetailScene';
-import Register from "guest/Register";
-import TrackOrderScene from "customer/orders/TrackOrderScene";
+import Register from 'guest/Register';
+import TrackOrderScene from 'customer/orders/TrackOrderScene';
 
 const getDrawerIcon = navigation => {
   return {

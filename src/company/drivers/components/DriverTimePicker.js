@@ -6,41 +6,58 @@ import Touchable from 'react-native-platform-touchable';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 import IconFactory from 'components/IconFactory';
-import TimePicker from "customer/cart/components/TimePicker";
-import {Title} from "react-native-paper";
-import Divider from "../../../components/Divider";
+import TimePicker from 'customer/cart/components/TimePicker';
+import {Title} from 'react-native-paper';
+import Divider from '../../../components/Divider';
 
 export default class DriverTimePicker extends Component {
-
   static propTypes = {
     onStartTimePress: PropTypes.func.isRequired,
     onEndTimePress: PropTypes.number,
     timings: PropTypes.array.isRequired,
-    start_time_id:PropTypes.number,
-    end_time_id:PropTypes.number,
+    start_time_id: PropTypes.number,
+    end_time_id: PropTypes.number,
   };
 
   shouldComponentUpdate(nextProps) {
     return (
-      nextProps.timings !== this.props.timings || nextProps.start_time_id !== this.props.start_time_id || nextProps.end_time_id !== this.props.end_time_id
+      nextProps.timings !== this.props.timings ||
+      nextProps.start_time_id !== this.props.start_time_id ||
+      nextProps.end_time_id !== this.props.end_time_id
     );
   }
 
   render() {
-    const {timings, onStartTimePress, onEndTimePress,start_time_id,end_time_id} = this.props;
+    const {
+      timings,
+      onStartTimePress,
+      onEndTimePress,
+      start_time_id,
+      end_time_id,
+    } = this.props;
 
     return (
       <View style={styles.container}>
         <View style={styles.listContainer}>
-          <Title style={{textAlign:'center'}}>Start Time</Title>
-          <TimePicker onItemPress={onStartTimePress} isFetching={false} items={timings} activeItemID={start_time_id}/>
+          <Title style={{textAlign: 'center'}}>Start Time</Title>
+          <TimePicker
+            onItemPress={onStartTimePress}
+            isFetching={false}
+            items={timings}
+            activeItemID={start_time_id}
+          />
         </View>
 
-        <Divider/>
+        <Divider />
 
         <View style={styles.listContainer}>
-          <Title style={{textAlign:'center'}}>End Time</Title>
-          <TimePicker onItemPress={onEndTimePress} isFetching={false} items={timings} activeItemID={end_time_id}/>
+          <Title style={{textAlign: 'center'}}>End Time</Title>
+          <TimePicker
+            onItemPress={onEndTimePress}
+            isFetching={false}
+            items={timings}
+            activeItemID={end_time_id}
+          />
         </View>
       </View>
     );
@@ -49,7 +66,7 @@ export default class DriverTimePicker extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:'white'
+    backgroundColor: 'white',
   },
   listContainer: {
     paddingVertical: 50,

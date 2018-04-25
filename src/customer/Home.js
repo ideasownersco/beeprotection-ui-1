@@ -5,7 +5,7 @@ import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import WelcomeText from 'customer/components/WelcomeText';
-import StandingOrdersList from "customer/components/StandingOrdersList";
+import StandingOrdersList from 'customer/components/StandingOrdersList';
 
 class Home extends Component {
   static defaultProps = {
@@ -127,7 +127,6 @@ class Home extends Component {
           onItemPress={this.onStandingOrderListItemPress}
           onItemTrackPress={this.onItemTrackPress}
         />
-
       </ScrollView>
     );
   }

@@ -14,13 +14,13 @@ import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 
 import I18n from 'utils/locale';
 import {Switch} from 'react-native-paper';
-import DriverStartEndTime from "./components/DriverStartEndTime";
-import {SELECTORS as ORDER_SELECTORS} from "company/selectors/orders";
-import Divider from "components/Divider";
+import DriverStartEndTime from './components/DriverStartEndTime';
+import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
+import Divider from 'components/Divider';
 import Modal from 'react-native-modal';
-import DriverTimePicker from "company/drivers/components/DriverTimePicker";
-import Button from "components/Button";
-import colors from "assets/theme/colors";
+import DriverTimePicker from 'company/drivers/components/DriverTimePicker';
+import Button from 'components/Button';
+import colors from 'assets/theme/colors';
 
 class DriverDetailScene extends PureComponent {
   static propTypes = {
@@ -37,14 +37,14 @@ class DriverDetailScene extends PureComponent {
   static defaultProps = {
     navigation: {state: {params: {driverID: 0}}},
     driver: {user: {}},
-    timings: []
+    timings: [],
   };
 
   state = {
     online: true,
     showStartEndTimeModal: false,
     start_time_id: null,
-    end_time_id: null
+    end_time_id: null,
   };
 
   static navigationOptions = ({navigation}) => {
@@ -114,36 +114,38 @@ class DriverDetailScene extends PureComponent {
 
   showStartEndTimeModal = () => {
     this.setState({
-      showStartEndTimeModal: true
+      showStartEndTimeModal: true,
     });
   };
 
   hideStartEndTimeModal = () => {
     this.setState({
-      showStartEndTimeModal: false
+      showStartEndTimeModal: false,
     });
   };
 
-  onDriverStartTimePress = (item) => {
+  onDriverStartTimePress = item => {
     this.setState({
-      start_time_id: item.id
+      start_time_id: item.id,
     });
   };
 
-  onDriverEndTimePress = (item) => {
+  onDriverEndTimePress = item => {
     this.setState({
-      end_time_id: item.id
+      end_time_id: item.id,
     });
   };
 
   setTimings = () => {
     this.hideStartEndTimeModal();
 
-    this.props.dispatch(COMPANY_ACTIONS.saveDriverAttributes({
-      driver_id:this.props.driver.id,
-      start_time_id:this.state.start_time_id,
-      end_time_id:this.state.end_time_id,
-    }));
+    this.props.dispatch(
+      COMPANY_ACTIONS.saveDriverAttributes({
+        driver_id: this.props.driver.id,
+        start_time_id: this.state.start_time_id,
+        end_time_id: this.state.end_time_id,
+      }),
+    );
   };
 
   render() {
@@ -157,63 +159,66 @@ class DriverDetailScene extends PureComponent {
       <ScrollView
         style={{flex: 1}}
         keyboardShouldPersistTap="always"
-        contentContainerStyle={{paddingBottom: 100}}
-      >
-        <DriverThumb image={image} name={name}/>
+        contentContainerStyle={{paddingBottom: 100}}>
+        <DriverThumb image={image} name={name} />
 
-        <DriverInfo driver={driver}/>
+        <DriverInfo driver={driver} />
 
-        <Divider/>
+        <Divider />
 
-        <DriverStartEndTime onPress={this.showStartEndTimeModal} driver={driver}/>
+        <DriverStartEndTime
+          onPress={this.showStartEndTimeModal}
+          driver={driver}
+        />
 
         {driver.working_order &&
-        driver.working_order.id && (
-          <View>
-            <SectionHeading
-              title={I18n.t('working_order')}
-              onButtonPress={this.loadCurrentOrders}
-            />
+          driver.working_order.id && (
+            <View>
+              <SectionHeading
+                title={I18n.t('working_order')}
+                onButtonPress={this.loadCurrentOrders}
+              />
 
-            <OrdersList
-              items={[driver.working_order]}
-              onItemPress={this.onOrdersListItemPress}
-            />
-          </View>
-        )}
+              <OrdersList
+                items={[driver.working_order]}
+                onItemPress={this.onOrdersListItemPress}
+              />
+            </View>
+          )}
 
         {driver.upcoming_orders &&
-        driver.upcoming_orders.length && (
-          <View>
-            <SectionHeading
-              title={I18n.t('upcoming_orders')}
-              onButtonPress={this.loadCurrentOrders}
-            />
+          driver.upcoming_orders.length && (
+            <View>
+              <SectionHeading
+                title={I18n.t('upcoming_orders')}
+                onButtonPress={this.loadCurrentOrders}
+              />
 
-            <OrdersList
-              items={driver.upcoming_orders}
-              onItemPress={this.onOrdersListItemPress}
-            />
-          </View>
-        )}
+              <OrdersList
+                items={driver.upcoming_orders}
+                onItemPress={this.onOrdersListItemPress}
+              />
+            </View>
+          )}
 
         <Modal
           isVisible={this.state.showStartEndTimeModal}
           onBackdropPress={this.hideStartEndTimeModal}
-          style={{flex: 1, backgroundColor: 'white', padding: 0}}
-        >
-          <DriverTimePicker timings={timings}
-                            onStartTimePress={this.onDriverStartTimePress}
-                            onEndTimePress={this.onDriverEndTimePress}
-                            start_time_id={this.state.start_time_id}
-                            end_time_id={this.state.end_time_id}
+          style={{flex: 1, backgroundColor: 'white', padding: 0}}>
+          <DriverTimePicker
+            timings={timings}
+            onStartTimePress={this.onDriverStartTimePress}
+            onEndTimePress={this.onDriverEndTimePress}
+            start_time_id={this.state.start_time_id}
+            end_time_id={this.state.end_time_id}
           />
 
-          <Button title={I18n.t('save')} style={{marginTop: 20}} onPress={this.setTimings}/>
-
+          <Button
+            title={I18n.t('save')}
+            style={{marginTop: 20}}
+            onPress={this.setTimings}
+          />
         </Modal>
-
-
       </ScrollView>
     );
   }

@@ -10,7 +10,7 @@ import I18n from 'utils/locale';
 import Divider from 'components/Divider';
 import Touchable from 'react-native-platform-touchable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {TouchableRipple} from "react-native-paper";
+import {TouchableRipple} from 'react-native-paper';
 
 export default class DriverStartEndTime extends Component {
   static propTypes = {
@@ -23,13 +23,15 @@ export default class DriverStartEndTime extends Component {
   }
 
   render() {
-    const {driver,onPress} = this.props;
+    const {driver, onPress} = this.props;
 
     return (
       <TouchableRipple onPress={onPress} style={[styles.container]}>
         <View style={styles.itemContainer}>
           <Text style={styles.label}>{I18n.t('timings')}</Text>
-          <Text style={styles.value}>{driver.start_time} - {driver.end_time}</Text>
+          <Text style={styles.value}>
+            {driver.start_time} - {driver.end_time}
+          </Text>
         </View>
       </TouchableRipple>
     );

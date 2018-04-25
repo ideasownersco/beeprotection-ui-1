@@ -48,8 +48,7 @@ class Home extends Component {
     });
   };
 
-  onStartStopButtonPress = () => {
-  };
+  onStartStopButtonPress = () => {};
 
   onAddressButtonPress = (order: object) => {
     return this.props.navigation.navigate('CustomerLocationMap', {
@@ -75,21 +74,17 @@ class Home extends Component {
   render() {
     let {orders, order} = this.props;
 
-    console.log('order',order);
+    console.log('order', order);
 
     return (
-      <ScrollView style={{flex: 1}}
+      <ScrollView
+        style={{flex: 1}}
         refreshControl={
-          <RefreshControl
-            refreshing={false}
-            onRefresh={this.onRefresh}
-          />
-        }
-      >
-
+          <RefreshControl refreshing={false} onRefresh={this.onRefresh} />
+        }>
         {order.id && (
           <View>
-            <SectionHeading title={I18n.t('working_order')}/>
+            <SectionHeading title={I18n.t('working_order')} />
             <OrdersList
               items={[order]}
               onItemPress={this.onOrdersListItemPress}

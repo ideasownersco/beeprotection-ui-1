@@ -11,10 +11,10 @@ import I18n from 'utils/locale';
 import IconFactory from 'components/IconFactory';
 import colors from 'assets/theme/colors';
 import {ACTIONS as ORDER_ACTIONS} from 'company/common/actions';
-import TrackDetailScene from "./TrackDetailScene";
-import Map from "customer/orders/components/Map";
+import TrackDetailScene from './TrackDetailScene';
+import Map from 'customer/orders/components/Map';
 import Touchable from 'react-native-platform-touchable';
-import {ACTIONS as CUSTOMER_ACTIONS} from "customer/common/actions";
+import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 
 class TrackOrderScene extends Component {
   static propTypes = {
@@ -28,9 +28,11 @@ class TrackOrderScene extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(CUSTOMER_ACTIONS.fetchOrderDetails(
-      this.props.navigation.state.params.orderID,
-    ));
+    this.props.dispatch(
+      CUSTOMER_ACTIONS.fetchOrderDetails(
+        this.props.navigation.state.params.orderID,
+      ),
+    );
   }
 
   static defaultProps = {
@@ -44,16 +46,17 @@ class TrackOrderScene extends Component {
   };
 
   onRefresh = () => {
-    this.props.dispatch(CUSTOMER_ACTIONS.fetchOrderDetails(
-      this.props.navigation.state.params.orderID,
-    ));
+    this.props.dispatch(
+      CUSTOMER_ACTIONS.fetchOrderDetails(
+        this.props.navigation.state.params.orderID,
+      ),
+    );
   };
 
-
   render() {
-    const {order,isFetching} = this.props;
+    const {order, isFetching} = this.props;
     console.log('order', order);
-    let {job,address} = order;
+    let {job, address} = order;
     let destination = {
       latitude: address.latitude,
       longitude: address.longitude,
@@ -73,78 +76,76 @@ class TrackOrderScene extends Component {
         keyboardShouldPersistTaps={'always'}
         contentInset={{bottom: 50}}
         refreshControl={
-          <RefreshControl
-            refreshing={isFetching}
-            onRefresh={this.onRefresh}
-          />
+          <RefreshControl refreshing={isFetching} onRefresh={this.onRefresh} />
         }
-
-        refreshing={isFetching}
-      >
+        refreshing={isFetching}>
         <View style={{backgroundColor: 'white'}}>
-
           <TrackItem
             title={I18n.t('order_received')}
             description={`${I18n.t('order_no')} : ${order.id}`}
             onPress={() => {}}
             iconProps={{
-              type: "Octicons",
+              type: 'Octicons',
               color: 'white',
-              name: "checklist"
+              name: 'checklist',
             }}
-            iconBackground={job.status == 'pending' ? colors.primary : colors.mediumGrey}
+            iconBackground={
+              job.status == 'pending' ? colors.primary : colors.mediumGrey
+            }
           />
           <TrackItem
-            title={job.status == 'reached' ? I18n.t('reached') : I18n.t('on_our_way')}
+            title={
+              job.status == 'reached' ? I18n.t('reached') : I18n.t('on_our_way')
+            }
             onPress={this.loadTrackDetailScene}
             iconProps={{
-              type: "MaterialCommunityIcons",
-              color:'white',
-              name: "car-estate",
+              type: 'MaterialCommunityIcons',
+              color: 'white',
+              name: 'car-estate',
             }}
-            iconBackground={job.status == 'driving' || job.status == 'reached' ? colors.primary : colors.mediumGrey}
+            iconBackground={
+              job.status == 'driving' || job.status == 'reached'
+                ? colors.primary
+                : colors.mediumGrey
+            }
             description={
-              order.trackeable ?
-                <Touchable
-                  onPress={this.loadTrackDetailScene}
-                >
-                  <Map
-                    origin={origin}
-                    destination={destination}
-                  />
+              order.trackeable ? (
+                <Touchable onPress={this.loadTrackDetailScene}>
+                  <Map origin={origin} destination={destination} />
                 </Touchable>
-                :
+              ) : (
                 I18n.t('tracking_not_available')
+              )
             }
           />
           <TrackItem
             title={I18n.t('order_in_progress')}
             description={I18n.t('order_in_progress_description')}
-            onPress={() => {
-            }}
+            onPress={() => {}}
             iconProps={{
-              type: "MaterialCommunityIcons",
+              type: 'MaterialCommunityIcons',
               color: 'white',
-              name: "clock"
+              name: 'clock',
             }}
-            iconBackground={job.status == 'working' ? colors.primary : colors.mediumGrey}
+            iconBackground={
+              job.status == 'working' ? colors.primary : colors.mediumGrey
+            }
           />
           <TrackItem
             title={I18n.t('all_done')}
-            onPress={() => {
-            }}
+            onPress={() => {}}
             iconProps={{
-              type: "MaterialCommunityIcons",
+              type: 'MaterialCommunityIcons',
               color: 'white',
-              name: "flag"
+              name: 'flag',
             }}
-            iconBackground={job.status == 'completed' ? colors.primary : colors.mediumGrey}
+            iconBackground={
+              job.status == 'completed' ? colors.primary : colors.mediumGrey
+            }
           />
         </View>
-
       </ScrollView>
-    )
-      ;
+    );
   }
 }
 
@@ -153,7 +154,7 @@ const makeMapStateToProps = () => {
   const mapStateToProps = (state, props) => {
     return {
       order: getOrderByID(state, props.navigation.state.params.orderID),
-      isFetching:state.customer.order.isFetching
+      isFetching: state.customer.order.isFetching,
     };
   };
   return mapStateToProps;

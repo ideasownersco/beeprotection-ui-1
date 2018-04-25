@@ -5,9 +5,9 @@ import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import Divider from 'components/Divider';
-import IconFactory from "components/IconFactory";
-import {Caption, Paragraph, Title} from "react-native-paper";
-import ListItem from "../../../components/ListItem";
+import IconFactory from 'components/IconFactory';
+import {Caption, Paragraph, Title} from 'react-native-paper';
+import ListItem from '../../../components/ListItem';
 
 export default class OrdersList extends Component {
   static propTypes = {
@@ -23,19 +23,15 @@ export default class OrdersList extends Component {
   }
 
   renderItem = ({item}) => {
-    const {
-      onItemPress,
-      onAddressButtonPress,
-    } = this.props;
+    const {onItemPress, onAddressButtonPress} = this.props;
     return (
       <Touchable onPress={() => onItemPress(item)} key={item.id}>
-        <View
-          style={[
-            styles.itemContainer,
-          ]}>
-
+        <View style={[styles.itemContainer]}>
           <View style={{flex: 4}}>
-            <ListItem title={`${item.date}, ${item.time}`} description={item.full_address}/>
+            <ListItem
+              title={`${item.date}, ${item.time}`}
+              description={item.full_address}
+            />
           </View>
 
           <Touchable onPress={() => onAddressButtonPress(item)}>
@@ -49,7 +45,6 @@ export default class OrdersList extends Component {
               <Caption>{I18n.t('address')}</Caption>
             </View>
           </Touchable>
-
         </View>
       </Touchable>
     );
@@ -63,14 +58,13 @@ export default class OrdersList extends Component {
         renderItem={this.renderItem}
         style={styles.listContainer}
         keyExtractor={item => `${item.id}`}
-        ItemSeparatorComponent={() => <Divider/>}
+        ItemSeparatorComponent={() => <Divider />}
       />
     );
   }
 }
 
 const styles = StyleSheet.create({
-
   listContainer: {
     flex: 1,
   },
@@ -88,7 +82,7 @@ const styles = StyleSheet.create({
   dateTime: {
     fontSize: 18,
     paddingRight: 10,
-    color: colors.darkGrey
+    color: colors.darkGrey,
   },
   categoryName: {
     fontSize: 20,
@@ -140,10 +134,9 @@ const styles = StyleSheet.create({
   orderNo: {
     color: colors.mediumGrey,
   },
-  trackButton:{
-    flex:1,
-    padding:10,
-    alignItems:'center'
-
-  }
+  trackButton: {
+    flex: 1,
+    padding: 10,
+    alignItems: 'center',
+  },
 });

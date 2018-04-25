@@ -50,7 +50,9 @@ export default class DriverInfo extends Component {
 
         <View style={styles.itemContainer}>
           <Text style={styles.label}>Status</Text>
-          <Text style={styles.value}>{driver.offline ? I18n.t('offline') : I18n.t('online')}</Text>
+          <Text style={styles.value}>
+            {driver.offline ? I18n.t('offline') : I18n.t('online')}
+          </Text>
         </View>
       </View>
     );

@@ -58,5 +58,5 @@ export const SELECTORS = {
   getWorkingOrders,
   getPastOrders,
   getOrderByID,
-  getTimings
+  getTimings,
 };

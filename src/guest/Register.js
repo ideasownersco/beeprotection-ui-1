@@ -47,7 +47,11 @@ class Register extends Component {
     let credentials = this.state;
     this.props.actions.register({
       ...credentials,
-      driver: this.props.navigation.state.params && this.props.navigation.state.params.userType && this.props.navigation.state.params.userType === 'driver' || false ,
+      driver:
+        (this.props.navigation.state.params &&
+          this.props.navigation.state.params.userType &&
+          this.props.navigation.state.params.userType === 'driver') ||
+        false,
     });
   };
 

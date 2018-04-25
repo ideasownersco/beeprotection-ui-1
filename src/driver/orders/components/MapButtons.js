@@ -4,103 +4,99 @@ import {StyleSheet, Text, View} from 'react-native';
 import Button from 'components/Button';
 import Touchable from 'react-native-platform-touchable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import I18n from 'utils/locale';
 import AddressInfo from 'components/AddressInfo';
 
 export default class MapButtons extends Component {
   static propTypes = {
-    jobStatus: PropTypes.string,
-  };
-
-  static defaultProps = {
-    jobStatus: 'pending',
-  };
-
-  startDriving = () => {
-    this.map.fitToElements(true);
-    if (!this.state.enabled) {
-      this.setState({
-        enabled: true,
-      });
-    }
-    this.props.startDriving();
-    BackgroundGeolocation.start();
-  };
-
-  stopDriving = () => {
-    this.map.fitToElements(true);
-    if (this.state.enabled) {
-      this.setState({
-        enabled: false,
-      });
-    }
-    this.props.stopDriving();
-    BackgroundGeolocation.stop();
-  };
-
-  startWorking = () => {
-    this.props.startWorking();
-  };
-
-  stopWorking = () => {
-    this.props.stopWorking();
+    jobStatus: PropTypes.string.isRequired,
+    address:PropTypes.object.isRequired,
+    startDriving:PropTypes.func.isRequired,
+    stopDriving:PropTypes.func.isRequired,
+    startWorking:PropTypes.func.isRequired,
+    stopWorking:PropTypes.func.isRequired,
+    onDirectionPress:PropTypes.func.isRequired,
+    approveImages:PropTypes.func.isRequired,
+    uploadImages:PropTypes.func.isRequired,
+    imagesApproved:PropTypes.bool.isRequired,
+    imagesUploaded:PropTypes.bool.isRequired,
   };
 
   render() {
-    const {jobStatus} = this.props;
+    const {jobStatus,address,startDriving,stopDriving,startWorking,stopWorking,onDirectionPress,approveImages,uploadImages,imagesApproved,imagesUploaded} = this.props;
     return (
       <View style={styles.container}>
-        <View style={{backgroundColor: 'white'}}>
-          <View style={styles.navContainer}>
-            <Touchable onPress={this.reCenterMap}>
-              <View style={{alignItems: 'center'}}>
-                <MaterialCommunityIcons name="arrow-all" size={35} />
-              </View>
-            </Touchable>
-            <Text style={styles.address}>
-              <AddressInfo address={address} style={{textAlign: 'center'}} />
-            </Text>
+        <View style={styles.navContainer}>
+          {/*<Touchable onPress={this.reCenterMap}>*/}
+            {/*<View style={{alignItems: 'center'}}>*/}
+              {/*<MaterialCommunityIcons name="arrow-all" size={35} />*/}
+            {/*</View>*/}
+          {/*</Touchable>*/}
+          <Text style={styles.address}>
+            <AddressInfo address={address} style={{textAlign: 'center'}} />
+          </Text>
 
-            <Touchable onPress={this.openInGoogleMaps}>
-              <View style={{alignItems: 'center'}}>
-                <Ionicons name="ios-navigate-outline" size={35} />
-              </View>
-            </Touchable>
-          </View>
-
-          {jobStatus == 'pending' && (
-            <Button
-              title={I18n.t('start_driving')}
-              onPress={this.startDriving}
-              style={{marginBottom: 10}}
-            />
-          )}
-
-          {jobStatus == 'driving' && (
-            <Button
-              title={I18n.t('stop_driving')}
-              onPress={this.stopDriving}
-              style={{marginBottom: 10}}
-            />
-          )}
-
-          {jobStatus == 'reached' && (
-            <Button
-              title={I18n.t('start_working')}
-              onPress={this.startWorking}
-              style={{marginBottom: 10}}
-            />
-          )}
-
-          {jobStatus == 'working' && (
-            <Button
-              title={I18n.t('stop_working')}
-              onPress={this.stopWorking}
-              style={{marginBottom: 10}}
-            />
-          )}
+          <Touchable onPress={onDirectionPress}>
+            <View style={{alignItems: 'center'}}>
+              <Ionicons name="ios-navigate-outline" size={35} />
+            </View>
+          </Touchable>
         </View>
+
+        {jobStatus == 'pending' && (
+          <Button
+            title={I18n.t('start_driving')}
+            onPress={startDriving}
+            style={{marginBottom: 10}}
+          />
+        )}
+
+        {jobStatus == 'driving' && (
+          <Button
+            title={I18n.t('stop_driving')}
+            onPress={stopDriving}
+            style={{marginBottom: 10}}
+          />
+        )}
+
+        {jobStatus == 'reached' && (
+          <View
+            style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+            {imagesUploaded &&
+            imagesApproved && (
+              <Button
+                title={I18n.t('start_working')}
+                onPress={startWorking}
+                style={{marginBottom: 10, width: 150}}
+              />
+            )}
+
+            {imagesUploaded &&
+            !imagesApproved && (
+              <Button
+                title={I18n.t('approve_images')}
+                onPress={approveImages}
+                style={{marginBottom: 10, width: 150}}
+              />
+            )}
+
+            {!imagesUploaded && (
+              <Button
+                title={I18n.t('upload_images')}
+                onPress={uploadImages}
+                style={{marginBottom: 10, width: 150}}
+              />
+            )}
+          </View>
+        )}
+
+        {jobStatus == 'working' && (
+          <Button
+            title={I18n.t('stop_working')}
+            onPress={stopWorking}
+            style={{marginBottom: 10}}
+          />
+        )}
       </View>
     );
   }
@@ -108,8 +104,7 @@ export default class MapButtons extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'flex-end',
+    backgroundColor:'white'
   },
   map: {
     flex: 1,

@@ -26,10 +26,9 @@ export default class OrderItems extends Component {
 
         {packages.map((packageModel, index) => (
           <View style={styles.itemContainer} key={packageModel.id}>
-
-              <Text style={styles.categoryTitle}>
-                {packageModel.category.name}
-              </Text>
+            <Text style={styles.categoryTitle}>
+              {packageModel.category.name}
+            </Text>
 
             <View style={styles.packageItemContainer}>
               <Text style={styles.packageTitle}>{packageModel.name}</Text>

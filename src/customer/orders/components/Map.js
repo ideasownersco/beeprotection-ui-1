@@ -22,25 +22,29 @@ export default class Map extends Component {
   };
 
   state = {
-    initialized: false
+    initialized: false,
   };
 
   componentDidMount() {
-    setTimeout(()=>this.setState({
-      initialized: true
-    }),1000);
+    setTimeout(
+      () =>
+        this.setState({
+          initialized: true,
+        }),
+      1000,
+    );
   }
 
   componentDidUpdate(nextProps) {
     if (this.props.origin.latitude !== nextProps.origin.latitude) {
-      if(this.state.initialized) {
+      if (this.state.initialized) {
         this.map.fitToElements(true);
       }
     }
   }
 
   onMapLayout = () => {
-    if(this.state.initialized) {
+    if (this.state.initialized) {
       this.map.fitToElements(true);
     }
   };
@@ -54,8 +58,7 @@ export default class Map extends Component {
 
     return (
       <View style={styles.container}>
-        {
-          this.state.initialized &&
+        {this.state.initialized && (
           <MapView
             // provider={PROVIDER_GOOGLE}
             ref={ref => {
@@ -84,8 +87,7 @@ export default class Map extends Component {
               identifier="MarkerDestination"
             />
           </MapView>
-        }
-
+        )}
       </View>
     );
   }
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    minHeight: 300
+    minHeight: 300,
   },
   map: {
     flex: 1,
