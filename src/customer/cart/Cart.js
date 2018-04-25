@@ -202,7 +202,6 @@ class Cart extends PureComponent {
   };
 
   saveAddress = address => {
-
     const {isAuthenticated} = this.props;
     if (!isAuthenticated) {
       this.redirectToLogin();

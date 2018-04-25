@@ -6,7 +6,7 @@ import Touchable from 'react-native-platform-touchable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from 'utils/locale';
 import AddressInfo from 'components/AddressInfo';
-import Dialog from "components/Dialog";
+import Dialog from 'components/Dialog';
 
 export default class MapButtons extends Component {
   static propTypes = {
@@ -24,10 +24,10 @@ export default class MapButtons extends Component {
   };
 
   state = {
-    showStartWorkingDialog:false,
-    showStartDrivingDialog:false,
-    showStopWorkingDialog:false,
-    showStopDrivingDialog:false,
+    showStartWorkingDialog: false,
+    showStartDrivingDialog: false,
+    showStopWorkingDialog: false,
+    showStopDrivingDialog: false,
   };
 
   showStartDrivingDialog = () => {
@@ -99,8 +99,12 @@ export default class MapButtons extends Component {
   };
 
   render() {
-
-    let {showStartWorkingDialog,showStartDrivingDialog,showStopDrivingDialog,showStopWorkingDialog} = this.state;
+    let {
+      showStartWorkingDialog,
+      showStartDrivingDialog,
+      showStopDrivingDialog,
+      showStopWorkingDialog,
+    } = this.state;
 
     const {
       jobStatus,
@@ -114,7 +118,6 @@ export default class MapButtons extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.navContainer}>
-
           <Text style={styles.address}>
             <AddressInfo address={address} style={{textAlign: 'center'}} />
           </Text>
@@ -177,11 +180,30 @@ export default class MapButtons extends Component {
           />
         )}
 
-        <Dialog description='You are about to start driving to the destination' close={this.hideStartDrivingDialog} confirm={this.startDriving} visible={showStartDrivingDialog}/>
-        <Dialog description='Have you reached the destination ?' close={this.hideStopDrivingDialog} confirm={this.stopDriving} visible={showStopDrivingDialog}/>
-        <Dialog description='Do you want to start working on the Job ?' close={this.hideStartWorkingDialog} confirm={this.startWorking} visible={showStartWorkingDialog}/>
-        <Dialog description='Have you completed the Job ?' close={this.hideStopWorkingDialog} confirm={this.stopWorking} visible={showStopWorkingDialog}/>
-
+        <Dialog
+          description="You are about to start driving to the destination"
+          close={this.hideStartDrivingDialog}
+          confirm={this.startDriving}
+          visible={showStartDrivingDialog}
+        />
+        <Dialog
+          description="Have you reached the destination ?"
+          close={this.hideStopDrivingDialog}
+          confirm={this.stopDriving}
+          visible={showStopDrivingDialog}
+        />
+        <Dialog
+          description="Do you want to start working on the Job ?"
+          close={this.hideStartWorkingDialog}
+          confirm={this.startWorking}
+          visible={showStartWorkingDialog}
+        />
+        <Dialog
+          description="Have you completed the Job ?"
+          close={this.hideStopWorkingDialog}
+          confirm={this.stopWorking}
+          visible={showStopWorkingDialog}
+        />
       </View>
     );
   }

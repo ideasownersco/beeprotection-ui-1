@@ -34,7 +34,7 @@ class TrackOrderScene extends Component {
     imagesApproved: false,
     latitude: 37.78825,
     longitude: -122.4324,
-    heading: 0
+    heading: 0,
     // latitude: 29.3772392006689,
     // longitude: 47.98511826155676,
   };
@@ -198,7 +198,6 @@ class TrackOrderScene extends Component {
     });
   };
 
-
   render() {
     let {order} = this.props;
 
@@ -207,7 +206,15 @@ class TrackOrderScene extends Component {
     }
 
     let {address, job} = order;
-    let {latitude, longitude, heading, images, imagesUploaded, imagesApproved, showUploadImageModal} = this.state;
+    let {
+      latitude,
+      longitude,
+      heading,
+      images,
+      imagesUploaded,
+      imagesApproved,
+      showUploadImageModal,
+    } = this.state;
 
     return (
       <View style={{flex: 1}}>
@@ -215,7 +222,7 @@ class TrackOrderScene extends Component {
           origin={{
             latitude: latitude,
             longitude: longitude,
-            heading: heading
+            heading: heading,
           }}
           destination={{
             latitude: address.latitude,
@@ -241,15 +248,13 @@ class TrackOrderScene extends Component {
         <ListModal
           onCancel={this.hideUploadImageModal}
           onSave={this.onSaveUploadedImage}
-          isVisible={showUploadImageModal}
-        >
+          isVisible={showUploadImageModal}>
           <UploadImage
             images={images}
             updateImage={this.uploadImage}
             deleteImage={this.deleteImage}
           />
         </ListModal>
-
       </View>
     );
   }

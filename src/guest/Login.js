@@ -35,7 +35,6 @@ class Login extends Component {
     let {redirectRoute} = this.props.navigation.state.params || {};
 
     return new Promise((resolve, reject) => {
-
       const credentials = {
         email: this.state.email,
         password: this.state.password,

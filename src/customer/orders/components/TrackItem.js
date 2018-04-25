@@ -41,7 +41,7 @@ TrackItem.propTypes = {
   iconProps: PropTypes.object,
   title: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  description: PropTypes.oneOfType([PropTypes.string,PropTypes.element]),
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 
 const styles = StyleSheet.create({
