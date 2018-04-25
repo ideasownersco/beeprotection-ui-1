@@ -75,8 +75,6 @@ export default class MapPicker extends Component {
   // };
 
   onRegionChangeComplete = region => {
-    console.log('onRegionChangeComplete', region);
-
     if (
       !this.props.address.area_id ||
       this.props.address.latitude === region.latitude

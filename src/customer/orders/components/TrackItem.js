@@ -18,7 +18,6 @@ const TrackItem = ({
   iconProps,
   style,
 }) => {
-  console.log('iconBackground', iconBackground);
   return (
     <Touchable onPress={onPress}>
       <View style={[styles.container, style]}>
@@ -42,7 +41,7 @@ TrackItem.propTypes = {
   iconProps: PropTypes.object,
   title: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  description: PropTypes.string,
+  description: PropTypes.oneOfType([PropTypes.string,PropTypes.element]),
 };
 
 const styles = StyleSheet.create({

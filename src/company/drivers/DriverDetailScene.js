@@ -150,9 +150,6 @@ class DriverDetailScene extends PureComponent {
 
   render() {
     const {driver, timings} = this.props;
-    console.log('timings', timings);
-    console.log('driver', driver);
-    console.log('state', this.state);
 
     const {image, name} = driver.user;
     return (

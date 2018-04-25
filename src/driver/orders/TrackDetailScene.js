@@ -26,22 +26,18 @@ class TrackOrderScene extends Component {
     }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      tracking_enabled: false,
-      isUploadImageModalVisible: false,
-      images: [],
-      imagesUploaded: false,
-      imagesApproved: false,
-      origin: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        // latitude: 29.3772392006689,
-        // longitude: 47.98511826155676,
-      },
-    };
-  }
+  state = {
+    tracking_enabled: false,
+    showUploadImageModal: false,
+    images: [],
+    imagesUploaded: false,
+    imagesApproved: false,
+    latitude: 37.78825,
+    longitude: -122.4324,
+    heading: 0
+    // latitude: 29.3772392006689,
+    // longitude: 47.98511826155676,
+  };
 
   componentDidMount() {
     let {order, profile} = this.props;
@@ -58,7 +54,7 @@ class TrackOrderScene extends Component {
 
     BackgroundGeolocation.configure(
       {
-        distanceFilter: 100,
+        distanceFilter: 1,
         stopOnTerminate: false,
         preventSuspend: false,
         startOnBoot: true,
@@ -83,10 +79,8 @@ class TrackOrderScene extends Component {
     //   location => {
     //     let {latitude, longitude} = location.coords;
     //     this.setState({
-    //       origin: {
     //         latitude: latitude,
     //         longitude: longitude,
-    //       },
     //     });
     //   },
     //   error => {
@@ -105,25 +99,15 @@ class TrackOrderScene extends Component {
   }
 
   onLocation = location => {
-    const lastPosition = this.state.origin;
-    const currentLocation = {
+    this.setState({
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
       heading: location.coords.heading,
-    };
-
-    if (lastPosition.latitude !== currentLocation.latitude) {
-      this.setState({
-        origin: {
-          ...this.state.origin,
-          ...currentLocation,
-        },
-      });
-    }
+    });
   };
 
   onHttp = response => {
-    console.log('[event] http: ', response);
+    // console.log('[event] http: ', response);
   };
 
   onStartWorkingPress = () => {
@@ -142,10 +126,8 @@ class TrackOrderScene extends Component {
         tracking_enabled: true,
       });
     }
-
     let {job} = this.props.order;
     BackgroundGeolocation.start();
-
     this.props.dispatch(DRIVER_ACTIONS.startDriving(job.id));
   };
 
@@ -165,10 +147,6 @@ class TrackOrderScene extends Component {
     // let {job} = this.props.navigation.state.params.order;
   };
 
-  uploadImages = () => {
-    this.showUploadImageModal();
-  };
-
   approveImages = () => {
     this.setState({
       imagesApproved: true,
@@ -178,8 +156,8 @@ class TrackOrderScene extends Component {
   onSaveUploadedImage = () => {
     this.setState({
       imagesUploaded: true,
-      isUploadImageModalVisible: false,
     });
+    this.hideUploadImageModal();
   };
 
   uploadImage = images => {
@@ -198,13 +176,13 @@ class TrackOrderScene extends Component {
 
   showUploadImageModal = () => {
     this.setState({
-      isUploadImageModalVisible: true,
+      showUploadImageModal: true,
     });
   };
 
   hideUploadImageModal = () => {
     this.setState({
-      isUploadImageModalVisible: false,
+      showUploadImageModal: false,
     });
   };
 
@@ -220,19 +198,23 @@ class TrackOrderScene extends Component {
   };
 
   render() {
-    let {order, profile} = this.props;
+    let {order} = this.props;
 
     if (!order.id) {
       return null;
     }
 
     let {address, job} = order;
-    let {origin, images, imagesUploaded, imagesApproved} = this.state;
+    let {latitude, longitude, heading, images, imagesUploaded, imagesApproved, showUploadImageModal} = this.state;
 
     return (
       <View style={{flex: 1}}>
         <Map
-          origin={origin}
+          origin={{
+            latitude: latitude,
+            longitude: longitude,
+            heading: heading
+          }}
           destination={{
             latitude: address.latitude,
             longitude: address.longitude,
@@ -242,28 +224,29 @@ class TrackOrderScene extends Component {
 
         <MapButtons
           address={address}
-          uploadImages={this.uploadImages}
+          uploadImages={this.showUploadImageModal}
           approveImages={this.approveImages}
-          imagesUploaded={imagesUploaded}
-          imagesApproved={imagesApproved}
           onDirectionPress={this.openInGoogleMaps}
           startWorking={this.onStartWorkingPress}
           stopWorking={this.onStopWorkingPress}
           startDriving={this.onStartDrivingPress}
           stopDriving={this.onStopDrivingPress}
+          imagesUploaded={imagesUploaded}
+          imagesApproved={imagesApproved}
           jobStatus={job.status}
         />
 
         <ListModal
-          isVisible={this.state.isUploadImageModalVisible}
           onCancel={this.hideUploadImageModal}
           onSave={this.onSaveUploadedImage}>
+          isVisible={showUploadImageModal}
           <UploadImage
             images={images}
             updateImage={this.uploadImage}
             deleteImage={this.deleteImage}
           />
         </ListModal>
+
       </View>
     );
   }

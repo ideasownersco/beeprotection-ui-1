@@ -68,8 +68,6 @@ class Home extends Component {
   render() {
     let {orders, order} = this.props;
 
-    console.log('order', order);
-
     return (
       <ScrollView
         style={{flex: 1}}

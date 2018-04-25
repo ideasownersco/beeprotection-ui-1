@@ -32,18 +32,9 @@ class Login extends Component {
   };
 
   handleLogin = () => {
-    // const credentials = {
-    //   email: this.state.email,
-    //   password: this.state.password,
-    // };
-    // this.props.actions.login(credentials, this.props.navigation);
-
     let {redirectRoute} = this.props.navigation.state.params || {};
 
-    console.log('redirectRoute', redirectRoute);
-
     return new Promise((resolve, reject) => {
-      // this.props.actions.checkout({item, resolve, reject});
 
       const credentials = {
         email: this.state.email,
@@ -56,7 +47,6 @@ class Login extends Component {
       this.props.actions.login({credentials, resolve, reject, redirectRoute});
     })
       .then(user => {
-        console.log('u', user);
         // if(scene && scene === 'checkout') {
         //   this.props.navigation.navigate('Cart');
         // }
