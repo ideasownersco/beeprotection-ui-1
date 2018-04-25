@@ -16,6 +16,7 @@ import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 import TrackDetailScene from 'company/orders/TrackDetailScene';
 import Register from "guest/Register";
+import TrackOrderScene from "customer/orders/TrackOrderScene";
 
 const getDrawerIcon = navigation => {
   return {
@@ -70,6 +71,12 @@ const HomeStack = StackNavigator(
     },
     TrackDetail: {
       screen: TrackDetailScene,
+      navigationOptions: ({navigation}) => ({
+        title: I18n.t('track_driver'),
+      }),
+    },
+    TrackOrder: {
+      screen: TrackOrderScene,
       navigationOptions: ({navigation}) => ({
         title: I18n.t('track_driver'),
       }),

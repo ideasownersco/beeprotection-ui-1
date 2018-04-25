@@ -150,8 +150,6 @@ class CustomerLocationMapScene extends Component {
     let {address, job} = order;
     let {origin, images} = this.state;
 
-    console.log('images', images);
-
     return (
       <View style={{flex: 1}}>
         <Map

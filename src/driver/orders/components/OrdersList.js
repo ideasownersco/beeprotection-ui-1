@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from 'utils/locale';
-import SectionTitle from 'components/SectionTitle';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Divider from 'components/Divider';
-import Button from 'components/Button';
+import IconFactory from "components/IconFactory";
+import {Caption, Paragraph, Title} from "react-native-paper";
+import ListItem from "../../../components/ListItem";
 
 export default class OrdersList extends Component {
   static propTypes = {
@@ -26,8 +25,6 @@ export default class OrdersList extends Component {
   renderItem = ({item}) => {
     const {
       onItemPress,
-      activeItemID,
-      onStartStopButtonPress,
       onAddressButtonPress,
     } = this.props;
     return (
@@ -35,41 +32,24 @@ export default class OrdersList extends Component {
         <View
           style={[
             styles.itemContainer,
-            item.id === activeItemID && {backgroundColor: colors.white},
           ]}>
-          <View style={{flex: 1}}>
-            <View style={styles.itemContentContainer}>
-              <Text style={styles.dateTime}>
-                {item.date}, {item.time}
-              </Text>
-            </View>
 
-            <Divider />
-
-            <View style={styles.itemContentContainer}>
-              {item.status === 'reached' && (
-                <Button
-                  title={I18n.t('start')}
-                  style={{borderRadius: 10, flex: 1, marginRight: 10}}
-                  background="error"
-                  onPress={() => onStartStopButtonPress(item)}
-                />
-              )}
-
-              <Button
-                title={I18n.t('address')}
-                style={{borderRadius: 10, flex: 1}}
-                background="secondary"
-                onPress={() => onAddressButtonPress(item)}
-              />
-            </View>
+          <View style={{flex: 4}}>
+            <ListItem title={`${item.date}, ${item.time}`} description={item.full_address}/>
           </View>
 
-          <SimpleLineIcons
-            name="arrow-right"
-            size={25}
-            color={colors.mediumGrey}
-          />
+          <Touchable onPress={() => onAddressButtonPress(item)}>
+            <View style={styles.trackButton}>
+              <IconFactory
+                name="map-marker"
+                type="MaterialCommunityIcons"
+                color="#a51300"
+                size={40}
+              />
+              <Caption>{I18n.t('address')}</Caption>
+            </View>
+          </Touchable>
+
         </View>
       </Touchable>
     );
@@ -83,17 +63,14 @@ export default class OrdersList extends Component {
         renderItem={this.renderItem}
         style={styles.listContainer}
         keyExtractor={item => `${item.id}`}
-        ItemSeparatorComponent={() => <Divider />}
+        ItemSeparatorComponent={() => <Divider/>}
       />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-    padding: 10,
-  },
+
   listContainer: {
     flex: 1,
   },
@@ -101,8 +78,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
-    backgroundColor: '#efefef',
+    backgroundColor: colors.lightGrey,
   },
   image: {
     width: 80,
@@ -110,8 +86,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   dateTime: {
-    fontSize: 20,
+    fontSize: 18,
     paddingRight: 10,
+    color: colors.darkGrey
   },
   categoryName: {
     fontSize: 20,
@@ -163,4 +140,10 @@ const styles = StyleSheet.create({
   orderNo: {
     color: colors.mediumGrey,
   },
+  trackButton:{
+    flex:1,
+    padding:10,
+    alignItems:'center'
+
+  }
 });

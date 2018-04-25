@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    paddingHorizontal: 5,
+    // paddingHorizontal: 5,
   },
 });
 export default SectionTitle;

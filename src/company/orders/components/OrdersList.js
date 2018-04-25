@@ -79,16 +79,16 @@ export default class OrdersList extends Component {
         style={styles.listContainer}
         keyExtractor={item => `${item.id}`}
         ItemSeparatorComponent={() => <Divider />}
-        onRefresh={() => onPullToRefresh()}
         scrollEventThrottle={120}
         ref="listView"
+        onRefresh={() => onPullToRefresh()}
+        refreshing={isFetching}
         showsVerticalScrollIndicator={false}
         automaticallyAdjustContentInsets={false}
         enableEmptySections={true}
         initialListSize={20}
         onEndReachedThreshold={1}
         onEndReached={() => !isFetching && onFetchMore()}
-        refreshing={isFetching}
       />
     );
   }

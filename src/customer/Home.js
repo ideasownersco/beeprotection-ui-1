@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
-import {ScrollView, AppState} from 'react-native';
+import {AppState, ScrollView} from 'react-native';
 import HomeActionButtons from 'customer/components/HomeActionButtons';
-import StandingOrdersList from 'customer/components/StandingOrdersList';
 import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
-import WelcomeText from './components/WelcomeText';
-import NavButton from '../components/NavButton';
-import IconFactory from '../components/IconFactory';
-import colors from '../assets/theme/colors';
+import WelcomeText from 'customer/components/WelcomeText';
+import StandingOrdersList from "customer/components/StandingOrdersList";
 
 class Home extends Component {
   static defaultProps = {
@@ -101,8 +98,8 @@ class Home extends Component {
   onProtectionPress = () => {};
 
   onItemTrackPress = (item: Object) => {
-    this.props.navigation.navigate('TrackDetail', {
-      // orderID: item.id,
+    this.props.navigation.navigate('TrackOrder', {
+      orderID: item.id,
       order: item,
     });
   };
@@ -119,18 +116,18 @@ class Home extends Component {
     return (
       <ScrollView style={{flex: 1}} contentContainer={{paddingVertical: 100}}>
         <WelcomeText />
+
         <HomeActionButtons
           onCreateOrderPress={this.onCreateOrderPress}
           onProtectionPress={this.onProtectionPress}
         />
-        {/*{working_order &&*/}
-        {/*working_order.id && (*/}
+
         <StandingOrdersList
           items={working_order}
           onItemPress={this.onStandingOrderListItemPress}
           onItemTrackPress={this.onItemTrackPress}
         />
-        // )}
+
       </ScrollView>
     );
   }

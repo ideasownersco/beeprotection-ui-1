@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {AppState, ScrollView} from 'react-native';
+import {AppState, RefreshControl, ScrollView, View} from 'react-native';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {connect} from 'react-redux';
 import OrdersList from 'driver/orders/components/OrdersList';
@@ -48,7 +48,8 @@ class Home extends Component {
     });
   };
 
-  onStartStopButtonPress = () => {};
+  onStartStopButtonPress = () => {
+  };
 
   onAddressButtonPress = (order: object) => {
     return this.props.navigation.navigate('CustomerLocationMap', {
@@ -66,20 +67,36 @@ class Home extends Component {
     // return this.props.navigation.navigate('UpcomingOrders');
   };
 
+  onRefresh = () => {
+    this.props.dispatch(DRIVER_ACTIONS.fetchWorkingOrder());
+    this.props.dispatch(DRIVER_ACTIONS.fetchUpcomingOrders());
+  };
+
   render() {
     let {orders, order} = this.props;
 
+    console.log('order',order);
+
     return (
-      <ScrollView style={{flex: 1}}>
-        <SectionHeading title={I18n.t('working_order')} />
+      <ScrollView style={{flex: 1}}
+        refreshControl={
+          <RefreshControl
+            refreshing={false}
+            onRefresh={this.onRefresh}
+          />
+        }
+      >
 
         {order.id && (
-          <OrdersList
-            items={[order]}
-            onItemPress={this.onOrdersListItemPress}
-            onAddressButtonPress={this.onAddressButtonPress}
-            onStartStopButtonPress={this.onStartStopButtonPress}
-          />
+          <View>
+            <SectionHeading title={I18n.t('working_order')}/>
+            <OrdersList
+              items={[order]}
+              onItemPress={this.onOrdersListItemPress}
+              onAddressButtonPress={this.onAddressButtonPress}
+              onStartStopButtonPress={this.onStartStopButtonPress}
+            />
+          </View>
         )}
 
         <SectionHeading

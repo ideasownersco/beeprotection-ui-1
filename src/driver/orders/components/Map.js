@@ -197,7 +197,7 @@ export default class Map extends Component {
       imagesUploaded,
       imagesApproved,
     } = this.props;
-    console.log('jobStatus', jobStatus);
+
     const {origin, initialized} = this.state;
     const {heading} = origin;
     const rotate =

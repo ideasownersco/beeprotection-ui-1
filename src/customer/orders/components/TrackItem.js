@@ -10,14 +10,17 @@ import SectionTitle from 'components/SectionTitle';
 import IconFactory from 'components/IconFactory';
 import Touchable from 'react-native-platform-touchable';
 
-const TrackItem = ({title, onPress, description, icon, style}) => {
+const TrackItem = ({title, onPress, description, iconBackground, iconProps, style}) => {
+  console.log('iconBackground',iconBackground);
   return (
-    <Touchable onPress={() => onPress()}>
+    <Touchable onPress={onPress}>
       <View style={[styles.container, style]}>
-        <View style={styles.iconContainer}>{icon}</View>
+        <View style={[styles.iconContainer,{backgroundColor:iconBackground}]}>{<IconFactory {...iconProps}/>}</View>
         <View style={styles.contentContainerStyle}>
           <SectionTitle title={title} style={styles.title} />
-          {description && <Text style={styles.description}>{description}</Text>}
+          {description && typeof (description) === 'string' ? <Text style={styles.description}>{description}</Text> :
+            description
+          }
         </View>
       </View>
     </Touchable>
@@ -25,10 +28,10 @@ const TrackItem = ({title, onPress, description, icon, style}) => {
 };
 
 TrackItem.propTypes = {
-  icon: PropTypes.element.isRequired,
+  iconProps:PropTypes.object,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
   onPress: PropTypes.func.isRequired,
+  description: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -44,9 +47,9 @@ const styles = StyleSheet.create({
     color: colors.mediumGrey,
   },
   iconContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     backgroundColor: colors.mediumGrey,
     alignItems: 'center',
     justifyContent: 'center',

@@ -86,7 +86,7 @@
   "select_driver" : "Select Driver",
   "order_total" : "Order Total",
   "basic_information" : "Basic Information",
-  "order_submitted" : "Order Submitted",
+  "order_received" : "Order Received",
   "order_in_progress": "Order In Progress",
   "order_in_progress_description": "We are processing the order",
   "on_our_way": "On Our Way",
@@ -150,5 +150,6 @@
 
   "timings" : "Timings",
   "offline" : "Offline",
-  "online" : "Online"
+  "online" : "Online",
+  "reached" : "Reached at Destination"
 }

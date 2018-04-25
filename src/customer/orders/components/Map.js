@@ -21,14 +21,28 @@ export default class Map extends Component {
     }),
   };
 
+  state = {
+    initialized: false
+  };
+
+  componentDidMount() {
+    setTimeout(()=>this.setState({
+      initialized: true
+    }),1000);
+  }
+
   componentDidUpdate(nextProps) {
     if (this.props.origin.latitude !== nextProps.origin.latitude) {
-      this.map.fitToElements(true);
+      if(this.state.initialized) {
+        this.map.fitToElements(true);
+      }
     }
   }
 
   onMapLayout = () => {
-    this.map.fitToElements(true);
+    if(this.state.initialized) {
+      this.map.fitToElements(true);
+    }
   };
 
   render() {
@@ -40,34 +54,38 @@ export default class Map extends Component {
 
     return (
       <View style={styles.container}>
-        <MapView
-          // provider={PROVIDER_GOOGLE}
-          ref={ref => {
-            this.map = ref;
-          }}
-          style={styles.map}
-          initialRegion={{
-            ...destination,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-          }}
-          onLayout={this.onMapLayout}>
-          <MapView.Marker
-            style={styles.mapMarker}
-            anchor={{x: 0.5, y: 0.5, position: 'relative'}}
-            coordinate={origin}
-            identifier="MarkerOrigin">
-            <Image
-              source={images.car}
-              style={[styles.image, rotate && {transform: [{rotate}]}]}
-            />
-          </MapView.Marker>
+        {
+          this.state.initialized &&
+          <MapView
+            // provider={PROVIDER_GOOGLE}
+            ref={ref => {
+              this.map = ref;
+            }}
+            style={styles.map}
+            initialRegion={{
+              ...destination,
+              latitudeDelta: LATITUDE_DELTA,
+              longitudeDelta: LONGITUDE_DELTA,
+            }}
+            onLayout={this.onMapLayout}>
+            <MapView.Marker
+              style={styles.mapMarker}
+              anchor={{x: 0.5, y: 0.5, position: 'relative'}}
+              coordinate={origin}
+              identifier="MarkerOrigin">
+              <Image
+                source={images.car}
+                style={[styles.image, rotate && {transform: [{rotate}]}]}
+              />
+            </MapView.Marker>
 
-          <MapView.Marker
-            coordinate={destination}
-            identifier="MarkerDestination"
-          />
-        </MapView>
+            <MapView.Marker
+              coordinate={destination}
+              identifier="MarkerDestination"
+            />
+          </MapView>
+        }
+
       </View>
     );
   }
@@ -77,6 +95,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
+    minHeight: 300
   },
   map: {
     flex: 1,
