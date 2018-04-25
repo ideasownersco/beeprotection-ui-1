@@ -7,7 +7,7 @@ import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {SELECTORS as ORDER_SELECTORS} from 'customer/selectors/orders';
 import I18n from 'utils/locale';
-import Map from 'customer/orders/components/Map';
+import Map from 'components/Map';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 
 class TrackDetailScene extends Component {

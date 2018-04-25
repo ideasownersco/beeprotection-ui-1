@@ -12,7 +12,7 @@ import IconFactory from 'components/IconFactory';
 import colors from 'assets/theme/colors';
 import {ACTIONS as ORDER_ACTIONS} from 'company/common/actions';
 import TrackDetailScene from './TrackDetailScene';
-import Map from 'customer/orders/components/Map';
+import Map from 'components/Map';
 import Touchable from 'react-native-platform-touchable';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 
@@ -76,14 +76,15 @@ class TrackOrderScene extends Component {
         keyboardShouldPersistTaps={'always'}
         contentInset={{bottom: 50}}
         refreshControl={
-          <RefreshControl refreshing={isFetching} onRefresh={this.onRefresh} />
+          <RefreshControl refreshing={isFetching} onRefresh={this.onRefresh}/>
         }
         refreshing={isFetching}>
         <View style={{backgroundColor: 'white'}}>
           <TrackItem
             title={I18n.t('order_received')}
             description={`${I18n.t('order_no')} : ${order.id}`}
-            onPress={() => {}}
+            onPress={() => {
+            }}
             iconProps={{
               type: 'Octicons',
               color: 'white',
@@ -110,8 +111,8 @@ class TrackOrderScene extends Component {
             }
             description={
               order.trackeable ? (
-                <Touchable onPress={this.loadTrackDetailScene}>
-                  <Map origin={origin} destination={destination} />
+                <Touchable onPress={this.loadTrackDetailScene} style={{height: 300}}>
+                  <Map origin={origin} destination={destination}/>
                 </Touchable>
               ) : (
                 I18n.t('tracking_not_available')
@@ -121,7 +122,8 @@ class TrackOrderScene extends Component {
           <TrackItem
             title={I18n.t('order_in_progress')}
             description={I18n.t('order_in_progress_description')}
-            onPress={() => {}}
+            onPress={() => {
+            }}
             iconProps={{
               type: 'MaterialCommunityIcons',
               color: 'white',
@@ -133,7 +135,8 @@ class TrackOrderScene extends Component {
           />
           <TrackItem
             title={I18n.t('all_done')}
-            onPress={() => {}}
+            onPress={() => {
+            }}
             iconProps={{
               type: 'MaterialCommunityIcons',
               color: 'white',

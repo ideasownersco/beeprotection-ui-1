@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Dimensions, Image, StyleSheet, View,} from 'react-native';
+import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import MapView from 'react-native-maps';
 import images from 'assets/theme/images';
-import Touchable from 'react-native-platform-touchable';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -23,12 +21,9 @@ export default class Map extends Component {
     }),
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      initialized: false,
-    };
-  }
+  state = {
+    initialized: false,
+  };
 
   componentDidMount() {
     setTimeout(() => {
@@ -38,12 +33,18 @@ export default class Map extends Component {
     }, 1000);
   }
 
-  onMapLayout = () => {
-    this.map.fitToElements(true);
-  };
+  componentDidUpdate(nextProps) {
+    if (this.props.origin.latitude !== nextProps.origin.latitude) {
+      if (this.state.initialized) {
+        this.map.fitToElements(true);
+      }
+    }
+  }
 
-  reCenterMap = () => {
-    this.map.fitToElements(true);
+  onMapLayout = () => {
+    if (this.state.initialized) {
+      this.map.fitToElements(true);
+    }
   };
 
   render() {
@@ -55,12 +56,8 @@ export default class Map extends Component {
 
     if (initialized) {
       return (
-        <View style={{flex:1}}>
-          {/*<Touchable onPress={this.reCenterMap}>*/}
-            {/*<View style={{alignItems: 'center'}}>*/}
-              {/*<MaterialCommunityIcons name="arrow-all" size={35} />*/}
-            {/*</View>*/}
-          {/*</Touchable>*/}
+        <View style={styles.container}>
+
           <MapView
             ref={ref => {
               this.map = ref;

@@ -51,7 +51,7 @@ class Home extends Component {
   onStartStopButtonPress = () => {};
 
   onAddressButtonPress = (order: object) => {
-    return this.props.navigation.navigate('TrackOrder', {
+    return this.props.navigation.navigate('TrackDetail', {
       orderID: order.id,
     });
   };

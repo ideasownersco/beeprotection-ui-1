@@ -8,15 +8,14 @@ import BackgroundGeolocation from 'react-native-background-geolocation';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
 import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
-import {View,Linking} from 'react-native';
-import Map from 'driver/orders/components/Map';
+import {View, Linking} from 'react-native';
+import Map from 'components/Map';
 import UploadImage from 'driver/components/UploadImage';
 import ListModal from 'components/ListModal';
-import MapButtons from "driver/orders/components/MapButtons";
+import MapButtons from 'driver/orders/components/MapButtons';
 import {API_URL} from 'utils/env';
 
 class TrackOrderScene extends Component {
-
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -30,7 +29,7 @@ class TrackOrderScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tracking_enabled:false,
+      tracking_enabled: false,
       isUploadImageModalVisible: false,
       images: [],
       imagesUploaded: false,
@@ -45,9 +44,8 @@ class TrackOrderScene extends Component {
   }
 
   componentDidMount() {
-
-    let {order,profile} = this.props;
-    let {address, job} = order;
+    let {order, profile} = this.props;
+    let {job} = order;
 
     this.props.dispatch(
       DRIVER_ACTIONS.fetchOrderDetails(
@@ -139,7 +137,6 @@ class TrackOrderScene extends Component {
   };
 
   onStartDrivingPress = () => {
-
     if (!this.state.tracking_enabled) {
       this.setState({
         tracking_enabled: true,
@@ -149,12 +146,10 @@ class TrackOrderScene extends Component {
     let {job} = this.props.order;
     BackgroundGeolocation.start();
 
-
     this.props.dispatch(DRIVER_ACTIONS.startDriving(job.id));
   };
 
   onStopDrivingPress = () => {
-
     if (this.state.tracking_enabled) {
       this.setState({
         tracking_enabled: false,
@@ -236,7 +231,6 @@ class TrackOrderScene extends Component {
 
     return (
       <View style={{flex: 1}}>
-
         <Map
           origin={origin}
           destination={{
