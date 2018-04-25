@@ -23,10 +23,10 @@ export default class extends Component {
     this.state = {
       label: null,
       mapPickerVisibility: false,
-      block: 1,
-      street: 1,
-      avenue: 1,
-      building: 1,
+      block: null,
+      street: null,
+      avenue: null,
+      building: null,
       country: 'KW',
       latitude: 29.3759,
       longitude: 47.9774,
@@ -34,7 +34,6 @@ export default class extends Component {
       // longitude:null,
       area_id: null,
       isAreaListModalVisible: false,
-      hideMap: false,
     };
   }
 
@@ -68,11 +67,7 @@ export default class extends Component {
   };
 
   saveAddress = () => {
-    this.hideMap();
-    this.props.onSave({
-      ...this.state,
-      area_id: 99
-    });
+    this.props.onSave(this.state);
   };
 
   hideMap = () => {
@@ -136,7 +131,6 @@ export default class extends Component {
       avenue,
       building,
       area_id,
-      mapPickerVisibility,
       isAreaListModalVisible,
     } = this.state;
 
@@ -183,7 +177,6 @@ export default class extends Component {
           />
         </View>
 
-
         <MapPicker
           updateAddress={this.updateAddressFields}
           address={{
@@ -197,7 +190,6 @@ export default class extends Component {
           <Button
             onPress={this.hideScreen}
             style={styles.button}
-            background="transparent"
             raised>
             {I18n.t('cancel')}
           </Button>
