@@ -380,9 +380,11 @@ class Cart extends PureComponent {
         <Button
           onPress={this.showAddressCreateModal}
           color={colors.primary}
-          style={{alignItems: 'flex-start'}}>
+          // style={{alignItems: 'flex-start'}}
+        >
           <View
             style={{
+              flex:1,
               flexDirection: 'row',
               alignItems: 'center',
             }}>
@@ -393,7 +395,7 @@ class Cart extends PureComponent {
               color={colors.primary}
             />
             <Text
-              style={{color: colors.primary, fontSize: 18, fontWeight: '700'}}>
+              style={{color: colors.darkGrey, fontSize: 18, fontWeight: '700'}}>
               {I18n.t('add_address')}
             </Text>
           </View>
@@ -452,7 +454,7 @@ class Cart extends PureComponent {
           address={user && user.addresses && user.addresses[selectedAddressID]}
           total={cartTotal}
           date={selectedDate}
-          time={timings.length && timings[selectedTimeID]}
+          time={selectedTimeID && timings.length && timings[selectedTimeID] || null}
           visible={showCheckoutConfirmDialog}
           close={this.hideCheckoutConfirmDialog}
           checkout={this.performCheckout}

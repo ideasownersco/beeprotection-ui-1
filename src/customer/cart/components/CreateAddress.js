@@ -22,21 +22,24 @@ export default class extends Component {
     this.state = {
       label: null,
       mapPickerVisibility: false,
-      block: null,
-      street: null,
-      avenue: null,
-      building: null,
+      block: 1,
+      street: 1,
+      avenue: 1,
+      building: 1,
       country: 'KW',
       latitude: 29.3759,
       longitude: 47.9774,
+      // latitude:null,
+      // longitude:null,
       area_id: null,
       isAreaListModalVisible: false,
+      hideMap: false,
     };
   }
 
-  shouldComponentUpdate(nextProps, prevState) {
-    return nextProps.items !== this.props.items || prevState !== this.state;
-  }
+  // shouldComponentUpdate(nextProps, prevState) {
+  //   return nextProps.items !== this.props.items || prevState !== this.state;
+  // }
 
   componentDidMount() {
     BackgroundGeolocation.getCurrentPosition(
@@ -64,12 +67,16 @@ export default class extends Component {
   };
 
   saveAddress = () => {
-    this.props.onSave(this.state);
+    this.hideMap();
+    this.props.onSave({
+      ...this.state,
+      area_id:99
+    });
   };
 
-  hideMapPicker = () => {
+  hideMap = () => {
     this.setState({
-      mapPickerVisibility: false,
+      hideMap: true,
     });
   };
 
@@ -132,10 +139,14 @@ export default class extends Component {
       isAreaListModalVisible,
     } = this.state;
 
+    console.log('latitude', latitude);
+    console.log('longitude', longitude);
+
     // console.log('state',{...this.state});
 
     return (
       <View style={styles.container}>
+
         <AddressFormFields
           block={block}
           avenue={avenue}
@@ -167,14 +178,18 @@ export default class extends Component {
             </Touchable>
           </View>
 
-          <MapPicker
-            updateAddress={this.updateAddressFields}
-            address={{
-              latitude: latitude,
-              longitude: longitude,
-              area_id: area_id,
-            }}
-          />
+          {
+            !this.state.hideMap &&
+            <MapPicker
+              updateAddress={this.updateAddressFields}
+              address={{
+                latitude: latitude,
+                longitude: longitude,
+                area_id: area_id,
+              }}
+            />
+          }
+
         </View>
 
         <View style={styles.buttonsContainer}>

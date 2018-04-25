@@ -11,7 +11,7 @@ import {isRTL} from 'utils/locale';
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 
-const LATITUDE_DELTA = 0.1;
+const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class MapPicker extends Component {
@@ -93,41 +93,35 @@ export default class MapPicker extends Component {
     const {latitude, longitude} = this.state;
     const {address} = this.props;
     // !address.area_id && {opacity: 0.3}
-    return (
-      <View style={[styles.container]}>
-        <View style={styles.searchInputContainer}>
-          <Image
-            source={require('./../../../assets/images/pin.png')}
-            style={{width: 50, height: 50}}
-            resizeMode="contain"
-          />
-        </View>
 
-        <MapView
-          ref={ref => {
-            this.map = ref;
-          }}
-          style={[styles.map]}
-          initialRegion={{
-            latitude: latitude,
-            longitude: longitude,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-          }}
-          // onRegionChange={this.onRegionChange}
-          onRegionChangeComplete={this.onRegionChangeComplete}
-          showsUserLocation={true}>
-          {/*<MapView.Marker*/}
-          {/*coordinate={{*/}
-          {/*latitude: latitude,*/}
-          {/*longitude: longitude,*/}
-          {/*}}*/}
-          {/*onDragEnd={e => this.onDragEnd(e)}*/}
-          {/*identifier="MARKER_1"*/}
-          {/*draggable*/}
-          {/*/>*/}
-        </MapView>
-      </View>
+    console.log('latitude in map', latitude);
+    console.log('longitude in map', longitude);
+    return (
+      <MapView
+        ref={ref => {
+          this.map = ref;
+        }}
+        style={[styles.map]}
+        region={{
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
+        }}
+        onRegionChangeComplete={this.onRegionChangeComplete}
+        showsUserLocation={true}
+        pitchEnabled={false}
+        rotateEnabled={false}
+        showsMyLocationButton={true}
+      >
+
+        <Image
+          source={require('./../../../assets/images/pin.png')}
+          style={styles.image}
+          resizeMode="contain"
+        />
+
+      </MapView>
     );
   }
 }
@@ -159,17 +153,16 @@ const autoCompleteStyle = {
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  searchInputContainer: {
-    position: 'absolute',
-    top: 180,
-    flexDirection: 'row',
-    zIndex: 5000,
+    flex: 1,
+    justifyContent: 'center',
   },
   map: {
+    flex: 1,
     ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
   },
+  image: {
+    width: 50, height: 50,
+    alignSelf: 'center'
+  }
 });

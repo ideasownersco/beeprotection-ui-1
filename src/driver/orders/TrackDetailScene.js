@@ -40,8 +40,6 @@ class TrackOrderScene extends Component {
   };
 
   componentDidMount() {
-    BackgroundGeolocation.stop();
-
     let {order, profile} = this.props;
     let {job} = order;
 
@@ -56,7 +54,7 @@ class TrackOrderScene extends Component {
 
     BackgroundGeolocation.configure(
       {
-        distanceFilter: 1,
+        distanceFilter: 10,
         stopOnTerminate: false,
         preventSuspend: false,
         startOnBoot: true,
