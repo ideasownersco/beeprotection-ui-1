@@ -17,58 +17,7 @@ class Home extends Component {
     appState: AppState.currentState,
   };
 
-  // static navigationOptions = ({navigation}) => {
-  //
-  //   return {
-  //     headerRight: (
-  //       <NavButton
-  //         icon={
-  //           <IconFactory type="MaterialCommunityIcons" name="cart-outline" color="white" size={26}/>
-  //         }
-  //         onPress={() =>
-  //           navigation.state.params &&
-  //           navigation.state.params.handleRightButtonPress()
-  //         }
-  //       />
-  //     ),
-  //   };
-  // };
-
-  static navigationOptions = ({navigation}) => {
-    return {
-      // headerTransparent:true,
-      // headerStyle: {
-      //   backgroundColor: 'transparent',
-      //   position: 'absolute',
-      //   height: 50,
-      //   top: 0,
-      //   left: 0,
-      //   right: 0,
-      //   borderBottomWidth: 0,
-      // },
-      // headerRight: (
-      //   <NavButton
-      //     icon={
-      //       <IconFactory
-      //         type="Ionicons"
-      //         name="md-globe"
-      //         color={colors.white}
-      //         size={26}
-      //       />
-      //     }
-      //     onPress={() =>
-      //       navigation.state.params &&
-      //       navigation.state.params.handleRightButtonPress()
-      //     }
-      //   />
-      // ),
-    };
-  };
-
   componentDidMount() {
-    // this.props.navigation.setParams({
-    //   handleRightButtonPress: this.changeLanguage,
-    // });
     this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrder());
     AppState.addEventListener('change', this.handleAppStateChange);
   }
@@ -76,10 +25,6 @@ class Home extends Component {
   componentWillUnmount() {
     AppState.removeEventListener('change', this.handleAppStateChange);
   }
-
-  changeLanguage = () => {
-    this.props.navigation.navigate('LanguageSelect');
-  };
 
   handleAppStateChange = nextAppState => {
     if (
@@ -111,7 +56,7 @@ class Home extends Component {
   };
 
   render() {
-    let {upcoming_orders, working_order} = this.props;
+    let {working_order} = this.props;
 
     return (
       <ScrollView style={{flex: 1}} contentContainer={{paddingVertical: 100}}>

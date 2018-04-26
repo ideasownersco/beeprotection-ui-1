@@ -4769,7 +4769,7 @@ react-native-image-crop-picker@^0.20.1:
 
 "react-native-maps@git+ssh://git@github.com:react-community/react-native-maps.git":
   version "0.21.0"
-  resolved "git+ssh://git@github.com:react-community/react-native-maps.git#71c74cdd8f5f30efd64bd20f2790db65d959b328"
+  resolved "git+ssh://git@github.com:react-community/react-native-maps.git#521e5fed0736bc8ccc08b7800a725fb874b52c29"
   dependencies:
     babel-plugin-module-resolver "^2.3.0"
     babel-preset-react-native "1.9.0"

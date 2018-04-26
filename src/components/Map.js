@@ -19,6 +19,11 @@ export default class Map extends Component {
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
     }),
+    cacheEnabled:PropTypes.string
+  };
+
+  static defaultProps = {
+    cacheEnabled:false
   };
 
   state = {
@@ -55,8 +60,7 @@ export default class Map extends Component {
   };
 
   render() {
-    console.log('props', this.props.origin);
-    const {destination, origin} = this.props;
+    const {destination, origin,cacheEnabled} = this.props;
     const {initialized} = this.state;
     const {heading} = origin;
     const rotate =
@@ -66,6 +70,7 @@ export default class Map extends Component {
       return (
         <View style={styles.container}>
           <MapView
+            provider="google"
             ref={ref => {
               this.map = ref;
             }}
@@ -75,7 +80,9 @@ export default class Map extends Component {
               latitudeDelta: LATITUDE_DELTA,
               longitudeDelta: LONGITUDE_DELTA,
             }}
-            onLayout={this.onMapLayout}>
+            onLayout={this.onMapLayout}
+            cacheEnabled={cacheEnabled}
+          >
             <MapView.Marker
               style={styles.mapMarker}
               anchor={{x: 0.5, y: 0.5, position: 'relative'}}

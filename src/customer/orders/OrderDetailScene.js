@@ -39,7 +39,7 @@ class OrderDetailScene extends Component {
 
   trackOrder = () => {
     this.props.navigation.navigate('TrackOrder', {
-      orderID: this.props.orderID,
+      orderID: this.props.order.id,
     });
   };
 

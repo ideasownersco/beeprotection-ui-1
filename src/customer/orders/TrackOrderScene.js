@@ -110,7 +110,7 @@ class TrackOrderScene extends Component {
                 <Touchable
                   onPress={this.loadTrackDetailScene}
                   style={{height: 300}}>
-                  <Map origin={origin} destination={destination} />
+                  <Map origin={origin} destination={destination} cacheEnabled={true} />
                 </Touchable>
               ) : (
                 I18n.t('tracking_not_available')
