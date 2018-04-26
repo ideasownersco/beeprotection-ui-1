@@ -54,7 +54,7 @@ class TrackOrderScene extends Component {
 
     BackgroundGeolocation.configure(
       {
-        distanceFilter: 10,
+        distanceFilter: 100,
         stopOnTerminate: false,
         preventSuspend: false,
         startOnBoot: true,

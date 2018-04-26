@@ -2,7 +2,7 @@
  * @flow
  */
 import React, {PureComponent} from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as CART_ACTIONS} from 'customer/common/actions';
@@ -40,19 +40,29 @@ class CreateOrder extends PureComponent {
   static navigationOptions = ({navigation}) => {
     return {
       headerRight: (
-        <NavButton
-          icon={
-            <MaterialCommunityIcons
-              name="cart-outline"
-              size={30}
-              color={colors.white}
-            />
-          }
-          onPress={() =>
-            navigation.state.params &&
-            navigation.state.params.handleRightButtonPress()
-          }
-        />
+        <View>
+          <Text style={{
+            position: 'absolute',
+            left: 8,
+            top: 3,
+            fontWeight: '700',
+            color: colors.maroon,
+            fontSize: 15
+          }}>{navigation.state.params && navigation.state.params.cartItemsCount}</Text>
+          <NavButton
+            icon={
+              <MaterialCommunityIcons
+                name="cart-outline"
+                size={30}
+                color={colors.white}
+              />
+            }
+            onPress={() =>
+              navigation.state.params &&
+              navigation.state.params.handleRightButtonPress()
+            }
+          />
+        </View>
       ),
     };
   };
@@ -62,6 +72,7 @@ class CreateOrder extends PureComponent {
     this.props.navigation.setParams({
       handleRightButtonPress: this.loadCartScene,
     });
+    this.setCartItemsCount();
   }
 
   loadCartScene = () => {
@@ -69,13 +80,19 @@ class CreateOrder extends PureComponent {
   };
 
   componentDidUpdate() {
-    const categories = this.props.categories;
+    const {categories} = this.props;
     if (categories.length) {
       if (!this.props.cart.activeCategoryID) {
         this.props.actions.setCartItem('activeCategoryID', categories[0].id);
       }
     }
   }
+
+  setCartItemsCount = () => {
+    return this.props.navigation.setParams({
+      cartItemsCount: Object.keys(this.props.cart.items).length || 0
+    })
+  };
 
   onCategoriesListItemPress = (item: object) => {
     if (this.props.cart.activeCategoryID !== item.id) {
@@ -151,10 +168,13 @@ class CreateOrder extends PureComponent {
     // return new Promise((resolve, reject) => {
     this.props.actions.addToCart(item);
 
+
     // dispatch order success
     this.setState({
-      showCartSuccessModal: true,
-    });
+        showCartSuccessModal: true,
+      },
+      () => this.setCartItemsCount()
+    );
   };
 
   onAddNewItemPress = () => {
@@ -193,9 +213,9 @@ class CreateOrder extends PureComponent {
       : categories.length
         ? categories[0]
         : {
-            id: undefined,
-            packages: [],
-          };
+          id: undefined,
+          packages: [],
+        };
 
     return (
       <ScrollView
@@ -209,13 +229,13 @@ class CreateOrder extends PureComponent {
         />
 
         {activeCategory.packages &&
-          activeCategory.packages.length && (
-            <PackagesList
-              items={activeCategory.packages}
-              onItemPress={this.onPackagesListItemPress}
-              activeItemID={activePackageID}
-            />
-          )}
+        activeCategory.packages.length && (
+          <PackagesList
+            items={activeCategory.packages}
+            onItemPress={this.onPackagesListItemPress}
+            activeItemID={activePackageID}
+          />
+        )}
 
         {activePackageID && (
           <ServicesList

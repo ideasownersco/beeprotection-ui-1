@@ -41,6 +41,7 @@ export default class DriverTimePicker extends Component {
             isFetching={false}
             items={timings}
             activeItemID={start_time_id}
+            hideDisabledItem={false}
           />
         </View>
 
@@ -53,6 +54,7 @@ export default class DriverTimePicker extends Component {
             isFetching={false}
             items={timings}
             activeItemID={end_time_id}
+            hideDisabledItem={false}
           />
         </View>
       </View>

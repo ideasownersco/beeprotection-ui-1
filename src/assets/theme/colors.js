@@ -12,4 +12,5 @@ export default {
   fadedBlack: '#352d34',
   black: '#000000',
   white: '#ffffff',
+  maroon:'maroon'
 };
