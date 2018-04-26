@@ -75,23 +75,23 @@ class TrackOrderScene extends Component {
       },
     );
 
-    // BackgroundGeolocation.getCurrentPosition(
-    //   location => {
-    //     let {latitude, longitude} = location.coords;
-    //     this.setState({
-    //         latitude: latitude,
-    //         longitude: longitude,
-    //     });
-    //   },
-    //   error => {
-    //     console.warn('- getCurrentPosition error: ', error);
-    //   },
-    //   {
-    //     persist: true,
-    //     samples: 1,
-    //     maximumAge: 5000,
-    //   },
-    // );
+    BackgroundGeolocation.getCurrentPosition(
+      location => {
+        let {latitude, longitude} = location.coords;
+        this.setState({
+            latitude: latitude,
+            longitude: longitude,
+        });
+      },
+      error => {
+        console.warn('- getCurrentPosition error: ', error);
+      },
+      {
+        persist: true,
+        samples: 1,
+        maximumAge: 5000,
+      },
+    );
   }
 
   componentWillUnmount() {
@@ -186,7 +186,8 @@ class TrackOrderScene extends Component {
   };
 
   openInGoogleMaps = () => {
-    let {latitude, longitude} = this.props.destination;
+    let {address} = this.props.order;
+    let {latitude, longitude} = address;
     const nativeGoogleUrl = `comgooglemaps://?daddr=${latitude},${longitude}&center=${latitude},${longitude}&zoom=14&views=traffic&directionsmode=driving`;
     Linking.canOpenURL(nativeGoogleUrl).then(supported => {
       const url = supported

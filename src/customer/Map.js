@@ -31,6 +31,8 @@ class Home extends Component {
   }
 
   saveAddress = address => {
+    console.log('address',address);
+
     this.setState({
       ...address,
     });
@@ -48,8 +50,8 @@ class Home extends Component {
     return (
       <CreateAddressForm
         visible={true}
-        onPress={this.saveAddress}
-        onClose={this.hideCreateAddressForm}
+        onSave={this.saveAddress}
+        onCancel={this.hideCreateAddressForm}
         areas={[
           {
             id: 7,

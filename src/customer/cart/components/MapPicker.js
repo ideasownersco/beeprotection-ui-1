@@ -20,67 +20,23 @@ export default class MapPicker extends Component {
     address: PropTypes.object.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      useCurrentLocation: false,
-      latitude: null,
-      longitude: null,
-    };
-  }
-
-  shouldComponentUpdate(nextProps, prevState) {
+  shouldComponentUpdate(nextProps) {
     return (
-      nextProps.address.area_id !== this.props.address.area_id ||
-      this.state.latitude != prevState.latitude
+      nextProps.address.area_id !== this.props.address.area_id
     );
   }
 
-  componentDidUpdate(nextProps, prevState) {
+  componentDidUpdate(nextProps) {
     if (nextProps.address.area_id !== this.props.address.area_id) {
-      this.map.animateToRegion(this.state);
+      this.map.animateToRegion(this.props.address);
     }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.address.latitude === prevState.latitude) {
-      return null;
-    }
-    return {
-      latitude: nextProps.address.latitude,
-      longitude: nextProps.address.longitude,
-    };
   }
 
   updateAddress = (address: object) => {
-    if (this.state.initialized) {
       this.props.updateAddress(address);
-    }
   };
-
-  onDragEnd = e => {
-    let {latitude, longitude} = e.nativeEvent.coordinate;
-    let params = {
-      latitude: latitude,
-      longitude: longitude,
-    };
-    this.updateAddress(params);
-  };
-
-  // onRegionChange = region => {
-  //   this.setState({
-  //     latitude: region.latitude,
-  //     longitude: region.longitude,
-  //   });
-  // };
 
   onRegionChangeComplete = region => {
-    if (
-      !this.props.address.area_id ||
-      this.props.address.latitude === region.latitude
-    ) {
-      return null;
-    }
     let {latitude, longitude} = region;
     let params = {
       latitude: latitude,
@@ -90,18 +46,13 @@ export default class MapPicker extends Component {
   };
 
   render() {
-    const {latitude, longitude} = this.state;
-    const {address} = this.props;
-    // !address.area_id && {opacity: 0.3}
-
-    console.log('latitude in map', latitude);
-    console.log('longitude in map', longitude);
+    const {latitude, longitude} = this.props.address;
     return (
       <MapView
         ref={ref => {
           this.map = ref;
         }}
-        style={[styles.map]}
+        style={[styles.container]}
         region={{
           latitude: latitude,
           longitude: longitude,
@@ -113,49 +64,18 @@ export default class MapPicker extends Component {
         pitchEnabled={false}
         rotateEnabled={false}
       >
-
         <Image
           source={require('./../../../assets/images/pin.png')}
           style={styles.image}
           resizeMode="contain"
         />
-
       </MapView>
     );
   }
 }
 
-const autoCompleteStyle = {
-  textInputContainer: {
-    margin: 0,
-    backgroundColor: 'white',
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
-    zIndex: 70000,
-  },
-  textInput: {
-    color: colors.darkGrey,
-    fontSize: 16,
-    fontWeight: '400',
-    textAlign: isRTL ? 'right' : 'left',
-  },
-  predefinedPlacesDescription: {
-    color: '#1faadb',
-  },
-  description: {
-    textAlign: 'left',
-  },
-  row: {
-    backgroundColor: 'white',
-  },
-};
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  map: {
     flex: 1,
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',

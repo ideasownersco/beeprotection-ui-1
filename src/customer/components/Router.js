@@ -10,7 +10,6 @@ import Settings from 'guest/Settings';
 import CreateOrder from 'customer/orders/CreateOrder';
 import DrawerIcon from 'components/DrawerIcon';
 import BackButton from 'components/BackButton';
-import BidList from 'customer/orders/BidList';
 import OrderDetailScene from 'customer/orders/OrderDetailScene';
 import TrackOrderScene from 'customer/orders/TrackOrderScene';
 import Cart from 'customer/cart/Cart';

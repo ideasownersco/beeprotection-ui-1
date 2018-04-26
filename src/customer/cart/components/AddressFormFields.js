@@ -5,6 +5,7 @@ import FormTextInput from 'components/FormTextInput';
 import I18n from 'utils/locale';
 
 export default class AddressFormFields extends PureComponent {
+
   static propTypes = {
     block: PropTypes.string,
     street: PropTypes.string,
@@ -14,6 +15,7 @@ export default class AddressFormFields extends PureComponent {
   };
 
   render() {
+    console.log('rendering address');
     const {block, street, avenue, building, updateFields} = this.props;
 
     return (
@@ -77,7 +79,6 @@ export default class AddressFormFields extends PureComponent {
 
 const styles = StyleSheet.create({
   label: {
-    marginVertical: 5,
     textAlign: 'center',
   },
   addressContainer: {
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
   },
   addressField: {
     flex: 1,
-    padding: 5,
+    paddingHorizontal: 5,
     backgroundColor: 'white',
     marginHorizontal: 1,
   },

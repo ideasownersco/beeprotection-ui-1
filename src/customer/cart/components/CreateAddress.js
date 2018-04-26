@@ -1,19 +1,19 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View, Alert} from 'react-native';
+import {StyleSheet, View, Alert} from 'react-native';
 import I18n from 'utils/locale';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
 import AddressFormFields from 'customer/cart/components/AddressFormFields';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import {Button} from 'react-native-paper';
-import Touchable from 'react-native-platform-touchable';
-import List from 'components/List';
-import Divider from "../../../components/Divider";
+import Divider from "components/Divider";
+import SelectArea from "./SelectArea";
+import MapButtons from "./MapButtons";
 
-export default class extends Component {
+export default class extends PureComponent {
+
   static propTypes = {
-    areas: PropTypes.array.isRequired,
     onCancel: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
   };
@@ -30,11 +30,7 @@ export default class extends Component {
       country: 'KW',
       latitude: 29.3759,
       longitude: 47.9774,
-      // latitude:null,
-      // longitude:null,
       area_id: null,
-      isAreaListModalVisible: false,
-      isMapHidden: false
     };
   }
 
@@ -52,9 +48,7 @@ export default class extends Component {
           initialized: true,
         });
       },
-      error => {
-        console.warn('- getCurrentPosition error: ', error);
-      },
+      error => {},
       {
         persist: true,
         samples: 1,
@@ -76,22 +70,11 @@ export default class extends Component {
         {
           text: I18n.t('yes'),
           onPress: () => {
-            this.hideMap();
-            this.setState({
-                isMapHidden: true
-              },
-              this.props.onSave(this.state)
-            );
+              this.props.onSave(this.state);
           },
         },
       ],
     );
-  };
-
-  hideMap = () => {
-    this.setState({
-      isMapHidden: true
-    });
   };
 
   updateFormFields = (key, value) => {
@@ -100,20 +83,8 @@ export default class extends Component {
     });
   };
 
-  // async reverseGeoCode(coordinate) {
-  //   let urlParams = `key=${GOOGLE_MAPS_KEY}`;
-  //   let request = await fetch(
-  //     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinate.latitude},${coordinate.longitude}&${urlParams}`,
-  //   );
-  //   let response = await request.json();
-  //   console.log('res', response);
-  // }
-
   updateAddressFields = (address: object) => {
-    this.setState({
-      ...this.state.address,
-      ...address,
-    });
+    this.setState(address);
   };
 
   setArea = area => {
@@ -124,18 +95,6 @@ export default class extends Component {
       area_id: area.id,
     };
     this.updateAddressFields(params);
-  };
-
-  onAreaButtonPress = () => {
-    this.setState({
-      isAreaListModalVisible: true,
-    });
-  };
-
-  hideAreaListModal = () => {
-    this.setState({
-      isAreaListModalVisible: false,
-    });
   };
 
   render() {
@@ -149,44 +108,14 @@ export default class extends Component {
       avenue,
       building,
       area_id,
-      isAreaListModalVisible,
-      isMapHidden
     } = this.state;
-
-    console.log('latitude', latitude);
-    console.log('longitude', longitude);
-
-    // console.log('state',{...this.state});
 
     return (
       <View style={styles.container}>
 
         <View style={styles.searchInputWrapper}>
-
-          <View style={styles.searchInputContainer}>
-            <Touchable
-              style={{
-                flex: 1,
-                padding: 10,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              onPress={this.onAreaButtonPress}>
-              <Text
-                style={{
-                  fontSize: 20,
-                  fontWeight: '500',
-                  color: 'black',
-                }}>
-                {area_id
-                  ? areas.find(area => area.id === area_id).name
-                  : I18n.t('select_area')}
-              </Text>
-            </Touchable>
-          </View>
-
+          <SelectArea setArea={this.setArea} items={areas} area_id={area_id}/>
           <Divider/>
-
           <AddressFormFields
             block={block}
             avenue={avenue}
@@ -196,45 +125,15 @@ export default class extends Component {
           />
         </View>
 
-        {
-          !isMapHidden &&
-          <MapPicker
-            updateAddress={this.updateAddressFields}
-            address={{
-              latitude: latitude,
-              longitude: longitude,
-              area_id: area_id,
-            }}
-          />
-        }
-
-        <View style={styles.buttonsContainer}>
-          <Button
-            onPress={this.hideScreen}
-            style={styles.button}
-            raised>
-            {I18n.t('cancel')}
-          </Button>
-
-          <Button
-            onPress={this.saveAddress}
-            style={styles.button}
-            raised
-            primary
-            dark>
-            {I18n.t('save')}
-          </Button>
-        </View>
-
-        <List
-          title={I18n.t('select_area')}
-          activeIDs={[area_id]}
-          isVisible={isAreaListModalVisible}
-          onConfirm={this.setArea}
-          onCancel={this.hideAreaListModal}
-          onSave={this.hideAreaListModal}
-          items={areas}
+        <MapPicker
+          updateAddress={this.updateAddressFields}
+          address={{
+            latitude: latitude,
+            longitude: longitude,
+            area_id: area_id,
+          }}
         />
+        <MapButtons save={this.saveAddress} close={this.hideScreen} />
       </View>
     );
   }
@@ -244,24 +143,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 0,
-    // marginVertical: 20,
-    // padding: 10,
     opacity: 1,
     backgroundColor: colors.fadedWhite,
-  },
-  buttonsContainer: {
-    position: 'absolute',
-    bottom: 20,
-    margin: 5,
-    flexDirection: 'row',
-    zIndex: 5000,
-  },
-  button: {
-    flex: 1,
-    borderRadius: 0,
-  },
-  mapContainer: {
-    flex: 1,
   },
   searchInputWrapper: {
     zIndex: 5000,
@@ -272,5 +155,4 @@ const styles = StyleSheet.create({
   searchInputContainer: {
     flexDirection: 'row',
   },
-  areaContainer: {},
 });

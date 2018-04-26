@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
-import Touchable from 'react-native-platform-touchable';
+import {StyleSheet, Text, View} from 'react-native';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
