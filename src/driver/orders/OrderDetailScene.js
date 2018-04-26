@@ -10,6 +10,9 @@ import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import PropTypes from 'prop-types';
 import OrderTotal from 'customer/orders/components/OrderTotal';
+import CustomerInfo from "driver/components/CustomerInfo";
+import SectionHeading from "company/components/SectionHeading";
+import I18n from 'utils/locale';
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -45,13 +48,22 @@ class OrderDetailScene extends Component {
   render() {
     let {order} = this.props;
 
+    console.log('order',order);
+
     return (
-      <ScrollView style={{flex: 1}} keyboardShouldPersistTap="always">
+      <ScrollView style={{flex: 1}} keyboardShouldPersistTap="always" contentContainerStyle={{paddingBottom:50}}>
         {order.packages && (
           <View>
             <OrderBasicInfo item={order} />
             <OrderItems order={order} />
             <OrderTotal total={order.total} />
+            {
+              order.user &&
+              <View>
+                <SectionHeading title={I18n.t('customer_info')}/>
+                <CustomerInfo user={order.user}/>
+              </View>
+            }
           </View>
         )}
       </ScrollView>

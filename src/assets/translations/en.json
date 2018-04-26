@@ -122,6 +122,7 @@
   "job_status" : "Job Status",
   "pending" : "Pending",
   "driver_info" : "Driver Info",
+  "customer_info" : "Customer Info",
   "call" : "Call",
   "thank_you" : "Thank you for choosing BeeProtection. Your order has been confirmed",
 

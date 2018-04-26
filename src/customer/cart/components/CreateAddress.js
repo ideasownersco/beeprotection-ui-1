@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Alert} from 'react-native';
 import I18n from 'utils/locale';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
@@ -34,6 +34,7 @@ export default class extends Component {
       // longitude:null,
       area_id: null,
       isAreaListModalVisible: false,
+      isMapHidden: false
     };
   }
 
@@ -67,12 +68,29 @@ export default class extends Component {
   };
 
   saveAddress = () => {
-    this.props.onSave(this.state);
+    return Alert.alert(
+      `${I18n.t('confirm_location')}`,
+      `${I18n.t('confirm_location_confirmation')}`,
+      [
+        {text: I18n.t('cancel')},
+        {
+          text: I18n.t('yes'),
+          onPress: () => {
+            this.hideMap();
+            this.setState({
+                isMapHidden: true
+              },
+              this.props.onSave(this.state)
+            );
+          },
+        },
+      ],
+    );
   };
 
   hideMap = () => {
     this.setState({
-      hideMap: true,
+      isMapHidden: true
     });
   };
 
@@ -132,6 +150,7 @@ export default class extends Component {
       building,
       area_id,
       isAreaListModalVisible,
+      isMapHidden
     } = this.state;
 
     console.log('latitude', latitude);
@@ -177,14 +196,17 @@ export default class extends Component {
           />
         </View>
 
-        <MapPicker
-          updateAddress={this.updateAddressFields}
-          address={{
-            latitude: latitude,
-            longitude: longitude,
-            area_id: area_id,
-          }}
-        />
+        {
+          !isMapHidden &&
+          <MapPicker
+            updateAddress={this.updateAddressFields}
+            address={{
+              latitude: latitude,
+              longitude: longitude,
+              area_id: area_id,
+            }}
+          />
+        }
 
         <View style={styles.buttonsContainer}>
           <Button

@@ -11,7 +11,7 @@ import {isRTL} from 'utils/locale';
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 
-const LATITUDE_DELTA = 0.07;
+const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class MapPicker extends Component {
@@ -112,7 +112,6 @@ export default class MapPicker extends Component {
         showsUserLocation={true}
         pitchEnabled={false}
         rotateEnabled={false}
-        showsMyLocationButton={true}
       >
 
         <Image

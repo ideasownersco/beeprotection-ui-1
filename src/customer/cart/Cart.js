@@ -202,33 +202,16 @@ class Cart extends PureComponent {
   };
 
   saveAddress = address => {
-    const {isAuthenticated} = this.props;
-    if (!isAuthenticated) {
-      this.redirectToLogin();
-    } else {
-      return Alert.alert(
-        `${I18n.t('confirm_location')}`,
-        `${I18n.t('confirm_location_confirmation')}`,
-        [
-          {text: I18n.t('cancel')},
-          {
-            text: I18n.t('yes'),
-            onPress: () => {
-              this.props.actions.saveAddress(address);
-              this.hideAddressCreateModal();
-            },
-          },
-        ],
-      );
-    }
+    this.props.actions.saveAddress(address);
+    this.hideAddressCreateModal();
   };
 
   onSuccessButtonPress = () => {
     this.hideSuccessModal();
     this.fetchTimings();
-    // this.props.actions.flushCart();
-    // this.props.actions.fetchWorkingOrder();
-    // this.props.navigation.popToTop();
+    this.props.actions.flushCart();
+    this.props.actions.fetchWorkingOrder();
+    this.props.navigation.popToTop();
   };
 
   fetchTimings = (date = null) => {

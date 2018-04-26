@@ -38,8 +38,8 @@ class OrderDetailScene extends Component {
   }
 
   trackOrder = () => {
-    this.props.navigation.navigate('TrackDetail', {
-      order: this.props.order,
+    this.props.navigation.navigate('TrackOrder', {
+      orderID: this.props.orderID,
     });
   };
 
@@ -51,23 +51,23 @@ class OrderDetailScene extends Component {
           <ScrollView
             style={{flex: 1}}
             contentContainerStyle={{paddingBottom: 30}}>
-            <OrderBasicInfo item={order} />
-            <OrderItems order={order} />
-            <OrderTotal total={order.total} />
+            <OrderBasicInfo item={order}/>
+            <OrderItems order={order}/>
+            <OrderTotal total={order.total}/>
 
             {order.job &&
-              order.job.driver &&
-              order.job.driver &&
-              order.job.driver.user && (
-                <View>
-                  <SectionHeading title={I18n.t('driver_info')} />
-                  <DriverInfo driver={order.job.driver} />
-                  <OrderTrackButton
-                    onPress={this.trackOrder}
-                    disabled={!order.trackeable}
-                  />
-                </View>
-              )}
+            order.job.driver &&
+            order.job.driver.user &&
+            (
+              <View>
+                <SectionHeading title={I18n.t('driver_info')}/>
+                <DriverInfo driver={order.job.driver}/>
+                <OrderTrackButton
+                  onPress={this.trackOrder}
+                  // disabled={!order.trackeable}
+                />
+              </View>
+            )}
           </ScrollView>
         )}
       </View>
