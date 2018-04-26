@@ -18,6 +18,7 @@ if (__DEV__) {
     PUSH_TOKEN_KEY: 'PUSH_TOKEN_KEY',
     COUNTRY_KEY: 'COUNTRY_KEY',
     CODE_PUSH_ENABLED: false,
+    GEOLOCATION_SOUNDS_ENABLED:true
   };
 } else {
   module.exports = {
@@ -35,5 +36,6 @@ if (__DEV__) {
     PUSH_TOKEN_KEY: 'PUSH_TOKEN_KEY',
     COUNTRY_KEY: 'COUNTRY_KEY',
     CODE_PUSH_ENABLED: false,
+    GEOLOCATION_SOUNDS_ENABLED:true
   };
 }

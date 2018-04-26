@@ -13,7 +13,7 @@ import Map from 'components/Map';
 import UploadImage from 'driver/components/UploadImage';
 import ListModal from 'components/ListModal';
 import MapButtons from 'driver/orders/components/MapButtons';
-import {API_URL} from 'utils/env';
+import {API_URL,GEOLOCATION_SOUNDS_ENABLED} from 'utils/env';
 
 class TrackOrderScene extends Component {
   static propTypes = {
@@ -61,8 +61,8 @@ class TrackOrderScene extends Component {
         foregroundService: true,
         url: `http://${API_URL}/jobs/${job.id}/update/location`,
         autoSync: true,
-        debug: true,
-        logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE,
+        debug: GEOLOCATION_SOUNDS_ENABLED,
+        logLevel: GEOLOCATION_SOUNDS_ENABLED ? BackgroundGeolocation.LOG_LEVEL_VERBOSE : BackgroundGeolocation.LOG_LEVEL_OFF,
         maxRecordsToPersist: 1,
         params: {
           driver_id: profile.id,

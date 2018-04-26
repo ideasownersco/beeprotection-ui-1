@@ -8,5 +8,10 @@
         "theme": "./src/assets/theme"
       }
     }]
-  ]
+  ],
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  }
 }
