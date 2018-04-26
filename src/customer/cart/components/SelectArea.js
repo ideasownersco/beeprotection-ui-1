@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import {StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import I18n from 'utils/locale';
-import List from "../../../components/List";
+import List from '../../../components/List';
 
 export default class SelectArea extends Component {
-
   static propTypes = {
     area_id: PropTypes.number,
     setArea: PropTypes.func.isRequired,
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
   };
 
   state = {
@@ -18,9 +17,11 @@ export default class SelectArea extends Component {
   };
 
   shouldComponentUpdate(nextProps, prevState) {
-    return nextProps.items !== this.props.items ||
+    return (
+      nextProps.items !== this.props.items ||
       nextProps.area_id !== this.props.area_id ||
       prevState.isAreaListModalVisible !== this.state.isAreaListModalVisible
+    );
   }
 
   setArea = area => {
@@ -40,14 +41,11 @@ export default class SelectArea extends Component {
   };
 
   render() {
-
     let {area_id, items} = this.props;
     let {isAreaListModalVisible} = this.state;
 
     return (
-      <Touchable
-        style={{}}
-        onPress={this.showAreaModal}>
+      <Touchable style={{}} onPress={this.showAreaModal}>
         <View style={styles.container}>
           <Text
             style={{
@@ -69,7 +67,6 @@ export default class SelectArea extends Component {
             onSave={this.hideAreaListModal}
             items={items}
           />
-
         </View>
       </Touchable>
     );

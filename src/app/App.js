@@ -13,6 +13,7 @@ import {CODE_PUSH_ENABLED} from 'utils/env';
 import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import NavigatorService from 'components/NavigatorService';
 import colors from 'assets/theme/colors';
+import SplashScreen from './SplashScreen';
 
 class App extends Component {
   static propTypes = {
@@ -32,7 +33,6 @@ class App extends Component {
 
   onLanguageSelect = name => {
     this.props.dispatch(ACTIONS.setLanguage(name));
-    this.props.dispatch(ACTIONS.setInstalled(true));
   };
 
   dismissNotification = () => {
@@ -91,14 +91,27 @@ class App extends Component {
     // });
   };
 
+  loadApp = () => {
+    this.props.dispatch(ACTIONS.setInstalled(true));
+  };
+
   render() {
+
     const {app, notifications, isAuthenticated, user, userType} = this.props;
+
+    console.log('app', app);
 
     if (!app.booted) return null;
 
     if (!app.installed) {
-      return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
+
+      if (app.has_set_language) {
+        return <SplashScreen onEndReached={this.loadApp} onLanguageSelect={this.onLanguageSelect}/>;
+      }
+      return <LanguageSelectScene onItemPress={this.onLanguageSelect}/>;
     }
+
+    // return <SplashScreen onEndReached={this.loadApp} onLanguageSelect={this.onLanguageSelect}/>;
 
     return (
       <View style={{flex: 1, backgroundColor: colors.primary}}>

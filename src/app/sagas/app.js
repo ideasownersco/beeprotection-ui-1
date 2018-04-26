@@ -33,14 +33,17 @@ function* boot() {
 
   // 2- Set language from history
   let currentLanguage = yield call(getStorageItem, LANGUAGE_KEY);
-  if (isNull(currentLanguage)) {
-    currentLanguage = DEFAULT_LANGUAGE;
+  // if (isNull(currentLanguage)) {
+  //   currentLanguage = DEFAULT_LANGUAGE;
+  // }
+
+  if(currentLanguage) {
+    I18n.locale = currentLanguage;
+    yield put({
+      type: ACTION_TYPES.SET_LANGUAGE_SUCCESS,
+      language: currentLanguage,
+    });
   }
-  I18n.locale = currentLanguage;
-  yield put({
-    type: ACTION_TYPES.SET_LANGUAGE_SUCCESS,
-    language: currentLanguage,
-  });
 
   //3- Login from history and sync push token to user if exists
   const authStorageKey = yield call(getStorageItem, AUTH_KEY);

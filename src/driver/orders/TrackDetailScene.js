@@ -79,8 +79,8 @@ class TrackOrderScene extends Component {
       location => {
         let {latitude, longitude} = location.coords;
         this.setState({
-            latitude: latitude,
-            longitude: longitude,
+          latitude: latitude,
+          longitude: longitude,
         });
       },
       error => {

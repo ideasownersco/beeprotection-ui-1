@@ -17,7 +17,7 @@ export default class CustomerInfo extends Component {
   }
 
   makeCall = () => {
-    let {user} =  this.props;
+    let {user} = this.props;
     let url = `tel:${user.mobile}`;
     return Linking.canOpenURL(url).then(supported => {
       if (supported) {

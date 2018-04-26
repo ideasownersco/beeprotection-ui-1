@@ -9,7 +9,7 @@ import IconFactory from 'components/IconFactory';
 
 export default class TimePicker extends Component {
   static propTypes = {
-    hideDisabledItem:PropTypes.bool,
+    hideDisabledItem: PropTypes.bool,
     onItemPress: PropTypes.func.isRequired,
     activeItemID: PropTypes.number,
     isFetching: PropTypes.bool.isRequired,
@@ -23,7 +23,7 @@ export default class TimePicker extends Component {
   };
 
   static defaultProps = {
-    hideDisabledItem:true
+    hideDisabledItem: true,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -35,7 +35,7 @@ export default class TimePicker extends Component {
   }
 
   renderTime = item => {
-    const {activeItemID,hideDisabledItem} = this.props;
+    const {activeItemID, hideDisabledItem} = this.props;
     return (
       <View
         style={[
@@ -70,7 +70,7 @@ export default class TimePicker extends Component {
   };
 
   renderItem = ({item}) => {
-    const {onItemPress,hideDisabledItem} = this.props;
+    const {onItemPress, hideDisabledItem} = this.props;
 
     if (item.disabled && hideDisabledItem) {
       return this.renderTime(item);

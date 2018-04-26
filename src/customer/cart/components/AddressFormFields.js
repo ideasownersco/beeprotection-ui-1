@@ -5,7 +5,6 @@ import FormTextInput from 'components/FormTextInput';
 import I18n from 'utils/locale';
 
 export default class AddressFormFields extends PureComponent {
-
   static propTypes = {
     block: PropTypes.string,
     street: PropTypes.string,

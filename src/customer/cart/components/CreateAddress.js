@@ -7,12 +7,11 @@ import colors from 'assets/theme/colors';
 import AddressFormFields from 'customer/cart/components/AddressFormFields';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import {Button} from 'react-native-paper';
-import Divider from "components/Divider";
-import SelectArea from "./SelectArea";
-import MapButtons from "./MapButtons";
+import Divider from 'components/Divider';
+import SelectArea from './SelectArea';
+import MapButtons from './MapButtons';
 
 export default class extends PureComponent {
-
   static propTypes = {
     onCancel: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
@@ -70,7 +69,7 @@ export default class extends PureComponent {
         {
           text: I18n.t('yes'),
           onPress: () => {
-              this.props.onSave(this.state);
+            this.props.onSave(this.state);
           },
         },
       ],
@@ -112,10 +111,9 @@ export default class extends PureComponent {
 
     return (
       <View style={styles.container}>
-
         <View style={styles.searchInputWrapper}>
-          <SelectArea setArea={this.setArea} items={areas} area_id={area_id}/>
-          <Divider/>
+          <SelectArea setArea={this.setArea} items={areas} area_id={area_id} />
+          <Divider />
           <AddressFormFields
             block={block}
             avenue={avenue}

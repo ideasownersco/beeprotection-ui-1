@@ -41,14 +41,17 @@ class CreateOrder extends PureComponent {
     return {
       headerRight: (
         <View>
-          <Text style={{
-            position: 'absolute',
-            left: 8,
-            top: 3,
-            fontWeight: '700',
-            color: colors.maroon,
-            fontSize: 15
-          }}>{navigation.state.params && navigation.state.params.cartItemsCount}</Text>
+          <Text
+            style={{
+              position: 'absolute',
+              left: 8,
+              top: 3,
+              fontWeight: '700',
+              color: colors.maroon,
+              fontSize: 15,
+            }}>
+            {navigation.state.params && navigation.state.params.cartItemsCount}
+          </Text>
           <NavButton
             icon={
               <MaterialCommunityIcons
@@ -90,8 +93,8 @@ class CreateOrder extends PureComponent {
 
   setCartItemsCount = () => {
     return this.props.navigation.setParams({
-      cartItemsCount: Object.keys(this.props.cart.items).length || 0
-    })
+      cartItemsCount: Object.keys(this.props.cart.items).length || 0,
+    });
   };
 
   onCategoriesListItemPress = (item: object) => {
@@ -168,12 +171,12 @@ class CreateOrder extends PureComponent {
     // return new Promise((resolve, reject) => {
     this.props.actions.addToCart(item);
 
-
     // dispatch order success
-    this.setState({
+    this.setState(
+      {
         showCartSuccessModal: true,
       },
-      () => this.setCartItemsCount()
+      () => this.setCartItemsCount(),
     );
   };
 
@@ -213,9 +216,9 @@ class CreateOrder extends PureComponent {
       : categories.length
         ? categories[0]
         : {
-          id: undefined,
-          packages: [],
-        };
+            id: undefined,
+            packages: [],
+          };
 
     return (
       <ScrollView
@@ -229,13 +232,13 @@ class CreateOrder extends PureComponent {
         />
 
         {activeCategory.packages &&
-        activeCategory.packages.length && (
-          <PackagesList
-            items={activeCategory.packages}
-            onItemPress={this.onPackagesListItemPress}
-            activeItemID={activePackageID}
-          />
-        )}
+          activeCategory.packages.length && (
+            <PackagesList
+              items={activeCategory.packages}
+              onItemPress={this.onPackagesListItemPress}
+              activeItemID={activePackageID}
+            />
+          )}
 
         {activePackageID && (
           <ServicesList

@@ -21,9 +21,7 @@ export default class MapPicker extends Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    return (
-      nextProps.address.area_id !== this.props.address.area_id
-    );
+    return nextProps.address.area_id !== this.props.address.area_id;
   }
 
   componentDidUpdate(nextProps) {
@@ -33,7 +31,7 @@ export default class MapPicker extends Component {
   }
 
   updateAddress = (address: object) => {
-      this.props.updateAddress(address);
+    this.props.updateAddress(address);
   };
 
   onRegionChangeComplete = region => {
@@ -62,8 +60,7 @@ export default class MapPicker extends Component {
         onRegionChangeComplete={this.onRegionChangeComplete}
         showsUserLocation={true}
         pitchEnabled={false}
-        rotateEnabled={false}
-      >
+        rotateEnabled={false}>
         <Image
           source={require('./../../../assets/images/pin.png')}
           style={styles.image}
@@ -81,7 +78,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: 50, height: 50,
-    alignSelf: 'center'
-  }
+    width: 50,
+    height: 50,
+    alignSelf: 'center',
+  },
 });

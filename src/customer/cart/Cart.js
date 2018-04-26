@@ -275,7 +275,7 @@ class Cart extends PureComponent {
     } = this.state;
 
     if (!cartItems.length) {
-      return <EmptyCart />;
+      return <EmptyCart/>;
     }
 
     return (
@@ -292,9 +292,9 @@ class Cart extends PureComponent {
           iconType="MaterialIcons"
         />
 
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
 
-        <CartTotal total={cartTotal} />
+        <CartTotal total={cartTotal}/>
 
         <SectionTitle
           title={I18n.t('date')}
@@ -360,29 +360,20 @@ class Cart extends PureComponent {
           />
         </Modal>
 
-        <Button
-          onPress={this.showAddressCreateModal}
-          color={colors.primary}
-          // style={{alignItems: 'flex-start'}}
-        >
-          <View
-            style={{
-              flex:1,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}>
-            <IconFactory
-              type="MaterialIcons"
-              name="add"
-              size={22}
-              color={colors.primary}
-            />
-            <Text
-              style={{color: colors.darkGrey, fontSize: 18, fontWeight: '700'}}>
+        <Divider/>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+          }}>
+          <Button
+            onPress={this.showAddressCreateModal}
+            color={colors.primary}
+            icon={'add'}
+          >
               {I18n.t('add_address')}
-            </Text>
-          </View>
-        </Button>
+          </Button>
+        </View>
 
         <Divider
           style={{flex: 1, padding: 10, backgroundColor: colors.lightGrey}}
@@ -400,7 +391,7 @@ class Cart extends PureComponent {
           selectedItem={paymentMode}
         />
 
-        <Divider style={{marginVertical: 20}} />
+        <Divider style={{marginVertical: 20}}/>
 
         <Button
           onPress={this.checkout}
@@ -437,7 +428,10 @@ class Cart extends PureComponent {
           address={user && user.addresses && user.addresses[selectedAddressID]}
           total={cartTotal}
           date={selectedDate}
-          time={selectedTimeID && timings.length && timings[selectedTimeID] || null}
+          time={
+            (selectedTimeID && timings.length && timings[selectedTimeID]) ||
+            null
+          }
           visible={showCheckoutConfirmDialog}
           close={this.hideCheckoutConfirmDialog}
           checkout={this.performCheckout}
