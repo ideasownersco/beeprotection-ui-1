@@ -97,9 +97,7 @@ class App extends Component {
 
   render() {
 
-    const {app, notifications, isAuthenticated, user, userType} = this.props;
-
-    console.log('app', app);
+    const {app, notifications, isAuthenticated, user} = this.props;
 
     if (!app.booted) return null;
 
@@ -110,8 +108,6 @@ class App extends Component {
       }
       return <LanguageSelectScene onItemPress={this.onLanguageSelect}/>;
     }
-
-    // return <SplashScreen onEndReached={this.loadApp} onLanguageSelect={this.onLanguageSelect}/>;
 
     return (
       <View style={{flex: 1, backgroundColor: colors.primary}}>
@@ -129,7 +125,6 @@ class App extends Component {
 
         <Navigator
           isAuthenticated={isAuthenticated}
-          userType={userType}
           user={user}
           logout={this.logout}
         />
@@ -143,7 +138,7 @@ function mapStateToProps(state) {
     app: state.app,
     notifications: state.notifications,
     isAuthenticated: USER_SELECTOR.isAuthenticated(state),
-    userType: USER_SELECTOR.getAuthUserType(state),
+    // userType: USER_SELECTOR.getAuthUserType(state),
     user: USER_SELECTOR.getAuthUser(state),
   };
 }

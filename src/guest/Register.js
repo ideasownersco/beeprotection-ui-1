@@ -25,7 +25,6 @@ type State = {
 
 class Register extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   };
 
@@ -64,7 +63,6 @@ class Register extends Component {
   };
 
   render() {
-    const {auth} = this.props;
     const {
       name,
       email,
@@ -149,9 +147,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  return {
-    auth: state.user,
-  };
+  return state;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

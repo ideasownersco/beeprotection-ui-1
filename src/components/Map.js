@@ -70,7 +70,6 @@ export default class Map extends Component {
       return (
         <View style={styles.container}>
           <MapView
-            provider="google"
             ref={ref => {
               this.map = ref;
             }}
