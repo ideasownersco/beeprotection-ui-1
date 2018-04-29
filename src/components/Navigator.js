@@ -7,9 +7,9 @@ import {Router as CustomerRouter} from 'customer/components/Router';
 import {Router as GuestRouter} from 'guest/components/Router';
 
 export default class Navigator extends Component {
+
   shouldComponentUpdate(nextProps) {
     return (
-      this.props.isAuthenticated !== nextProps.isAuthenticated ||
       this.props.user.id !== nextProps.user.id
     );
   }
@@ -30,9 +30,7 @@ export default class Navigator extends Component {
   };
 
   render() {
-    let {isAuthenticated, user, logout} = this.props;
-
-    const screen = this.resolveScreenForUser(user.type);
+    let {user, logout} = this.props;
 
     const AppNavigator = StackNavigator(
       {
@@ -43,7 +41,7 @@ export default class Navigator extends Component {
       },
       {
         headerMode: 'none',
-        initialRouteName: isAuthenticated ? screen : 'Customer',
+        initialRouteName: user.id ? this.resolveScreenForUser(user.type) : 'Customer',
       },
     );
 
@@ -52,7 +50,7 @@ export default class Navigator extends Component {
         ref={navigatorRef => {
           NavigatorService.setContainer(navigatorRef);
         }}
-        screenProps={{isAuthenticated, user, logout}}
+        screenProps={{user, logout}}
       />
     );
   }

@@ -3,9 +3,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS} from 'guest/common/actions';
-import LoginScene from 'guest/scenes/LoginScene';
 import {NavigationActions} from 'react-navigation';
-import {Alert, Text, TouchableHighlight} from 'react-native';
+import {Text, TouchableHighlight} from 'react-native';
 import I18n from 'utils/locale';
 import FormContainer from 'components/FormContainer';
 import FormContent from 'components/FormContent';
@@ -98,24 +97,13 @@ class Login extends Component {
     this.props.navigation.dispatch(navigationAction);
   };
 
-  onSkip = () => {
-    this.props.navigation.goBack(null);
-  };
-
   render() {
     const {auth} = this.props;
     const {
       email,
       password,
-      onFieldChange,
-      handleLogin,
-      handleRegisterRoute,
-      handleForgotPasswordRoute,
-      onSkip,
       busy,
     } = this.state;
-
-    console.log('props', this.props);
 
     return (
       <FormContainer>
@@ -167,18 +155,6 @@ class Login extends Component {
       </FormContainer>
     );
 
-    // return (
-    //   <LoginScene
-    //     {...this.state}
-    //     handleLogin={this.handleLogin}
-    //     handleRegisterRoute={this.handleRegisterRoute}
-    //     handleForgotPasswordRoute={this.handleForgotPasswordRoute}
-    //     onSkip={this.onSkip}
-    //     onFieldChange={this.onFieldChange}
-    //     busy={auth.login.busy}
-    //     onRightButtonPress={this.goBack}
-    //   />
-    // );
   }
 }
 

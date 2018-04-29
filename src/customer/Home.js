@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import WelcomeText from 'customer/components/WelcomeText';
 import StandingOrdersList from 'customer/components/StandingOrdersList';
-import moment from 'moment';
 
 class Home extends Component {
   static defaultProps = {

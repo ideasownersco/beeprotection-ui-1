@@ -48,7 +48,6 @@ class App extends Component {
   };
 
   onReceivePushNotifications = (notification: object) => {
-    // console.log('notification', notification);
     let {foreground, data} = notification;
     let navigation = NavigatorService;
 
@@ -96,7 +95,8 @@ class App extends Component {
   };
 
   render() {
-    const {app, notifications, isAuthenticated, user} = this.props;
+
+    const {app, notifications, user} = this.props;
 
     if (!app.booted) return null;
 
@@ -127,7 +127,6 @@ class App extends Component {
         />
 
         <Navigator
-          isAuthenticated={isAuthenticated}
           user={user}
           logout={this.logout}
         />
@@ -140,9 +139,7 @@ function mapStateToProps(state) {
   return {
     app: state.app,
     notifications: state.notifications,
-    isAuthenticated: USER_SELECTOR.isAuthenticated(state),
-    // userType: USER_SELECTOR.getAuthUserType(state),
-    user: USER_SELECTOR.getAuthUser(state),
+    user: state.user,
   };
 }
 

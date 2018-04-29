@@ -20,7 +20,7 @@ export default class Drawer extends Component {
   };
 
   render() {
-    let {isAuthenticated, logout, user} = this.props.screenProps;
+    let {logout, user} = this.props.screenProps;
     let {activeRoute} = this.state;
 
     return (
@@ -68,7 +68,7 @@ export default class Drawer extends Component {
           active={this.state.activeRoute === 'LanguageSelect'}
         />
 
-        {isAuthenticated ? (
+        {user.id ? (
           <DrawerItem
             label={I18n.t('logout')}
             routeName="Logout"

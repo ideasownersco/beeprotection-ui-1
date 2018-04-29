@@ -2,15 +2,12 @@
  * @flow
  */
 import React, {PureComponent} from 'react';
-import {Alert, ScrollView, Text, View} from 'react-native';
+import {Alert, ScrollView, View} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
-import {
-  SELECTORS,
-  SELECTORS as ORDER_SELECTORS,
-} from 'customer/selectors/orders';
+import {SELECTORS, SELECTORS as ORDER_SELECTORS,} from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import {Button} from 'react-native-paper';
 import I18n from 'utils/locale';
@@ -30,7 +27,6 @@ import SectionTitle from 'components/SectionTitle';
 import CheckoutAlert from 'customer/cart/components/CheckoutAlert';
 import AddressesList from 'customer/cart/components/AddressesList';
 import CreateAddress from 'customer/cart/components/CreateAddress';
-import IconFactory from 'components/IconFactory';
 import Modal from 'react-native-modal';
 
 type State = {
