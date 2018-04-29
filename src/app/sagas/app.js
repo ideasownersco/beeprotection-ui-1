@@ -37,7 +37,7 @@ function* boot() {
   //   currentLanguage = DEFAULT_LANGUAGE;
   // }
 
-  if(currentLanguage) {
+  if (currentLanguage) {
     I18n.locale = currentLanguage;
     yield put({
       type: ACTION_TYPES.SET_LANGUAGE_SUCCESS,

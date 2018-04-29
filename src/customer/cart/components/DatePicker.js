@@ -18,34 +18,49 @@ export default class DatePicker extends Component {
     );
   }
 
-  renderItem = ({item}) => {
-    const {onItemPress, activeItem} = this.props;
+  renderDay = day => {
+    const {activeItem} = this.props;
+
     return (
-      <Touchable onPress={() => onItemPress(item)}>
-        <View
+      <View
+        style={[
+          styles.itemContainer,
+          activeItem.format('DD/MM') === day.format('DD/MM') &&
+            styles.itemContainerActive,
+        ]}>
+        <Text
           style={[
-            styles.itemContainer,
-            activeItem.format('DD/MM') === item.format('DD/MM') &&
-              styles.itemContainerActive,
+            styles.day,
+            activeItem.format('DD/MM') === day.format('DD/MM') &&
+              styles.dayActive,
           ]}>
-          <Text
-            style={[
-              styles.day,
-              activeItem.format('DD/MM') === item.format('DD/MM') &&
-                styles.dayActive,
-            ]}>
-            {item.format('ddd').toUpperCase()}
-          </Text>
-          <Text
-            style={[
-              styles.date,
-              activeItem.format('DD/MM') === item.format('DD/MM') &&
-                styles.dateActive,
-            ]}>
-            {item.date()}
-          </Text>
-        </View>
-      </Touchable>
+          {day.format('ddd').toUpperCase()}
+        </Text>
+        <Text
+          style={[
+            styles.date,
+            activeItem.format('DD/MM') === day.format('DD/MM') &&
+              styles.dateActive,
+          ]}>
+          {day.date()}
+        </Text>
+      </View>
+    );
+  };
+
+  renderItem = ({item}) => {
+    const {onItemPress} = this.props;
+
+    return (
+      <View style={[item.day() === 5 && styles.itemContainerDisabled]}>
+        {item.day() === 5 ? (
+          this.renderDay(item)
+        ) : (
+          <Touchable onPress={() => onItemPress(item)}>
+            {this.renderDay(item)}
+          </Touchable>
+        )}
+      </View>
     );
   };
 
@@ -97,5 +112,8 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     paddingHorizontal: 10,
+  },
+  itemContainerDisabled: {
+    opacity: 0.4,
   },
 });

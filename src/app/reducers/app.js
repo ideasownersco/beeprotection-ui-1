@@ -4,7 +4,7 @@ const initialState = {
   installed: false,
   booted: false,
   language: 'en',
-  has_set_language:false
+  has_set_language: false,
 };
 
 export function reducer(state = initialState, action = {}) {
@@ -19,7 +19,7 @@ export function reducer(state = initialState, action = {}) {
       return {
         ...state,
         language: action.language,
-        has_set_language:true
+        has_set_language: true,
       };
     default:
       return state;

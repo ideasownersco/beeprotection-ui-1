@@ -7,7 +7,6 @@ import {Router as CustomerRouter} from 'customer/components/Router';
 import {Router as GuestRouter} from 'guest/components/Router';
 
 export default class Navigator extends Component {
-
   shouldComponentUpdate(nextProps) {
     return (
       this.props.isAuthenticated !== nextProps.isAuthenticated ||
@@ -16,7 +15,7 @@ export default class Navigator extends Component {
   }
 
   static defaultProps = {
-    user:{}
+    user: {},
   };
 
   resolveScreenForUser = userType => {
@@ -31,7 +30,6 @@ export default class Navigator extends Component {
   };
 
   render() {
-
     let {isAuthenticated, user, logout} = this.props;
 
     const screen = this.resolveScreenForUser(user.type);

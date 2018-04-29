@@ -19,11 +19,11 @@ export default class Map extends Component {
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
     }),
-    cacheEnabled:PropTypes.string
+    cacheEnabled: PropTypes.string,
   };
 
   static defaultProps = {
-    cacheEnabled:false
+    cacheEnabled: false,
   };
 
   state = {
@@ -60,7 +60,7 @@ export default class Map extends Component {
   };
 
   render() {
-    const {destination, origin,cacheEnabled} = this.props;
+    const {destination, origin, cacheEnabled} = this.props;
     const {initialized} = this.state;
     const {heading} = origin;
     const rotate =
@@ -80,8 +80,7 @@ export default class Map extends Component {
               longitudeDelta: LONGITUDE_DELTA,
             }}
             onLayout={this.onMapLayout}
-            cacheEnabled={cacheEnabled}
-          >
+            cacheEnabled={cacheEnabled}>
             <MapView.Marker
               style={styles.mapMarker}
               anchor={{x: 0.5, y: 0.5, position: 'relative'}}

@@ -275,7 +275,7 @@ class Cart extends PureComponent {
     } = this.state;
 
     if (!cartItems.length) {
-      return <EmptyCart/>;
+      return <EmptyCart />;
     }
 
     return (
@@ -292,9 +292,9 @@ class Cart extends PureComponent {
           iconType="MaterialIcons"
         />
 
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
 
-        <CartTotal total={cartTotal}/>
+        <CartTotal total={cartTotal} />
 
         <SectionTitle
           title={I18n.t('date')}
@@ -360,7 +360,7 @@ class Cart extends PureComponent {
           />
         </Modal>
 
-        <Divider/>
+        <Divider />
         <View
           style={{
             flex: 1,
@@ -369,9 +369,8 @@ class Cart extends PureComponent {
           <Button
             onPress={this.showAddressCreateModal}
             color={colors.primary}
-            icon={'add'}
-          >
-              {I18n.t('add_address')}
+            icon={'add'}>
+            {I18n.t('add_address')}
           </Button>
         </View>
 
@@ -391,7 +390,7 @@ class Cart extends PureComponent {
           selectedItem={paymentMode}
         />
 
-        <Divider style={{marginVertical: 20}}/>
+        <Divider style={{marginVertical: 20}} />
 
         <Button
           onPress={this.checkout}

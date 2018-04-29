@@ -4,7 +4,7 @@ import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button, Title} from 'react-native-paper';
 import Swiper from 'react-native-swiper';
 import colors from '../assets/theme/colors';
-import LanguageSelectScene from "./scenes/LanguageSelectScene";
+import LanguageSelectScene from './scenes/LanguageSelectScene';
 import I18n from 'utils/locale';
 
 export default class SplashScreen extends Component {
@@ -14,7 +14,7 @@ export default class SplashScreen extends Component {
   };
 
   render() {
-    let {onEndReached,onLanguageSelect} = this.props;
+    let {onEndReached, onLanguageSelect} = this.props;
     return (
       <View style={styles.container}>
         <Swiper
@@ -22,13 +22,13 @@ export default class SplashScreen extends Component {
           autoPlay={false}
           showsButtons={false}
           removeClippedSubviews={false}
-          dot={<View style={styles.dot}/>}
-          activeDot={<View style={styles.activeDot}/>}
-          loop={false}
-        >
-
+          dot={<View style={styles.dot} />}
+          activeDot={<View style={styles.activeDot} />}
+          loop={false}>
           <View style={styles.slide}>
-            <Title style={styles.title}>{I18n.t('app_name').toUpperCase()}</Title>
+            <Title style={styles.title}>
+              {I18n.t('app_name').toUpperCase()}
+            </Title>
             <Image
               source={require('./../assets/images/splash/1.png')}
               style={styles.image}
@@ -41,7 +41,6 @@ export default class SplashScreen extends Component {
           </View>
 
           <View style={styles.slide}>
-
             <Title style={styles.title}>BEE WASH</Title>
 
             <Image
@@ -50,14 +49,10 @@ export default class SplashScreen extends Component {
               resizeMode="contain"
             />
 
-            <Text style={styles.description}>
-              Wash anywhere
-            </Text>
-
+            <Text style={styles.description}>Wash anywhere</Text>
           </View>
 
           <View style={styles.slide}>
-
             <Title style={styles.title}>BEE WASH</Title>
 
             <Image
@@ -66,14 +61,10 @@ export default class SplashScreen extends Component {
               resizeMode="contain"
             />
 
-            <Text style={styles.description}>
-              Your Date, Your Time
-            </Text>
+            <Text style={styles.description}>Your Date, Your Time</Text>
           </View>
 
-
           <View style={styles.slide}>
-
             <Title style={styles.title}>Live Track the Driver</Title>
 
             <Image
@@ -82,11 +73,14 @@ export default class SplashScreen extends Component {
               resizeMode="contain"
             />
 
-            <Button raised  dark onPress={onEndReached} style={styles.buttonContainer}>
+            <Button
+              raised
+              dark
+              onPress={onEndReached}
+              style={styles.buttonContainer}>
               <Text style={styles.buttonText}>Start Using the App</Text>
             </Button>
           </View>
-
         </Swiper>
       </View>
     );
@@ -95,7 +89,7 @@ export default class SplashScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
   },
   slide: {
     flex: 1,
@@ -104,12 +98,12 @@ const styles = StyleSheet.create({
     // backgroundColor:'blue',
   },
   buttonContainer: {
-    marginTop:20,
+    marginTop: 20,
     alignItems: 'center',
   },
   button: {},
   buttonText: {
-    color:colors.primary,
+    color: colors.primary,
   },
   title: {
     color: colors.darkGrey,
@@ -143,8 +137,8 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   image: {
-    marginVertical:30,
+    marginVertical: 30,
     width: 400,
-    height: 400
-  }
+    height: 400,
+  },
 });

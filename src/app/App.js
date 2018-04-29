@@ -96,17 +96,20 @@ class App extends Component {
   };
 
   render() {
-
     const {app, notifications, isAuthenticated, user} = this.props;
 
     if (!app.booted) return null;
 
     if (!app.installed) {
-
       if (app.has_set_language) {
-        return <SplashScreen onEndReached={this.loadApp} onLanguageSelect={this.onLanguageSelect}/>;
+        return (
+          <SplashScreen
+            onEndReached={this.loadApp}
+            onLanguageSelect={this.onLanguageSelect}
+          />
+        );
       }
-      return <LanguageSelectScene onItemPress={this.onLanguageSelect}/>;
+      return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
     }
 
     return (

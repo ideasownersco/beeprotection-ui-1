@@ -22,7 +22,7 @@ function connect() {
 function subscribe(socket) {
   return eventChannel(emit => {
     socket.on('location.updated', data => {
-      console.log('location.updated',data);
+      console.log('location.updated', data);
       emit({
         type: DRIVER_ACTIONS.DRIVER_LOCATION_UPDATED,
         payload: data.payload,
