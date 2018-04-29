@@ -8,6 +8,7 @@ import {DrawerSection} from 'react-native-paper';
 import DrawerHeader from 'components/DrawerHeader';
 
 export default class Drawer extends Component {
+
   state = {
     activeRoute: 'HomeStack',
   };

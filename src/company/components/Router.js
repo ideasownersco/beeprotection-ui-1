@@ -214,11 +214,6 @@ const DrawerRoutes = {
 };
 
 export const Router = DrawerNavigator(DrawerRoutes, {
-  gesturesEnabled: false,
   contentComponent: props => <Drawer {...props} />,
   drawerWidth: 275,
-  drawerOpenRoute: 'DrawerOpen',
-  drawerCloseRoute: 'DrawerClose',
-  drawerToggleRoute: 'DrawerToggle',
-  // initialRouteName:'TrackDriversStack'
 });

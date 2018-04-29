@@ -139,7 +139,7 @@ function mapStateToProps(state) {
   return {
     app: state.app,
     notifications: state.notifications,
-    user: state.user,
+    user: USER_SELECTOR.getAuthUser(state),
   };
 }
 
