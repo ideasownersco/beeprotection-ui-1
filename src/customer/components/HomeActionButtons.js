@@ -30,15 +30,14 @@ export default class HomeActionButtons extends Component {
             <Text style={[styles.buttonText]}>{I18n.t('car_wash')}</Text>
           </View>
         </Touchable>
-
-        <Touchable
-          style={styles.buttonContainer}
-          onPress={() => onProtectionPress()}>
-          <View style={styles.content}>
-            <Entypo name="shield" size={40} color={colors.white} />
-            <Text style={[styles.buttonText]}>{I18n.t('protection')}</Text>
-          </View>
-        </Touchable>
+        {/*<Touchable*/}
+          {/*style={styles.buttonContainer}*/}
+          {/*onPress={() => onProtectionPress()}>*/}
+          {/*<View style={styles.content}>*/}
+            {/*<Entypo name="shield" size={40} color={colors.white} />*/}
+            {/*<Text style={[styles.buttonText]}>{I18n.t('protection')}</Text>*/}
+          {/*</View>*/}
+        {/*</Touchable>*/}
       </View>
     );
   }

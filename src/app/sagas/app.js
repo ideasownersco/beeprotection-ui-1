@@ -66,6 +66,7 @@ function* boot() {
       yield put({
         type: AUTH_ACTION_TYPES.SYNC_USER_TO_SOCKET,
       });
+
     } catch (error) {
       yield put({type: AUTH_ACTION_TYPES.LOGIN_FAILURE, error});
     }
@@ -117,13 +118,15 @@ function* setPushToken(action) {
 
     if (!pushTokenStorageKey) {
       yield call(setStorageItem, PUSH_TOKEN_KEY, action.params.token);
-      yield call(API.storePushToken, params);
     }
+
+    yield call(API.storePushToken, params);
 
     yield put({
       type: ACTION_TYPES.SET_PUSH_TOKEN_SUCCESS,
       token: action.params.token,
     });
+
   } catch (error) {
     yield put({type: ACTION_TYPES.SET_PUSH_TOKEN_FAILURE, error});
   }

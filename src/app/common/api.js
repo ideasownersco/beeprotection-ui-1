@@ -1,4 +1,3 @@
-import {API_URL} from 'utils/env';
 import {request} from 'utils/network';
 
 function storePushToken(params) {
