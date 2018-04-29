@@ -58,9 +58,11 @@ export const ACTION_TYPES = {
   FETCH_UPCOMING_ORDERS_REFRESH_REQUEST:
     '@customer/FETCH_UPCOMING_ORDERS_REFRESH_REQUEST',
 
-  FETCH_WORKING_ORDER_REQUEST: '@customer/FETCH_WORKING_ORDER_REQUEST',
-  FETCH_WORKING_ORDER_SUCCESS: '@customer/FETCH_WORKING_ORDER_SUCCESS',
-  FETCH_WORKING_ORDER_FAILURE: '@customer/FETCH_WORKING_ORDER_FAILURE',
+  FETCH_WORKING_ORDERS_REQUEST: '@customer/FETCH_WORKING_ORDERS_REQUEST',
+  FETCH_WORKING_ORDERS_SUCCESS: '@customer/FETCH_WORKING_ORDERS_SUCCESS',
+  FETCH_WORKING_ORDERS_FAILURE: '@customer/FETCH_WORKING_ORDERS_FAILURE',
+  FETCH_WORKING_ORDERS_REFRESH_REQUEST:
+    '@customer/FETCH_UPCOMING_ORDERS_REFRESH_REQUEST',
 
   FETCH_PAST_ORDERS_REQUEST: '@customer/FETCH_PAST_ORDERS_REQUEST',
   FETCH_PAST_ORDERS_SUCCESS: '@customer/FETCH_PAST_ORDERS_SUCCESS',
@@ -181,9 +183,16 @@ function fetchUpcomingOrdersRefresh(params) {
   };
 }
 
-function fetchWorkingOrder(params) {
+function fetchWorkingOrders(params) {
   return {
-    type: ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST,
+    type: ACTION_TYPES.FETCH_WORKING_ORDERS_REQUEST,
+    params,
+  };
+}
+
+function fetchWorkingOrdersRefresh(params) {
+  return {
+    type: ACTION_TYPES.FETCH_WORKING_ORDERS_REFRESH_REQUEST,
     params,
   };
 }
@@ -225,7 +234,8 @@ export const ACTIONS = {
   subscribeToOrderTracking,
   fetchUpcomingOrders,
   fetchUpcomingOrdersRefresh,
-  fetchWorkingOrder,
+  fetchWorkingOrders,
+  fetchWorkingOrdersRefresh,
   fetchPastOrders,
   fetchPastOrdersRefresh,
   fetchOrderDetails,

@@ -40,7 +40,7 @@ function fetchPastOrders(params = {}) {
   return request({path, params});
 }
 
-function fetchWorkingOrder() {
+function fetchWorkingOrders() {
   const path = `customer/orders/working`;
   return request({path});
 }
@@ -80,6 +80,6 @@ export const API = {
   checkout,
   fetchUpcomingOrders,
   fetchPastOrders,
-  fetchWorkingOrder,
+  fetchWorkingOrders,
   fetchOrderDetails,
 };

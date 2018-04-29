@@ -206,7 +206,9 @@ class Cart extends PureComponent {
     this.hideSuccessModal();
     this.fetchTimings();
     this.props.actions.flushCart();
-    this.props.actions.fetchWorkingOrder();
+    this.props.actions.fetchWorkingOrders({
+      force:true
+    });
     this.props.navigation.popToTop();
   };
 

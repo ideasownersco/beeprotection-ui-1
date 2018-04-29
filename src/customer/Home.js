@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppState, ScrollView} from 'react-native';
+import {AppState, RefreshControl, ScrollView} from 'react-native';
 import HomeActionButtons from 'customer/components/HomeActionButtons';
 import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
@@ -18,7 +18,9 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrder());
+    this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders({
+      force:true
+    }));
     AppState.addEventListener('change', this.handleAppStateChange);
   }
 
@@ -31,7 +33,9 @@ class Home extends Component {
       this.state.appState.match(/inactive|background/) &&
       nextAppState === 'active'
     ) {
-      this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrder());
+      this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders({
+        force:true
+      }));
     }
     this.setState({appState: nextAppState});
   };
@@ -59,7 +63,14 @@ class Home extends Component {
     let {working_order} = this.props;
 
     return (
-      <ScrollView style={{flex: 1}} contentContainer={{paddingVertical: 100}}>
+      <ScrollView
+        style={{flex: 1}}
+        contentContainer={{paddingVertical: 100}}
+        refreshControl={
+          <RefreshControl refreshing={false} onRefresh={this.onRefresh} />
+        }
+        refreshing={false}
+      >
         <WelcomeText />
 
         <HomeActionButtons

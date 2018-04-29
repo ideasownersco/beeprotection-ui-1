@@ -75,7 +75,8 @@ class TrackOrderScene extends Component {
         refreshControl={
           <RefreshControl refreshing={isFetching} onRefresh={this.onRefresh} />
         }
-        refreshing={isFetching}>
+        refreshing={isFetching}
+      >
         <View style={{backgroundColor: 'white'}}>
           <TrackItem
             title={I18n.t('order_received')}

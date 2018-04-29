@@ -1,5 +1,6 @@
 import {all, call, fork, put, takeLatest, select} from 'redux-saga/effects';
 import {ACTION_TYPES} from 'customer/common/actions';
+import {ACTIONS} from 'customer/common/actions';
 import {API} from 'customer/common/api';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
@@ -129,15 +130,19 @@ function* fetchPastOrders() {
   }
 }
 
-function* fetchWorkingOrder() {
+function* fetchWorkingOrders(action) {
   try {
     const state = yield select();
 
     const {nextPage} = state.customer.working_order;
 
-    if (nextPage === null) {
+    // if(action.params.force) {
+    //   yield put(ACTIONS.fetchWorkingOrdersRefresh());
+    // }
+
+    if (nextPage === null && !action.params.force) {
       yield put({
-        type: ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE,
+        type: ACTION_TYPES.FETCH_WORKING_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),
       });
     } else {
@@ -145,18 +150,18 @@ function* fetchWorkingOrder() {
         paginated: !!nextPage,
         paginatedUrl: nextPage,
       };
-      const response = yield call(API.fetchWorkingOrder, params);
+      const response = yield call(API.fetchWorkingOrders, params);
       const normalized = normalize(response.data, [Schema.orders]);
       const {entities, result} = normalized;
       yield put({
-        type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
+        type: ACTION_TYPES.FETCH_WORKING_ORDERS_SUCCESS,
         entities: entities,
         result: result,
         nextPage: (response.links && response.links.next) || null,
       });
     }
   } catch (error) {
-    yield put({type: ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE, error});
+    yield put({type: ACTION_TYPES.FETCH_WORKING_ORDERS_FAILURE, error});
   }
 }
 
@@ -322,8 +327,8 @@ function* checkoutMonitor() {
   yield takeLatest(ACTION_TYPES.CHECKOUT_REQUEST, checkout);
 }
 
-function* fetchWorkingOrderMonitor() {
-  yield takeLatest(ACTION_TYPES.FETCH_WORKING_ORDER_REQUEST, fetchWorkingOrder);
+function* fetchWorkingOrdersMonitor() {
+  yield takeLatest(ACTION_TYPES.FETCH_WORKING_ORDERS_REQUEST, fetchWorkingOrders);
 }
 
 function* fetchPastOrdersMonitor() {
@@ -342,7 +347,7 @@ export const sagas = all([
   fork(saveAddressMonitor),
   // fork(createOrderMonitor),
   fork(checkoutMonitor),
-  fork(fetchWorkingOrderMonitor),
+  fork(fetchWorkingOrdersMonitor),
   fork(fetchUpcomingOrdersMonitor),
   fork(fetchPastOrdersMonitor),
   fork(fetchOrderDetailsMonitor),
