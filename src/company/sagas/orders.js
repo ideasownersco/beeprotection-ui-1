@@ -5,13 +5,13 @@ import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import I18n from 'utils/locale';
 
-function* fetchUpcomingOrders() {
+function* fetchUpcomingOrders(action) {
   try {
     const state = yield select();
 
     const {nextPage} = state.company.upcoming_orders;
 
-    if (nextPage === null) {
+    if (nextPage === null && !action.params.force) {
       yield put({
         type: ACTION_TYPES.FETCH_UPCOMING_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),
@@ -39,13 +39,13 @@ function* fetchUpcomingOrders() {
   }
 }
 
-function* fetchWorkingOrders() {
+function* fetchWorkingOrders(action) {
   try {
     const state = yield select();
 
     const {nextPage} = state.company.working_orders;
 
-    if (nextPage === null) {
+    if (nextPage === null && !action.params.force) {
       yield put({
         type: ACTION_TYPES.FETCH_WORKING_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),
@@ -70,13 +70,13 @@ function* fetchWorkingOrders() {
   }
 }
 
-function* fetchPastOrders() {
+function* fetchPastOrders(action) {
   try {
     const state = yield select();
 
     const {nextPage} = state.company.past_orders;
 
-    if (nextPage === null) {
+    if (nextPage === null && !action.params.force) {
       yield put({
         type: ACTION_TYPES.FETCH_PAST_ORDERS_FAILURE,
         error: I18n.t('no_more_records'),

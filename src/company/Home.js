@@ -31,21 +31,25 @@ class Home extends PureComponent {
 
   componentDidMount() {
     this.fetchData();
+    this.props.dispatch(COMPANY_ACTIONS.fetchDrivers());
+    this.props.dispatch(COMPANY_ACTIONS.fetchTimings());
   }
 
   fetchData = () => {
-    this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders());
-    this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders());
-    this.props.dispatch(COMPANY_ACTIONS.fetchDrivers());
-    this.props.dispatch(COMPANY_ACTIONS.fetchTimings());
+    this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders({
+      force:true
+    }));
+    this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders({
+      force:true
+    }));
   };
 
   _onRefresh = () => {
-    this.setState({refreshing: true});
-    setTimeout(() => {
-      this.fetchData();
-      this.setState({refreshing: false});
-    }, 1000);
+    // this.setState({refreshing: true});
+    this.fetchData();
+    // setTimeout(() => {
+    //   this.setState({refreshing: false});
+    // }, 1000);
   };
 
   onOrdersListItemPress = (item: object) => {

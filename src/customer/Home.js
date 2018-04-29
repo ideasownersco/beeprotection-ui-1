@@ -18,9 +18,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders({
-      force:true
-    }));
+    this.fetchWorkingOrders();
     AppState.addEventListener('change', this.handleAppStateChange);
   }
 
@@ -33,9 +31,7 @@ class Home extends Component {
       this.state.appState.match(/inactive|background/) &&
       nextAppState === 'active'
     ) {
-      this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders({
-        force:true
-      }));
+      this.fetchWorkingOrders();
     }
     this.setState({appState: nextAppState});
   };
@@ -57,6 +53,16 @@ class Home extends Component {
     this.props.navigation.navigate('OrderDetail', {
       orderID: item.id,
     });
+  };
+
+  fetchWorkingOrders = () => {
+    this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders({
+      force:true
+    }));
+  };
+
+  onRefresh = () => {
+    this.fetchWorkingOrders();
   };
 
   render() {
