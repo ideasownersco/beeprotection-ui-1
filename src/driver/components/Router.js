@@ -10,6 +10,7 @@ import PastOrdersScene from 'driver/orders/PastOrdersScene';
 import UpcomingOrdersScene from 'driver/orders/UpcomingOrdersScene';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
+import PhotosUploadScene from "driver/orders/PhotosUploadScene";
 
 const getDrawerIcon = navigation => {
   return {
@@ -42,12 +43,16 @@ const HomeStack = StackNavigator(
     },
     PastOrders: {screen: PastOrdersScene},
     UpcomingOrders: {screen: UpcomingOrdersScene},
+    PhotosUpload:{
+      screen:PhotosUploadScene
+    }
   },
   {
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
       ...navStyle,
     }),
+    // initialRouteName:'PhotosUpload'
   },
 );
 

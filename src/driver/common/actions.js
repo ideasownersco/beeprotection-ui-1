@@ -48,6 +48,10 @@ export const ACTION_TYPES = {
   FETCH_ORDER_DETAILS_SUCCESS: '@driver/FETCH_ORDER_DETAILS_SUCCESS',
   FETCH_ORDER_DETAILS_FAILURE: '@driver/FETCH_ORDER_DETAILS_FAILURE',
 
+  FETCH_JOB_PHOTOS_REQUEST: '@driver/FETCH_JOB_PHOTOS_REQUEST',
+  FETCH_JOB_PHOTOS_SUCCESS: '@driver/FETCH_JOB_PHOTOS_SUCCESS',
+  FETCH_JOB_PHOTOS_FAILURE: '@driver/FETCH_JOB_PHOTOS_FAILURE',
+
   DRIVER_LOCATION_UPDATED: '@driver/DRIVER_LOCATION_UPDATED',
 };
 
@@ -140,6 +144,13 @@ function fetchOrderDetails(id) {
   };
 }
 
+function fetchJobPhotos(id) {
+  return {
+    type: ACTION_TYPES.FETCH_JOB_PHOTOS_REQUEST,
+    job_id: id,
+  };
+}
+
 export const ACTIONS = {
   saveProfile,
   fetchProfile,
@@ -153,4 +164,5 @@ export const ACTIONS = {
   startDriving,
   stopDriving,
   fetchOrderDetails,
+  fetchJobPhotos,
 };

@@ -176,9 +176,10 @@ class TrackOrderScene extends Component {
   };
 
   showUploadImage = () => {
-    this.setState({
-      showUploadImageModal: true,
-    });
+
+    // this.setState({
+    //   showUploadImageModal: true,
+    // });
   };
 
   hideUploadImageModal = () => {

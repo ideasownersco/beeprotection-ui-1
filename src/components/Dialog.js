@@ -15,14 +15,17 @@ export default class Dialog extends Component {
   static propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
-    close: PropTypes.func.isRequired,
-    confirm: PropTypes.func.isRequired,
+    leftPress: PropTypes.func.isRequired,
+    rightPress: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
+    onDismiss:PropTypes.func,
+    dismissable:PropTypes.bool
   };
 
   static defaultProps = {
-    closeText: I18n.t('cancel'),
-    confirmText: I18n.t('yes'),
+    leftText: I18n.t('cancel'),
+    rightText: I18n.t('yes'),
+    dismissable:false
   };
 
   shouldComponentUpdate(nextProps) {
@@ -34,23 +37,25 @@ export default class Dialog extends Component {
       title,
       description,
       visible,
-      close,
-      confirm,
-      closeText,
-      confirmText,
+      leftPress,
+      rightPress,
+      leftText,
+      rightText,
+      dismissable,
+      onDismiss
     } = this.props;
     return (
-      <PaperDialog visible={visible} dismissable={false}>
+      <PaperDialog visible={visible} dismissable={dismissable} onDismiss={onDismiss}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <Paragraph>{description}</Paragraph>
         </DialogContent>
         <DialogActions>
-          <Button color={Colors.teal500} onPress={close}>
-            {closeText}
+          <Button color={Colors.teal500} onPress={leftPress}>
+            {leftText}
           </Button>
-          <Button primary onPress={confirm}>
-            {confirmText}
+          <Button primary onPress={rightPress}>
+            {rightText}
           </Button>
         </DialogActions>
       </PaperDialog>

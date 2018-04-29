@@ -153,5 +153,7 @@
   "timings" : "Timings",
   "offline" : "Offline",
   "online" : "Online",
-  "reached" : "Reached at Destination"
+  "reached" : "Reached at Destination",
+  "upload_from_camera" : "Camera",
+  "upload_from_album" : "from Library ..."
 }

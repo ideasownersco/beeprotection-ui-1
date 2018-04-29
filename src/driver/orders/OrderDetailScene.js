@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'driver/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'driver/selectors/orders';
-import {ScrollView, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import OrderItems from 'customer/orders/components/OrderItems';
 import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import PropTypes from 'prop-types';
@@ -13,6 +13,8 @@ import OrderTotal from 'customer/orders/components/OrderTotal';
 import CustomerInfo from 'driver/components/CustomerInfo';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
+import Divider from "../../components/Divider";
+import {Button} from "react-native-paper";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -45,6 +47,13 @@ class OrderDetailScene extends Component {
     }
   }
 
+  uploadImages = () => {
+    this.props.navigation.navigate('PhotosUpload',{
+      orderID:this.props.order.id,
+      jobID:this.props.order.job.id,
+    });
+  };
+
   render() {
     let {order} = this.props;
 
@@ -57,15 +66,26 @@ class OrderDetailScene extends Component {
         contentContainerStyle={{paddingBottom: 50}}>
         {order.packages && (
           <View>
-            <OrderBasicInfo item={order} />
-            <OrderItems order={order} />
-            <OrderTotal total={order.total} />
+            <OrderBasicInfo item={order}/>
+            <OrderItems order={order}/>
+            <OrderTotal total={order.total}/>
             {order.user && (
               <View>
-                <SectionHeading title={I18n.t('customer_info')} />
-                <CustomerInfo user={order.user} />
+                <SectionHeading title={I18n.t('customer_info')}/>
+                <CustomerInfo user={order.user}/>
               </View>
             )}
+
+            <Divider style={{marginBottom: 10}}/>
+
+            {
+              order.trackeable &&
+              <Button raised onPress={this.uploadImages}>
+                <Text>{I18n.t('upload_images')}</Text>
+              </Button>
+
+            }
+
           </View>
         )}
       </ScrollView>

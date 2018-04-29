@@ -82,6 +82,20 @@ function* stopDriving(action) {
   }
 }
 
+function* fetchJobPhotos(action) {
+  try {
+    const response = yield call(API.fetchJobPhotos, action.job_id);
+    const normalizedOrders = normalize(response.data, Schema.orders);
+    yield put({
+      type: ACTION_TYPES.FETCH_JOB_PHOTOS_SUCCESS,
+      entities: normalizedOrders.entities,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.FETCH_JOB_PHOTOS_FAILURE, error});
+  }
+}
+
+
 function* startWorkingMonitor() {
   yield takeLatest(ACTION_TYPES.START_WORKING_REQUEST, startWorking);
 }
@@ -98,9 +112,13 @@ function* stopDrivingMonitor() {
   yield takeLatest(ACTION_TYPES.STOP_DRIVING_REQUEST, stopDriving);
 }
 
+function* fetchJobPhotosMonitor() {
+  yield takeLatest(ACTION_TYPES.FETCH_JOB_PHOTOS_REQUEST, fetchJobPhotos);
+}
 export const sagas = all([
   fork(startWorkingMonitor),
   fork(stopWorkingMonitor),
   fork(startDrivingMonitor),
   fork(stopDrivingMonitor),
+  fork(fetchJobPhotosMonitor),
 ]);

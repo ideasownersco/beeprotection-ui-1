@@ -1,0 +1,208 @@
+/**
+ * @flow
+ */
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {ACTIONS as ORDER_ACTIONS} from 'driver/common/actions';
+import {SELECTORS as ORDER_SELECTORS} from 'driver/selectors/orders';
+import {ScrollView, View} from 'react-native';
+import PropTypes from 'prop-types';
+import I18n from 'utils/locale';
+import {Button, FAB} from "react-native-paper";
+import UploadImage from 'driver/components/UploadImage';
+import ListModal from 'components/ListModal';
+import PhotosList from "driver/components/PhotosList";
+import colors from "assets/theme/colors";
+import Dialog from "components/Dialog";
+import ImagePicker from 'react-native-image-crop-picker';
+
+class PhotosUploadScene extends Component {
+  static propTypes = {
+    navigation: PropTypes.shape({
+      state: PropTypes.shape({
+        params: PropTypes.shape({
+          orderID: PropTypes.number.isRequired,
+          jobID: PropTypes.number.isRequired,
+        }),
+      }),
+    }).isRequired,
+  };
+
+  static defaultProps = {
+    order: {},
+  };
+
+  state = {
+    showUploadImageModal: false,
+    images:[],
+    showImageUploadOptionsDialog:false
+  };
+
+  componentDidMount() {
+    this.props.dispatch(
+      ORDER_ACTIONS.fetchJobPhotos(
+        // this.props.navigation.state.params.jobID,
+        1
+      ),
+    );
+  }
+
+  onImageUploadButtonPress = () => {
+    // this.props.navigation.navigate('PhotosUpload',{
+    //   orderID:this.props.order.id,
+    //   jobID:this.props.order.job.id,
+    // });
+    this.showImageUploadOptions();
+    // this.showUploadImageModal();
+  };
+
+  showImageUploadOptions = () => {
+    this.setState({
+      showImageUploadOptionsDialog: true,
+    });
+  };
+
+  hideImageUploadOptions = () => {
+    this.setState({
+      showImageUploadOptionsDialog: false,
+    });
+  };
+
+  showUploadImageModal = () => {
+    this.setState({
+      showUploadImageModal: true,
+    });
+  };
+
+  hideUploadImageModal = () => {
+    this.setState({
+      showUploadImageModal: false,
+    });
+  };
+
+  onSaveUploadedImage = () => {
+    this.setState({
+      imagesUploaded: true,
+    });
+    this.hideUploadImageModal();
+  };
+
+  deleteImage = image => {
+    this.setState({
+      images: this.state.images.filter(
+        uploadedImage => uploadedImage !== image,
+      ),
+    });
+  };
+
+  approveImages = () => {
+    this.setState({
+      imagesApproved: true,
+    });
+  };
+
+  uploadImage = images => {
+    this.setState({
+      images: images,
+    });
+  };
+
+  onPhotoListItemPress = () => {
+  };
+
+  onPhotoListItemDeletePress = () => {
+  };
+
+  uploadFromAlbum = () => {
+    this.hideImageUploadOptions();
+    this.showUploadImageModal();
+  };
+
+  uploadFromCamera = () => {
+    this.hideImageUploadOptions();
+
+    ImagePicker.openCamera({
+      cropping: false,
+      width: 500,
+      height: 500,
+      includeExif: true,
+    }).then(image => {
+      console.log('received image', image);
+      this.setState({
+        image: {uri: image.path, width: image.width, height: image.height},
+        images: null
+      });
+    }).catch(e => alert(e));
+
+  };
+
+  onImageUploadOptionsDialogDismiss = () => {
+    this.hideImageUploadOptions();
+  };
+
+  render() {
+    let {order} = this.props;
+
+    let {
+      showUploadImageModal,
+      images,
+      showImageUploadOptionsDialog
+    } = this.state;
+
+    return (
+      <View
+        style={{flex: 1,padding:10}}
+        keyboardShouldPersistTap="always"
+        contentContainerStyle={{paddingBottom: 50}}
+      >
+
+        <PhotosList
+          items={order.job.photos || []}
+          onItemPress={this.onPhotoListItemPress}
+          onItemDeletePress={this.onPhotoListItemDeletePress}
+        />
+
+        <FAB
+          icon="add"
+          dark
+          onPress={this.onImageUploadButtonPress}
+          medium
+          style={{
+            left: 20,
+            bottom: 20,
+            backgroundColor: colors.primary,
+          }}
+        />
+        
+        <Dialog
+          title={I18n.t('upload_images')}
+          onDismiss={this.onImageUploadOptionsDialogDismiss} dismissable={true} leftText={I18n.t('upload_from_album')} rightText={I18n.t('upload_from_camera')} leftPress={this.uploadFromAlbum} rightPress={this.uploadFromCamera} visible={showImageUploadOptionsDialog}/>
+
+        <ListModal
+          onCancel={this.hideUploadImageModal}
+          onSave={this.onSaveUploadedImage}
+          isVisible={showUploadImageModal}>
+          <UploadImage
+            images={images}
+            updateImage={this.uploadImage}
+            deleteImage={this.deleteImage}
+          />
+        </ListModal>
+
+      </View>
+    );
+  }
+}
+
+const makeMapStateToProps = () => {
+  const getOrderByID = ORDER_SELECTORS.getOrderByID();
+  const mapStateToProps = (state, props) => {
+    return {
+      order: getOrderByID(state, props.navigation.state.params.orderID),
+      orders: ORDER_SELECTORS.getUpcomingOrders(state),
+    };
+  };
+  return mapStateToProps;
+};
+
+export default connect(makeMapStateToProps)(PhotosUploadScene);

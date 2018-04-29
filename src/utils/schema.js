@@ -37,7 +37,6 @@ ordersSchema.define({
 });
 
 jobsSchema.define({
-  order: ordersSchema,
   driver: driversSchema,
 });
 
@@ -60,6 +59,5 @@ export const Schema = {
   orders: ordersSchema,
   users: usersSchema,
   drivers: driversSchema,
-  jobs: jobsSchema,
   areas: areasSchema,
 };

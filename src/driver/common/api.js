@@ -70,6 +70,11 @@ function fetchOrderDetails(id) {
   return request({path, requiresAuthentication: true});
 }
 
+function fetchJobPhotos(id) {
+  const path = `driver/jobs/${id}/photos`;
+  return request({path, requiresAuthentication: true});
+}
+
 export const API = {
   saveProfile,
   fetchProfile,
@@ -81,4 +86,5 @@ export const API = {
   stopWorking,
   startDriving,
   stopDriving,
+  fetchJobPhotos
 };
