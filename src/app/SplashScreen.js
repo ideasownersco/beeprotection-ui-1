@@ -17,18 +17,23 @@ export default class SplashScreen extends Component {
     let {onEndReached, onLanguageSelect} = this.props;
     return (
       <View style={styles.container}>
+
+        <Title style={styles.title}>
+          {I18n.t('app_name')}
+        </Title>
+
         <Swiper
           style={styles.slider}
           autoPlay={false}
           showsButtons={false}
           removeClippedSubviews={false}
-          dot={<View style={styles.dot} />}
-          activeDot={<View style={styles.activeDot} />}
+          dot={<View style={styles.dot}/>}
+          activeDot={<View style={styles.activeDot}/>}
           loop={false}>
+
+
           <View style={styles.slide}>
-            <Title style={styles.title}>
-              {I18n.t('app_name').toUpperCase()}
-            </Title>
+
             <Image
               source={require('./../assets/images/splash/1.png')}
               style={styles.image}
@@ -38,34 +43,31 @@ export default class SplashScreen extends Component {
             <Text style={styles.description}>
               Get the car wash at your convenience
             </Text>
+
           </View>
 
           <View style={styles.slide}>
-            <Title style={styles.title}>BEE WASH</Title>
 
             <Image
               source={require('./../assets/images/splash/2.png')}
               style={styles.image}
-              resizeMode="contain"
+              resizeMode="stretch"
             />
 
             <Text style={styles.description}>Wash anywhere</Text>
           </View>
 
           <View style={styles.slide}>
-            <Title style={styles.title}>BEE WASH</Title>
 
             <Image
               source={require('./../assets/images/splash/3.png')}
               style={styles.image}
               resizeMode="contain"
             />
-
             <Text style={styles.description}>Your Date, Your Time</Text>
           </View>
 
           <View style={styles.slide}>
-            <Title style={styles.title}>Live Track the Driver</Title>
 
             <Image
               source={require('./../assets/images/splash/4.png')}
@@ -74,12 +76,11 @@ export default class SplashScreen extends Component {
             />
 
             <Button
-              raised
-              dark
               onPress={onEndReached}
-              style={styles.buttonContainer}>
-              <Text style={styles.buttonText}>Start Using the App</Text>
-            </Button>
+              style={styles.buttonContainer}
+              title={I18n.t('start')}
+            />
+
           </View>
         </Swiper>
       </View>
@@ -90,12 +91,13 @@ export default class SplashScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 50
   },
   slide: {
     flex: 1,
     alignItems: 'center',
-    // justifyContent: 'center',
-    // backgroundColor:'blue',
   },
   buttonContainer: {
     marginTop: 20,
@@ -106,14 +108,13 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   title: {
-    color: colors.darkGrey,
+    color: colors.black,
     fontWeight: '700',
     fontSize: 22,
-    paddingTop: 50,
   },
   description: {
-    color: colors.darkGrey,
-    fontWeight: '300',
+    color: colors.black,
+    fontWeight: '700',
     fontSize: 18,
   },
   dot: {
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
   },
   image: {
     marginVertical: 30,
-    width: 400,
-    height: 400,
+    width: '90%',
+    height: '75%',
   },
 });

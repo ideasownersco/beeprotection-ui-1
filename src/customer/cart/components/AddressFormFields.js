@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
   addressField: {
     flex: 1,
     paddingHorizontal: 5,
-    backgroundColor: 'white',
     marginHorizontal: 1,
   },
   textInput: {},

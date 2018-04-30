@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {Text,StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {Button as PaperButton} from 'react-native-paper';
 
@@ -33,9 +33,14 @@ export default class Button extends Component {
     } = this.props;
 
     return (
-      <PaperButton disabled={disabled} onPress={onPress} style={style} {...rest}>
+      <PaperButton disabled={disabled} onPress={onPress} style={[styles.container,style]} {...rest}>
         <Text style={[titleStyle]}>{title}</Text>
       </PaperButton>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container:{
+  }
+});

@@ -51,7 +51,7 @@ export default class ListModal extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
+    margin: 0,
     backgroundColor: colors.lightGrey,
     opacity: 1,
     paddingTop: 40,
