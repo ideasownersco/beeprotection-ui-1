@@ -1,5 +1,5 @@
 import React from 'react';
-import {DrawerNavigator, StackNavigator} from 'react-navigation';
+import {createDrawerNavigator, createStackNavigator} from 'react-navigation';
 import Drawer from 'driver/components/Drawer';
 import Home from 'driver/Home';
 import Login from 'guest/Login';
@@ -28,7 +28,7 @@ const navStyle = {
   },
 };
 
-const HomeStack = StackNavigator(
+const HomeStack = createStackNavigator(
   {
     Home: {
       screen: Home,
@@ -56,7 +56,7 @@ const HomeStack = StackNavigator(
   },
 );
 
-const PastOrdersStack = StackNavigator(
+const PastOrdersStack = createStackNavigator(
   {
     PastOrders: {
       screen: PastOrdersScene,
@@ -76,7 +76,7 @@ const PastOrdersStack = StackNavigator(
   },
 );
 
-const UpcomingOrdersStack = StackNavigator(
+const UpcomingOrdersStack = createStackNavigator(
   {
     UpcomingOrders: {
       screen: UpcomingOrdersScene,
@@ -106,7 +106,7 @@ const DrawerRoutes = {
   UpcomingOrdersStack: {screen: UpcomingOrdersStack},
 };
 
-export const Router = DrawerNavigator(DrawerRoutes, {
+export const Router = createDrawerNavigator(DrawerRoutes, {
   contentComponent: props => <Drawer {...props} />,
   drawerWidth: 275,
 });

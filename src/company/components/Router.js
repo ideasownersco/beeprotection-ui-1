@@ -1,5 +1,5 @@
 import React from 'react';
-import {DrawerNavigator, StackNavigator} from 'react-navigation';
+import {createDrawerNavigator, createStackNavigator} from 'react-navigation';
 import Drawer from 'company/components/Drawer';
 import Home from 'company/Home';
 import Login from 'guest/Login';
@@ -34,7 +34,7 @@ const navStyle = {
   },
 };
 
-const HomeStack = StackNavigator(
+const HomeStack = createStackNavigator(
   {
     Home: {
       screen: Home,
@@ -90,7 +90,7 @@ const HomeStack = StackNavigator(
   },
 );
 
-const DriversStack = StackNavigator(
+const DriversStack = createStackNavigator(
   {
     DriversList: {
       screen: DriversListScene,
@@ -116,7 +116,7 @@ const DriversStack = StackNavigator(
   },
 );
 
-const PastOrdersStack = StackNavigator(
+const PastOrdersStack = createStackNavigator(
   {
     PastOrders: {
       screen: PastOrdersScene,
@@ -135,7 +135,7 @@ const PastOrdersStack = StackNavigator(
   },
 );
 
-const UpcomingOrdersStack = StackNavigator(
+const UpcomingOrdersStack = createStackNavigator(
   {
     UpcomingOrders: {
       screen: UpcomingOrdersScene,
@@ -154,7 +154,7 @@ const UpcomingOrdersStack = StackNavigator(
   },
 );
 
-const WorkingOrdersStack = StackNavigator(
+const WorkingOrdersStack = createStackNavigator(
   {
     WorkingOrders: {
       screen: WorkingOrdersScene,
@@ -173,7 +173,7 @@ const WorkingOrdersStack = StackNavigator(
   },
 );
 
-const SettingsStack = StackNavigator(
+const SettingsStack = createStackNavigator(
   {
     Settings: {
       screen: SettingsScene,
@@ -187,7 +187,7 @@ const SettingsStack = StackNavigator(
     }),
   },
 );
-const TrackDriversStack = StackNavigator(
+const TrackDriversStack = createStackNavigator(
   {
     TrackDrivers: {
       screen: TrackDriversScene,
@@ -213,7 +213,7 @@ const DrawerRoutes = {
   Login: {screen: Login},
 };
 
-export const Router = DrawerNavigator(DrawerRoutes, {
+export const Router = createDrawerNavigator(DrawerRoutes, {
   contentComponent: props => <Drawer {...props} />,
   drawerWidth: 275,
 });

@@ -2,7 +2,7 @@
 # platform :ios, '9.0'
 
 target 'BeeProtection' do
-  rn_path = '../node_modules/react-native'
+   rn_path = '../node_modules/react-native'
    rn_maps_path = '../node_modules/react-native-maps'
 
    pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"

@@ -63,9 +63,9 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - RNBackgroundFetch (2.4.1):
+  - RNBackgroundFetch (2.3.0):
     - React
-  - RNBackgroundGeolocation (2.12.0-beta.4):
+  - RNBackgroundGeolocation (2.11.0):
     - CocoaLumberjack (~> 3.0)
     - React
   - RNI18n (2.0.12):
@@ -131,6 +131,6 @@ SPEC CHECKSUMS:
   RSKImageCropper: 50d5a3e4160f0309b14d75b89d5ae2f496d56e0d
   yoga: a23273df0088bf7f2bb7e5d7b00044ea57a2a54a
 
-PODFILE CHECKSUM: 8e40db2c1567c757b3e40c2c6d820a7bf0814784
+PODFILE CHECKSUM: 5f03345812aa9c3c684519b65b963a1256e2a8bc
 
 COCOAPODS: 1.4.0
