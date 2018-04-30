@@ -52,6 +52,10 @@ export const ACTION_TYPES = {
   FETCH_JOB_PHOTOS_SUCCESS: '@driver/FETCH_JOB_PHOTOS_SUCCESS',
   FETCH_JOB_PHOTOS_FAILURE: '@driver/FETCH_JOB_PHOTOS_FAILURE',
 
+  UPLOAD_PHOTOS_REQUEST: '@driver/UPLOAD_PHOTOS_REQUEST',
+  UPLOAD_PHOTOS_SUCCESS: '@driver/UPLOAD_PHOTOS_SUCCESS',
+  UPLOAD_PHOTOS_FAILURE: '@driver/UPLOAD_PHOTOS_FAILURE',
+
   DRIVER_LOCATION_UPDATED: '@driver/DRIVER_LOCATION_UPDATED',
 };
 
@@ -151,6 +155,14 @@ function fetchJobPhotos(id) {
   };
 }
 
+
+function uploadImages(params) {
+  return {
+    type: ACTION_TYPES.UPLOAD_PHOTOS_REQUEST,
+    params
+  };
+}
+
 export const ACTIONS = {
   saveProfile,
   fetchProfile,
@@ -165,4 +177,5 @@ export const ACTIONS = {
   stopDriving,
   fetchOrderDetails,
   fetchJobPhotos,
+  uploadImages
 };

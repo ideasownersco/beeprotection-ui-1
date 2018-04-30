@@ -3,12 +3,12 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ACTIONS as ORDER_ACTIONS} from 'driver/common/actions';
-import {SELECTORS as ORDER_SELECTORS} from 'driver/selectors/orders';
-import {ScrollView, View} from 'react-native';
+import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
+import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
+import {View} from 'react-native';
 import PropTypes from 'prop-types';
 import I18n from 'utils/locale';
-import {Button, FAB} from "react-native-paper";
+import {FAB} from "react-native-paper";
 import UploadImage from 'driver/components/UploadImage';
 import ListModal from 'components/ListModal';
 import PhotosList from "driver/components/PhotosList";
@@ -40,20 +40,14 @@ class PhotosUploadScene extends Component {
 
   componentDidMount() {
     this.props.dispatch(
-      ORDER_ACTIONS.fetchJobPhotos(
-        // this.props.navigation.state.params.jobID,
-        1
+      DRIVER_ACTIONS.fetchJobPhotos(
+        this.props.navigation.state.params.jobID,
       ),
     );
   }
 
   onImageUploadButtonPress = () => {
-    // this.props.navigation.navigate('PhotosUpload',{
-    //   orderID:this.props.order.id,
-    //   jobID:this.props.order.job.id,
-    // });
     this.showImageUploadOptions();
-    // this.showUploadImageModal();
   };
 
   showImageUploadOptions = () => {
@@ -84,7 +78,14 @@ class PhotosUploadScene extends Component {
     this.setState({
       imagesUploaded: true,
     });
-    this.hideUploadImageModal();
+
+    this.props.dispatch(DRIVER_ACTIONS.uploadImages({
+      job_id:this.props.order.job.id,
+      images:this.state.images
+    }));
+
+    // this.hideUploadImageModal();
+
   };
 
   deleteImage = image => {
@@ -122,16 +123,18 @@ class PhotosUploadScene extends Component {
     this.hideImageUploadOptions();
 
     ImagePicker.openCamera({
+      multiple:true,
       cropping: false,
       width: 500,
       height: 500,
       includeExif: true,
     }).then(image => {
-      console.log('received image', image);
-      this.setState({
-        image: {uri: image.path, width: image.width, height: image.height},
-        images: null
-      });
+      
+      this.props.dispatch(DRIVER_ACTIONS.uploadImages({
+        job_id:this.props.order.job.id,
+        images:[image]
+      }))
+      
     }).catch(e => alert(e));
 
   };
@@ -195,11 +198,11 @@ class PhotosUploadScene extends Component {
 }
 
 const makeMapStateToProps = () => {
-  const getOrderByID = ORDER_SELECTORS.getOrderByID();
+  const getOrderByID = DRIVER_SELECTORS.getOrderByID();
   const mapStateToProps = (state, props) => {
     return {
       order: getOrderByID(state, props.navigation.state.params.orderID),
-      orders: ORDER_SELECTORS.getUpcomingOrders(state),
+      orders: DRIVER_SELECTORS.getUpcomingOrders(state),
     };
   };
   return mapStateToProps;
