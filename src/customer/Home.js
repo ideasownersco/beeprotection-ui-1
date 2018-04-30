@@ -56,9 +56,11 @@ class Home extends Component {
   };
 
   fetchWorkingOrders = () => {
-    this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders({
-      force:true
-    }));
+    this.props.dispatch(
+      ORDER_ACTIONS.fetchWorkingOrders({
+        force: true,
+      }),
+    );
   };
 
   onRefresh = () => {
@@ -75,8 +77,7 @@ class Home extends Component {
         refreshControl={
           <RefreshControl refreshing={false} onRefresh={this.onRefresh} />
         }
-        refreshing={false}
-      >
+        refreshing={false}>
         <WelcomeText />
 
         <HomeActionButtons

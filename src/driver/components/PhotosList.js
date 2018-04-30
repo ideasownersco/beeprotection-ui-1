@@ -4,47 +4,44 @@ import {FlatList, Image, StyleSheet, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import Divider from 'components/Divider';
-import IconFactory from "../../components/IconFactory";
+import IconFactory from '../../components/IconFactory';
 
 export default class PhotosList extends Component {
   static propTypes = {
     items: PropTypes.array.isRequired,
     onItemPress: PropTypes.func.isRequired,
-    onItemDeletePress: PropTypes.func.isRequired
+    onItemDeletePress: PropTypes.func.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
-    return (
-      nextProps.items !== this.props.items
-    );
+    return nextProps.items !== this.props.items;
   }
 
   renderItem = ({item}) => {
-    const {onItemPress,onItemDeletePress} = this.props;
+    const {onItemPress, onItemDeletePress} = this.props;
 
     return (
       <View style={styles.row}>
         {/*<Touchable*/}
-          {/*onPress={() => onItemDeletePress(item)}*/}
-          {/*underlayColor="transparent"*/}
-          {/*style={styles.iconContainer}*/}
-          {/*hitSlop={{top: 20, left: 20, right: 20, bottom: 20}}>*/}
-          {/*<IconFactory*/}
-            {/*name="ios-close"*/}
-            {/*type="Ionicons"*/}
-            {/*style={{*/}
-              {/*backgroundColor: 'transparent',*/}
-            {/*}}*/}
-            {/*color="red"*/}
-            {/*size={30}*/}
-          {/*/>*/}
+        {/*onPress={() => onItemDeletePress(item)}*/}
+        {/*underlayColor="transparent"*/}
+        {/*style={styles.iconContainer}*/}
+        {/*hitSlop={{top: 20, left: 20, right: 20, bottom: 20}}>*/}
+        {/*<IconFactory*/}
+        {/*name="ios-close"*/}
+        {/*type="Ionicons"*/}
+        {/*style={{*/}
+        {/*backgroundColor: 'transparent',*/}
+        {/*}}*/}
+        {/*color="red"*/}
+        {/*size={30}*/}
+        {/*/>*/}
         {/*</Touchable>*/}
         <Touchable onPress={() => onItemPress(item)}>
-          <Image source={{uri: item.url}} style={styles.image}/>
+          <Image source={{uri: item.url}} style={styles.image} />
         </Touchable>
       </View>
     );
-
   };
 
   render() {
@@ -56,14 +53,12 @@ export default class PhotosList extends Component {
         renderItem={this.renderItem}
         style={styles.listContainer}
         keyExtractor={item => `${item.id}`}
-
         contentContainerStyle={styles.contentContainer}
         enableEmptySections={true}
         automaticallyAdjustContentInsets={false}
         showsVerticalScrollIndicator={false}
         contentInset={{bottom: 50}}
         numColumns={2}
-
       />
     );
   }
@@ -71,7 +66,7 @@ export default class PhotosList extends Component {
 
 const styles = StyleSheet.create({
   listContainer: {
-    padding:10
+    padding: 10,
   },
   itemContainer: {
     flexDirection: 'row',
@@ -117,5 +112,5 @@ const styles = StyleSheet.create({
     zIndex: 1000,
     top: -15,
     left: -5,
-  }
+  },
 });

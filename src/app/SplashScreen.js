@@ -5,7 +5,7 @@ import {Title} from 'react-native-paper';
 import Swiper from 'react-native-swiper';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
-import Button from "components/Button";
+import Button from 'components/Button';
 
 export default class SplashScreen extends Component {
   static propTypes = {
@@ -17,23 +17,17 @@ export default class SplashScreen extends Component {
     let {onEndReached, onLanguageSelect} = this.props;
     return (
       <View style={styles.container}>
-
-        <Title style={styles.title}>
-          {I18n.t('app_name')}
-        </Title>
+        <Title style={styles.title}>{I18n.t('app_name')}</Title>
 
         <Swiper
           style={styles.slider}
           autoPlay={false}
           showsButtons={false}
           removeClippedSubviews={false}
-          dot={<View style={styles.dot}/>}
-          activeDot={<View style={styles.activeDot}/>}
+          dot={<View style={styles.dot} />}
+          activeDot={<View style={styles.activeDot} />}
           loop={false}>
-
-
           <View style={styles.slide}>
-
             <Image
               source={require('./../assets/images/splash/1.png')}
               style={styles.image}
@@ -43,11 +37,9 @@ export default class SplashScreen extends Component {
             <Text style={styles.description}>
               Get the car wash at your convenience
             </Text>
-
           </View>
 
           <View style={styles.slide}>
-
             <Image
               source={require('./../assets/images/splash/2.png')}
               style={styles.image}
@@ -58,7 +50,6 @@ export default class SplashScreen extends Component {
           </View>
 
           <View style={styles.slide}>
-
             <Image
               source={require('./../assets/images/splash/3.png')}
               style={styles.image}
@@ -68,7 +59,6 @@ export default class SplashScreen extends Component {
           </View>
 
           <View style={styles.slide}>
-
             <Image
               source={require('./../assets/images/splash/4.png')}
               style={styles.image}
@@ -80,7 +70,6 @@ export default class SplashScreen extends Component {
               style={styles.buttonContainer}
               title={I18n.t('start')}
             />
-
           </View>
         </Swiper>
       </View>
@@ -93,7 +82,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 50
+    paddingTop: 50,
   },
   slide: {
     flex: 1,

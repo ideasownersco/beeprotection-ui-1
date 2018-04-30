@@ -20,9 +20,7 @@ import TrackOrderScene from 'customer/orders/TrackOrderScene';
 
 const getDrawerIcon = navigation => {
   return {
-    headerLeft: (
-      <DrawerIcon onPress={() => navigation.openDrawer()} />
-    ),
+    headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
   };
 };
 

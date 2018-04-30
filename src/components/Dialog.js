@@ -12,7 +12,6 @@ import I18n from 'utils/locale';
 import Button from 'components/Button';
 
 export default class Dialog extends Component {
-
   static propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
@@ -20,13 +19,13 @@ export default class Dialog extends Component {
     rightButtonPress: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
     onDismiss: PropTypes.func,
-    dismissable: PropTypes.bool
+    dismissable: PropTypes.bool,
   };
 
   static defaultProps = {
     leftButtonText: I18n.t('cancel'),
     rightButtonText: I18n.t('yes'),
-    dismissable: false
+    dismissable: false,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -44,17 +43,26 @@ export default class Dialog extends Component {
       rightButtonText,
       rightButtonStyle,
       dismissable,
-      onDismiss
+      onDismiss,
     } = this.props;
     return (
-      <PaperDialog visible={visible} dismissable={dismissable} onDismiss={onDismiss}>
+      <PaperDialog
+        visible={visible}
+        dismissable={dismissable}
+        onDismiss={onDismiss}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <Paragraph>{description}</Paragraph>
         </DialogContent>
         <DialogActions>
-          <Button onPress={leftButtonPress} title={leftButtonText}/>
-          <Button color={Colors.teal500}  primary onPress={rightButtonPress} title={rightButtonText} {...rightButtonStyle}/>
+          <Button onPress={leftButtonPress} title={leftButtonText} />
+          <Button
+            color={Colors.teal500}
+            primary
+            onPress={rightButtonPress}
+            title={rightButtonText}
+            {...rightButtonStyle}
+          />
         </DialogActions>
       </PaperDialog>
     );

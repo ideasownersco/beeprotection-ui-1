@@ -9,7 +9,7 @@ import Modal from 'react-native-modal';
 import colors from 'assets/theme/colors';
 import {Headline} from 'react-native-paper';
 import I18n from 'utils/locale';
-import Button from "components/Button";
+import Button from 'components/Button';
 
 export default class ListModal extends Component {
   static propTypes = {
@@ -42,8 +42,7 @@ export default class ListModal extends Component {
           dark
           style={{marginBottom: 50, paddingVertical: 10}}
           title={I18n.t('save')}
-        >
-        </Button>
+        />
       </Modal>
     );
   }

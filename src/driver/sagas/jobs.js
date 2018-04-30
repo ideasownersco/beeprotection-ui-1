@@ -3,7 +3,7 @@ import {API} from 'driver/common/api';
 import {ACTION_TYPES} from 'driver/common/actions';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
-import {getFileExtension, getFileName} from "utils/functions";
+import {getFileExtension, getFileName} from 'utils/functions';
 
 function* startWorking(action) {
   try {
@@ -96,10 +96,8 @@ function* fetchJobPhotos(action) {
   }
 }
 
-
 function* uploadPhotos(action) {
   try {
-
     const formData = new FormData();
 
     let {images} = action.params;
@@ -114,7 +112,7 @@ function* uploadPhotos(action) {
 
     const params = {
       body: formData,
-      isBlob:true
+      isBlob: true,
     };
 
     const response = yield call(API.uploadPhotos, action.params.job_id, params);
@@ -129,7 +127,6 @@ function* uploadPhotos(action) {
     yield put({type: ACTION_TYPES.UPLOAD_PHOTOS_FAILURE, error});
   }
 }
-
 
 function* startWorkingMonitor() {
   yield takeLatest(ACTION_TYPES.START_WORKING_REQUEST, startWorking);

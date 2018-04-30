@@ -47,8 +47,11 @@ export default class CartSuccessModal extends Component {
           />
 
           <View style={{flexDirection: 'row', paddingTop: 20}}>
-            <Button onPress={onAddNewItemPress} raised secondary
-                    title={I18n.t('add_item')}
+            <Button
+              onPress={onAddNewItemPress}
+              raised
+              secondary
+              title={I18n.t('add_item')}
             />
 
             <Button
@@ -58,7 +61,6 @@ export default class CartSuccessModal extends Component {
               dark
               title={I18n.t('checkout')}
             />
-
           </View>
         </View>
       </Modal>

@@ -13,8 +13,8 @@ import OrderTotal from 'customer/orders/components/OrderTotal';
 import CustomerInfo from 'driver/components/CustomerInfo';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
-import Divider from "components/Divider";
-import Button from "components/Button";
+import Divider from 'components/Divider';
+import Button from 'components/Button';
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -48,9 +48,9 @@ class OrderDetailScene extends Component {
   }
 
   uploadImages = () => {
-    this.props.navigation.navigate('PhotosUpload',{
-      orderID:this.props.order.id,
-      jobID:this.props.order.job.id,
+    this.props.navigation.navigate('PhotosUpload', {
+      orderID: this.props.order.id,
+      jobID: this.props.order.job.id,
     });
   };
 
@@ -66,23 +66,25 @@ class OrderDetailScene extends Component {
         contentContainerStyle={{paddingBottom: 50}}>
         {order.packages && (
           <View>
-            <OrderBasicInfo item={order}/>
-            <OrderItems order={order}/>
-            <OrderTotal total={order.total}/>
+            <OrderBasicInfo item={order} />
+            <OrderItems order={order} />
+            <OrderTotal total={order.total} />
             {order.user && (
               <View>
-                <SectionHeading title={I18n.t('customer_info')}/>
-                <CustomerInfo user={order.user}/>
+                <SectionHeading title={I18n.t('customer_info')} />
+                <CustomerInfo user={order.user} />
               </View>
             )}
 
-            <Divider style={{marginBottom: 10}}/>
+            <Divider style={{marginBottom: 10}} />
 
-            {
-              order.trackeable &&
-              <Button raised onPress={this.uploadImages} title={I18n.t('upload_images')}/>
-            }
-
+            {order.trackeable && (
+              <Button
+                raised
+                onPress={this.uploadImages}
+                title={I18n.t('upload_images')}
+              />
+            )}
           </View>
         )}
       </ScrollView>

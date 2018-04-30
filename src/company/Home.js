@@ -36,12 +36,16 @@ class Home extends PureComponent {
   }
 
   fetchData = () => {
-    this.props.dispatch(ORDER_ACTIONS.fetchUpcomingOrders({
-      force:true
-    }));
-    this.props.dispatch(ORDER_ACTIONS.fetchWorkingOrders({
-      force:true
-    }));
+    this.props.dispatch(
+      ORDER_ACTIONS.fetchUpcomingOrders({
+        force: true,
+      }),
+    );
+    this.props.dispatch(
+      ORDER_ACTIONS.fetchWorkingOrders({
+        force: true,
+      }),
+    );
   };
 
   _onRefresh = () => {

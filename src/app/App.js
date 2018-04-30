@@ -95,7 +95,6 @@ class App extends Component {
   };
 
   render() {
-
     const {app, notifications, user} = this.props;
 
     if (!app.booted) return null;
@@ -126,10 +125,7 @@ class App extends Component {
           onReceiveNotifications={this.onReceivePushNotifications}
         />
 
-        <Navigator
-          user={user}
-          logout={this.logout}
-        />
+        <Navigator user={user} logout={this.logout} />
       </View>
     );
   }

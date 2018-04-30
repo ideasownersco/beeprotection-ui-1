@@ -17,8 +17,8 @@ import NavButton from 'components/NavButton';
 import colors from 'assets/theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from 'components/Button';
-import Dialog from "components/Dialog";
-import IconFactory from "components/IconFactory";
+import Dialog from 'components/Dialog';
+import IconFactory from 'components/IconFactory';
 
 type State = {
   activeCategoryID: ?number,
@@ -218,9 +218,9 @@ class CreateOrder extends PureComponent {
       : categories.length
         ? categories[0]
         : {
-          id: undefined,
-          packages: [],
-        };
+            id: undefined,
+            packages: [],
+          };
 
     return (
       <ScrollView
@@ -234,13 +234,13 @@ class CreateOrder extends PureComponent {
         />
 
         {activeCategory.packages &&
-        activeCategory.packages.length && (
-          <PackagesList
-            items={activeCategory.packages}
-            onItemPress={this.onPackagesListItemPress}
-            activeItemID={activePackageID}
-          />
-        )}
+          activeCategory.packages.length && (
+            <PackagesList
+              items={activeCategory.packages}
+              onItemPress={this.onPackagesListItemPress}
+              activeItemID={activePackageID}
+            />
+          )}
 
         {activePackageID && (
           <ServicesList
@@ -278,9 +278,15 @@ class CreateOrder extends PureComponent {
         <Dialog
           title={I18n.t('success')}
           description={
-            <View style={{flexDirection:'row',alignItems:'center'}}>
-              <IconFactory type="MaterialIcons" name="check" color={colors.primary}/>
-              <Text style={{paddingHorizontal:10}}>{I18n.t('cart_item_added')}</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <IconFactory
+                type="MaterialIcons"
+                name="check"
+                color={colors.primary}
+              />
+              <Text style={{paddingHorizontal: 10}}>
+                {I18n.t('cart_item_added')}
+              </Text>
             </View>
           }
           leftButtonPress={this.onAddNewItemPress}
@@ -289,10 +295,9 @@ class CreateOrder extends PureComponent {
           rightButtonText={I18n.t('checkout').toUpperCase()}
           leftButtonText={I18n.t('add_item').toUpperCase()}
           rightButtonStyle={{
-            primary:true
+            primary: true,
           }}
         />
-
       </ScrollView>
     );
   }

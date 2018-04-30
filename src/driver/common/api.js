@@ -45,7 +45,7 @@ function stopDriving(id) {
   return request(requestParams);
 }
 
-function uploadPhotos(id,params) {
+function uploadPhotos(id, params) {
   const path = `driver/jobs/${id}/photos`;
   let requestParams = {
     path,
@@ -97,6 +97,5 @@ export const API = {
   startDriving,
   stopDriving,
   fetchJobPhotos,
-  uploadPhotos
-
+  uploadPhotos,
 };

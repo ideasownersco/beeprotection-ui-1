@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {Text,StyleSheet} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {Button as PaperButton} from 'react-native-paper';
 
 export default class Button extends Component {
-
   shouldComponentUpdate(nextProps) {
     return (
       nextProps.disabled !== this.props.disabled ||
@@ -23,17 +22,14 @@ export default class Button extends Component {
   };
 
   render() {
-    const {
-      title,
-      titleStyle,
-      disabled,
-      onPress,
-      style,
-      ...rest
-    } = this.props;
+    const {title, titleStyle, disabled, onPress, style, ...rest} = this.props;
 
     return (
-      <PaperButton disabled={disabled} onPress={onPress} style={[styles.container,style]} {...rest}>
+      <PaperButton
+        disabled={disabled}
+        onPress={onPress}
+        style={[styles.container, style]}
+        {...rest}>
         <Text style={[titleStyle]}>{title}</Text>
       </PaperButton>
     );
@@ -41,6 +37,5 @@ export default class Button extends Component {
 }
 
 const styles = StyleSheet.create({
-  container:{
-  }
+  container: {},
 });

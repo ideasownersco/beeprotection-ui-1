@@ -147,10 +147,10 @@ const styles = StyleSheet.create({
     zIndex: 5000,
     top: 20,
     margin: 10,
-    marginTop:40,
+    marginTop: 40,
     backgroundColor: colors.white,
-    borderWidth:1,
-    borderColor:colors.primary,
+    borderWidth: 1,
+    borderColor: colors.primary,
   },
   searchInputContainer: {
     flexDirection: 'row',

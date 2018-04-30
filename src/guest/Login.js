@@ -99,11 +99,7 @@ class Login extends Component {
 
   render() {
     const {auth} = this.props;
-    const {
-      email,
-      password,
-      busy,
-    } = this.state;
+    const {email, password, busy} = this.state;
 
     return (
       <FormContainer>
@@ -154,7 +150,6 @@ class Login extends Component {
         </FormContent>
       </FormContainer>
     );
-
   }
 }
 

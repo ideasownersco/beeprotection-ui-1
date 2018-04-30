@@ -8,12 +8,12 @@ import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
 import {View} from 'react-native';
 import PropTypes from 'prop-types';
 import I18n from 'utils/locale';
-import {FAB} from "react-native-paper";
+import {FAB} from 'react-native-paper';
 import UploadImage from 'driver/components/UploadImage';
 import ListModal from 'components/ListModal';
-import PhotosList from "driver/components/PhotosList";
-import colors from "assets/theme/colors";
-import Dialog from "components/Dialog";
+import PhotosList from 'driver/components/PhotosList';
+import colors from 'assets/theme/colors';
+import Dialog from 'components/Dialog';
 import ImagePicker from 'react-native-image-crop-picker';
 
 class PhotosUploadScene extends Component {
@@ -34,15 +34,13 @@ class PhotosUploadScene extends Component {
 
   state = {
     showUploadImageModal: false,
-    images:[],
-    showImageUploadOptionsDialog:false
+    images: [],
+    showImageUploadOptionsDialog: false,
   };
 
   componentDidMount() {
     this.props.dispatch(
-      DRIVER_ACTIONS.fetchJobPhotos(
-        this.props.navigation.state.params.jobID,
-      ),
+      DRIVER_ACTIONS.fetchJobPhotos(this.props.navigation.state.params.jobID),
     );
   }
 
@@ -79,13 +77,14 @@ class PhotosUploadScene extends Component {
       imagesUploaded: true,
     });
 
-    this.props.dispatch(DRIVER_ACTIONS.uploadImages({
-      job_id:this.props.order.job.id,
-      images:this.state.images
-    }));
+    this.props.dispatch(
+      DRIVER_ACTIONS.uploadImages({
+        job_id: this.props.order.job.id,
+        images: this.state.images,
+      }),
+    );
 
     // this.hideUploadImageModal();
-
   };
 
   deleteImage = image => {
@@ -108,11 +107,9 @@ class PhotosUploadScene extends Component {
     });
   };
 
-  onPhotoListItemPress = () => {
-  };
+  onPhotoListItemPress = () => {};
 
-  onPhotoListItemDeletePress = () => {
-  };
+  onPhotoListItemDeletePress = () => {};
 
   uploadFromAlbum = () => {
     this.hideImageUploadOptions();
@@ -123,20 +120,21 @@ class PhotosUploadScene extends Component {
     this.hideImageUploadOptions();
 
     ImagePicker.openCamera({
-      multiple:true,
+      multiple: true,
       cropping: false,
       width: 500,
       height: 500,
       includeExif: true,
-    }).then(image => {
-      
-      this.props.dispatch(DRIVER_ACTIONS.uploadImages({
-        job_id:this.props.order.job.id,
-        images:[image]
-      }))
-      
-    }).catch(e => alert(e));
-
+    })
+      .then(image => {
+        this.props.dispatch(
+          DRIVER_ACTIONS.uploadImages({
+            job_id: this.props.order.job.id,
+            images: [image],
+          }),
+        );
+      })
+      .catch(e => alert(e));
   };
 
   onImageUploadOptionsDialogDismiss = () => {
@@ -149,15 +147,14 @@ class PhotosUploadScene extends Component {
     let {
       showUploadImageModal,
       images,
-      showImageUploadOptionsDialog
+      showImageUploadOptionsDialog,
     } = this.state;
 
     return (
       <View
         style={{flex: 1}}
         keyboardShouldPersistTap="always"
-        contentContainerStyle={{paddingBottom: 50}}
-      >
+        contentContainerStyle={{paddingBottom: 50}}>
         <PhotosList
           items={order.job.photos || []}
           onItemPress={this.onPhotoListItemPress}
@@ -178,7 +175,14 @@ class PhotosUploadScene extends Component {
 
         <Dialog
           title={I18n.t('upload_images')}
-          onDismiss={this.onImageUploadOptionsDialogDismiss} dismissable={true} leftButtonText={I18n.t('upload_from_album').toUpperCase()} rightButtonText={I18n.t('upload_from_camera').toUpperCase()} leftButtonPress={this.uploadFromAlbum} rightButtonPress={this.uploadFromCamera} visible={showImageUploadOptionsDialog}/>
+          onDismiss={this.onImageUploadOptionsDialogDismiss}
+          dismissable={true}
+          leftButtonText={I18n.t('upload_from_album').toUpperCase()}
+          rightButtonText={I18n.t('upload_from_camera').toUpperCase()}
+          leftButtonPress={this.uploadFromAlbum}
+          rightButtonPress={this.uploadFromCamera}
+          visible={showImageUploadOptionsDialog}
+        />
 
         <ListModal
           onCancel={this.hideUploadImageModal}
@@ -190,7 +194,6 @@ class PhotosUploadScene extends Component {
             deleteImage={this.deleteImage}
           />
         </ListModal>
-
       </View>
     );
   }

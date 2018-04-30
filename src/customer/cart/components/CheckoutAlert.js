@@ -78,10 +78,19 @@ export default class CheckoutAlert extends Component {
         </DialogScrollArea>
 
         <DialogActions>
-          <Button primary onPress={close} disabled={disabled} title={I18n.t('cancel')}/>
-          <Button primary onPress={checkout} disabled={disabled} title={I18n.t('checkout')}/>
+          <Button
+            primary
+            onPress={close}
+            disabled={disabled}
+            title={I18n.t('cancel')}
+          />
+          <Button
+            primary
+            onPress={checkout}
+            disabled={disabled}
+            title={I18n.t('checkout')}
+          />
         </DialogActions>
-
       </Dialog>
     );
   }

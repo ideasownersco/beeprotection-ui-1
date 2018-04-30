@@ -4,8 +4,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import I18n from 'utils/locale';
 import List from 'components/List';
-import IconFactory from "components/IconFactory";
-import colors from "assets/theme/colors";
+import IconFactory from 'components/IconFactory';
+import colors from 'assets/theme/colors';
 
 export default class SelectArea extends Component {
   static propTypes = {
@@ -49,14 +49,16 @@ export default class SelectArea extends Component {
     return (
       <Touchable style={{}} onPress={this.showAreaModal}>
         <View style={styles.container}>
-
-          <Text
-            style={styles.title}>
+          <Text style={styles.title}>
             {area_id
               ? items.find(area => area.id === area_id).name
               : I18n.t('select_area')}
           </Text>
-          <IconFactory type="MaterialCommunityIcons" name="arrow-down" size={20}/>
+          <IconFactory
+            type="MaterialCommunityIcons"
+            name="arrow-down"
+            size={20}
+          />
 
           <List
             title={I18n.t('select_area')}
@@ -80,10 +82,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title:{
+  title: {
     fontSize: 18,
     fontWeight: '500',
     color: colors.fadedBlack,
-    paddingHorizontal:10
-  }
+    paddingHorizontal: 10,
+  },
 });

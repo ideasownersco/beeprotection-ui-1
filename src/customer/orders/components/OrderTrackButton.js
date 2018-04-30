@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {StyleSheet} from 'react-native';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
-import Button from "components/Button";
+import Button from 'components/Button';
 
 const OrderTrackButton = ({onPress, style, disabled}) => {
   return (
