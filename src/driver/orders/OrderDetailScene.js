@@ -70,20 +70,19 @@ class OrderDetailScene extends Component {
         contentContainerStyle={{paddingBottom: 50}}>
         {order.packages && (
           <View>
-            <OrderBasicInfo item={order}/>
-            <OrderItems order={order}/>
-            <OrderTotal total={order.total}/>
+            <OrderBasicInfo item={order} />
+            <OrderItems order={order} />
+            <OrderTotal total={order.total} />
             {order.user && (
               <View>
-                <SectionHeading title={I18n.t('customer_info')}/>
-                <CustomerInfo user={order.user}/>
+                <SectionHeading title={I18n.t('customer_info')} />
+                <CustomerInfo user={order.user} />
               </View>
             )}
 
-            <Divider style={{marginBottom: 10}}/>
+            <Divider style={{marginBottom: 10}} />
 
             {order.trackeable && (
-
               <View>
                 <Button
                   raised
@@ -93,16 +92,14 @@ class OrderDetailScene extends Component {
                   dark
                 />
 
-                <Divider style={{marginBottom: 10}}/>
+                <Divider style={{marginBottom: 10}} />
 
                 <Button
                   raised
                   onPress={this.uploadImages}
                   title={I18n.t('upload_images')}
                 />
-
               </View>
-
             )}
           </View>
         )}

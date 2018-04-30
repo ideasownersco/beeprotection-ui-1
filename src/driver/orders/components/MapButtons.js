@@ -102,11 +102,7 @@ export default class MapButtons extends Component {
       showStopWorkingDialog,
     } = this.state;
 
-    const {
-      jobStatus,
-      address,
-      onDirectionPress,
-    } = this.props;
+    const {jobStatus, address, onDirectionPress} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.navContainer}>
@@ -125,7 +121,7 @@ export default class MapButtons extends Component {
           <Button
             title={I18n.t('start_driving')}
             onPress={this.showStartDrivingDialog}
-            style={{marginHorizontal:20,marginBottom:30,}}
+            style={{marginHorizontal: 20, marginBottom: 30}}
             raised
             primary
             dark
@@ -136,7 +132,7 @@ export default class MapButtons extends Component {
           <Button
             title={I18n.t('stop_driving')}
             onPress={this.showStopDrivingDialog}
-            style={{marginHorizontal:20,marginBottom:30,}}
+            style={{marginHorizontal: 20, marginBottom: 30}}
             raised
             primary
             dark
@@ -148,7 +144,7 @@ export default class MapButtons extends Component {
             <Button
               title={I18n.t('start_working')}
               onPress={this.showStartWorkingDialog}
-              style={{marginHorizontal:20,marginBottom:30,}}
+              style={{marginHorizontal: 20, marginBottom: 30}}
               raised
               primary
               dark
@@ -160,7 +156,7 @@ export default class MapButtons extends Component {
           <Button
             title={I18n.t('stop_working')}
             onPress={this.showStopWorkingDialog}
-            style={{marginHorizontal:20,marginBottom:30,}}
+            style={{marginHorizontal: 20, marginBottom: 30}}
             raised
             primary
             dark

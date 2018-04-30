@@ -27,7 +27,7 @@ class TrackOrderScene extends Component {
   };
 
   state = {
-    initialized:false,
+    initialized: false,
     tracking_enabled: false,
     // latitude: 37.78825,
     // longitude: -122.4324,
@@ -165,15 +165,10 @@ class TrackOrderScene extends Component {
     }
 
     let {address, job} = order;
-    let {
-      latitude,
-      longitude,
-      heading,
-    } = this.state;
+    let {latitude, longitude, heading} = this.state;
 
     return (
       <View style={{flex: 1}}>
-
         <Map
           origin={{
             latitude: latitude,
@@ -196,7 +191,6 @@ class TrackOrderScene extends Component {
           stopWorking={this.stopWorking}
           jobStatus={job.status}
         />
-
       </View>
     );
   }
