@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {ScrollView, Text, View, StyleSheet} from 'react-native';
 import {
   Paragraph,
-  Button,
   Dialog,
   DialogTitle,
   DialogActions,
@@ -13,6 +12,8 @@ import {
 import I18n from 'utils/locale';
 import AddressInfo from 'components/AddressInfo';
 import colors from 'assets/theme/colors';
+
+import Button from 'components/Button';
 
 export default class CheckoutAlert extends Component {
   render() {
@@ -75,15 +76,12 @@ export default class CheckoutAlert extends Component {
             </View>
           </ScrollView>
         </DialogScrollArea>
-        <DialogActions>
-          <Button primary onPress={close} disabled={disabled}>
-            {I18n.t('cancel')}
-          </Button>
 
-          <Button primary onPress={checkout} disabled={disabled}>
-            {I18n.t('checkout')}
-          </Button>
+        <DialogActions>
+          <Button primary onPress={close} disabled={disabled} title={I18n.t('cancel')}/>
+          <Button primary onPress={checkout} disabled={disabled} title={I18n.t('checkout')}/>
         </DialogActions>
+
       </Dialog>
     );
   }

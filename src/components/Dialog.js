@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   Dialog as PaperDialog,
-  Button,
   DialogActions,
   DialogContent,
   DialogTitle,
@@ -10,22 +9,24 @@ import {
   Colors,
 } from 'react-native-paper';
 import I18n from 'utils/locale';
+import Button from 'components/Button';
 
 export default class Dialog extends Component {
+
   static propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
-    leftPress: PropTypes.func.isRequired,
-    rightPress: PropTypes.func.isRequired,
+    leftButtonPress: PropTypes.func.isRequired,
+    rightButtonPress: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
-    onDismiss:PropTypes.func,
-    dismissable:PropTypes.bool
+    onDismiss: PropTypes.func,
+    dismissable: PropTypes.bool
   };
 
   static defaultProps = {
-    leftText: I18n.t('cancel'),
-    rightText: I18n.t('yes'),
-    dismissable:false
+    leftButtonText: I18n.t('cancel'),
+    rightButtonText: I18n.t('yes'),
+    dismissable: false
   };
 
   shouldComponentUpdate(nextProps) {
@@ -37,10 +38,10 @@ export default class Dialog extends Component {
       title,
       description,
       visible,
-      leftPress,
-      rightPress,
-      leftText,
-      rightText,
+      leftButtonPress,
+      rightButtonPress,
+      leftButtonText,
+      rightButtonText,
       dismissable,
       onDismiss
     } = this.props;
@@ -51,12 +52,8 @@ export default class Dialog extends Component {
           <Paragraph>{description}</Paragraph>
         </DialogContent>
         <DialogActions>
-          <Button color={Colors.teal500} onPress={leftPress}>
-            {leftText}
-          </Button>
-          <Button primary onPress={rightPress}>
-            {rightText}
-          </Button>
+          <Button color={Colors.teal500} onPress={leftButtonPress} title={leftButtonText}/>
+          <Button primary onPress={rightButtonPress} title={rightButtonText}/>
         </DialogActions>
       </PaperDialog>
     );

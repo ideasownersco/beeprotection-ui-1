@@ -9,7 +9,7 @@ import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
 import {SELECTORS, SELECTORS as ORDER_SELECTORS,} from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
-import {Button} from 'react-native-paper';
+import Button from 'components/Button';
 import I18n from 'utils/locale';
 import CartItems from 'customer/cart/components/CartItems';
 import DatePicker from 'customer/cart/components/DatePicker';
@@ -367,9 +367,9 @@ class Cart extends PureComponent {
           <Button
             onPress={this.showAddressCreateModal}
             color={colors.primary}
-            icon={'add'}>
-            {I18n.t('add_address')}
-          </Button>
+            icon={'add'}
+            title={I18n.t('add_address')}
+          />
         </View>
 
         <Divider
@@ -402,9 +402,9 @@ class Cart extends PureComponent {
             paddingVertical: 10,
             marginTop: 20,
             backgroundColor: colors.primary,
-          }}>
-          {I18n.t('checkout')}
-        </Button>
+          }}
+          title={I18n.t('checkout')}
+        />
 
         <OrderSuccess
           onPress={this.onSuccessButtonPress}

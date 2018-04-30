@@ -91,9 +91,6 @@ const HomeStack = StackNavigator(
         headerLeft: <BackButton onPress={() => navigation.goBack(null)} />,
       }),
     },
-    // DriverLocationMap: {
-    //   screen: DriverLocationMapScene,
-    // },
     TrackDetail: {
       screen: TrackDetailScene,
     },

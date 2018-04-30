@@ -179,7 +179,7 @@ class PhotosUploadScene extends Component {
         
         <Dialog
           title={I18n.t('upload_images')}
-          onDismiss={this.onImageUploadOptionsDialogDismiss} dismissable={true} leftText={I18n.t('upload_from_album')} rightText={I18n.t('upload_from_camera')} leftPress={this.uploadFromAlbum} rightPress={this.uploadFromCamera} visible={showImageUploadOptionsDialog}/>
+          onDismiss={this.onImageUploadOptionsDialogDismiss} dismissable={true} leftButtonText={I18n.t('upload_from_album')} rightButtonText={I18n.t('upload_from_camera')} leftButtonPress={this.uploadFromAlbum} rightButtonPress={this.uploadFromCamera} visible={showImageUploadOptionsDialog}/>
 
         <ListModal
           onCancel={this.hideUploadImageModal}

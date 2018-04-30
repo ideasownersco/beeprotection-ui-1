@@ -19,13 +19,8 @@ export default class MapButtons extends Component {
 
     return (
       <View style={styles.container}>
-        <Button onPress={close} style={styles.button} raised>
-          {I18n.t('cancel')}
-        </Button>
-
-        <Button onPress={save} style={styles.button} raised primary dark>
-          {I18n.t('save')}
-        </Button>
+        <Button onPress={close} style={styles.button} raised title={I18n.t('cancel')}/>
+        <Button onPress={save} style={styles.button} raised primary dark title={I18n.t('save')}/>
       </View>
     );
   }

@@ -11,13 +11,13 @@ import {SELECTORS} from 'customer/selectors/orders';
 import CategoriesList from 'customer/orders/components/CategoriesList';
 import PackagesList from 'customer/orders/components/PackagesList';
 import ServicesList from 'customer/orders/components/ServicesList';
-import {Button, Title} from 'react-native-paper';
+import {Title} from 'react-native-paper';
 import I18n from 'utils/locale';
 import NavButton from 'components/NavButton';
 import colors from 'assets/theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CartSuccessModal from 'customer/cart/components/CartSuccessModal';
-
+import Button from 'components/Button';
 type State = {
   activeCategoryID: ?number,
   activePackageID: ?number,
@@ -216,9 +216,9 @@ class CreateOrder extends PureComponent {
       : categories.length
         ? categories[0]
         : {
-            id: undefined,
-            packages: [],
-          };
+          id: undefined,
+          packages: [],
+        };
 
     return (
       <ScrollView
@@ -232,13 +232,13 @@ class CreateOrder extends PureComponent {
         />
 
         {activeCategory.packages &&
-          activeCategory.packages.length && (
-            <PackagesList
-              items={activeCategory.packages}
-              onItemPress={this.onPackagesListItemPress}
-              activeItemID={activePackageID}
-            />
-          )}
+        activeCategory.packages.length && (
+          <PackagesList
+            items={activeCategory.packages}
+            onItemPress={this.onPackagesListItemPress}
+            activeItemID={activePackageID}
+          />
+        )}
 
         {activePackageID && (
           <ServicesList
@@ -269,9 +269,9 @@ class CreateOrder extends PureComponent {
           style={{
             backgroundColor: colors.primary,
             padding: 10,
-          }}>
-          {I18n.t('add_to_cart')}
-        </Button>
+          }}
+          title={I18n.t('add_to_cart')}
+        />
 
         <CartSuccessModal
           onAddNewItemPress={this.onAddNewItemPress}

@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {Button, Title} from 'react-native-paper';
+import {Title} from 'react-native-paper';
 import Swiper from 'react-native-swiper';
-import colors from '../assets/theme/colors';
-import LanguageSelectScene from './scenes/LanguageSelectScene';
+import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
+import Button from "components/Button";
 
 export default class SplashScreen extends Component {
   static propTypes = {

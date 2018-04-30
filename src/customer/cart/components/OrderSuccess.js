@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import Modal from 'react-native-modal';
 import colors from 'assets/theme/colors';
-import {Button, Title} from 'react-native-paper';
+import {Title} from 'react-native-paper';
 import I18n from 'utils/locale';
 import Divider from 'components/Divider';
+import Button from 'components/Button';
 
 export default class OrderSuccess extends Component {
   // shouldComponentUpdate(nextProps) {
@@ -70,9 +71,9 @@ export default class OrderSuccess extends Component {
             dark
             raised
             onPress={onPress}
-            style={{padding: 20}}>
-            {I18n.t('home')}
-          </Button>
+            style={{padding: 20}}
+            title={I18n.t('home')}
+          />
         </ScrollView>
       </Modal>
     );

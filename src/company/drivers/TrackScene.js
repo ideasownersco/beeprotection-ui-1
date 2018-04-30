@@ -6,12 +6,12 @@ import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {Image, Dimensions, View} from 'react-native';
 import images from 'assets/theme/images';
 import {SELECTORS as COMPANY__DRIVER_SELECTORS} from 'company/selectors/drivers';
-import {Button} from 'react-native-paper';
-
+import Button from "components/Button";
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.3;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+import I18n from 'utils/locale';
 
 const DEFAULT_PADDING = {top: 100, right: 100, bottom: 100, left: 100};
 
@@ -180,9 +180,7 @@ class TrackScene extends PureComponent {
         </MapView>
 
         {this.state.pauseTrackingUpdate && (
-          <Button raised primary dark onPress={this.resumeTrackingUpdate}>
-            Resume
-          </Button>
+          <Button raised primary dark onPress={this.resumeTrackingUpdate} title={I18n.t('resume')} />
         )}
       </View>
     );

@@ -13,8 +13,8 @@ import OrderTotal from 'customer/orders/components/OrderTotal';
 import CustomerInfo from 'driver/components/CustomerInfo';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
-import Divider from "../../components/Divider";
-import {Button} from "react-native-paper";
+import Divider from "components/Divider";
+import Button from "components/Button";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -80,10 +80,7 @@ class OrderDetailScene extends Component {
 
             {
               order.trackeable &&
-              <Button raised onPress={this.uploadImages}>
-                <Text>{I18n.t('upload_images')}</Text>
-              </Button>
-
+              <Button raised onPress={this.uploadImages} title={I18n.t('upload_images')}/>
             }
 
           </View>

@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text, Modal} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
-import Touchable from 'react-native-platform-touchable';
+import {Modal, StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
-import Divider from 'components/Divider';
 import Button from 'components/Button';
 import I18n from 'utils/locale';
 import DriversList from 'driver/components/DriversList';
