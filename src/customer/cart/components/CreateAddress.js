@@ -6,10 +6,9 @@ import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
 import AddressFormFields from 'customer/cart/components/AddressFormFields';
 import BackgroundGeolocation from 'react-native-background-geolocation';
-import {Button} from 'react-native-paper';
 import Divider from 'components/Divider';
-import SelectArea from './SelectArea';
-import MapButtons from './MapButtons';
+import SelectArea from 'customer/cart/components/SelectArea';
+import MapButtons from 'customer/cart/components/MapButtons';
 
 export default class extends PureComponent {
   static propTypes = {

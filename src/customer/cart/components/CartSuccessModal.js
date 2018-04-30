@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {StyleSheet, Text, View} from 'react-native';
 import Modal from 'react-native-modal';
 import colors from 'assets/theme/colors';
-import {Button} from 'react-native-paper';
+import Button from 'components/Button';
 import I18n from 'utils/locale';
 import IconFactory from 'components/IconFactory';
 

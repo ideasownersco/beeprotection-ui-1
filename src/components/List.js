@@ -4,10 +4,10 @@
 import React, {Component} from 'react';
 import Touchable from 'react-native-platform-touchable';
 import PropTypes from 'prop-types';
-import {FlatList, Text, View, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Divider from 'components/Divider';
 import colors from 'assets/theme/colors';
-import {Button, Checkbox, Headline} from 'react-native-paper';
+import {Checkbox} from 'react-native-paper';
 import I18n from 'utils/locale';
 import ListModal from 'components/ListModal';
 
