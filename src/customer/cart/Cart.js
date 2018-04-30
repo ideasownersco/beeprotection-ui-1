@@ -24,7 +24,7 @@ import CartTotal from 'customer/cart/components/CartTotal';
 import PaymentOptions from 'customer/cart/components/PaymentOptions';
 import OrderSuccess from 'customer/cart/components/OrderSuccess';
 import PaymentPage from 'customer/cart/components/PaymentPage';
-import TimePicker from 'components/TimePicker';
+import TimePicker from 'customer/cart/components/TimePicker';
 import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
 import SectionTitle from 'components/SectionTitle';
 import CheckoutAlert from 'customer/cart/components/CheckoutAlert';
