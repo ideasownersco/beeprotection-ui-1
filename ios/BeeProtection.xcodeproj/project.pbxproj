@@ -1687,6 +1687,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+                );
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1716,6 +1717,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+                );
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
