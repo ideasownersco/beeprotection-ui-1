@@ -71,8 +71,7 @@ export default class PhotosList extends Component {
 
 const styles = StyleSheet.create({
   listContainer: {
-    backgroundColor: colors.fadedWhite,
-    margin: 5,
+    padding:10
   },
   itemContainer: {
     flexDirection: 'row',

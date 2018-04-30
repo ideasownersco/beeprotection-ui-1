@@ -154,11 +154,10 @@ class PhotosUploadScene extends Component {
 
     return (
       <View
-        style={{flex: 1,padding:10}}
+        style={{flex: 1}}
         keyboardShouldPersistTap="always"
         contentContainerStyle={{paddingBottom: 50}}
       >
-
         <PhotosList
           items={order.job.photos || []}
           onItemPress={this.onPhotoListItemPress}
@@ -176,10 +175,10 @@ class PhotosUploadScene extends Component {
             backgroundColor: colors.primary,
           }}
         />
-        
+
         <Dialog
           title={I18n.t('upload_images')}
-          onDismiss={this.onImageUploadOptionsDialogDismiss} dismissable={true} leftButtonText={I18n.t('upload_from_album')} rightButtonText={I18n.t('upload_from_camera')} leftButtonPress={this.uploadFromAlbum} rightButtonPress={this.uploadFromCamera} visible={showImageUploadOptionsDialog}/>
+          onDismiss={this.onImageUploadOptionsDialogDismiss} dismissable={true} leftButtonText={I18n.t('upload_from_album').toUpperCase()} rightButtonText={I18n.t('upload_from_camera').toUpperCase()} leftButtonPress={this.uploadFromAlbum} rightButtonPress={this.uploadFromCamera} visible={showImageUploadOptionsDialog}/>
 
         <ListModal
           onCancel={this.hideUploadImageModal}

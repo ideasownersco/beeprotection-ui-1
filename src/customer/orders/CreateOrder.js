@@ -16,8 +16,10 @@ import I18n from 'utils/locale';
 import NavButton from 'components/NavButton';
 import colors from 'assets/theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import CartSuccessModal from 'customer/cart/components/CartSuccessModal';
 import Button from 'components/Button';
+import Dialog from "components/Dialog";
+import IconFactory from "components/IconFactory";
+
 type State = {
   activeCategoryID: ?number,
   activePackageID: ?number,
@@ -273,12 +275,24 @@ class CreateOrder extends PureComponent {
           title={I18n.t('add_to_cart')}
         />
 
-        <CartSuccessModal
-          onAddNewItemPress={this.onAddNewItemPress}
-          onCheckoutPress={this.onCheckoutPress}
+        <Dialog
+          title={I18n.t('success')}
+          description={
+            <View style={{flexDirection:'row',alignItems:'center'}}>
+              <IconFactory type="MaterialIcons" name="check" color={colors.primary}/>
+              <Text style={{paddingHorizontal:10}}>{I18n.t('cart_item_added')}</Text>
+            </View>
+          }
+          leftButtonPress={this.onAddNewItemPress}
+          rightButtonPress={this.onCheckoutPress}
           visible={showCartSuccessModal}
-          onHide={this.hideCheckoutModal}
+          rightButtonText={I18n.t('checkout').toUpperCase()}
+          leftButtonText={I18n.t('add_item').toUpperCase()}
+          rightButtonStyle={{
+            primary:true
+          }}
         />
+
       </ScrollView>
     );
   }

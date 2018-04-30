@@ -42,6 +42,7 @@ export default class Dialog extends Component {
       rightButtonPress,
       leftButtonText,
       rightButtonText,
+      rightButtonStyle,
       dismissable,
       onDismiss
     } = this.props;
@@ -52,8 +53,8 @@ export default class Dialog extends Component {
           <Paragraph>{description}</Paragraph>
         </DialogContent>
         <DialogActions>
-          <Button color={Colors.teal500} onPress={leftButtonPress} title={leftButtonText}/>
-          <Button primary onPress={rightButtonPress} title={rightButtonText}/>
+          <Button onPress={leftButtonPress} title={leftButtonText}/>
+          <Button color={Colors.teal500}  primary onPress={rightButtonPress} title={rightButtonText} {...rightButtonStyle}/>
         </DialogActions>
       </PaperDialog>
     );
