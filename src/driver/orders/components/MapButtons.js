@@ -17,10 +17,6 @@ export default class MapButtons extends Component {
     startWorking: PropTypes.func.isRequired,
     stopWorking: PropTypes.func.isRequired,
     onDirectionPress: PropTypes.func.isRequired,
-    approveImages: PropTypes.func.isRequired,
-    uploadImages: PropTypes.func.isRequired,
-    imagesApproved: PropTypes.bool.isRequired,
-    imagesUploaded: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -110,10 +106,6 @@ export default class MapButtons extends Component {
       jobStatus,
       address,
       onDirectionPress,
-      approveImages,
-      uploadImages,
-      imagesApproved,
-      imagesUploaded,
     } = this.props;
     return (
       <View style={styles.container}>
@@ -124,7 +116,7 @@ export default class MapButtons extends Component {
 
           <Touchable onPress={onDirectionPress}>
             <View style={{alignItems: 'center'}}>
-              <Ionicons name="ios-navigate-outline" size={35} />
+              <Ionicons name="ios-navigate-outline" size={32} />
             </View>
           </Touchable>
         </View>
@@ -133,7 +125,10 @@ export default class MapButtons extends Component {
           <Button
             title={I18n.t('start_driving')}
             onPress={this.showStartDrivingDialog}
-            style={{marginBottom: 10}}
+            style={{marginHorizontal:20,marginBottom:30,}}
+            raised
+            primary
+            dark
           />
         )}
 
@@ -141,7 +136,10 @@ export default class MapButtons extends Component {
           <Button
             title={I18n.t('stop_driving')}
             onPress={this.showStopDrivingDialog}
-            style={{marginBottom: 10}}
+            style={{marginHorizontal:20,marginBottom:30,}}
+            raised
+            primary
+            dark
           />
         )}
 
@@ -150,25 +148,11 @@ export default class MapButtons extends Component {
             <Button
               title={I18n.t('start_working')}
               onPress={this.showStartWorkingDialog}
-              style={{marginBottom: 10, width: 150}}
+              style={{marginHorizontal:20,marginBottom:30,}}
+              raised
+              primary
+              dark
             />
-
-            {imagesUploaded &&
-              !imagesApproved && (
-                <Button
-                  title={I18n.t('approve_images')}
-                  onPress={approveImages}
-                  style={{marginBottom: 10, width: 150}}
-                />
-              )}
-
-            {!imagesUploaded && (
-              <Button
-                title={I18n.t('upload_images')}
-                onPress={uploadImages}
-                style={{marginBottom: 10, width: 150}}
-              />
-            )}
           </View>
         )}
 
@@ -176,7 +160,10 @@ export default class MapButtons extends Component {
           <Button
             title={I18n.t('stop_working')}
             onPress={this.showStopWorkingDialog}
-            style={{marginBottom: 10}}
+            style={{marginHorizontal:20,marginBottom:30,}}
+            raised
+            primary
+            dark
           />
         )}
 

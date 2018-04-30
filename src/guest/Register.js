@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {ACTIONS} from './common/actions';
+import {ACTIONS} from 'guest/common/actions';
 import {Text} from 'react-native';
 import FormTextInput from 'components/FormTextInput';
 import FormSubmit from 'components/FormSubmit';

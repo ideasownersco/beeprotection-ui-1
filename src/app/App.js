@@ -13,7 +13,7 @@ import {CODE_PUSH_ENABLED} from 'utils/env';
 import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import NavigatorService from 'components/NavigatorService';
 import colors from 'assets/theme/colors';
-import SplashScreen from './SplashScreen';
+import SplashScreen from 'app/SplashScreen';
 
 class App extends Component {
   static propTypes = {
@@ -55,15 +55,13 @@ class App extends Component {
       let {type} = data;
       switch (type) {
         case 'started.working':
+        case 'stopped.working':
+        case 'started.driving':
+        case 'stopped.driving':
           let {order_id} = data;
           return navigation.navigate('OrderDetail', {
             orderID: order_id,
           });
-        case 'stopped.working':
-          break;
-        case 'started.driving':
-          break;
-        case 'stopped.driving':
           break;
       }
     }

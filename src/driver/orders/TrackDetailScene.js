@@ -27,11 +27,8 @@ class TrackOrderScene extends Component {
   };
 
   state = {
+    initialized:false,
     tracking_enabled: false,
-    showUploadImageModal: false,
-    images: [],
-    imagesUploaded: false,
-    imagesApproved: false,
     // latitude: 37.78825,
     // longitude: -122.4324,
     latitude: 29.3772392006689,
@@ -148,45 +145,6 @@ class TrackOrderScene extends Component {
     // let {job} = this.props.navigation.state.params.order;
   };
 
-  approveImages = () => {
-    this.setState({
-      imagesApproved: true,
-    });
-  };
-
-  onSaveUploadedImage = () => {
-    this.setState({
-      imagesUploaded: true,
-    });
-    this.hideUploadImageModal();
-  };
-
-  uploadImage = images => {
-    this.setState({
-      images: images,
-    });
-  };
-
-  deleteImage = image => {
-    this.setState({
-      images: this.state.images.filter(
-        uploadedImage => uploadedImage !== image,
-      ),
-    });
-  };
-
-  showUploadImage = () => {
-    // this.setState({
-    //   showUploadImageModal: true,
-    // });
-  };
-
-  hideUploadImageModal = () => {
-    this.setState({
-      showUploadImageModal: false,
-    });
-  };
-
   openInGoogleMaps = () => {
     let {address} = this.props.order;
     let {latitude, longitude} = address;
@@ -211,14 +169,11 @@ class TrackOrderScene extends Component {
       latitude,
       longitude,
       heading,
-      images,
-      imagesUploaded,
-      imagesApproved,
-      showUploadImageModal,
     } = this.state;
 
     return (
       <View style={{flex: 1}}>
+
         <Map
           origin={{
             latitude: latitude,
@@ -239,23 +194,9 @@ class TrackOrderScene extends Component {
           stopDriving={this.stopDriving}
           startWorking={this.startWorking}
           stopWorking={this.stopWorking}
-          uploadImages={this.showUploadImage}
-          approveImages={this.approveImages}
-          imagesUploaded={imagesUploaded}
-          imagesApproved={imagesApproved}
           jobStatus={job.status}
         />
 
-        <ListModal
-          onCancel={this.hideUploadImageModal}
-          onSave={this.onSaveUploadedImage}
-          isVisible={showUploadImageModal}>
-          <UploadImage
-            images={images}
-            updateImage={this.uploadImage}
-            deleteImage={this.deleteImage}
-          />
-        </ListModal>
       </View>
     );
   }

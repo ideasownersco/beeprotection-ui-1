@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import {FlatList, Image, StyleSheet, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
-import Divider from 'components/Divider';
-import IconFactory from '../../components/IconFactory';
 
 export default class PhotosList extends Component {
   static propTypes = {

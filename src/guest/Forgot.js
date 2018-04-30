@@ -4,10 +4,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {NavigationActions} from 'react-navigation';
 import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
-import ForgotScene from './scenes/ForgotScene';
-import ConfirmScene from './scenes/ConfirmScene';
-import PasswordUpdateScene from './scenes/PasswordUpdateScene';
-import {ACTIONS} from './common/actions';
+import ForgotScene from 'guest/scenes/ForgotScene';
+import ConfirmScene from 'guest/scenes/ConfirmScene';
+import PasswordUpdateScene from 'guest/scenes/PasswordUpdateScene';
+import {ACTIONS} from 'guest/common/actions';
 import FormContainer from 'components/FormContainer';
 import FormContent from 'components/FormContent';
 

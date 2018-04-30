@@ -14,7 +14,7 @@ import {SELECTORS as DRIVER_SELECTORS} from 'company/selectors/drivers';
 
 import I18n from 'utils/locale';
 import {Switch} from 'react-native-paper';
-import DriverStartEndTime from './components/DriverStartEndTime';
+import DriverStartEndTime from 'company/drivers/components/DriverStartEndTime';
 import {SELECTORS as ORDER_SELECTORS} from 'company/selectors/orders';
 import Divider from 'components/Divider';
 import Modal from 'react-native-modal';

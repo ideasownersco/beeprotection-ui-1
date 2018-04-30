@@ -1,5 +1,5 @@
 import merge from 'lodash/merge';
-import {ACTION_TYPES} from './actions';
+import {ACTION_TYPES} from 'app/common/actions';
 
 const appInitialState = {
   installed: false,

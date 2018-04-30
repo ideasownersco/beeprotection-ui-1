@@ -42,6 +42,6 @@ export default class AddressInfo extends Component {
 
 const styles = StyleSheet.create({
   value: {
-    color: colors.primary,
+    color: colors.secondary,
   },
 });

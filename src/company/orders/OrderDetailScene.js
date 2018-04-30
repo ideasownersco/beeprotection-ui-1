@@ -17,7 +17,7 @@ import OrderTotal from 'customer/orders/components/OrderTotal';
 import DriverInfo from 'driver/components/DriverInfo';
 import OrderTrackButton from 'customer/orders/components/OrderTrackButton';
 import UserInfo from 'customer/components/UserInfo';
-import DriverAssign from './components/DriverAssign';
+import DriverAssign from 'company/orders/components/DriverAssign';
 
 class OrderDetailScene extends Component {
   static propTypes = {

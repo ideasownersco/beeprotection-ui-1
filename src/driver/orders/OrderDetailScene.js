@@ -54,10 +54,14 @@ class OrderDetailScene extends Component {
     });
   };
 
+  trackOrder = () => {
+    this.props.navigation.navigate('TrackDetail', {
+      orderID: this.props.order.id,
+    });
+  };
+
   render() {
     let {order} = this.props;
-
-    console.log('order', order);
 
     return (
       <ScrollView
@@ -66,24 +70,39 @@ class OrderDetailScene extends Component {
         contentContainerStyle={{paddingBottom: 50}}>
         {order.packages && (
           <View>
-            <OrderBasicInfo item={order} />
-            <OrderItems order={order} />
-            <OrderTotal total={order.total} />
+            <OrderBasicInfo item={order}/>
+            <OrderItems order={order}/>
+            <OrderTotal total={order.total}/>
             {order.user && (
               <View>
-                <SectionHeading title={I18n.t('customer_info')} />
-                <CustomerInfo user={order.user} />
+                <SectionHeading title={I18n.t('customer_info')}/>
+                <CustomerInfo user={order.user}/>
               </View>
             )}
 
-            <Divider style={{marginBottom: 10}} />
+            <Divider style={{marginBottom: 10}}/>
 
             {order.trackeable && (
-              <Button
-                raised
-                onPress={this.uploadImages}
-                title={I18n.t('upload_images')}
-              />
+
+              <View>
+                <Button
+                  raised
+                  onPress={this.trackOrder}
+                  title={I18n.t('track_order')}
+                  primary
+                  dark
+                />
+
+                <Divider style={{marginBottom: 10}}/>
+
+                <Button
+                  raised
+                  onPress={this.uploadImages}
+                  title={I18n.t('upload_images')}
+                />
+
+              </View>
+
             )}
           </View>
         )}

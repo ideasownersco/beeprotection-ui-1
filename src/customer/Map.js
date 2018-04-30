@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
-import MapPicker from './cart/components/MapPicker';
-import BackgroundGeolocation from 'react-native-background-geolocation';
-import CreateAddressForm from './cart/components/CreateAddress';
+import CreateAddressForm from 'customer/cart/components/CreateAddress';
 
 class Home extends Component {
   componentDidMount() {
