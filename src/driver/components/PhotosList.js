@@ -20,7 +20,7 @@ export default class PhotosList extends Component {
 
     return (
       <Touchable onPress={() => onItemPress(item)} style={styles.row}>
-        <Image source={{uri: item.url}} style={styles.image}/>
+        <Image source={{uri: item.url}} style={styles.image} />
       </Touchable>
     );
   };

@@ -55,7 +55,11 @@ export default class Dialog extends Component {
           <Paragraph>{description}</Paragraph>
         </DialogContent>
         <DialogActions>
-          <Button onPress={leftButtonPress} title={leftButtonText} color={Colors.grey700} />
+          <Button
+            onPress={leftButtonPress}
+            title={leftButtonText}
+            color={Colors.grey700}
+          />
           <Button
             color={Colors.teal500}
             primary

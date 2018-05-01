@@ -14,7 +14,7 @@ import {ACTIONS} from 'customer/common/actions';
 import DriverInfo from 'driver/components/DriverInfo';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
-import Button from "components/Button";
+import Button from 'components/Button';
 
 class OrderDetailScene extends Component {
   static propTypes = {

@@ -17,7 +17,7 @@ import OrderTotal from 'customer/orders/components/OrderTotal';
 import DriverInfo from 'driver/components/DriverInfo';
 import UserInfo from 'customer/components/UserInfo';
 import DriverAssign from 'company/orders/components/DriverAssign';
-import Button from "components/Button";
+import Button from 'components/Button';
 import I18n from 'utils/locale';
 
 class OrderDetailScene extends Component {
@@ -104,7 +104,6 @@ class OrderDetailScene extends Component {
                 dark
                 title={I18n.t('track')}
               />
-
             </View>
           )}
       </ScrollView>

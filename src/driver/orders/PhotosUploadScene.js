@@ -15,7 +15,7 @@ import PhotosList from 'driver/components/PhotosList';
 import colors from 'assets/theme/colors';
 import Dialog from 'components/Dialog';
 import ImagePicker from 'react-native-image-crop-picker';
-import Button from "components/Button";
+import Button from 'components/Button';
 
 class PhotosUploadScene extends Component {
   static propTypes = {
@@ -31,9 +31,9 @@ class PhotosUploadScene extends Component {
 
   static defaultProps = {
     order: {
-      job:{
-        photos:[]
-      }
+      job: {
+        photos: [],
+      },
     },
   };
 
@@ -41,7 +41,7 @@ class PhotosUploadScene extends Component {
     showUploadImageModal: false,
     images: [],
     showImageUploadOptionsDialog: false,
-    imageApprovalDialogVisible:false,
+    imageApprovalDialogVisible: false,
   };
 
   componentDidMount() {
@@ -60,7 +60,7 @@ class PhotosUploadScene extends Component {
     });
   };
 
-   hideImageApprovalDialog = () => {
+  hideImageApprovalDialog = () => {
     this.setState({
       imageApprovalDialogVisible: false,
     });
@@ -115,9 +115,11 @@ class PhotosUploadScene extends Component {
 
   approveImages = () => {
     this.hideImageApprovalDialog();
-    this.props.dispatch(DRIVER_ACTIONS.approveImages({
-      job_id:this.props.order.job.id
-    }));
+    this.props.dispatch(
+      DRIVER_ACTIONS.approveImages({
+        job_id: this.props.order.job.id,
+      }),
+    );
   };
 
   uploadImage = images => {
@@ -167,7 +169,7 @@ class PhotosUploadScene extends Component {
       showUploadImageModal,
       images,
       showImageUploadOptionsDialog,
-      imageApprovalDialogVisible
+      imageApprovalDialogVisible,
     } = this.state;
 
     return (
@@ -175,23 +177,23 @@ class PhotosUploadScene extends Component {
         style={{flex: 1}}
         keyboardShouldPersistTap="always"
         contentContainerStyle={{paddingBottom: 50}}>
-
         <PhotosList
           items={order.job.photos || []}
           onItemPress={this.onPhotoListItemPress}
           onItemDeletePress={this.onPhotoListItemDeletePress}
         />
 
-        {
-          order.job && order.job.photos && order.job.photos.length &&
+        {order.job &&
+          order.job.photos &&
+          order.job.photos.length && (
             <Button
               title={I18n.t('approve_images')}
               onPress={this.showImageApprovalDialog}
               raised
               disabled={order.job.photos_approved}
-              style={{margin:20,marginBottom:50}}
+              style={{margin: 20, marginBottom: 50}}
             />
-        }
+          )}
 
         <FAB
           icon="add"
@@ -234,7 +236,6 @@ class PhotosUploadScene extends Component {
             deleteImage={this.deleteImage}
           />
         </ListModal>
-
       </View>
     );
   }

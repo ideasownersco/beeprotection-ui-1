@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
 import CreateAddressForm from 'customer/cart/components/CreateAddress';
-import BackgroundGeolocation from "react-native-background-geolocation";
+import BackgroundGeolocation from 'react-native-background-geolocation';
 
 class Home extends Component {
-
   // componentDidMount() {
   //   BackgroundGeolocation.getCurrentPosition(
   //     location => {
