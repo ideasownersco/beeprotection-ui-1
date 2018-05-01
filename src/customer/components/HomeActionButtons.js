@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View,Dimensions} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
 import colors from 'assets/theme/colors';
 import Touchable from 'react-native-platform-touchable';
@@ -18,10 +18,11 @@ export default class HomeActionButtons extends Component {
 
     return (
       <View style={styles.container}>
-        <Touchable
-          onPress={() => onCreateOrderPress()}>
+        <Touchable onPress={() => onCreateOrderPress()}>
           <View style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>{I18n.t('start').toUpperCase()}</Text>
+            <Text style={styles.buttonText}>
+              {I18n.t('start').toUpperCase()}
+            </Text>
           </View>
         </Touchable>
       </View>
@@ -47,20 +48,19 @@ export default class HomeActionButtons extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    alignItems:'center',
-    justifyContent:'flex-end',
-    paddingBottom:30
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingBottom: 30,
   },
-  content: {
-  },
+  content: {},
   buttonContainer: {
     borderRadius: 3,
-    width:300,
-    padding:10,
+    width: 300,
+    padding: 10,
     borderWidth: 6,
-    borderColor:'#62A3D0',
-    backgroundColor:'#1c599d',
+    borderColor: '#62A3D0',
+    backgroundColor: '#1c599d',
   },
   buttonText: {
     color: colors.white,

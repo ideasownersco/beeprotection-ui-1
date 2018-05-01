@@ -16,7 +16,6 @@ import colors from 'assets/theme/colors';
 import SplashScreen from 'app/SplashScreen';
 
 class App extends Component {
-
   static propTypes = {
     app: PropTypes.object.isRequired,
   };

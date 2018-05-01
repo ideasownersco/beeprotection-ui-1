@@ -5,7 +5,7 @@ import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import HomeActionButtons from "./HomeActionButtons";
+import HomeActionButtons from 'customer/components/HomeActionButtons';
 
 export default class StandingOrdersList extends Component {
   shouldComponentUpdate(nextProps) {
@@ -67,7 +67,9 @@ export default class StandingOrdersList extends Component {
         style={styles.listContainer}
         keyExtractor={(item, index) => `${index}`}
         contentContainerStyle={styles.contentContainerStyle}
-        ListHeaderComponent={<HomeActionButtons onCreateOrderPress={onCreateOrderPress}/>}
+        ListHeaderComponent={
+          <HomeActionButtons onCreateOrderPress={onCreateOrderPress} />
+        }
       />
     );
   }

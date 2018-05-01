@@ -37,7 +37,7 @@ export default class PaymentOptions extends Component {
             checked={selectedItem === 'knet'}
             style={{color: colors.primary}}
           />
-          <Text style={[styles.text,{opacity:.4}]}>{I18n.t('knet')}</Text>
+          <Text style={[styles.text, {opacity: 0.4}]}>{I18n.t('knet')}</Text>
         </View>
         <View style={styles.rowContainer}>
           <FormCheck

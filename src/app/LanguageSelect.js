@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {ACTIONS as APP_ACTIONS} from './common/actions';
+import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
 import LanguageSelectScene from 'app/scenes/LanguageSelectScene';
 
 class LanguageSelect extends Component {

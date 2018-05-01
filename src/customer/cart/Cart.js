@@ -237,7 +237,6 @@ class Cart extends PureComponent {
               showOrderSuccessModal: true,
               showCheckoutConfirmDialog: false,
             });
-
           } else if (order.status == 'Checkout') {
             this.setState({
               showPaymentModal: true,
@@ -276,7 +275,7 @@ class Cart extends PureComponent {
     } = this.state;
 
     if (!cartItems.length) {
-      return <EmptyCart/>;
+      return <EmptyCart />;
     }
 
     return (
@@ -286,7 +285,6 @@ class Cart extends PureComponent {
           {backgroundColor: 'white'},
           checkout.isFetching && {opacity: 0.4},
         ]}>
-
         <SectionTitle
           title={I18n.t('order_details')}
           style={{padding: 10}}
@@ -294,9 +292,9 @@ class Cart extends PureComponent {
           iconType="MaterialIcons"
         />
 
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
 
-        <CartTotal total={cartTotal}/>
+        <CartTotal total={cartTotal} />
 
         <SectionTitle
           title={I18n.t('date')}
@@ -349,7 +347,7 @@ class Cart extends PureComponent {
           activeItemID={selectedAddressID || null}
         />
 
-        <Divider/>
+        <Divider />
 
         <View
           style={{
@@ -380,7 +378,7 @@ class Cart extends PureComponent {
           selectedItem={paymentMode}
         />
 
-        <Divider style={{marginVertical: 20}}/>
+        <Divider style={{marginVertical: 20}} />
 
         <Button
           onPress={this.checkout}
@@ -417,8 +415,7 @@ class Cart extends PureComponent {
           style={{margin: 0, padding: 0, backgroundColor: 'white'}}
           presentationStyle="fullScreen"
           transparent={false}
-          useNativeDriver={true}
-        >
+          useNativeDriver={true}>
           <CreateAddress
             onCancel={this.hideAddressCreateModal}
             onSave={this.saveAddress}
@@ -434,8 +431,7 @@ class Cart extends PureComponent {
           backdropColor="rgba(0,0,0,0.5)"
           useNativeDriver={true}
           hideModalContentWhileAnimating={true}
-          style={{margin: 0, padding: 0, backgroundColor: 'white'}}
-        >
+          style={{margin: 0, padding: 0, backgroundColor: 'white'}}>
           <OrderSuccess
             onPress={this.onSuccessButtonPress}
             visible={showOrderSuccessModal}
@@ -444,7 +440,6 @@ class Cart extends PureComponent {
             total={cartTotal}
           />
         </Modal>
-
       </ScrollView>
     );
   }
