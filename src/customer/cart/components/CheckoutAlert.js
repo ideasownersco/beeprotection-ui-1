@@ -1,6 +1,20 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, ScrollView, StyleSheet, Text, View,Platform} from 'react-native';
-import {Caption, Colors, Dialog, DialogActions, DialogScrollArea, DialogTitle} from 'react-native-paper';
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+} from 'react-native';
+import {
+  Caption,
+  Colors,
+  Dialog,
+  DialogActions,
+  DialogScrollArea,
+  DialogTitle,
+} from 'react-native-paper';
 import I18n from 'utils/locale';
 import AddressInfo from 'components/AddressInfo';
 import colors from 'assets/theme/colors';
@@ -47,22 +61,23 @@ export default class CheckoutAlert extends Component {
               </View>
             )}
 
-            {address && address.area(
-              <View style={styles.rowContainer}>
-                <Caption style={{flex: 1}}>{I18n.t('address')}</Caption>
-                <View
-                  style={{
-                    flex: 3,
-                    paddingHorizontal: 10,
-                    alignItems: 'flex-end',
-                  }}>
-                  <AddressInfo
-                    address={address}
-                    style={{textAlign: 'center'}}
-                  />
-                </View>
-              </View>
-            )}
+            {address &&
+              address.area(
+                <View style={styles.rowContainer}>
+                  <Caption style={{flex: 1}}>{I18n.t('address')}</Caption>
+                  <View
+                    style={{
+                      flex: 3,
+                      paddingHorizontal: 10,
+                      alignItems: 'flex-end',
+                    }}>
+                    <AddressInfo
+                      address={address}
+                      style={{textAlign: 'center'}}
+                    />
+                  </View>
+                </View>,
+              )}
 
             <View style={styles.rowContainer}>
               <Caption style={{flex: 1}}>{I18n.t('amount')}</Caption>
@@ -80,23 +95,21 @@ export default class CheckoutAlert extends Component {
             color={Colors.grey400}
           />
 
-          {
-            disabled ?
-              <ActivityIndicator
-                color={Colors.indigo500}
-                size={isIOS ? 'large' : 48}
-                style={{marginRight: 16}}
-              />
-              :
-              <Button
-                primary
-                onPress={checkout}
-                disabled={disabled}
-                title={I18n.t('checkout')}
-                color={Colors.teal500}
-              />
-          }
-
+          {disabled ? (
+            <ActivityIndicator
+              color={Colors.indigo500}
+              size={isIOS ? 'large' : 48}
+              style={{marginRight: 16}}
+            />
+          ) : (
+            <Button
+              primary
+              onPress={checkout}
+              disabled={disabled}
+              title={I18n.t('checkout')}
+              color={Colors.teal500}
+            />
+          )}
         </DialogActions>
       </Dialog>
     );
