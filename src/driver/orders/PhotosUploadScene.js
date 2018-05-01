@@ -15,7 +15,7 @@ import PhotosList from 'driver/components/PhotosList';
 import colors from 'assets/theme/colors';
 import Dialog from 'components/Dialog';
 import ImagePicker from 'react-native-image-crop-picker';
-import Button from "../../components/Button";
+import Button from "components/Button";
 
 class PhotosUploadScene extends Component {
   static propTypes = {
