@@ -14,7 +14,7 @@ import {ACTIONS} from 'customer/common/actions';
 import DriverInfo from 'driver/components/DriverInfo';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
-import OrderTrackButton from 'customer/orders/components/OrderTrackButton';
+import Button from "components/Button";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -61,9 +61,12 @@ class OrderDetailScene extends Component {
                 <View>
                   <SectionHeading title={I18n.t('driver_info')} />
                   <DriverInfo driver={order.job.driver} />
-                  <OrderTrackButton
+                  <Button
                     onPress={this.trackOrder}
-                    // disabled={!order.trackeable}
+                    primary
+                    raised
+                    dark
+                    title={I18n.t('track')}
                   />
                 </View>
               )}

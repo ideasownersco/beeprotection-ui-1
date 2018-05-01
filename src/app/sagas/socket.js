@@ -58,7 +58,6 @@ function* subscribeToJobTrack(socket) {
 }
 
 function* subscribeToDriversTracking(socket) {
-  console.log('socket', socket);
   while (true) {
     yield take(COMPANY_ACTIONS.SUBSCRIBE_TO_DRIVER_TRACKINGS);
     socket.emit('track.drivers.subscribe');

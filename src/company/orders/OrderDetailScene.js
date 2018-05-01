@@ -15,9 +15,10 @@ import OrderBasicInfo from 'customer/orders/components/OrderBasicInfo';
 import PropTypes from 'prop-types';
 import OrderTotal from 'customer/orders/components/OrderTotal';
 import DriverInfo from 'driver/components/DriverInfo';
-import OrderTrackButton from 'customer/orders/components/OrderTrackButton';
 import UserInfo from 'customer/components/UserInfo';
 import DriverAssign from 'company/orders/components/DriverAssign';
+import Button from "components/Button";
+import I18n from 'utils/locale';
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -56,8 +57,8 @@ class OrderDetailScene extends Component {
   };
 
   trackOrder = () => {
-    this.props.navigation.navigate('TrackDetail', {
-      order: this.props.order,
+    this.props.navigation.navigate('TrackOrder', {
+      orderID: this.props.order.id,
     });
   };
 
@@ -96,10 +97,14 @@ class OrderDetailScene extends Component {
           order.job.driver.user && (
             <View>
               <DriverInfo driver={order.job.driver} />
-              <OrderTrackButton
+              <Button
                 onPress={this.trackOrder}
-                disabled={!order.trackeable}
+                primary
+                raised
+                dark
+                title={I18n.t('track')}
               />
+
             </View>
           )}
       </ScrollView>

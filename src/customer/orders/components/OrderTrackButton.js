@@ -15,7 +15,7 @@ const OrderTrackButton = ({onPress, style, disabled}) => {
       raised
       color={colors.primary}
       disabled={disabled}
-      style={[style, {padding: 10}]}
+      style={[style]}
       dark
       title={I18n.t('track')}
     />
