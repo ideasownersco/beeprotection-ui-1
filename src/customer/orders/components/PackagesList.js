@@ -3,12 +3,10 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
-import I18n from 'utils/locale';
 import Accordion from 'react-native-collapsible/Accordion';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 
 let SectionHeader = ({item}) => {

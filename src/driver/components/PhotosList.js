@@ -19,26 +19,9 @@ export default class PhotosList extends Component {
     const {onItemPress, onItemDeletePress} = this.props;
 
     return (
-      <View style={styles.row}>
-        {/*<Touchable*/}
-        {/*onPress={() => onItemDeletePress(item)}*/}
-        {/*underlayColor="transparent"*/}
-        {/*style={styles.iconContainer}*/}
-        {/*hitSlop={{top: 20, left: 20, right: 20, bottom: 20}}>*/}
-        {/*<IconFactory*/}
-        {/*name="ios-close"*/}
-        {/*type="Ionicons"*/}
-        {/*style={{*/}
-        {/*backgroundColor: 'transparent',*/}
-        {/*}}*/}
-        {/*color="red"*/}
-        {/*size={30}*/}
-        {/*/>*/}
-        {/*</Touchable>*/}
-        <Touchable onPress={() => onItemPress(item)}>
-          <Image source={{uri: item.url}} style={styles.image} />
-        </Touchable>
-      </View>
+      <Touchable onPress={() => onItemPress(item)} style={styles.row}>
+        <Image source={{uri: item.url}} style={styles.image}/>
+      </Touchable>
     );
   };
 

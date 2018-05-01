@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, FlatList, View, Text, Image} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 

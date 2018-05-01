@@ -127,6 +127,20 @@ function* uploadPhotos(action) {
     yield put({type: ACTION_TYPES.UPLOAD_PHOTOS_FAILURE, error});
   }
 }
+function* approvePhotos(action) {
+  try {
+    const response = yield call(API.approvePhotos, action.params.job_id);
+    const normalized = normalize(response.data, Schema.orders);
+
+    yield put({
+      type: ACTION_TYPES.APPROVE_PHOTOS_SUCCESS,
+      entities: normalized.entities,
+      result: normalized.result,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.APPROVE_PHOTOS_FAILURE, error});
+  }
+}
 
 function* startWorkingMonitor() {
   yield takeLatest(ACTION_TYPES.START_WORKING_REQUEST, startWorking);
@@ -151,6 +165,9 @@ function* fetchJobPhotosMonitor() {
 function* uploadPhotosMonitor() {
   yield takeLatest(ACTION_TYPES.UPLOAD_PHOTOS_REQUEST, uploadPhotos);
 }
+function* approvePhotosMonitor() {
+  yield takeLatest(ACTION_TYPES.APPROVE_PHOTOS_REQUEST, approvePhotos);
+}
 
 export const sagas = all([
   fork(startWorkingMonitor),
@@ -159,4 +176,5 @@ export const sagas = all([
   fork(stopDrivingMonitor),
   fork(fetchJobPhotosMonitor),
   fork(uploadPhotosMonitor),
+  fork(approvePhotosMonitor),
 ]);

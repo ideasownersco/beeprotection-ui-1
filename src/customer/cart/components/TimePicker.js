@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
-import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 import IconFactory from 'components/IconFactory';
 

@@ -29,8 +29,6 @@ export default class Navigator extends Component {
   render() {
     let {user, logout} = this.props;
 
-    console.log('isAuthenticated', this.props.isAuthenticated);
-
     const AppNavigator = SwitchNavigator(
       {
         Guest: {screen: GuestRouter},

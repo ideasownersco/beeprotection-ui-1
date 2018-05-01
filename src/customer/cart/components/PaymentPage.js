@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
-import Touchable from 'react-native-platform-touchable';
-import Modal from 'react-native-modal';
+import {StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
 
 export default class PaymentPage extends Component {

@@ -56,6 +56,10 @@ export const ACTION_TYPES = {
   UPLOAD_PHOTOS_SUCCESS: '@driver/UPLOAD_PHOTOS_SUCCESS',
   UPLOAD_PHOTOS_FAILURE: '@driver/UPLOAD_PHOTOS_FAILURE',
 
+  APPROVE_PHOTOS_REQUEST: '@driver/APPROVE_PHOTOS_REQUEST',
+  APPROVE_PHOTOS_SUCCESS: '@driver/APPROVE_PHOTOS_SUCCESS',
+  APPROVE_PHOTOS_FAILURE: '@driver/APPROVE_PHOTOS_FAILURE',
+
   DRIVER_LOCATION_UPDATED: '@driver/DRIVER_LOCATION_UPDATED',
 };
 
@@ -162,6 +166,13 @@ function uploadImages(params) {
   };
 }
 
+function approveImages(params) {
+  return {
+    type: ACTION_TYPES.APPROVE_PHOTOS_REQUEST,
+    params,
+  };
+}
+
 export const ACTIONS = {
   saveProfile,
   fetchProfile,
@@ -177,4 +188,5 @@ export const ACTIONS = {
   fetchOrderDetails,
   fetchJobPhotos,
   uploadImages,
+  approveImages,
 };

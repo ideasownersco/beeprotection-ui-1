@@ -8,10 +8,8 @@ import BackgroundGeolocation from 'react-native-background-geolocation';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
 import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
-import {View, Linking} from 'react-native';
+import {Linking, View} from 'react-native';
 import Map from 'components/Map';
-import UploadImage from 'driver/components/UploadImage';
-import ListModal from 'components/ListModal';
 import MapButtons from 'driver/orders/components/MapButtons';
 import {API_URL, GEOLOCATION_SOUNDS_ENABLED} from 'utils/env';
 

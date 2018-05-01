@@ -55,6 +55,15 @@ function uploadPhotos(id, params) {
   return request(requestParams);
 }
 
+function approvePhotos(id) {
+  const path = `driver/jobs/${id}/photos/approve`;
+  let requestParams = {
+    path,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
 function fetchProfile() {
   const path = `driver/profile`;
   return request({path});
@@ -98,4 +107,5 @@ export const API = {
   stopDriving,
   fetchJobPhotos,
   uploadPhotos,
+  approvePhotos,
 };

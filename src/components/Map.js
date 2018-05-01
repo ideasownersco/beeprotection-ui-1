@@ -10,6 +10,7 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class Map extends Component {
+
   static propTypes = {
     origin: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
@@ -30,11 +31,10 @@ export default class Map extends Component {
     initialized: false,
   };
 
-  shouldComponentUpdate(nextProps) {
-    if (!this.state.initialized) {
+  shouldComponentUpdate(nextProps,prevState) {
+    if (this.state.initialized !== prevState.initialized || nextProps.origin !== this.props.origin) {
       return true;
     }
-    return nextProps.origin !== this.props.origin;
   }
 
   componentDidMount() {

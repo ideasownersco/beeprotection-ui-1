@@ -2,7 +2,7 @@ import React from 'react';
 import {ActivityIndicator, View} from 'react-native';
 import colors from 'theme/colors';
 
-const LoadingIndicator = ({style}) => (
+const Spinner = ({style}) => (
   <ActivityIndicator
     size="small"
     animating
@@ -11,8 +11,8 @@ const LoadingIndicator = ({style}) => (
   />
 );
 
-LoadingIndicator.propTypes = {
+Spinner.propTypes = {
   style: View.propTypes.style,
 };
 
-export default LoadingIndicator;
+export default Spinner;

@@ -148,6 +148,7 @@
   "confirm_order" : "Confirm Order",
   "amount" : "Amount",
   "approve_images" : "Approve Images",
+  "approve_images_confirm" : "Are you sure you want to approve the uploaded Images ?",
   "confirm_location" : "Confirm Location",
   "confirm_location_confirmation" : "Are you sure that this is the right location ?",
 

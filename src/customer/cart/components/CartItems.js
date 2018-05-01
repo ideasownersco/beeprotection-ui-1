@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, FlatList, View, Text} from 'react-native';
-import LocalizedText from 'components/LocalizedText';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import Divider from 'components/Divider';
-import SectionTitle from 'components/SectionTitle';
-import I18n from 'utils/locale';
 
 export default class CartItems extends Component {
   shouldComponentUpdate(nextProps) {
