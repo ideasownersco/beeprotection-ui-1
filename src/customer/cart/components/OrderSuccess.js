@@ -1,25 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {ImageBackground, ScrollView, StyleSheet, Text, View} from 'react-native';
-import Modal from 'react-native-modal';
+import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
-import {Title} from 'react-native-paper';
 import I18n from 'utils/locale';
-import Divider from 'components/Divider';
-import Button from 'components/Button';
 import Touchable from 'react-native-platform-touchable';
 
 export default class OrderSuccess extends Component {
-  // shouldComponentUpdate(nextProps) {
-  //   return nextProps.visible !== this.props.visible;
-  // }
 
   static propTypes = {
     onPress: PropTypes.func.isRequired,
-    // visible: PropTypes.bool.isRequired,
-    // onHide: PropTypes.func.isRequired,
-    // cart: PropTypes.object.isRequired,
-    // total: PropTypes.number.isRequired,
   };
 
   render() {
