@@ -270,7 +270,6 @@ class CreateOrder extends PureComponent {
           dark
           style={{
             backgroundColor: colors.primary,
-            padding: 10,
           }}
           title={I18n.t('add_to_cart')}
         />

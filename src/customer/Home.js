@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import {AppState, RefreshControl, ScrollView} from 'react-native';
+import {AppState, Image, ImageBackground, RefreshControl, ScrollView, Text, View} from 'react-native';
 import HomeActionButtons from 'customer/components/HomeActionButtons';
 import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import WelcomeText from 'customer/components/WelcomeText';
 import StandingOrdersList from 'customer/components/StandingOrdersList';
+import DrawerIcon from "../components/DrawerIcon";
+import NavButton from "../components/NavButton";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 class Home extends Component {
   static defaultProps = {
@@ -15,6 +18,13 @@ class Home extends Component {
 
   state = {
     appState: AppState.currentState,
+  };
+
+  static navigationOptions = ({navigation}) => {
+    return {
+      // headerStyle:{borderBottomWidth: 0},
+      headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
+    }
   };
 
   componentDidMount() {
@@ -40,7 +50,8 @@ class Home extends Component {
     this.props.navigation.navigate('CreateOrder');
   };
 
-  onProtectionPress = () => {};
+  onProtectionPress = () => {
+  };
 
   onItemTrackPress = (item: Object) => {
     this.props.navigation.navigate('TrackOrder', {
@@ -71,26 +82,33 @@ class Home extends Component {
     let {working_order} = this.props;
 
     return (
-      <ScrollView
-        style={{flex: 1}}
-        contentContainer={{paddingVertical: 100}}
-        refreshControl={
-          <RefreshControl refreshing={false} onRefresh={this.onRefresh} />
-        }
-        refreshing={false}>
-        <WelcomeText />
+      <ImageBackground
+        source={require('./../assets/images/home-bg.png')}
+        resizeMode="stretch"
+        style={{flex:1,backgroundColor:'#2D72A8'}}
+      >
 
-        <HomeActionButtons
-          onCreateOrderPress={this.onCreateOrderPress}
-          onProtectionPress={this.onProtectionPress}
-        />
+        {/*<HomeActionButtons*/}
+          {/*onCreateOrderPress={this.onCreateOrderPress}*/}
+          {/*onProtectionPress={this.onProtectionPress}*/}
+        {/*/>*/}
 
-        <StandingOrdersList
-          items={working_order}
-          onItemPress={this.onStandingOrderListItemPress}
-          onItemTrackPress={this.onItemTrackPress}
-        />
-      </ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={false} onRefresh={this.onRefresh} />
+          }
+          refreshing={false}
+          contentContainerStyle={{paddingTop:300}}
+        >
+          <StandingOrdersList
+            items={working_order}
+            onItemPress={this.onStandingOrderListItemPress}
+            onItemTrackPress={this.onItemTrackPress}
+            onCreateOrderPress={this.onCreateOrderPress}
+          />
+
+        </ScrollView>
+      </ImageBackground>
     );
   }
 }

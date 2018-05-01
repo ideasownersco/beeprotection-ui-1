@@ -124,7 +124,8 @@
   "driver_info" : "Driver Info",
   "customer_info" : "Customer Info",
   "call" : "Call",
-  "thank_you" : "Thank you for choosing BeeProtection. Your order has been confirmed",
+  "thank_you" : "Thank you",
+  "order_confirmed" : "Order Success",
 
   "admin_home" : "Admin Home",
   "customer_home": "Customer Home",
@@ -156,5 +157,6 @@
   "reached" : "Reached at Destination",
   "upload_from_camera" : "Camera",
   "upload_from_album" : "from Library ...",
-  "success" : "Success"
+  "success" : "Success",
+  "view_order" : "View Order",
 }

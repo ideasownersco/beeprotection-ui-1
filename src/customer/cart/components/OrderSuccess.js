@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ImageBackground, ScrollView, StyleSheet, Text, View} from 'react-native';
 import Modal from 'react-native-modal';
 import colors from 'assets/theme/colors';
 import {Title} from 'react-native-paper';
 import I18n from 'utils/locale';
 import Divider from 'components/Divider';
 import Button from 'components/Button';
+import Touchable from 'react-native-platform-touchable';
 
 export default class OrderSuccess extends Component {
   // shouldComponentUpdate(nextProps) {
@@ -15,67 +16,35 @@ export default class OrderSuccess extends Component {
 
   static propTypes = {
     onPress: PropTypes.func.isRequired,
-    visible: PropTypes.bool.isRequired,
-    onHide: PropTypes.func.isRequired,
-    cart: PropTypes.object.isRequired,
-    total: PropTypes.number.isRequired,
+    // visible: PropTypes.bool.isRequired,
+    // onHide: PropTypes.func.isRequired,
+    // cart: PropTypes.object.isRequired,
+    // total: PropTypes.number.isRequired,
   };
 
   render() {
-    let {visible, onHide, cart, total, onPress} = this.props;
+    let {onPress} = this.props;
     return (
-      <Modal
-        isVisible={visible}
-        animationType="slide"
-        // onBackdropPress={onHide}
-        backdropOpacity={0.8}
-        transparent={true}
-        backdropColor="black"
-        useNativeDriver={true}
-        hideModalContentWhileAnimating={true}
-        style={{flex: 1}}>
-        <ScrollView
-          style={[styles.container]}
-          contentContainer={styles.contentContainer}>
-          <View style={{padding: 10, paddingTop: 200}}>
-            <Title style={{textAlign: 'center', fontSize: 20}}>
-              {I18n.t('thank_you')}
-            </Title>
-          </View>
+      <ImageBackground
+        source={require('./../../../assets/images/end-bg.png')}
+        resizeMode="stretch"
+        style={{flex: 1, backgroundColor: '#2D72A8'}}
+      >
 
-          <View style={styles.rowContainer}>
-            <View style={styles.leftCol}>{I18n.t('order_date')}</View>
-            <View style={styles.rightCol}>
-              {cart.selectedDate.format('dd-mm-yy')}
+        <View style={styles.container}>
+          <Text style={styles.thankyou}>{I18n.t('order_confirmed')}</Text>
+
+          <Touchable
+            onPress={onPress}>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.buttonText}>{I18n.t('view_order').toUpperCase()}</Text>
             </View>
-          </View>
+          </Touchable>
 
-          <Divider />
+          <Text style={styles.thankyou}>{I18n.t('thank_you')}</Text>
+        </View>
 
-          <View style={styles.rowContainer}>
-            <View style={styles.leftCol}>{I18n.t('order_time')}</View>
-            <View style={styles.rightCol}>
-              {cart.selectedTime.format('dd-mm-yy')}
-            </View>
-          </View>
-
-          <Divider />
-
-          <View style={styles.rowContainer}>
-            <View style={styles.leftCol}>{I18n.t('total')}</View>
-            <View style={styles.rightCol}>{total}</View>
-          </View>
-
-          <Button
-            color={colors.primary}
-            dark
-            raised
-            onPress={onPress}
-            style={{padding: 20}}
-            title={I18n.t('home')}
-          />
-        </ScrollView>
-      </Modal>
+      </ImageBackground>
     );
   }
 }
@@ -83,7 +52,9 @@ export default class OrderSuccess extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    justifyContent:'flex-end',
+    alignItems:'center',
+    paddingBottom:150,
   },
   contentContainer: {
     flexGrow: 1,
@@ -95,9 +66,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  text: {
+  thankyou: {
     color: 'white',
     fontSize: 25,
+    textAlign:'center',
+    padding:30,
+    fontWeight:'700'
   },
   centerText: {
     fontSize: 18,
@@ -112,5 +86,19 @@ const styles = StyleSheet.create({
   },
   rightCol: {
     flex: 1,
+  },
+  buttonContainer: {
+    borderRadius: 3,
+    width:300,
+    padding:10,
+    borderWidth: 6,
+    borderColor:'#62A3D0',
+    backgroundColor:'#1c599d',
+  },
+  buttonText: {
+    color: colors.white,
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '900',
   },
 });

@@ -13,29 +13,14 @@ export default class PaymentPage extends Component {
 
   static propTypes = {
     onPress: PropTypes.func.isRequired,
-    visible: PropTypes.bool.isRequired,
-    onHide: PropTypes.func.isRequired,
   };
 
   render() {
     let {visible, onHide} = this.props;
     return (
-      <Modal
-        isVisible={visible}
-        animationType="slide"
-        onBackdropPress={onHide}
-        backdropOpacity={0.8}
-        transparent={true}
-        backdropColor="rgba(0,0,0,0.5)"
-        style={{
-          margin: 50,
-        }}
-        useNativeDriver={true}
-        hideModalContentWhileAnimating={true}>
-        <View style={[styles.centerModal]}>
-          <Text style={[styles.text, styles.centerText]}>Payment Page</Text>
-        </View>
-      </Modal>
+      <View style={[styles.centerModal]}>
+        <Text style={[styles.text, styles.centerText]}>Payment Page</Text>
+      </View>
     );
   }
 }

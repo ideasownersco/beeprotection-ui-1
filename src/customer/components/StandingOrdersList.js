@@ -5,6 +5,7 @@ import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import HomeActionButtons from "./HomeActionButtons";
 
 export default class StandingOrdersList extends Component {
   shouldComponentUpdate(nextProps) {
@@ -15,10 +16,11 @@ export default class StandingOrdersList extends Component {
     items: PropTypes.array.isRequired,
     onItemPress: PropTypes.func.isRequired,
     onItemTrackPress: PropTypes.func.isRequired,
+    onCreateOrderPress: PropTypes.func.isRequired,
   };
 
   renderItem = ({item}) => {
-    const {onItemPress, onItemTrackPress, activeItemID} = this.props;
+    const {onItemPress, onItemTrackPress} = this.props;
     return (
       <View style={[styles.buttonContainer]}>
         <Touchable
@@ -57,7 +59,7 @@ export default class StandingOrdersList extends Component {
   };
 
   render() {
-    const {items, activeItemID, onViewAllPress} = this.props;
+    const {items, onCreateOrderPress} = this.props;
     return (
       <FlatList
         data={items}
@@ -65,6 +67,7 @@ export default class StandingOrdersList extends Component {
         style={styles.listContainer}
         keyExtractor={(item, index) => `${index}`}
         contentContainerStyle={styles.contentContainerStyle}
+        ListHeaderComponent={<HomeActionButtons onCreateOrderPress={onCreateOrderPress}/>}
       />
     );
   }
@@ -73,7 +76,6 @@ export default class StandingOrdersList extends Component {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
-    paddingTop: 30,
   },
   contentContainerStyle: {},
   buttonContainer: {

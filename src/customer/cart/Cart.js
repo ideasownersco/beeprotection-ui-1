@@ -276,7 +276,7 @@ class Cart extends PureComponent {
     } = this.state;
 
     if (!cartItems.length) {
-      return <EmptyCart />;
+      return <EmptyCart/>;
     }
 
     return (
@@ -286,6 +286,7 @@ class Cart extends PureComponent {
           {backgroundColor: 'white'},
           checkout.isFetching && {opacity: 0.4},
         ]}>
+
         <SectionTitle
           title={I18n.t('order_details')}
           style={{padding: 10}}
@@ -293,9 +294,9 @@ class Cart extends PureComponent {
           iconType="MaterialIcons"
         />
 
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
 
-        <CartTotal total={cartTotal} />
+        <CartTotal total={cartTotal}/>
 
         <SectionTitle
           title={I18n.t('date')}
@@ -348,20 +349,8 @@ class Cart extends PureComponent {
           activeItemID={selectedAddressID || null}
         />
 
-        <Modal
-          animationType="slide"
-          isVisible={showAddressCreateModal}
-          style={{margin: 0, padding: 0, backgroundColor: 'white'}}
-          presentationStyle="fullScreen"
-          transparent={false}>
-          <CreateAddress
-            onCancel={this.hideAddressCreateModal}
-            onSave={this.saveAddress}
-            areas={areas}
-          />
-        </Modal>
+        <Divider/>
 
-        <Divider />
         <View
           style={{
             flex: 1,
@@ -391,7 +380,7 @@ class Cart extends PureComponent {
           selectedItem={paymentMode}
         />
 
-        <Divider style={{marginVertical: 20}} />
+        <Divider style={{marginVertical: 20}}/>
 
         <Button
           onPress={this.checkout}
@@ -402,25 +391,10 @@ class Cart extends PureComponent {
           loading={checkout.isFetching}
           style={{
             justifyContent: 'center',
-            paddingVertical: 10,
             marginTop: 20,
             backgroundColor: colors.primary,
           }}
           title={I18n.t('checkout')}
-        />
-
-        <OrderSuccess
-          onPress={this.onSuccessButtonPress}
-          visible={showOrderSuccessModal}
-          onHide={this.hideSuccessModal}
-          cart={cart}
-          total={cartTotal}
-        />
-
-        <PaymentPage
-          onPress={this.onPaymentOptionsItemPress}
-          visible={showPaymentModal}
-          onHide={this.hideCheckoutModal}
         />
 
         <CheckoutAlert
@@ -436,6 +410,41 @@ class Cart extends PureComponent {
           close={this.hideCheckoutConfirmDialog}
           checkout={this.performCheckout}
         />
+
+        <Modal
+          animationType="slide"
+          isVisible={showAddressCreateModal}
+          style={{margin: 0, padding: 0, backgroundColor: 'white'}}
+          presentationStyle="fullScreen"
+          transparent={false}
+          useNativeDriver={true}
+        >
+          <CreateAddress
+            onCancel={this.hideAddressCreateModal}
+            onSave={this.saveAddress}
+            areas={areas}
+          />
+        </Modal>
+
+        <Modal
+          isVisible={showOrderSuccessModal}
+          animationType="slide"
+          backdropOpacity={0.8}
+          transparent={true}
+          backdropColor="rgba(0,0,0,0.5)"
+          useNativeDriver={true}
+          hideModalContentWhileAnimating={true}
+          style={{margin: 0, padding: 0, backgroundColor: 'white'}}
+        >
+          <OrderSuccess
+            onPress={this.onSuccessButtonPress}
+            visible={showOrderSuccessModal}
+            onHide={this.hideSuccessModal}
+            cart={cart}
+            total={cartTotal}
+          />
+        </Modal>
+
       </ScrollView>
     );
   }

@@ -9,17 +9,19 @@ import Touchable from 'react-native-platform-touchable';
 export default class FormCheck extends Component {
   static propTypes = {
     checked: PropTypes.bool.isRequired,
-    onPress: PropTypes.func.isRequired,
+    onPress: PropTypes.func,
+    disabled:PropTypes.bool
     // style:PropTypes.object
   };
 
   render() {
-    const {checked, style, onPress} = this.props;
+    const {checked, style, onPress,disabled} = this.props;
     return (
       <Touchable
+        disabled={disabled}
         onPress={onPress}
         hitSlop={{top: 10, bottom: 10, right: 10, left: 10}}
-        style={styles.label}>
+        style={[styles.label,disabled && {opacity:.4}]}>
         {checked ? (
           <MaterialCommunityIcons
             name="checkbox-marked-circle"
