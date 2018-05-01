@@ -9,7 +9,7 @@ import {Router as GuestRouter} from 'guest/components/Router';
 export default class Navigator extends Component {
 
   shouldComponentUpdate(nextProps) {
-    return this.props.isAuthenticated !== nextProps.isAuthenticated;
+    return this.props.user.id !== nextProps.user.id;
   }
 
   static defaultProps = {

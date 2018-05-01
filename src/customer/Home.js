@@ -47,11 +47,7 @@ class Home extends Component {
   };
 
   onCreateOrderPress = () => {
-
-    this.props.navigation.navigate('Login', {
-      redirectRoute: 'Cart',
-    });
-    // this.props.navigation.navigate('CreateOrder');
+    this.props.navigation.navigate('CreateOrder');
   };
 
   onProtectionPress = () => {
