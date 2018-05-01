@@ -23,7 +23,7 @@ class Home extends Component {
         backgroundColor: colors.secondary,
         borderBottomWidth: 0,
       },
-      // headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
+      // headerLeft: <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />,
     }
   };
 

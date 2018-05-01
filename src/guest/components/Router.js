@@ -1,10 +1,10 @@
 import React from 'react';
-import {createStackNavigator} from 'react-navigation';
+import {StackNavigator} from 'react-navigation';
 import Login from 'guest/Login';
 import Register from 'guest/Register';
 import Forgot from 'guest/Forgot';
 
-export const Router = createStackNavigator(
+export const Router = StackNavigator(
   {
     LoginScreen: {
       screen: Login,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {createDrawerNavigator, createStackNavigator} from 'react-navigation';
+import {DrawerNavigator, StackNavigator} from 'react-navigation';
 import Drawer from 'company/components/Drawer';
 import Home from 'company/Home';
 import Login from 'guest/Login';
@@ -20,7 +20,7 @@ import TrackOrderScene from 'customer/orders/TrackOrderScene';
 
 const getDrawerIcon = navigation => {
   return {
-    headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
+    headerLeft: <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />,
   };
 };
 
@@ -32,7 +32,7 @@ const navStyle = {
   },
 };
 
-const HomeStack = createStackNavigator(
+const HomeStack = StackNavigator(
   {
     Home: {
       screen: Home,
@@ -88,7 +88,7 @@ const HomeStack = createStackNavigator(
   },
 );
 
-const DriversStack = createStackNavigator(
+const DriversStack = StackNavigator(
   {
     DriversList: {
       screen: DriversListScene,
@@ -114,7 +114,7 @@ const DriversStack = createStackNavigator(
   },
 );
 
-const PastOrdersStack = createStackNavigator(
+const PastOrdersStack = StackNavigator(
   {
     PastOrders: {
       screen: PastOrdersScene,
@@ -133,7 +133,7 @@ const PastOrdersStack = createStackNavigator(
   },
 );
 
-const UpcomingOrdersStack = createStackNavigator(
+const UpcomingOrdersStack = StackNavigator(
   {
     UpcomingOrders: {
       screen: UpcomingOrdersScene,
@@ -152,7 +152,7 @@ const UpcomingOrdersStack = createStackNavigator(
   },
 );
 
-const WorkingOrdersStack = createStackNavigator(
+const WorkingOrdersStack = StackNavigator(
   {
     WorkingOrders: {
       screen: WorkingOrdersScene,
@@ -171,7 +171,7 @@ const WorkingOrdersStack = createStackNavigator(
   },
 );
 
-const SettingsStack = createStackNavigator(
+const SettingsStack = StackNavigator(
   {
     Settings: {
       screen: SettingsScene,
@@ -185,7 +185,7 @@ const SettingsStack = createStackNavigator(
     }),
   },
 );
-const TrackDriversStack = createStackNavigator(
+const TrackDriversStack = StackNavigator(
   {
     TrackDrivers: {
       screen: TrackDriversScene,
@@ -211,7 +211,7 @@ const DrawerRoutes = {
   Login: {screen: Login},
 };
 
-export const Router = createDrawerNavigator(DrawerRoutes, {
+export const Router = DrawerNavigator(DrawerRoutes, {
   contentComponent: props => <Drawer {...props} />,
   drawerWidth: 275,
 });
