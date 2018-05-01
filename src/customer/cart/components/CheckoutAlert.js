@@ -97,7 +97,6 @@ export default class CheckoutAlert extends Component {
               />
           }
 
-
         </DialogActions>
       </Dialog>
     );
