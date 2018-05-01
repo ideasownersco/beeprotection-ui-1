@@ -29,7 +29,7 @@ const getDrawerIcon = navigation => {
 const navStyle = {
   headerTintColor: colors.white,
   headerStyle: {
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.primary,
     borderBottomWidth: 0,
   },
 };

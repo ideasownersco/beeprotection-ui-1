@@ -16,6 +16,7 @@ import colors from 'assets/theme/colors';
 import SplashScreen from 'app/SplashScreen';
 
 class App extends Component {
+
   static propTypes = {
     app: PropTypes.object.isRequired,
   };
@@ -93,7 +94,7 @@ class App extends Component {
   };
 
   render() {
-    const {app, notifications, user} = this.props;
+    const {app, notifications, user,isAuthenticated} = this.props;
 
     if (!app.booted) return null;
 
@@ -123,7 +124,7 @@ class App extends Component {
           onReceiveNotifications={this.onReceivePushNotifications}
         />
 
-        <Navigator user={user} logout={this.logout} />
+        <Navigator user={user} logout={this.logout} isAuthenticated={isAuthenticated} />
       </View>
     );
   }
@@ -134,6 +135,7 @@ function mapStateToProps(state) {
     app: state.app,
     notifications: state.notifications,
     user: USER_SELECTOR.getAuthUser(state),
+    isAuthenticated:state.user.isAuthenticated
   };
 }
 

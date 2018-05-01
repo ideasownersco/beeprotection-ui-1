@@ -6,6 +6,7 @@ import Swiper from 'react-native-swiper';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import Button from 'components/Button';
+import Divider from "../components/Divider";
 
 export default class SplashScreen extends Component {
   static propTypes = {
@@ -17,6 +18,7 @@ export default class SplashScreen extends Component {
     let {onEndReached, onLanguageSelect} = this.props;
     return (
       <View style={styles.container}>
+
         <Title style={styles.title}>{I18n.t('app_name')}</Title>
 
         <Swiper
@@ -33,9 +35,9 @@ export default class SplashScreen extends Component {
               style={styles.image}
               resizeMode="contain"
             />
-
+            <Divider/>
             <Text style={styles.description}>
-              Get the car wash at your convenience
+              {I18n.t('slider_1')}
             </Text>
           </View>
 
@@ -45,8 +47,9 @@ export default class SplashScreen extends Component {
               style={styles.image}
               resizeMode="stretch"
             />
-
-            <Text style={styles.description}>Wash anywhere</Text>
+            <Text style={styles.description}>
+              {I18n.t('slider_2')}
+            </Text>
           </View>
 
           <View style={styles.slide}>
@@ -55,10 +58,13 @@ export default class SplashScreen extends Component {
               style={styles.image}
               resizeMode="contain"
             />
-            <Text style={styles.description}>Your Date, Your Time</Text>
+            <Text style={styles.description}>
+              {I18n.t('slider_3')}
+            </Text>
           </View>
 
           <View style={styles.slide}>
+
             <Image
               source={require('./../assets/images/splash/4.png')}
               style={styles.image}
@@ -67,9 +73,13 @@ export default class SplashScreen extends Component {
 
             <Button
               onPress={onEndReached}
-              style={styles.buttonContainer}
-              title={I18n.t('start')}
+              style={styles.button}
+              title={I18n.t('slider_4')}
+              raised
+              primary
+              dark
             />
+
           </View>
         </Swiper>
       </View>
@@ -82,17 +92,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 50,
+    marginVertical:50,
   },
   slide: {
     flex: 1,
     alignItems: 'center',
   },
-  buttonContainer: {
-    marginTop: 20,
+  button: {
+    marginBottom: 20,
     alignItems: 'center',
   },
-  button: {},
   buttonText: {
     color: colors.primary,
   },

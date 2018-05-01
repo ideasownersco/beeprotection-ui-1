@@ -159,4 +159,9 @@
   "upload_from_album" : "from Library ...",
   "success" : "Success",
   "view_order" : "View Order",
+
+  "slider_1" : "Quick Booking",
+  "slider_2" : "Your Place",
+  "slider_3" : "Convenient Time",
+  "slider_4" : "Get Started",
 }

@@ -7,8 +7,9 @@ import {Router as CustomerRouter} from 'customer/components/Router';
 import {Router as GuestRouter} from 'guest/components/Router';
 
 export default class Navigator extends Component {
+
   shouldComponentUpdate(nextProps) {
-    return this.props.user.id !== nextProps.user.id;
+    return this.props.isAuthenticated !== nextProps.isAuthenticated;
   }
 
   static defaultProps = {
@@ -28,6 +29,8 @@ export default class Navigator extends Component {
 
   render() {
     let {user, logout} = this.props;
+
+    console.log('isAuthenticated',this.props.isAuthenticated);
 
     const AppNavigator = createSwitchNavigator(
       {

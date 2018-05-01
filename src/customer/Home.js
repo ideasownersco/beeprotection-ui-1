@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
-import {AppState, Image, ImageBackground, RefreshControl, ScrollView, Text, View} from 'react-native';
-import HomeActionButtons from 'customer/components/HomeActionButtons';
+import {AppState, ImageBackground, RefreshControl, ScrollView} from 'react-native';
 import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
 import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
-import WelcomeText from 'customer/components/WelcomeText';
 import StandingOrdersList from 'customer/components/StandingOrdersList';
-import DrawerIcon from "../components/DrawerIcon";
-import NavButton from "../components/NavButton";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import colors from "assets/theme/colors";
 
 class Home extends Component {
+
   static defaultProps = {
     upcoming_orders: [],
     working_order: {},
@@ -22,8 +19,11 @@ class Home extends Component {
 
   static navigationOptions = ({navigation}) => {
     return {
-      // headerStyle:{borderBottomWidth: 0},
-      headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
+      headerStyle: {
+        backgroundColor: colors.secondary,
+        borderBottomWidth: 0,
+      },
+      // headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
     }
   };
 
@@ -47,7 +47,11 @@ class Home extends Component {
   };
 
   onCreateOrderPress = () => {
-    this.props.navigation.navigate('CreateOrder');
+
+    this.props.navigation.navigate('Login', {
+      redirectRoute: 'Cart',
+    });
+    // this.props.navigation.navigate('CreateOrder');
   };
 
   onProtectionPress = () => {
@@ -115,7 +119,6 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    upcoming_orders: SELECTORS.getUpcomingOrders(state),
     working_order: SELECTORS.getWorkingOrder(state),
   };
 }

@@ -202,9 +202,8 @@ class Cart extends PureComponent {
       total,
     } = cart;
     if (!isAuthenticated) {
-      this.props.navigation.navigate('Login', {
-        redirectRoute: 'Cart',
-      });
+      this.hideCheckoutConfirmDialog();
+      return this.redirectToLogin();
     } else {
       const item = {
         user_id: user.id,
@@ -238,6 +237,7 @@ class Cart extends PureComponent {
               showOrderSuccessModal: true,
               showCheckoutConfirmDialog: false,
             });
+
           } else if (order.status == 'Checkout') {
             this.setState({
               showPaymentModal: true,
@@ -246,9 +246,7 @@ class Cart extends PureComponent {
           }
         })
         .catch(e => {
-          this.setState({
-            showCheckoutConfirmDialog: false,
-          });
+          this.hideCheckoutConfirmDialog();
         });
     }
   };
@@ -264,6 +262,8 @@ class Cart extends PureComponent {
       isFetchingTimings,
       areas,
     } = this.props;
+    console.log('cart');
+
     let {selectedDate, selectedAddressID, selectedTimeID} = cart;
 
     let {
