@@ -92,69 +92,6 @@ class Cart extends PureComponent {
     });
   };
 
-  performCheckout = () => {
-    const {user, isAuthenticated, cart} = this.props;
-    const {paymentMode} = this.state;
-
-    const {
-      selectedDate,
-      selectedAddressID,
-      selectedTimeID,
-      items,
-      total,
-    } = cart;
-    if (!isAuthenticated) {
-      this.props.navigation.navigate('Login', {
-        redirectRoute: 'Cart',
-      });
-    } else {
-      const item = {
-        user_id: user.id,
-        address_id: selectedAddressID,
-        items: items,
-        total: total,
-        time: selectedTimeID,
-        date: selectedDate,
-        payment_mode: paymentMode,
-      };
-
-      let address =
-        user &&
-        user.addresses.find(address => address.id === selectedAddressID);
-
-      if (!address.area.active) {
-        return this.props.dispatch(
-          APP_ACTIONS.setNotification({
-            type: 'error',
-            message: `${I18n.t('address_disabled')}`,
-          }),
-        );
-      }
-
-      return new Promise((resolve, reject) => {
-        this.props.actions.checkout({item, resolve, reject});
-      })
-        .then(order => {
-          if (order.status == 'Success') {
-            this.setState({
-              showOrderSuccessModal: true,
-              showCheckoutConfirmDialog: false,
-            });
-          } else if (order.status == 'Checkout') {
-            this.setState({
-              showPaymentModal: true,
-              showCheckoutConfirmDialog: false,
-            });
-          }
-        })
-        .catch(e => {
-          this.setState({
-            showCheckoutConfirmDialog: false,
-          });
-        });
-    }
-  };
-
   onDatePickerItemPress = date => {
     this.props.actions.setCartItems({
       selectedDate: date,
@@ -251,6 +188,69 @@ class Cart extends PureComponent {
           }),
       },
     ]);
+  };
+
+  performCheckout = () => {
+    const {user, isAuthenticated, cart} = this.props;
+    const {paymentMode} = this.state;
+
+    const {
+      selectedDate,
+      selectedAddressID,
+      selectedTimeID,
+      items,
+      total,
+    } = cart;
+    if (!isAuthenticated) {
+      this.props.navigation.navigate('Login', {
+        redirectRoute: 'Cart',
+      });
+    } else {
+      const item = {
+        user_id: user.id,
+        address_id: selectedAddressID,
+        items: items,
+        total: total,
+        time: selectedTimeID,
+        date: selectedDate,
+        payment_mode: paymentMode,
+      };
+
+      let address =
+        user &&
+        user.addresses.find(address => address.id === selectedAddressID);
+
+      if (address && address.area && !address.area.active) {
+        return this.props.dispatch(
+          APP_ACTIONS.setNotification({
+            type: 'error',
+            message: `${I18n.t('address_disabled')}`,
+          }),
+        );
+      }
+
+      return new Promise((resolve, reject) => {
+        this.props.actions.checkout({item, resolve, reject});
+      })
+        .then(order => {
+          if (order.status == 'Success') {
+            this.setState({
+              showOrderSuccessModal: true,
+              showCheckoutConfirmDialog: false,
+            });
+          } else if (order.status == 'Checkout') {
+            this.setState({
+              showPaymentModal: true,
+              showCheckoutConfirmDialog: false,
+            });
+          }
+        })
+        .catch(e => {
+          this.setState({
+            showCheckoutConfirmDialog: false,
+          });
+        });
+    }
   };
 
   render() {
