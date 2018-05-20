@@ -21,18 +21,10 @@ import Dialog from 'components/Dialog';
 import IconFactory from 'components/IconFactory';
 
 type State = {
-  activeCategoryID: ?number,
-  activePackageID: ?number,
-  activeServicesIDs: Array<string>,
-  amount: number,
   showCartSuccessModal: boolean,
 };
 
 const initialState = {
-  activeCategoryID: undefined,
-  activePackageID: undefined,
-  activeServicesIDs: [],
-  amount: 0,
   showCartSuccessModal: false,
 };
 
@@ -227,6 +219,7 @@ class CreateOrder extends PureComponent {
         style={{flex: 1, backgroundColor: 'white'}}
         keyboardShouldPersistTaps={'always'}
         contentInset={{bottom: 50}}>
+
         <CategoriesList
           items={categories}
           onItemPress={this.onCategoriesListItemPress}
