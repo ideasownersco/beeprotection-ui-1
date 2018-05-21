@@ -19,12 +19,15 @@ export default class extends PureComponent {
 
   constructor(props) {
     super(props);
+
+    let {block, street, avenue, building} = this.props.address;
+
     this.state = {
       label: null,
-      block: null,
-      street: null,
-      avenue: null,
-      building: null,
+      block: block,
+      street: street,
+      avenue: avenue,
+      building: building,
     };
   }
 
@@ -34,21 +37,23 @@ export default class extends PureComponent {
 
   saveAddress = () => {
 
-    this.props.onSave(this.state);
-
-    // return Alert.alert(
-    //   `${I18n.t('confirm_location')}`,
-    //   `${I18n.t('confirm_location_confirmation')}`,
-    //   [
-    //     {text: I18n.t('cancel')},
-    //     {
-    //       text: I18n.t('yes'),
-    //       onPress: () => {
-    //         this.props.onSave(this.state);
-    //       },
-    //     },
-    //   ],
-    // );
+    return Alert.alert(
+      `${I18n.t('confirm_location')}`,
+      `${I18n.t('confirm_location_confirmation')}`,
+      [
+        {text: I18n.t('cancel')},
+        {
+          text: I18n.t('yes'),
+          onPress: () => {
+            this.props.onSave({
+              ...this.state,
+              id:this.props.address.id,
+              area_id:this.props.address.area.id
+            });
+          },
+        },
+      ],
+    );
   };
 
   updateFormFields = (key, value) => {
@@ -57,45 +62,28 @@ export default class extends PureComponent {
     });
   };
 
-  updateAddressFields = (address: object) => {
-    this.setState(address);
-  };
-
-  // setArea = area => {
-  //   let {latitude, longitude} = area;
-  //   let params = {
-  //     latitude: latitude,
-  //     longitude: longitude,
-  //     area_id: area.id,
-  //   };
-  //   this.updateAddressFields(params);
-  // };
-
   render() {
-
     const {
       block,
       street,
       avenue,
       building,
-      area_id,
+      label
     } = this.state;
-
+    let {area} = this.props.address;
     return (
       <View style={styles.container}>
-          {/*<SelectArea setArea={this.setArea} items={areas} area_id={area_id} />*/}
-          {/*<Divider />*/}
-          <Title style={{textAlign:'center'}}>Salwa</Title>
-
-          <AddressFormFields
-            block={block}
-            avenue={avenue}
-            street={street}
-            building={building}
-            updateFields={this.updateFormFields}
-          />
-
-        <MapButtons save={this.saveAddress} close={this.hideScreen} />
+        <Title style={{textAlign: 'center'}}>{area.name}</Title>
+        <Divider style={{marginVertical:10}}/>
+        <AddressFormFields
+          block={block}
+          avenue={avenue}
+          street={street}
+          building={building}
+          label={label}
+          updateFields={this.updateFormFields}
+        />
+        <MapButtons save={this.saveAddress} close={this.hideScreen}/>
       </View>
     );
   }
@@ -104,11 +92,10 @@ export default class extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding:10,
-    paddingTop:50
+    padding: 10,
+    paddingTop: 50
   },
-  searchInputWrapper: {
-  },
+  searchInputWrapper: {},
   searchInputContainer: {
     flexDirection: 'row',
   },

@@ -24,9 +24,9 @@ export default class AddressesList extends Component {
         title={item.area.name || item.area.name_en}
         description={`${I18n.t('block')} ${item.block}, ${I18n.t('street')} ${
           item.street
-        }, ${I18n.t('avenue')} ${item.avenue}, ${I18n.t('building')} ${
-          item.building
-        }`}
+        }
+        ${item.avenue ? + ',' + I18n.t('avenue') + item.avenue + ',' : ''}
+        ${item.building ? I18n.t('building') + item.building + ',' : ''}`}
       />
     );
   };

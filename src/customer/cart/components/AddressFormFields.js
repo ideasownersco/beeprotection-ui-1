@@ -15,10 +15,24 @@ export default class AddressFormFields extends PureComponent {
 
   render() {
     console.log('rendering address');
-    const {block, street, avenue, building, updateFields} = this.props;
+    const {block, street, avenue, building, updateFields,label} = this.props;
 
     return (
       <View style={styles.addressContainer}>
+
+        <View style={styles.addressField}>
+          <FormTextInput
+            onValueChange={updateFields}
+            value={label}
+            field="label"
+            maxLength={40}
+            keyboardType="numeric"
+            autoFocus={false}
+            style={styles.textInput}
+            label={I18n.t('name')}
+          />
+        </View>
+
         <View style={styles.addressField}>
           <FormTextInput
             onValueChange={updateFields}

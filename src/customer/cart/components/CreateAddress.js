@@ -21,39 +21,12 @@ export default class extends PureComponent {
     this.state = {
       label: null,
       mapPickerVisibility: false,
-      block: null,
-      street: null,
-      avenue: null,
-      building: null,
       country: 'KW',
       latitude: this.props.address.latitude || 29.3759,
       longitude: this.props.address.longitude || 47.9774,
       area_id: null,
     };
   }
-
-  // shouldComponentUpdate(nextProps, prevState) {
-  //   return nextProps.items !== this.props.items || prevState !== this.state;
-  // }
-
-  // componentDidMount() {
-  //   BackgroundGeolocation.getCurrentPosition(
-  //     location => {
-  //       let {latitude, longitude} = location.coords;
-  //       this.setState({
-  //         latitude: latitude,
-  //         longitude: longitude,
-  //         initialized: true,
-  //       });
-  //     },
-  //     error => {},
-  //     {
-  //       persist: true,
-  //       samples: 1,
-  //       maximumAge: 5000,
-  //     },
-  //   );
-  // }
 
   hideScreen = () => {
     this.props.onCancel();
@@ -75,36 +48,14 @@ export default class extends PureComponent {
     );
   };
 
-  updateFormFields = (key, value) => {
-    this.setState({
-      [key]: value,
-    });
-  };
-
   updateAddressFields = (address: object) => {
     this.setState(address);
   };
 
-  setArea = area => {
-    let {latitude, longitude} = area;
-    let params = {
-      latitude: latitude,
-      longitude: longitude,
-      area_id: area.id,
-    };
-    this.updateAddressFields(params);
-  };
-
   render() {
-    const {areas} = this.props;
-
     const {
       latitude,
       longitude,
-      block,
-      street,
-      avenue,
-      building,
       area_id,
     } = this.state;
 

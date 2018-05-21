@@ -165,34 +165,18 @@ function* fetchWorkingOrders(action) {
   }
 }
 
-// function* fetchWorkingOrder() {
-//   try {
-//     const response = yield call(API.fetchWorkingOrder);
-//
-//     if (response.data) {
-//       const normalized = normalize(response.data, [Schema.orders]);
-//       yield put({
-//         type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
-//         entities: normalized.entities,
-//         result: normalized.result,
-//       });
-//     } else {
-//       yield put({
-//         type: ACTION_TYPES.FETCH_WORKING_ORDER_SUCCESS,
-//       });
-//     }
-//   } catch (error) {
-//     yield put({type: ACTION_TYPES.FETCH_WORKING_ORDER_FAILURE, error});
-//   }
-// }
-
 function* saveAddress(action) {
+
+  const {address, resolve, reject} = action.payload;
+
   try {
+
     const params = {
       body: {
-        ...action.params,
+        ...address,
       },
     };
+
     const response = yield call(API.saveAddress, params);
     const normalized = normalize(response.data, Schema.users);
     yield put({
@@ -200,11 +184,12 @@ function* saveAddress(action) {
       entities: normalized.entities,
       address_id: response.address_id,
     });
-    yield put(
-      APP_ACTIONS.setNotification({
-        message: I18n.t('address_save_success'),
-      }),
-    );
+    // yield put(
+    //   APP_ACTIONS.setNotification({
+    //     message: I18n.t('address_save_success'),
+    //   }),
+    // );
+    yield resolve(response.address);
   } catch (error) {
     yield put({type: ACTION_TYPES.SAVE_ADDRESS_FAILURE, error});
     yield put(
@@ -213,6 +198,44 @@ function* saveAddress(action) {
         type: 'error',
       }),
     );
+    yield reject(error);
+  }
+}
+
+function* updateAddress(action) {
+
+  const {address, resolve, reject} = action.payload;
+
+  try {
+
+    const params = {
+      body: {
+        ...address,
+      },
+    };
+
+    const response = yield call(API.updateAddress, params);
+    const normalized = normalize(response.data, Schema.users);
+    yield put({
+      type: ACTION_TYPES.UPDATE_ADDRESS_SUCCESS,
+      entities: normalized.entities,
+      address_id: response.address_id,
+    });
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: I18n.t('address_save_success'),
+      }),
+    );
+    yield resolve(response.address);
+  } catch (error) {
+    yield put({type: ACTION_TYPES.UPDATE_ADDRESS_FAILURE, error});
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: I18n.t('address_save_failure'),
+        type: 'error',
+      }),
+    );
+    yield reject(error);
   }
 }
 
@@ -262,35 +285,6 @@ function* fetchOrderDetails(action) {
   }
 }
 
-// function* checkout(action) {
-//   try {
-//     const params = {
-//       body: {
-//         ...action.params,
-//       },
-//     };
-//
-//     const response = yield call(API.checkout, params);
-//     const normalized = normalize(response.data, Schema.users);
-//     let {entities} = normalized;
-//     let orderIds = entities.orders ? Object.keys(entities.orders) : [];
-//     console.log('normalized',normalized);
-//
-//     console.log('orderIds',orderIds);
-//
-//     yield put({
-//       type: ACTION_TYPES.CHECKOUT_SUCCESS,
-//       entities: entities,
-//       orderIds: orderIds,
-//     });
-//   } catch (error) {
-//     yield put({type: ACTION_TYPES.CHECKOUT_FAILURE, error});
-//     yield put(APP_ACTIONS.setNotification({
-//       message:error,
-//       type:'error'
-//     }));
-//   }
-// }
 
 // Monitoring Sagas
 function* fetchCategoriesMonitor() {
@@ -317,6 +311,9 @@ function* fetchUpcomingOrdersMonitor() {
 
 function* saveAddressMonitor() {
   yield takeLatest(ACTION_TYPES.SAVE_ADDRESS_REQUEST, saveAddress);
+}
+function* updateAddressMonitor() {
+  yield takeLatest(ACTION_TYPES.UPDATE_ADDRESS_REQUEST, updateAddress);
 }
 
 // function* createOrderMonitor() {
@@ -348,6 +345,7 @@ export const sagas = all([
   fork(fetchAddressesMonitor),
   fork(fetchAreasMonitor),
   fork(saveAddressMonitor),
+  fork(updateAddressMonitor),
   // fork(createOrderMonitor),
   fork(checkoutMonitor),
   fork(fetchWorkingOrdersMonitor),

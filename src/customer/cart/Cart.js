@@ -56,7 +56,7 @@ class Cart extends PureComponent {
     addressTypeSelectionModalVisible: false,
     addressType: 'current_location',
     paymentMode: 'cash',
-    address:{
+    address: {
       latitude: 29.3759,
       longitude: 47.9774,
     }
@@ -167,8 +167,46 @@ class Cart extends PureComponent {
   };
 
   saveAddress = address => {
-    this.props.actions.saveAddress(address);
-    this.hideAddressCreateModal();
+    return new Promise((resolve, reject) => {
+      this.props.actions.saveAddress({address, resolve, reject});
+    })
+      .then(address => {
+        console.log('address', address);
+
+        this.setState({
+          address:{
+            ...address
+          }
+        },()=> {
+          console.log('showCreateAddress');
+          this.showAddressCreateFieldsModal();
+        });
+
+        this.hideAddressCreateModal();
+      }).catch((e) => {
+        console.log('error', e);
+      });
+  };
+
+  updateAddress = address => {
+    return new Promise((resolve, reject) => {
+      this.props.actions.updateAddress({address, resolve, reject});
+    })
+      .then(address => {
+        console.log('address', address);
+
+        this.setState({
+          address:{
+            ...address
+          }
+        },()=> {
+          this.hideAddressCreateFieldsModal();
+        });
+
+        this.hideAddressCreateModal();
+      }).catch((e) => {
+        console.log('error', e);
+      });
   };
 
   onSuccessButtonPress = () => {
@@ -287,7 +325,6 @@ class Cart extends PureComponent {
 
   onAddressTypeSelection = (type: string) => {
 
-    console.log('type',type);
     this.setState({
       addressType: type
     });
@@ -299,12 +336,11 @@ class Cart extends PureComponent {
         location => {
           let {latitude, longitude} = location.coords;
           this.setState({
-            address:{
+            address: {
               latitude: latitude,
               longitude: longitude,
             }
-          },()=>{
-            this.showAddressCreateFieldsModal();
+          }, () => {
           });
         },
         error => {
@@ -316,9 +352,7 @@ class Cart extends PureComponent {
           maximumAge: 5000,
         },
       );
-
-      this.showAddressCreateFieldsModal();
-
+      this.saveAddress(this.state.address);
     } else {
       this.showAddressCreateModal();
     }
@@ -506,8 +540,6 @@ class Cart extends PureComponent {
             onSave={this.saveAddress}
             areas={areas}
             address={address}
-
-
           />
         </Modal>
 
@@ -520,11 +552,10 @@ class Cart extends PureComponent {
           useNativeDriver={true}>
           <CreateAddressFields
             onCancel={this.hideAddressCreateFieldsModal}
-            onSave={this.saveAddress}
-            areas={areas}
+            onSave={this.updateAddress}
+            address={{...this.state.address}}
           />
         </Modal>
-
 
         <Modal
           isVisible={showOrderSuccessModal}

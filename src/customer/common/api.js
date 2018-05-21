@@ -55,6 +55,16 @@ function saveAddress(params) {
   return request(requestParams);
 }
 
+function updateAddress(params) {
+  const path = `customer/addresses/${params.body.id}/update`;
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
 function checkout(params) {
   const path = `customer/checkout`;
   let requestParams = {
@@ -77,6 +87,7 @@ export const API = {
   fetchAddresses,
   fetchAreas,
   saveAddress,
+  updateAddress,
   checkout,
   fetchUpcomingOrders,
   fetchPastOrders,

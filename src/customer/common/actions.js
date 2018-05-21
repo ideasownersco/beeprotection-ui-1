@@ -38,6 +38,10 @@ export const ACTION_TYPES = {
   SAVE_ADDRESS_SUCCESS: '@customer/SAVE_ADDRESS_SUCCESS',
   SAVE_ADDRESS_FAILURE: '@customer/SAVE_ADDRESS_FAILURE',
 
+  UPDATE_ADDRESS_REQUEST: '@customer/UPDATE_ADDRESS_REQUEST',
+  UPDATE_ADDRESS_SUCCESS: '@customer/UPDATE_ADDRESS_SUCCESS',
+  UPDATE_ADDRESS_FAILURE: '@customer/UPDATE_ADDRESS_FAILURE',
+
   CREATE_ORDER_REQUEST: '@customer/CREATE_ORDER_REQUEST',
   CREATE_ORDER_SUCCESS: '@customer/CREATE_ORDER_SUCCESS',
   CREATE_ORDER_FAILURE: '@customer/CREATE_ORDER_FAILURE',
@@ -155,10 +159,17 @@ function fetchAreas(params) {
   };
 }
 
-function saveAddress(params: object) {
+function saveAddress(payload: object) {
   return {
     type: ACTION_TYPES.SAVE_ADDRESS_REQUEST,
-    params,
+    payload,
+  };
+}
+
+function updateAddress(payload: object) {
+  return {
+    type: ACTION_TYPES.UPDATE_ADDRESS_REQUEST,
+    payload,
   };
 }
 
@@ -229,6 +240,7 @@ export const ACTIONS = {
   fetchAddresses,
   fetchAreas,
   saveAddress,
+  updateAddress,
   checkout,
   setCartItems,
   subscribeToOrderTracking,
