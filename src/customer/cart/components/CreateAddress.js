@@ -130,6 +130,7 @@ export default class extends PureComponent {
             area_id: area_id,
           }}
         />
+
         <MapButtons save={this.saveAddress} close={this.hideScreen} />
       </View>
     );
