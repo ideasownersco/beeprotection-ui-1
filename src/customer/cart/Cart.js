@@ -31,6 +31,9 @@ import CheckoutAlert from 'customer/cart/components/CheckoutAlert';
 import AddressesList from 'customer/cart/components/AddressesList';
 import CreateAddress from 'customer/cart/components/CreateAddress';
 import Modal from 'react-native-modal';
+import AddressTypeSelectionModal from "./components/AddressTypeSelectionModal";
+import BackgroundGeolocation from "react-native-background-geolocation";
+import CreateAddressFields from "./components/CreateAddressFields";
 
 type State = {
   dates: Array,
@@ -45,11 +48,18 @@ class Cart extends PureComponent {
     dates: [],
     showPaymentModal: false,
     showOrderSuccessModal: false,
-    showAddressCreateModal: false,
+    addressCreateModalVisible: false,
+    addressCreateFieldsModalVisible: false,
     showCheckoutConfirmDialog: false,
     timePickerModalVisible: false,
     performingCheckout: false,
+    addressTypeSelectionModalVisible: false,
+    addressType: 'current_location',
     paymentMode: 'cash',
+    address:{
+      latitude: 29.3759,
+      longitude: 47.9774,
+    }
   };
 
   static defaultProps = {
@@ -89,6 +99,25 @@ class Cart extends PureComponent {
   hideCheckoutConfirmDialog = () => {
     this.setState({
       showCheckoutConfirmDialog: false,
+    });
+  };
+
+  showAddressTypeSelectionModal = () => {
+
+    let {isAuthenticated} = this.props;
+
+    if (!isAuthenticated) {
+      return this.redirectToLogin();
+    }
+
+    this.setState({
+      addressTypeSelectionModalVisible: true,
+    });
+  };
+
+  hideAddressTypeSelectionModal = () => {
+    this.setState({
+      addressTypeSelectionModalVisible: false,
     });
   };
 
@@ -159,21 +188,27 @@ class Cart extends PureComponent {
     });
   };
 
-  showAddressCreateModal = () => {
-    let {isAuthenticated} = this.props;
-
-    if (!isAuthenticated) {
-      return this.redirectToLogin();
-    }
-
+  showAddressCreateFieldsModal = () => {
     this.setState({
-      showAddressCreateModal: true,
+      addressCreateFieldsModalVisible: true,
+    });
+  };
+
+  hideAddressCreateFieldsModal = () => {
+    this.setState({
+      addressCreateFieldsModalVisible: false,
+    });
+  };
+
+  showAddressCreateModal = () => {
+    this.setState({
+      addressCreateModalVisible: true,
     });
   };
 
   hideAddressCreateModal = () => {
     this.setState({
-      showAddressCreateModal: false,
+      addressCreateModalVisible: false,
     });
   };
 
@@ -250,6 +285,46 @@ class Cart extends PureComponent {
     }
   };
 
+  onAddressTypeSelection = (type: string) => {
+
+    console.log('type',type);
+    this.setState({
+      addressType: type
+    });
+
+    this.hideAddressTypeSelectionModal();
+
+    if (type === 'current_location') {
+      BackgroundGeolocation.getCurrentPosition(
+        location => {
+          let {latitude, longitude} = location.coords;
+          this.setState({
+            address:{
+              latitude: latitude,
+              longitude: longitude,
+            }
+          },()=>{
+            this.showAddressCreateFieldsModal();
+          });
+        },
+        error => {
+          console.log('error');
+        },
+        {
+          persist: true,
+          samples: 1,
+          maximumAge: 5000,
+        },
+      );
+
+      this.showAddressCreateFieldsModal();
+
+    } else {
+      this.showAddressCreateModal();
+    }
+
+  };
+
   render() {
     let {
       cart,
@@ -261,7 +336,6 @@ class Cart extends PureComponent {
       isFetchingTimings,
       areas,
     } = this.props;
-    console.log('cart');
 
     let {selectedDate, selectedAddressID, selectedTimeID} = cart;
 
@@ -269,13 +343,18 @@ class Cart extends PureComponent {
       dates,
       showPaymentModal,
       showOrderSuccessModal,
-      showAddressCreateModal,
+      addressCreateModalVisible,
+      addressCreateFieldsModalVisible,
       paymentMode,
       showCheckoutConfirmDialog,
+      addressTypeSelectionModalVisible,
+      address
     } = this.state;
 
+    console.log('this.state', this.state);
+
     if (!cartItems.length) {
-      return <EmptyCart />;
+      return <EmptyCart/>;
     }
 
     return (
@@ -292,9 +371,9 @@ class Cart extends PureComponent {
           iconType="MaterialIcons"
         />
 
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
 
-        <CartTotal total={cartTotal} />
+        <CartTotal total={cartTotal}/>
 
         <SectionTitle
           title={I18n.t('date')}
@@ -347,7 +426,7 @@ class Cart extends PureComponent {
           activeItemID={selectedAddressID || null}
         />
 
-        <Divider />
+        <Divider/>
 
         <View
           style={{
@@ -355,7 +434,7 @@ class Cart extends PureComponent {
             flexDirection: 'row',
           }}>
           <Button
-            onPress={this.showAddressCreateModal}
+            onPress={this.showAddressTypeSelectionModal}
             color={colors.primary}
             icon={'add'}
             title={I18n.t('add_address')}
@@ -378,7 +457,7 @@ class Cart extends PureComponent {
           selectedItem={paymentMode}
         />
 
-        <Divider style={{marginVertical: 20}} />
+        <Divider style={{marginVertical: 20}}/>
 
         <Button
           onPress={this.checkout}
@@ -409,9 +488,15 @@ class Cart extends PureComponent {
           checkout={this.performCheckout}
         />
 
+        <AddressTypeSelectionModal
+          visible={addressTypeSelectionModalVisible}
+          close={this.hideAddressTypeSelectionModal}
+          onPress={this.onAddressTypeSelection}
+        />
+
         <Modal
           animationType="slide"
-          isVisible={showAddressCreateModal}
+          isVisible={addressCreateModalVisible}
           style={{margin: 0, padding: 0, backgroundColor: 'white'}}
           presentationStyle="fullScreen"
           transparent={false}
@@ -420,8 +505,26 @@ class Cart extends PureComponent {
             onCancel={this.hideAddressCreateModal}
             onSave={this.saveAddress}
             areas={areas}
+            address={address}
+
+
           />
         </Modal>
+
+        <Modal
+          animationType="slide"
+          isVisible={addressCreateFieldsModalVisible}
+          style={{margin: 0, padding: 0, backgroundColor: 'white'}}
+          presentationStyle="fullScreen"
+          transparent={false}
+          useNativeDriver={true}>
+          <CreateAddressFields
+            onCancel={this.hideAddressCreateFieldsModal}
+            onSave={this.saveAddress}
+            areas={areas}
+          />
+        </Modal>
+
 
         <Modal
           isVisible={showOrderSuccessModal}

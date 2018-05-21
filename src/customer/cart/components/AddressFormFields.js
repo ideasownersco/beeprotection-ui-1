@@ -81,10 +81,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   addressContainer: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
   },
   addressField: {
-    flex: 1,
     paddingHorizontal: 5,
     marginHorizontal: 1,
   },

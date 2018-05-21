@@ -26,8 +26,8 @@ export default class extends PureComponent {
       avenue: null,
       building: null,
       country: 'KW',
-      latitude: this.props.address.latitude || 29.3759,
-      longitude: this.props.address.longitude || 47.9774,
+      latitude: 29.3759,
+      longitude: 47.9774,
       area_id: null,
     };
   }
@@ -36,24 +36,24 @@ export default class extends PureComponent {
   //   return nextProps.items !== this.props.items || prevState !== this.state;
   // }
 
-  // componentDidMount() {
-  //   BackgroundGeolocation.getCurrentPosition(
-  //     location => {
-  //       let {latitude, longitude} = location.coords;
-  //       this.setState({
-  //         latitude: latitude,
-  //         longitude: longitude,
-  //         initialized: true,
-  //       });
-  //     },
-  //     error => {},
-  //     {
-  //       persist: true,
-  //       samples: 1,
-  //       maximumAge: 5000,
-  //     },
-  //   );
-  // }
+  componentDidMount() {
+    BackgroundGeolocation.getCurrentPosition(
+      location => {
+        let {latitude, longitude} = location.coords;
+        this.setState({
+          latitude: latitude,
+          longitude: longitude,
+          initialized: true,
+        });
+      },
+      error => {},
+      {
+        persist: true,
+        samples: 1,
+        maximumAge: 5000,
+      },
+    );
+  }
 
   hideScreen = () => {
     this.props.onCancel();
@@ -110,6 +110,18 @@ export default class extends PureComponent {
 
     return (
       <View style={styles.container}>
+        <View style={styles.searchInputWrapper}>
+          <SelectArea setArea={this.setArea} items={areas} area_id={area_id} />
+          <Divider />
+          <AddressFormFields
+            block={block}
+            avenue={avenue}
+            street={street}
+            building={building}
+            updateFields={this.updateFormFields}
+          />
+        </View>
+
         <MapPicker
           updateAddress={this.updateAddressFields}
           address={{
@@ -118,6 +130,7 @@ export default class extends PureComponent {
             area_id: area_id,
           }}
         />
+
         <MapButtons save={this.saveAddress} close={this.hideScreen} />
       </View>
     );
@@ -131,5 +144,16 @@ const styles = StyleSheet.create({
     opacity: 1,
     backgroundColor: colors.fadedWhite,
   },
-
+  searchInputWrapper: {
+    zIndex: 5000,
+    top: 20,
+    margin: 10,
+    marginTop: 40,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.primary,
+  },
+  searchInputContainer: {
+    flexDirection: 'row',
+  },
 });

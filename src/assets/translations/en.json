@@ -166,5 +166,9 @@
   "slider_3" : "Convenient Time",
   "slider_4" : "Get Started",
 
-  "comment" : "Comment"
+  "comment" : "Comment",
+  "elsewhere" : "Elsewhere",
+  "current_location" : "Current Location",
+  "select_location_type" : "Select Location",
+  "next" : "Next",
 }
