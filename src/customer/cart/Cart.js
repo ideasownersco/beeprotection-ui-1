@@ -31,9 +31,9 @@ import CheckoutAlert from 'customer/cart/components/CheckoutAlert';
 import AddressesList from 'customer/cart/components/AddressesList';
 import CreateAddress from 'customer/cart/components/CreateAddress';
 import Modal from 'react-native-modal';
-import AddressTypeSelectionModal from "./components/AddressTypeSelectionModal";
-import BackgroundGeolocation from "react-native-background-geolocation";
-import CreateAddressFields from "./components/CreateAddressFields";
+import AddressTypeSelectionModal from './components/AddressTypeSelectionModal';
+import BackgroundGeolocation from 'react-native-background-geolocation';
+import CreateAddressFields from './components/CreateAddressFields';
 
 type State = {
   dates: Array,
@@ -59,7 +59,7 @@ class Cart extends PureComponent {
     address: {
       latitude: 29.3759,
       longitude: 47.9774,
-    }
+    },
   };
 
   static defaultProps = {
@@ -103,7 +103,6 @@ class Cart extends PureComponent {
   };
 
   showAddressTypeSelectionModal = () => {
-
     let {isAuthenticated} = this.props;
 
     if (!isAuthenticated) {
@@ -173,17 +172,21 @@ class Cart extends PureComponent {
       .then(address => {
         console.log('address', address);
 
-        this.setState({
-          address:{
-            ...address
-          }
-        },()=> {
-          console.log('showCreateAddress');
-          this.showAddressCreateFieldsModal();
-        });
+        this.setState(
+          {
+            address: {
+              ...address,
+            },
+          },
+          () => {
+            console.log('showCreateAddress');
+            this.showAddressCreateFieldsModal();
+          },
+        );
 
         this.hideAddressCreateModal();
-      }).catch((e) => {
+      })
+      .catch(e => {
         console.log('error', e);
       });
   };
@@ -195,16 +198,20 @@ class Cart extends PureComponent {
       .then(address => {
         console.log('address', address);
 
-        this.setState({
-          address:{
-            ...address
-          }
-        },()=> {
-          this.hideAddressCreateFieldsModal();
-        });
+        this.setState(
+          {
+            address: {
+              ...address,
+            },
+          },
+          () => {
+            this.hideAddressCreateFieldsModal();
+          },
+        );
 
         this.hideAddressCreateModal();
-      }).catch((e) => {
+      })
+      .catch(e => {
         console.log('error', e);
       });
   };
@@ -324,9 +331,8 @@ class Cart extends PureComponent {
   };
 
   onAddressTypeSelection = (type: string) => {
-
     this.setState({
-      addressType: type
+      addressType: type,
     });
 
     this.hideAddressTypeSelectionModal();
@@ -335,13 +341,15 @@ class Cart extends PureComponent {
       BackgroundGeolocation.getCurrentPosition(
         location => {
           let {latitude, longitude} = location.coords;
-          this.setState({
-            address: {
-              latitude: latitude,
-              longitude: longitude,
-            }
-          }, () => {
-          });
+          this.setState(
+            {
+              address: {
+                latitude: latitude,
+                longitude: longitude,
+              },
+            },
+            () => {},
+          );
         },
         error => {
           console.log('error');
@@ -356,7 +364,6 @@ class Cart extends PureComponent {
     } else {
       this.showAddressCreateModal();
     }
-
   };
 
   render() {
@@ -382,13 +389,13 @@ class Cart extends PureComponent {
       paymentMode,
       showCheckoutConfirmDialog,
       addressTypeSelectionModalVisible,
-      address
+      address,
     } = this.state;
 
     console.log('this.state', this.state);
 
     if (!cartItems.length) {
-      return <EmptyCart/>;
+      return <EmptyCart />;
     }
 
     return (
@@ -405,9 +412,9 @@ class Cart extends PureComponent {
           iconType="MaterialIcons"
         />
 
-        <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
+        <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
 
-        <CartTotal total={cartTotal}/>
+        <CartTotal total={cartTotal} />
 
         <SectionTitle
           title={I18n.t('date')}
@@ -460,7 +467,7 @@ class Cart extends PureComponent {
           activeItemID={selectedAddressID || null}
         />
 
-        <Divider/>
+        <Divider />
 
         <View
           style={{
@@ -491,7 +498,7 @@ class Cart extends PureComponent {
           selectedItem={paymentMode}
         />
 
-        <Divider style={{marginVertical: 20}}/>
+        <Divider style={{marginVertical: 20}} />
 
         <Button
           onPress={this.checkout}

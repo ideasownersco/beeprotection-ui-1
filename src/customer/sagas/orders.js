@@ -166,11 +166,9 @@ function* fetchWorkingOrders(action) {
 }
 
 function* saveAddress(action) {
-
   const {address, resolve, reject} = action.payload;
 
   try {
-
     const params = {
       body: {
         ...address,
@@ -203,11 +201,9 @@ function* saveAddress(action) {
 }
 
 function* updateAddress(action) {
-
   const {address, resolve, reject} = action.payload;
 
   try {
-
     const params = {
       body: {
         ...address,
@@ -284,7 +280,6 @@ function* fetchOrderDetails(action) {
     yield put({type: ACTION_TYPES.FETCH_ORDER_DETAILS_FAILURE, error});
   }
 }
-
 
 // Monitoring Sagas
 function* fetchCategoriesMonitor() {

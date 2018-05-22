@@ -168,7 +168,8 @@
 
   "comment" : "Comment",
   "elsewhere" : "Elsewhere",
-  "current_location" : "Current Location",
+  "current_location" : "My Current Location",
   "select_location_type" : "Select Location",
   "next" : "Next",
+  "label" : "Label",
 }

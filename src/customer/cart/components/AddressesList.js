@@ -5,6 +5,7 @@ import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
 import Divider from 'components/Divider';
 import CheckedListItem from 'components/CheckedListItem';
+import AddressInfo from '../../../components/AddressInfo';
 
 export default class AddressesList extends Component {
   shouldComponentUpdate(nextProps) {
@@ -22,11 +23,7 @@ export default class AddressesList extends Component {
         checked={activeItemID === item.id}
         onPress={() => (!item.area.active ? {} : onItemPress(item))}
         title={item.area.name || item.area.name_en}
-        description={`${I18n.t('block')} ${item.block}, ${I18n.t('street')} ${
-          item.street
-        }
-        ${item.avenue ? + ',' + I18n.t('avenue') + item.avenue + ',' : ''}
-        ${item.building ? I18n.t('building') + item.building + ',' : ''}`}
+        description={<AddressInfo address={item} style={{color:colors.darkGrey}}/>}
       />
     );
   };

@@ -219,7 +219,6 @@ class CreateOrder extends PureComponent {
         style={{flex: 1, backgroundColor: 'white'}}
         keyboardShouldPersistTaps={'always'}
         contentInset={{bottom: 50}}>
-
         <CategoriesList
           items={categories}
           onItemPress={this.onCategoriesListItemPress}

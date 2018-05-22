@@ -9,7 +9,7 @@ import BackgroundGeolocation from 'react-native-background-geolocation';
 import Divider from 'components/Divider';
 import SelectArea from 'customer/cart/components/SelectArea';
 import MapButtons from 'customer/cart/components/MapButtons';
-import {Title} from "react-native-paper";
+import {Title} from 'react-native-paper';
 
 export default class extends PureComponent {
   static propTypes = {
@@ -23,7 +23,7 @@ export default class extends PureComponent {
     let {block, street, avenue, building} = this.props.address;
 
     this.state = {
-      label: null,
+      label: 'Home',
       block: block,
       street: street,
       avenue: avenue,
@@ -36,24 +36,11 @@ export default class extends PureComponent {
   };
 
   saveAddress = () => {
-
-    return Alert.alert(
-      `${I18n.t('confirm_location')}`,
-      `${I18n.t('confirm_location_confirmation')}`,
-      [
-        {text: I18n.t('cancel')},
-        {
-          text: I18n.t('yes'),
-          onPress: () => {
-            this.props.onSave({
-              ...this.state,
-              id:this.props.address.id,
-              area_id:this.props.address.area.id
-            });
-          },
-        },
-      ],
-    );
+      this.props.onSave({
+        ...this.state,
+        id: this.props.address.id,
+        area_id: this.props.address.area.id,
+      });
   };
 
   updateFormFields = (key, value) => {
@@ -63,18 +50,12 @@ export default class extends PureComponent {
   };
 
   render() {
-    const {
-      block,
-      street,
-      avenue,
-      building,
-      label
-    } = this.state;
+    const {block, street, avenue, building, label} = this.state;
     let {area} = this.props.address;
     return (
       <View style={styles.container}>
         <Title style={{textAlign: 'center'}}>{area.name}</Title>
-        <Divider style={{marginVertical:10}}/>
+        <Divider style={{marginVertical: 10}} />
         <AddressFormFields
           block={block}
           avenue={avenue}
@@ -83,7 +64,7 @@ export default class extends PureComponent {
           label={label}
           updateFields={this.updateFormFields}
         />
-        <MapButtons save={this.saveAddress} close={this.hideScreen}/>
+        <MapButtons save={this.saveAddress} close={this.hideScreen} />
       </View>
     );
   }
@@ -93,7 +74,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    paddingTop: 50
+    paddingTop: 50,
   },
   searchInputWrapper: {},
   searchInputContainer: {

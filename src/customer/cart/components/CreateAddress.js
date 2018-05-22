@@ -53,11 +53,7 @@ export default class extends PureComponent {
   };
 
   render() {
-    const {
-      latitude,
-      longitude,
-      area_id,
-    } = this.state;
+    const {latitude, longitude, area_id} = this.state;
 
     return (
       <View style={styles.container}>
@@ -82,5 +78,4 @@ const styles = StyleSheet.create({
     opacity: 1,
     backgroundColor: colors.fadedWhite,
   },
-
 });

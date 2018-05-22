@@ -16,7 +16,7 @@ import colors from 'assets/theme/colors';
 import Dialog from 'components/Dialog';
 import ImagePicker from 'react-native-image-crop-picker';
 import Button from 'components/Button';
-import FormTextInput from "../../components/FormTextInput";
+import FormTextInput from '../../components/FormTextInput';
 
 class PhotosUploadScene extends Component {
   static propTypes = {
@@ -43,7 +43,7 @@ class PhotosUploadScene extends Component {
     images: [],
     showImageUploadOptionsDialog: false,
     imageApprovalDialogVisible: false,
-    comment:null
+    comment: null,
   };
 
   componentDidMount() {
@@ -165,9 +165,9 @@ class PhotosUploadScene extends Component {
     this.hideImageUploadOptions();
   };
 
-  onFieldChange = (key,value) => {
+  onFieldChange = (key, value) => {
     this.setState({
-      [key]:value
+      [key]: value,
     });
   };
 
@@ -193,22 +193,25 @@ class PhotosUploadScene extends Component {
         />
 
         {order.job &&
-        order.job.photos &&
-        order.job.photos.length && (
-
-          <View>
-            <View style={{padding:10,backgroundColor:'white'}}>
-              <FormTextInput field="comment" onValueChange={this.onFieldChange} label={I18n.t('comment')}/>
+          order.job.photos &&
+          order.job.photos.length && (
+            <View>
+              <View style={{padding: 10, backgroundColor: 'white'}}>
+                <FormTextInput
+                  field="comment"
+                  onValueChange={this.onFieldChange}
+                  label={I18n.t('comment')}
+                />
+              </View>
+              <Button
+                title={I18n.t('approve_images')}
+                onPress={this.showImageApprovalDialog}
+                raised
+                // disabled={order.job.photos_approved}
+                style={{margin: 20, marginBottom: 50}}
+              />
             </View>
-            <Button
-              title={I18n.t('approve_images')}
-              onPress={this.showImageApprovalDialog}
-              raised
-              // disabled={order.job.photos_approved}
-              style={{margin: 20, marginBottom: 50}}
-            />
-          </View>
-        )}
+          )}
 
         <FAB
           icon="add"

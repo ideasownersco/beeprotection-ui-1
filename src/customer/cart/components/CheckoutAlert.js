@@ -48,7 +48,9 @@ export default class CheckoutAlert extends Component {
             {date && (
               <View style={styles.rowContainer}>
                 <Caption style={{flex: 1}}>{I18n.t('date')}</Caption>
-                <Text style={styles.value}>{date.format('ddd')} {date.format('DD-MM-Y')}</Text>
+                <Text style={styles.value}>
+                  {date.format('ddd')} {date.format('DD-MM-Y')}
+                </Text>
               </View>
             )}
 

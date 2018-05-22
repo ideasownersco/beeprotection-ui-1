@@ -33,7 +33,6 @@ export default class Drawer extends Component {
 
     return (
       <DrawerSection>
-
         <DrawerHeader user={user} />
 
         <DrawerItem
@@ -46,7 +45,6 @@ export default class Drawer extends Component {
           }}
           active={activeRoute === 'HomeStack'}
         />
-
 
         <DrawerItem
           label={I18n.t('working_orders')}
