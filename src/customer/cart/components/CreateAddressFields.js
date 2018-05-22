@@ -36,11 +36,11 @@ export default class extends PureComponent {
   };
 
   saveAddress = () => {
-      this.props.onSave({
-        ...this.state,
-        id: this.props.address.id,
-        area_id: this.props.address.area.id,
-      });
+    this.props.onSave({
+      ...this.state,
+      id: this.props.address.id,
+      area_id: this.props.address.area.id,
+    });
   };
 
   updateFormFields = (key, value) => {

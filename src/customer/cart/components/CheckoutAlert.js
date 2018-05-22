@@ -63,23 +63,24 @@ export default class CheckoutAlert extends Component {
               </View>
             )}
 
-            {address &&
-              address.area(
-                <View style={styles.rowContainer}>
-                  <Caption style={{flex: 1}}>{I18n.t('address')}</Caption>
-                  <View
-                    style={{
-                      flex: 3,
-                      paddingHorizontal: 10,
-                      alignItems: 'flex-end',
-                    }}>
-                    <AddressInfo
-                      address={address}
-                      style={{textAlign: 'center'}}
-                    />
-                  </View>
-                </View>,
-              )}
+            {address && address.area ? (
+              <View style={styles.rowContainer}>
+                <Caption style={{flex: 1}}>{I18n.t('address')}</Caption>
+                <View
+                  style={{
+                    flex: 3,
+                    paddingHorizontal: 10,
+                    alignItems: 'flex-end',
+                  }}>
+                  <AddressInfo
+                    address={address}
+                    style={{textAlign: 'center'}}
+                  />
+                </View>
+              </View>
+            ) : (
+              <View />
+            )}
 
             <View style={styles.rowContainer}>
               <Caption style={{flex: 1}}>{I18n.t('amount')}</Caption>

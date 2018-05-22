@@ -285,6 +285,7 @@ class Cart extends PureComponent {
       this.hideCheckoutConfirmDialog();
       return this.redirectToLogin();
     } else {
+
       const item = {
         user_id: user.id,
         address_id: selectedAddressID,
@@ -295,18 +296,18 @@ class Cart extends PureComponent {
         payment_mode: paymentMode,
       };
 
-      let address =
-        user &&
-        user.addresses.find(address => address.id === selectedAddressID);
-
-      if (address && address.area && !address.area.active) {
-        return this.props.dispatch(
-          APP_ACTIONS.setNotification({
-            type: 'error',
-            message: `${I18n.t('address_disabled')}`,
-          }),
-        );
-      }
+      // let address =
+      //   user &&
+      //   user.addresses.find(address => address.id === selectedAddressID);
+      //
+      // if (address && address.area && !address.area.active) {
+      //   return this.props.actions.(
+      //     APP_ACTIONS.setNotification({
+      //       type: 'error',
+      //       message: `${I18n.t('address_disabled')}`,
+      //     }),
+      //   );
+      // }
 
       return new Promise((resolve, reject) => {
         this.props.actions.checkout({item, resolve, reject});

@@ -13,8 +13,8 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 import I18n from 'utils/locale';
-import IconFactory from "../../../components/IconFactory";
-import colors from "../../../assets/theme/colors";
+import IconFactory from '../../../components/IconFactory';
+import colors from '../../../assets/theme/colors';
 
 export default class AddressTypeSelectionModal extends Component {
   state = {
@@ -44,7 +44,11 @@ export default class AddressTypeSelectionModal extends Component {
                       checked={type === 'current_location'}
                     />
                   </View>
-                  <IconFactory type="MaterialIcons" name="my-location" color={colors.error}/>
+                  <IconFactory
+                    type="MaterialIcons"
+                    name="my-location"
+                    color={colors.error}
+                  />
                   <Subheading style={styles.text}>
                     {I18n.t('current_location')}
                   </Subheading>
@@ -59,12 +63,15 @@ export default class AddressTypeSelectionModal extends Component {
                       checked={type === 'elsewhere'}
                     />
                   </View>
-                  <IconFactory type="MaterialIcons" name="location-on" color={colors.error}/>
+                  <IconFactory
+                    type="MaterialIcons"
+                    name="location-on"
+                    color={colors.error}
+                  />
 
                   <Subheading style={styles.text}>
                     {I18n.t('elsewhere')}
                   </Subheading>
-
                 </View>
               </TouchableRipple>
             </View>

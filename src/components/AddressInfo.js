@@ -19,11 +19,7 @@ export default class AddressInfo extends Component {
 
     return (
       <Text style={[styles.value, style]}>
-
-        {
-          area &&
-          <Text>{area.name + ', '}</Text>
-        }
+        {area && <Text>{area.name + ', '}</Text>}
 
         <Text>
           {I18n.t('block')} {block},{' '}

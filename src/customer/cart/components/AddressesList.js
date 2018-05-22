@@ -18,12 +18,26 @@ export default class AddressesList extends Component {
   renderItem = ({item}) => {
     const {onItemPress, activeItemID} = this.props;
 
+    if(!item.area.active) {
+      return (
+        <CheckedListItem
+          disabled={true}
+          title={item.area.name || item.area.name_en}
+          description={
+            <AddressInfo address={item} style={{color: colors.darkGrey}} />
+          }
+        />
+      )
+    }
+
     return (
       <CheckedListItem
         checked={activeItemID === item.id}
-        onPress={() => (!item.area.active ? {} : onItemPress(item))}
+        onPress={()=>onItemPress(item)}
         title={item.area.name || item.area.name_en}
-        description={<AddressInfo address={item} style={{color:colors.darkGrey}}/>}
+        description={
+          <AddressInfo address={item} style={{color: colors.darkGrey}} />
+        }
       />
     );
   };
@@ -32,7 +46,7 @@ export default class AddressesList extends Component {
     const {items, activeItemID} = this.props;
     return (
       <FlatList
-        data={items}
+        data={items.filter(item => item.area !== null || undefined)}
         renderItem={this.renderItem}
         style={styles.listContainer}
         keyExtractor={(item, index) => `${index}`}
