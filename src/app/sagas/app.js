@@ -4,13 +4,16 @@ import CodePush from 'react-native-code-push';
 import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
 import {I18nManager} from 'react-native';
 import {API} from 'app/common/api';
+import {API as CUSTOMER_API} from 'customer/common/api';
 import {ACTION_TYPES} from 'app/common/actions';
+import {ACTION_TYPES as CUSTOMER_ACTION_TYPES} from 'customer/common/actions';
 import {
   INSTALLED_KEY,
   COUNTRY_KEY,
   LANGUAGE_KEY,
   PUSH_TOKEN_KEY,
   AUTH_KEY,
+  DEVICE_UUID_KEY,
   DEFAULT_LANGUAGE,
 } from 'utils/env';
 import {API as AUTH_API} from 'guest/common/api';
@@ -18,6 +21,7 @@ import {ACTION_TYPES as AUTH_ACTION_TYPES} from 'guest/common/actions';
 import {normalize} from 'normalizr';
 import {setStorageItem, getStorageItem} from 'utils/functions';
 import {Schema} from 'utils/schema';
+import DeviceInfo from 'react-native-device-info';
 
 function* setInstalled() {
   yield call(setStorageItem, INSTALLED_KEY, 'INSTALLED');
@@ -29,6 +33,42 @@ function* boot() {
   let installedStorageKey = yield call(getStorageItem, INSTALLED_KEY);
   if (!isNull(installedStorageKey)) {
     yield put({type: ACTION_TYPES.INSTALL_SUCCESS, value: true});
+  } else {
+
+
+  }
+
+  // run on first
+  const uniqueId = DeviceInfo.getUniqueID();
+
+  try {
+    let response = yield call(API.storeDeviceID, {
+      body: {
+        uuid: uniqueId,
+      },
+    });
+    if (response.success) {
+      yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId)
+    }
+  } catch (error) {
+    console.log('error registering uuid', error);
+  }
+
+  try {
+    let params = {
+      uuid: uniqueId
+    };
+
+    let response = yield call(CUSTOMER_API.fetchHasFreeWash, params);
+    if(response.success) {
+      yield put({
+        type:CUSTOMER_ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS,
+        uuid:uniqueId
+      })
+    }
+
+  } catch (error) {
+
   }
 
   // 2- Set language from history

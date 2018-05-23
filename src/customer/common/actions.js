@@ -77,6 +77,11 @@ export const ACTION_TYPES = {
   FETCH_ORDER_DETAILS_REQUEST: '@customer/FETCH_ORDER_DETAILS_REQUEST',
   FETCH_ORDER_DETAILS_SUCCESS: '@customer/FETCH_ORDER_DETAILS_SUCCESS',
   FETCH_ORDER_DETAILS_FAILURE: '@customer/FETCH_ORDER_DETAILS_FAILURE',
+
+  FETCH_HAS_FREE_WASH_REQUEST: '@customer/FETCH_HAS_FREE_WASH_REQUEST',
+  FETCH_HAS_FREE_WASH_SUCCESS: '@customer/FETCH_HAS_FREE_WASH_SUCCESS',
+  FETCH_HAS_FREE_WASH_FAILURE: '@customer/FETCH_HAS_FREE_WASH_FAILURE',
+
 };
 
 function fetchCartItems() {
@@ -126,6 +131,13 @@ function setCartItems(params: object) {
 }
 
 function fetchCategories(params) {
+  return {
+    type: ACTION_TYPES.CATEGORY_REQUEST,
+    params,
+  };
+}
+
+function fetchHasFreeWash(params) {
   return {
     type: ACTION_TYPES.CATEGORY_REQUEST,
     params,
@@ -236,6 +248,7 @@ export const ACTIONS = {
   removeCartItem,
   flushCart,
   fetchCategories,
+  fetchHasFreeWash,
   fetchTimings,
   fetchAddresses,
   fetchAreas,

@@ -10,6 +10,11 @@ function fetchCategories(params = {}) {
   return request({path, params});
 }
 
+function fetchHasFreeWash(params = {}) {
+  const path = `freewash/check?uuid=${params.uuid}`;
+  return request({path, params});
+}
+
 function fetchTimings(params = {}) {
   const path = `timings`;
   let requestParams = {
@@ -83,6 +88,7 @@ function fetchOrderDetails(id) {
 export const API = {
   fetchCartItems,
   fetchCategories,
+  fetchHasFreeWash,
   fetchTimings,
   fetchAddresses,
   fetchAreas,

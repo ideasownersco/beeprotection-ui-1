@@ -12,6 +12,7 @@ const initialState = {
   activeCategoryID: null,
   activePackageID: null,
   activeServicesIDs: [],
+  hasFreeWash:false
 };
 
 export function reducer(state = initialState, action = {}) {
@@ -58,6 +59,13 @@ export function reducer(state = initialState, action = {}) {
       return {
         ...initialState,
       };
+   case ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS:
+      return {
+        ...initialState,
+        hasFreeWash:true
+      };
+
+
     default:
       return state;
   }

@@ -19,6 +19,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Button from 'components/Button';
 import Dialog from 'components/Dialog';
 import IconFactory from 'components/IconFactory';
+import FreeWash from "customer/components/FreeWash";
+import Modal from 'react-native-modal';
 
 type State = {
   showCartSuccessModal: boolean,
@@ -188,9 +190,14 @@ class CreateOrder extends PureComponent {
     this.props.navigation.navigate('Cart');
   };
 
-  hideCheckoutModal = () => {
-    this.setState({
-      showCartSuccessModal: false,
+  hideFreeWashModal = () => {
+    this.props.actions.setCartItem('hasFreeWash',false);
+  };
+
+  onFreeWashPress = () => {
+    this.props.actions.setCartItem('hasFreeWash',false);
+    this.props.navigation.navigate('Cart',{
+      isFreeWash:true
     });
   };
 
@@ -200,6 +207,7 @@ class CreateOrder extends PureComponent {
       activePackageID,
       activeServicesIDs,
       total,
+      hasFreeWash
     } = this.props.cart;
     const {categories} = this.props;
 
@@ -289,6 +297,11 @@ class CreateOrder extends PureComponent {
             primary: true,
           }}
         />
+
+        <Modal isVisible={hasFreeWash} style={{marginVertical:100,marginHorizontal:30,backgroundColor:'white'}}>
+          <FreeWash close={this.hideFreeWashModal} onPress={this.onFreeWashPress}/>
+        </Modal>
+
       </ScrollView>
     );
   }

@@ -172,4 +172,7 @@
   "select_location_type" : "Select Location",
   "next" : "Next",
   "label" : "Label",
+  "get_free_wash" : "Get Free Wash",
+  "proceed" : "Proceed",
+  "today" : "Today"
 }

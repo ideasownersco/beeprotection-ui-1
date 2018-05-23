@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
+import I18n from 'utils/locale';
 
 export default class DatePicker extends Component {
   static propTypes = {
@@ -20,29 +21,45 @@ export default class DatePicker extends Component {
   renderDay = day => {
     const {activeItem} = this.props;
 
+
+    console.log('day',);
     return (
-      <View
-        style={[
-          styles.itemContainer,
-          activeItem.format('DD/MM') === day.format('DD/MM') &&
+
+      <View>
+
+
+        <View
+          style={[
+            styles.itemContainer,
+            activeItem.format('DD/MM') === day.format('DD/MM') &&
             styles.itemContainerActive,
-        ]}>
-        <Text
-          style={[
-            styles.day,
-            activeItem.format('DD/MM') === day.format('DD/MM') &&
+          ]}>
+
+          {
+            day.isSame(new Date(), "day") ?
+              <Text style={{textAlign:'center',paddingVertical:5,fontWeight:'500'}}>{I18n.t('today').toUpperCase()}</Text>
+              :
+              <Text style={{textAlign:'center',paddingTop:15}}></Text>
+          }
+
+
+          <Text
+            style={[
+              styles.day,
+              activeItem.format('DD/MM') === day.format('DD/MM') &&
               styles.dayActive,
-          ]}>
-          {day.format('ddd').toUpperCase()}
-        </Text>
-        <Text
-          style={[
-            styles.date,
-            activeItem.format('DD/MM') === day.format('DD/MM') &&
+            ]}>
+            {day.format('ddd').toUpperCase()}
+          </Text>
+          <Text
+            style={[
+              styles.date,
+              activeItem.format('DD/MM') === day.format('DD/MM') &&
               styles.dateActive,
-          ]}>
-          {day.date()}
-        </Text>
+            ]}>
+            {day.date()}
+          </Text>
+        </View>
       </View>
     );
   };

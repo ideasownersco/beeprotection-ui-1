@@ -68,6 +68,8 @@ PODS:
   - RNBackgroundGeolocation (2.12.0-beta.4):
     - CocoaLumberjack (~> 3.0)
     - React
+  - RNDeviceInfo (0.21.5):
+    - React
   - RNI18n (2.0.12):
     - React
   - RNImageCropPicker (0.20.1):
@@ -94,6 +96,7 @@ DEPENDENCIES:
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
   - RNBackgroundGeolocation (from `../node_modules/react-native-background-geolocation`)
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNI18n (from `../node_modules/react-native-i18n`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
@@ -109,6 +112,8 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-background-fetch
   RNBackgroundGeolocation:
     :path: ../node_modules/react-native-background-geolocation
+  RNDeviceInfo:
+    :path: ../node_modules/react-native-device-info
   RNI18n:
     :path: ../node_modules/react-native-i18n
   RNImageCropPicker:
@@ -126,11 +131,12 @@ SPEC CHECKSUMS:
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNBackgroundFetch: 8c4f77f83c398c659bce82af2f0a885079417b9e
   RNBackgroundGeolocation: c9bbf69b9aa277f0b46754cc5f853bd26051a18f
+  RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
   RNI18n: db9be06a40336f04d136f24dd5de3f5eb9f3207c
   RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
   RSKImageCropper: 50d5a3e4160f0309b14d75b89d5ae2f496d56e0d
   yoga: a23273df0088bf7f2bb7e5d7b00044ea57a2a54a
 
-PODFILE CHECKSUM: 8e40db2c1567c757b3e40c2c6d820a7bf0814784
+PODFILE CHECKSUM: 532f6783b772b2454128402b8caca771110abbe4
 
 COCOAPODS: 1.4.0
