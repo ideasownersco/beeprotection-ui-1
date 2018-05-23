@@ -14,39 +14,55 @@ export default class ServicesList extends Component {
     );
   }
 
+  renderService = (item) => {
+
+    console.log('item',item);
+    const {activeItemIDs} = this.props;
+
+    return (
+      <View
+        style={[
+          styles.itemContainer,
+          activeItemIDs.indexOf(item.id) > -1 && {
+            backgroundColor: colors.white,
+          },
+          item.included && {backgroundColor: colors.white}
+        ]}>
+        <Image
+          source={{uri: item.image}}
+          style={styles.image}
+          resizeMode="contain"
+        />
+        <View style={{flexDirection: 'row'}}>
+          <Text
+            style={[
+              styles.title,
+              activeItemIDs.indexOf(item.id) > -1 && {
+                color: colors.primary,
+                fontWeight: 'bold',
+              },
+            ]}>
+            {item.name}
+          </Text>
+          <Text style={styles.price}>{item.price} KD</Text>
+        </View>
+      </View>
+    )
+  };
+
   renderItem = ({item}) => {
     const {onItemPress, activeItemIDs} = this.props;
 
-    return (
-      <Touchable onPress={() => onItemPress(item)} key={item.id}>
-        <View
-          style={[
-            styles.itemContainer,
-            activeItemIDs.indexOf(item.id) > -1 && {
-              backgroundColor: colors.white,
-            },
-          ]}>
-          <Image
-            source={{uri: item.image}}
-            style={styles.image}
-            resizeMode="contain"
-          />
-          <View style={{flexDirection: 'row'}}>
-            <Text
-              style={[
-                styles.title,
-                activeItemIDs.indexOf(item.id) > -1 && {
-                  color: colors.primary,
-                  fontWeight: 'bold',
-                },
-              ]}>
-              {item.name}
-            </Text>
-            <Text style={styles.price}>{item.price} KD</Text>
-          </View>
-        </View>
-      </Touchable>
-    );
+    if(item.included) {
+      return this.renderService(item);
+    } else {
+      return (
+        <Touchable onPress={() => onItemPress(item)} key={item.id}>
+          {this.renderService(item)}
+        </Touchable>
+      )
+    }
+
   };
 
   render() {
