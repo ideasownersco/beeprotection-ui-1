@@ -21,12 +21,9 @@ export default class DatePicker extends Component {
   renderDay = day => {
     const {activeItem} = this.props;
 
-
-    console.log('day',);
     return (
 
       <View>
-
 
         <View
           style={[
@@ -39,9 +36,8 @@ export default class DatePicker extends Component {
             day.isSame(new Date(), "day") ?
               <Text style={{textAlign:'center',paddingVertical:5,fontWeight:'500'}}>{I18n.t('today').toUpperCase()}</Text>
               :
-              <Text style={{textAlign:'center',paddingTop:15}}></Text>
+              <Text style={{paddingTop:15}}></Text>
           }
-
 
           <Text
             style={[
