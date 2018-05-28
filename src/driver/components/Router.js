@@ -1,5 +1,5 @@
 import React from 'react';
-import {DrawerNavigator, StackNavigator} from 'react-navigation';
+import {DrawerNavigator, createStackNavigator} from 'react-navigation';
 import Drawer from 'driver/components/Drawer';
 import Home from 'driver/Home';
 import Login from 'guest/Login';
@@ -15,7 +15,7 @@ import PhotosUploadScene from 'driver/orders/PhotosUploadScene';
 const getDrawerIcon = navigation => {
   return {
     headerLeft: (
-      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
+      <DrawerIcon onPress={() => navigation.openDrawer()} />
     ),
   };
 };
@@ -28,7 +28,7 @@ const navStyle = {
   },
 };
 
-const HomeStack = StackNavigator(
+const HomeStack = createStackNavigator(
   {
     Home: {
       screen: Home,
@@ -56,7 +56,7 @@ const HomeStack = StackNavigator(
   },
 );
 
-const PastOrdersStack = StackNavigator(
+const PastOrdersStack = createStackNavigator(
   {
     PastOrders: {
       screen: PastOrdersScene,
@@ -76,7 +76,7 @@ const PastOrdersStack = StackNavigator(
   },
 );
 
-const UpcomingOrdersStack = StackNavigator(
+const UpcomingOrdersStack = createStackNavigator(
   {
     UpcomingOrders: {
       screen: UpcomingOrdersScene,

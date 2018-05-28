@@ -14,7 +14,7 @@ import Button from 'components/Button';
 export default class Dialog extends Component {
   static propTypes = {
     title: PropTypes.string,
-    description: PropTypes.string,
+    description: PropTypes.element,
     leftButtonPress: PropTypes.func.isRequired,
     rightButtonPress: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
