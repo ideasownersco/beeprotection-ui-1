@@ -5,6 +5,7 @@ import colors from 'theme/colors';
 import I18n from 'utils/locale';
 import FormTextInput from 'components/FormTextInput';
 import FormSubmit from 'components/FormSubmit';
+import Button from "../../components/Button";
 
 export default class ConfirmScene extends Component {
   static propTypes = {
@@ -42,14 +43,16 @@ export default class ConfirmScene extends Component {
           style={{marginTop: 50}}
         />
 
-        <TouchableHighlight
-          onPress={() => onForgotPassword()}
-          style={[{paddingTop: 100}]}
-          underlayColor="transparent">
-          <Text style={[styles.link]}>
-            {I18n.t('resend_confirmation_code')}
-          </Text>
-        </TouchableHighlight>
+
+        <Button title={I18n.t('resend_confirmation_code')} onPress={onForgotPassword} style={{marginVertical:20}}/>
+        {/*<TouchableHighlight*/}
+          {/*onPress={() => onForgotPassword()}*/}
+          {/*style={[{paddingTop: 100}]}*/}
+          {/*underlayColor="transparent">*/}
+          {/*<Text style={[styles.link]}>*/}
+            {/*{I18n.t('resend_confirmation_code')}*/}
+          {/*</Text>*/}
+        {/*</TouchableHighlight>*/}
       </View>
     );
   }

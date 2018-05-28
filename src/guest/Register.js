@@ -121,7 +121,7 @@ class Register extends Component {
             onPress={this.handleRegister}
             disabled={busy}
             title={busy ? I18n.t('signing_up') : I18n.t('create_account')}
-            style={{marginTop: 50}}
+            style={{marginVertical: 20}}
           />
         </FormContent>
 
