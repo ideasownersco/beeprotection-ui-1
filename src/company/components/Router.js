@@ -1,5 +1,5 @@
 import React from 'react';
-import {DrawerNavigator, createStackNavigator} from 'react-navigation';
+import {createDrawerNavigator, createStackNavigator} from 'react-navigation';
 import Drawer from 'company/components/Drawer';
 import Home from 'company/Home';
 import Login from 'guest/Login';
@@ -213,7 +213,7 @@ const DrawerRoutes = {
   Login: {screen: Login},
 };
 
-export const Router = DrawerNavigator(DrawerRoutes, {
+export const Router = createDrawerNavigator(DrawerRoutes, {
   contentComponent: props => <Drawer {...props} />,
   drawerWidth: 275,
 });

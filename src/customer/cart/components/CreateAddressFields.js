@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Alert} from 'react-native';
+import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
 import I18n from 'utils/locale';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
@@ -11,6 +11,12 @@ import SelectArea from 'customer/cart/components/SelectArea';
 import MapButtons from 'customer/cart/components/MapButtons';
 import {Title} from 'react-native-paper';
 import Map from "components/Map";
+import MapView from "react-native-maps";
+
+const {width, height} = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class extends PureComponent {
   static propTypes = {
@@ -29,7 +35,16 @@ export default class extends PureComponent {
       street: street,
       avenue: avenue,
       building: building,
+      initialized: false
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        initialized: true
+      });
+    }, 1000)
   }
 
   hideScreen = () => {
@@ -51,17 +66,41 @@ export default class extends PureComponent {
   };
 
   render() {
-    const {block, street, avenue, building, label,...rest} = this.state;
-    let {area} = this.props.address;
+    const {block, street, avenue, building, label, initialized} = this.state;
+    let {latitude, longitude, area} = this.props.address;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={{paddingBottom:40}}>
 
-        <Map
-          origin={rest}
-        />
+        <View style={styles.map}>
+        {
+          initialized &&
+          <MapView
+            ref={ref => this.map = ref}
+            style={{
+              height:250
+            }}
+            initialRegion={{
+              latitude: latitude,
+              longitude: longitude,
+              latitudeDelta: LATITUDE_DELTA,
+              longitudeDelta: LONGITUDE_DELTA,
+            }}
+            cacheEnabled={true}
+          >
+            <MapView.Marker
+              coordinate={{
+                latitude: latitude,
+                longitude: longitude
+              }}
+              // centerOffset={{x: -18, y: -60}}
+              // anchor={{x: 0.69, y: 1}}
+            />
+          </MapView>
+        }
+        </View>
 
-        <Title style={{textAlign: 'center'}}>{area.name}</Title>
-        <Divider style={{marginVertical: 10}} />
+        <Title style={{textAlign: 'center',marginTop:10}}>{area.name}</Title>
+        <Divider style={{marginVertical: 10}}/>
         <AddressFormFields
           block={block}
           avenue={avenue}
@@ -70,8 +109,8 @@ export default class extends PureComponent {
           label={label}
           updateFields={this.updateFormFields}
         />
-        <MapButtons save={this.saveAddress} close={this.hideScreen} />
-      </View>
+        <MapButtons save={this.saveAddress} close={this.hideScreen}/>
+      </ScrollView>
     );
   }
 }
@@ -79,11 +118,15 @@ export default class extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    paddingTop: 50,
   },
   searchInputWrapper: {},
   searchInputContainer: {
     flexDirection: 'row',
   },
+  map:{
+    height:250,
+    backgroundColor:colors.lightGrey
+  }
 });
+
+

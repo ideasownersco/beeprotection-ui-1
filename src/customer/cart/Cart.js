@@ -230,7 +230,7 @@ class Cart extends PureComponent {
     this.props.actions.fetchTimings({
       date: date ? date : this.props.cart.selectedDate,
       items: this.props.cart.items,
-      free_wash: this.props.navigation.getParam('isFreeWash')
+      free_wash: this.props.navigation.getParam('isFreeWash',false)
     });
   };
 
@@ -295,7 +295,7 @@ class Cart extends PureComponent {
         time: selectedTimeID,
         date: selectedDate,
         payment_mode: paymentMode,
-        free_wash: this.props.navigation.getParam('isFreeWash')
+        free_wash: this.props.navigation.getParam('isFreeWash',false)
       };
 
       // let address =
@@ -397,9 +397,7 @@ class Cart extends PureComponent {
       address,
     } = this.state;
 
-    console.log('this.state', this.state);
-
-    let freeWash = navigation.getParam('isFreeWash');
+    let freeWash = navigation.getParam('isFreeWash',false);
 
     if (!freeWash && !cartItems.length) {
       return <EmptyCart/>;

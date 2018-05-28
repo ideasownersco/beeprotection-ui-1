@@ -15,10 +15,10 @@ export default class MapButtons extends Component {
   }
 
   render() {
-    let {close, save} = this.props;
+    let {close, save,style} = this.props;
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container,style]}>
         <Button
           onPress={close}
           style={styles.button}
@@ -40,11 +40,8 @@ export default class MapButtons extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    bottom: 20,
     margin: 5,
     flexDirection: 'row',
-    zIndex: 5000,
   },
   button: {
     flex: 1,
