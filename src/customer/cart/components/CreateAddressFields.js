@@ -10,6 +10,7 @@ import Divider from 'components/Divider';
 import SelectArea from 'customer/cart/components/SelectArea';
 import MapButtons from 'customer/cart/components/MapButtons';
 import {Title} from 'react-native-paper';
+import Map from "components/Map";
 
 export default class extends PureComponent {
   static propTypes = {
@@ -50,10 +51,15 @@ export default class extends PureComponent {
   };
 
   render() {
-    const {block, street, avenue, building, label} = this.state;
+    const {block, street, avenue, building, label,...rest} = this.state;
     let {area} = this.props.address;
     return (
       <View style={styles.container}>
+
+        <Map
+          origin={rest}
+        />
+
         <Title style={{textAlign: 'center'}}>{area.name}</Title>
         <Divider style={{marginVertical: 10}} />
         <AddressFormFields

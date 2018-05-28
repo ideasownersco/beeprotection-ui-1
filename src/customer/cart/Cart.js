@@ -575,7 +575,7 @@ class Cart extends PureComponent {
           <CreateAddressFields
             onCancel={this.hideAddressCreateFieldsModal}
             onSave={this.updateAddress}
-            address={{...this.state.address}}
+            address={{...address}}
           />
         </Modal>
 
