@@ -108,7 +108,7 @@ const HomeStack = StackNavigator(
       gesturesEnabled: false,
       ...navStyle,
     }),
-    initialRouteName:'CreateOrder'
+    // initialRouteName:'CreateOrder'
   },
 );
 

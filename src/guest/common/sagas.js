@@ -49,7 +49,9 @@ function* login(action) {
     });
 
     if (redirectRoute) {
-      yield NavigatorService.navigate(redirectRoute);
+      yield setTimeout(() => {
+        NavigatorService.navigate(redirectRoute);
+      },1000);
     }
 
     yield resolve(response.data);
