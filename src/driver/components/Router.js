@@ -1,5 +1,5 @@
 import React from 'react';
-import {createDrawerNavigator, createStackNavigator} from 'react-navigation';
+import {DrawerNavigator, StackNavigator} from 'react-navigation';
 import Drawer from 'driver/components/Drawer';
 import Home from 'driver/Home';
 import Login from 'guest/Login';
@@ -15,7 +15,7 @@ import PhotosUploadScene from 'driver/orders/PhotosUploadScene';
 const getDrawerIcon = navigation => {
   return {
     headerLeft: (
-      <DrawerIcon onPress={() => navigation.openDrawer()} />
+      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
     ),
   };
 };
@@ -28,7 +28,7 @@ const navStyle = {
   },
 };
 
-const HomeStack = createStackNavigator(
+const HomeStack = StackNavigator(
   {
     Home: {
       screen: Home,
@@ -56,7 +56,7 @@ const HomeStack = createStackNavigator(
   },
 );
 
-const PastOrdersStack = createStackNavigator(
+const PastOrdersStack = StackNavigator(
   {
     PastOrders: {
       screen: PastOrdersScene,
@@ -76,7 +76,7 @@ const PastOrdersStack = createStackNavigator(
   },
 );
 
-const UpcomingOrdersStack = createStackNavigator(
+const UpcomingOrdersStack = StackNavigator(
   {
     UpcomingOrders: {
       screen: UpcomingOrdersScene,
@@ -106,7 +106,7 @@ const DrawerRoutes = {
   UpcomingOrdersStack: {screen: UpcomingOrdersStack},
 };
 
-export const Router = createDrawerNavigator(DrawerRoutes, {
+export const Router = DrawerNavigator(DrawerRoutes, {
   contentComponent: props => <Drawer {...props} />,
   drawerWidth: 275,
 });

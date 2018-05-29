@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NavigatorService from 'components/NavigatorService';
-import {createSwitchNavigator} from 'react-navigation';
+import {SwitchNavigator} from 'react-navigation';
 import {Router as AdminRouter} from 'company/components/Router';
 import {Router as DriverRouter} from 'driver/components/Router';
 import {Router as CustomerRouter} from 'customer/components/Router';
@@ -29,7 +29,7 @@ export default class Navigator extends Component {
   render() {
     let {user, logout} = this.props;
 
-    const AppNavigator = createSwitchNavigator(
+    const AppNavigator = SwitchNavigator(
       {
         Guest: {screen: GuestRouter},
         Admin: {screen: AdminRouter},
