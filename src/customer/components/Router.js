@@ -178,6 +178,9 @@ const DrawerRoutes = {
   SettingsStack: {screen: SettingsStack},
   PastOrdersStack: {screen: PastOrdersStack},
   UpcomingOrdersStack: {screen: UpcomingOrdersStack},
+  // AuthStack:{
+  //   screen:AuthStack
+  // }
 };
 
 export const Router = createDrawerNavigator(DrawerRoutes, {
