@@ -99,7 +99,11 @@ export default class extends PureComponent {
         }
         </View>
 
-        <Title style={{textAlign: 'center',marginTop:10}}>{area.name}</Title>
+        {
+          area &&
+          <Title style={{textAlign: 'center',marginTop:10}}>{area.name}</Title>
+        }
+
         <Divider style={{marginVertical: 10}}/>
         <AddressFormFields
           block={block}

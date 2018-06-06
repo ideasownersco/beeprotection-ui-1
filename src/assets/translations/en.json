@@ -174,5 +174,6 @@
   "label" : "Label",
   "get_free_wash" : "Get Free Wash",
   "proceed" : "Proceed",
-  "today" : "Today"
+  "today" : "Today",
+  "open_in_google_maps?" : "Open in Google Maps ?"
 }

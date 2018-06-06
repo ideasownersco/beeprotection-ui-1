@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ACTIONS as ORDER_ACTIONS} from 'driver/common/actions';
+import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {SELECTORS as ORDER_SELECTORS} from 'driver/selectors/orders';
 import {ScrollView, Text, View} from 'react-native';
 import OrderItems from 'customer/orders/components/OrderItems';
@@ -15,6 +15,11 @@ import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
 import Divider from 'components/Divider';
 import Button from 'components/Button';
+import MapButtons from "driver/orders/components/MapButtons";
+import BackgroundGeolocation from 'react-native-background-geolocation';
+import GEOLOCATION_CONFIG from 'utils/background-geolocation';
+import { API_URL} from 'utils/env';
+import TrackButtons from "./components/TrackButtons";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -32,10 +37,25 @@ class OrderDetailScene extends Component {
   };
 
   componentDidMount() {
+
+    let {order} = this.props;
+    let {job} = order;
+
     this.props.dispatch(
-      ORDER_ACTIONS.fetchOrderDetails(
+      DRIVER_ACTIONS.fetchOrderDetails(
         this.props.navigation.state.params.orderID,
       ),
+    );
+
+    BackgroundGeolocation.configure({
+        ...GEOLOCATION_CONFIG,
+        url: `http://${API_URL}/jobs/${job.id}/update/location`,
+      },
+      state => {
+        return {
+          enabled:this.props.order.trackeable
+        }
+      },
     );
   }
 
@@ -60,8 +80,34 @@ class OrderDetailScene extends Component {
     });
   };
 
+
+  startDriving = () => {
+    let {job} = this.props.order;
+    BackgroundGeolocation.start();
+    this.props.startDriving();
+    this.props.dispatch(DRIVER_ACTIONS.startDriving(job.id));
+  };
+
+  stopDriving = () => {
+    let {job} = this.props.order;
+    BackgroundGeolocation.stop();
+    this.props.dispatch(DRIVER_ACTIONS.stopDriving(job.id));
+  };
+
+  startWorking = () => {
+    let {job} = this.props.order;
+    this.props.dispatch(DRIVER_ACTIONS.startWorking(job.id));
+  };
+
+  stopWorking = () => {
+    let {job} = this.props.order;
+    this.props.dispatch(DRIVER_ACTIONS.stopWorking(job.id));
+  };
+
   render() {
     let {order} = this.props;
+
+    let {address,job} = order;
 
     return (
       <ScrollView
@@ -101,6 +147,19 @@ class OrderDetailScene extends Component {
                 />
               </View>
             )}
+
+            {
+              job &&
+              <MapButtons
+                address={address}
+                startDriving={this.startDriving}
+                stopDriving={this.stopDriving}
+                startWorking={this.startWorking}
+                stopWorking={this.stopWorking}
+                jobStatus={job.status}
+              />
+            }
+
           </View>
         )}
       </ScrollView>

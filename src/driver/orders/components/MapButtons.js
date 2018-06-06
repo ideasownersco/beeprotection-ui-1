@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from 'utils/locale';
 import AddressInfo from 'components/AddressInfo';
 import Dialog from 'components/Dialog';
+import GoogleMapDirection from "../../../components/GoogleMapDirection";
 
 export default class MapButtons extends Component {
   static propTypes = {
@@ -16,7 +17,6 @@ export default class MapButtons extends Component {
     stopDriving: PropTypes.func.isRequired,
     startWorking: PropTypes.func.isRequired,
     stopWorking: PropTypes.func.isRequired,
-    onDirectionPress: PropTypes.func.isRequired,
   };
 
   state = {
@@ -102,7 +102,7 @@ export default class MapButtons extends Component {
       showStopWorkingDialog,
     } = this.state;
 
-    const {jobStatus, address, onDirectionPress} = this.props;
+    const {jobStatus, address} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.navContainer}>
@@ -110,12 +110,14 @@ export default class MapButtons extends Component {
             <AddressInfo address={address} style={{textAlign: 'center'}} />
           </Text>
 
-          <Touchable onPress={onDirectionPress}>
+          <GoogleMapDirection address={address}>
             <View style={{alignItems: 'center'}}>
               <Ionicons name="ios-navigate-outline" size={32} />
             </View>
-          </Touchable>
+          </GoogleMapDirection>
+
         </View>
+
 
         {jobStatus == 'pending' && (
           <Button
