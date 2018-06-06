@@ -10,8 +10,8 @@ import Divider from 'components/Divider';
 import SelectArea from 'customer/cart/components/SelectArea';
 import MapButtons from 'customer/cart/components/MapButtons';
 import {Title} from 'react-native-paper';
-import Map from "components/Map";
-import MapView from "react-native-maps";
+import Map from 'components/Map';
+import MapView from 'react-native-maps';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -35,16 +35,16 @@ export default class extends PureComponent {
       street: street,
       avenue: avenue,
       building: building,
-      initialized: false
+      initialized: false,
     };
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({
-        initialized: true
+        initialized: true,
       });
-    }, 1000)
+    }, 1000);
   }
 
   hideScreen = () => {
@@ -69,42 +69,42 @@ export default class extends PureComponent {
     const {block, street, avenue, building, label, initialized} = this.state;
     let {latitude, longitude, area} = this.props.address;
     return (
-      <ScrollView style={styles.container} contentContainerStyle={{paddingBottom:40}}>
-
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{paddingBottom: 40}}>
         <View style={styles.map}>
-        {
-          initialized &&
-          <MapView
-            ref={ref => this.map = ref}
-            style={{
-              height:250
-            }}
-            initialRegion={{
-              latitude: latitude,
-              longitude: longitude,
-              latitudeDelta: LATITUDE_DELTA,
-              longitudeDelta: LONGITUDE_DELTA,
-            }}
-            cacheEnabled={true}
-          >
-            <MapView.Marker
-              coordinate={{
-                latitude: latitude,
-                longitude: longitude
+          {initialized && (
+            <MapView
+              ref={ref => (this.map = ref)}
+              style={{
+                height: 250,
               }}
-              // centerOffset={{x: -18, y: -60}}
-              // anchor={{x: 0.69, y: 1}}
-            />
-          </MapView>
-        }
+              initialRegion={{
+                latitude: latitude,
+                longitude: longitude,
+                latitudeDelta: LATITUDE_DELTA,
+                longitudeDelta: LONGITUDE_DELTA,
+              }}
+              cacheEnabled={true}>
+              <MapView.Marker
+                coordinate={{
+                  latitude: latitude,
+                  longitude: longitude,
+                }}
+                // centerOffset={{x: -18, y: -60}}
+                // anchor={{x: 0.69, y: 1}}
+              />
+            </MapView>
+          )}
         </View>
 
-        {
-          area &&
-          <Title style={{textAlign: 'center',marginTop:10}}>{area.name}</Title>
-        }
+        {area && (
+          <Title style={{textAlign: 'center', marginTop: 10}}>
+            {area.name}
+          </Title>
+        )}
 
-        <Divider style={{marginVertical: 10}}/>
+        <Divider style={{marginVertical: 10}} />
         <AddressFormFields
           block={block}
           avenue={avenue}
@@ -113,7 +113,7 @@ export default class extends PureComponent {
           label={label}
           updateFields={this.updateFormFields}
         />
-        <MapButtons save={this.saveAddress} close={this.hideScreen}/>
+        <MapButtons save={this.saveAddress} close={this.hideScreen} />
       </ScrollView>
     );
   }
@@ -127,10 +127,8 @@ const styles = StyleSheet.create({
   searchInputContainer: {
     flexDirection: 'row',
   },
-  map:{
-    height:250,
-    backgroundColor:colors.lightGrey
-  }
+  map: {
+    height: 250,
+    backgroundColor: colors.lightGrey,
+  },
 });
-
-

@@ -1,13 +1,20 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {AppState, RefreshControl, ScrollView, Switch, Text, View} from 'react-native';
+import {
+  AppState,
+  RefreshControl,
+  ScrollView,
+  Switch,
+  Text,
+  View,
+} from 'react-native';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {connect} from 'react-redux';
 import OrdersList from 'driver/orders/components/OrdersList';
 import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
-import colors from "assets/theme/colors";
+import colors from 'assets/theme/colors';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 
 class Home extends Component {
@@ -21,7 +28,7 @@ class Home extends Component {
 
   state = {
     appState: AppState.currentState,
-    online:true
+    online: true,
   };
 
   static navigationOptions = ({navigation}) => {

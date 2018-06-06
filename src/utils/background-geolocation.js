@@ -1,4 +1,4 @@
-import { GEOLOCATION_SOUNDS_ENABLED} from 'utils/env';
+import {GEOLOCATION_SOUNDS_ENABLED} from 'utils/env';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 
 export default {
@@ -13,4 +13,4 @@ export default {
     ? BackgroundGeolocation.LOG_LEVEL_VERBOSE
     : BackgroundGeolocation.LOG_LEVEL_OFF,
   maxRecordsToPersist: 1,
-}
+};

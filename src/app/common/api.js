@@ -11,5 +11,5 @@ function storeDeviceID(params) {
 
 export const API = {
   storePushToken,
-  storeDeviceID
+  storeDeviceID,
 };

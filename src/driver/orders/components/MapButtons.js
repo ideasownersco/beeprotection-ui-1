@@ -7,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from 'utils/locale';
 import AddressInfo from 'components/AddressInfo';
 import Dialog from 'components/Dialog';
-import GoogleMapDirection from "../../../components/GoogleMapDirection";
+import GoogleMapDirection from '../../../components/GoogleMapDirection';
 
 export default class MapButtons extends Component {
   static propTypes = {
@@ -115,9 +115,7 @@ export default class MapButtons extends Component {
               <Ionicons name="ios-navigate-outline" size={32} />
             </View>
           </GoogleMapDirection>
-
         </View>
-
 
         {jobStatus == 'pending' && (
           <Button

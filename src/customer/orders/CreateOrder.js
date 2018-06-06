@@ -19,15 +19,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Button from 'components/Button';
 import Dialog from 'components/Dialog';
 import IconFactory from 'components/IconFactory';
-import FreeWash from "customer/components/FreeWash";
+import FreeWash from 'customer/components/FreeWash';
 import Modal from 'react-native-modal';
 
 type State = {
   showCartSuccessModal: boolean,
 };
 
-const initialState = {
-};
+const initialState = {};
 
 class CreateOrder extends PureComponent {
   state = {
@@ -77,12 +76,12 @@ class CreateOrder extends PureComponent {
 
     let {hasFreeWash} = this.props.cart;
 
-    if(hasFreeWash) {
+    if (hasFreeWash) {
       this.setState({
-        showFreewashModal:true
+        showFreewashModal: true,
       });
     }
-    this.props.actions.setCartItem('isFreeWash',false);
+    this.props.actions.setCartItem('isFreeWash', false);
   }
 
   loadCartScene = () => {
@@ -173,8 +172,8 @@ class CreateOrder extends PureComponent {
       activeCategoryID: undefined,
       activePackageID: undefined,
       activeServicesIDs: [],
-      hasFreeWash:false,
-      isFreeWash:false
+      hasFreeWash: false,
+      isFreeWash: false,
     });
 
     // return new Promise((resolve, reject) => {
@@ -204,18 +203,18 @@ class CreateOrder extends PureComponent {
   };
 
   hideFreeWashModal = () => {
-    this.props.actions.setCartItem('hasFreeWash',false);
+    this.props.actions.setCartItem('hasFreeWash', false);
     this.setState({
-      showFreewashModal:false
+      showFreewashModal: false,
     });
   };
 
   onFreeWashPress = () => {
     this.props.navigation.navigate('Cart');
-    this.props.actions.setCartItem('hasFreeWash',false);
-    this.props.actions.setCartItem('isFreeWash',true);
+    this.props.actions.setCartItem('hasFreeWash', false);
+    this.props.actions.setCartItem('isFreeWash', true);
     this.setState({
-      showFreewashModal:false
+      showFreewashModal: false,
     });
   };
 
@@ -228,7 +227,7 @@ class CreateOrder extends PureComponent {
     } = this.props.cart;
     const {categories} = this.props;
 
-    const {showCartSuccessModal,showFreewashModal} = this.state;
+    const {showCartSuccessModal, showFreewashModal} = this.state;
 
     let activeCategory = activeCategoryID
       ? categories.find(item => item.id === activeCategoryID)
@@ -315,10 +314,18 @@ class CreateOrder extends PureComponent {
           }}
         />
 
-        <Modal isVisible={showFreewashModal} style={{marginVertical:100,marginHorizontal:30,backgroundColor:'white'}}>
-          <FreeWash close={this.hideFreeWashModal} onPress={this.onFreeWashPress}/>
+        <Modal
+          isVisible={showFreewashModal}
+          style={{
+            marginVertical: 100,
+            marginHorizontal: 30,
+            backgroundColor: 'white',
+          }}>
+          <FreeWash
+            close={this.hideFreeWashModal}
+            onPress={this.onFreeWashPress}
+          />
         </Modal>
-
       </ScrollView>
     );
   }

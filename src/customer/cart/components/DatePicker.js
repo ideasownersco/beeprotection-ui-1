@@ -22,28 +22,31 @@ export default class DatePicker extends Component {
     const {activeItem} = this.props;
 
     return (
-
       <View>
-
         <View
           style={[
             styles.itemContainer,
             activeItem.format('DD/MM') === day.format('DD/MM') &&
-            styles.itemContainerActive,
+              styles.itemContainerActive,
           ]}>
-
-          {
-            day.isSame(new Date(), "day") ?
-              <Text style={{textAlign:'center',paddingVertical:5,fontWeight:'500'}}>{I18n.t('today').toUpperCase()}</Text>
-              :
-              <Text style={{paddingTop:15}}></Text>
-          }
+          {day.isSame(new Date(), 'day') ? (
+            <Text
+              style={{
+                textAlign: 'center',
+                paddingVertical: 5,
+                fontWeight: '500',
+              }}>
+              {I18n.t('today').toUpperCase()}
+            </Text>
+          ) : (
+            <Text style={{paddingTop: 15}} />
+          )}
 
           <Text
             style={[
               styles.day,
               activeItem.format('DD/MM') === day.format('DD/MM') &&
-              styles.dayActive,
+                styles.dayActive,
             ]}>
             {day.format('ddd').toUpperCase()}
           </Text>
@@ -51,7 +54,7 @@ export default class DatePicker extends Component {
             style={[
               styles.date,
               activeItem.format('DD/MM') === day.format('DD/MM') &&
-              styles.dateActive,
+                styles.dateActive,
             ]}>
             {day.date()}
           </Text>

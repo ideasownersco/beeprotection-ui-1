@@ -65,11 +65,15 @@ export default class extends PureComponent {
             area_id: area_id,
           }}
         />
-        <MapButtons save={this.saveAddress} close={this.hideScreen} style={{
-          zIndex: 5000,
-          position:'absolute',
-          bottom:20
-        }} />
+        <MapButtons
+          save={this.saveAddress}
+          close={this.hideScreen}
+          style={{
+            zIndex: 5000,
+            position: 'absolute',
+            bottom: 20,
+          }}
+        />
       </View>
     );
   }

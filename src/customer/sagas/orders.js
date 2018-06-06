@@ -6,7 +6,7 @@ import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
 import I18n from 'utils/locale';
-import {getStorageItem} from "utils/functions";
+import {getStorageItem} from 'utils/functions';
 import {DEVICE_UUID_KEY} from 'utils/env';
 
 function* fetchCategories() {
@@ -285,15 +285,15 @@ function* fetchOrderDetails(action) {
 
 function* fetchHasFreeWash(action) {
   try {
-    const uuid = yield call(getStorageItem,DEVICE_UUID_KEY);
+    const uuid = yield call(getStorageItem, DEVICE_UUID_KEY);
 
     let params = {
-      uuid:uuid
+      uuid: uuid,
     };
     const response = yield call(API.fetchHasFreeWash, params);
     yield put({
       type: ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS,
-      uuid:uuid
+      uuid: uuid,
     });
   } catch (error) {
     yield put({type: ACTION_TYPES.FETCH_HAS_FREE_WASH_FAILURE, error});

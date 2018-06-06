@@ -15,10 +15,10 @@ import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
 import Divider from 'components/Divider';
 import Button from 'components/Button';
-import MapButtons from "driver/orders/components/MapButtons";
+import MapButtons from 'driver/orders/components/MapButtons';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import GEOLOCATION_CONFIG from 'utils/background-geolocation';
-import { API_URL} from 'utils/env';
+import {API_URL} from 'utils/env';
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -36,7 +36,6 @@ class OrderDetailScene extends Component {
   };
 
   componentDidMount() {
-
     let {order} = this.props;
     let {job} = order;
 
@@ -46,14 +45,15 @@ class OrderDetailScene extends Component {
       ),
     );
 
-    BackgroundGeolocation.configure({
+    BackgroundGeolocation.configure(
+      {
         ...GEOLOCATION_CONFIG,
         url: `http://${API_URL}/jobs/${job.id}/update/location`,
       },
       state => {
         return {
-          enabled:this.props.order.trackeable
-        }
+          enabled: this.props.order.trackeable,
+        };
       },
     );
   }
@@ -98,7 +98,7 @@ class OrderDetailScene extends Component {
   render() {
     let {order} = this.props;
 
-    let {address,job} = order;
+    let {address, job} = order;
 
     return (
       <ScrollView
@@ -120,8 +120,7 @@ class OrderDetailScene extends Component {
             <Divider style={{marginBottom: 10}} />
 
             <SectionHeading title={I18n.t('address')} />
-            {
-              job &&
+            {job && (
               <View>
                 <MapButtons
                   address={address}
@@ -133,19 +132,15 @@ class OrderDetailScene extends Component {
                 />
                 <Divider style={{marginBottom: 10}} />
 
-                {
-                  order.trackeable && (
-                    <Button
-                      raised
-                      onPress={this.uploadImages}
-                      title={I18n.t('upload_images')}
-                    />
-                  )
-                }
-
+                {order.trackeable && (
+                  <Button
+                    raised
+                    onPress={this.uploadImages}
+                    title={I18n.t('upload_images')}
+                  />
+                )}
               </View>
-            }
-
+            )}
           </View>
         )}
       </ScrollView>

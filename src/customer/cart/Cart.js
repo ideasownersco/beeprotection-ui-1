@@ -224,7 +224,7 @@ class Cart extends PureComponent {
       force: true,
     });
     this.props.navigation.popToTop();
-    this.props.actions.setCartItem('isFreeWash',false);
+    this.props.actions.setCartItem('isFreeWash', false);
   };
 
   fetchTimings = (date = null) => {
@@ -232,7 +232,7 @@ class Cart extends PureComponent {
     this.props.actions.fetchTimings({
       date: date ? date : this.props.cart.selectedDate,
       items: this.props.cart.items,
-      free_wash: isFreeWash
+      free_wash: isFreeWash,
     });
   };
 
@@ -288,7 +288,6 @@ class Cart extends PureComponent {
       this.hideCheckoutConfirmDialog();
       return this.redirectToLogin();
     } else {
-
       const item = {
         user_id: user.id,
         address_id: selectedAddressID,
@@ -297,7 +296,7 @@ class Cart extends PureComponent {
         time: selectedTimeID,
         date: selectedDate,
         payment_mode: paymentMode,
-        free_wash: cart.isFreeWash
+        free_wash: cart.isFreeWash,
       };
 
       // let address =
@@ -353,8 +352,7 @@ class Cart extends PureComponent {
                 longitude: longitude,
               },
             },
-            () => {
-            },
+            () => {},
           );
         },
         error => {
@@ -384,7 +382,7 @@ class Cart extends PureComponent {
       areas,
     } = this.props;
 
-    let {selectedDate, selectedAddressID, selectedTimeID,isFreeWash} = cart;
+    let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash} = cart;
 
     let {
       dates,
@@ -398,9 +396,8 @@ class Cart extends PureComponent {
       address,
     } = this.state;
 
-
     if (!isFreeWash && !cartItems.length) {
-      return <EmptyCart/>;
+      return <EmptyCart />;
     }
 
     return (
@@ -410,10 +407,7 @@ class Cart extends PureComponent {
           {backgroundColor: 'white'},
           checkout.isFetching && {opacity: 0.4},
         ]}>
-
-        {
-          !isFreeWash &&
-
+        {!isFreeWash && (
           <View>
             <SectionTitle
               title={I18n.t('order_details')}
@@ -422,12 +416,11 @@ class Cart extends PureComponent {
               iconType="MaterialIcons"
             />
 
-            <CartItems items={cartItems} onItemPress={this.onCartItemPress}/>
+            <CartItems items={cartItems} onItemPress={this.onCartItemPress} />
 
-            <CartTotal total={cartTotal}/>
+            <CartTotal total={cartTotal} />
           </View>
-
-        }
+        )}
 
         <SectionTitle
           title={I18n.t('date')}
@@ -480,7 +473,7 @@ class Cart extends PureComponent {
           activeItemID={selectedAddressID || null}
         />
 
-        <Divider/>
+        <Divider />
 
         <View
           style={{
@@ -511,7 +504,7 @@ class Cart extends PureComponent {
           selectedItem={paymentMode}
         />
 
-        <Divider style={{marginVertical: 20}}/>
+        <Divider style={{marginVertical: 20}} />
 
         <Button
           onPress={this.checkout}

@@ -15,10 +15,10 @@ export default class MapButtons extends Component {
   }
 
   render() {
-    let {close, save,style} = this.props;
+    let {close, save, style} = this.props;
 
     return (
-      <View style={[styles.container,style]}>
+      <View style={[styles.container, style]}>
         <Button
           onPress={close}
           style={styles.button}

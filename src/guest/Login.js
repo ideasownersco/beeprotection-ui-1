@@ -12,7 +12,7 @@ import FormTextInput from 'components/FormTextInput';
 import FormSubmit from 'components/FormSubmit';
 import colors from 'assets/theme/colors';
 import Divider from 'components/Divider';
-import Button from "../components/Button";
+import Button from '../components/Button';
 
 class Login extends Component {
   static propTypes = {
@@ -141,8 +141,12 @@ class Login extends Component {
             title={I18n.t('create_account')}
           />
 
-          <Button disabled={busy} title={I18n.t('forgot_password')} onPress={this.handleForgotPasswordRoute} style={{marginVertical:20}}/>
-
+          <Button
+            disabled={busy}
+            title={I18n.t('forgot_password')}
+            onPress={this.handleForgotPasswordRoute}
+            style={{marginVertical: 20}}
+          />
         </FormContent>
       </FormContainer>
     );

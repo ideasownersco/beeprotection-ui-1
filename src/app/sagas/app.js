@@ -34,8 +34,6 @@ function* boot() {
   if (!isNull(installedStorageKey)) {
     yield put({type: ACTION_TYPES.INSTALL_SUCCESS, value: true});
   } else {
-
-
   }
 
   // run on first
@@ -48,7 +46,7 @@ function* boot() {
       },
     });
     if (response.success) {
-      yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId)
+      yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId);
     }
   } catch (error) {
     console.log('error registering uuid', error);
@@ -56,20 +54,17 @@ function* boot() {
 
   try {
     let params = {
-      uuid: uniqueId
+      uuid: uniqueId,
     };
 
     let response = yield call(CUSTOMER_API.fetchHasFreeWash, params);
-    if(response.success) {
+    if (response.success) {
       yield put({
-        type:CUSTOMER_ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS,
-        uuid:uniqueId
-      })
+        type: CUSTOMER_ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS,
+        uuid: uniqueId,
+      });
     }
-
-  } catch (error) {
-
-  }
+  } catch (error) {}
 
   // 2- Set language from history
   let currentLanguage = yield call(getStorageItem, LANGUAGE_KEY);

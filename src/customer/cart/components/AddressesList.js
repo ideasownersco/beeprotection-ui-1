@@ -18,7 +18,7 @@ export default class AddressesList extends Component {
   renderItem = ({item}) => {
     const {onItemPress, activeItemID} = this.props;
 
-    if(!item.area.active) {
+    if (!item.area.active) {
       return (
         <CheckedListItem
           disabled={true}
@@ -27,13 +27,13 @@ export default class AddressesList extends Component {
             <AddressInfo address={item} style={{color: colors.darkGrey}} />
           }
         />
-      )
+      );
     }
 
     return (
       <CheckedListItem
         checked={activeItemID === item.id}
-        onPress={()=>onItemPress(item)}
+        onPress={() => onItemPress(item)}
         title={item.area.name || item.area.name_en}
         description={
           <AddressInfo address={item} style={{color: colors.darkGrey}} />
