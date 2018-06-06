@@ -27,11 +27,13 @@ type State = {
 };
 
 const initialState = {
-  showCartSuccessModal: false,
 };
 
 class CreateOrder extends PureComponent {
-  state: State = initialState;
+  state = {
+    showCartSuccessModal: false,
+    showFreewashModal: false,
+  };
 
   static navigationOptions = ({navigation}) => {
     return {
@@ -72,6 +74,15 @@ class CreateOrder extends PureComponent {
       handleRightButtonPress: this.loadCartScene,
     });
     this.setCartItemsCount();
+
+    let {hasFreeWash} = this.props.cart;
+
+    if(hasFreeWash) {
+      this.setState({
+        showFreewashModal:true
+      });
+    }
+    this.props.actions.setCartItem('isFreeWash',false);
   }
 
   loadCartScene = () => {
@@ -162,6 +173,8 @@ class CreateOrder extends PureComponent {
       activeCategoryID: undefined,
       activePackageID: undefined,
       activeServicesIDs: [],
+      hasFreeWash:false,
+      isFreeWash:false
     });
 
     // return new Promise((resolve, reject) => {
@@ -192,12 +205,17 @@ class CreateOrder extends PureComponent {
 
   hideFreeWashModal = () => {
     this.props.actions.setCartItem('hasFreeWash',false);
+    this.setState({
+      showFreewashModal:false
+    });
   };
 
   onFreeWashPress = () => {
+    this.props.navigation.navigate('Cart');
     this.props.actions.setCartItem('hasFreeWash',false);
-    this.props.navigation.navigate('Cart',{
-      isFreeWash:true
+    this.props.actions.setCartItem('isFreeWash',true);
+    this.setState({
+      showFreewashModal:false
     });
   };
 
@@ -207,11 +225,10 @@ class CreateOrder extends PureComponent {
       activePackageID,
       activeServicesIDs,
       total,
-      hasFreeWash
     } = this.props.cart;
     const {categories} = this.props;
 
-    const {showCartSuccessModal} = this.state;
+    const {showCartSuccessModal,showFreewashModal} = this.state;
 
     let activeCategory = activeCategoryID
       ? categories.find(item => item.id === activeCategoryID)
@@ -298,7 +315,7 @@ class CreateOrder extends PureComponent {
           }}
         />
 
-        <Modal isVisible={hasFreeWash} style={{marginVertical:100,marginHorizontal:30,backgroundColor:'white'}}>
+        <Modal isVisible={showFreewashModal} style={{marginVertical:100,marginHorizontal:30,backgroundColor:'white'}}>
           <FreeWash close={this.hideFreeWashModal} onPress={this.onFreeWashPress}/>
         </Modal>
 

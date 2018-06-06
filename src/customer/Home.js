@@ -99,7 +99,7 @@ class Home extends Component {
             <RefreshControl refreshing={false} onRefresh={this.onRefresh} />
           }
           refreshing={false}
-          contentContainerStyle={{paddingTop: 300}}>
+          contentContainerStyle={{paddingTop: 400}}>
           <StandingOrdersList
             items={working_order}
             onItemPress={this.onStandingOrderListItemPress}

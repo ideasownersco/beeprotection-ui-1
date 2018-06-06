@@ -4,7 +4,6 @@ import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import colors from 'assets/theme/colors';
 
 const LanguageSelectScene = ({active, onItemPress}) => {
-  console.log('active', active);
   return (
     <View style={[styles.container]}>
       <TouchableHighlight

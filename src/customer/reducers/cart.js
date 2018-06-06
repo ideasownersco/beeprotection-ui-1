@@ -12,7 +12,8 @@ const initialState = {
   activeCategoryID: null,
   activePackageID: null,
   activeServicesIDs: [],
-  hasFreeWash:false
+  hasFreeWash:false,
+  isFreeWash:false
 };
 
 export function reducer(state = initialState, action = {}) {

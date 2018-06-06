@@ -224,13 +224,15 @@ class Cart extends PureComponent {
       force: true,
     });
     this.props.navigation.popToTop();
+    this.props.actions.setCartItem('isFreeWash',false);
   };
 
   fetchTimings = (date = null) => {
+    let {isFreeWash} = this.props.cart;
     this.props.actions.fetchTimings({
       date: date ? date : this.props.cart.selectedDate,
       items: this.props.cart.items,
-      free_wash: this.props.navigation.getParam('isFreeWash',false)
+      free_wash: isFreeWash
     });
   };
 
@@ -295,7 +297,7 @@ class Cart extends PureComponent {
         time: selectedTimeID,
         date: selectedDate,
         payment_mode: paymentMode,
-        free_wash: this.props.navigation.getParam('isFreeWash',false)
+        free_wash: cart.isFreeWash
       };
 
       // let address =
@@ -380,10 +382,9 @@ class Cart extends PureComponent {
       timings,
       isFetchingTimings,
       areas,
-      navigation
     } = this.props;
 
-    let {selectedDate, selectedAddressID, selectedTimeID} = cart;
+    let {selectedDate, selectedAddressID, selectedTimeID,isFreeWash} = cart;
 
     let {
       dates,
@@ -397,9 +398,8 @@ class Cart extends PureComponent {
       address,
     } = this.state;
 
-    let freeWash = navigation.getParam('isFreeWash',false);
 
-    if (!freeWash && !cartItems.length) {
+    if (!isFreeWash && !cartItems.length) {
       return <EmptyCart/>;
     }
 
@@ -412,7 +412,7 @@ class Cart extends PureComponent {
         ]}>
 
         {
-          !freeWash &&
+          !isFreeWash &&
 
           <View>
             <SectionTitle

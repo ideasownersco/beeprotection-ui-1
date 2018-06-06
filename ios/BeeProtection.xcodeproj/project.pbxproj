@@ -43,7 +43,7 @@
 		309161358DDC454F9DCFADB5 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59797E3FECC14E648B243260 /* libRNVectorIcons.a */; };
 		341F31FFD890427E894F2263 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88B0DFF0A0884F52B47086C9 /* Octicons.ttf */; };
 		35271DF620BDD15000E14535 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 35271DF520BDD15000E14535 /* Default-568h@2x.png */; };
-		35271DF820BDD16100E14535 /* Splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 35271DF720BDD16100E14535 /* Splash@2x.png */; };
+		35271E5120BDEA5800E14535 /* Splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 35271E5020BDEA5800E14535 /* Splash@2x.png */; };
 		35D57FF8200B95FF00CD36FE /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D57FF7200B95FF00CD36FE /* RNBackgroundFetch+AppDelegate.m */; };
 		35F016252098636500C66DDA /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F016032098611E00C66DDA /* libRCTPushNotification.a */; };
 		3751926C092743D0B59AB33B /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCC2B56D432C4E69B43B60EC /* MaterialCommunityIcons.ttf */; };
@@ -397,7 +397,7 @@
 		2D02E4901E0B4A5D006451C7 /* BeeProtection-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BeeProtection-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		35271DF520BDD15000E14535 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		35271DF720BDD16100E14535 /* Splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Splash@2x.png"; sourceTree = "<group>"; };
+		35271E5020BDEA5800E14535 /* Splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Splash@2x.png"; sourceTree = "<group>"; };
 		354BA636200B8D3600FD5C2A /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		35B6C270201CAE6500CD37DC /* BeeProtection.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BeeProtection.entitlements; path = BeeProtection/BeeProtection.entitlements; sourceTree = "<group>"; };
 		35D57FF7200B95FF00CD36FE /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
@@ -707,7 +707,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				35271DF720BDD16100E14535 /* Splash@2x.png */,
+				35271E5020BDEA5800E14535 /* Splash@2x.png */,
 				35271DF520BDD15000E14535 /* Default-568h@2x.png */,
 				13B07FAE1A68108700A75B9A /* BeeProtection */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -850,10 +850,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = KPNT8JPB9F;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = HPM3XD35FV;
+						DevelopmentTeam = KPNT8JPB9F;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1278,7 +1279,7 @@
 				CD7FE702BC4E4E278E3CB593 /* Foundation.ttf in Resources */,
 				35271DF620BDD15000E14535 /* Default-568h@2x.png in Resources */,
 				4A482096E94F498A8EB4C6B7 /* Ionicons.ttf in Resources */,
-				35271DF820BDD16100E14535 /* Splash@2x.png in Resources */,
+				35271E5120BDEA5800E14535 /* Splash@2x.png in Resources */,
 				3751926C092743D0B59AB33B /* MaterialCommunityIcons.ttf in Resources */,
 				794849D81C914662BCCC99CA /* MaterialIcons.ttf in Resources */,
 				341F31FFD890427E894F2263 /* Octicons.ttf in Resources */,
@@ -1458,6 +1459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = KPNT8JPB9F;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1489,6 +1491,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = KPNT8JPB9F;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1519,7 +1522,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeeProtection/BeeProtection.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = HPM3XD35FV;
+				DEVELOPMENT_TEAM = KPNT8JPB9F;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1533,7 +1536,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ideasowners.beeprotection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideasowners.bp;
 				PRODUCT_NAME = BeeProtection;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1546,7 +1549,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BeeProtection/BeeProtection.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HPM3XD35FV;
+				DEVELOPMENT_TEAM = KPNT8JPB9F;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1560,7 +1563,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ideasowners.beeprotection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ideasowners.bp;
 				PRODUCT_NAME = BeeProtection;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
