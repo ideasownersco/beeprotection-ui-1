@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
-import {View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import PropTypes from 'prop-types';
 import I18n from 'utils/locale';
 import {FAB} from 'react-native-paper';
@@ -120,6 +120,7 @@ class PhotosUploadScene extends Component {
     this.props.dispatch(
       DRIVER_ACTIONS.approveImages({
         job_id: this.props.order.job.id,
+        comment:this.state.comment
       }),
     );
     this.props.navigation.pop();
@@ -213,17 +214,21 @@ class PhotosUploadScene extends Component {
             </View>
           )}
 
-        <FAB
-          icon="add"
-          dark
-          onPress={this.onImageUploadButtonPress}
-          medium
-          style={{
-            left: 20,
-            bottom: 20,
-            backgroundColor: colors.primary,
-          }}
-        />
+        <View style={{
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+        }}>
+          <FAB
+            icon="add"
+            dark
+            onPress={this.onImageUploadButtonPress}
+            medium
+            style={{
+              bottom: 20,
+              backgroundColor: colors.primary,
+            }}
+          />
+        </View>
 
         <Dialog
           title={I18n.t('approve_images_confirm')}

@@ -55,10 +55,11 @@ function uploadPhotos(id, params) {
   return request(requestParams);
 }
 
-function approvePhotos(id) {
+function approvePhotos(id,params) {
   const path = `driver/jobs/${id}/photos/approve`;
   let requestParams = {
     path,
+    params,
     method: 'POST',
   };
   return request(requestParams);

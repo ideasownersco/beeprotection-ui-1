@@ -129,7 +129,12 @@ function* uploadPhotos(action) {
 }
 function* approvePhotos(action) {
   try {
-    const response = yield call(API.approvePhotos, action.params.job_id);
+
+    const params = {
+      body: action.params,
+    };
+
+    const response = yield call(API.approvePhotos, action.params.job_id, params);
     const normalized = normalize(response.data, Schema.orders);
 
     yield put({
