@@ -7,7 +7,6 @@ export default {
   preventSuspend: false,
   startOnBoot: true,
   foregroundService: true,
-  // url: `http://${API_URL}/jobs/${job.id}/update/location`,
   autoSync: true,
   debug: GEOLOCATION_SOUNDS_ENABLED,
   logLevel: GEOLOCATION_SOUNDS_ENABLED
