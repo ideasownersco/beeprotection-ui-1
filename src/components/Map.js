@@ -89,7 +89,7 @@ export default class Map extends Component {
               coordinate={origin}
               identifier="MarkerOrigin">
               <Image
-                source={images.car}
+                source={images.logo}
                 style={[styles.image, rotate && {transform: [{rotate}]}]}
               />
             </MapView.Marker>
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   mapMarker: {},
   image: {
-    width: 20,
-    height: 40,
+    width: 30,
+    height: 30,
   },
 });
