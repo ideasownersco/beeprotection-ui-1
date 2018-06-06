@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {AppState, RefreshControl, ScrollView, View} from 'react-native';
+import {AppState, RefreshControl, ScrollView, Switch, Text, View} from 'react-native';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {connect} from 'react-redux';
 import OrdersList from 'driver/orders/components/OrdersList';
 import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
+import colors from "assets/theme/colors";
+import BackgroundGeolocation from 'react-native-background-geolocation';
 
 class Home extends Component {
   static propTypes = {
@@ -19,6 +21,23 @@ class Home extends Component {
 
   state = {
     appState: AppState.currentState,
+    online:true
+  };
+
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerRight: (
+        <Switch
+          style={{transform: [{scaleX: 0.8}, {scaleY: 0.8}]}}
+          value={navigation.state.params && navigation.state.params.online}
+          onValueChange={value =>
+            navigation.state.params &&
+            navigation.state.params.handleRightButtonPress(value)
+          }
+          color={colors.success}
+        />
+      ),
+    };
   };
 
   componentDidMount() {
@@ -26,11 +45,25 @@ class Home extends Component {
     this.props.dispatch(DRIVER_ACTIONS.fetchWorkingOrder());
     this.props.dispatch(DRIVER_ACTIONS.fetchUpcomingOrders());
     AppState.addEventListener('change', this.handleAppStateChange);
+    this.props.navigation.setParams({
+      handleRightButtonPress: this.activateDriver,
+      online: this.state.online,
+    });
   }
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this.handleAppStateChange);
   }
+
+  activateDriver = () => {
+    this.setState({
+      online: !this.state.online,
+    });
+    this.props.navigation.setParams({
+      online: !this.state.online,
+    });
+    BackgroundGeolocation.stop();
+  };
 
   handleAppStateChange = nextAppState => {
     if (

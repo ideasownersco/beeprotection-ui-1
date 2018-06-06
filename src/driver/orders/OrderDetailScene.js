@@ -19,7 +19,6 @@ import MapButtons from "driver/orders/components/MapButtons";
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import GEOLOCATION_CONFIG from 'utils/background-geolocation';
 import { API_URL} from 'utils/env';
-import TrackButtons from "./components/TrackButtons";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -74,17 +73,9 @@ class OrderDetailScene extends Component {
     });
   };
 
-  trackOrder = () => {
-    this.props.navigation.navigate('TrackDetail', {
-      orderID: this.props.order.id,
-    });
-  };
-
-
   startDriving = () => {
     let {job} = this.props.order;
     BackgroundGeolocation.start();
-    this.props.startDriving();
     this.props.dispatch(DRIVER_ACTIONS.startDriving(job.id));
   };
 
@@ -128,36 +119,31 @@ class OrderDetailScene extends Component {
 
             <Divider style={{marginBottom: 10}} />
 
-            {order.trackeable && (
-              <View>
-                <Button
-                  raised
-                  onPress={this.trackOrder}
-                  title={I18n.t('track_order')}
-                  primary
-                  dark
-                />
-
-                <Divider style={{marginBottom: 10}} />
-
-                <Button
-                  raised
-                  onPress={this.uploadImages}
-                  title={I18n.t('upload_images')}
-                />
-              </View>
-            )}
-
+            <SectionHeading title={I18n.t('address')} />
             {
               job &&
-              <MapButtons
-                address={address}
-                startDriving={this.startDriving}
-                stopDriving={this.stopDriving}
-                startWorking={this.startWorking}
-                stopWorking={this.stopWorking}
-                jobStatus={job.status}
-              />
+              <View>
+                <MapButtons
+                  address={address}
+                  startDriving={this.startDriving}
+                  stopDriving={this.stopDriving}
+                  startWorking={this.startWorking}
+                  stopWorking={this.stopWorking}
+                  jobStatus={job.status}
+                />
+                <Divider style={{marginBottom: 10}} />
+
+                {
+                  order.trackeable && (
+                    <Button
+                      raised
+                      onPress={this.uploadImages}
+                      title={I18n.t('upload_images')}
+                    />
+                  )
+                }
+
+              </View>
             }
 
           </View>

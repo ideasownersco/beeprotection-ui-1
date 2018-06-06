@@ -34,7 +34,7 @@ export default class OrdersList extends Component {
             />
           </View>
 
-          <Touchable onPress={() => onAddressButtonPress(item)}>
+          <Touchable onPress={() => onItemPress(item)}>
             <View style={styles.trackButton}>
               <IconFactory
                 name="map-marker"
