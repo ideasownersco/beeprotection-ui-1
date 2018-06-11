@@ -15,6 +15,8 @@ import DriverInfo from 'driver/components/DriverInfo';
 import SectionHeading from 'company/components/SectionHeading';
 import I18n from 'utils/locale';
 import Button from 'components/Button';
+import CustomerCare from "../../driver/components/CustomerCare";
+import Divider from "../../components/Divider";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -58,9 +60,11 @@ class OrderDetailScene extends Component {
             {order.job &&
               order.job.driver &&
               order.job.driver.user && (
-                <View>
-                  {/*<SectionHeading title={I18n.t('driver_info')} />*/}
-                  {/*<DriverInfo driver={order.job.driver} />*/}
+                <View >
+                  <SectionHeading title={I18n.t('customer_care')}  />
+                  <CustomerCare driver={order.job.driver} />
+                  <Divider style={{marginVertical:10}}/>
+
                   <Button
                     onPress={this.trackOrder}
                     primary
