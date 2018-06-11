@@ -59,7 +59,7 @@ class OrderDetailScene extends Component {
               order.job.driver &&
               order.job.driver.user && (
                 <View>
-                  <SectionHeading title={I18n.t('driver_info')} />
+                  {/*<SectionHeading title={I18n.t('driver_info')} />*/}
                   {/*<DriverInfo driver={order.job.driver} />*/}
                   <Button
                     onPress={this.trackOrder}
