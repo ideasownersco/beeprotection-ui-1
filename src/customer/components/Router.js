@@ -109,8 +109,6 @@ const HomeStack = StackNavigator(
       gesturesEnabled: false,
       ...navStyle,
     }),
-    ...cardStyle
-    // initialRouteName:'Cart'
   },
 );
 

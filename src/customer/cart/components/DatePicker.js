@@ -27,7 +27,7 @@ export default class DatePicker extends Component {
           style={[
             styles.itemContainer,
             activeItem.format('DD/MM') === day.format('DD/MM') &&
-              styles.itemContainerActive,
+            styles.itemContainerActive,
           ]}>
           {day.isSame(new Date(), 'day') ? (
             <Text
@@ -46,7 +46,7 @@ export default class DatePicker extends Component {
             style={[
               styles.day,
               activeItem.format('DD/MM') === day.format('DD/MM') &&
-                styles.dayActive,
+              styles.dayActive,
             ]}>
             {day.format('ddd').toUpperCase()}
           </Text>
@@ -54,7 +54,7 @@ export default class DatePicker extends Component {
             style={[
               styles.date,
               activeItem.format('DD/MM') === day.format('DD/MM') &&
-                styles.dateActive,
+              styles.dateActive,
             ]}>
             {day.date()}
           </Text>
@@ -65,17 +65,10 @@ export default class DatePicker extends Component {
 
   renderItem = ({item}) => {
     const {onItemPress} = this.props;
-
     return (
-      <View style={[item.day() === 5 && styles.itemContainerDisabled]}>
-        {item.day() === 5 ? (
-          this.renderDay(item)
-        ) : (
-          <Touchable onPress={() => onItemPress(item)}>
-            {this.renderDay(item)}
-          </Touchable>
-        )}
-      </View>
+      <Touchable onPress={() => onItemPress(item)}>
+        {this.renderDay(item)}
+      </Touchable>
     );
   };
 
