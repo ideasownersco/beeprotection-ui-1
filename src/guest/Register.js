@@ -13,7 +13,16 @@ import I18n from 'utils/locale';
 import Touchable from 'react-native-platform-touchable';
 import FormContainer from 'components/FormContainer';
 import FormContent from 'components/FormContent';
+import { ActivityIndicator, Platform, View } from 'react-native';
+import {
+  Paragraph,
+  Colors,
+  Dialog,
+  DialogTitle,
+  DialogContent, Button,
+} from 'react-native-paper';
 
+const isIOS = Platform.OS === 'ios';
 type State = {
   name: string,
   email: string,
@@ -27,11 +36,20 @@ class Register extends Component {
   };
 
   state: State = {
-    name: null,
-    email: null,
-    mobile: null,
-    password: null,
-    password_confirmation: null,
+    name: 'afzal',
+    email: 'zzz@a.com',
+    mobile: '97978803',
+    password: 'password',
+    password_confirmation: 'password',
+    confirmation_code:null,
+
+    // name: null,
+    // email: null,
+    // mobile: null,
+    // password: null,
+    // password_confirmation: null,
+    // confirmation_code:null,
+    // show_resend_confirmation_screen:false
   };
 
   static navigationOptions = () => {
@@ -60,6 +78,21 @@ class Register extends Component {
     this.props.navigation.pop();
   };
 
+  confirmRegistration = () => {
+    this.props.actions.confirmRegistration({
+      code:this.state.confirmation_code
+    })
+  };
+
+  reSendConfirmationCode = () => {
+    this.setState({
+      show_resend_confirmation_screen:false
+    });
+    this.props.actions.reSendConfirmationCode({
+      email:this.state.email
+    })
+  };
+
   render() {
     const {
       name,
@@ -70,8 +103,10 @@ class Register extends Component {
       busy,
     } = this.state;
 
+    let {auth} = this.props;
+
     return (
-      <FormContainer>
+      <FormContainer style={{paddingTop:40}}>
         <FormContent>
           <FormTextInput
             onValueChange={this.onFieldChange}
@@ -123,6 +158,24 @@ class Register extends Component {
             title={busy ? I18n.t('signing_up') : I18n.t('create_account')}
             style={{marginVertical: 20}}
           />
+
+          <Button primary onPress={() => this.setState({show_resend_confirmation_screen:true})} loading={auth.confirming} disabled={auth.confirming}>
+            {I18n.t('resend_confirmation_code')}
+          </Button>
+
+          <Dialog visible={this.state.show_resend_confirmation_screen}>
+            <DialogContent>
+
+              {/*<Paragraph>{I18n.t('r')}</Paragraph>*/}
+              <FormTextInput field="email" onValueChange={this.onFieldChange} label={I18n.t('email')}/>
+
+              <Button raised primary onPress={this.reSendConfirmationCode} loading={auth.confirming} disabled={auth.confirming}>
+                {I18n.t('confirm')}
+              </Button>
+
+            </DialogContent>
+          </Dialog>
+
         </FormContent>
 
         <Touchable onPress={this.onLoginPress}>
@@ -135,6 +188,22 @@ class Register extends Component {
             {I18n.t('have_an_account')} {I18n.t('login')}
           </Text>
         </Touchable>
+
+
+        <Dialog visible={auth.confirmationScreenVisible}>
+          {/*<DialogTitle>Progress Dialog</DialogTitle>*/}
+          <DialogContent>
+
+            <Paragraph>{I18n.t('confirm_account')}</Paragraph>
+            <FormTextInput field="confirmation_code" onValueChange={this.onFieldChange} label={I18n.t('confirmation_code')}/>
+
+            <Button raised primary onPress={this.confirmRegistration} loading={auth.confirming} disabled={auth.confirming}>
+              {I18n.t('confirm')}
+            </Button>
+
+          </DialogContent>
+        </Dialog>
+
       </FormContainer>
     );
   }
@@ -145,7 +214,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  return state;
+  return {
+    auth:state.user
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

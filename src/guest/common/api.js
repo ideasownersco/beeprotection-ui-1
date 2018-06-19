@@ -53,10 +53,31 @@ function updatePassword(params) {
   return request(requestParams);
 }
 
+function confirmRegistration(params) {
+  const path = `auth/registration/confirm`;
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+function reSendConfirmationCode(params) {
+  const path = `auth/registration/confirm/resend`;
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
 export const API = {
   login,
   register,
   recoverPassword,
   forgotPassword,
   updatePassword,
+  confirmRegistration,
+  reSendConfirmationCode
 };

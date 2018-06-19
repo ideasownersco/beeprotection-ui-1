@@ -7,6 +7,8 @@ const initialState = {
   skipped: false,
   showPasswordUpdateScene: false,
   showPasswordRecoverScene: false,
+  confirmationScreenVisible:false,
+  confirming:false,
   login: {
     busy: false,
     error: null,
@@ -25,6 +27,7 @@ export function reducer(state = initialState, action = {}) {
         isAuthenticated: false,
         id: null,
         login: {...state.login, busy: true, error: null},
+        confirmationScreenVisible:false,
       };
     case ACTION_TYPES.LOGIN_SUCCESS:
       return {
@@ -45,11 +48,13 @@ export function reducer(state = initialState, action = {}) {
       return {
         ...state,
         register: {...state.register, busy: true, error: null},
+        confirmationScreenVisible:false,
       };
     case ACTION_TYPES.REGISTER_SUCCESS:
       return {
         ...state,
-        register: {...state.register, busy: false, error: null},
+        confirmationScreenVisible:true,
+        register: {...state.register, busy: false, error: null,},
       };
     case ACTION_TYPES.REGISTER_FAILURE:
       return {
@@ -77,6 +82,40 @@ export function reducer(state = initialState, action = {}) {
         ...initialState,
         showPasswordUpdateScene: false,
         showPasswordRecoverScene: false,
+      };
+    case ACTION_TYPES.ACCOUNT_CONFIRMATION_REQUEST:
+      return {
+        ...state,
+        confirming:true
+      };
+    case ACTION_TYPES.ACCOUNT_CONFIRMATION_SUCCESS:
+      return {
+        ...state,
+        confirmationScreenVisible:false,
+        confirming:false
+      };
+    case ACTION_TYPES.ACCOUNT_CONFIRMATION_FAILURE:
+      return {
+        ...state,
+        confirmationScreenVisible:false,
+        confirming:false
+      };
+
+    case ACTION_TYPES.RESEND_CONFIRMATION_REQUEST:
+      return {
+        ...state,
+        confirmationScreenVisible:false,
+      };
+    case ACTION_TYPES.RESEND_CONFIRMATION_SUCCESS:
+      return {
+        ...state,
+        confirmationScreenVisible:true,
+      };
+    case ACTION_TYPES.RESEND_CONFIRMATION_FAILURE:
+      return {
+        ...state,
+        confirmationScreenVisible:false,
+        confirming:false
       };
     default:
       return state;

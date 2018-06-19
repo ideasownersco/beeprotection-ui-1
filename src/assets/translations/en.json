@@ -176,5 +176,11 @@
   "proceed" : "Proceed",
   "today" : "Today",
   "open_in_google_maps?" : "Open in Google Maps ?",
-  "customer_care" : "Customer Care"
+  "customer_care" : "Customer Care",
+
+  "registration_code_detail" : "Please check your Phone for confirmation code",
+  "confirm_account" : "Confirm your account",
+
+  "ok" : "OK",
+  "confirmation_code_sent" : "Confirmation code sent to your Mobile"
 }

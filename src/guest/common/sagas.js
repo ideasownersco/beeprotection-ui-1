@@ -69,93 +69,6 @@ function* login(action) {
   }
 }
 
-// function* login(action) {
-//
-//   try {
-//     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
-//
-//     const params = {
-//       body: {
-//         ...action.credentials,
-//         push_token: pushTokenStorageKey,
-//       },
-//     };
-//
-//     const response = yield call(API.login, params);
-//
-//     if (response.meta) {
-//       yield call(setStorageItem, AUTH_KEY, response.meta.api_token || '');
-//     }
-//
-//     const normalized = normalize(response.data, Schema.users);
-//
-//     yield put({
-//       type: ACTION_TYPES.SYNC_USER_TO_SOCKET,
-//     });
-//
-//     yield put({
-//       type: ACTION_TYPES.LOGIN_SUCCESS,
-//       entities: normalized.entities,
-//       payload: response.data,
-//     });
-//
-//     // yield NavigatorService.back();
-//
-//   } catch (error) {
-//     yield put({type: ACTION_TYPES.LOGIN_FAILURE, error});
-//
-//     yield put(
-//       APP_ACTIONS.setNotification({
-//         message: error,
-//         type: 'error',
-//       }),
-//     );
-//   }
-// }
-// function* login(action) {
-//
-//   try {
-//     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
-//
-//     const params = {
-//       body: {
-//         ...action.credentials,
-//         push_token: pushTokenStorageKey,
-//       },
-//     };
-//
-//     const response = yield call(API.login, params);
-//
-//     if (response.meta) {
-//       yield call(setStorageItem, AUTH_KEY, response.meta.api_token || '');
-//     }
-//
-//     const normalized = normalize(response.data, Schema.users);
-//
-//     yield put({
-//       type: ACTION_TYPES.SYNC_USER_TO_SOCKET,
-//     });
-//
-//     yield put({
-//       type: ACTION_TYPES.LOGIN_SUCCESS,
-//       entities: normalized.entities,
-//       payload: response.data,
-//     });
-//
-//     // yield NavigatorService.back();
-//
-//   } catch (error) {
-//     yield put({type: ACTION_TYPES.LOGIN_FAILURE, error});
-//
-//     yield put(
-//       APP_ACTIONS.setNotification({
-//         message: error,
-//         type: 'error',
-//       }),
-//     );
-//   }
-// }
-
 function* register(action) {
   try {
     const params = {
@@ -167,13 +80,8 @@ function* register(action) {
 
     yield put({type: ACTION_TYPES.REGISTER_SUCCESS, payload: response.data});
 
-    yield put(
-      APP_ACTIONS.setNotification({
-        message: I18n.t('registration_success'),
-        type: 'success',
-      }),
-    );
-    yield NavigatorService.back();
+
+    // yield NavigatorService.back();
   } catch (error) {
     yield put({type: ACTION_TYPES.REGISTER_FAILURE, error});
     yield put(
@@ -221,6 +129,40 @@ function* forgotPassword(action) {
   }
 }
 
+function* confirmRegistration(action) {
+  try {
+    const params = {
+      body: {
+        ...action.params,
+      },
+    };
+
+    const response = yield call(API.confirmRegistration, params);
+    yield put({
+      type: ACTION_TYPES.ACCOUNT_CONFIRMATION_SUCCESS,
+      payload: response.data,
+    });
+
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: I18n.t('registration_success'),
+        type: 'success',
+      }),
+    );
+
+    yield NavigatorService.back();
+
+  } catch (error) {
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: error,
+        type: 'error',
+      }),
+    );
+    yield put({type: ACTION_TYPES.ACCOUNT_CONFIRMATION_FAILURE, error});
+  }
+}
+
 function* recoverPassword(action) {
   try {
     const params = {
@@ -242,6 +184,37 @@ function* recoverPassword(action) {
       }),
     );
     yield put({type: ACTION_TYPES.RECOVER_PASSWORD_FAILURE, error});
+  }
+}
+function* reSendConfirmationCode(action) {
+  try {
+    const params = {
+      body: {
+        ...action.params,
+      },
+    };
+
+    const response = yield call(API.reSendConfirmationCode, params);
+    yield put({
+      type: ACTION_TYPES.RESEND_CONFIRMATION_SUCCESS,
+      payload: response.data,
+    });
+
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: I18n.t('confirmation_code_sent'),
+        type: 'success',
+      }),
+    );
+
+  } catch (error) {
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: error,
+        type: 'error',
+      }),
+    );
+    yield put({type: ACTION_TYPES.RESEND_CONFIRMATION_FAILURE, error});
   }
 }
 
@@ -310,6 +283,13 @@ function* passwordUpdateMonitor() {
   yield takeLatest(ACTION_TYPES.PASSWORD_UPDATE_REQUEST, updatePassword);
 }
 
+function* confirmRegistrationMonitor() {
+  yield takeLatest(ACTION_TYPES.ACCOUNT_CONFIRMATION_REQUEST, confirmRegistration);
+}
+function* reSendConfirmationCodeMonitor() {
+  yield takeLatest(ACTION_TYPES.RESEND_CONFIRMATION_REQUEST, reSendConfirmationCode);
+}
+
 export const sagas = all([
   fork(loginMonitor),
   fork(logoutMonitor),
@@ -317,4 +297,6 @@ export const sagas = all([
   fork(recoverPasswordMonitor),
   fork(forgotPasswordMonitor),
   fork(passwordUpdateMonitor),
+  fork(confirmRegistrationMonitor),
+  fork(reSendConfirmationCodeMonitor),
 ]);

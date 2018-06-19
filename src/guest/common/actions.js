@@ -22,6 +22,15 @@ export const ACTION_TYPES = {
   SET_AUTH_TOKEN: '@user/SET_AUTH_TOKEN',
 
   SYNC_USER_TO_SOCKET: '@user/SYNC_USER_TO_SOCKET',
+
+  ACCOUNT_CONFIRMATION_REQUEST: '@guest/ACCOUNT_CONFIRMATION_REQUEST',
+  ACCOUNT_CONFIRMATION_SUCCESS: '@guest/ACCOUNT_CONFIRMATION_SUCCESS',
+  ACCOUNT_CONFIRMATION_FAILURE: '@guest/ACCOUNT_CONFIRMATION_FAILURE',
+
+  RESEND_CONFIRMATION_REQUEST: '@guest/RESEND_CONFIRMATION_REQUEST',
+  RESEND_CONFIRMATION_SUCCESS: '@guest/RESEND_CONFIRMATION_SUCCESS',
+  RESEND_CONFIRMATION_FAILURE: '@guest/RESEND_CONFIRMATION_FAILURE',
+
 };
 
 function login(payload) {
@@ -64,6 +73,20 @@ function register(params) {
   };
 }
 
+function confirmRegistration(params) {
+  return {
+    type: ACTION_TYPES.ACCOUNT_CONFIRMATION_REQUEST,
+    params,
+  };
+}
+
+function reSendConfirmationCode(params) {
+  return {
+    type: ACTION_TYPES.RESEND_CONFIRMATION_REQUEST,
+    params,
+  };
+}
+
 export const ACTIONS = {
   login,
   register,
@@ -71,4 +94,6 @@ export const ACTIONS = {
   recoverPassword,
   forgotPassword,
   updatePassword,
+  confirmRegistration,
+  reSendConfirmationCode
 };
