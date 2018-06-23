@@ -114,7 +114,6 @@
   "track_order" : "Track Order",
   "knet" : "KNET",
   "cash" : "CASH",
-
   "cart_item_added" : "Added to Cart",
   "add_item" : "Add New Car",
   "payment_mode" : "Payment Mode",
@@ -126,22 +125,17 @@
   "call" : "Call",
   "thank_you" : "Thank you",
   "order_confirmed" : "Order Success",
-
   "admin_home" : "Admin Home",
   "customer_home": "Customer Home",
   "driver_home" : "Driver Home",
   "customer_information" : "Customer Information",
-
   "invoice" : "Invoice",
   "driver_status_update_failed" :"Could not update Driver's Status",
-
   "address_disabled" : "Sorry, Service to the selected area cannot be delivered at this time",
-
   "start_working" : "Start Working",
   "stop_working" : "Stop Working",
   "start_driving" : "Start Driving",
   "stop_driving" : "Stop Driving",
-
   "have_an_account" : "Have an account ?",
   "upload_images" : "Upload Images",
   "login_required" : "You must login to perform this action",
@@ -151,7 +145,6 @@
   "approve_images_confirm" : "Are you sure you want to approve the uploaded Images ?",
   "confirm_location" : "Confirm Location",
   "confirm_location_confirmation" : "Are you sure that this is the right location ?",
-
   "timings" : "Timings",
   "offline" : "Offline",
   "online" : "Online",
@@ -160,12 +153,10 @@
   "upload_from_album" : "from Library ...",
   "success" : "Success",
   "view_order" : "View Order",
-
   "slider_1" : "Quick Booking",
   "slider_2" : "Your Place",
   "slider_3" : "Convenient Time",
   "slider_4" : "Get Started",
-
   "comment" : "Comment",
   "elsewhere" : "Elsewhere",
   "current_location" : "My Current Location",
@@ -177,10 +168,8 @@
   "today" : "Today",
   "open_in_google_maps?" : "Open in Google Maps ?",
   "customer_care" : "Customer Care",
-
   "registration_code_detail" : "Please check your Phone for confirmation code",
   "confirm_account" : "Confirm your account",
-
   "ok" : "OK",
   "confirmation_code_sent" : "Confirmation code sent to your Mobile"
 }

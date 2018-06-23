@@ -36,20 +36,19 @@ class Register extends Component {
   };
 
   state: State = {
-    name: 'afzal',
-    email: 'zzz@a.com',
-    mobile: '97978803',
-    password: 'password',
-    password_confirmation: 'password',
-    confirmation_code:null,
-
-    // name: null,
-    // email: null,
-    // mobile: null,
-    // password: null,
-    // password_confirmation: null,
+    // name: 'afzal',
+    // email: 'zzz@a.com',
+    // mobile: '97978803',
+    // password: 'password',
+    // password_confirmation: 'password',
     // confirmation_code:null,
-    // show_resend_confirmation_screen:false
+    name: null,
+    email: null,
+    mobile: null,
+    password: null,
+    password_confirmation: null,
+    confirmation_code:null,
+    show_resend_confirmation_screen:false
   };
 
   static navigationOptions = () => {
@@ -220,3 +219,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
+
