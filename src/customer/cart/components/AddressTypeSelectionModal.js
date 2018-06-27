@@ -13,8 +13,8 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 import I18n from 'utils/locale';
-import IconFactory from '../../../components/IconFactory';
-import colors from '../../../assets/theme/colors';
+import IconFactory from 'components/IconFactory';
+import colors from 'assets/theme/colors';
 
 export default class AddressTypeSelectionModal extends Component {
   state = {

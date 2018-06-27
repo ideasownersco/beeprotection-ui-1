@@ -171,5 +171,6 @@
   "registration_code_detail" : "Please check your Phone for confirmation code",
   "confirm_account" : "Confirm your account",
   "ok" : "OK",
-  "confirmation_code_sent" : "Confirmation code sent to your Mobile"
+  "confirmation_code_sent" : "Confirmation code sent to your Mobile",
+  "select_feet" : "Select Feet"
 }

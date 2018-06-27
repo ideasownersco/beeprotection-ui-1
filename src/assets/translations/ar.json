@@ -10,7 +10,7 @@
   "confirmation_code": "رمز التأكيد",
   "resend_confirmation_code": "اعادة ارسال رمز التأكيد",
   "recover_password": "استرجاع كلمة المرور ",
-  "logging_in": "logging in",
+  "logging_in": "جاري عملية الدخول",
   "login": "التسجيل ",
   "create_account": "انشاء حساب",
   "forgot_password": "نسيت كلمة المرور",
@@ -41,7 +41,7 @@
   "avenue": "جادة ",
   "building": "مبنى ",
   "close": "اغلاق ",
-  "addons": "Add Ons",
+  "addons": "الاضافات",
   "packages": "الفئات ",
   "order_details": "تفاصيل الطلب ",
   "time": " الوقت ",
@@ -142,7 +142,7 @@
   "confirm_order": " تأكيد الطلب",
   "amount": " الكمية",
   "approve_images": " تم الموافقة على الصور",
-  "approve_images_confirm": " هل انت متأكد من رفع الصور"
+  "approve_images_confirm": " هل انت متأكد من رفع الصور",
   "confirm_location": " تأكيد الموقع",
   "confirm_location_confirmation": "هل متأكد من الموقع ؟",
   "timings": "الأوقات",
@@ -171,5 +171,5 @@
   "registration_code_detail": "تم ارسال الكود الى هاتفك",
   "confirm_account": "تأكيد الحساب",
   "ok": "نعم",
-  "confirmation_code_sent": "تأكيد كود  المرسل الى رقم موبايلك",
+  "confirmation_code_sent": "تأكيد كود  المرسل الى رقم موبايلك"
 }

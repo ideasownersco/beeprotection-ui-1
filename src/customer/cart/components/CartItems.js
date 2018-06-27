@@ -4,6 +4,7 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import Divider from 'components/Divider';
+import {Subheading} from "react-native-paper";
 
 export default class CartItems extends Component {
   shouldComponentUpdate(nextProps) {
@@ -24,8 +25,19 @@ export default class CartItems extends Component {
           <Text style={styles.categoryTitle}>{category.name}</Text>
 
           <View style={styles.packageItemContainer}>
-            <Text style={styles.packageTitle}>{item.package.name}</Text>
-            <Text style={styles.packagePrice}>{item.package.price} KD</Text>
+            <Text style={styles.packageTitle}>
+              {item.package.name}
+              {
+                item.package.show_quantity && item.quantity ? <Subheading> - {item.quantity} feet</Subheading> : null
+              }
+            </Text>
+            <Text style={styles.packagePrice}>{item.package.price} KD
+
+              {
+                item.package.show_quantity && item.quantity ? <Subheading> x {item.quantity} </Subheading>: null
+              }
+
+            </Text>
           </View>
           {item.services.map((service, index) => (
             <View style={{flex: 1}} key={index}>
@@ -35,14 +47,8 @@ export default class CartItems extends Component {
                 <Text style={styles.packageTitle}>{service.name}</Text>
                 <Text style={styles.packagePrice}>{service.price} KD</Text>
               </View>
-              {/*<Divider style={{marginVertical: 10}} />*/}
             </View>
           ))}
-
-          {/*<View style={styles.packageItemContainer}>*/}
-          {/*/!*<Text style={styles.total}>{I18n.t('total')}</Text>*!/*/}
-          {/*<Text style={styles.totalPrice}>{item.total} KD</Text>*/}
-          {/*</View>*/}
         </View>
       </Touchable>
     );

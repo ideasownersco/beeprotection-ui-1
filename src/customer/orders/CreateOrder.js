@@ -32,6 +32,7 @@ class CreateOrder extends PureComponent {
   state = {
     showCartSuccessModal: false,
     showFreewashModal: false,
+    quantity:1
   };
 
   static navigationOptions = ({navigation}) => {
@@ -110,6 +111,10 @@ class CreateOrder extends PureComponent {
         activePackageID: undefined,
         activeServicesIDs: [],
       });
+
+      this.setState({
+        quantity:1
+      });
     }
   };
 
@@ -124,7 +129,10 @@ class CreateOrder extends PureComponent {
         ...params,
         activeServicesIDs: [],
       };
+
+
     }
+
 
     this.props.actions.setCartItems(params);
   };
@@ -166,6 +174,7 @@ class CreateOrder extends PureComponent {
       package: activePackageID,
       services: activeServicesIDs,
       total: total,
+      quantity:this.state.quantity
     };
 
     this.props.actions.setCartItems({
@@ -218,6 +227,24 @@ class CreateOrder extends PureComponent {
     });
   };
 
+  selectquantity = (value) => {
+
+    this.setState({quantity:value});
+
+    let {activeCategoryID,activePackageID}  = this.props.cart;
+
+    const {categories} = this.props;
+
+    let activeCategory = categories.find(item => item.id === activeCategoryID) || {packages:[]};
+
+    let packageModel = activeCategory.packages.find(item => item.id == activePackageID) || {};
+
+    if(packageModel.id) {
+      this.props.actions.setCartItem('total', packageModel.price * value);
+    }
+
+  };
+
   render() {
     const {
       activeCategoryID,
@@ -238,6 +265,8 @@ class CreateOrder extends PureComponent {
             packages: [],
           };
 
+    console.log('this.state.quantity',this.state.quantity);
+
     return (
       <ScrollView
         style={{flex: 1, backgroundColor: 'white'}}
@@ -255,10 +284,12 @@ class CreateOrder extends PureComponent {
               items={activeCategory.packages}
               onItemPress={this.onPackagesListItemPress}
               activeItemID={activePackageID}
+              selectquantity={this.selectquantity}
+              quantity={this.state.quantity}
             />
           )}
 
-        {activePackageID && (
+        {activePackageID &&  (
           <ServicesList
             items={
               activeCategory.packages.find(item => item.id === activePackageID)

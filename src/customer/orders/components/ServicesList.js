@@ -66,22 +66,28 @@ export default class ServicesList extends Component {
   render() {
     const {items, activeItemIDs} = this.props;
 
-    return (
-      <View style={styles.container}>
-        <Divider style={{marginVertical: 10}} />
+    if(items.length) {
+      return (
+        <View style={styles.container}>
+          <Divider style={{marginVertical: 10}} />
 
-        <Text style={styles.sectionTitle}>{I18n.t('addons')}</Text>
+          <Text style={styles.sectionTitle}>{I18n.t('addons')}</Text>
 
-        <FlatList
-          data={items}
-          renderItem={this.renderItem}
-          style={styles.listContainer}
-          keyExtractor={item => `${item.id}`}
-          horizontal={true}
-          extraData={activeItemIDs}
-        />
-      </View>
-    );
+          <FlatList
+            data={items}
+            renderItem={this.renderItem}
+            style={styles.listContainer}
+            keyExtractor={item => `${item.id}`}
+            horizontal={true}
+            extraData={activeItemIDs}
+          />
+        </View>
+      );
+    }
+
+    return null;
+
+
   }
 }
 

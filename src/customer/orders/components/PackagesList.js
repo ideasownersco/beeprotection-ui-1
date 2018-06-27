@@ -3,11 +3,16 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View} from 'react-native';
+import {Slider, StyleSheet, Text, View} from 'react-native';
 import colors from 'assets/theme/colors';
 import Accordion from 'react-native-collapsible/Accordion';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Touchable from 'react-native-platform-touchable';
+import IconFactory from "components/IconFactory";
+import FormLabel from "components/FormLabel";
+import I18n from 'utils/locale';
+import Divider from "../../../components/Divider";
+import {Title} from "react-native-paper";
 
 let SectionHeader = ({item}) => {
   return (
@@ -21,6 +26,12 @@ let SectionHeader = ({item}) => {
 };
 
 export default class PackagesList extends Component {
+
+  static propTypes = {
+    items: PropTypes.array.isRequired,
+    onItemPress: PropTypes.func.isRequired,
+  };
+
   renderSectionHeader = items => {
     return items.map(item => item);
   };
@@ -30,16 +41,14 @@ export default class PackagesList extends Component {
     return (
       <View style={styles.headerContainer}>
         <Touchable onPress={() => onItemPress(item)} key={item.id}>
-          <FontAwesome
+          <IconFactory
+            type="FontAwesome"
             name={item.id === activeItemID ? 'check-circle' : 'circle-thin'}
             color={colors.primary}
-            size={25}
-            style={[{flex: 0.1, paddingTop: 5, paddingRight: 5}, styles.icon]}
+            size={30}
           />
         </Touchable>
-
         <SectionHeader item={item} />
-
         <FontAwesome
           name={isActive ? 'minus-square-o' : 'plus-square-o'}
           color={colors.primary}
@@ -51,14 +60,27 @@ export default class PackagesList extends Component {
   };
 
   renderContent = item => {
+
+    let {selectquantity,quantity,activeItemID} = this.props;
+
     return (
-      <View>
-        <View style={styles.contentContainer}>
-          <View style={styles.rowContent}>
-            <Text style={[styles.itemName]}>{item.description}</Text>
-            {item.price && <Text style={styles.price}>{item.price} KD</Text>}
-          </View>
+      <View style={styles.contentContainer}>
+        <View style={styles.rowContent}>
+          <Text style={[styles.itemName]}>{item.description}</Text>
+          {item.price && <Text style={styles.price}>{item.price} KD</Text>}
         </View>
+        {
+          item.show_quantity &&
+          <View>
+            <Divider style={{marginVertical:10}}/>
+            <View style={styles.sectionContainer}>
+              <FormLabel title={I18n.t('select_feet')}/>
+              <Text> : </Text>
+              <Title>{quantity} ft</Title>
+            </View>
+            <Slider disabled={!activeItemID} step={1} value={quantity} maximumValue={100} minimumValue={1} onValueChange={(value)=>selectquantity(value)} />
+          </View>
+        }
       </View>
     );
   };
@@ -67,27 +89,17 @@ export default class PackagesList extends Component {
     const {items} = this.props;
 
     return (
-      <View style={styles.container}>
-        {/*<Text style={styles.sectionTitle}>{I18n.t('packages')}</Text>*/}
-
-        <View style={styles.listContainer}>
-          <Accordion
-            sections={this.renderSectionHeader(items)}
-            renderHeader={this.renderHeader}
-            renderContent={this.renderContent}
-            underlayColor="transparent"
-            expanded={false}
-          />
-        </View>
+      <View style={styles.listContainer}>
+        <Accordion
+          sections={this.renderSectionHeader(items)}
+          renderHeader={this.renderHeader}
+          renderContent={this.renderContent}
+          underlayColor="transparent"
+        />
       </View>
     );
   }
 }
-
-PackagesList.propTypes = {
-  items: PropTypes.array.isRequired,
-  onItemPress: PropTypes.func.isRequired,
-};
 
 let styles = StyleSheet.create({
   listContainer: {

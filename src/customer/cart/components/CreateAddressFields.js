@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
+import {StyleSheet, View, Dimensions, ScrollView,Alert} from 'react-native';
 import I18n from 'utils/locale';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
@@ -22,6 +22,10 @@ export default class extends PureComponent {
   static propTypes = {
     onCancel: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    address:{}
   };
 
   constructor(props) {
@@ -52,11 +56,28 @@ export default class extends PureComponent {
   };
 
   saveAddress = () => {
-    this.props.onSave({
-      ...this.state,
-      id: this.props.address.id,
-      area_id: this.props.address.area.id,
-    });
+    if(!this.props.address.area) {
+      return Alert.alert(
+        `${I18n.t('error')}`,
+        `${I18n.t('could_not_save_location')}`,
+        [
+          {
+            text: I18n.t('ok'),
+            onPress: () => {
+              this.hideScreen();
+            },
+          },
+        ],
+      );
+    } else {
+      this.props.onSave({
+        ...this.state,
+        id: this.props.address.id,
+        area_id: this.props.address.area ? this.props.address.area.id : null,
+      });
+    }
+
+
   };
 
   updateFormFields = (key, value) => {
