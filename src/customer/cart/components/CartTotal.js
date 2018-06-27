@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     paddingHorizontal: 10,
+    textAlign:'left',
   },
   totalPrice: {
     fontSize: 18,

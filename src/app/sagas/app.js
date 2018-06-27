@@ -54,9 +54,10 @@ function* boot() {
 
   try {
     let params = {
-      uuid: uniqueId,
+      body:{
+        uuid: uniqueId,
+      }
     };
-
     let response = yield call(CUSTOMER_API.fetchHasFreeWash, params);
     if (response.success) {
       yield put({

@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     color: colors.darkGrey,
     // color: '#aa2d29',
     // fontWeight: 'bold',
+    textAlign:'left'
   },
   packageItemContainer: {
     flexDirection: 'row',
@@ -96,6 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: colors.mediumGrey,
     paddingLeft: 10,
+    textAlign:'left'
   },
   packagePrice: {
     color: colors.primary,
@@ -106,8 +108,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   total: {
+    flex:1,
     fontSize: 20,
     paddingHorizontal: 10,
+    textAlign:'left'
   },
   totalPrice: {
     flex: 1,

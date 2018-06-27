@@ -19,9 +19,7 @@ export async function request({
   forceAuthentication = false,
 }) {
   let {paginated, paginatedUrl, body, isBlob, query} = params;
-
   let fullUrl;
-
   if (paginated) {
     fullUrl = paginatedUrl;
   } else {

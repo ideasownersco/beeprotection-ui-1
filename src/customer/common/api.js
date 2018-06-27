@@ -11,8 +11,13 @@ function fetchCategories(params = {}) {
 }
 
 function fetchHasFreeWash(params = {}) {
-  const path = `freewash/check?uuid=${params.uuid}`;
-  return request({path, params});
+  const path = `freewash/check`;
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
 }
 
 function fetchTimings(params = {}) {

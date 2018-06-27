@@ -59,32 +59,6 @@ class Login extends Component {
 
   handleRegisterRoute = () => {
     return this.props.navigation.navigate('RegisterScreen');
-    // return Alert.alert(I18n.t('choose_account_type'), '', [
-    //   {
-    //     text: I18n.t('yes'),
-    //     onPress: () => {
-    //       this.props.navigation.navigate('RegisterScreen', {
-    //         isCompany: true,
-    //       });
-    //     },
-    //   },
-    //   {
-    //     text: I18n.t('no'),
-    //     onPress: () => {
-    //       this.props.navigation.navigate('RegisterScreen', {
-    //         isCompany: false,
-    //       });
-    //     },
-    //   },
-    //   // {
-    //   //   text: I18n.t('driver'),
-    //   //   onPress: () => {
-    //   //     this.props.navigation.navigate('RegisterScreen', {
-    //   //       userType: 'driver',
-    //   //     });
-    //   //   },
-    //   // },
-    // ]);
   };
 
   handleForgotPasswordRoute = () => {

@@ -129,10 +129,7 @@ class CreateOrder extends PureComponent {
         ...params,
         activeServicesIDs: [],
       };
-
-
     }
-
 
     this.props.actions.setCartItems(params);
   };
