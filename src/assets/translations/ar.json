@@ -171,5 +171,6 @@
   "registration_code_detail": "تم ارسال الكود الى هاتفك",
   "confirm_account": "تأكيد الحساب",
   "ok": "نعم",
-  "confirmation_code_sent": "تأكيد كود  المرسل الى رقم موبايلك"
+  "confirmation_code_sent": "تأكيد كود  المرسل الى رقم موبايلك",
+  "select_feet" : "اختر حجم / قدم"
 }

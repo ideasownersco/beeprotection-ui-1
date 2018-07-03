@@ -20,9 +20,9 @@ const getTrackings = state => state.customer.trackings;
 const getCategories = createSelector(
   [schemas, categoriesEntity],
   (entities, categories) => {
-    return map(categories, category =>
+    return Object.keys(categories).map(categoryID => categories[categoryID]).map(category =>
       denormalize(category.id, Schema.categories, entities),
-    );
+    ).sort((a, b) => parseInt(a.order) - parseInt(b.order));
   },
 );
 

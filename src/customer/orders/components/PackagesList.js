@@ -33,11 +33,12 @@ export default class PackagesList extends Component {
   };
 
   renderSectionHeader = items => {
-    return items.map(item => item);
+    return items.map(item => item).sort((a, b) => parseInt(a.order) - parseInt(b.order));
   };
 
   renderHeader = (item, index, isActive) => {
     let {onItemPress, activeItemID} = this.props;
+    console.log('item',item.order);
     return (
       <View style={styles.headerContainer}>
         <Touchable onPress={() => onItemPress(item)} key={item.id}>
@@ -61,7 +62,7 @@ export default class PackagesList extends Component {
 
   renderContent = item => {
 
-    let {selectquantity,quantity,activeItemID} = this.props;
+    let {selectQuantity,quantity,activeItemID} = this.props;
 
     return (
       <View style={styles.contentContainer}>
@@ -78,7 +79,7 @@ export default class PackagesList extends Component {
               <Text> : </Text>
               <Title>{quantity} ft</Title>
             </View>
-            <Slider disabled={!activeItemID} step={1} value={quantity} maximumValue={100} minimumValue={1} onValueChange={(value)=>selectquantity(value)} />
+            <Slider disabled={!activeItemID} step={1} value={quantity} maximumValue={100} minimumValue={1} onValueChange={(value)=>selectQuantity(value)} />
           </View>
         }
       </View>
@@ -87,7 +88,6 @@ export default class PackagesList extends Component {
 
   render() {
     const {items} = this.props;
-
     return (
       <View style={styles.listContainer}>
         <Accordion

@@ -224,7 +224,9 @@ class CreateOrder extends PureComponent {
     });
   };
 
-  selectquantity = (value) => {
+  selectQuantity = (value) => {
+
+    console.log('selectQuantity',value);
 
     this.setState({quantity:value});
 
@@ -262,8 +264,6 @@ class CreateOrder extends PureComponent {
             packages: [],
           };
 
-    console.log('this.state.quantity',this.state.quantity);
-
     return (
       <ScrollView
         style={{flex: 1, backgroundColor: 'white'}}
@@ -281,7 +281,7 @@ class CreateOrder extends PureComponent {
               items={activeCategory.packages}
               onItemPress={this.onPackagesListItemPress}
               activeItemID={activePackageID}
-              selectquantity={this.selectquantity}
+              selectQuantity={this.selectQuantity}
               quantity={this.state.quantity}
             />
           )}
