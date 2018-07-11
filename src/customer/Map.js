@@ -30,8 +30,6 @@ class Home extends Component {
   // }
 
   saveAddress = address => {
-    console.log('address', address);
-
     this.setState({
       ...address,
     });

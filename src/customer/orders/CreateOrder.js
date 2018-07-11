@@ -226,8 +226,6 @@ class CreateOrder extends PureComponent {
 
   selectQuantity = (value) => {
 
-    console.log('selectQuantity',value);
-
     this.setState({quantity:value});
 
     let {activeCategoryID,activePackageID}  = this.props.cart;

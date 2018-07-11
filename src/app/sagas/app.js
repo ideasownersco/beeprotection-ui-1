@@ -49,7 +49,6 @@ function* boot() {
       yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId);
     }
   } catch (error) {
-    console.log('error registering uuid', error);
   }
 
   try {

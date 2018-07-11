@@ -114,6 +114,7 @@
   "track_order": " تتبع الطلب ",
   "knet": " دفع الكي نت ",
   "cash": " نقدي ",
+
   "cart_item_added": " اضافة الى الطلبات ",
   "add_item": " اضافة سيارة جديدة ",
   "payment_mode": " طريقة الدفع ",
@@ -124,6 +125,7 @@
   "customer_info": " معلمات العميل ",
   "call": " اتصال ",
   "thank_you": " شكرا لكم ",
+
   "order_confirmed": " تم تنفيذ الطلب بنجاح ",
   "admin_home": " لوحة التحكم ",
   "customer_home": " لوحة تحكم العميل ",
@@ -137,6 +139,7 @@
   "start_driving": " السائق بالطريق ",
   "stop_driving": " توقف السائق ",
   "have_an_account": " لديك حساب مسجل ؟",
+
   "upload_images": " رفع الصور",
   "login_required": " يجب التسجيل اولا ",
   "confirm_order": " تأكيد الطلب",

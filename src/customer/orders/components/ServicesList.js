@@ -15,7 +15,6 @@ export default class ServicesList extends Component {
   }
 
   renderService = item => {
-    console.log('item', item);
     const {activeItemIDs} = this.props;
 
     return (

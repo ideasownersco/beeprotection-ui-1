@@ -104,7 +104,6 @@ class TrackOrderScene extends Component {
   };
 
   onHttp = response => {
-    // console.log('[event] http: ', response);
   };
 
   startDriving = () => {

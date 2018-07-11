@@ -14,7 +14,6 @@ export default class AddressFormFields extends PureComponent {
   };
 
   render() {
-    console.log('rendering address');
     const {block, street, avenue, building, updateFields, label} = this.props;
 
     return (

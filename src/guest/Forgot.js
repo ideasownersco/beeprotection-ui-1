@@ -62,8 +62,6 @@ class Forgot extends Component {
       password,
     } = this.state;
 
-    console.log('state', this.state);
-
     let renderingComponent;
 
     if (auth.showPasswordUpdateScene) {

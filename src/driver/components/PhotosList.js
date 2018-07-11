@@ -27,7 +27,6 @@ export default class PhotosList extends Component {
 
   render() {
     const {items} = this.props;
-    console.log('items', items);
     return (
       <FlatList
         data={items}

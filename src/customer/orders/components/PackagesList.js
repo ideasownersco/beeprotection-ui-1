@@ -38,7 +38,6 @@ export default class PackagesList extends Component {
 
   renderHeader = (item, index, isActive) => {
     let {onItemPress, activeItemID} = this.props;
-    console.log('item',item.order);
     return (
       <View style={styles.headerContainer}>
         <Touchable onPress={() => onItemPress(item)} key={item.id}>
