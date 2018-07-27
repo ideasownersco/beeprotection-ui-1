@@ -184,7 +184,7 @@ class Register extends Component {
               textAlign: 'center',
               paddingVertical: 10,
             }}>
-            {I18n.t('have_an_account')} {I18n.t('login')}
+            {I18n.t('have_an_account')} {I18n.t('login_do')}
           </Text>
         </Touchable>
 

@@ -11,7 +11,7 @@
   "resend_confirmation_code": "اعادة ارسال رمز التأكيد",
   "recover_password": "استرجاع كلمة المرور ",
   "logging_in": "جاري عملية الدخول",
-  "login": "التسجيل ",
+  "login": "تسجيل الدخول",
   "create_account": "انشاء حساب",
   "forgot_password": "نسيت كلمة المرور",
   "logout": "خروج",
@@ -55,7 +55,7 @@
   "select_area": "اختار المنطقة ",
   "name_en": "الاسم بالإنجليزية ",
   "name_ar": "الاسم بالعربية ",
-  "registration_success": "تم انشاء الحساب ",
+  "registration_success": "تم تسجيل الحساب ، قم بتسجيل الدخول",
   "standing_orders": "Standing Orders",
   "view_all": " عرض الكل ",
   "address_save_success": "تم حفظ العنوان ",
@@ -175,5 +175,6 @@
   "confirm_account": "تأكيد الحساب",
   "ok": "نعم",
   "confirmation_code_sent": "تأكيد كود  المرسل الى رقم موبايلك",
-  "select_feet" : "اختر حجم / قدم"
+  "select_feet" : "اختر حجم / قدم",
+  "login_do" : "قم بتسجبل الدخول"
 }

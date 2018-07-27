@@ -1,4 +1,4 @@
-import {API_URL, AUTH_KEY} from 'utils/env';
+import {API_URL, AUTH_KEY,DEVICE_UUID_KEY} from 'utils/env';
 import I18n from 'utils/locale';
 import {getStorageItem} from 'utils/functions';
 import NavigatorService from 'components/NavigatorService';
@@ -20,16 +20,19 @@ export async function request({
 }) {
   let {paginated, paginatedUrl, body, isBlob, query} = params;
   let fullUrl;
+
+
+  const apiToken = await getStorageItem(AUTH_KEY);
+  const deviceID = await getStorageItem(DEVICE_UUID_KEY);
+
   if (paginated) {
     fullUrl = paginatedUrl;
   } else {
     let localeAwareUrl = domain
       ? domain
-      : `${protocol + API_URL}/${path}?lang=${I18n.locale}&`;
+      : `${protocol + API_URL}/${path}?lang=${I18n.locale}&device_id=${deviceID}&`;
     fullUrl = localeAwareUrl + query;
   }
-
-  const apiToken = await getStorageItem(AUTH_KEY);
 
   if (__DEV__) {
     if (console.group) {
@@ -39,6 +42,7 @@ export async function request({
         method: method,
         params: params,
         api_token: apiToken,
+        device_id: deviceID,
       });
       console.groupEnd();
     }

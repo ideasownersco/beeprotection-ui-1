@@ -77,10 +77,7 @@ function* register(action) {
       },
     };
     const response = yield call(API.register, params);
-
     yield put({type: ACTION_TYPES.REGISTER_SUCCESS, payload: response.data});
-
-
     // yield NavigatorService.back();
   } catch (error) {
     yield put({type: ACTION_TYPES.REGISTER_FAILURE, error});
