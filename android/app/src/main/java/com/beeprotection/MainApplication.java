@@ -12,9 +12,9 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
 import java.util.Arrays;
 import java.util.List;
+import com.airbnb.android.react.maps.MapsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -34,11 +34,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNDeviceInfo(),
-            new RNI18nPackage(),
-            new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
-            new VectorIconsPackage(),
-            new ReactNativePushNotificationPackage()
+          new RNDeviceInfo(),
+          new RNI18nPackage(),
+          new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
+          new VectorIconsPackage(),
+          new ReactNativePushNotificationPackage(),
+          new MapsPackage()
       );
     }
 
