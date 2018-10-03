@@ -13,13 +13,14 @@ import I18n from 'utils/locale';
 import Touchable from 'react-native-platform-touchable';
 import FormContainer from 'components/FormContainer';
 import FormContent from 'components/FormContent';
-import { ActivityIndicator, Platform, View } from 'react-native';
+import {ActivityIndicator, Platform, View} from 'react-native';
 import {
   Paragraph,
   Colors,
   Dialog,
   DialogTitle,
-  DialogContent, Button,
+  DialogContent,
+  Button,
 } from 'react-native-paper';
 
 const isIOS = Platform.OS === 'ios';
@@ -47,8 +48,8 @@ class Register extends Component {
     mobile: null,
     password: null,
     password_confirmation: null,
-    confirmation_code:null,
-    show_resend_confirmation_screen:false
+    confirmation_code: null,
+    show_resend_confirmation_screen: false,
   };
 
   static navigationOptions = () => {
@@ -79,17 +80,17 @@ class Register extends Component {
 
   confirmRegistration = () => {
     this.props.actions.confirmRegistration({
-      code:this.state.confirmation_code
-    })
+      code: this.state.confirmation_code,
+    });
   };
 
   reSendConfirmationCode = () => {
     this.setState({
-      show_resend_confirmation_screen:false
+      show_resend_confirmation_screen: false,
     });
     this.props.actions.reSendConfirmationCode({
-      email:this.state.email
-    })
+      email: this.state.email,
+    });
   };
 
   render() {
@@ -105,7 +106,7 @@ class Register extends Component {
     let {auth} = this.props;
 
     return (
-      <FormContainer style={{paddingTop:40}}>
+      <FormContainer style={{paddingTop: 40}}>
         <FormContent>
           <FormTextInput
             onValueChange={this.onFieldChange}
@@ -158,23 +159,35 @@ class Register extends Component {
             style={{marginVertical: 20}}
           />
 
-          <Button primary onPress={() => this.setState({show_resend_confirmation_screen:true})} loading={auth.confirming} disabled={auth.confirming}>
+          <Button
+            primary
+            onPress={() =>
+              this.setState({show_resend_confirmation_screen: true})
+            }
+            loading={auth.confirming}
+            disabled={auth.confirming}>
             {I18n.t('resend_confirmation_code')}
           </Button>
 
           <Dialog visible={this.state.show_resend_confirmation_screen}>
             <DialogContent>
-
               {/*<Paragraph>{I18n.t('r')}</Paragraph>*/}
-              <FormTextInput field="email" onValueChange={this.onFieldChange} label={I18n.t('email')}/>
+              <FormTextInput
+                field="email"
+                onValueChange={this.onFieldChange}
+                label={I18n.t('email')}
+              />
 
-              <Button raised primary onPress={this.reSendConfirmationCode} loading={auth.confirming} disabled={auth.confirming}>
+              <Button
+                raised
+                primary
+                onPress={this.reSendConfirmationCode}
+                loading={auth.confirming}
+                disabled={auth.confirming}>
                 {I18n.t('confirm')}
               </Button>
-
             </DialogContent>
           </Dialog>
-
         </FormContent>
 
         <Touchable onPress={this.onLoginPress}>
@@ -188,21 +201,26 @@ class Register extends Component {
           </Text>
         </Touchable>
 
-
         <Dialog visible={auth.confirmationScreenVisible}>
           {/*<DialogTitle>Progress Dialog</DialogTitle>*/}
           <DialogContent>
-
             <Paragraph>{I18n.t('confirm_account')}</Paragraph>
-            <FormTextInput field="confirmation_code" onValueChange={this.onFieldChange} label={I18n.t('confirmation_code')}/>
+            <FormTextInput
+              field="confirmation_code"
+              onValueChange={this.onFieldChange}
+              label={I18n.t('confirmation_code')}
+            />
 
-            <Button raised primary onPress={this.confirmRegistration} loading={auth.confirming} disabled={auth.confirming}>
+            <Button
+              raised
+              primary
+              onPress={this.confirmRegistration}
+              loading={auth.confirming}
+              disabled={auth.confirming}>
               {I18n.t('confirm')}
             </Button>
-
           </DialogContent>
         </Dialog>
-
       </FormContainer>
     );
   }
@@ -214,9 +232,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    auth:state.user
+    auth: state.user,
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
-

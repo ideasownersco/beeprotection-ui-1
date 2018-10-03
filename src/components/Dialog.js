@@ -50,8 +50,8 @@ export default class Dialog extends Component {
         visible={visible}
         dismissable={dismissable}
         onDismiss={onDismiss}>
-        <DialogTitle style={{textAlign:'left'}}>{title}</DialogTitle>
-        <DialogContent >
+        <DialogTitle style={{textAlign: 'left'}}>{title}</DialogTitle>
+        <DialogContent>
           <Paragraph>{description}</Paragraph>
         </DialogContent>
         <DialogActions>

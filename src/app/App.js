@@ -95,7 +95,6 @@ class App extends Component {
   render() {
     const {app, notifications, user} = this.props;
 
-
     if (!app.booted) return null;
 
     // if (!app.installed) {

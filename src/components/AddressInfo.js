@@ -19,7 +19,7 @@ export default class AddressInfo extends Component {
 
     return (
       <Text style={[styles.value, style]}>
-        {area && <Text style={{textAlign:'left'}}>{area.name + ', '}</Text>}
+        {area && <Text style={{textAlign: 'left'}}>{area.name + ', '}</Text>}
 
         <Text>
           {I18n.t('block')} {block},{' '}
@@ -45,6 +45,6 @@ export default class AddressInfo extends Component {
 const styles = StyleSheet.create({
   value: {
     color: colors.primary,
-    textAlign:'left',
+    textAlign: 'left',
   },
 });

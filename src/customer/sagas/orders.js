@@ -288,9 +288,9 @@ function* fetchHasFreeWash(action) {
     const uuid = yield call(getStorageItem, DEVICE_UUID_KEY);
 
     let params = {
-      body:{
-        uuid:uuid
-      }
+      body: {
+        uuid: uuid,
+      },
     };
     const response = yield call(API.fetchHasFreeWash, params);
     yield put({

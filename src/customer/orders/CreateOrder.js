@@ -32,7 +32,7 @@ class CreateOrder extends PureComponent {
   state = {
     showCartSuccessModal: false,
     showFreewashModal: false,
-    quantity:1
+    quantity: 1,
   };
 
   static navigationOptions = ({navigation}) => {
@@ -113,7 +113,7 @@ class CreateOrder extends PureComponent {
       });
 
       this.setState({
-        quantity:1
+        quantity: 1,
       });
     }
   };
@@ -171,7 +171,7 @@ class CreateOrder extends PureComponent {
       package: activePackageID,
       services: activeServicesIDs,
       total: total,
-      quantity:this.state.quantity
+      quantity: this.state.quantity,
     };
 
     this.props.actions.setCartItems({
@@ -224,22 +224,23 @@ class CreateOrder extends PureComponent {
     });
   };
 
-  selectQuantity = (value) => {
+  selectQuantity = value => {
+    this.setState({quantity: value});
 
-    this.setState({quantity:value});
-
-    let {activeCategoryID,activePackageID}  = this.props.cart;
+    let {activeCategoryID, activePackageID} = this.props.cart;
 
     const {categories} = this.props;
 
-    let activeCategory = categories.find(item => item.id === activeCategoryID) || {packages:[]};
+    let activeCategory = categories.find(
+      item => item.id === activeCategoryID,
+    ) || {packages: []};
 
-    let packageModel = activeCategory.packages.find(item => item.id == activePackageID) || {};
+    let packageModel =
+      activeCategory.packages.find(item => item.id == activePackageID) || {};
 
-    if(packageModel.id) {
+    if (packageModel.id) {
       this.props.actions.setCartItem('total', packageModel.price * value);
     }
-
   };
 
   render() {
@@ -273,18 +274,17 @@ class CreateOrder extends PureComponent {
           activeItemID={activeCategoryID}
         />
 
-        {activeCategory.packages &&
-          activeCategory.packages.length && (
-            <PackagesList
-              items={activeCategory.packages}
-              onItemPress={this.onPackagesListItemPress}
-              activeItemID={activePackageID}
-              selectQuantity={this.selectQuantity}
-              quantity={this.state.quantity}
-            />
-          )}
+        {!!activeCategory.packages && !!activeCategory.packages.length && (
+          <PackagesList
+            items={activeCategory.packages}
+            onItemPress={this.onPackagesListItemPress}
+            activeItemID={activePackageID}
+            selectQuantity={this.selectQuantity}
+            quantity={this.state.quantity}
+          />
+        )}
 
-        {activePackageID &&  (
+        {activePackageID && (
           <ServicesList
             items={
               activeCategory.packages.find(item => item.id === activePackageID)
@@ -318,18 +318,7 @@ class CreateOrder extends PureComponent {
 
         <Dialog
           title={I18n.t('success')}
-          description={
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <IconFactory
-                type="MaterialIcons"
-                name="check"
-                color={colors.primary}
-              />
-              <Text style={{paddingHorizontal: 10}}>
-                {I18n.t('cart_item_added')}
-              </Text>
-            </View>
-          }
+
           leftButtonPress={this.onAddNewItemPress}
           rightButtonPress={this.onCheckoutPress}
           visible={showCartSuccessModal}

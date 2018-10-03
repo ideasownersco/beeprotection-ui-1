@@ -183,8 +183,7 @@ class Cart extends PureComponent {
 
         this.hideAddressCreateModal();
       })
-      .catch(e => {
-      });
+      .catch(e => {});
   };
 
   updateAddress = address => {
@@ -349,8 +348,7 @@ class Cart extends PureComponent {
             () => {},
           );
         },
-        error => {
-        },
+        error => {},
         {
           persist: true,
           samples: 1,

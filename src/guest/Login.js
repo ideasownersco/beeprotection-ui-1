@@ -52,8 +52,7 @@ class Login extends Component {
         //   this.props.navigation.navigate('Cart');
         // }
       })
-      .catch(e => {
-      });
+      .catch(e => {});
   };
 
   handleRegisterRoute = () => {

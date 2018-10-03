@@ -48,14 +48,13 @@ function* boot() {
     if (response.success) {
       yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId);
     }
-  } catch (error) {
-  }
+  } catch (error) {}
 
   try {
     let params = {
-      body:{
+      body: {
         uuid: uniqueId,
-      }
+      },
     };
     let response = yield call(CUSTOMER_API.fetchHasFreeWash, params);
     if (response.success) {

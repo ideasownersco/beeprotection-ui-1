@@ -65,7 +65,7 @@ export default class ServicesList extends Component {
   render() {
     const {items, activeItemIDs} = this.props;
 
-    if(items.length) {
+    if (items.length) {
       return (
         <View style={styles.container}>
           <Divider style={{marginVertical: 10}} />
@@ -85,8 +85,6 @@ export default class ServicesList extends Component {
     }
 
     return null;
-
-
   }
 }
 

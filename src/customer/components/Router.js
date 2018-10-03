@@ -36,7 +36,6 @@ const navStyle = {
   },
 };
 
-
 const AuthStack = StackNavigator(
   {
     LoginScreen: {

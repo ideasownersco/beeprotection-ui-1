@@ -120,7 +120,7 @@ class PhotosUploadScene extends Component {
     this.props.dispatch(
       DRIVER_ACTIONS.approveImages({
         job_id: this.props.order.job.id,
-        comment:this.state.comment
+        comment: this.state.comment,
       }),
     );
     this.props.navigation.pop();
@@ -214,10 +214,11 @@ class PhotosUploadScene extends Component {
             </View>
           )}
 
-        <View style={{
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-        }}>
+        <View
+          style={{
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+          }}>
           <FAB
             icon="add"
             dark
