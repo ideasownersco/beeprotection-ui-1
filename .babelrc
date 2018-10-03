@@ -1,4 +1,5 @@
 {
+<<<<<<< ours
   "presets": ["react-native","flow"],
   "plugins": [
     ["module-resolver", {
@@ -14,4 +15,7 @@
       "plugins": ["transform-remove-console"]
     }
   }
+=======
+  "presets": ["module:metro-react-native-babel-preset"]
+>>>>>>> theirs
 }
