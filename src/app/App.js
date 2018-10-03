@@ -5,7 +5,7 @@ import CodePush from 'react-native-code-push';
 import PushNotificationManager from 'app/components/PushNotificationManager';
 import Notification from 'app/components/Notification';
 import Navigator from 'components/Navigator';
-import {StatusBar, View} from 'react-native';
+import {StatusBar, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {ACTIONS} from 'app/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
@@ -95,19 +95,20 @@ class App extends Component {
   render() {
     const {app, notifications, user} = this.props;
 
+
     if (!app.booted) return null;
 
-    if (!app.installed) {
-      if (app.has_set_language) {
-        return (
-          <SplashScreen
-            onEndReached={this.loadApp}
-            onLanguageSelect={this.onLanguageSelect}
-          />
-        );
-      }
-      return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
-    }
+    // if (!app.installed) {
+    //   if (app.has_set_language) {
+    //     return (
+    //       <SplashScreen
+    //         onEndReached={this.loadApp}
+    //         onLanguageSelect={this.onLanguageSelect}
+    //       />
+    //     );
+    //   }
+    //   return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
+    // }
 
     return (
       <View style={{flex: 1, backgroundColor: colors.primary}}>

@@ -48,7 +48,7 @@ export async function request({
     if (forceAuthentication) {
       NavigatorService.navigate('Login');
     }
-    throw 'CLIENT_NOT_AUTHENTICATED';
+    // throw 'CLIENT_NOT_AUTHENTICATED';
   }
 
   let headers = new Headers();

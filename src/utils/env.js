@@ -3,8 +3,10 @@ const defaults = {};
 if (__DEV__) {
   module.exports = {
     ...defaults,
-    API_URL: 'beeprotection.test/api',
-    SOCKET_SERVER: 'http://beeprotection.test:3000',
+    // API_URL: 'beeprotection.test/api',
+    API_URL: 'bp.ideasowners.net/api',
+    // SOCKET_SERVER: 'http://beeprotection.test:3000',
+    SOCKET_SERVER: 'http://bp.ideasowners.net:3000',
     // API_URL: 'bp.ideasowners.net/api',
     // SOCKET_SERVER: 'http://bp.ideasowners.net:3000',
     GOOGLE_MAPS_KEY: 'AIzaSyCpQX4H0QPxVgKuNMZ0ELG_ymgT8RHcKh4',
