@@ -1,6 +1,5 @@
 {
-<<<<<<< ours
-  "presets": ["react-native","flow"],
+  "presets": ["module:metro-react-native-babel-preset"],
   "plugins": [
     ["module-resolver", {
       "root": ["./src"],
@@ -15,7 +14,4 @@
       "plugins": ["transform-remove-console"]
     }
   }
-=======
-  "presets": ["module:metro-react-native-babel-preset"]
->>>>>>> theirs
 }
