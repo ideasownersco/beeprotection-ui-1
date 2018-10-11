@@ -27,10 +27,10 @@ class Login extends Component {
   // };
 
   state = {
-    email: '',
-    password: '',
-    // email: 'customer@test.com',
-    // password: 'secret',
+    // email: '',
+    // password: '',
+    email: 'customer@test.com',
+    password: 'secret',
   };
 
   handleLogin = () => {

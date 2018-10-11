@@ -3764,7 +3764,7 @@ lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.10, lodash@^4.17.4, 
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
-lodash@^4.17.11:
+lodash@^4.16.6, lodash@^4.17.11:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
@@ -4978,6 +4978,14 @@ react-native-safe-area-view@0.11.0:
 react-native-screens@^1.0.0-alpha.11:
   version "1.0.0-alpha.14"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.14.tgz#fe3ccdcec7be8e1ada090c34a7f8951337adf653"
+
+react-native-svg@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-7.0.3.tgz#1ced56f4f6e96ad95374d66706390f51fa86bea7"
+  dependencies:
+    color "^2.0.1"
+    lodash "^4.16.6"
+    pegjs "^0.10.0"
 
 react-native-swiper@^1.5.13:
   version "1.5.13"

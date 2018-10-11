@@ -3,6 +3,7 @@ package com.beeprotection;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.microsoft.codepush.react.CodePush;
@@ -38,6 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
           new RNBackgroundGeolocation(),
           new RNBackgroundFetchPackage(),
           new MainReactPackage(),
+          new SvgPackage(),
           new RNDeviceInfo(),
           new RNI18nPackage(),
           new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),

@@ -27,6 +27,8 @@ target 'BeeProtection' do
    pod 'RNI18n', :path => '../node_modules/react-native-i18n'
    pod 'RNImageCropPicker', :path =>  '../node_modules/react-native-image-crop-picker'
    pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 end
 
 post_install do |installer|
