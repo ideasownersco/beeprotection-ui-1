@@ -4944,7 +4944,7 @@ react-native-modal@^6.2.0, react-native-modal@^6.5.0:
     prop-types "^15.6.1"
     react-native-animatable "^1.2.4"
 
-react-native-paper@^1.10.3:
+react-native-paper@1.12.0:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-1.12.0.tgz#1d891b2068cda4193b42fc527779aa379605ca11"
   dependencies:
@@ -5045,9 +5045,9 @@ react-native@0.57.2:
     xmldoc "^0.4.0"
     yargs "^9.0.0"
 
-react-navigation@^1.5.12:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-1.6.1.tgz#f08b560637edb5517f375bbd9bae3123e3027206"
+react-navigation@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-1.6.0.tgz#d67b9d40465205c088b3d6aa09eae629062d1db3"
   dependencies:
     clamp "^1.0.1"
     hoist-non-react-statics "^2.2.0"
