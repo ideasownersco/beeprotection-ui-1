@@ -18,6 +18,10 @@ export default class MapPicker extends Component {
     address: PropTypes.object.isRequired,
   };
 
+  state = {
+    imageLoaded:false
+  };
+
   shouldComponentUpdate(nextProps) {
     return nextProps.address.area_id !== this.props.address.area_id;
   }
@@ -41,6 +45,12 @@ export default class MapPicker extends Component {
     this.updateAddress(params);
   };
 
+  forceUpdate = () => {
+    this.setState({
+      imageLoaded:true
+    })
+  }
+
   render() {
     const {latitude, longitude} = this.props.address;
     return (
@@ -63,6 +73,7 @@ export default class MapPicker extends Component {
           source={require('./../../../assets/images/pin.png')}
           style={styles.image}
           resizeMode="contain"
+          onLoad={() => this.forceUpdate()}
         />
       </MapView>
     );
