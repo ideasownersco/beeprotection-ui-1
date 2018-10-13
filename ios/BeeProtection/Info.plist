@@ -43,9 +43,9 @@
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use your camera</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Location Always And When In Use Usage Description</string>
+	<string>This app is using location service to pin point your delivery address </string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location Always Usage Description</string>
+	<string>This app is using location service to pin point your delivery address </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app is using location service to pin point your delivery address </string>
 	<key>NSMicrophoneUsageDescription</key>
