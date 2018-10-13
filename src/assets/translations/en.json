@@ -172,5 +172,6 @@
   "confirm_account" : "Confirm your account",
   "ok" : "OK",
   "confirmation_code_sent" : "Confirmation code sent to your Mobile",
-  "select_feet" : "Select Feet"
+  "select_feet" : "Select Feet",
+  "login_do" : "login"
 }

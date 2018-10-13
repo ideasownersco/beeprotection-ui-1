@@ -44,11 +44,11 @@ PODS:
   - QBImagePickerController (3.4.0)
   - React (0.57.2):
     - React/Core (= 0.57.2)
-  - react-native-google-maps (0.21.0):
+  - react-native-google-maps (0.22.0):
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 2.5.0)
     - React
-  - react-native-maps (0.21.0):
+  - react-native-maps (0.22.0):
     - React
   - React/Core (0.57.2):
     - yoga (= 0.57.2.React)
@@ -191,7 +191,7 @@ SPEC CHECKSUMS:
   JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
-  react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
+  react-native-google-maps: b946d62e25dc66097921ed82520e45b0b081768a
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNBackgroundFetch: 8c4f77f83c398c659bce82af2f0a885079417b9e
   RNBackgroundGeolocation: c9bbf69b9aa277f0b46754cc5f853bd26051a18f
@@ -204,6 +204,6 @@ SPEC CHECKSUMS:
   SSZipArchive: 41455d4b8d2b6ab93990820b50dc697c2554a322
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 37d78fa77cf2e39fb9abb3eaedf0312a19d28dc9
+PODFILE CHECKSUM: bb6385e0fe875765c57f577f5558171160a09790
 
 COCOAPODS: 1.4.0

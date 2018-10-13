@@ -8,8 +8,8 @@ target 'BeeProtection' do
    pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
    pod 'React', path: rn_path, subspecs: [
      'Core',
-     'CxxBridge', # Include this for RN >= 0.47
-     'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
+     'CxxBridge',
+     'DevSupport',
      'RCTActionSheet',
      'RCTAnimation',
      'RCTGeolocation',
