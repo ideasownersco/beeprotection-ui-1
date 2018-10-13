@@ -704,7 +704,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		7FF0379F479E30EC82CE81699B352907 /* PBXContainerItemProxy */ = {
@@ -718,7 +718,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		865A719BCB85912A400291AFC9FBFD43 /* PBXContainerItemProxy */ = {
@@ -746,14 +746,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		94969FDEDF326913C5FCD0D6B8414083 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		9C1F734864FD5B25297B125ED51F9FA7 /* PBXContainerItemProxy */ = {
@@ -767,14 +767,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		AF5D865B981947F954BA122012C0CC11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		AF8C670AC8473BE3B18662D96E6ADB60 /* PBXContainerItemProxy */ = {
@@ -788,14 +788,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		AFF12B9E5005DE78926C12C6F85C6341 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		B4E77E061E4D3413EA59C26847762C12 /* PBXContainerItemProxy */ = {
@@ -837,7 +837,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		E0693FFF388056B07960E82C9EFFA1B5 /* PBXContainerItemProxy */ = {
@@ -872,14 +872,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		EFE23F6EB8B2EF628DEE4ACE2D07877A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E358580592C6ACA1D2E81B8;
+			remoteGlobalIDString = 12916C05CFAF8E77A7FF2AA5;
 			remoteInfo = React;
 		};
 		F7E655FF8CB28532B38D23FC08C9D5C1 /* PBXContainerItemProxy */ = {
