@@ -30,11 +30,12 @@ target 'BeeProtection' do
    pod 'RNImageCropPicker', :path =>  '../node_modules/react-native-image-crop-picker'
    pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
    pod 'RNSVG', :path => '../node_modules/react-native-svg'
+   pod 'CodePush', :path => '../node_modules/react-native-code-push'
+   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
    pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
    pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
    pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-   pod 'CodePush', :path => '../node_modules/react-native-code-push'
-   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
 end
 
