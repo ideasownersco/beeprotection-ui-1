@@ -25,7 +25,7 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected String getJSBundleFile() {
-        return CodePush.getJSBundleFile();
+            return CodePush.getJSBundleFile();
         }
 
     @Override
@@ -42,7 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
           new SvgPackage(),
           new RNDeviceInfo(),
           new RNI18nPackage(),
-          new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
+          new CodePush("7BqJ5-d4-mQTn7Fi6NmlBPohfKI1687af85f-1654-43d6-b735-3ff7e4bf4cd7", getApplicationContext(), BuildConfig.DEBUG),
           new VectorIconsPackage(),
           new ReactNativePushNotificationPackage(),
           new MapsPackage()
