@@ -338,6 +338,9 @@ class Cart extends PureComponent {
       BackgroundGeolocation.getCurrentPosition(
         location => {
           let {latitude, longitude} = location.coords;
+
+          console.log('coords',location.coords);
+
           this.setState(
             {
               address: {
@@ -345,7 +348,9 @@ class Cart extends PureComponent {
                 longitude: longitude,
               },
             },
-            () => {},
+            () => {
+              this.saveAddress(this.state.address);
+            },
           );
         },
         error => {},
@@ -355,7 +360,6 @@ class Cart extends PureComponent {
           maximumAge: 5000,
         },
       );
-      this.saveAddress(this.state.address);
     } else {
       this.showAddressCreateModal();
     }
