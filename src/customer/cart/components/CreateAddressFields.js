@@ -87,6 +87,8 @@ export default class extends PureComponent {
   render() {
     const {block, street, avenue, building, label, initialized} = this.state;
     let {latitude, longitude, area} = this.props.address;
+    let {savingAddress} = this.props;
+
     return (
       <ScrollView
         style={styles.container}
@@ -132,7 +134,7 @@ export default class extends PureComponent {
           label={label}
           updateFields={this.updateFormFields}
         />
-        <MapButtons save={this.saveAddress} close={this.hideScreen} />
+        <MapButtons save={this.saveAddress} close={this.hideScreen} savingAddress={savingAddress} />
       </ScrollView>
     );
   }

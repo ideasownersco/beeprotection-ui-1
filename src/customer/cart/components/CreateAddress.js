@@ -54,6 +54,7 @@ export default class extends PureComponent {
 
   render() {
     const {latitude, longitude, area_id} = this.state;
+    const {savingAddress} = this.props;
 
     return (
       <View style={styles.container}>
@@ -76,6 +77,7 @@ export default class extends PureComponent {
         <MapButtons
           save={this.saveAddress}
           close={this.hideScreen}
+          savingAddress={savingAddress}
           style={{
             zIndex: 5000,
             position: 'absolute',
