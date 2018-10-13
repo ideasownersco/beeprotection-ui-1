@@ -1,5 +1,5 @@
 import React from 'react';
-import {DrawerNavigator, StackNavigator} from 'react-navigation';
+import {createDrawerNavigator, createStackNavigator} from 'react-navigation';
 import Login from 'guest/Login';
 import Register from 'guest/Register';
 import Forgot from 'guest/Forgot';
@@ -23,7 +23,7 @@ import LanguageSelect from 'app/LanguageSelect';
 const getDrawerIcon = navigation => {
   return {
     headerLeft: (
-      <DrawerIcon onPress={() => navigation.navigate('DrawerToggle')} />
+      <DrawerIcon onPress={() => navigation.openDrawer()} />
     ),
   };
 };
@@ -36,7 +36,7 @@ const navStyle = {
   },
 };
 
-const AuthStack = StackNavigator(
+const AuthStack = createStackNavigator(
   {
     LoginScreen: {
       screen: Login,
@@ -57,7 +57,7 @@ const AuthStack = StackNavigator(
   },
 );
 
-const HomeStack = StackNavigator(
+const HomeStack = createStackNavigator(
   {
     Home: {
       screen: Home,
@@ -111,7 +111,7 @@ const HomeStack = StackNavigator(
   },
 );
 
-const PastOrdersStack = StackNavigator(
+const PastOrdersStack = createStackNavigator(
   {
     PastOrders: {
       screen: PastOrdersScene,
@@ -132,7 +132,7 @@ const PastOrdersStack = StackNavigator(
   },
 );
 
-const UpcomingOrdersStack = StackNavigator(
+const UpcomingOrdersStack = createStackNavigator(
   {
     UpcomingOrders: {
       screen: UpcomingOrdersScene,
@@ -153,7 +153,7 @@ const UpcomingOrdersStack = StackNavigator(
   },
 );
 
-const SettingsStack = StackNavigator(
+const SettingsStack = createStackNavigator(
   {
     Settings: {
       screen: Settings,
@@ -182,7 +182,7 @@ const DrawerRoutes = {
   // }
 };
 
-export const Router = DrawerNavigator(DrawerRoutes, {
+export const Router = createDrawerNavigator(DrawerRoutes, {
   contentComponent: props => <Drawer {...props} />,
   drawerWidth: 275,
 });

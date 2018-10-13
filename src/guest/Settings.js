@@ -24,7 +24,7 @@ export default class Settings extends Component {
   // }
   //
   // toggleDrawer = () => {
-  //   this.props.navigation.navigate('DrawerToggle');
+  //   this.props.navigation.openDrawer();
   // };
 
   render() {
