@@ -1,12 +1,12 @@
-import {API_URL, AUTH_KEY} from 'utils/env';
+import {API_URL, AUTH_KEY, NETWORK_PROTOCOL} from 'utils/env';
 import I18n from 'utils/locale';
 import {getStorageItem} from 'utils/functions';
 import NavigatorService from 'components/NavigatorService';
 
 export async function request({
   path,
-  protocol = 'http://',
-  domain = null, //http://wwww.waa.com
+  protocol = NETWORK_PROTOCOL,
+  domain = null,
   method = 'GET',
   params = {
     body: null, // for POST
