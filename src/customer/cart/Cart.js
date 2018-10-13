@@ -349,7 +349,8 @@ class Cart extends PureComponent {
               },
             },
             () => {
-              this.saveAddress(this.state.address);
+              this.showAddressCreateModal();
+              // this.saveAddress(this.state.address);
             },
           );
         },
