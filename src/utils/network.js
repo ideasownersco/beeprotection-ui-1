@@ -5,7 +5,7 @@ import NavigatorService from 'components/NavigatorService';
 
 export async function request({
   path,
-  protocol = 'http://',
+  protocol = 'https://',
   domain = null, //http://wwww.waa.com
   method = 'GET',
   params = {
