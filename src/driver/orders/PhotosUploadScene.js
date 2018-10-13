@@ -174,6 +174,7 @@ class PhotosUploadScene extends Component {
 
   render() {
     let {order} = this.props;
+    let {job}  = order;
 
     let {
       showUploadImageModal,
@@ -193,9 +194,8 @@ class PhotosUploadScene extends Component {
           onItemDeletePress={this.onPhotoListItemDeletePress}
         />
 
-        {order.job &&
-          order.job.photos &&
-          order.job.photos.length && (
+        {job &&
+          job.photos && (
             <View>
               <View style={{padding: 10, backgroundColor: 'white'}}>
                 <FormTextInput
