@@ -27,57 +27,59 @@ PODS:
   - GoogleMaps/Maps (2.5.0):
     - GoogleMaps/Base
   - QBImagePickerController (3.4.0)
-  - React (0.55.4):
-    - React/Core (= 0.55.4)
+  - React (0.57.2):
+    - React/Core (= 0.57.2)
   - react-native-google-maps (0.21.0):
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 2.5.0)
     - React
   - react-native-maps (0.21.0):
     - React
-  - React/Core (0.55.4):
-    - yoga (= 0.55.4.React)
-  - React/fishhook (0.55.4)
-  - React/RCTActionSheet (0.55.4):
+  - React/Core (0.57.2):
+    - yoga (= 0.57.2.React)
+  - React/fishhook (0.57.2)
+  - React/RCTActionSheet (0.57.2):
     - React/Core
-  - React/RCTAnimation (0.55.4):
+  - React/RCTAnimation (0.57.2):
     - React/Core
-  - React/RCTBlob (0.55.4):
+  - React/RCTBlob (0.57.2):
     - React/Core
-  - React/RCTGeolocation (0.55.4):
+  - React/RCTGeolocation (0.57.2):
     - React/Core
-  - React/RCTImage (0.55.4):
+  - React/RCTImage (0.57.2):
     - React/Core
     - React/RCTNetwork
-  - React/RCTLinkingIOS (0.55.4):
+  - React/RCTLinkingIOS (0.57.2):
     - React/Core
-  - React/RCTNetwork (0.55.4):
+  - React/RCTNetwork (0.57.2):
     - React/Core
-  - React/RCTSettings (0.55.4):
+  - React/RCTSettings (0.57.2):
     - React/Core
-  - React/RCTText (0.55.4):
+  - React/RCTText (0.57.2):
     - React/Core
-  - React/RCTVibration (0.55.4):
+  - React/RCTVibration (0.57.2):
     - React/Core
-  - React/RCTWebSocket (0.55.4):
+  - React/RCTWebSocket (0.57.2):
     - React/Core
     - React/fishhook
     - React/RCTBlob
   - RNBackgroundFetch (2.4.3):
     - React
-  - RNBackgroundGeolocation (2.12.2):
+  - RNBackgroundGeolocation (2.13.4):
     - CocoaLumberjack (~> 3.0)
     - React
   - RNDeviceInfo (0.21.5):
     - React
-  - RNI18n (2.0.12):
+  - RNI18n (2.0.15):
     - React
-  - RNImageCropPicker (0.20.3):
+  - RNImageCropPicker (0.21.2):
     - QBImagePickerController
     - React/Core
     - RSKImageCropper
-  - RSKImageCropper (2.0.1)
-  - yoga (0.55.4.React)
+  - RNSVG (7.0.3):
+    - React
+  - RSKImageCropper (2.2.1)
+  - yoga (0.57.2.React)
 
 DEPENDENCIES:
   - GoogleMaps
@@ -99,6 +101,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNI18n (from `../node_modules/react-native-i18n`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 EXTERNAL SOURCES:
@@ -118,6 +121,8 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-i18n
   RNImageCropPicker:
     :path: ../node_modules/react-native-image-crop-picker
+  RNSVG:
+    :path: ../node_modules/react-native-svg
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
@@ -126,17 +131,18 @@ SPEC CHECKSUMS:
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
-  React: aa2040dbb6f317b95314968021bd2888816e03d5
+  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNBackgroundFetch: 8c4f77f83c398c659bce82af2f0a885079417b9e
   RNBackgroundGeolocation: c9bbf69b9aa277f0b46754cc5f853bd26051a18f
   RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
-  RNI18n: db9be06a40336f04d136f24dd5de3f5eb9f3207c
+  RNI18n: 46b8694063fbd699f2c06a4dc8e835b3176763b1
   RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
-  RSKImageCropper: 50d5a3e4160f0309b14d75b89d5ae2f496d56e0d
-  yoga: a23273df0088bf7f2bb7e5d7b00044ea57a2a54a
+  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
+  RSKImageCropper: 98296ad26b41753f796b6898d015509598f13d97
+  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 532f6783b772b2454128402b8caca771110abbe4
+PODFILE CHECKSUM: 6a78ac6a2ec6f9280bbf848794e3cfdd282aebd6
 
 COCOAPODS: 1.4.0
