@@ -12,6 +12,7 @@ import {Linking, View} from 'react-native';
 import Map from 'components/Map';
 import MapButtons from 'driver/orders/components/MapButtons';
 import {API_URL, GEOLOCATION_SOUNDS_ENABLED} from 'utils/env';
+import GEOLOCATION_CONFIG from 'utils/background-geolocation';
 
 class TrackOrderScene extends Component {
   static propTypes = {
@@ -49,18 +50,8 @@ class TrackOrderScene extends Component {
 
     BackgroundGeolocation.configure(
       {
-        distanceFilter: 100,
-        stopOnTerminate: false,
-        preventSuspend: false,
-        startOnBoot: true,
-        foregroundService: true,
+        ...GEOLOCATION_CONFIG,
         url: `http://${API_URL}/jobs/${job.id}/update/location`,
-        autoSync: true,
-        debug: GEOLOCATION_SOUNDS_ENABLED,
-        logLevel: GEOLOCATION_SOUNDS_ENABLED
-          ? BackgroundGeolocation.LOG_LEVEL_VERBOSE
-          : BackgroundGeolocation.LOG_LEVEL_OFF,
-        maxRecordsToPersist: 1,
         params: {
           driver_id: profile.id,
         },
