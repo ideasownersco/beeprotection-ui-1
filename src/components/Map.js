@@ -19,7 +19,7 @@ export default class Map extends Component {
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
     }),
-    cacheEnabled: PropTypes.string,
+    cacheEnabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -90,7 +90,8 @@ export default class Map extends Component {
               identifier="MarkerOrigin">
               <Image
                 source={images.logo}
-                style={[styles.image, rotate && {transform: [{rotate}]}]}
+                style={[styles.image]}
+                // style={[styles.image, rotate && {transform: [{rotate}]}]}
               />
             </MapView.Marker>
 

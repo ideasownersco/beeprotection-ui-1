@@ -79,5 +79,5 @@ export const API = {
   forgotPassword,
   updatePassword,
   confirmRegistration,
-  reSendConfirmationCode
+  reSendConfirmationCode,
 };

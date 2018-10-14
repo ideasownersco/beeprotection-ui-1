@@ -21,7 +21,7 @@
   NSURL *jsCodeLocation;
 
     [GMSServices provideAPIKey:@"AIzaSyCZ5LWZU88moEY3GJIGBEvEkkOJsBgFK98"];
-  
+
     #ifdef DEBUG
 //      jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
         jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
@@ -29,7 +29,7 @@
 //        jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
         jsCodeLocation = [CodePush bundleURL];
     #endif
-  
+
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"BeeProtection"

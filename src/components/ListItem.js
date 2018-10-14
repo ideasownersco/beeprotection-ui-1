@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {ListItem as PaperListItem} from 'react-native-paper';
 import I18n from 'utils/locale';
 import IconFactory from 'components/IconFactory';
-import {Text} from "react-native";
+import {Text} from 'react-native';
 
 export default class ListItem extends Component {
   static propTypes = {
@@ -34,7 +34,7 @@ export default class ListItem extends Component {
       <PaperListItem
         onPress={name ? () => onItemPress(name) : onItemPress}
         icon={iconProps ? <IconFactory {...iconProps} /> : null}
-        title={<Text style={{textAlign:'left'}}>{title}</Text>}
+        title={<Text style={{textAlign: 'left'}}>{title}</Text>}
         description={description}
         inset={true}
         style={style}

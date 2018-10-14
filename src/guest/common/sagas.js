@@ -148,7 +148,6 @@ function* confirmRegistration(action) {
     );
 
     yield NavigatorService.back();
-
   } catch (error) {
     yield put(
       APP_ACTIONS.setNotification({
@@ -203,7 +202,6 @@ function* reSendConfirmationCode(action) {
         type: 'success',
       }),
     );
-
   } catch (error) {
     yield put(
       APP_ACTIONS.setNotification({
@@ -281,10 +279,16 @@ function* passwordUpdateMonitor() {
 }
 
 function* confirmRegistrationMonitor() {
-  yield takeLatest(ACTION_TYPES.ACCOUNT_CONFIRMATION_REQUEST, confirmRegistration);
+  yield takeLatest(
+    ACTION_TYPES.ACCOUNT_CONFIRMATION_REQUEST,
+    confirmRegistration,
+  );
 }
 function* reSendConfirmationCodeMonitor() {
-  yield takeLatest(ACTION_TYPES.RESEND_CONFIRMATION_REQUEST, reSendConfirmationCode);
+  yield takeLatest(
+    ACTION_TYPES.RESEND_CONFIRMATION_REQUEST,
+    reSendConfirmationCode,
+  );
 }
 
 export const sagas = all([

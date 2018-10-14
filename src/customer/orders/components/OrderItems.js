@@ -16,8 +16,7 @@ export default class OrderItems extends Component {
   };
 
   render() {
-    const {order} = this.props;
-    const {packages} = order;
+    const {packages,services} = this.props.order;
     return (
       <View style={styles.container}>
         <SectionTitle title={I18n.t('order_details')} />
@@ -35,9 +34,8 @@ export default class OrderItems extends Component {
               )}
             </View>
 
-            {order.services &&
-              order.services.length &&
-              order.services
+            {services &&
+              services
                 .filter(service => service.package.id === packageModel.id)
                 .map(service => {
                   return (

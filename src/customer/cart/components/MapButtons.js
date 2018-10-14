@@ -11,11 +11,11 @@ export default class MapButtons extends Component {
   };
 
   shouldComponentUpdate(nextProps, prevState) {
-    return false;
+    return nextProps.savingAddress !== this.props.savingAddress;
   }
 
   render() {
-    let {close, save, style} = this.props;
+    let {close, save, style,savingAddress} = this.props;
 
     return (
       <View style={[styles.container, style]}>
@@ -24,6 +24,7 @@ export default class MapButtons extends Component {
           style={styles.button}
           raised
           title={I18n.t('cancel')}
+          disabled={savingAddress}
         />
         <Button
           onPress={save}
@@ -31,7 +32,8 @@ export default class MapButtons extends Component {
           raised
           primary
           dark
-          title={I18n.t('save')}
+          title={savingAddress ? I18n.t('saving') : I18n.t('save')}
+          disabled={savingAddress}
         />
       </View>
     );

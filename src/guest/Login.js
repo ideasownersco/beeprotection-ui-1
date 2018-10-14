@@ -27,10 +27,10 @@ class Login extends Component {
   // };
 
   state = {
-    email: '',
-    password: '',
-    // email: 'customer@test.com',
-    // password: 'secret',
+    // email: '',
+    // password: '',
+    email: 'customer@test.com',
+    password: 'secret',
   };
 
   handleLogin = () => {
@@ -52,8 +52,7 @@ class Login extends Component {
         //   this.props.navigation.navigate('Cart');
         // }
       })
-      .catch(e => {
-      });
+      .catch(e => {});
   };
 
   handleRegisterRoute = () => {

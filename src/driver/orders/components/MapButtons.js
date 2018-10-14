@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, View} from 'react-native';
 import Button from 'components/Button';
-import Touchable from 'react-native-platform-touchable';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from 'utils/locale';
 import AddressInfo from 'components/AddressInfo';
 import Dialog from 'components/Dialog';
-import GoogleMapDirection from '../../../components/GoogleMapDirection';
+import GoogleMapDirection from 'components/GoogleMapDirection';
+import IconFactory from "../../../components/IconFactory";
 
 export default class MapButtons extends Component {
   static propTypes = {
@@ -112,7 +111,7 @@ export default class MapButtons extends Component {
 
           <GoogleMapDirection address={address}>
             <View style={{alignItems: 'center'}}>
-              <Ionicons name="ios-navigate-outline" size={32} />
+              <IconFactory type="Ionicons" name="ios-navigate" size={32} />
             </View>
           </GoogleMapDirection>
         </View>

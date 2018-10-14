@@ -8,11 +8,11 @@ import colors from 'assets/theme/colors';
 import Accordion from 'react-native-collapsible/Accordion';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Touchable from 'react-native-platform-touchable';
-import IconFactory from "components/IconFactory";
-import FormLabel from "components/FormLabel";
+import IconFactory from 'components/IconFactory';
+import FormLabel from 'components/FormLabel';
 import I18n from 'utils/locale';
-import Divider from "../../../components/Divider";
-import {Title} from "react-native-paper";
+import Divider from 'components/Divider';
+import {Title} from 'react-native-paper';
 
 let SectionHeader = ({item}) => {
   return (
@@ -26,14 +26,15 @@ let SectionHeader = ({item}) => {
 };
 
 export default class PackagesList extends Component {
-
   static propTypes = {
     items: PropTypes.array.isRequired,
     onItemPress: PropTypes.func.isRequired,
   };
 
   renderSectionHeader = items => {
-    return items.map(item => item).sort((a, b) => parseInt(a.order) - parseInt(b.order));
+    return items
+      .map(item => item)
+      .sort((a, b) => parseInt(a.order) - parseInt(b.order));
   };
 
   renderHeader = (item, index, isActive) => {
@@ -60,8 +61,7 @@ export default class PackagesList extends Component {
   };
 
   renderContent = item => {
-
-    let {selectQuantity,quantity,activeItemID} = this.props;
+    let {selectQuantity, quantity, activeItemID} = this.props;
 
     return (
       <View style={styles.contentContainer}>
@@ -69,24 +69,31 @@ export default class PackagesList extends Component {
           <Text style={[styles.itemName]}>{item.description}</Text>
           {item.price && <Text style={styles.price}>{item.price} KD</Text>}
         </View>
-        {
-          item.show_quantity &&
+        {!!item.show_quantity && (
           <View>
-            <Divider style={{marginVertical:10}}/>
+            <Divider style={{marginVertical: 10}} />
             <View style={styles.sectionContainer}>
-              <FormLabel title={I18n.t('select_feet')}/>
+              <FormLabel title={I18n.t('select_feet')} />
               <Text> : </Text>
               <Title>{quantity} ft</Title>
             </View>
-            <Slider disabled={!activeItemID} step={1} value={quantity} maximumValue={100} minimumValue={1} onValueChange={(value)=>selectQuantity(value)} />
+            <Slider
+              disabled={!activeItemID}
+              step={1}
+              value={quantity}
+              maximumValue={100}
+              minimumValue={1}
+              onValueChange={value => selectQuantity(value)}
+            />
           </View>
-        }
+        )}
       </View>
     );
   };
 
   render() {
     const {items} = this.props;
+
     return (
       <View style={styles.listContainer}>
         <Accordion

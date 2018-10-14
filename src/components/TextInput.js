@@ -6,11 +6,11 @@ import {
   Animated,
   TextInput as NativeTextInput,
   StyleSheet,
-  Text
+  Text,
 } from 'react-native';
-import { polyfill } from 'react-lifecycles-compat';
+import {polyfill} from 'react-lifecycles-compat';
 import {withTheme} from 'react-native-paper';
-import {isRTL} from "utils/locale";
+import {isRTL} from 'utils/locale';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -93,7 +93,7 @@ class TextInput extends React.Component<Props, State> {
         this.setState({
           placeholder: this.props.placeholder,
         }),
-      50
+      50,
     );
   };
 
@@ -133,7 +133,7 @@ class TextInput extends React.Component<Props, State> {
     }).start();
 
   _handleFocus = (...args) => {
-    this.setState({ focused: true });
+    this.setState({focused: true});
 
     if (this.props.onFocus) {
       this.props.onFocus(...args);
@@ -141,7 +141,7 @@ class TextInput extends React.Component<Props, State> {
   };
 
   _handleBlur = (...args) => {
-    this.setState({ focused: false });
+    this.setState({focused: false});
 
     if (this.props.onBlur) {
       this.props.onBlur(...args);
@@ -149,13 +149,13 @@ class TextInput extends React.Component<Props, State> {
   };
 
   _handleChangeText = (value: string) => {
-    this.setState({ value });
+    this.setState({value});
     this.props.onChangeText && this.props.onChangeText(value);
   };
 
   _getBottomLineStyle = (color: string, animatedValue: *) => ({
     backgroundColor: color,
-    transform: [{ scaleX: animatedValue }],
+    transform: [{scaleX: animatedValue}],
     opacity: animatedValue.interpolate({
       inputRange: [0, 0.1, 1],
       outputRange: [0, 1, 1],
@@ -208,7 +208,7 @@ class TextInput extends React.Component<Props, State> {
       ...rest
     } = this.props;
 
-    const { colors, fonts } = theme;
+    const {colors, fonts} = theme;
     const fontFamily = fonts.regular;
     const {
       primary: primaryColor,
@@ -235,9 +235,9 @@ class TextInput extends React.Component<Props, State> {
     const labelTranslateX =
       this.state.value && error
         ? this.state.error.interpolate({
-          inputRange: [0, 0.5, 1],
-          outputRange: [0, LABEL_WIGGLE_X_OFFSET, 0],
-        })
+            inputRange: [0, 0.5, 1],
+            outputRange: [0, LABEL_WIGGLE_X_OFFSET, 0],
+          })
         : 0;
 
     // Move label to top if value is set
@@ -255,18 +255,14 @@ class TextInput extends React.Component<Props, State> {
       color: labelColorAnimation,
       fontFamily,
       fontSize: labelFontSize,
-      transform: [
-        { translateX: labelTranslateX },
-        { translateY: labelTranslateY },
-      ],
+      transform: [{translateX: labelTranslateX}, {translateY: labelTranslateY}],
     };
 
     return (
       <View style={style}>
         <AnimatedText
           pointerEvents="none"
-          style={[styles.placeholder, labelStyle]}
-        >
+          style={[styles.placeholder, labelStyle]}>
           {label}
         </AnimatedText>
         <NativeTextInput
@@ -287,8 +283,8 @@ class TextInput extends React.Component<Props, State> {
             label ? styles.inputWithLabel : styles.inputWithoutLabel,
             rest.multiline
               ? label
-              ? styles.multilineWithLabel
-              : styles.multilineWithoutLabel
+                ? styles.multilineWithLabel
+                : styles.multilineWithoutLabel
               : null,
             {
               color: inputTextColor,
@@ -300,7 +296,7 @@ class TextInput extends React.Component<Props, State> {
           <View
             style={[
               styles.bottomLine,
-              { backgroundColor: error ? errorColor : inactiveColor },
+              {backgroundColor: error ? errorColor : inactiveColor},
             ]}
           />
           <Animated.View
@@ -312,7 +308,7 @@ class TextInput extends React.Component<Props, State> {
                 this.state.labeled.interpolate({
                   inputRange: [0, 1],
                   outputRange: [1, 0],
-                })
+                }),
               ),
             ]}
           />
@@ -323,7 +319,7 @@ class TextInput extends React.Component<Props, State> {
               this._getBottomLineStyle(
                 errorColor,
                 // $FlowFixMe$
-                Animated.multiply(this.state.labeled, this.state.error)
+                Animated.multiply(this.state.labeled, this.state.error),
               ),
             ]}
           />
@@ -343,14 +339,14 @@ const styles = StyleSheet.create({
     left: 0,
     top: 40,
     fontSize: 16,
-    textAlign:isRTL ? 'right' : 'left'
+    textAlign: isRTL ? 'right' : 'left',
   },
   input: {
     paddingBottom: 0,
     marginTop: 8,
     marginBottom: -4,
     fontSize: 16,
-    textAlign:isRTL ? 'right' : 'left'
+    textAlign: isRTL ? 'right' : 'left',
   },
   inputWithLabel: {
     paddingTop: 20,

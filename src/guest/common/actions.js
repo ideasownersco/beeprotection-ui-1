@@ -30,7 +30,6 @@ export const ACTION_TYPES = {
   RESEND_CONFIRMATION_REQUEST: '@guest/RESEND_CONFIRMATION_REQUEST',
   RESEND_CONFIRMATION_SUCCESS: '@guest/RESEND_CONFIRMATION_SUCCESS',
   RESEND_CONFIRMATION_FAILURE: '@guest/RESEND_CONFIRMATION_FAILURE',
-
 };
 
 function login(payload) {
@@ -95,5 +94,5 @@ export const ACTIONS = {
   forgotPassword,
   updatePassword,
   confirmRegistration,
-  reSendConfirmationCode
+  reSendConfirmationCode,
 };

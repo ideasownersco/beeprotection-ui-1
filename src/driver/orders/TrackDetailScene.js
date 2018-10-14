@@ -94,8 +94,7 @@ class TrackOrderScene extends Component {
     });
   };
 
-  onHttp = response => {
-  };
+  onHttp = response => {};
 
   startDriving = () => {
     if (!this.state.tracking_enabled) {

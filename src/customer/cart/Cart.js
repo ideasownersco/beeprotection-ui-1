@@ -60,6 +60,7 @@ class Cart extends PureComponent {
       latitude: 29.3759,
       longitude: 47.9774,
     },
+    savingAddress:false
   };
 
   static defaultProps = {
@@ -166,6 +167,11 @@ class Cart extends PureComponent {
   };
 
   saveAddress = address => {
+
+    this.setState({
+      savingAddress:true
+    });
+
     return new Promise((resolve, reject) => {
       this.props.actions.saveAddress({address, resolve, reject});
     })
@@ -175,19 +181,26 @@ class Cart extends PureComponent {
             address: {
               ...address,
             },
+            savingAddress:false
           },
           () => {
             this.showAddressCreateFieldsModal();
           },
         );
-
         this.hideAddressCreateModal();
       })
       .catch(e => {
+        this.hideAddressCreateModal();
+        this.setState({
+          savingAddress:false
+        });
       });
   };
 
   updateAddress = address => {
+    this.setState({
+      savingAddress:false
+    });
     return new Promise((resolve, reject) => {
       this.props.actions.updateAddress({address, resolve, reject});
     })
@@ -197,6 +210,7 @@ class Cart extends PureComponent {
             address: {
               ...address,
             },
+            savingAddress:false
           },
           () => {
             this.hideAddressCreateFieldsModal();
@@ -207,6 +221,10 @@ class Cart extends PureComponent {
       })
       .catch(e => {
         console.log('error', e);
+        this.hideAddressCreateFieldsModal();
+        this.setState({
+          savingAddress:false
+        });
       });
   };
 
@@ -339,6 +357,9 @@ class Cart extends PureComponent {
       BackgroundGeolocation.getCurrentPosition(
         location => {
           let {latitude, longitude} = location.coords;
+
+          console.log('coords',location.coords);
+
           this.setState(
             {
               address: {
@@ -346,18 +367,19 @@ class Cart extends PureComponent {
                 longitude: longitude,
               },
             },
-            () => {},
+            () => {
+              this.showAddressCreateModal();
+              // this.saveAddress(this.state.address);
+            },
           );
         },
-        error => {
-        },
+        error => {},
         {
           persist: true,
           samples: 1,
           maximumAge: 5000,
         },
       );
-      this.saveAddress(this.state.address);
     } else {
       this.showAddressCreateModal();
     }
@@ -387,6 +409,7 @@ class Cart extends PureComponent {
       showCheckoutConfirmDialog,
       addressTypeSelectionModalVisible,
       address,
+      savingAddress
     } = this.state;
 
     if (!isFreeWash && !cartItems.length) {
@@ -546,6 +569,7 @@ class Cart extends PureComponent {
             onSave={this.saveAddress}
             areas={areas}
             address={address}
+            savingAddress={savingAddress}
           />
         </Modal>
 
@@ -560,6 +584,7 @@ class Cart extends PureComponent {
             onCancel={this.hideAddressCreateFieldsModal}
             onSave={this.updateAddress}
             address={{...address}}
+            savingAddress={savingAddress}
           />
         </Modal>
 

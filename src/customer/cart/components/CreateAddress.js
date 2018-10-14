@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Alert, StyleSheet, View} from 'react-native';
+import {Alert, Image, StyleSheet, View} from 'react-native';
 import I18n from 'utils/locale';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
@@ -50,9 +50,18 @@ export default class extends PureComponent {
 
   render() {
     const {latitude, longitude, area_id} = this.state;
+    const {savingAddress} = this.props;
 
     return (
       <View style={styles.container}>
+        <View style={styles.marker}>
+          <Image
+            source={require('./../../../assets/images/pin.png')}
+            style={styles.image}
+            resizeMode="contain"
+            onLoad={() => this.forceUpdate()}
+          />
+        </View>
         <MapPicker
           updateAddress={this.updateAddressFields}
           address={{
@@ -64,6 +73,7 @@ export default class extends PureComponent {
         <MapButtons
           save={this.saveAddress}
           close={this.hideScreen}
+          savingAddress={savingAddress}
           style={{
             zIndex: 5000,
             position: 'absolute',
@@ -81,5 +91,16 @@ const styles = StyleSheet.create({
     margin: 0,
     opacity: 1,
     backgroundColor: colors.fadedWhite,
+  },
+  marker:{
+    ...StyleSheet.absoluteFill,
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  image: {
+    width: 50,
+    height: 50,
+    zIndex:1000,
   },
 });

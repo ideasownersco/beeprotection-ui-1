@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import isEmpty from 'lodash/isEmpty';
 import colors from 'assets/theme/colors';
 import I18n from 'utils/locale';
-import { Snackbar } from 'react-native-paper';
+import {Snackbar} from 'react-native-paper';
 
 export default class Notification extends Component {
   static propTypes = PropTypes.shape({
@@ -48,18 +48,16 @@ export default class Notification extends Component {
         primary
         raised
         style={{
-          backgroundColor:type === 'error' ? colors.error : colors.success
+          backgroundColor: type === 'error' ? colors.error : colors.success,
         }}
         action={{
           label: I18n.t('ok'),
           onPress: () => {
-            this.closeModal()
+            this.closeModal();
           },
-        }}
-      >
+        }}>
         {message}
       </Snackbar>
     );
-
   }
 }

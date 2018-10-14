@@ -4,7 +4,7 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import Divider from 'components/Divider';
-import {Subheading} from "react-native-paper";
+import {Subheading} from 'react-native-paper';
 
 export default class CartItems extends Component {
   shouldComponentUpdate(nextProps) {
@@ -27,16 +27,15 @@ export default class CartItems extends Component {
           <View style={styles.packageItemContainer}>
             <Text style={styles.packageTitle}>
               {item.package.name}
-              {
-                item.package.show_quantity && item.quantity ? <Subheading> - {item.quantity} feet</Subheading> : null
-              }
+              {item.package.show_quantity && item.quantity ? (
+                <Subheading> - {item.quantity} feet</Subheading>
+              ) : null}
             </Text>
-            <Text style={styles.packagePrice}>{item.package.price} KD
-
-              {
-                item.package.show_quantity && item.quantity ? <Subheading> x {item.quantity} </Subheading>: null
-              }
-
+            <Text style={styles.packagePrice}>
+              {item.package.price} KD
+              {item.package.show_quantity && item.quantity ? (
+                <Subheading> x {item.quantity} </Subheading>
+              ) : null}
             </Text>
           </View>
           {item.services.map((service, index) => (
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
     color: colors.darkGrey,
     // color: '#aa2d29',
     // fontWeight: 'bold',
-    textAlign:'left'
+    textAlign: 'left',
   },
   packageItemContainer: {
     flexDirection: 'row',
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: colors.mediumGrey,
     paddingLeft: 10,
-    textAlign:'left'
+    textAlign: 'left',
   },
   packagePrice: {
     color: colors.primary,
@@ -108,10 +107,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   total: {
-    flex:1,
+    flex: 1,
     fontSize: 20,
     paddingHorizontal: 10,
-    textAlign:'left'
+    textAlign: 'left',
   },
   totalPrice: {
     flex: 1,

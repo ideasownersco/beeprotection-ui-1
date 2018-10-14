@@ -120,7 +120,7 @@ class PhotosUploadScene extends Component {
     this.props.dispatch(
       DRIVER_ACTIONS.approveImages({
         job_id: this.props.order.job.id,
-        comment:this.state.comment
+        comment: this.state.comment,
       }),
     );
     this.props.navigation.pop();
@@ -174,6 +174,7 @@ class PhotosUploadScene extends Component {
 
   render() {
     let {order} = this.props;
+    let {job}  = order;
 
     let {
       showUploadImageModal,
@@ -193,9 +194,8 @@ class PhotosUploadScene extends Component {
           onItemDeletePress={this.onPhotoListItemDeletePress}
         />
 
-        {order.job &&
-          order.job.photos &&
-          order.job.photos.length && (
+        {job &&
+          job.photos && (
             <View>
               <View style={{padding: 10, backgroundColor: 'white'}}>
                 <FormTextInput
@@ -214,10 +214,11 @@ class PhotosUploadScene extends Component {
             </View>
           )}
 
-        <View style={{
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-        }}>
+        <View
+          style={{
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+          }}>
           <FAB
             icon="add"
             dark

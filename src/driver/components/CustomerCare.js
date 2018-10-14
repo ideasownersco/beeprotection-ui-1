@@ -6,7 +6,7 @@ import colors from 'assets/theme/colors';
 import Feather from 'react-native-vector-icons/Feather';
 import I18n from 'utils/locale';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Divider from "../../components/Divider";
+import Divider from '../../components/Divider';
 
 export default class CustomerCare extends Component {
   static propTypes = {
@@ -17,8 +17,7 @@ export default class CustomerCare extends Component {
     return nextProps.driver !== this.props.driver;
   }
 
-  makeCall = (number) => {
-
+  makeCall = number => {
     let url = `tel:${number}`;
 
     return Linking.canOpenURL(url).then(supported => {
@@ -34,6 +33,23 @@ export default class CustomerCare extends Component {
 
     return (
       <View style={[styles.itemContainer]}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingHorizontal: 5,
+          }}>
+          <View style={{flex: 1}}>
+            <Text style={[styles.title]}>{I18n.t('mobile')}: 98009966</Text>
+          </View>
+
+          <Touchable onPress={() => this.makeCall('98009966')}>
+            <MaterialIcons name="phone" size={30} color="green" />
+          </Touchable>
+        </View>
+
+        <Divider style={{backgroundColor: 'black', marginVertical: 10}} />
 
         <View
           style={{
@@ -43,40 +59,13 @@ export default class CustomerCare extends Component {
             paddingHorizontal: 5,
           }}>
           <View style={{flex: 1}}>
-
-            <Text style={[styles.title]}>
-              {I18n.t('mobile')}:
-              98009966
-            </Text>
+            <Text style={[styles.title]}>{I18n.t('mobile')}: 98009977</Text>
           </View>
 
-          <Touchable onPress={()=>this.makeCall('98009966')}>
+          <Touchable onPress={() => this.makeCall('98009977')}>
             <MaterialIcons name="phone" size={30} color="green" />
           </Touchable>
         </View>
-
-        <Divider style={{backgroundColor:'black',marginVertical:10}}/>
-
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingHorizontal: 5,
-          }}>
-          <View style={{flex: 1}}>
-
-            <Text style={[styles.title]}>
-              {I18n.t('mobile')}:
-              98009977
-            </Text>
-          </View>
-
-          <Touchable onPress={()=>this.makeCall('98009977')}>
-            <MaterialIcons name="phone" size={30} color="green" />
-          </Touchable>
-        </View>
-
       </View>
     );
   }

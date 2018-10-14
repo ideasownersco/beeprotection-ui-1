@@ -1,12 +1,12 @@
-import {API_URL, AUTH_KEY} from 'utils/env';
+import {API_URL, AUTH_KEY, NETWORK_PROTOCOL} from 'utils/env';
 import I18n from 'utils/locale';
 import {getStorageItem} from 'utils/functions';
 import NavigatorService from 'components/NavigatorService';
 
 export async function request({
   path,
-  protocol = 'https://',
-  domain = null, //http://wwww.waa.com
+  protocol = NETWORK_PROTOCOL,
+  domain = null,
   method = 'GET',
   params = {
     body: null, // for POST
@@ -33,14 +33,14 @@ export async function request({
 
   if (__DEV__) {
     if (console.group) {
-      console.groupCollapsed('action', 'NETWORK_REQUEST');
+      // console.groupCollapsed('action', 'NETWORK_REQUEST');
       console.log({
         path: fullUrl,
         method: method,
         params: params,
         api_token: apiToken,
       });
-      console.groupEnd();
+      // console.groupEnd();
     }
   }
 
@@ -48,7 +48,7 @@ export async function request({
     if (forceAuthentication) {
       NavigatorService.navigate('Login');
     }
-    throw 'CLIENT_NOT_AUTHENTICATED';
+    // throw 'CLIENT_NOT_AUTHENTICATED';
   }
 
   let headers = new Headers();
@@ -77,9 +77,9 @@ export async function request({
       // .then(({json}) => {
       if (__DEV__) {
         if (console.group) {
-          console.groupCollapsed('action', 'NETWORK_RESPONSE');
+        //   console.groupCollapsed('action', 'NETWORK_RESPONSE');
           console.log('payload', json);
-          console.groupEnd();
+          // console.groupEnd();
         }
       }
 
