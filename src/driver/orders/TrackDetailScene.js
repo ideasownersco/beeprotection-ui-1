@@ -82,9 +82,9 @@ class TrackOrderScene extends Component {
     );
   }
 
-  componentWillUnmount() {
-    BackgroundGeolocation.un('location', this.onLocation);
-  }
+  // componentWillUnmount() {
+  //   BackgroundGeolocation.un('location', this.onLocation);
+  // }
 
   onLocation = location => {
     this.setState({

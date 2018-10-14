@@ -48,8 +48,8 @@ class OrderDetailScene extends Component {
     BackgroundGeolocation.configure(
       {
         ...GEOLOCATION_CONFIG,
-        locationAuthorizationRequest:'Always',
-        url: `http://${API_URL}/jobs/${job.id}/update/location`,
+        locationAuthorizationRequest:'Any',
+        url: `https://${API_URL}/jobs/${job.id}/update/location`,
       },
       state => {
         return {
