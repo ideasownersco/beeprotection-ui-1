@@ -3,14 +3,14 @@ const defaults = {};
 if (__DEV__) {
   module.exports = {
     ...defaults,
-    NETWORK_PROTOCOL:'https://',
-    // API_URL: '192.168.8.102:8081/api',
-    API_URL: 'beeprotection.test/api',
-    SOCKET_SERVER: 'https://beeprotection.test:3000',
-
     // NETWORK_PROTOCOL:'https://',
-    // API_URL: 'beeprotection.net/api',
+    // API_URL: '192.168.8.102:8081/api',
+    // API_URL: 'beeprotection.test/api',
     // SOCKET_SERVER: 'http://beeprotection.test:3000',
+
+    NETWORK_PROTOCOL:'https://',
+    API_URL: 'beeprotection.net/api',
+    SOCKET_SERVER: 'http://beeprotection.net:3000',
 
     GOOGLE_MAPS_KEY: 'AIzaSyCpQX4H0QPxVgKuNMZ0ELG_ymgT8RHcKh4',
     GOOGLE_MAPS_IOS_KEY: 'AIzaSyDPCgdWqrkBe4v3uSuU-MZGJIZ0AQxfbCo',

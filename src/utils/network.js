@@ -34,6 +34,7 @@ export async function request({
   if (__DEV__) {
     if (console.group) {
       // console.groupCollapsed('action', 'NETWORK_REQUEST');
+      console.log('action', 'NETWORK_REQUEST');
       console.log({
         path: fullUrl,
         method: method,
@@ -78,6 +79,7 @@ export async function request({
       if (__DEV__) {
         if (console.group) {
         //   console.groupCollapsed('action', 'NETWORK_RESPONSE');
+          console.log('action', 'NETWORK_RESPONSE');
           console.log('payload', json);
           // console.groupEnd();
         }
