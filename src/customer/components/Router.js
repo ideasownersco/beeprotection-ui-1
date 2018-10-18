@@ -19,6 +19,7 @@ import UpcomingOrdersScene from 'customer/orders/UpcomingOrdersScene';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 import LanguageSelect from 'app/LanguageSelect';
+import Payment from 'customer/cart/Payment';
 
 const getDrawerIcon = navigation => {
   return {
@@ -85,6 +86,9 @@ const HomeStack = createStackNavigator(
         title: I18n.t('cart'),
       }),
     },
+    Payment: {
+      screen: Payment,
+    },
     Login: {
       screen: AuthStack,
       navigationOptions: ({navigation}) => ({
@@ -102,6 +106,7 @@ const HomeStack = createStackNavigator(
     LanguageSelect: {
       screen: LanguageSelect,
     },
+
   },
   {
     navigationOptions: ({navigation}) => ({

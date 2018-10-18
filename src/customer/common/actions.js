@@ -81,6 +81,10 @@ export const ACTION_TYPES = {
   FETCH_HAS_FREE_WASH_REQUEST: '@customer/FETCH_HAS_FREE_WASH_REQUEST',
   FETCH_HAS_FREE_WASH_SUCCESS: '@customer/FETCH_HAS_FREE_WASH_SUCCESS',
   FETCH_HAS_FREE_WASH_FAILURE: '@customer/FETCH_HAS_FREE_WASH_FAILURE',
+
+  SET_PAYMENT_SUCCESS_REQUEST: '@customer/SET_PAYMENT_SUCCESS_REQUEST',
+  SET_PAYMENT_SUCCESS_FAILURE: '@customer/SET_PAYMENT_SUCCESS_FAILURE',
+  SET_PAYMENT_SUCCESS_SUCCESS: '@customer/SET_PAYMENT_SUCCESS_SUCCESS',
 };
 
 function fetchCartItems() {
@@ -240,6 +244,14 @@ function fetchOrderDetails(id) {
   };
 }
 
+
+function paymentSuccess(params) {
+  return {
+    type: ACTION_TYPES.SET_PAYMENT_SUCCESS_REQUEST,
+    params,
+  };
+}
+
 export const ACTIONS = {
   addToCart,
   fetchCartItems,
@@ -263,4 +275,6 @@ export const ACTIONS = {
   fetchPastOrders,
   fetchPastOrdersRefresh,
   fetchOrderDetails,
+  paymentSuccess,
+
 };

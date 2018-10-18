@@ -302,6 +302,34 @@ function* fetchHasFreeWash(action) {
   }
 }
 
+function* setPaymentSuccess(action) {
+  // const {item} = action.params;
+  try {
+    const params = {
+      body: {
+        ...action.params,
+      },
+    };
+    const response = yield call(API.setPaymentSuccess, params);
+    const normalized = normalize(response.data, Schema.orders);
+    yield put({
+      type: ACTION_TYPES.SET_PAYMENT_SUCCESS_SUCCESS,
+      entities: normalized.entities,
+      payload: response.data,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.SET_PAYMENT_SUCCESS_FAILURE, error});
+
+    // yield put(
+    //   APP_ACTIONS.setNotification({
+    //     message: error,
+    //     type: 'error',
+    //   }),
+    // );
+  }
+}
+
+
 // Monitoring Sagas
 function* fetchCategoriesMonitor() {
   yield takeLatest(ACTION_TYPES.CATEGORY_REQUEST, fetchCategories);
@@ -359,6 +387,10 @@ function* fetchHasFreeWashMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_HAS_FREE_WASH_REQUEST, fetchHasFreeWash);
 }
 
+function* setPaymentSuccessMonitor() {
+  yield takeLatest(ACTION_TYPES.SET_PAYMENT_SUCCESS_REQUEST, setPaymentSuccess);
+}
+
 export const sagas = all([
   fork(fetchCategoriesMonitor),
   fork(fetchHasFreeWashMonitor),
@@ -373,4 +405,6 @@ export const sagas = all([
   fork(fetchUpcomingOrdersMonitor),
   fork(fetchPastOrdersMonitor),
   fork(fetchOrderDetailsMonitor),
+  fork(setPaymentSuccessMonitor),
+
 ]);

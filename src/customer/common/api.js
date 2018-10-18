@@ -90,6 +90,16 @@ function fetchOrderDetails(id) {
   return request({path, requiresAuthentication: true});
 }
 
+function setPaymentSuccess(params) {
+  const path = `customer/orders/payment/success`;
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
 export const API = {
   fetchCartItems,
   fetchCategories,
@@ -104,4 +114,6 @@ export const API = {
   fetchPastOrders,
   fetchWorkingOrders,
   fetchOrderDetails,
+  setPaymentSuccess,
+
 };

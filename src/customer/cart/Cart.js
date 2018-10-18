@@ -7,10 +7,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
-import {
-  SELECTORS,
-  SELECTORS as ORDER_SELECTORS,
-} from 'customer/selectors/orders';
+import {SELECTORS, SELECTORS as ORDER_SELECTORS,} from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import Button from 'components/Button';
 import I18n from 'utils/locale';
@@ -23,9 +20,7 @@ import colors from 'assets/theme/colors';
 import CartTotal from 'customer/cart/components/CartTotal';
 import PaymentOptions from 'customer/cart/components/PaymentOptions';
 import OrderSuccess from 'customer/cart/components/OrderSuccess';
-import PaymentPage from 'customer/cart/components/PaymentPage';
 import TimePicker from 'customer/cart/components/TimePicker';
-import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
 import SectionTitle from 'components/SectionTitle';
 import CheckoutAlert from 'customer/cart/components/CheckoutAlert';
 import AddressesList from 'customer/cart/components/AddressesList';
@@ -88,7 +83,7 @@ class Cart extends PureComponent {
   }
 
   checkout = () => {
-    this.showCheckoutConfirmDialog();
+    // this.showCheckoutConfirmDialog();
   };
 
   showCheckoutConfirmDialog = () => {
@@ -310,41 +305,89 @@ class Cart extends PureComponent {
         payment_mode: paymentMode,
         free_wash: cart.isFreeWash,
       };
-
-      // let address =
-      //   user &&
-      //   user.addresses.find(address => address.id === selectedAddressID);
-      //
-      // if (address && address.area && !address.area.active) {
-      //   return this.props.actions.(
-      //     APP_ACTIONS.setNotification({
-      //       type: 'error',
-      //       message: `${I18n.t('address_disabled')}`,
-      //     }),
-      //   );
-      // }
-
       return new Promise((resolve, reject) => {
         this.props.actions.checkout({item, resolve, reject});
       })
         .then(order => {
-          if (order.status == 'Success') {
+
+          if(this.state.paymentMode === 'cash') {
+            if (order.status == 'Success') {
+              this.setState({
+                showOrderSuccessModal: true,
+                showCheckoutConfirmDialog: false,
+              });
+            } else if (order.status == 'Checkout') {
+              this.setState({
+                showPaymentModal: true,
+                showCheckoutConfirmDialog: false,
+              });
+            }
+          } else {
+
             this.setState({
-              showOrderSuccessModal: true,
+              showPaymentModal: false,
               showCheckoutConfirmDialog: false,
             });
-          } else if (order.status == 'Checkout') {
-            this.setState({
-              showPaymentModal: true,
-              showCheckoutConfirmDialog: false,
+
+            return this.props.navigation.navigate('Payment', {
+              orderID: order.id,
             });
+
           }
+
+
         })
         .catch(e => {
           this.hideCheckoutConfirmDialog();
         });
     }
   };
+  // performCheckout = () => {
+  //   const {user, isAuthenticated, cart} = this.props;
+  //   const {paymentMode} = this.state;
+  //
+  //   const {
+  //     selectedDate,
+  //     selectedAddressID,
+  //     selectedTimeID,
+  //     items,
+  //     total,
+  //   } = cart;
+  //   if (!isAuthenticated) {
+  //     this.hideCheckoutConfirmDialog();
+  //     return this.redirectToLogin();
+  //   } else {
+  //     const item = {
+  //       user_id: user.id,
+  //       address_id: selectedAddressID,
+  //       items: items,
+  //       total: total,
+  //       time: selectedTimeID,
+  //       date: selectedDate,
+  //       payment_mode: paymentMode,
+  //       free_wash: cart.isFreeWash,
+  //     };
+  //     return new Promise((resolve, reject) => {
+  //       this.props.actions.checkout({item, resolve, reject});
+  //     })
+  //       .then(order => {
+  //         if (order.status == 'Success') {
+  //           this.setState({
+  //             showOrderSuccessModal: true,
+  //             showCheckoutConfirmDialog: false,
+  //           });
+  //         } else if (order.status == 'Checkout') {
+  //           this.setState({
+  //             showPaymentModal: true,
+  //             showCheckoutConfirmDialog: false,
+  //           });
+  //         }
+  //       })
+  //       .catch(e => {
+  //         this.hideCheckoutConfirmDialog();
+  //       });
+  //   }
+  // }hideCheckoutConfirmDialog;
 
   onAddressTypeSelection = (type: string) => {
     this.setState({
@@ -523,7 +566,7 @@ class Cart extends PureComponent {
         <Divider style={{marginVertical: 20}} />
 
         <Button
-          onPress={this.checkout}
+          onPress={this.showCheckoutConfirmDialog}
           disabled={checkout.isFetching}
           raised
           primary

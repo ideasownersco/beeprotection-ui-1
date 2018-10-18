@@ -4,13 +4,20 @@
 import React, {Component} from 'react';
 import {View, WebView} from 'react-native';
 import {connect} from 'react-redux';
-import {SELECTORS as CUSTOMER_SELECTORS} from 'customer/common/selectors';
-import {ACTIONS} from 'customer/common/actions';
-import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import PropTypes from 'prop-types';
 import {PAYMENT_ENDPOINT} from 'utils/env';
 import Dialog from 'components/Dialog';
 import I18n from 'utils/locale';
+import Modal from 'react-native-modal';
+import OrderSuccess from "./components/OrderSuccess";
+import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
+import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
+import {bindActionCreators} from 'redux';
+import {
+  SELECTORS,
+  SELECTORS as ORDER_SELECTORS,
+} from 'customer/selectors/orders';
+import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 
 class Payment extends Component {
   static propTypes = {
@@ -31,28 +38,22 @@ class Payment extends Component {
     scene: 'payment',
   };
 
-  componentDidMount() {
-    this.props.dispatch(
-      ACTIONS.fetchOrderDetails({
-        order_id: this.props.navigation.getParam('orderID'),
-      }),
-    );
-  }
-
   onNavigationStateChange = navState => {
-    const successUrl = `${PAYMENT_ENDPOINT}/success`;
-    const failureUrl = `${PAYMENT_ENDPOINT}/failure`;
 
-    if (navState.url.includes('result=SUCCESS')) {
+    console.log('navState',navState);
+
+    const successUrl = `${PAYMENT_ENDPOINT}/payment/knet/success`;
+    const failureUrl = `${PAYMENT_ENDPOINT}/payment/knet/failure`;
+
+    if (navState.url.includes('success')) {
       this.setState({
         scene: 'success',
       });
 
-      this.props.dispatch(
-        ACTIONS.paymentSuccess({
-          order_id: this.props.navigation.getParam('orderID'),
-        }),
-      );
+      this.props.actions.paymentSuccess({
+        order_id: this.props.navigation.getParam('orderID'),
+      });
+
     } else if (navState.url === failureUrl) {
       this.setState({
         scene: 'failed',
@@ -62,75 +63,108 @@ class Payment extends Component {
     }
   };
 
-  paymentSuccessDialogPress = () => {
-    this.props.navigation.replace('Home');
-    this.props.navigation.navigate('OrderDetail', {
-      orderID: this.props.order.id,
+  fetchTimings = (date = null) => {
+    let {isFreeWash} = this.props.cart;
+    this.props.actions.fetchTimings({
+      date: date ? date : this.props.cart.selectedDate,
+      items: this.props.cart.items,
+      free_wash: isFreeWash,
     });
   };
 
   paymentFailedDialogPress = () => {};
 
-  goToHome = () => {
+  paymentSuccessDialogPress = () => {
+    this.onPaymentSuccess();
     this.props.navigation.replace('Home');
+    let orderID = this.props.navigation.getParam('orderID');
+    this.props.navigation.navigate('OrderDetail', {
+      orderID: orderID
+    });
+  };
+
+  onPaymentSuccess = () => {
+    this.fetchTimings();
+    this.props.actions.flushCart();
+    this.props.actions.fetchWorkingOrders({
+      force: true,
+    });
+    this.props.navigation.popToTop();
+    this.props.actions.setCartItem('isFreeWash', false);
   };
 
   render() {
-    let {order} = this.props;
     let {scene} = this.state;
 
-    if (order && order.id) {
-      let url = `${PAYMENT_ENDPOINT}/page/?payment_token=${
-        order.payment_token
-      }`;
+    let orderID = this.props.navigation.getParam('orderID');
 
-      switch (scene) {
-        case 'payment':
-          return (
-            <WebView
-              source={{uri: url}}
-              scalesPageToFit={false}
-              onNavigationStateChange={this.onNavigationStateChange}
+    let url = `${PAYMENT_ENDPOINT}/${orderID}/checkout`;
+
+    console.log('url',url);
+
+    switch (scene) {
+      case 'payment':
+        return (
+          <WebView
+            source={{uri: url,method:'POST'}}
+            scalesPageToFit={false}
+            onNavigationStateChange={this.onNavigationStateChange}
+          />
+        );
+      case 'success':
+        return (
+          <Modal
+            isVisible={true}
+            animationType="slide"
+            backdropOpacity={0.8}
+            transparent={true}
+            backdropColor="rgba(0,0,0,0.5)"
+            useNativeDriver={true}
+            hideModalContentWhileAnimating={true}
+            style={{margin: 0, padding: 0, backgroundColor: 'white'}}>
+            <OrderSuccess
+              onPress={this.paymentSuccessDialogPress}
             />
-          );
-        case 'success':
-          return (
-            <Dialog
-              title={I18n.t('payment_success')}
-              description={I18n.t('order_success')}
-              rightPress={this.paymentSuccessDialogPress}
-              leftPress={this.goToHome}
-              leftText={I18n.t('go_home')}
-              rightText={I18n.t('view_order')}
-              visible={true}
-            />
-          );
-        case 'failed':
-          return (
-            <Dialog
-              title={I18n.t('payment_failed')}
-              description={I18n.t('order_failed')}
-              rightPress={this.paymentFailedDialogPress}
-              visible={true}
-            />
-          );
-        default:
-          return null;
-      }
+          </Modal>
+
+        );
+      case 'failed':
+        return (
+          <Dialog
+            title={I18n.t('payment_failed')}
+            description={I18n.t('order_failed')}
+            rightPress={this.paymentFailedDialogPress}
+            visible={true}
+          />
+        );
+      default:
+        return null;
     }
-
-    return null;
   }
 }
 
-function mapStateToProps(state, props) {
-  const orderID = props.navigation.getParam('orderID');
-  // const orderID = 10;
-  const getOrderByID = CUSTOMER_SELECTORS.getOrderByID();
+
+function mapDispatchToProps(dispatch) {
   return {
-    user: USER_SELECTORS.getAuthUser(state),
-    order: getOrderByID(state, orderID),
+    actions: bindActionCreators(
+      {...ACTIONS, ...USER_ACTIONS,...ORDER_ACTIONS},
+      dispatch,
+    ),
   };
 }
 
-export default connect(mapStateToProps)(Payment);
+function mapStateToProps(state) {
+  return {
+    cartItems: SELECTORS.getCartItems(state) || [],
+    cart: SELECTORS.getCart(state),
+    cartTotal: SELECTORS.getCartTotal(state),
+    timings: ORDER_SELECTORS.getTimings(state) || [],
+    isFetchingTimings: state.customer.timings.isFetching,
+    user: USER_SELECTORS.getAuthUser(state),
+    isAuthenticated: USER_SELECTORS.isAuthenticated(state),
+    checkout: state.customer.checkout,
+    areas: SELECTORS.getAreas(state),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Payment);
