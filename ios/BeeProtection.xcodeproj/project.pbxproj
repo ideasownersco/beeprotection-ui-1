@@ -757,6 +757,9 @@
 							com.apple.BackgroundModes = {
 								enabled = true;
 							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
 							};
