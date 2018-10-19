@@ -36,6 +36,8 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* BeeProtectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BeeProtectionTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		3508FE62217A5342002A15B0 /* Splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3508FE3A217A5342002A15B0 /* Splash@2x.png */; };
+		3508FE64217A5349002A15B0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3508FE63217A5349002A15B0 /* Default-568h@2x.png */; };
 		357EEBDD2171A9D100FE219D /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 357EEBDA2171A9C300FE219D /* libRCTPushNotification.a */; };
 		357EEC642171B0D300FE219D /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 357EEC632171B0D300FE219D /* RNBackgroundFetch+AppDelegate.m */; };
 		5F2959406454459CA5257524 /* TSLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F000CEB67B4D47FEAA17932B /* TSLocationManager.framework */; };
@@ -359,6 +361,8 @@
 		2D02E47B1E0B4A5D006451C7 /* BeeProtection-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BeeProtection-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* BeeProtection-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BeeProtection-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3508FE3A217A5342002A15B0 /* Splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Splash@2x.png"; path = "../../../../Desktop/ProjectBeeProtection/V2/Splash@2x.png"; sourceTree = "<group>"; };
+		3508FE63217A5349002A15B0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../../../Desktop/ProjectBeeProtection/V2/Default-568h@2x.png"; sourceTree = "<group>"; };
 		357EEBD42171A9C300FE219D /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		357EEC602171B00D00FE219D /* BeeProtection.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BeeProtection.entitlements; path = BeeProtection/BeeProtection.entitlements; sourceTree = "<group>"; };
 		357EEC632171B0D300FE219D /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
@@ -618,6 +622,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				3508FE63217A5349002A15B0 /* Default-568h@2x.png */,
+				3508FE3A217A5342002A15B0 /* Splash@2x.png */,
 				13B07FAE1A68108700A75B9A /* BeeProtection */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* BeeProtectionTests */,
@@ -1143,6 +1149,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3508FE62217A5342002A15B0 /* Splash@2x.png in Resources */,
+				3508FE64217A5349002A15B0 /* Default-568h@2x.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);

@@ -5,7 +5,7 @@ import CodePush from 'react-native-code-push';
 import PushNotificationManager from 'app/components/PushNotificationManager';
 import Notification from 'app/components/Notification';
 import Navigator from 'components/Navigator';
-import {StatusBar, Text, View} from 'react-native';
+import {StatusBar, Text, View,Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {ACTIONS} from 'app/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
@@ -14,6 +14,7 @@ import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import NavigatorService from 'components/NavigatorService';
 import colors from 'assets/theme/colors';
 import SplashScreen from 'app/SplashScreen';
+import Permissions from 'react-native-permissions';
 
 class App extends Component {
   static propTypes = {
@@ -29,6 +30,9 @@ class App extends Component {
 
   componentDidMount() {
     this.props.dispatch(ACTIONS.boot());
+
+
+
   }
 
   onLanguageSelect = name => {
@@ -108,6 +112,18 @@ class App extends Component {
       }
       return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
     }
+
+    // Permissions.request('notification')
+    //   .then((response) => {
+    //     if (response !== 'authorized') {
+    //       Alert.alert(
+    //         'Please allow notifications',
+    //         'This app needs you to authorize notifications in order to work',
+    //         [{text: 'Go to settings', onPress: () => Permissions.openSettings()}],
+    //         {cancelable: false}
+    //       );
+    //     }
+    //   });
 
     return (
       <View style={{flex: 1, backgroundColor: colors.primary}}>
