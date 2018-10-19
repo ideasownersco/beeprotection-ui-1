@@ -16,7 +16,7 @@ import colors from 'assets/theme/colors';
 import Dialog from 'components/Dialog';
 import ImagePicker from 'react-native-image-crop-picker';
 import Button from 'components/Button';
-import FormTextInput from '../../components/FormTextInput';
+import FormTextInput from 'components/FormTextInput';
 
 class PhotosUploadScene extends Component {
   static propTypes = {
@@ -92,20 +92,6 @@ class PhotosUploadScene extends Component {
     });
   };
 
-  onSaveUploadedImage = () => {
-    this.setState({
-      imagesUploaded: true,
-    });
-
-    this.props.dispatch(
-      DRIVER_ACTIONS.uploadImages({
-        job_id: this.props.order.job.id,
-        images: this.state.images,
-      }),
-    );
-
-    this.hideUploadImageModal();
-  };
 
   deleteImage = image => {
     this.setState({
@@ -141,21 +127,41 @@ class PhotosUploadScene extends Component {
     this.showUploadImageModal();
   };
 
+  onSaveUploadedImage = () => {
+    this.setState({
+      imagesUploaded: true,
+    });
+
+    console.log('this.state.images',this.state.images);
+
+    this.props.dispatch(
+      DRIVER_ACTIONS.uploadImages({
+        job_id: this.props.order.job.id,
+        images: this.state.images,
+      }),
+    );
+
+    this.hideUploadImageModal();
+  };
+
   uploadFromCamera = () => {
     this.hideImageUploadOptions();
 
     ImagePicker.openCamera({
-      multiple: true,
+      multiple: false,
       cropping: false,
       width: 500,
       height: 500,
       includeExif: true,
     })
       .then(image => {
+
+        console.log('image',image);
+
         this.props.dispatch(
           DRIVER_ACTIONS.uploadImages({
             job_id: this.props.order.job.id,
-            images: [image],
+            images: [image.path],
           }),
         );
       })
