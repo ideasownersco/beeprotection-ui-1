@@ -26,6 +26,7 @@ let SectionHeader = ({item}) => {
 };
 
 export default class PackagesList extends Component {
+
   static propTypes = {
     items: PropTypes.array.isRequired,
     onItemPress: PropTypes.func.isRequired,
@@ -36,6 +37,24 @@ export default class PackagesList extends Component {
       .map(item => item)
       .sort((a, b) => parseInt(a.order) - parseInt(b.order));
   };
+
+  componentDidUpdate() {
+    console.log('this.props',this.props);
+    if(!this.props.activeItemID && this.props.items.length === 1) {
+
+      this.props.onItemPress(this.props.items[0]);
+
+      setTimeout(()=>{
+        if(this.props.activeCategoryID === 4) {
+          this.props.selectQuantity(10);
+        }
+      },1);
+      // if(this.props.activeCategoryID === 4) {
+      //   this.props.selectQuantity(10);
+      // }
+
+    }
+  }
 
   renderHeader = (item, index, isActive) => {
     let {onItemPress, activeItemID} = this.props;
@@ -101,6 +120,7 @@ export default class PackagesList extends Component {
           renderHeader={this.renderHeader}
           renderContent={this.renderContent}
           underlayColor="transparent"
+          initiallyActiveSection={0}
         />
       </View>
     );

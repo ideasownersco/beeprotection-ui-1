@@ -113,8 +113,9 @@ class CreateOrder extends PureComponent {
       });
 
       this.setState({
-        quantity: 1,
+        quantity: 1
       });
+
     }
   };
 
@@ -259,9 +260,9 @@ class CreateOrder extends PureComponent {
       : categories.length
         ? categories[0]
         : {
-            id: undefined,
-            packages: [],
-          };
+          id: undefined,
+          packages: [],
+        };
 
     return (
       <ScrollView
@@ -281,6 +282,7 @@ class CreateOrder extends PureComponent {
             activeItemID={activePackageID}
             selectQuantity={this.selectQuantity}
             quantity={this.state.quantity}
+            activeCategoryID={activeCategoryID}
           />
         )}
 
@@ -318,7 +320,6 @@ class CreateOrder extends PureComponent {
 
         <Dialog
           title={I18n.t('success')}
-
           leftButtonPress={this.onAddNewItemPress}
           rightButtonPress={this.onCheckoutPress}
           visible={showCartSuccessModal}
