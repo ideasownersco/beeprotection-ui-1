@@ -25,44 +25,16 @@ const theme = {
   }
 };
 
-// const MyStatusBar = ({backgroundColor, ...props}) => (
-//   <View style={[styles.statusBar, {backgroundColor}]}>
-//     <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-//   </View>
-// );
-//
-// const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
-// const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
-
 const Root = () => {
   return (
     <View style={{flex: 1}}>
-      {/*<MyStatusBar backgroundColor={colors.primary} barStyle="light-content"/>*/}
       <Provider store={Store}>
         <PaperProvider theme={theme}>
-
-        <App/>
+          <App/>
         </PaperProvider>
       </Provider>
     </View>
   );
 };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   statusBar: {
-//     // height: STATUSBAR_HEIGHT,
-//   },
-//   appBar: {
-//     backgroundColor: '#79B45D',
-//     // height: APPBAR_HEIGHT,
-//   },
-//   content: {
-//     flex: 1,
-//     backgroundColor: '#33373B',
-//   },
-// });
 
 AppRegistry.registerComponent('BeeProtection', () => Root);
