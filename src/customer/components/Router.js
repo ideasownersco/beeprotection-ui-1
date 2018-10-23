@@ -113,7 +113,6 @@ const HomeStack = createStackNavigator(
       gesturesEnabled: false,
       ...navStyle,
     }),
-    // initialRouteName:'Payment'
   },
 );
 
