@@ -98,14 +98,14 @@ class Payment extends Component {
 
     let orderID = this.props.navigation.getParam('orderID');
 
+    // let url = `https://beeprotection.net/knet-test`;
     let url = `${PAYMENT_ENDPOINT}/${orderID}/checkout`;
-
-    console.log('url',url);
 
     switch (scene) {
       case 'payment':
         return (
           <WebView
+            // source={{uri: url}}
             source={{uri: url,method:'POST'}}
             scalesPageToFit={false}
             onNavigationStateChange={this.onNavigationStateChange}

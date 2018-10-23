@@ -39,20 +39,13 @@ export default class PackagesList extends Component {
   };
 
   componentDidUpdate() {
-    console.log('this.props',this.props);
     if(!this.props.activeItemID && this.props.items.length === 1) {
-
       this.props.onItemPress(this.props.items[0]);
-
       setTimeout(()=>{
         if(this.props.activeCategoryID === 4) {
           this.props.selectQuantity(10);
         }
       },1);
-      // if(this.props.activeCategoryID === 4) {
-      //   this.props.selectQuantity(10);
-      // }
-
     }
   }
 
@@ -120,7 +113,6 @@ export default class PackagesList extends Component {
           renderHeader={this.renderHeader}
           renderContent={this.renderContent}
           underlayColor="transparent"
-          initiallyActiveSection={0}
         />
       </View>
     );

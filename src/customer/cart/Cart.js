@@ -50,7 +50,7 @@ class Cart extends PureComponent {
     performingCheckout: false,
     addressTypeSelectionModalVisible: false,
     addressType: 'current_location',
-    paymentMode: 'cash',
+    paymentMode: 'knet',
     address: {
       latitude: 29.3759,
       longitude: 47.9774,
