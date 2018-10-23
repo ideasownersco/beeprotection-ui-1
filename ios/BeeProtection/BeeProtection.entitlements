@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)com.beeprotection.app</string>
+		<string>$(AppIdentifierPrefix)com.ideasowners.bp</string>
 	</array>
 </dict>
 </plist>
