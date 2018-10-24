@@ -32,7 +32,6 @@ target 'BeeProtection' do
    pod 'RNSVG', :path => '../node_modules/react-native-svg'
    pod 'CodePush', :path => '../node_modules/react-native-code-push'
    pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-   pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
 
    pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
    pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'

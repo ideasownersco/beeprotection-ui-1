@@ -14,7 +14,6 @@ import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import NavigatorService from 'components/NavigatorService';
 import colors from 'assets/theme/colors';
 import SplashScreen from 'app/SplashScreen';
-import Permissions from 'react-native-permissions';
 
 class App extends Component {
   static propTypes = {

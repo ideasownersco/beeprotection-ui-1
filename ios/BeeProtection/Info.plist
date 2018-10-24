@@ -40,8 +40,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSCalendarsUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to access your calender</string>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use your camera</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
