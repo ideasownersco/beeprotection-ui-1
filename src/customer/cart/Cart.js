@@ -26,9 +26,9 @@ import CheckoutAlert from 'customer/cart/components/CheckoutAlert';
 import AddressesList from 'customer/cart/components/AddressesList';
 import CreateAddress from 'customer/cart/components/CreateAddress';
 import Modal from 'react-native-modal';
-import AddressTypeSelectionModal from './components/AddressTypeSelectionModal';
+import AddressTypeSelectionModal from 'customer/cart/components/AddressTypeSelectionModal';
 import BackgroundGeolocation from 'react-native-background-geolocation';
-import CreateAddressFields from './components/CreateAddressFields';
+import CreateAddressFields from 'customer/cart/components/CreateAddressFields';
 
 type State = {
   dates: Array,

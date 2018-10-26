@@ -113,6 +113,7 @@ export default class PackagesList extends Component {
           renderHeader={this.renderHeader}
           renderContent={this.renderContent}
           underlayColor="transparent"
+          // initiallyActiveSection={0}
         />
       </View>
     );
