@@ -158,9 +158,8 @@ dependencies {
     compile project(':react-native-code-push')
     compile project(':react-native-vector-icons')
     compile project(':react-native-push-notification')
-    compile project(':react-native-background-geolocation')
     compile project(':react-native-maps')
-
+    compile project(':react-native-background-geolocation')
     compile project(':react-native-background-fetch')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
