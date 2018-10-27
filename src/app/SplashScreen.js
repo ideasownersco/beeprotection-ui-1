@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     marginVertical: 50,
   },
   slide: {
@@ -100,6 +99,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: '700',
     fontSize: 22,
+    textAlign:'center'
   },
   description: {
     color: colors.black,

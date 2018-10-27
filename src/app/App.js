@@ -29,9 +29,6 @@ class App extends Component {
 
   componentDidMount() {
     this.props.dispatch(ACTIONS.boot());
-
-
-
   }
 
   onLanguageSelect = name => {
