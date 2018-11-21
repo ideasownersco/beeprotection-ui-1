@@ -40,7 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
           new RNBackgroundGeolocation(),
           new RNBackgroundFetchPackage(),
           new MainReactPackage(),
-            new PickerPackage(),
+          new PickerPackage(),
           new SvgPackage(),
           new RNDeviceInfo(),
           new RNI18nPackage(),

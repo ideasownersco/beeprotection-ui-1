@@ -3,8 +3,8 @@ const defaults = {};
 if (__DEV__) {
   module.exports = {
     ...defaults,
-    // NETWORK_PROTOCOL:'https://',
-    // API_URL: '192.168.8.102:8081/api',
+    // NETWORK_PROTOCOL:'http://',
+    // API_URL: '127.0.0.1:8000/api',
     // API_URL: 'beeprotection.test/api',
     // SOCKET_SERVER: 'http://beeprotection.test:3000',
 
