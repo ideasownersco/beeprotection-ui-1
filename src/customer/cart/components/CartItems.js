@@ -60,9 +60,6 @@ export default class CartItems extends Component {
           </View>
         ))}
 
-
-
-
       </View>
     );
   };
