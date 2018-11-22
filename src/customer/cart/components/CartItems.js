@@ -5,6 +5,8 @@ import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import Divider from 'components/Divider';
 import {Subheading} from 'react-native-paper';
+import I18n from 'utils/locale';
+import IconFactory from "../../../components/IconFactory";
 
 export default class CartItems extends Component {
   shouldComponentUpdate(nextProps) {
@@ -20,36 +22,48 @@ export default class CartItems extends Component {
     const {category, services} = item;
 
     return (
-      <Touchable onPress={() => onItemPress(item)} key={item.id}>
-        <View style={styles.itemContainer}>
-          <Text style={styles.categoryTitle}>{category.name}</Text>
+      <View style={styles.itemContainer}>
 
-          <View style={styles.packageItemContainer}>
-            <Text style={styles.packageTitle}>
-              {item.package.name}
-              {item.package.show_quantity && item.quantity ? (
-                <Subheading> - {item.quantity} feet</Subheading>
-              ) : null}
-            </Text>
-            <Text style={styles.packagePrice}>
-              {item.package.price} KD
-              {item.package.show_quantity && item.quantity ? (
-                <Subheading> x {item.quantity} </Subheading>
-              ) : null}
-            </Text>
-          </View>
-          {item.services.map((service, index) => (
-            <View style={{flex: 1}} key={index}>
-              <Divider style={{marginVertical: 10}} />
+        <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
 
-              <View style={styles.serviceListContainer}>
-                <Text style={styles.packageTitle}>{service.name}</Text>
-                <Text style={styles.packagePrice}>{service.price} KD</Text>
-              </View>
+          <Text style={[styles.categoryTitle,{flex:1,flexDirection:'row'}]}>{category.name}</Text>
+
+          <Touchable onPress={() => onItemPress(item)} key={item.id} style={styles.deleteButton}>
+            <View style={{flexDirection:'row',alignItems:'center'}}>
+              <Text>{I18n.t('delete')}</Text>
+              <IconFactory type="MaterialIcons" name="delete"/>
             </View>
-          ))}
+          </Touchable>
         </View>
-      </Touchable>
+        <View style={styles.packageItemContainer}>
+          <Text style={styles.packageTitle}>
+            {item.package.name}
+            {item.package.show_quantity && item.quantity ? (
+              <Subheading> - {item.quantity} feet</Subheading>
+            ) : null}
+          </Text>
+          <Text style={styles.packagePrice}>
+            {item.package.price} KD
+            {item.package.show_quantity && item.quantity ? (
+              <Subheading> x {item.quantity} </Subheading>
+            ) : null}
+          </Text>
+        </View>
+        {item.services.map((service, index) => (
+          <View style={{flex: 1}} key={index}>
+            <Divider style={{marginVertical: 10}} />
+
+            <View style={styles.serviceListContainer}>
+              <Text style={styles.packageTitle}>{service.name}</Text>
+              <Text style={styles.packagePrice}>{service.price} KD</Text>
+            </View>
+          </View>
+        ))}
+
+
+
+
+      </View>
     );
   };
 
@@ -117,4 +131,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'right',
   },
+  deleteButton:{
+    backgroundColor:'#E7E7E7',
+    padding:5
+  }
 });

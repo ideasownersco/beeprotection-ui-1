@@ -174,5 +174,6 @@
   "confirmation_code_sent" : "Confirmation code sent to your Mobile",
   "select_feet" : "Select Feet",
   "login_do" : "login",
-  "saving" : "Saving"
+  "saving" : "Saving",
+  "delete" : "Delete"
 }
