@@ -39,6 +39,7 @@ class TrackDetailScene extends Component {
 
   render() {
     let {order} = this.props;
+    let {job} = order;
     let {tracking} = this.props;
     let {address} = order;
     let origin;
@@ -46,11 +47,18 @@ class TrackDetailScene extends Component {
     if (tracking.latitude) {
       origin = tracking;
     } else {
+      // origin = {
+      //   // latitude: 37.78825,
+      //   // longitude: -122.4324,
+      //   latitude: 29.37723,
+      //   longitude: 47.98511,
+      //   heading: 0,
+      // };
       origin = {
-        // latitude: 37.78825,
-        // longitude: -122.4324,
-        latitude: 29.37723,
-        longitude: 47.98511,
+        // latitude: 37.7882,
+        // longitude: -122.43,
+        latitude: job && job.driver ? job.driver.latitude : 29.3772392006689,
+        longitude: job && job.driver ? job.driver.longitude :  47.98511826155676,
         heading: 0,
       };
     }

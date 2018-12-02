@@ -80,6 +80,13 @@ class Cart extends PureComponent {
     this.props.actions.fetchAddresses();
     this.props.actions.fetchAreas();
     this.fetchTimings();
+
+
+    if(this.props.cart.isFreeWash){
+      this.setState({
+        paymentMode:'cash'
+      })
+    }
   }
 
   checkout = () => {
@@ -547,21 +554,26 @@ class Cart extends PureComponent {
           />
         </View>
 
-        <Divider
-          style={{flex: 1, padding: 10, backgroundColor: colors.lightGrey}}
-        />
 
-        <SectionTitle
-          title={I18n.t('payment_mode')}
-          style={{padding: 10, marginTop: 10}}
-          icon="cash"
-          iconType="MaterialCommunityIcons"
-        />
+        {
+          !this.props.cart.isFreeWash &&
+          <View>
+            <Divider
+              style={{flex: 1, padding: 10, backgroundColor: colors.lightGrey}}
+            />
 
-        <PaymentOptions
-          onPress={this.onPaymentOptionsItemPress}
-          selectedItem={paymentMode}
-        />
+            <SectionTitle
+              title={I18n.t('payment_mode')}
+              style={{padding: 10, marginTop: 10}}
+              icon="cash"
+              iconType="MaterialCommunityIcons"
+            />
+            <PaymentOptions
+              onPress={this.onPaymentOptionsItemPress}
+              selectedItem={paymentMode}
+            />
+          </View>
+        }
 
         <Divider style={{marginVertical: 20}} />
 
