@@ -14,8 +14,8 @@ if (__DEV__) {
     duration: true,
   });
 
-  Store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-  // Store = createStore(rootReducer, applyMiddleware(logger, sagaMiddleware));
+  // Store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+  Store = createStore(rootReducer, applyMiddleware(logger, sagaMiddleware));
 
   if (module.hot) {
     module.hot.accept(() => {

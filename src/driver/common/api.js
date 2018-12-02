@@ -27,11 +27,12 @@ function stopWorking(id) {
   };
   return request(requestParams);
 }
-function startDriving(id) {
+function startDriving(id,params) {
   const path = `driver/jobs/${id}/start/drive`;
   let requestParams = {
     path,
     method: 'POST',
+    params
   };
   return request(requestParams);
 }

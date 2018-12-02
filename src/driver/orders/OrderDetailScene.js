@@ -46,7 +46,7 @@ class OrderDetailScene extends Component {
     );
 
     BackgroundGeolocation.on('location',this.onLocation);
-    
+
     BackgroundGeolocation.ready(
       {
         ...GEOLOCATION_CONFIG,
@@ -57,8 +57,8 @@ class OrderDetailScene extends Component {
       state => {
         console.log('state',state);
         return {
-          enabled: true,
-          // enabled: this.props.order.trackeable,
+          // enabled: true,
+          enabled: job.status === 'driving',
         };
       },
     );
@@ -75,7 +75,7 @@ class OrderDetailScene extends Component {
       });
     }
   }
-  
+
   onLocation = (location) => {
     console.log('location',location);
   };
@@ -90,7 +90,20 @@ class OrderDetailScene extends Component {
   startDriving = () => {
     let {job} = this.props.order;
     BackgroundGeolocation.start();
-    this.props.dispatch(DRIVER_ACTIONS.startDriving(job.id));
+    BackgroundGeolocation.getCurrentPosition({
+      timeout: 30,          // 30 second timeout to fetch location
+      persist: true,        // Defaults to state.enabled
+      maximumAge: 5000,     // Accept the last-known-location if not older than 5000 ms.
+      desiredAccuracy: 10,  // Try to fetch a location with an accuracy of `10` meters.
+      samples: 3,           // How many location samples to attempt.
+    }).then(location => {
+      let {latitude, longitude} = location.coords;
+      this.props.dispatch(DRIVER_ACTIONS.startDriving(job.id, {
+          latitude: latitude,
+          longitude: longitude,
+        })
+      );
+    });
   };
 
   stopDriving = () => {
