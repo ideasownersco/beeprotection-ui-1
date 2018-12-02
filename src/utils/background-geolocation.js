@@ -2,7 +2,7 @@ import {GEOLOCATION_SOUNDS_ENABLED} from 'utils/env';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 
 export default {
-  desiredAccuracy:0,
+  desiredAccuracy:BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
   distanceFilter: 20,
   stopOnTerminate: false,
   preventSuspend: true,
