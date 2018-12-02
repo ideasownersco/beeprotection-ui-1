@@ -18,7 +18,7 @@ import Button from 'components/Button';
 import MapButtons from 'driver/orders/components/MapButtons';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import GEOLOCATION_CONFIG from 'utils/background-geolocation';
-import {API_URL} from 'utils/env';
+import {API_URL,NETWORK_PROTOCOL} from 'utils/env';
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -52,15 +52,20 @@ class OrderDetailScene extends Component {
         ...GEOLOCATION_CONFIG,
         reset:true,
         locationAuthorizationRequest:'Any',
-        url: `https://${API_URL}/jobs/${job.id}/update/location`,
+        url: `${NETWORK_PROTOCOL}${API_URL}/jobs/${job.id}/update/location`,
       },
       state => {
         console.log('state',state);
         return {
-          enabled: this.props.order.trackeable,
+          enabled: true,
+          // enabled: this.props.order.trackeable,
         };
       },
     );
+  }
+
+  componentWillUnmount() {
+    BackgroundGeolocation.removeListeners();
   }
 
   componentWillReceiveProps(nextProps) {
