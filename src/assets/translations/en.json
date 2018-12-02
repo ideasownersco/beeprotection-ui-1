@@ -175,5 +175,6 @@
   "select_feet" : "Select Feet",
   "login_do" : "login",
   "saving" : "Saving",
-  "delete" : "Delete"
+  "delete" : "Delete",
+  "track_driver" : "Track Driver"
 }
