@@ -55,7 +55,11 @@ class OrderDetailScene extends Component {
         url: `${NETWORK_PROTOCOL}${API_URL}/jobs/${job.id}/update/location`,
       },
       state => {
-        console.log('state',state);
+
+        if(!state.enabled && order.trackeable) {
+          BackgroundGeolocation.start();
+        }
+
         return {
           // enabled: true,
           enabled: job.status === 'driving',
