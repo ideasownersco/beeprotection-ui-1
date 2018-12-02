@@ -22,7 +22,7 @@ export default class OrderItems extends Component {
         <SectionTitle title={I18n.t('order_details')} />
 
         {packages.map((packageModel, index) => (
-          <View style={styles.itemContainer} key={packageModel.id}>
+          <View style={styles.itemContainer} key={index}>
             <Text style={styles.categoryTitle}>
               {packageModel.category.name}
             </Text>
@@ -37,9 +37,9 @@ export default class OrderItems extends Component {
             {services &&
               services
                 .filter(service => service.package.id === packageModel.id)
-                .map(service => {
+                .map((service,index) => {
                   return (
-                    <View style={{flex: 1}} key={service.id}>
+                    <View style={{flex: 1}} key={index}>
                       <Divider style={{marginVertical: 10}} />
 
                       <View style={styles.serviceListContainer}>

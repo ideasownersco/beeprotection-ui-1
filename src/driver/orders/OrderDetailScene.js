@@ -45,13 +45,17 @@ class OrderDetailScene extends Component {
       ),
     );
 
-    BackgroundGeolocation.configure(
+    BackgroundGeolocation.on('location',this.onLocation);
+    
+    BackgroundGeolocation.ready(
       {
         ...GEOLOCATION_CONFIG,
+        reset:true,
         locationAuthorizationRequest:'Any',
         url: `https://${API_URL}/jobs/${job.id}/update/location`,
       },
       state => {
+        console.log('state',state);
         return {
           enabled: this.props.order.trackeable,
         };
@@ -66,6 +70,10 @@ class OrderDetailScene extends Component {
       });
     }
   }
+  
+  onLocation = (location) => {
+    console.log('location',location);
+  };
 
   uploadImages = () => {
     this.props.navigation.navigate('PhotosUpload', {

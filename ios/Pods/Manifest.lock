@@ -95,9 +95,9 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - RNBackgroundFetch (2.4.3):
+  - RNBackgroundFetch (2.4.5):
     - React
-  - RNBackgroundGeolocation (2.13.4):
+  - RNBackgroundGeolocation (2.14.2):
     - CocoaLumberjack (~> 3.0)
     - React
   - RNDeviceInfo (0.21.5):
