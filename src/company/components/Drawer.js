@@ -93,6 +93,17 @@ export default class Drawer extends Component {
         />
 
         <DrawerItem
+          label={I18n.t('create_order')}
+          routeName="CreateOrdersStack"
+          onItemPress={this.onItemPress}
+          iconProps={{
+            name: 'plus',
+            type: 'MaterialCommunityIcons',
+          }}
+          active={activeRoute === 'TrackDriversStack'}
+        />
+
+        <DrawerItem
           label={I18n.t('logout')}
           routeName="Logout"
           onItemPress={logout}

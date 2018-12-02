@@ -17,6 +17,7 @@ import colors from 'assets/theme/colors';
 import TrackDetailScene from 'company/orders/TrackDetailScene';
 import Register from 'guest/Register';
 import TrackOrderScene from 'customer/orders/TrackOrderScene';
+import CreateOrder from "customer/orders/CreateOrder";
 
 const getDrawerIcon = navigation => {
   return {
@@ -202,6 +203,21 @@ const TrackDriversStack = createStackNavigator(
   },
 );
 
+const CreateOrderStack = createStackNavigator(
+  {
+    CreateOrder: {
+      screen: CreateOrder,
+      navigationOptions: ({navigation}) => getDrawerIcon(navigation),
+    },
+  },
+  {
+    // initialRouteName:'WorkingOrders'
+    navigationOptions: ({navigation}) => ({
+      ...navStyle,
+    }),
+  },
+);
+
 const DrawerRoutes = {
   HomeStack: {screen: HomeStack},
   DriversStack: {screen: DriversStack},
@@ -211,6 +227,7 @@ const DrawerRoutes = {
   SettingsStack: {screen: SettingsStack},
   TrackDriversStack: {screen: TrackDriversStack},
   Login: {screen: Login},
+  CreateOrdersStack:{screen:CreateOrderStack}
 };
 
 export const Router = createDrawerNavigator(DrawerRoutes, {
