@@ -54,6 +54,7 @@ class OrderDetailScene extends Component {
         locationAuthorizationRequest:'Any',
         url: `${NETWORK_PROTOCOL}${API_URL}/jobs/${job.id}/update/location`,
       },
+
       state => {
 
         if(!state.enabled && order.trackeable) {
@@ -61,7 +62,6 @@ class OrderDetailScene extends Component {
         }
 
         return {
-          // enabled: true,
           enabled: job.status === 'driving',
         };
       },
@@ -163,7 +163,7 @@ class OrderDetailScene extends Component {
                 />
                 <Divider style={{marginBottom: 10}} />
 
-                {order.trackeable && (
+                {!order.is_completed && (
                   <Button
                     raised
                     onPress={this.uploadImages}

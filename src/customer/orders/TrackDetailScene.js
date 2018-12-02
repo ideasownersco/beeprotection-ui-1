@@ -28,7 +28,7 @@ class TrackDetailScene extends Component {
       ),
     );
     const {order} = this.props;
-    if (order && order.trackeable && order.job) {
+    if (order && order.trackeable) {
       this.props.dispatch(
         CUSTOMER_ACTIONS.subscribeToOrderTracking({
           job_id: order.job.id,
