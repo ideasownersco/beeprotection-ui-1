@@ -554,7 +554,6 @@ class Cart extends PureComponent {
           />
         </View>
 
-
         {
           !this.props.cart.isFreeWash &&
           <View>
