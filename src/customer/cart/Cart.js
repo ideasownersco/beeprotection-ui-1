@@ -409,7 +409,6 @@ class Cart extends PureComponent {
             },
           );
       }, (error) => {
-        alert(JSON.stringify(error))
       }, {
         enableHighAccuracy: true,
         timeout: 20000,
