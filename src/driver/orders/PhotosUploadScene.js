@@ -132,8 +132,6 @@ class PhotosUploadScene extends Component {
       imagesUploaded: true,
     });
 
-    console.log('this.state.images',this.state.images);
-
     this.props.dispatch(
       DRIVER_ACTIONS.uploadImages({
         job_id: this.props.order.job.id,
@@ -155,8 +153,6 @@ class PhotosUploadScene extends Component {
       includeExif: true,
     })
       .then(image => {
-
-        console.log('image',image);
 
         this.props.dispatch(
           DRIVER_ACTIONS.uploadImages({

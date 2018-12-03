@@ -40,8 +40,6 @@ class Payment extends Component {
 
   onNavigationStateChange = navState => {
 
-    console.log('navState',navState);
-
     const successUrl = `${PAYMENT_ENDPOINT}/payment/knet/success`;
     const failureUrl = `${PAYMENT_ENDPOINT}/payment/knet/failure`;
 

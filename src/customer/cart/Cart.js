@@ -27,7 +27,6 @@ import AddressesList from 'customer/cart/components/AddressesList';
 import CreateAddress from 'customer/cart/components/CreateAddress';
 import Modal from 'react-native-modal';
 import AddressTypeSelectionModal from 'customer/cart/components/AddressTypeSelectionModal';
-import BackgroundGeolocation from 'react-native-background-geolocation';
 import CreateAddressFields from 'customer/cart/components/CreateAddressFields';
 
 class Cart extends PureComponent {
@@ -214,7 +213,6 @@ class Cart extends PureComponent {
         this.hideAddressCreateModal();
       })
       .catch(e => {
-        console.log('error', e);
         this.hideAddressCreateFieldsModal();
         this.setState({
           savingAddress:false
@@ -457,6 +455,7 @@ class Cart extends PureComponent {
           {backgroundColor: 'white'},
           checkout.isFetching && {opacity: 0.4},
         ]}>
+
         {!isFreeWash && (
           <View>
             <SectionTitle
@@ -581,7 +580,7 @@ class Cart extends PureComponent {
           total={cartTotal}
           date={selectedDate}
           time={
-            (selectedTimeID && timings.length && timings[selectedTimeID]) ||
+            (selectedTimeID && timings.length && timings.find(timing => timing.id === selectedTimeID)) ||
             null
           }
           visible={showCheckoutConfirmDialog}
