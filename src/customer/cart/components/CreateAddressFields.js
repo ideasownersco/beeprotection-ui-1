@@ -1,16 +1,12 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Dimensions, ScrollView, Alert} from 'react-native';
+import {Alert, Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, View} from 'react-native';
 import I18n from 'utils/locale';
-import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
 import AddressFormFields from 'customer/cart/components/AddressFormFields';
-import BackgroundGeolocation from 'react-native-background-geolocation';
 import Divider from 'components/Divider';
-import SelectArea from 'customer/cart/components/SelectArea';
 import MapButtons from 'customer/cart/components/MapButtons';
 import {Title} from 'react-native-paper';
-import Map from 'components/Map';
 import MapView from 'react-native-maps';
 
 const {width, height} = Dimensions.get('window');
@@ -93,48 +89,52 @@ export default class extends PureComponent {
       <ScrollView
         style={styles.container}
         contentContainerStyle={{paddingBottom: 40}}>
-        <View style={styles.map}>
-          {initialized && (
-            <MapView
-              ref={ref => (this.map = ref)}
-              style={{
-                height: 250,
-              }}
-              initialRegion={{
-                latitude: latitude,
-                longitude: longitude,
-                latitudeDelta: LATITUDE_DELTA,
-                longitudeDelta: LONGITUDE_DELTA,
-              }}
-              cacheEnabled={true}>
-              <MapView.Marker
-                coordinate={{
+
+        <KeyboardAvoidingView behavior="position">
+
+          <View style={styles.map}>
+            {initialized && (
+              <MapView
+                ref={ref => (this.map = ref)}
+                style={{
+                  height: 250,
+                }}
+                initialRegion={{
                   latitude: latitude,
                   longitude: longitude,
+                  latitudeDelta: LATITUDE_DELTA,
+                  longitudeDelta: LONGITUDE_DELTA,
                 }}
-                // centerOffset={{x: -18, y: -60}}
-                // anchor={{x: 0.69, y: 1}}
-              />
-            </MapView>
+                cacheEnabled={true}>
+                <MapView.Marker
+                  coordinate={{
+                    latitude: latitude,
+                    longitude: longitude,
+                  }}
+                  // centerOffset={{x: -18, y: -60}}
+                  // anchor={{x: 0.69, y: 1}}
+                />
+              </MapView>
+            )}
+          </View>
+
+          {area && (
+            <Title style={{textAlign: 'center', marginTop: 10}}>
+              {area.name}
+            </Title>
           )}
-        </View>
 
-        {area && (
-          <Title style={{textAlign: 'center', marginTop: 10}}>
-            {area.name}
-          </Title>
-        )}
-
-        <Divider style={{marginVertical: 10}} />
-        <AddressFormFields
-          block={block}
-          avenue={avenue}
-          street={street}
-          building={building}
-          label={label}
-          updateFields={this.updateFormFields}
-        />
-        <MapButtons save={this.saveAddress} close={this.hideScreen} savingAddress={savingAddress} />
+          <Divider style={{marginVertical: 10}} />
+          <AddressFormFields
+            block={block}
+            avenue={avenue}
+            street={street}
+            building={building}
+            label={label}
+            updateFields={this.updateFormFields}
+          />
+          <MapButtons save={this.saveAddress} close={this.hideScreen} savingAddress={savingAddress} />
+        </KeyboardAvoidingView>
       </ScrollView>
     );
   }

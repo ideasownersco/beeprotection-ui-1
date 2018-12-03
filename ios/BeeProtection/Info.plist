@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.2</string>
+	<string>4.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4.2</string>
+	<string>4.3</string>
 	<key>CodePushDeploymentKey</key>
 	<string>XcUDvMSVamNUFvTLtxYwbJNlG0VJ687af85f-1654-43d6-b735-3ff7e4bf4cd7</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -48,6 +48,8 @@
 	<string>This app is using location service to pin point your delivery address </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app is using location service to pin point your delivery address </string>
+	<key>NSMainNibFile</key>
+	<string>LaunchScreen</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to your microphone (for videos)</string>
 	<key>NSMotionUsageDescription</key>

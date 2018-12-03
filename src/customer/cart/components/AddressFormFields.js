@@ -18,71 +18,65 @@ export default class AddressFormFields extends PureComponent {
 
     return (
       <View style={styles.addressContainer}>
-        <View style={styles.addressField}>
-          <FormTextInput
-            onValueChange={updateFields}
-            value={label}
-            field="label"
-            maxLength={40}
-            keyboardType="numeric"
-            autoFocus={false}
-            style={styles.textInput}
-            label={I18n.t('label')}
-          />
-        </View>
+          <View style={styles.addressField}>
+            <FormTextInput
+              onValueChange={updateFields}
+              value={label}
+              field="label"
+              maxLength={40}
+              autoFocus={false}
+              style={styles.textInput}
+              label={I18n.t('label')}
+            />
+          </View>
 
-        <View style={styles.addressField}>
-          <FormTextInput
-            onValueChange={updateFields}
-            value={block}
-            field="block"
-            maxLength={40}
-            keyboardType="numeric"
-            autoFocus={false}
-            style={styles.textInput}
-            label={I18n.t('block')}
-          />
-        </View>
+          <View style={styles.addressField}>
+            <FormTextInput
+              onValueChange={updateFields}
+              value={block}
+              field="block"
+              maxLength={40}
+              autoFocus={false}
+              style={styles.textInput}
+              label={I18n.t('block')}
+            />
+          </View>
 
-        <View style={[styles.addressField]}>
-          <FormTextInput
-            onValueChange={updateFields}
-            value={street}
-            field="street"
-            maxLength={40}
-            keyboardType="numeric"
-            autoFocus={false}
-            style={styles.textInput}
-            label={I18n.t('street')}
-            multiline
-          />
-        </View>
+          <View style={[styles.addressField]}>
+            <FormTextInput
+              onValueChange={updateFields}
+              value={street}
+              field="street"
+              maxLength={40}
+              autoFocus={false}
+              style={styles.textInput}
+              label={I18n.t('street')}
+            />
+          </View>
 
-        <View style={styles.addressField}>
-          <FormTextInput
-            onValueChange={updateFields}
-            value={avenue}
-            field="avenue"
-            maxLength={40}
-            keyboardType="numeric"
-            autoFocus={false}
-            style={styles.textInput}
-            label={I18n.t('avenue')}
-          />
-        </View>
+          <View style={styles.addressField}>
+            <FormTextInput
+              onValueChange={updateFields}
+              value={avenue}
+              field="avenue"
+              maxLength={40}
+              autoFocus={false}
+              style={styles.textInput}
+              label={I18n.t('avenue')}
+            />
+          </View>
 
-        <View style={styles.addressField}>
-          <FormTextInput
-            onValueChange={updateFields}
-            value={building}
-            field="building"
-            maxLength={40}
-            keyboardType="numeric"
-            autoFocus={false}
-            style={styles.textInput}
-            label={I18n.t('building')}
-          />
-        </View>
+          <View style={styles.addressField}>
+            <FormTextInput
+              onValueChange={updateFields}
+              value={building}
+              field="building"
+              maxLength={40}
+              autoFocus={false}
+              style={styles.textInput}
+              label={I18n.t('building')}
+            />
+          </View>
       </View>
     );
   }

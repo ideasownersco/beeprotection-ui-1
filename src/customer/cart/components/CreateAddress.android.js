@@ -1,13 +1,9 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Alert, Image, Text} from 'react-native';
+import {Alert, Image, StyleSheet, View} from 'react-native';
 import I18n from 'utils/locale';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
-import AddressFormFields from 'customer/cart/components/AddressFormFields';
-import BackgroundGeolocation from 'react-native-background-geolocation';
-import Divider from 'components/Divider';
-import SelectArea from 'customer/cart/components/SelectArea';
 import MapButtons from 'customer/cart/components/MapButtons';
 
 export default class extends PureComponent {
@@ -63,7 +59,6 @@ export default class extends PureComponent {
             source={require('./../../../assets/images/pin.png')}
             style={styles.image}
             resizeMode="contain"
-            onLoad={() => this.forceUpdate()}
           />
         </View>
         <MapPicker
