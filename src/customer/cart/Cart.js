@@ -30,14 +30,6 @@ import AddressTypeSelectionModal from 'customer/cart/components/AddressTypeSelec
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import CreateAddressFields from 'customer/cart/components/CreateAddressFields';
 
-type State = {
-  dates: Array,
-  paymentMode: 'knet' | 'cash',
-  showPaymentModal: boolean,
-  showOrderSuccessModal: boolean,
-  timePickerModalVisible: boolean,
-};
-
 class Cart extends PureComponent {
   state: State = {
     dates: [],
@@ -404,32 +396,25 @@ class Cart extends PureComponent {
     this.hideAddressTypeSelectionModal();
 
     if (type === 'current_location') {
-      BackgroundGeolocation.getCurrentPosition(
-        location => {
-          let {latitude, longitude} = location.coords;
-
-          console.log('coords',location.coords);
-
-          this.setState(
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.setState(
             {
               address: {
-                latitude: latitude,
-                longitude: longitude,
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
               },
             },
             () => {
               this.showAddressCreateModal();
-              // this.saveAddress(this.state.address);
             },
           );
-        },
-        error => {},
-        {
-          persist: true,
-          samples: 1,
-          maximumAge: 5000,
-        },
-      );
+      }, (error) => {
+        alert(JSON.stringify(error))
+      }, {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 1000
+      });
     } else {
       this.showAddressCreateModal();
     }
