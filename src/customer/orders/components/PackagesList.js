@@ -14,58 +14,63 @@ import I18n from 'utils/locale';
 import Divider from 'components/Divider';
 import {Title} from 'react-native-paper';
 
-let SectionHeader = ({item,onPress}) => {
+let SectionHeader = ({item, onPress}) => {
   return (
-    <Touchable onPress={onPress} style={[styles.sectionContainer]} >
+    <Touchable onPress={onPress} style={[styles.sectionContainer]}>
       <View>
         <Text style={[styles.headerText]}>{item.name}</Text>
-      <View style={styles.line} />
+        <View style={styles.line} />
       </View>
     </Touchable>
   );
 };
 
 export default class PackagesList extends Component {
-
   static propTypes = {
     items: PropTypes.array.isRequired,
     onItemPress: PropTypes.func.isRequired,
   };
 
   state = {
-    activeSection:0
+    activeSection: 0,
   };
 
   componentDidMount() {
-    if(!this.props.activeItemID) {
-      this.setState({
-        activeSection: 0
-      }, () => {
-        this.props.onItemPress(this.props.items[0]);
-      });
+    if (!this.props.activeItemID) {
+      this.setState(
+        {
+          activeSection: 0,
+        },
+        () => {
+          this.props.onItemPress(this.props.items[0]);
+        },
+      );
     }
   }
 
   componentDidUpdate() {
     // if(!this.props.activeItemID && this.props.items.length === 1) {
-    if(!this.props.activeItemID) {
-      this.setState({
-        activeSection:0
-      },()=>{
-        this.props.onItemPress(this.props.items[0]);
-      });
+    if (!this.props.activeItemID) {
+      this.setState(
+        {
+          activeSection: 0,
+        },
+        () => {
+          this.props.onItemPress(this.props.items[0]);
+        },
+      );
 
-      setTimeout(()=>{
-        if(this.props.activeCategoryID === 4) {
+      setTimeout(() => {
+        if (this.props.activeCategoryID === 4) {
           this.props.selectQuantity(10);
         }
-      },1);
+      }, 1);
     }
   }
 
-  onItemPress = (item,index) => {
+  onItemPress = (item, index) => {
     this.setState({
-      activeSection:index
+      activeSection: index,
     });
     this.props.onItemPress(item);
   };
@@ -80,7 +85,7 @@ export default class PackagesList extends Component {
     let {onItemPress, activeItemID} = this.props;
     return (
       <View style={styles.headerContainer}>
-        <Touchable onPress={() => this.onItemPress(item,index)} key={item.id}>
+        <Touchable onPress={() => this.onItemPress(item, index)} key={item.id}>
           <IconFactory
             type="FontAwesome"
             name={item.id === activeItemID ? 'check-circle' : 'circle-thin'}
@@ -88,12 +93,15 @@ export default class PackagesList extends Component {
             size={30}
           />
         </Touchable>
-        <SectionHeader item={item} onPress={() => this.onItemPress(item,index)}/>
+        <SectionHeader
+          item={item}
+          onPress={() => this.onItemPress(item, index)}
+        />
         {/*<FontAwesome*/}
-          {/*name={isActive ? 'minus-square-o' : 'plus-square-o'}*/}
-          {/*color={colors.primary}*/}
-          {/*size={25}*/}
-          {/*style={styles.icon}*/}
+        {/*name={isActive ? 'minus-square-o' : 'plus-square-o'}*/}
+        {/*color={colors.primary}*/}
+        {/*size={25}*/}
+        {/*style={styles.icon}*/}
         {/*/>*/}
       </View>
     );
@@ -134,7 +142,7 @@ export default class PackagesList extends Component {
   render() {
     const {items} = this.props;
 
-    console.log('this.props.activeItemID',this.props.activeItemID);
+    console.log('this.props.activeItemID', this.props.activeItemID);
 
     return (
       <View style={styles.listContainer}>

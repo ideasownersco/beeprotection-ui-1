@@ -15,9 +15,7 @@ import PrintInvoiceScene from 'driver/orders/PrintInvoice';
 
 const getDrawerIcon = navigation => {
   return {
-    headerLeft: (
-      <DrawerIcon onPress={() => navigation.openDrawer()} />
-    ),
+    headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
   };
 };
 
@@ -47,9 +45,9 @@ const HomeStack = createStackNavigator(
     PhotosUpload: {
       screen: PhotosUploadScene,
     },
-    PrintInvoice:{
-      screen:PrintInvoiceScene
-    }
+    PrintInvoice: {
+      screen: PrintInvoiceScene,
+    },
   },
   {
     navigationOptions: ({navigation}) => ({

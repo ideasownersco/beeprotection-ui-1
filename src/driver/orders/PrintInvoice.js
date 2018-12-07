@@ -6,9 +6,9 @@ import {Text, View, WebView} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {WEB_URL} from 'utils/env';
-import NavButton from "components/NavButton";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import colors from "assets/theme/colors";
+import NavButton from 'components/NavButton';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import colors from 'assets/theme/colors';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import RNPrint from 'react-native-print';
 
@@ -28,12 +28,11 @@ class PrintInvoiceScene extends Component {
   };
 
   state = {
-    invoiceURL:undefined,
-    downloaded:false
+    invoiceURL: undefined,
+    downloaded: false,
   };
 
-  onNavigationStateChange = navState => {
-  };
+  onNavigationStateChange = navState => {};
 
   static navigationOptions = ({navigation}) => {
     return {
@@ -72,45 +71,45 @@ class PrintInvoiceScene extends Component {
     this.props.navigation.setParams({
       handleRightButtonPress: this.printInvoice,
     });
-    if(this.props.navigation) {
+    if (this.props.navigation) {
       this.downloadInvoice();
     }
-
   }
-
 
   downloadInvoice = () => {
     this.setState({
-      downloaded:false
+      downloaded: false,
     });
     return new Promise((resolve, reject) => {
-      this.props.dispatch(DRIVER_ACTIONS.printInvoice({
-          orderID:this.props.navigation.getParam('orderID'),
+      this.props.dispatch(
+        DRIVER_ACTIONS.printInvoice({
+          orderID: this.props.navigation.getParam('orderID'),
           resolve,
-          reject
-        })
+          reject,
+        }),
       );
     })
       .then(res => {
         this.setState({
-          downloaded:true,
-          invoiceURL:res.url
+          downloaded: true,
+          invoiceURL: res.url,
         });
       })
       .catch(e => {});
   };
 
   printInvoice = () => {
-    if(this.state.downloaded) {
+    if (this.state.downloaded) {
       // RNPrint.
-      RNPrint.print({ filePath: this.state.invoiceURL})
+      RNPrint.print({filePath: this.state.invoiceURL});
     } else {
-      alert('Invoice file is being processed, Please wait a minute and try again');
+      alert(
+        'Invoice file is being processed, Please wait a minute and try again',
+      );
     }
   };
 
   render() {
-
     let orderID = this.props.navigation.getParam('orderID');
     let url = `${WEB_URL}/orders/${orderID}/invoice`;
     return (
@@ -119,13 +118,13 @@ class PrintInvoiceScene extends Component {
         scalesPageToFit={false}
         onNavigationStateChange={this.onNavigationStateChange}
       />
-    )
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    state
+    state,
   };
 }
 

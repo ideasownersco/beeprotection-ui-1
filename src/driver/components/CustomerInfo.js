@@ -50,8 +50,7 @@ export default class CustomerInfo extends Component {
             <Text style={[styles.title]}>{user.name}</Text>
 
             <Text style={[styles.title]}>
-              {I18n.t('mobile')}:
-              {user.mobile}
+              {I18n.t('mobile')}:{user.mobile}
             </Text>
           </View>
 

@@ -15,7 +15,7 @@ export default class MapButtons extends Component {
   }
 
   render() {
-    let {close, save, style,savingAddress} = this.props;
+    let {close, save, style, savingAddress} = this.props;
 
     return (
       <View style={[styles.container, style]}>

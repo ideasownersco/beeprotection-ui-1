@@ -7,7 +7,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
-import {SELECTORS, SELECTORS as ORDER_SELECTORS,} from 'customer/selectors/orders';
+import {
+  SELECTORS,
+  SELECTORS as ORDER_SELECTORS,
+} from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import Button from 'components/Button';
 import I18n from 'utils/locale';
@@ -46,7 +49,7 @@ class Cart extends PureComponent {
       latitude: 29.3759,
       longitude: 47.9774,
     },
-    savingAddress:false
+    savingAddress: false,
   };
 
   static defaultProps = {
@@ -72,11 +75,10 @@ class Cart extends PureComponent {
     this.props.actions.fetchAreas();
     this.fetchTimings();
 
-
-    if(this.props.cart.isFreeWash){
+    if (this.props.cart.isFreeWash) {
       this.setState({
-        paymentMode:'cash'
-      })
+        paymentMode: 'cash',
+      });
     }
   }
 
@@ -160,9 +162,8 @@ class Cart extends PureComponent {
   };
 
   saveAddress = address => {
-
     this.setState({
-      savingAddress:true
+      savingAddress: true,
     });
 
     return new Promise((resolve, reject) => {
@@ -174,7 +175,7 @@ class Cart extends PureComponent {
             address: {
               ...address,
             },
-            savingAddress:false
+            savingAddress: false,
           },
           () => {
             this.showAddressCreateFieldsModal();
@@ -185,14 +186,14 @@ class Cart extends PureComponent {
       .catch(e => {
         this.hideAddressCreateModal();
         this.setState({
-          savingAddress:false
+          savingAddress: false,
         });
       });
   };
 
   updateAddress = address => {
     this.setState({
-      savingAddress:false
+      savingAddress: false,
     });
     return new Promise((resolve, reject) => {
       this.props.actions.updateAddress({address, resolve, reject});
@@ -203,7 +204,7 @@ class Cart extends PureComponent {
             address: {
               ...address,
             },
-            savingAddress:false
+            savingAddress: false,
           },
           () => {
             this.hideAddressCreateFieldsModal();
@@ -215,7 +216,7 @@ class Cart extends PureComponent {
       .catch(e => {
         this.hideAddressCreateFieldsModal();
         this.setState({
-          savingAddress:false
+          savingAddress: false,
         });
       });
   };
@@ -306,8 +307,7 @@ class Cart extends PureComponent {
         this.props.actions.checkout({item, resolve, reject});
       })
         .then(order => {
-
-          if(this.state.paymentMode === 'cash') {
+          if (this.state.paymentMode === 'cash') {
             if (order.status == 'Success') {
               this.setState({
                 showOrderSuccessModal: true,
@@ -320,7 +320,6 @@ class Cart extends PureComponent {
               });
             }
           } else {
-
             this.setState({
               showPaymentModal: false,
               showCheckoutConfirmDialog: false,
@@ -329,10 +328,7 @@ class Cart extends PureComponent {
             return this.props.navigation.navigate('Payment', {
               orderID: order.id,
             });
-
           }
-
-
         })
         .catch(e => {
           this.hideCheckoutConfirmDialog();
@@ -394,8 +390,9 @@ class Cart extends PureComponent {
     this.hideAddressTypeSelectionModal();
 
     if (type === 'current_location') {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.setState(
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          this.setState(
             {
               address: {
                 latitude: position.coords.latitude,
@@ -406,12 +403,14 @@ class Cart extends PureComponent {
               this.showAddressCreateModal();
             },
           );
-      }, (error) => {
-      }, {
-        enableHighAccuracy: true,
-        timeout: 20000,
-        maximumAge: 1000
-      });
+        },
+        error => {},
+        {
+          enableHighAccuracy: true,
+          timeout: 20000,
+          maximumAge: 1000,
+        },
+      );
     } else {
       this.showAddressCreateModal();
     }
@@ -441,7 +440,7 @@ class Cart extends PureComponent {
       showCheckoutConfirmDialog,
       addressTypeSelectionModalVisible,
       address,
-      savingAddress
+      savingAddress,
     } = this.state;
 
     if (!isFreeWash && !cartItems.length) {
@@ -455,7 +454,6 @@ class Cart extends PureComponent {
           {backgroundColor: 'white'},
           checkout.isFetching && {opacity: 0.4},
         ]}>
-
         {!isFreeWash && (
           <View>
             <SectionTitle
@@ -537,8 +535,7 @@ class Cart extends PureComponent {
           />
         </View>
 
-        {
-          !this.props.cart.isFreeWash &&
+        {!this.props.cart.isFreeWash && (
           <View>
             <Divider
               style={{flex: 1, padding: 10, backgroundColor: colors.lightGrey}}
@@ -555,7 +552,7 @@ class Cart extends PureComponent {
               selectedItem={paymentMode}
             />
           </View>
-        }
+        )}
 
         <Divider style={{marginVertical: 20}} />
 
@@ -580,7 +577,9 @@ class Cart extends PureComponent {
           total={cartTotal}
           date={selectedDate}
           time={
-            (selectedTimeID && timings.length && timings.find(timing => timing.id === selectedTimeID)) ||
+            (selectedTimeID &&
+              timings.length &&
+              timings.find(timing => timing.id === selectedTimeID)) ||
             null
           }
           visible={showCheckoutConfirmDialog}
@@ -670,4 +669,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Cart);

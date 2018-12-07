@@ -2,13 +2,13 @@ import {GEOLOCATION_SOUNDS_ENABLED} from 'utils/env';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 
 export default {
-  desiredAccuracy:BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
+  desiredAccuracy: BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
   distanceFilter: 50,
   stopOnTerminate: false,
   preventSuspend: true,
   startOnBoot: true,
   foregroundService: true,
-  enableHeadless:true,
+  enableHeadless: true,
   autoSync: true,
   debug: GEOLOCATION_SOUNDS_ENABLED,
   logLevel: GEOLOCATION_SOUNDS_ENABLED

@@ -3,8 +3,8 @@ const defaults = {};
 if (__DEV__) {
   module.exports = {
     ...defaults,
-    NETWORK_PROTOCOL:'http://',
-    WEB_URL:'http://beeprotection.test',
+    NETWORK_PROTOCOL: 'http://',
+    WEB_URL: 'http://beeprotection.test',
     API_URL: 'beeprotection.test/api',
     SOCKET_SERVER: 'http://beeprotection.test:3000',
     PAYMENT_ENDPOINT: 'http://beeprotection.test/payment/knet',
@@ -31,7 +31,7 @@ if (__DEV__) {
 } else {
   module.exports = {
     ...defaults,
-    NETWORK_PROTOCOL:'https://',
+    NETWORK_PROTOCOL: 'https://',
     API_URL: 'beeprotection.net/api',
     WEB_URL: 'https://beeprotection.net',
     SOCKET_SERVER: 'http://beeprotection.net:3000',

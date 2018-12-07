@@ -244,7 +244,6 @@ function fetchOrderDetails(id) {
   };
 }
 
-
 function paymentSuccess(params) {
   return {
     type: ACTION_TYPES.SET_PAYMENT_SUCCESS_REQUEST,
@@ -276,5 +275,4 @@ export const ACTIONS = {
   fetchPastOrdersRefresh,
   fetchOrderDetails,
   paymentSuccess,
-
 };

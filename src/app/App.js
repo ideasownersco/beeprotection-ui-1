@@ -5,7 +5,7 @@ import CodePush from 'react-native-code-push';
 import PushNotificationManager from 'app/components/PushNotificationManager';
 import Notification from 'app/components/Notification';
 import Navigator from 'components/Navigator';
-import {StatusBar, Text, View,Alert} from 'react-native';
+import {StatusBar, Text, View, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {ACTIONS} from 'app/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';

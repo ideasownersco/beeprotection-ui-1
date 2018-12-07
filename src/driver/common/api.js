@@ -28,12 +28,12 @@ function stopWorking(id) {
   };
   return request(requestParams);
 }
-function startDriving(id,params) {
+function startDriving(id, params) {
   const path = `driver/jobs/${id}/start/drive`;
   let requestParams = {
     path,
     method: 'POST',
-    params
+    params,
   };
   return request(requestParams);
 }
@@ -71,7 +71,7 @@ function printInvoice(orderID) {
   const path = `driver/orders/${orderID}/invoice/print`;
   let requestParams = {
     path,
-    params:{},
+    params: {},
     method: 'POST',
   };
   return request(requestParams);
@@ -121,5 +121,5 @@ export const API = {
   fetchJobPhotos,
   uploadPhotos,
   approvePhotos,
-  printInvoice
+  printInvoice,
 };

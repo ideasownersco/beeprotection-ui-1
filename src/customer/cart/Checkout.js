@@ -74,8 +74,7 @@ class Checkout extends PureComponent {
           orderID: res.id,
         });
       })
-      .catch(e => {
-      });
+      .catch(e => {});
   };
 
   onFieldChange = (field, value) => {

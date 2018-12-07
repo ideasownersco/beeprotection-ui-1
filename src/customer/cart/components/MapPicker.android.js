@@ -3,7 +3,7 @@
  */
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Dimensions, StyleSheet, View,Image} from 'react-native';
+import {Dimensions, StyleSheet, View, Image} from 'react-native';
 import MapView from 'react-native-maps';
 // import Svg,{Image} from "react-native-svg";
 
@@ -14,14 +14,13 @@ const LATITUDE_DELTA = 0.1;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class MapPicker extends Component {
-
   static propTypes = {
     updateAddress: PropTypes.func.isRequired,
     address: PropTypes.object.isRequired,
   };
 
   state = {
-    imageLoaded:false
+    imageLoaded: false,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -49,7 +48,7 @@ export default class MapPicker extends Component {
 
   forceUpdate = () => {
     this.setState({
-      imageLoaded:true
+      imageLoaded: true,
     });
   };
 
@@ -57,7 +56,7 @@ export default class MapPicker extends Component {
     const {latitude, longitude} = this.props.address;
 
     return (
-      <View style={{flex:1}}>
+      <View style={{flex: 1}}>
         <MapView
           ref={ref => {
             this.map = ref;
@@ -72,9 +71,8 @@ export default class MapPicker extends Component {
           onRegionChangeComplete={this.onRegionChangeComplete}
           showsUserLocation={true}
           pitchEnabled={false}
-          rotateEnabled={false}>
-        </MapView>
-
+          rotateEnabled={false}
+        />
       </View>
     );
   }
@@ -90,6 +88,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     alignSelf: 'center',
-    zIndex:10000
+    zIndex: 10000,
   },
 });

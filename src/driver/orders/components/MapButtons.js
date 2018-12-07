@@ -6,7 +6,7 @@ import I18n from 'utils/locale';
 import AddressInfo from 'components/AddressInfo';
 import Dialog from 'components/Dialog';
 import GoogleMapDirection from 'components/GoogleMapDirection';
-import IconFactory from "../../../components/IconFactory";
+import IconFactory from '../../../components/IconFactory';
 
 export default class MapButtons extends Component {
   static propTypes = {

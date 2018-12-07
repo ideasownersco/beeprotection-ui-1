@@ -177,7 +177,6 @@ function approveImages(params) {
   };
 }
 
-
 function printInvoice(payload) {
   return {
     type: ACTION_TYPES.PRINT_INVOICE_REQUEST,
@@ -201,5 +200,5 @@ export const ACTIONS = {
   fetchJobPhotos,
   uploadImages,
   approveImages,
-  printInvoice
+  printInvoice,
 };

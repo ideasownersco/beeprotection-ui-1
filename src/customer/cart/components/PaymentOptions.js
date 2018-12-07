@@ -31,7 +31,7 @@ export default class PaymentOptions extends Component {
           <FormCheck
             checked={selectedItem === 'knet'}
             style={{color: colors.primary}}
-            onPress={()=>this.props.onPress('knet')}
+            onPress={() => this.props.onPress('knet')}
           />
           <Text style={[styles.text]}>{I18n.t('knet')}</Text>
         </View>

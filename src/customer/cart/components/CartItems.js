@@ -6,7 +6,7 @@ import colors from 'assets/theme/colors';
 import Divider from 'components/Divider';
 import {Subheading} from 'react-native-paper';
 import I18n from 'utils/locale';
-import IconFactory from "../../../components/IconFactory";
+import IconFactory from '../../../components/IconFactory';
 
 export default class CartItems extends Component {
   shouldComponentUpdate(nextProps) {
@@ -23,15 +23,18 @@ export default class CartItems extends Component {
 
     return (
       <View style={styles.itemContainer}>
+        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={[styles.categoryTitle, {flex: 1, flexDirection: 'row'}]}>
+            {category.name}
+          </Text>
 
-        <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
-
-          <Text style={[styles.categoryTitle,{flex:1,flexDirection:'row'}]}>{category.name}</Text>
-
-          <Touchable onPress={() => onItemPress(item)} key={item.id} style={styles.deleteButton}>
-            <View style={{flexDirection:'row',alignItems:'center'}}>
+          <Touchable
+            onPress={() => onItemPress(item)}
+            key={item.id}
+            style={styles.deleteButton}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text>{I18n.t('delete')}</Text>
-              <IconFactory type="MaterialIcons" name="delete"/>
+              <IconFactory type="MaterialIcons" name="delete" />
             </View>
           </Touchable>
         </View>
@@ -59,7 +62,6 @@ export default class CartItems extends Component {
             </View>
           </View>
         ))}
-
       </View>
     );
   };
@@ -128,8 +130,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'right',
   },
-  deleteButton:{
-    backgroundColor:'#E7E7E7',
-    padding:5
-  }
+  deleteButton: {
+    backgroundColor: '#E7E7E7',
+    padding: 5,
+  },
 });

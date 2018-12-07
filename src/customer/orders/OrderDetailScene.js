@@ -97,6 +97,7 @@ const makeMapStateToProps = () => {
   return mapStateToProps;
 };
 
-export default connect(makeMapStateToProps, mapDispatchToProps)(
-  OrderDetailScene,
-);
+export default connect(
+  makeMapStateToProps,
+  mapDispatchToProps,
+)(OrderDetailScene);

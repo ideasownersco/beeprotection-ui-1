@@ -17,13 +17,11 @@ import colors from 'assets/theme/colors';
 import TrackDetailScene from 'company/orders/TrackDetailScene';
 import Register from 'guest/Register';
 import TrackOrderScene from 'customer/orders/TrackOrderScene';
-import CreateOrder from "customer/orders/CreateOrder";
+import CreateOrder from 'customer/orders/CreateOrder';
 
 const getDrawerIcon = navigation => {
   return {
-    headerLeft: (
-      <DrawerIcon onPress={() => navigation.openDrawer()} />
-    ),
+    headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
   };
 };
 
@@ -227,7 +225,7 @@ const DrawerRoutes = {
   SettingsStack: {screen: SettingsStack},
   TrackDriversStack: {screen: TrackDriversStack},
   Login: {screen: Login},
-  CreateOrdersStack:{screen:CreateOrderStack}
+  CreateOrdersStack: {screen: CreateOrderStack},
 };
 
 export const Router = createDrawerNavigator(DrawerRoutes, {

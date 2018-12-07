@@ -14,7 +14,7 @@ export async function request({
     isBlob: false,
     paginated: false,
     paginatedUrl: '',
-    web:false
+    web: false,
   },
   requiresAuthentication = false,
   forceAuthentication = false,
@@ -79,7 +79,7 @@ export async function request({
       // .then(({json}) => {
       if (__DEV__) {
         if (console.group) {
-        //   console.groupCollapsed('action', 'NETWORK_RESPONSE');
+          //   console.groupCollapsed('action', 'NETWORK_RESPONSE');
           console.log('action', 'NETWORK_RESPONSE');
           console.log('payload', json);
           // console.groupEnd();

@@ -23,9 +23,7 @@ import Payment from 'customer/cart/Payment';
 
 const getDrawerIcon = navigation => {
   return {
-    headerLeft: (
-      <DrawerIcon onPress={() => navigation.openDrawer()} />
-    ),
+    headerLeft: <DrawerIcon onPress={() => navigation.openDrawer()} />,
   };
 };
 
@@ -106,7 +104,6 @@ const HomeStack = createStackNavigator(
     LanguageSelect: {
       screen: LanguageSelect,
     },
-
   },
   {
     navigationOptions: ({navigation}) => ({

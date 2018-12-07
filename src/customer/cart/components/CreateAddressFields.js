@@ -1,6 +1,13 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Alert, Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, View} from 'react-native';
+import {
+  Alert,
+  Dimensions,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 import AddressFormFields from 'customer/cart/components/AddressFormFields';
@@ -89,9 +96,7 @@ export default class extends PureComponent {
       <ScrollView
         style={styles.container}
         contentContainerStyle={{paddingBottom: 40}}>
-
         <KeyboardAvoidingView behavior="position">
-
           <View style={styles.map}>
             {initialized && (
               <MapView
@@ -133,7 +138,11 @@ export default class extends PureComponent {
             label={label}
             updateFields={this.updateFormFields}
           />
-          <MapButtons save={this.saveAddress} close={this.hideScreen} savingAddress={savingAddress} />
+          <MapButtons
+            save={this.saveAddress}
+            close={this.hideScreen}
+            savingAddress={savingAddress}
+          />
         </KeyboardAvoidingView>
       </ScrollView>
     );

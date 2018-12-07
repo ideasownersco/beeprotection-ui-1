@@ -24,4 +24,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BidList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(BidList);

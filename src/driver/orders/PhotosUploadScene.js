@@ -92,7 +92,6 @@ class PhotosUploadScene extends Component {
     });
   };
 
-
   deleteImage = image => {
     this.setState({
       images: this.state.images.filter(
@@ -153,7 +152,6 @@ class PhotosUploadScene extends Component {
       includeExif: true,
     })
       .then(image => {
-
         this.props.dispatch(
           DRIVER_ACTIONS.uploadImages({
             job_id: this.props.order.job.id,
@@ -176,7 +174,7 @@ class PhotosUploadScene extends Component {
 
   render() {
     let {order} = this.props;
-    let {job}  = order;
+    let {job} = order;
 
     let {
       showUploadImageModal,

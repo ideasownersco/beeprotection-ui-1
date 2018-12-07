@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: '700',
     fontSize: 22,
-    textAlign:'center'
+    textAlign: 'center',
   },
   description: {
     color: colors.black,

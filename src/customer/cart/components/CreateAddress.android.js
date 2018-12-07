@@ -91,15 +91,15 @@ const styles = StyleSheet.create({
     opacity: 1,
     backgroundColor: colors.fadedWhite,
   },
-  marker:{
+  marker: {
     ...StyleSheet.absoluteFill,
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center'
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     width: 50,
     height: 50,
-    zIndex:1000,
+    zIndex: 1000,
   },
 });

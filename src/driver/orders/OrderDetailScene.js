@@ -18,7 +18,7 @@ import Button from 'components/Button';
 import MapButtons from 'driver/orders/components/MapButtons';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import GEOLOCATION_CONFIG from 'utils/background-geolocation';
-import {API_URL,NETWORK_PROTOCOL} from 'utils/env';
+import {API_URL, NETWORK_PROTOCOL} from 'utils/env';
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -45,19 +45,18 @@ class OrderDetailScene extends Component {
       ),
     );
 
-    BackgroundGeolocation.on('location',this.onLocation);
+    BackgroundGeolocation.on('location', this.onLocation);
 
     BackgroundGeolocation.ready(
       {
         ...GEOLOCATION_CONFIG,
-        reset:true,
-        locationAuthorizationRequest:'Any',
+        reset: true,
+        locationAuthorizationRequest: 'Any',
         url: `${NETWORK_PROTOCOL}${API_URL}/jobs/${job.id}/update/location`,
       },
 
       state => {
-
-        if(!state.enabled && order.trackeable) {
+        if (!state.enabled && order.trackeable) {
           BackgroundGeolocation.start();
         }
 
@@ -80,8 +79,8 @@ class OrderDetailScene extends Component {
     }
   }
 
-  onLocation = (location) => {
-    console.log('location',location);
+  onLocation = location => {
+    console.log('location', location);
   };
 
   uploadImages = () => {
@@ -101,17 +100,18 @@ class OrderDetailScene extends Component {
     let {job} = this.props.order;
     BackgroundGeolocation.start();
     BackgroundGeolocation.getCurrentPosition({
-      timeout: 30,          // 30 second timeout to fetch location
-      persist: true,        // Defaults to state.enabled
-      maximumAge: 5000,     // Accept the last-known-location if not older than 5000 ms.
-      desiredAccuracy: 10,  // Try to fetch a location with an accuracy of `10` meters.
-      samples: 3,           // How many location samples to attempt.
+      timeout: 30, // 30 second timeout to fetch location
+      persist: true, // Defaults to state.enabled
+      maximumAge: 5000, // Accept the last-known-location if not older than 5000 ms.
+      desiredAccuracy: 10, // Try to fetch a location with an accuracy of `10` meters.
+      samples: 3, // How many location samples to attempt.
     }).then(location => {
       let {latitude, longitude} = location.coords;
-      this.props.dispatch(DRIVER_ACTIONS.startDriving(job.id, {
+      this.props.dispatch(
+        DRIVER_ACTIONS.startDriving(job.id, {
           latitude: latitude,
           longitude: longitude,
-        })
+        }),
       );
     });
   };
@@ -185,12 +185,8 @@ class OrderDetailScene extends Component {
                 )}
               </View>
             )}
-
-
-
           </View>
         )}
-
       </ScrollView>
     );
   }

@@ -113,9 +113,8 @@ class CreateOrder extends PureComponent {
       });
 
       this.setState({
-        quantity: 1
+        quantity: 1,
       });
-
     }
   };
 
@@ -260,9 +259,9 @@ class CreateOrder extends PureComponent {
       : categories.length
         ? categories[0]
         : {
-          id: undefined,
-          packages: [],
-        };
+            id: undefined,
+            packages: [],
+          };
 
     return (
       <ScrollView
@@ -275,16 +274,17 @@ class CreateOrder extends PureComponent {
           activeItemID={activeCategoryID}
         />
 
-        {!!activeCategory.packages && !!activeCategory.packages.length && (
-          <PackagesList
-            items={activeCategory.packages}
-            onItemPress={this.onPackagesListItemPress}
-            activeItemID={activePackageID}
-            selectQuantity={this.selectQuantity}
-            quantity={this.state.quantity}
-            activeCategoryID={activeCategoryID}
-          />
-        )}
+        {!!activeCategory.packages &&
+          !!activeCategory.packages.length && (
+            <PackagesList
+              items={activeCategory.packages}
+              onItemPress={this.onPackagesListItemPress}
+              activeItemID={activePackageID}
+              selectQuantity={this.selectQuantity}
+              quantity={this.state.quantity}
+              activeCategoryID={activeCategoryID}
+            />
+          )}
 
         {activePackageID && (
           <ServicesList
@@ -363,4 +363,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateOrder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CreateOrder);

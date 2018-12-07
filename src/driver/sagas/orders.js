@@ -4,7 +4,7 @@ import {ACTION_TYPES} from 'driver/common/actions';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import I18n from 'utils/locale';
-import {ACTIONS as APP_ACTIONS} from "../../app/common/actions";
+import {ACTIONS as APP_ACTIONS} from '../../app/common/actions';
 
 function* fetchWorkingOrder() {
   try {
@@ -104,10 +104,10 @@ function* printInvoice(action) {
   try {
     const params = {
       body: {
-        order_id:orderID,
+        order_id: orderID,
       },
     };
-    const response = yield call(API.printInvoice, orderID,params);
+    const response = yield call(API.printInvoice, orderID, params);
     yield put({
       type: ACTION_TYPES.PRINT_INVOICE_SUCCESS,
     });
@@ -123,7 +123,6 @@ function* printInvoice(action) {
     yield reject(error);
   }
 }
-
 
 function* fetchUpcomingOrdersMonitor() {
   yield takeLatest(

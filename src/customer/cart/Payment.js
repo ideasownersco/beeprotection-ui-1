@@ -9,7 +9,7 @@ import {PAYMENT_ENDPOINT} from 'utils/env';
 import Dialog from 'components/Dialog';
 import I18n from 'utils/locale';
 import Modal from 'react-native-modal';
-import OrderSuccess from "./components/OrderSuccess";
+import OrderSuccess from './components/OrderSuccess';
 import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
 import {bindActionCreators} from 'redux';
@@ -39,7 +39,6 @@ class Payment extends Component {
   };
 
   onNavigationStateChange = navState => {
-
     const successUrl = `${PAYMENT_ENDPOINT}/payment/knet/success`;
     const failureUrl = `${PAYMENT_ENDPOINT}/payment/knet/failure`;
 
@@ -51,7 +50,6 @@ class Payment extends Component {
       this.props.actions.paymentSuccess({
         order_id: this.props.navigation.getParam('orderID'),
       });
-
     } else if (navState.url === failureUrl) {
       this.setState({
         scene: 'failed',
@@ -77,7 +75,7 @@ class Payment extends Component {
     this.props.navigation.replace('Home');
     let orderID = this.props.navigation.getParam('orderID');
     this.props.navigation.navigate('OrderDetail', {
-      orderID: orderID
+      orderID: orderID,
     });
   };
 
@@ -101,7 +99,7 @@ class Payment extends Component {
       case 'payment':
         return (
           <WebView
-            source={{uri: url,method:'POST'}}
+            source={{uri: url, method: 'POST'}}
             scalesPageToFit={false}
             onNavigationStateChange={this.onNavigationStateChange}
           />
@@ -117,11 +115,8 @@ class Payment extends Component {
             useNativeDriver={true}
             hideModalContentWhileAnimating={true}
             style={{margin: 0, padding: 0, backgroundColor: 'white'}}>
-            <OrderSuccess
-              onPress={this.paymentSuccessDialogPress}
-            />
+            <OrderSuccess onPress={this.paymentSuccessDialogPress} />
           </Modal>
-
         );
       case 'failed':
         return (
@@ -138,11 +133,10 @@ class Payment extends Component {
   }
 }
 
-
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(
-      {...ACTIONS, ...USER_ACTIONS,...ORDER_ACTIONS},
+      {...ACTIONS, ...USER_ACTIONS, ...ORDER_ACTIONS},
       dispatch,
     ),
   };
@@ -162,4 +156,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Payment);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Payment);

@@ -329,7 +329,6 @@ function* setPaymentSuccess(action) {
   }
 }
 
-
 // Monitoring Sagas
 function* fetchCategoriesMonitor() {
   yield takeLatest(ACTION_TYPES.CATEGORY_REQUEST, fetchCategories);
@@ -406,5 +405,4 @@ export const sagas = all([
   fork(fetchPastOrdersMonitor),
   fork(fetchOrderDetailsMonitor),
   fork(setPaymentSuccessMonitor),
-
 ]);

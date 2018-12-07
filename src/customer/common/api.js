@@ -115,5 +115,4 @@ export const API = {
   fetchWorkingOrders,
   fetchOrderDetails,
   setPaymentSuccess,
-
 };
