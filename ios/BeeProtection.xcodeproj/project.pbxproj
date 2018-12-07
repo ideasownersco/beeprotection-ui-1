@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -43,9 +44,9 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		84F6E998CAD78A8C526D1CA5 /* libPods-BeeProtection.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16891BD2C66552616E89D11D /* libPods-BeeProtection.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		DB4EFCDBC05043AB9F367CAF /* TSBackgroundFetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E8FD1F00DA43DB9E846867 /* TSBackgroundFetch.framework */; };
 		CD9AD2AF6BE543EFA47D721E /* libRNPrint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A8F2C8E51246829C4E6DCD /* libRNPrint.a */; };
-		EAAF7FFAE5604EF2899D6BB6 /* RNPrintTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = D8C8334E8D044054B69F4730 /* RNPrintTests.xctest */; };
+		DB4EFCDBC05043AB9F367CAF /* TSBackgroundFetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E8FD1F00DA43DB9E846867 /* TSBackgroundFetch.framework */; };
+		EAAF7FFAE5604EF2899D6BB6 /* RNPrintTests.xctest in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C8334E8D044054B69F4730 /* RNPrintTests.xctest */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,6 +211,20 @@
 			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
 			remoteInfo = "RCTPushNotification-tvOS";
 		};
+		35CE06F121BAAAF7004987E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1193D5F6B667401E98CEBC0B /* RNPrint.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1132585C1B99F348005E19FE;
+			remoteInfo = RNPrint;
+		};
+		35CE06F321BAAAF7004987E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1193D5F6B667401E98CEBC0B /* RNPrint.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 113258671B99F348005E19FE;
+			remoteInfo = RNPrintTests;
+		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
@@ -348,6 +363,7 @@
 		00E356EE1AD99517003FC87E /* BeeProtectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeeProtectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* BeeProtectionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeeProtectionTests.m; sourceTree = "<group>"; };
+		1193D5F6B667401E98CEBC0B /* RNPrint.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNPrint.xcodeproj; path = "../node_modules/react-native-print/ios/RNPrint.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* BeeProtection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeeProtection.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -372,12 +388,11 @@
 		68E8FD1F00DA43DB9E846867 /* TSBackgroundFetch.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = TSBackgroundFetch.framework; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/TSBackgroundFetch.framework"; sourceTree = SDKROOT; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		A2A8F2C8E51246829C4E6DCD /* libRNPrint.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNPrint.a; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		D8C8334E8D044054B69F4730 /* RNPrintTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RNPrintTests.xctest; sourceTree = "<group>"; };
 		DC2CC770B912703C05409B50 /* Pods-BeeProtection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeeProtection.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeeProtection/Pods-BeeProtection.release.xcconfig"; sourceTree = "<group>"; };
 		F000CEB67B4D47FEAA17932B /* TSLocationManager.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = TSLocationManager.framework; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation/TSLocationManager.framework"; sourceTree = SDKROOT; };
-		1193D5F6B667401E98CEBC0B /* RNPrint.xcodeproj */ = {isa = PBXFileReference; name = "RNPrint.xcodeproj"; path = "../node_modules/react-native-print/ios/RNPrint.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		A2A8F2C8E51246829C4E6DCD /* libRNPrint.a */ = {isa = PBXFileReference; name = "libRNPrint.a"; path = "libRNPrint.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		D8C8334E8D044054B69F4730 /* RNPrintTests.xctest */ = {isa = PBXFileReference; name = "RNPrintTests.xctest"; path = "RNPrintTests.xctest"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.cfbundle; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,7 +425,7 @@
 				5F2959406454459CA5257524 /* TSLocationManager.framework in Frameworks */,
 				DB4EFCDBC05043AB9F367CAF /* TSBackgroundFetch.framework in Frameworks */,
 				CD9AD2AF6BE543EFA47D721E /* libRNPrint.a in Frameworks */,
-				EAAF7FFAE5604EF2899D6BB6 /* RNPrintTests.xctest in Resources */,
+				EAAF7FFAE5604EF2899D6BB6 /* RNPrintTests.xctest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +593,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		35CE06C521BAAAF7004987E8 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				A2A8F2C8E51246829C4E6DCD /* libRNPrint.a */,
+				D8C8334E8D044054B69F4730 /* RNPrintTests.xctest */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		35CE06ED21BAAAF7004987E8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				35CE06F221BAAAF7004987E8 /* libRNPrint.a */,
+				35CE06F421BAAAF7004987E8 /* RNPrintTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +670,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				A267184046BEBAE2412657A6 /* Pods */,
+				35CE06C521BAAAF7004987E8 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -859,6 +893,10 @@
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
+				{
+					ProductGroup = 35CE06ED21BAAAF7004987E8 /* Products */;
+					ProjectRef = 1193D5F6B667401E98CEBC0B /* RNPrint.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1016,6 +1054,20 @@
 			fileType = archive.ar;
 			path = "libRCTPushNotification-tvOS.a";
 			remoteRef = 357EEBDB2171A9C300FE219D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		35CE06F221BAAAF7004987E8 /* libRNPrint.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNPrint.a;
+			remoteRef = 35CE06F121BAAAF7004987E8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		35CE06F421BAAAF7004987E8 /* RNPrintTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RNPrintTests.xctest;
+			remoteRef = 35CE06F321BAAAF7004987E8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -1375,9 +1427,18 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
+				);
 				INFOPLIST_FILE = BeeProtectionTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1385,15 +1446,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeeProtection.app/BeeProtection";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
-				);
 			};
 			name = Debug;
 		};
@@ -1407,9 +1459,18 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
+				);
 				INFOPLIST_FILE = BeeProtectionTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1417,15 +1478,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeeProtection.app/BeeProtection";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
-				);
 			};
 			name = Release;
 		};
@@ -1442,6 +1494,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
+				);
 				INFOPLIST_FILE = BeeProtection/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1453,10 +1509,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ideasowners.bp;
 				PRODUCT_NAME = BeeProtection;
 				VERSIONING_SYSTEM = "apple-generic";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
-				);
 			};
 			name = Debug;
 		};
@@ -1472,6 +1524,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
+				);
 				INFOPLIST_FILE = BeeProtection/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1483,10 +1539,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ideasowners.bp;
 				PRODUCT_NAME = BeeProtection;
 				VERSIONING_SYSTEM = "apple-generic";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
-				);
 			};
 			name = Release;
 		};
@@ -1507,8 +1559,17 @@
 					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
+				);
 				INFOPLIST_FILE = "BeeProtection-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1518,15 +1579,6 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
-				);
 			};
 			name = Debug;
 		};
@@ -1547,8 +1599,17 @@
 					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
+				);
 				INFOPLIST_FILE = "BeeProtection-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1558,15 +1619,6 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
-				);
 			};
 			name = Release;
 		};
@@ -1585,8 +1637,17 @@
 					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
+				);
 				INFOPLIST_FILE = "BeeProtection-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1596,15 +1657,6 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeeProtection-tvOS.app/BeeProtection-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
-				);
 			};
 			name = Debug;
 		};
@@ -1623,8 +1675,17 @@
 					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
+				);
 				INFOPLIST_FILE = "BeeProtection-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1634,15 +1695,6 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeeProtection-tvOS.app/BeeProtection-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-print/ios/RNPrint",
-				);
 			};
 			name = Release;
 		};

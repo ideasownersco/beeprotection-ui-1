@@ -60,6 +60,10 @@ export const ACTION_TYPES = {
   APPROVE_PHOTOS_SUCCESS: '@driver/APPROVE_PHOTOS_SUCCESS',
   APPROVE_PHOTOS_FAILURE: '@driver/APPROVE_PHOTOS_FAILURE',
 
+  PRINT_INVOICE_REQUEST: '@driver/PRINT_INVOICE_REQUEST',
+  PRINT_INVOICE_SUCCESS: '@driver/PRINT_INVOICE_SUCCESS',
+  PRINT_INVOICE_FAILURE: '@driver/PRINT_INVOICE_FAILURE',
+
   DRIVER_LOCATION_UPDATED: '@driver/DRIVER_LOCATION_UPDATED',
 };
 
@@ -173,6 +177,14 @@ function approveImages(params) {
   };
 }
 
+
+function printInvoice(payload) {
+  return {
+    type: ACTION_TYPES.PRINT_INVOICE_REQUEST,
+    payload,
+  };
+}
+
 export const ACTIONS = {
   saveProfile,
   fetchProfile,
@@ -189,4 +201,5 @@ export const ACTIONS = {
   fetchJobPhotos,
   uploadImages,
   approveImages,
+  printInvoice
 };

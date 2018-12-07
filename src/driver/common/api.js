@@ -1,4 +1,5 @@
 import {request} from 'utils/network';
+import {WEB_URL} from 'utils/env';
 
 function saveProfile(params) {
   const path = `driver/profile/update`;
@@ -66,6 +67,16 @@ function approvePhotos(id, params) {
   return request(requestParams);
 }
 
+function printInvoice(orderID) {
+  const path = `driver/orders/${orderID}/invoice/print`;
+  let requestParams = {
+    path,
+    params:{},
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
 function fetchProfile() {
   const path = `driver/profile`;
   return request({path});
@@ -110,4 +121,5 @@ export const API = {
   fetchJobPhotos,
   uploadPhotos,
   approvePhotos,
+  printInvoice
 };

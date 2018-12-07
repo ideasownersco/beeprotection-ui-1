@@ -11,6 +11,7 @@ import UpcomingOrdersScene from 'driver/orders/UpcomingOrdersScene';
 import I18n from 'utils/locale';
 import colors from 'assets/theme/colors';
 import PhotosUploadScene from 'driver/orders/PhotosUploadScene';
+import PrintInvoiceScene from 'driver/orders/PrintInvoice';
 
 const getDrawerIcon = navigation => {
   return {
@@ -46,6 +47,9 @@ const HomeStack = createStackNavigator(
     PhotosUpload: {
       screen: PhotosUploadScene,
     },
+    PrintInvoice:{
+      screen:PrintInvoiceScene
+    }
   },
   {
     navigationOptions: ({navigation}) => ({

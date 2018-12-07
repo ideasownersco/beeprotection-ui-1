@@ -4,6 +4,7 @@ import {ACTION_TYPES} from 'driver/common/actions';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import I18n from 'utils/locale';
+import {ACTIONS as APP_ACTIONS} from "../../app/common/actions";
 
 function* fetchWorkingOrder() {
   try {
@@ -97,6 +98,33 @@ function* fetchOrderDetails(action) {
   }
 }
 
+function* printInvoice(action) {
+  const {orderID, resolve, reject} = action.payload;
+
+  try {
+    const params = {
+      body: {
+        order_id:orderID,
+      },
+    };
+    const response = yield call(API.printInvoice, orderID,params);
+    yield put({
+      type: ACTION_TYPES.PRINT_INVOICE_SUCCESS,
+    });
+    yield resolve(response);
+  } catch (error) {
+    yield put({type: ACTION_TYPES.PRINT_INVOICE_FAILURE, error});
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: I18n.t('print_failed'),
+        type: 'error',
+      }),
+    );
+    yield reject(error);
+  }
+}
+
+
 function* fetchUpcomingOrdersMonitor() {
   yield takeLatest(
     ACTION_TYPES.FETCH_UPCOMING_ORDERS_REQUEST,
@@ -116,9 +144,14 @@ function* fetchOrderDetailsMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_ORDER_DETAILS_REQUEST, fetchOrderDetails);
 }
 
+function* printInvoiceMonitor() {
+  yield takeLatest(ACTION_TYPES.PRINT_INVOICE_REQUEST, printInvoice);
+}
+
 export const sagas = all([
   fork(fetchWorkingOrderMonitor),
   fork(fetchUpcomingOrdersMonitor),
   fork(fetchPastOrdersMonitor),
   fork(fetchOrderDetailsMonitor),
+  fork(printInvoiceMonitor),
 ]);

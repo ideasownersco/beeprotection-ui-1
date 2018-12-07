@@ -91,6 +91,12 @@ class OrderDetailScene extends Component {
     });
   };
 
+  printInvoice = () => {
+    this.props.navigation.navigate('PrintInvoice', {
+      orderID: this.props.order.id,
+    });
+  };
+
   startDriving = () => {
     let {job} = this.props.order;
     BackgroundGeolocation.start();
@@ -141,6 +147,13 @@ class OrderDetailScene extends Component {
             <OrderBasicInfo item={order} />
             <OrderItems order={order} />
             <OrderTotal total={order.total} />
+
+            <Button
+              raised
+              onPress={this.printInvoice}
+              title={I18n.t('print_invoice')}
+            />
+
             {order.user && (
               <View>
                 <SectionHeading title={I18n.t('customer_info')} />
@@ -172,8 +185,12 @@ class OrderDetailScene extends Component {
                 )}
               </View>
             )}
+
+
+
           </View>
         )}
+
       </ScrollView>
     );
   }

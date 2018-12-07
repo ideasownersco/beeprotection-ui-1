@@ -14,6 +14,7 @@ export async function request({
     isBlob: false,
     paginated: false,
     paginatedUrl: '',
+    web:false
   },
   requiresAuthentication = false,
   forceAuthentication = false,
