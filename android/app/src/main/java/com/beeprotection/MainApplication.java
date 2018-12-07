@@ -3,6 +3,7 @@ package com.beeprotection;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.christopherdro.RNPrint.RNPrintPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.horcrux.svg.SvgPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -40,6 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
           new RNBackgroundGeolocation(),
           new RNBackgroundFetchPackage(),
           new MainReactPackage(),
+            new RNPrintPackage(),
           new PickerPackage(),
           new SvgPackage(),
           new RNDeviceInfo(),
