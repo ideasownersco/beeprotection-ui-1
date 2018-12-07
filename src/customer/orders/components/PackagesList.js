@@ -89,6 +89,7 @@ export default class PackagesList extends Component {
               <Text> : </Text>
               <Title>{quantity} ft</Title>
             </View>
+            <Divider style={{marginVertical: 10}} />
             <Slider
               disabled={!activeItemID}
               step={1}
