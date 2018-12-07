@@ -14,14 +14,14 @@ import I18n from 'utils/locale';
 import Divider from 'components/Divider';
 import {Title} from 'react-native-paper';
 
-let SectionHeader = ({item}) => {
+let SectionHeader = ({item,onPress}) => {
   return (
-    <View style={[styles.sectionContainer]}>
+    <Touchable onPress={onPress} style={[styles.sectionContainer]} >
       <View>
         <Text style={[styles.headerText]}>{item.name}</Text>
-      </View>
       <View style={styles.line} />
-    </View>
+      </View>
+    </Touchable>
   );
 };
 
@@ -32,15 +32,29 @@ export default class PackagesList extends Component {
     onItemPress: PropTypes.func.isRequired,
   };
 
-  renderSectionHeader = items => {
-    return items
-      .map(item => item)
-      .sort((a, b) => parseInt(a.order) - parseInt(b.order));
+  state = {
+    activeSection:0
   };
 
+  componentDidMount() {
+    if(!this.props.activeItemID) {
+      this.setState({
+        activeSection: 0
+      }, () => {
+        this.props.onItemPress(this.props.items[0]);
+      });
+    }
+  }
+
   componentDidUpdate() {
-    if(!this.props.activeItemID && this.props.items.length === 1) {
-      this.props.onItemPress(this.props.items[0]);
+    // if(!this.props.activeItemID && this.props.items.length === 1) {
+    if(!this.props.activeItemID) {
+      this.setState({
+        activeSection:0
+      },()=>{
+        this.props.onItemPress(this.props.items[0]);
+      });
+
       setTimeout(()=>{
         if(this.props.activeCategoryID === 4) {
           this.props.selectQuantity(10);
@@ -49,11 +63,24 @@ export default class PackagesList extends Component {
     }
   }
 
+  onItemPress = (item,index) => {
+    this.setState({
+      activeSection:index
+    });
+    this.props.onItemPress(item);
+  };
+
+  renderSectionHeader = items => {
+    return items
+      .map(item => item)
+      .sort((a, b) => parseInt(a.order) - parseInt(b.order));
+  };
+
   renderHeader = (item, index, isActive) => {
     let {onItemPress, activeItemID} = this.props;
     return (
       <View style={styles.headerContainer}>
-        <Touchable onPress={() => onItemPress(item)} key={item.id}>
+        <Touchable onPress={() => this.onItemPress(item,index)} key={item.id}>
           <IconFactory
             type="FontAwesome"
             name={item.id === activeItemID ? 'check-circle' : 'circle-thin'}
@@ -61,13 +88,13 @@ export default class PackagesList extends Component {
             size={30}
           />
         </Touchable>
-        <SectionHeader item={item} />
-        <FontAwesome
-          name={isActive ? 'minus-square-o' : 'plus-square-o'}
-          color={colors.primary}
-          size={25}
-          style={styles.icon}
-        />
+        <SectionHeader item={item} onPress={() => this.onItemPress(item,index)}/>
+        {/*<FontAwesome*/}
+          {/*name={isActive ? 'minus-square-o' : 'plus-square-o'}*/}
+          {/*color={colors.primary}*/}
+          {/*size={25}*/}
+          {/*style={styles.icon}*/}
+        {/*/>*/}
       </View>
     );
   };
@@ -107,6 +134,8 @@ export default class PackagesList extends Component {
   render() {
     const {items} = this.props;
 
+    console.log('this.props.activeItemID',this.props.activeItemID);
+
     return (
       <View style={styles.listContainer}>
         <Accordion
@@ -114,7 +143,8 @@ export default class PackagesList extends Component {
           renderHeader={this.renderHeader}
           renderContent={this.renderContent}
           underlayColor="transparent"
-          // initiallyActiveSection={0}
+          initiallyActiveSection={this.state.activeSection}
+          activeSection={this.state.activeSection}
         />
       </View>
     );

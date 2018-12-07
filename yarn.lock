@@ -4867,22 +4867,22 @@ react-native-animatable@^1.2.4:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-background-fetch@^2.4.3, react-native-background-fetch@~2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/react-native-background-fetch/-/react-native-background-fetch-2.4.3.tgz#4621cca2a8f9e96edbf0556afcd04873bd698f37"
+react-native-background-fetch@^2.4.5, react-native-background-fetch@~2.4.4:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/react-native-background-fetch/-/react-native-background-fetch-2.4.5.tgz#ddf201d1e9799957e20068a8ca19b98d3e25e7ce"
   dependencies:
     fast-plist "^0.1.2"
     plist "^2.0.1"
     xcode "^0.9.1"
 
-react-native-background-geolocation@^2.13.4:
-  version "2.13.4"
-  resolved "https://registry.yarnpkg.com/react-native-background-geolocation/-/react-native-background-geolocation-2.13.4.tgz#a1e709f07d3e27783e85ba150fe03a7a57a5b3f1"
+react-native-background-geolocation@^2.14.2:
+  version "2.14.2"
+  resolved "https://registry.yarnpkg.com/react-native-background-geolocation/-/react-native-background-geolocation-2.14.2.tgz#a95ded5fb12f0cd02035fc6031eeeb2d9a8eebf7"
   dependencies:
     cocoa-lumberjack "^3.0.5"
     fast-plist "^0.1.2"
     plist "^2.0.1"
-    react-native-background-fetch "~2.4.3"
+    react-native-background-fetch "~2.4.4"
     xcode "^0.9.1"
 
 react-native-code-push@^5.4.2:
@@ -4896,11 +4896,11 @@ react-native-code-push@^5.4.2:
     plist "3.0.1"
     xcode "1.0.0"
 
-react-native-collapsible@^0.12.3:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-0.13.0.tgz#bd88aa1649b15cb748d59aac44f8f6b94bb77efd"
+react-native-collapsible@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-0.12.0.tgz#8ef25f23f4eec72af4a80074b3f534f8605c7f80"
   dependencies:
-    prop-types "^15.6.2"
+    prop-types "^15.5.10"
 
 react-native-device-info@^0.24.0:
   version "0.24.0"
