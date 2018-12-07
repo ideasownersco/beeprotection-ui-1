@@ -176,5 +176,6 @@
   "login_do" : "login",
   "saving" : "Saving",
   "delete" : "Delete",
-  "track_driver" : "Track Driver"
+  "track_driver" : "Track Driver",
+  "print_invoice" : "Print Invoice",
 }

@@ -179,5 +179,6 @@
   "login_do" : "قم بتسجبل الدخول",
   "saving" : "جاري عملية الحفظ",
   "delete" : "حذف",
-  "track_driver" : "تتبع السائق"
+  "track_driver" : "تتبع السائق",
+  "print_invoice" : "اطبع فاتورة"
 }

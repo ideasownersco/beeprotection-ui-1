@@ -69,13 +69,9 @@ class PrintInvoiceScene extends Component {
   };
 
   componentDidMount() {
-
     this.props.navigation.setParams({
       handleRightButtonPress: this.printInvoice,
     });
-
-    console.log('this.props',this.props);
-
     if(this.props.navigation) {
       this.downloadInvoice();
     }
@@ -84,11 +80,9 @@ class PrintInvoiceScene extends Component {
 
 
   downloadInvoice = () => {
-
     this.setState({
       downloaded:false
     });
-
     return new Promise((resolve, reject) => {
       this.props.dispatch(DRIVER_ACTIONS.printInvoice({
           orderID:this.props.navigation.getParam('orderID'),
@@ -106,24 +100,19 @@ class PrintInvoiceScene extends Component {
       .catch(e => {});
   };
 
-
   printInvoice = () => {
     if(this.state.downloaded) {
       // RNPrint.
       RNPrint.print({ filePath: this.state.invoiceURL})
+    } else {
+      alert('Invoice file is being processed, Please wait a minute and try again');
     }
   };
-
-  // async printRemotePDF() {
-  //   await RNPrint.print({ filePath: 'https://graduateland.com/api/v2/users/jesper/cv' })
-  // }
 
   render() {
 
     let orderID = this.props.navigation.getParam('orderID');
     let url = `${WEB_URL}/orders/${orderID}/invoice`;
-
-    console.log('this.state',this.state);
     return (
       <WebView
         source={{uri: url}}
