@@ -82,6 +82,10 @@ export const ACTION_TYPES = {
   FETCH_HAS_FREE_WASH_SUCCESS: '@customer/FETCH_HAS_FREE_WASH_SUCCESS',
   FETCH_HAS_FREE_WASH_FAILURE: '@customer/FETCH_HAS_FREE_WASH_FAILURE',
 
+  SET_HAS_FREE_WASH_REQUEST: '@customer/SET_HAS_FREE_WASH_REQUEST',
+  SET_HAS_FREE_WASH_SUCCESS: '@customer/SET_HAS_FREE_WASH_SUCCESS',
+  SET_HAS_FREE_WASH_FAILURE: '@customer/SET_HAS_FREE_WASH_FAILURE',
+
   SET_PAYMENT_SUCCESS_REQUEST: '@customer/SET_PAYMENT_SUCCESS_REQUEST',
   SET_PAYMENT_SUCCESS_FAILURE: '@customer/SET_PAYMENT_SUCCESS_FAILURE',
   SET_PAYMENT_SUCCESS_SUCCESS: '@customer/SET_PAYMENT_SUCCESS_SUCCESS',
@@ -140,9 +144,15 @@ function fetchCategories(params) {
   };
 }
 
-function fetchHasFreeWash(params) {
+function fetchHasFreeWash(params = {}) {
   return {
-    type: ACTION_TYPES.CATEGORY_REQUEST,
+    type: ACTION_TYPES.FETCH_HAS_FREE_WASH_REQUEST,
+    params,
+  };
+}
+function setHasFreeWash(params = {}) {
+  return {
+    type: ACTION_TYPES.SET_HAS_FREE_WASH_REQUEST,
     params,
   };
 }
@@ -259,6 +269,7 @@ export const ACTIONS = {
   flushCart,
   fetchCategories,
   fetchHasFreeWash,
+  setHasFreeWash,
   fetchTimings,
   fetchAddresses,
   fetchAreas,

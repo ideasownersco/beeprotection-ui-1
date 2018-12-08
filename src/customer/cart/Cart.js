@@ -63,6 +63,9 @@ class Cart extends PureComponent {
   };
 
   componentDidMount() {
+    
+    console.log('this.props.cart',this.props.cart);
+    
     const dates = [];
     for (let i = 0; i < 30; i++) {
       dates.push(moment().add(i, 'days'));
@@ -428,7 +431,7 @@ class Cart extends PureComponent {
       areas,
     } = this.props;
 
-    let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash} = cart;
+    let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash,hasFreeWash} = cart;
 
     let {
       dates,
@@ -442,6 +445,9 @@ class Cart extends PureComponent {
       address,
       savingAddress,
     } = this.state;
+
+    console.log('isFreeWash',isFreeWash);
+    console.log('hasFreeWash',hasFreeWash);
 
     if (!isFreeWash && !cartItems.length) {
       return <EmptyCart />;

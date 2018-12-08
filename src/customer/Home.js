@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {SELECTORS} from 'customer/selectors/orders';
 import {connect} from 'react-redux';
-import {ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
+import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 import StandingOrdersList from 'customer/components/StandingOrdersList';
 import colors from 'assets/theme/colors';
 
@@ -34,6 +34,7 @@ class Home extends Component {
   componentDidMount() {
     this.fetchWorkingOrders();
     AppState.addEventListener('change', this.handleAppStateChange);
+    this.props.dispatch(CUSTOMER_ACTIONS.fetchHasFreeWash());
   }
 
   componentWillUnmount() {
@@ -71,7 +72,7 @@ class Home extends Component {
 
   fetchWorkingOrders = () => {
     this.props.dispatch(
-      ORDER_ACTIONS.fetchWorkingOrders({
+      CUSTOMER_ACTIONS.fetchWorkingOrders({
         force: true,
       }),
     );

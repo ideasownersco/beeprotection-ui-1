@@ -293,12 +293,33 @@ function* fetchHasFreeWash(action) {
       },
     };
     const response = yield call(API.fetchHasFreeWash, params);
+    console.log('response',response);
     yield put({
       type: ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS,
-      uuid: uuid,
+      has_free_wash:response.has_free_wash
     });
   } catch (error) {
     yield put({type: ACTION_TYPES.FETCH_HAS_FREE_WASH_FAILURE, error});
+  }
+}
+
+function* setHasFreeWash(action) {
+  try {
+    const uuid = yield call(getStorageItem, DEVICE_UUID_KEY);
+
+    let params = {
+      body: {
+        uuid: uuid,
+        ...action.params
+      },
+    };
+    const response = yield call(API.setHasFreeWash, params);
+    yield put({
+      type: ACTION_TYPES.SET_HAS_FREE_WASH_SUCCESS,
+      has_free_wash:response.has_free_wash
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.SET_HAS_FREE_WASH_FAILURE, error});
   }
 }
 
@@ -386,6 +407,10 @@ function* fetchHasFreeWashMonitor() {
   yield takeLatest(ACTION_TYPES.FETCH_HAS_FREE_WASH_REQUEST, fetchHasFreeWash);
 }
 
+function* setHasFreeWashMonitor() {
+  yield takeLatest(ACTION_TYPES.SET_HAS_FREE_WASH_REQUEST, setHasFreeWash);
+}
+
 function* setPaymentSuccessMonitor() {
   yield takeLatest(ACTION_TYPES.SET_PAYMENT_SUCCESS_REQUEST, setPaymentSuccess);
 }
@@ -393,6 +418,7 @@ function* setPaymentSuccessMonitor() {
 export const sagas = all([
   fork(fetchCategoriesMonitor),
   fork(fetchHasFreeWashMonitor),
+  fork(setHasFreeWashMonitor),
   fork(fetchTimingsMonitor),
   fork(fetchAddressesMonitor),
   fork(fetchAreasMonitor),

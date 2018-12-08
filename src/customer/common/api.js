@@ -20,6 +20,16 @@ function fetchHasFreeWash(params = {}) {
   return request(requestParams);
 }
 
+function setHasFreeWash(params = {}) {
+  const path = `freewash/set`;
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
 function fetchTimings(params = {}) {
   const path = `timings`;
   let requestParams = {
@@ -104,6 +114,7 @@ export const API = {
   fetchCartItems,
   fetchCategories,
   fetchHasFreeWash,
+  setHasFreeWash,
   fetchTimings,
   fetchAddresses,
   fetchAreas,

@@ -34,36 +34,9 @@ function* boot() {
   if (!isNull(installedStorageKey)) {
     yield put({type: ACTION_TYPES.INSTALL_SUCCESS, value: true});
   } else {
+    const uniqueId = DeviceInfo.getUniqueID();
+    yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId);
   }
-
-  // run on first
-  const uniqueId = DeviceInfo.getUniqueID();
-
-  try {
-    let response = yield call(API.storeDeviceID, {
-      body: {
-        uuid: uniqueId,
-      },
-    });
-    if (response.success) {
-      yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId);
-    }
-  } catch (error) {}
-
-  try {
-    let params = {
-      body: {
-        uuid: uniqueId,
-      },
-    };
-    let response = yield call(CUSTOMER_API.fetchHasFreeWash, params);
-    if (response.success) {
-      yield put({
-        type: CUSTOMER_ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS,
-        uuid: uniqueId,
-      });
-    }
-  } catch (error) {}
 
   // 2- Set language from history
   let currentLanguage = yield call(getStorageItem, LANGUAGE_KEY);
@@ -104,6 +77,36 @@ function* boot() {
       yield put({type: AUTH_ACTION_TYPES.LOGIN_FAILURE, error});
     }
   }
+  //
+  // // run on first
+
+  //
+  // try {
+  //   let response = yield call(API.storeDeviceID, {
+  //     body: {
+  //       uuid: uniqueId,
+  //     },
+  //   });
+  //   if (response.success) {
+  //     yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId);
+  //   }
+  // } catch (error) {}
+  //
+  // try {
+  //   let params = {
+  //     body: {
+  //       uuid: uniqueId,
+  //     },
+  //   };
+  //   let response = yield call(CUSTOMER_API.fetchHasFreeWash, params);
+  //   if (response.success) {
+  //     yield put({
+  //       type: CUSTOMER_ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS,
+  //       uuid: uniqueId,
+  //     });
+  //   }
+  // } catch (error) {}
+
 
   //4- boot the app
   yield put({type: ACTION_TYPES.BOOT_SUCCESS});

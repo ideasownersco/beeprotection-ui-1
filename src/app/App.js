@@ -14,6 +14,7 @@ import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import NavigatorService from 'components/NavigatorService';
 import colors from 'assets/theme/colors';
 import SplashScreen from 'app/SplashScreen';
+import {ACTIONS as CUSTOMER_ACTIONS} from "../customer/common/actions";
 
 class App extends Component {
   static propTypes = {

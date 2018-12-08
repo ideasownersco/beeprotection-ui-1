@@ -82,7 +82,7 @@ class CreateOrder extends PureComponent {
         showFreewashModal: true,
       });
     }
-    this.props.actions.setCartItem('isFreeWash', false);
+    // this.props.actions.setCartItem('isFreeWash', false);
   }
 
   loadCartScene = () => {
@@ -213,15 +213,19 @@ class CreateOrder extends PureComponent {
     this.setState({
       showFreewashModal: false,
     });
+
+    this.props.actions.setHasFreeWash({has_free_wash:false,force_fill:true});
+
   };
 
   onFreeWashPress = () => {
-    this.props.navigation.navigate('Cart');
+    this.props.actions.setHasFreeWash({has_free_wash:false});
     this.props.actions.setCartItem('hasFreeWash', false);
     this.props.actions.setCartItem('isFreeWash', true);
     this.setState({
       showFreewashModal: false,
     });
+    this.props.navigation.navigate('Cart');
   };
 
   selectQuantity = value => {
