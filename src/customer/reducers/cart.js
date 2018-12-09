@@ -65,7 +65,6 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         hasFreeWash: action.has_free_wash,
       };
-
     default:
       return state;
   }

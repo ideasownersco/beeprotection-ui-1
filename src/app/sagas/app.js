@@ -4,22 +4,12 @@ import CodePush from 'react-native-code-push';
 import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
 import {I18nManager} from 'react-native';
 import {API} from 'app/common/api';
-import {API as CUSTOMER_API} from 'customer/common/api';
 import {ACTION_TYPES} from 'app/common/actions';
-import {ACTION_TYPES as CUSTOMER_ACTION_TYPES} from 'customer/common/actions';
-import {
-  INSTALLED_KEY,
-  COUNTRY_KEY,
-  LANGUAGE_KEY,
-  PUSH_TOKEN_KEY,
-  AUTH_KEY,
-  DEVICE_UUID_KEY,
-  DEFAULT_LANGUAGE,
-} from 'utils/env';
+import {AUTH_KEY, COUNTRY_KEY, DEVICE_UUID_KEY, INSTALLED_KEY, LANGUAGE_KEY, PUSH_TOKEN_KEY,} from 'utils/env';
 import {API as AUTH_API} from 'guest/common/api';
 import {ACTION_TYPES as AUTH_ACTION_TYPES} from 'guest/common/actions';
 import {normalize} from 'normalizr';
-import {setStorageItem, getStorageItem} from 'utils/functions';
+import {getStorageItem, setStorageItem} from 'utils/functions';
 import {Schema} from 'utils/schema';
 import DeviceInfo from 'react-native-device-info';
 
@@ -33,16 +23,16 @@ function* boot() {
   let installedStorageKey = yield call(getStorageItem, INSTALLED_KEY);
   if (!isNull(installedStorageKey)) {
     yield put({type: ACTION_TYPES.INSTALL_SUCCESS, value: true});
-  } else {
+  }
+
+  let deviceUUIDKey = yield call(getStorageItem, DEVICE_UUID_KEY);
+  if(isNull(deviceUUIDKey)) {
     const uniqueId = DeviceInfo.getUniqueID();
     yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId);
   }
 
   // 2- Set language from history
   let currentLanguage = yield call(getStorageItem, LANGUAGE_KEY);
-  // if (isNull(currentLanguage)) {
-  //   currentLanguage = DEFAULT_LANGUAGE;
-  // }
 
   if (currentLanguage) {
     I18n.locale = currentLanguage;
@@ -77,36 +67,6 @@ function* boot() {
       yield put({type: AUTH_ACTION_TYPES.LOGIN_FAILURE, error});
     }
   }
-  //
-  // // run on first
-
-  //
-  // try {
-  //   let response = yield call(API.storeDeviceID, {
-  //     body: {
-  //       uuid: uniqueId,
-  //     },
-  //   });
-  //   if (response.success) {
-  //     yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId);
-  //   }
-  // } catch (error) {}
-  //
-  // try {
-  //   let params = {
-  //     body: {
-  //       uuid: uniqueId,
-  //     },
-  //   };
-  //   let response = yield call(CUSTOMER_API.fetchHasFreeWash, params);
-  //   if (response.success) {
-  //     yield put({
-  //       type: CUSTOMER_ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS,
-  //       uuid: uniqueId,
-  //     });
-  //   }
-  // } catch (error) {}
-
 
   //4- boot the app
   yield put({type: ACTION_TYPES.BOOT_SUCCESS});

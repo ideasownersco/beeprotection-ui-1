@@ -18,17 +18,11 @@ import colors from 'assets/theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from 'components/Button';
 import Dialog from 'components/Dialog';
-import IconFactory from 'components/IconFactory';
 import FreeWash from 'customer/components/FreeWash';
 import Modal from 'react-native-modal';
 
-type State = {
-  showCartSuccessModal: boolean,
-};
-
-const initialState = {};
-
 class CreateOrder extends PureComponent {
+
   state = {
     showCartSuccessModal: false,
     showFreewashModal: false,
