@@ -291,6 +291,9 @@ class Cart extends PureComponent {
       selectedTimeID,
       items,
       total,
+      customer_name,
+      customer_email,
+      customer_mobile
     } = cart;
     if (!isAuthenticated) {
       this.hideCheckoutConfirmDialog();
@@ -305,6 +308,9 @@ class Cart extends PureComponent {
         date: selectedDate,
         payment_mode: paymentMode,
         free_wash: cart.isFreeWash,
+        customer_name:customer_name,
+        customer_email:customer_email,
+        customer_mobile:customer_mobile,
       };
       return new Promise((resolve, reject) => {
         this.props.actions.checkout({item, resolve, reject});
