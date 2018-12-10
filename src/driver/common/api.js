@@ -38,11 +38,12 @@ function startDriving(id, params) {
   return request(requestParams);
 }
 
-function stopDriving(id) {
+function stopDriving(id,params) {
   const path = `driver/jobs/${id}/stop/drive`;
   let requestParams = {
     path,
     method: 'POST',
+    params
   };
   return request(requestParams);
 }

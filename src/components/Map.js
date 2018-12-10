@@ -30,14 +30,16 @@ export default class Map extends Component {
     initialized: false,
   };
 
-  shouldComponentUpdate(nextProps, prevState) {
-    if (
-      this.state.initialized !== prevState.initialized ||
-      nextProps.origin !== this.props.origin
-    ) {
-      return true;
-    }
-  }
+  // shouldComponentUpdate(nextProps, prevState) {
+  //   if (
+  //     this.state.initialized !== prevState.initialized ||
+  //     nextProps.origin !== this.props.origin
+  //   ) {
+  //     return true;
+  //   }
+  //
+  //   return false;
+  // }
 
   componentDidMount() {
     setTimeout(() => {

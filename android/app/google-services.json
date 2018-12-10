@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "320516717481",
+    "firebase_url": "https://beeprotection-194108.firebaseio.com",
+    "project_id": "beeprotection-194108",
+    "storage_bucket": "beeprotection-194108.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320516717481:android:809e146fdd39b0ae",
+        "android_client_info": {
+          "package_name": "com.beeprotection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320516717481-unuju4iql6fcq6uas8u3sfvt8le7ps4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8g2GFwsEpzHCYw1Gt4JFp2Ura0tkXwtk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

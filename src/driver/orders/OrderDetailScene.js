@@ -118,8 +118,22 @@ class OrderDetailScene extends Component {
 
   stopDriving = () => {
     let {job} = this.props.order;
+
     BackgroundGeolocation.stop();
-    this.props.dispatch(DRIVER_ACTIONS.stopDriving(job.id));
+    BackgroundGeolocation.getCurrentPosition({
+      timeout: 30,          // 30 second timeout to fetch location
+      persist: true,        // Defaults to state.enabled
+      maximumAge: 5000,     // Accept the last-known-location if not older than 5000 ms.
+      desiredAccuracy: 10,  // Try to fetch a location with an accuracy of `10` meters.
+      samples: 3,           // How many location samples to attempt.
+    }).then(location => {
+      let {latitude, longitude} = location.coords;
+      this.props.dispatch(DRIVER_ACTIONS.stopDriving(job.id, {
+          latitude: latitude,
+          longitude: longitude,
+        })
+      );
+    });
   };
 
   startWorking = () => {
