@@ -30,7 +30,6 @@ class TrackOrderScene extends Component {
         this.props.navigation.state.params.orderID,
       ),
     );
-    // this.props.dispatch(CUSTOMER_ACTIONS.fetchDr)
   }
 
   static defaultProps = {

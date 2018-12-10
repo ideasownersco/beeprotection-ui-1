@@ -49,13 +49,13 @@ export default class Map extends Component {
     }, 1000);
   }
 
-  componentDidUpdate(nextProps) {
-    if (this.props.origin.latitude !== nextProps.origin.latitude) {
-      if (this.state.initialized) {
-        this.map.fitToElements(true);
-      }
-    }
-  }
+  // componentDidUpdate(nextProps) {
+  //   if (this.props.origin.latitude !== nextProps.origin.latitude) {
+  //     if (this.state.initialized) {
+  //       this.map.fitToElements(true);
+  //     }
+  //   }
+  // }
 
   onMapLayout = () => {
     if (this.state.initialized) {
