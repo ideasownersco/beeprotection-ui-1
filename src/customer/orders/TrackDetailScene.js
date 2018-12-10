@@ -50,8 +50,8 @@ class TrackDetailScene extends Component {
       origin = {
         // latitude: 37.78825,
         // longitude: -122.4324,
-        latitude: job && job.driver ? job.driver.latitude : 29.3772392006689,
-        longitude: job && job.driver ? job.driver.longitude : 47.98511826155676,
+        latitude: job && job.driver && job.driver.latitude || 29.3772392006689,
+        longitude: job && job.driver && job.driver.longitude || 47.98511826155676,
         heading: 0,
       };
     }
