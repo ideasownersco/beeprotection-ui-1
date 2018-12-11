@@ -51,7 +51,7 @@ class OrderDetailScene extends Component {
       {
         ...GEOLOCATION_CONFIG,
         reset: true,
-        locationAuthorizationRequest: 'Any',
+        locationAuthorizationRequest: 'Always',
         url: `${NETWORK_PROTOCOL}${API_URL}/jobs/${job.id}/update/location`,
       },
 
