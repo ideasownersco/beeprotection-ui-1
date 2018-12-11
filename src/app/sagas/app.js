@@ -12,6 +12,7 @@ import {normalize} from 'normalizr';
 import {getStorageItem, setStorageItem} from 'utils/functions';
 import {Schema} from 'utils/schema';
 import DeviceInfo from 'react-native-device-info';
+import {Platform} from 'react-native';
 
 function* setInstalled() {
   yield call(setStorageItem, INSTALLED_KEY, 'INSTALLED');
@@ -49,7 +50,8 @@ function* boot() {
     try {
       let response = yield call(AUTH_API.login, {
         body: {
-          push_token: pushTokenStorageKey,
+          token: pushTokenStorageKey,
+          os:Platform.OS === 'ios' ? 'ios' : 'android'
         },
       });
       const normalized = normalize(response.data, Schema.users);
