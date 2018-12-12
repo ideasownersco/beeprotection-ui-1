@@ -26,8 +26,6 @@ class OrderCustomerInfo extends PureComponent {
 
     let {customer_name,customer_mobile,customer_email} = this.props.cart;
 
-    console.log('this.props.cart',this.props.cart);
-
     return (
       <ScrollView
         style={{flex: 1, backgroundColor: 'white',padding:10}}

@@ -293,7 +293,6 @@ function* fetchHasFreeWash(action) {
       },
     };
     const response = yield call(API.fetchHasFreeWash, params);
-    console.log('response',response);
     yield put({
       type: ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS,
       has_free_wash:response.has_free_wash

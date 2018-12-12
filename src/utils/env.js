@@ -3,17 +3,17 @@ const defaults = {};
 if (__DEV__) {
   module.exports = {
     ...defaults,
-    // NETWORK_PROTOCOL: 'http://',
-    // WEB_URL: 'http://beeprotection.test',
-    // API_URL: 'beeprotection.test/api',
-    // SOCKET_SERVER: 'http://beeprotection.test:3000',
-    // PAYMENT_ENDPOINT: 'http://beeprotection.test/payment/knet',
+    NETWORK_PROTOCOL: 'http://',
+    WEB_URL: 'http://beeprotection.test',
+    API_URL: 'beeprotection.test/api',
+    SOCKET_SERVER: 'http://beeprotection.test:3000',
+    PAYMENT_ENDPOINT: 'http://beeprotection.test/payment/knet',
 
-    NETWORK_PROTOCOL:'https://',
-    WEB_URL: 'https://beeprotection.net',
-    API_URL: 'beeprotection.net/api',
-    SOCKET_SERVER: 'http://beeprotection.net:3000',
-    PAYMENT_ENDPOINT: 'https://beeprotection.net/payment/knet',
+    // NETWORK_PROTOCOL:'https://',
+    // WEB_URL: 'https://beeprotection.net',
+    // API_URL: 'beeprotection.net/api',
+    // SOCKET_SERVER: 'http://beeprotection.net:3000',
+    // PAYMENT_ENDPOINT: 'https://beeprotection.net/payment/knet',
 
     GOOGLE_MAPS_KEY: 'AIzaSyCpQX4H0QPxVgKuNMZ0ELG_ymgT8RHcKh4',
     GOOGLE_MAPS_IOS_KEY: 'AIzaSyDPCgdWqrkBe4v3uSuU-MZGJIZ0AQxfbCo',

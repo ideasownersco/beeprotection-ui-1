@@ -80,7 +80,7 @@ class OrderDetailScene extends Component {
   }
 
   onLocation = location => {
-    console.log('location', location);
+    // console.log('location', location);
   };
 
   uploadImages = () => {

@@ -64,8 +64,6 @@ class Cart extends PureComponent {
 
   componentDidMount() {
     
-    console.log('this.props.cart',this.props.cart);
-    
     const dates = [];
     for (let i = 0; i < 30; i++) {
       dates.push(moment().add(i, 'days'));
@@ -451,9 +449,6 @@ class Cart extends PureComponent {
       address,
       savingAddress,
     } = this.state;
-
-    console.log('isFreeWash',isFreeWash);
-    console.log('hasFreeWash',hasFreeWash);
 
     if (!isFreeWash && !cartItems.length) {
       return <EmptyCart />;

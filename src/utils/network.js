@@ -34,15 +34,12 @@ export async function request({
 
   if (__DEV__) {
     if (console.group) {
-      // console.groupCollapsed('action', 'NETWORK_REQUEST');
-      console.log('api', 'NETWORK_REQUEST');
-      console.log({
+      console.log('NETWORK_REQUEST',{
         path: fullUrl,
         method: method,
         params: params,
         api_token: apiToken,
       });
-      // console.groupEnd();
     }
   }
 
@@ -50,7 +47,6 @@ export async function request({
     if (forceAuthentication) {
       NavigatorService.navigate('Login');
     }
-    // throw 'CLIENT_NOT_AUTHENTICATED';
   }
 
   let headers = new Headers();
@@ -79,10 +75,7 @@ export async function request({
       // .then(({json}) => {
       if (__DEV__) {
         if (console.group) {
-          //   console.groupCollapsed('action', 'NETWORK_RESPONSE');
-          console.log('api', 'NETWORK_RESPONSE');
-          console.log('payload', json);
-          // console.groupEnd();
+          console.log('NETWORK_RESPONSE', json);
         }
       }
 
@@ -96,7 +89,7 @@ export async function request({
       return json;
     })
     .catch(e => {
-      console.log('fetch error', e);
+      console.log('NETWORK_REQUEST_ERROR', e);
       return Promise.reject(`${e}`);
     });
 }

@@ -142,8 +142,6 @@ export default class PackagesList extends Component {
   render() {
     const {items} = this.props;
 
-    console.log('this.props.activeItemID', this.props.activeItemID);
-
     return (
       <View style={styles.listContainer}>
         <Accordion
