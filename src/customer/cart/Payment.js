@@ -55,7 +55,6 @@ class Payment extends Component {
         scene: 'failed',
       });
     } else {
-      // console.log('wa');
     }
   };
 

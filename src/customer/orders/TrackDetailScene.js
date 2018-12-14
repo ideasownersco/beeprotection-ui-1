@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Text, View} from 'react-native';
+import {Text, View,AppState} from 'react-native';
 import {connect} from 'react-redux';
 import {SELECTORS as ORDER_SELECTORS} from 'customer/selectors/orders';
 import I18n from 'utils/locale';
@@ -11,6 +11,7 @@ import Map from 'components/Map';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 
 class TrackDetailScene extends Component {
+
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -21,7 +22,14 @@ class TrackDetailScene extends Component {
     }),
   };
 
+  state = {
+    appState: AppState.currentState
+  };
+
   componentDidMount() {
+    console.log('componentMounted');
+    AppState.addEventListener('change', this._handleAppStateChange);
+
     this.props.dispatch(
       CUSTOMER_ACTIONS.fetchOrderDetails(
         this.props.navigation.state.params.order.id,
@@ -36,6 +44,24 @@ class TrackDetailScene extends Component {
       );
     }
   }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = (nextAppState) => {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      const {order} = this.props;
+      if (order && order.trackeable) {
+        this.props.dispatch(
+          CUSTOMER_ACTIONS.subscribeToOrderTracking({
+            job_id: order.job.id,
+          }),
+        );
+      }
+    }
+    this.setState({appState: nextAppState});
+  };
 
   render() {
     let {order} = this.props;

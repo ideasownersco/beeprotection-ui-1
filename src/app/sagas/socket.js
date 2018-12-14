@@ -11,12 +11,26 @@ import {ACTION_TYPES as AUTH_ACTIONS} from 'guest/common/actions';
 import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
 
 function connect() {
-  const socket = io(SOCKET_SERVER);
+  const socket = io(SOCKET_SERVER,{
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax : 5000,
+    reconnectionAttempts: 99999
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnected',socket);
+  });
+
   return new Promise(resolve => {
     socket.on('connect', () => {
       resolve(socket);
     });
+    // socket.on('disonnect', () => {
+    //   console.log('disconnected',socket);
+    // })
   });
+
 }
 
 function subscribe(socket) {
@@ -73,11 +87,8 @@ function* handleIO(socket) {
 function* socketFlowMonitor() {
   while (true) {
     yield take(AUTH_ACTIONS.LOGIN_SUCCESS);
-
     const socket = yield call(connect);
-
     const task = yield fork(handleIO, socket);
-
     yield take(AUTH_ACTIONS.LOGOUT);
     yield cancel(task);
     socket.emit('logout');
