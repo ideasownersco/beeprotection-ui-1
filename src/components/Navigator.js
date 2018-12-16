@@ -5,8 +5,18 @@ import {Router as AdminRouter} from 'company/components/Router';
 import {Router as DriverRouter} from 'driver/components/Router';
 import {Router as CustomerRouter} from 'customer/components/Router';
 import {Router as GuestRouter} from 'guest/components/Router';
+import {CODE_PUSH_ENABLED} from 'utils/env';
+import CodePush from 'react-native-code-push';
 
 export default class Navigator extends Component {
+
+  constructor(props) {
+    super(props);
+    if (CODE_PUSH_ENABLED) {
+      CodePush.sync();
+    }
+  }
+
   shouldComponentUpdate(nextProps) {
     return this.props.user.id !== nextProps.user.id;
   }
