@@ -171,7 +171,12 @@ class OrderDetailScene extends Component {
             {order.user && (
               <View>
                 <SectionHeading title={I18n.t('customer_info')} />
-                <CustomerInfo user={order.user} />
+                <CustomerInfo user={{
+                  ...order.user,
+                  name:order.customer_name ? order.customer_name : order.user.name,
+                  mobile:order.customer_mobile ? order.customer_mobile : order.user.mobile,
+                }}
+                />
               </View>
             )}
 

@@ -18,17 +18,14 @@ function connect() {
     reconnectionAttempts: 99999
   });
 
-  socket.on('disconnect', () => {
-    console.log('disconnected',socket);
-  });
+  // socket.on('disconnect', () => {
+  //   console.log('disconnected',socket);
+  // });
 
   return new Promise(resolve => {
     socket.on('connect', () => {
       resolve(socket);
     });
-    // socket.on('disonnect', () => {
-    //   console.log('disconnected',socket);
-    // })
   });
 
 }
