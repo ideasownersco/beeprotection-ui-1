@@ -297,8 +297,6 @@ class Cart extends PureComponent {
       this.hideCheckoutConfirmDialog();
       return this.redirectToLogin();
     } else {
-
-
       const item = {
         user_id: user.id,
         address_id: selectedAddressID,
