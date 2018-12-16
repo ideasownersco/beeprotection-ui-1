@@ -32,16 +32,16 @@ export async function request({
 
   const apiToken = await getStorageItem(AUTH_KEY);
 
-  if (__DEV__) {
-    if (console.group) {
-      console.log('NETWORK_REQUEST',{
-        path: fullUrl,
-        method: method,
-        params: params,
-        api_token: apiToken,
-      });
-    }
-  }
+  // if (__DEV__) {
+  //   if (console.group) {
+  //     console.log('NETWORK_REQUEST',{
+  //       path: fullUrl,
+  //       method: method,
+  //       params: params,
+  //       api_token: apiToken,
+  //     });
+  //   }
+  // }
 
   if (requiresAuthentication && !apiToken) {
     if (forceAuthentication) {
@@ -73,11 +73,11 @@ export async function request({
     )
     .then(({status, statusType, json}) => {
       // .then(({json}) => {
-      if (__DEV__) {
-        if (console.group) {
-          console.log('NETWORK_RESPONSE', json);
-        }
-      }
+      // if (__DEV__) {
+      //   if (console.group) {
+      //     console.log('NETWORK_RESPONSE', json);
+      //   }
+      // }
 
       if (!json.success) {
         const errorMsg = json.message
@@ -89,7 +89,7 @@ export async function request({
       return json;
     })
     .catch(e => {
-      console.log('NETWORK_REQUEST_ERROR', e);
+      // console.log('NETWORK_REQUEST_ERROR', e);
       return Promise.reject(`${e}`);
     });
 }

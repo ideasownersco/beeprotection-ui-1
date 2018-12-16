@@ -27,7 +27,6 @@ class TrackDetailScene extends Component {
   };
 
   componentDidMount() {
-    console.log('componentMounted');
     AppState.addEventListener('change', this._handleAppStateChange);
 
     this.props.dispatch(

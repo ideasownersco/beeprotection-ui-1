@@ -54,6 +54,7 @@ function* boot() {
           os:Platform.OS === 'ios' ? 'ios' : 'android'
         },
       });
+
       const normalized = normalize(response.data, Schema.users);
 
       yield put({
@@ -108,7 +109,7 @@ function* setPushToken(action) {
     const params = {
       body: {
         token: action.params.token,
-        os: action.params.os,
+        os:Platform.OS === 'ios' ? 'ios' : 'android'
       },
     };
 
