@@ -180,5 +180,6 @@
   "saving" : "جاري عملية الحفظ",
   "delete" : "حذف",
   "track_driver" : "تتبع السائق",
-  "print_invoice" : "اطبع فاتورة"
+  "print_invoice" : "اطبع فاتورة",
+  "resume" : "Reset"
 }

@@ -178,4 +178,5 @@
   "delete" : "Delete",
   "track_driver" : "Track Driver",
   "print_invoice" : "Print Invoice",
+  "resume" : "Reset"
 }
