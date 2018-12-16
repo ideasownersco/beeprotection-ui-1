@@ -213,7 +213,6 @@ class CreateOrder extends PureComponent {
   };
 
   onFreeWashPress = () => {
-    this.props.actions.setHasFreeWash({has_free_wash:false});
     this.props.actions.setCartItem('hasFreeWash', false);
     this.props.actions.setCartItem('isFreeWash', true);
     this.setState({

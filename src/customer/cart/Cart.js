@@ -297,6 +297,8 @@ class Cart extends PureComponent {
       this.hideCheckoutConfirmDialog();
       return this.redirectToLogin();
     } else {
+
+
       const item = {
         user_id: user.id,
         address_id: selectedAddressID,
@@ -314,6 +316,9 @@ class Cart extends PureComponent {
         this.props.actions.checkout({item, resolve, reject});
       })
         .then(order => {
+
+          this.props.actions.setHasFreeWash({has_free_wash:false,force_fill:true});
+
           if (this.state.paymentMode === 'cash') {
             if (order.status == 'Success') {
               this.setState({
