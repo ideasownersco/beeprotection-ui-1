@@ -93,6 +93,8 @@ class Payment extends Component {
 
     let orderID = this.props.navigation.getParam('orderID');
     let url = `${PAYMENT_ENDPOINT}/${orderID}/checkout`;
+    // let url = `http://beeprotection.test/knet-pay`;
+    // let url = `http://beeprotection.test/knet-pay`;
 
     switch (scene) {
       case 'payment':
