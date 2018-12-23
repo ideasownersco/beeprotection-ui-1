@@ -40,7 +40,7 @@ class TrackScene extends PureComponent {
   };
 
   onMapLayout = () => {
-    // this.map.fitToElements(true);
+    this.map.fitToElements(true);
     // let drivers = [
     //   {
     //     driver_id: 1,
@@ -66,16 +66,15 @@ class TrackScene extends PureComponent {
   };
 
   componentDidUpdate(nextProps) {
-    if (this.props.drivers !== nextProps.drivers) {
-      if (!this.state.pauseTrackingUpdate) {
-        this.onMapLayout();
-      }
-    }
+    // if (this.props.drivers !== nextProps.drivers) {
+    //   if (!this.state.pauseTrackingUpdate) {
+    //     this.onMapLayout();
+    //   }
+    // }
   }
 
   resumeTrackingUpdate = () => {
-    this.onMapLayout();
-
+    // this.onMapLayout();
     this.setState({
       pauseTrackingUpdate: false,
     });
@@ -148,8 +147,9 @@ class TrackScene extends PureComponent {
           // showsTraffic={true}
           showsUserLocation={true}
           showsMyLocationButton={true}
-          onLongPress={this.pauseTrackingUpdate}
-          onPress={this.pauseTrackingUpdate}>
+          // onLongPress={this.pauseTrackingUpdate}
+          // onPress={this.pauseTrackingUpdate}
+        >
           {drivers.map((driver, index) => {
             const {heading} = driver;
             const rotate =
@@ -171,7 +171,7 @@ class TrackScene extends PureComponent {
                       width: 20,
                       height: 40,
                     },
-                    rotate && {transform: [{rotate}]},
+                    // rotate && {transform: [{rotate}]},
                   ]}
                 />
               </MapView.Marker>
