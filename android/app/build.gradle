@@ -167,8 +167,6 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'
     // From node_modules
     //noinspection GradleCompatible
-    implementation 'com.google.firebase:firebase-core:16.0.0'
-    //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
 }
 
@@ -178,3 +176,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'
