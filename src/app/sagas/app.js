@@ -48,15 +48,14 @@ function* boot() {
   if (!isNull(authStorageKey)) {
     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
     try {
-      let response = yield call(AUTH_API.login, {
+      const params = {
         body: {
           token: pushTokenStorageKey,
           os:Platform.OS === 'ios' ? 'ios' : 'android'
         },
-      });
-
+      };
+      let response = yield call(AUTH_API.login, params);
       const normalized = normalize(response.data, Schema.users);
-
       yield put({
         type: AUTH_ACTION_TYPES.LOGIN_SUCCESS,
         entities: normalized.entities,

@@ -84,7 +84,7 @@ class Login extends Component {
             value={email}
             field="email"
             maxLength={40}
-            label={I18n.t('email')}
+            placeholder={I18n.t('email')}
             keyboardType="email-address"
           />
 
@@ -93,7 +93,7 @@ class Login extends Component {
             value={password}
             field="password"
             maxLength={40}
-            label={I18n.t('password')}
+            placeholder={I18n.t('password')}
             secureTextEntry={true}
           />
 
