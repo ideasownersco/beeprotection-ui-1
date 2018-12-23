@@ -41,28 +41,10 @@ class TrackScene extends PureComponent {
 
   onMapLayout = () => {
     this.map.fitToElements(true);
-    // let drivers = [
-    //   {
-    //     driver_id: 1,
-    //     heading: 305.16,
-    //     job_id: '1',
-    //     latitude: 29.33285,
-    //     longitude: 48.05415,
-    //   },
-    //   {
-    //     driver_id: 2,
-    //     heading: 305.16,
-    //     job_id: '1',
-    //     latitude: 29.3195616,
-    //     longitude: 47.991724
-    //   },
-    // ];
-    //
-
-    this.map.fitToCoordinates(this.props.drivers, {
-      edgePadding: DEFAULT_PADDING,
-      animated: true,
-    });
+    // this.map.fitToCoordinates(this.props.drivers, {
+    //   edgePadding: DEFAULT_PADDING,
+    //   animated: true,
+    // });
   };
 
   componentDidUpdate(nextProps) {
@@ -74,9 +56,10 @@ class TrackScene extends PureComponent {
   }
 
   resumeTrackingUpdate = () => {
-    // this.onMapLayout();
     this.setState({
       pauseTrackingUpdate: false,
+    },()=>{
+      this.onMapLayout();
     });
   };
 
@@ -89,16 +72,16 @@ class TrackScene extends PureComponent {
   render() {
     let {drivers} = this.props;
 
-    let origin = {
-      // latitude: 37.48522,
-      // longitude: -122.23635,
-      latitude: 29.3772392006689,
-      longitude: 47.98511826155676,
-      heading: 0,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA,
-    };
-
+    // let origin = {
+    //   latitude: 37.48522,
+    //   longitude: -122.23635,
+    //   // latitude: 29.3772392006689,
+    //   // longitude: 47.98511826155676,
+    //   heading: 0,
+    //   latitudeDelta: LATITUDE_DELTA,
+    //   longitudeDelta: LONGITUDE_DELTA,
+    // };
+    //
     // let drivers = [
     //   {
     //     driver_id: 1,
@@ -106,6 +89,13 @@ class TrackScene extends PureComponent {
     //     job_id: '1',
     //     latitude: 37.49844611,
     //     longitude: -122.31576031,
+    //   },
+    //   {
+    //     driver_id: 2,
+    //     heading: 305.16,
+    //     job_id: '2',
+    //     latitude: 37.33182,
+    //     longitude: -122.03118,
     //   },
     // ];
 
@@ -144,11 +134,10 @@ class TrackScene extends PureComponent {
           initialRegion={origin}
           onMapReady={this.onMapLayout}
           maxZoomLevel={12}
-          // showsTraffic={true}
-          showsUserLocation={true}
-          showsMyLocationButton={true}
-          // onLongPress={this.pauseTrackingUpdate}
-          // onPress={this.pauseTrackingUpdate}
+          showsUserLocation={false}
+          showsMyLocationButton={false}
+          onLongPress={this.pauseTrackingUpdate}
+          onPress={this.pauseTrackingUpdate}
         >
           {drivers.map((driver, index) => {
             const {heading} = driver;
