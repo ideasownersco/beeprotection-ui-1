@@ -1,7 +1,6 @@
 package com.beeprotection;
 
 import android.app.Application;
-
 import com.facebook.react.ReactApplication;
 import com.christopherdro.RNPrint.RNPrintPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
@@ -25,10 +24,10 @@ public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
 
-        @Override
-        protected String getJSBundleFile() {
-            return CodePush.getJSBundleFile();
-        }
+    @Override
+    protected String getJSBundleFile() {
+      return CodePush.getJSBundleFile();
+    }
 
     @Override
     public boolean getUseDeveloperSupport() {
@@ -38,18 +37,18 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new RNBackgroundGeolocation(),
-          new RNBackgroundFetchPackage(),
-          new MainReactPackage(),
-            new RNPrintPackage(),
-          new PickerPackage(),
-          new SvgPackage(),
-          new RNDeviceInfo(),
-          new RNI18nPackage(),
-          new CodePush("7BqJ5-d4-mQTn7Fi6NmlBPohfKI1687af85f-1654-43d6-b735-3ff7e4bf4cd7", getApplicationContext(), BuildConfig.DEBUG),
-          new VectorIconsPackage(),
-          new ReactNativePushNotificationPackage(),
-          new MapsPackage()
+              new RNBackgroundGeolocation(),
+              new RNBackgroundFetchPackage(),
+              new MainReactPackage(),
+              new RNPrintPackage(),
+              new PickerPackage(),
+              new SvgPackage(),
+              new RNDeviceInfo(),
+              new RNI18nPackage(),
+              new CodePush("7BqJ5-d4-mQTn7Fi6NmlBPohfKI1687af85f-1654-43d6-b735-3ff7e4bf4cd7", getApplicationContext(), BuildConfig.DEBUG),
+              new VectorIconsPackage(),
+              new ReactNativePushNotificationPackage(),
+              new MapsPackage()
       );
     }
 

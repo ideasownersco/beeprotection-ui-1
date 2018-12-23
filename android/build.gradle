@@ -1,6 +1,18 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+
+    ext {
+        buildToolsVersion = "27.0.3"
+        minSdkVersion = 16
+        compileSdkVersion = 27
+        targetSdkVersion = 27
+        supportLibVersion = "27.1.0"
+        googlePlayServicesVersion = "16.0.0"
+        //googlePlayServicesVersion = "11.8.0"
+        androidMapsUtilsVersion = "0.5+"
+    }
+
     repositories {
         jcenter()
         maven {
@@ -9,8 +21,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0',
-        classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.0'
+//        classpath 'com.google.gms:google-services:4.0.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -39,13 +51,4 @@ allprojects {
            url "$rootDir/../node_modules/react-native-background-fetch/android/libs"
         }
     }
-}
-
-ext {
-    buildToolsVersion = "27.0.3"
-    minSdkVersion = 16
-    compileSdkVersion = 27
-    targetSdkVersion = 27
-    supportLibVersion = "27.1.1"
-    googlePlayServicesVersion = "15.0.1"
 }
