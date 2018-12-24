@@ -28,7 +28,7 @@ function* login(action) {
       body: {
         ...credentials,
         token: pushTokenStorageKey,
-          os:Platform.OS === 'ios' ? 'ios' : 'android'
+        os:Platform.OS === 'ios' ? 'ios' : 'android'
       },
     };
 

@@ -1,11 +1,15 @@
 const defaults = {};
+import Platform from 'react-native';
 
 if (__DEV__) {
   module.exports = {
     ...defaults,
     NETWORK_PROTOCOL: 'http://',
-    WEB_URL: 'http://beeprotection.test',
-    API_URL: 'beeprotection.test/api',
+    WEB_URL: '192.168.1.102:8081',
+    // WEB_URL: ''http://beeprotection.test',
+    // WEB_URL: Platform.OS === "android" ? 'http://192.168.1.102:8081' : 'http://beeprotection.test',
+    API_URL: '192.168.1.102:8081/api',
+    // API_URL: 'beeprotection.net/api',
     SOCKET_SERVER: 'http://beeprotection.test:3000',
     PAYMENT_ENDPOINT: 'http://beeprotection.test/payment/knet',
 
