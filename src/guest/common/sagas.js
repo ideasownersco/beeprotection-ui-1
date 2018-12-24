@@ -16,6 +16,7 @@ import I18n from 'utils/locale';
 import {PUSH_TOKEN_KEY} from 'utils/env';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
+import {Platform} from 'react-native';
 
 function* login(action) {
   const {credentials, resolve, reject, redirectRoute} = action.payload;
@@ -26,7 +27,8 @@ function* login(action) {
     const params = {
       body: {
         ...credentials,
-        push_token: pushTokenStorageKey,
+        token: pushTokenStorageKey,
+          os:Platform.OS === 'ios' ? 'ios' : 'android'
       },
     };
 

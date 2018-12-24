@@ -140,11 +140,11 @@ class TrackScene extends PureComponent {
           onPress={this.pauseTrackingUpdate}
         >
           {drivers.map((driver, index) => {
-            const {heading} = driver;
-            const rotate =
-              typeof heading === 'number' && heading >= 0
-                ? `${heading}deg`
-                : undefined;
+            // const {heading} = driver;
+            // const rotate =
+            //   typeof heading === 'number' && heading >= 0
+            //     ? `${heading}deg`
+            //     : undefined;
 
             return (
               <MapView.Marker
@@ -152,7 +152,8 @@ class TrackScene extends PureComponent {
                 anchor={{x: 0.5, y: 0.5, position: 'relative'}}
                 coordinate={{...driver}}
                 identifier="MarkerOrigin"
-                mapPadding={5}>
+                mapPadding={5}
+              >
                 <Image
                   source={images.car}
                   style={[
