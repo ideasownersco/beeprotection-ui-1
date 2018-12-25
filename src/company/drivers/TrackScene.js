@@ -89,7 +89,6 @@ class TrackScene extends PureComponent {
           style={{flex: 1}}
           initialRegion={origin}
           onMapReady={this.onMapLayout}
-          maxZoomLevel={12}
           showsUserLocation={false}
           showsMyLocationButton={false}
           onLongPress={this.pauseTrackingUpdate}
