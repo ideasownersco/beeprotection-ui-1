@@ -5,7 +5,7 @@ import {ACTIONS as DRIVER_ACTIONS} from 'company/common/actions';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {Image, Dimensions, View, Text, AppState} from 'react-native';
 import images from 'assets/theme/images';
-import {SELECTORS as COMPANY__DRIVER_SELECTORS} from 'company/selectors/drivers';
+import {SELECTORS as COMPANY__DRIVER_SELECTORS} from 'company/selectors/trackings';
 import Button from 'components/Button';
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -15,11 +15,11 @@ import I18n from 'utils/locale';
 
 class TrackScene extends PureComponent {
   static propTypes = {
-    drivers: PropTypes.array.isRequired,
+    trackings: PropTypes.array.isRequired,
   };
 
   static defaultProps = {
-    drivers: [],
+    trackings: [],
   };
 
   state = {
@@ -30,7 +30,7 @@ class TrackScene extends PureComponent {
 
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
-    this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
+    this.props.dispatch(DRIVER_ACTIONS.fetchtrackings());
     this.props.dispatch(DRIVER_ACTIONS.subscribeToDriverTrackings());
 
     setTimeout(()=>{
@@ -69,8 +69,14 @@ class TrackScene extends PureComponent {
     });
   };
 
+  ontrackingsListItemPress = (orderID) => {
+    this.props.navigation.navigate('OrderDetail', {
+      orderID: orderID,
+    });
+  };
+
   render() {
-    let {drivers} = this.props;
+    let {trackings} = this.props;
 
     let origin = {
       latitude: 29.3772392006689,
@@ -94,8 +100,8 @@ class TrackScene extends PureComponent {
           onLongPress={this.pauseTrackingUpdate}
           onPress={this.pauseTrackingUpdate}
         >
-          {drivers.map((driver, index) => {
-            const {heading} = driver;
+          {trackings.map((tracking, index) => {
+            const {heading} = tracking;
             const rotate =
               typeof heading === 'number' && heading >= 0
                 ? `${heading}deg`
@@ -106,7 +112,7 @@ class TrackScene extends PureComponent {
                 <MapView.Marker
                   key={`${index}`}
                   anchor={{x: 0.5, y: 0.5, position: 'relative'}}
-                  coordinate={{...driver}}
+                  coordinate={{...tracking}}
                   identifier="MarkerOrigin"
                   mapPadding={5}
                 >
@@ -121,9 +127,9 @@ class TrackScene extends PureComponent {
                     ]}
                     resizeMode="cover"
                   />
-                  <MapView.Callout onPress={() => {}} tracksViewChanges={true}>
+                  <MapView.Callout onPress={() => this.ontrackingsListItemPress(tracking.order_id)} tracksViewChanges={true}>
                     <View style={{flex:1,width:100,height:30,justifyContent:'center'}}>
-                      <Text style={{fontSize:19}}>{driver.user ? driver.user.name : `Driver ${driver.id}`}</Text>
+                      <Text style={{fontSize:19}}>{tracking.user ? tracking.user.name : `Driver ${tracking.id}`}</Text>
                     </View>
                   </MapView.Callout>
                 </MapView.Marker>
@@ -148,7 +154,7 @@ class TrackScene extends PureComponent {
 
 function mapStateToProps(state, props) {
   return {
-    drivers: COMPANY__DRIVER_SELECTORS.getDriverTrackings(state),
+    trackings: COMPANY__DRIVER_SELECTORS.getDriverTrackings(state),
   };
 }
 
