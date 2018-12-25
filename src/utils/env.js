@@ -6,9 +6,9 @@ if (__DEV__) {
     ...defaults,
 
     NETWORK_PROTOCOL: 'http://',
+    API_URL: 'beeprotection.test/api',
     WEB_URL: 'http://beeprotection.test',
     // API_URL: '192.168.1.102:8081/api',
-    API_URL: 'beeprotection.test/api',
     SOCKET_SERVER: 'http://beeprotection.test:3000',
     PAYMENT_ENDPOINT: 'http://beeprotection.test/payment/knet',
 
