@@ -96,6 +96,12 @@ class TrackScene extends PureComponent {
           onPress={this.pauseTrackingUpdate}
         >
           {drivers.map((driver, index) => {
+            const {heading} = driver;
+            const rotate =
+              typeof heading === 'number' && heading >= 0
+                ? `${heading}deg`
+                : undefined;
+
             if(this.state.initialized) {
               return (
                 <MapView.Marker
@@ -112,6 +118,7 @@ class TrackScene extends PureComponent {
                         width: 20,
                         height: 40,
                       },
+                      rotate && {transform: [{rotate}]},
                     ]}
                     resizeMode="cover"
                   />
