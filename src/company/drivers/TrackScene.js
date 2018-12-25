@@ -104,7 +104,6 @@ class TrackScene extends PureComponent {
           onPress={this.pauseTrackingUpdate}
         >
           {trackings.map((tracking, index) => {
-            console.log('tracking',tracking);
             const {heading} = tracking;
             const rotate =
               typeof heading === 'number' && heading >= 0
