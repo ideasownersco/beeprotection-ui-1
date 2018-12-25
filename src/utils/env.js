@@ -1,5 +1,4 @@
 const defaults = {};
-import Platform from 'react-native';
 
 if (__DEV__) {
   module.exports = {
