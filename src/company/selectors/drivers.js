@@ -28,14 +28,15 @@ const getDrivers = createSelector(
 );
 
 const getDriverTrackings = createSelector(
-  [schemas, driversSchema, getTrackings],
-  (entities, drivers, trackings) =>
+  [schemas, driversSchema, getTrackings,usersSchema],
+  (entities, drivers, trackings,users) =>
 
     Object.keys(drivers).map(driverID => {
         let driver = drivers[driverID];
         return {
           ...driver,
           ...trackings[driverID],
+          user:users[driver.user]
         }
     })
 
