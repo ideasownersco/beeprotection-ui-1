@@ -100,7 +100,7 @@ export default class Drawer extends Component {
             name: 'plus',
             type: 'MaterialCommunityIcons',
           }}
-          active={activeRoute === 'TrackDriversStack'}
+          active={activeRoute === 'CreateOrdersStack'}
         />
 
         <DrawerItem

@@ -72,11 +72,9 @@ class TrackScene extends PureComponent {
   render() {
     let {drivers} = this.props;
 
-    // console.log('drivers',drivers);
-
-    drivers.map(driver => {
-      console.log('driver.latitude',driver.latitude);
-    });
+    // drivers.map(driver => {
+    //   console.log('driver.latitude',driver.latitude);
+    // });
 
     let origin = {
       // latitude: 37.48522,

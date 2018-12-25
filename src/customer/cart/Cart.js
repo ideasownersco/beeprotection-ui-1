@@ -117,7 +117,6 @@ class Cart extends PureComponent {
   };
 
   onDatePickerItemPress = date => {
-    console.log('date',date);
     this.props.actions.setCartItems({
       selectedDate: date,
       selectedTimeID: null,
