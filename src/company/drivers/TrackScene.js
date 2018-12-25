@@ -2,16 +2,17 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ACTIONS as DRIVER_ACTIONS} from 'company/common/actions';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
-import {Image, Dimensions, View, Text, AppState} from 'react-native';
+import MapView from 'react-native-maps';
+import {AppState, Dimensions, Image, Text, View} from 'react-native';
 import images from 'assets/theme/images';
-import {SELECTORS as COMPANY__DRIVER_SELECTORS} from 'company/selectors/trackings';
+import {SELECTORS as COMPANY_DRIVER_SELECTORS} from 'company/selectors/drivers';
 import Button from 'components/Button';
+import I18n from 'utils/locale';
+
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.3;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-import I18n from 'utils/locale';
 
 class TrackScene extends PureComponent {
   static propTypes = {
@@ -30,7 +31,7 @@ class TrackScene extends PureComponent {
 
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
-    this.props.dispatch(DRIVER_ACTIONS.fetchtrackings());
+    this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
     this.props.dispatch(DRIVER_ACTIONS.subscribeToDriverTrackings());
 
     setTimeout(()=>{
@@ -69,10 +70,12 @@ class TrackScene extends PureComponent {
     });
   };
 
-  ontrackingsListItemPress = (orderID) => {
-    this.props.navigation.navigate('OrderDetail', {
-      orderID: orderID,
-    });
+  onDriversListItemPress = (orderID) => {
+    if(orderID) {
+      this.props.navigation.navigate('OrderDetail', {
+        orderID: orderID,
+      });
+    }
   };
 
   render() {
@@ -101,6 +104,7 @@ class TrackScene extends PureComponent {
           onPress={this.pauseTrackingUpdate}
         >
           {trackings.map((tracking, index) => {
+            console.log('tracking',tracking);
             const {heading} = tracking;
             const rotate =
               typeof heading === 'number' && heading >= 0
@@ -127,7 +131,7 @@ class TrackScene extends PureComponent {
                     ]}
                     resizeMode="cover"
                   />
-                  <MapView.Callout onPress={() => this.ontrackingsListItemPress(tracking.order_id)} tracksViewChanges={true}>
+                  <MapView.Callout onPress={() => this.onDriversListItemPress(tracking.order_id)} tracksViewChanges={true}>
                     <View style={{flex:1,width:100,height:30,justifyContent:'center'}}>
                       <Text style={{fontSize:19}}>{tracking.user ? tracking.user.name : `Driver ${tracking.id}`}</Text>
                     </View>
@@ -154,7 +158,7 @@ class TrackScene extends PureComponent {
 
 function mapStateToProps(state, props) {
   return {
-    trackings: COMPANY__DRIVER_SELECTORS.getDriverTrackings(state),
+    trackings: COMPANY_DRIVER_SELECTORS.getDriverTrackings(state),
   };
 }
 

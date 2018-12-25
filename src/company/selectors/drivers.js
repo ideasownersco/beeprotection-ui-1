@@ -39,7 +39,6 @@ const getDriverTrackings = createSelector(
           user:users[driver.user]
         }
     })
-
     // Object.keys(trackings).map(driverID => {
     //   let driver = drivers[driverID];
     //   return {
