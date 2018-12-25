@@ -30,13 +30,22 @@ const getDrivers = createSelector(
 const getDriverTrackings = createSelector(
   [schemas, driversSchema, getTrackings],
   (entities, drivers, trackings) =>
-    Object.keys(trackings).map(driverID => {
-      let driver = drivers[driverID];
-      return {
-        ...driver,
-        ...trackings[driverID],
-      };
-    }),
+
+    Object.keys(drivers).map(driverID => {
+        let driver = drivers[driverID];
+        return {
+          ...driver,
+          ...trackings[driverID],
+        }
+    })
+
+    // Object.keys(trackings).map(driverID => {
+    //   let driver = drivers[driverID];
+    //   return {
+    //     ...driver,
+    //     ...trackings[driverID],
+    //   };
+    // }),
 );
 
 export const SELECTORS = {

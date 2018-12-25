@@ -17,7 +17,7 @@ import I18n from 'utils/locale';
 import CartItems from 'customer/cart/components/CartItems';
 import DatePicker from 'customer/cart/components/DatePicker';
 import EmptyCart from 'customer/cart/components/EmptyCart';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import Divider from 'components/Divider';
 import colors from 'assets/theme/colors';
 import CartTotal from 'customer/cart/components/CartTotal';
@@ -63,7 +63,6 @@ class Cart extends PureComponent {
   };
 
   componentDidMount() {
-    
     const dates = [];
     for (let i = 0; i < 30; i++) {
       dates.push(moment().add(i, 'days'));
@@ -118,6 +117,7 @@ class Cart extends PureComponent {
   };
 
   onDatePickerItemPress = date => {
+    console.log('date',date);
     this.props.actions.setCartItems({
       selectedDate: date,
       selectedTimeID: null,
@@ -304,6 +304,7 @@ class Cart extends PureComponent {
         total: total,
         time: selectedTimeID,
         date: selectedDate,
+        // date: selectedDate.format("YYYY-MM-DD"),
         payment_mode: paymentMode,
         free_wash: cart.isFreeWash,
         customer_name:customer_name,
@@ -439,6 +440,8 @@ class Cart extends PureComponent {
     } = this.props;
 
     let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash,hasFreeWash} = cart;
+
+    console.log('selectedDate',selectedDate);
 
     let {
       dates,

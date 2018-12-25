@@ -13,6 +13,7 @@ import {getStorageItem, setStorageItem} from 'utils/functions';
 import {Schema} from 'utils/schema';
 import DeviceInfo from 'react-native-device-info';
 import {Platform} from 'react-native';
+import moment from 'moment-timezone';
 
 function* setInstalled() {
   yield call(setStorageItem, INSTALLED_KEY, 'INSTALLED');
