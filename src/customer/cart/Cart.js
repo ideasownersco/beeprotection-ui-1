@@ -304,7 +304,6 @@ class Cart extends PureComponent {
         total: total,
         time: selectedTimeID,
         date: selectedDate,
-        // date: selectedDate.format("YYYY-MM-DD"),
         payment_mode: paymentMode,
         free_wash: cart.isFreeWash,
         customer_name:customer_name,
@@ -440,8 +439,6 @@ class Cart extends PureComponent {
     } = this.props;
 
     let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash,hasFreeWash} = cart;
-
-    console.log('selectedDate',selectedDate);
 
     let {
       dates,

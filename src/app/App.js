@@ -12,7 +12,6 @@ import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import NavigatorService from 'components/NavigatorService';
 import colors from 'assets/theme/colors';
 import SplashScreen from 'app/SplashScreen';
-import moment from 'moment-timezone';
 
 class App extends Component {
   static propTypes = {
@@ -21,7 +20,6 @@ class App extends Component {
 
   componentDidMount() {
     this.props.dispatch(ACTIONS.boot());
-    moment().tz("Asia/Kuwait").format();
   }
 
   onLanguageSelect = name => {
