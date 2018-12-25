@@ -19,6 +19,7 @@ import MapButtons from 'driver/orders/components/MapButtons';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import GEOLOCATION_CONFIG from 'utils/background-geolocation';
 import {API_URL, NETWORK_PROTOCOL} from 'utils/env';
+import {SELECTORS as AUTH_SELECTORS} from "guest/common/selectors";
 
 class OrderDetailScene extends Component {
   static propTypes = {
@@ -36,7 +37,7 @@ class OrderDetailScene extends Component {
   };
 
   componentDidMount() {
-    let {order} = this.props;
+    let {order,profile} = this.props;
     let {job} = order;
 
     this.props.dispatch(
@@ -53,6 +54,9 @@ class OrderDetailScene extends Component {
         reset: true,
         locationAuthorizationRequest: 'Always',
         url: `${NETWORK_PROTOCOL}${API_URL}/jobs/${job.id}/update/location`,
+        params: {
+          driver_id: profile.id,
+        },
       },
 
       state => {
@@ -217,6 +221,7 @@ const makeMapStateToProps = () => {
     return {
       order: getOrderByID(state, props.navigation.state.params.orderID),
       orders: ORDER_SELECTORS.getUpcomingOrders(state),
+      profile: AUTH_SELECTORS.getAuthUserProfile(state),
     };
   };
   return mapStateToProps;
