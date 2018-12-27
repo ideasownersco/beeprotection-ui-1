@@ -12,20 +12,11 @@ import {SELECTORS as USER_SELECTOR} from 'guest/common/selectors';
 import NavigatorService from 'components/NavigatorService';
 import colors from 'assets/theme/colors';
 import SplashScreen from 'app/SplashScreen';
-import moment from 'moment-timezone';
 
 class App extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
   };
-
-  constructor(props) {
-    super(props);
-    // console.log('moment',moment().format('D-M-Y h:s a Z'))
-    // moment.tz.setDefault('Asia/Kuwait');
-    // console.log('moment',moment().format('h:s a Z'));
-
-  }
 
   componentDidMount() {
     this.props.dispatch(ACTIONS.boot());

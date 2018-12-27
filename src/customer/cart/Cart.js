@@ -7,10 +7,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
-import {
-  SELECTORS,
-  SELECTORS as ORDER_SELECTORS,
-} from 'customer/selectors/orders';
+import {SELECTORS, SELECTORS as ORDER_SELECTORS,} from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import Button from 'components/Button';
 import I18n from 'utils/locale';
@@ -64,11 +61,6 @@ class Cart extends PureComponent {
 
   componentDidMount() {
     const dates = [];
-
-    moment.tz.setDefault('Asia/Kuwait');
-
-    console.log('m',moment().format('D-M-Y h:s a Z'));
-
     for (let i = 0; i < 30; i++) {
       dates.push(moment().add(i, 'days'));
     }
@@ -86,10 +78,6 @@ class Cart extends PureComponent {
       });
     }
   }
-
-  checkout = () => {
-    // this.showCheckoutConfirmDialog();
-  };
 
   showCheckoutConfirmDialog = () => {
     this.setState({
@@ -239,14 +227,7 @@ class Cart extends PureComponent {
 
   fetchTimings = (date = null) => {
     let {isFreeWash} = this.props.cart;
-
-    console.log('date',date);
-    console.log('this.props.cart.selectedDate',this.props.cart.selectedDate);
-
     let orderDate = date ?  date : this.props.cart.selectedDate;
-
-    console.log('orderDate',orderDate);
-
     this.props.actions.fetchTimings({
       date: orderDate.format('Y-M-D'),
       items: this.props.cart.items,
@@ -295,6 +276,7 @@ class Cart extends PureComponent {
     const {user, isAuthenticated, cart} = this.props;
     const {paymentMode} = this.state;
 
+
     const {
       selectedDate,
       selectedAddressID,
@@ -305,6 +287,7 @@ class Cart extends PureComponent {
       customer_email,
       customer_mobile
     } = cart;
+
     if (!isAuthenticated) {
       this.hideCheckoutConfirmDialog();
       return this.redirectToLogin();
@@ -315,7 +298,7 @@ class Cart extends PureComponent {
         items: items,
         total: total,
         time: selectedTimeID,
-        date: selectedDate.format('Y-M-D'),
+        date: moment(selectedDate.format('Y-M-D')),
         payment_mode: paymentMode,
         free_wash: cart.isFreeWash,
         customer_name:customer_name,
@@ -357,52 +340,6 @@ class Cart extends PureComponent {
         });
     }
   };
-  // performCheckout = () => {
-  //   const {user, isAuthenticated, cart} = this.props;
-  //   const {paymentMode} = this.state;
-  //
-  //   const {
-  //     selectedDate,
-  //     selectedAddressID,
-  //     selectedTimeID,
-  //     items,
-  //     total,
-  //   } = cart;
-  //   if (!isAuthenticated) {
-  //     this.hideCheckoutConfirmDialog();
-  //     return this.redirectToLogin();
-  //   } else {
-  //     const item = {
-  //       user_id: user.id,
-  //       address_id: selectedAddressID,
-  //       items: items,
-  //       total: total,
-  //       time: selectedTimeID,
-  //       date: selectedDate,
-  //       payment_mode: paymentMode,
-  //       free_wash: cart.isFreeWash,
-  //     };
-  //     return new Promise((resolve, reject) => {
-  //       this.props.actions.checkout({item, resolve, reject});
-  //     })
-  //       .then(order => {
-  //         if (order.status == 'Success') {
-  //           this.setState({
-  //             showOrderSuccessModal: true,
-  //             showCheckoutConfirmDialog: false,
-  //           });
-  //         } else if (order.status == 'Checkout') {
-  //           this.setState({
-  //             showPaymentModal: true,
-  //             showCheckoutConfirmDialog: false,
-  //           });
-  //         }
-  //       })
-  //       .catch(e => {
-  //         this.hideCheckoutConfirmDialog();
-  //       });
-  //   }
-  // }hideCheckoutConfirmDialog;
 
   onAddressTypeSelection = (type: string) => {
     this.setState({
@@ -450,11 +387,11 @@ class Cart extends PureComponent {
       areas,
     } = this.props;
 
-    let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash,hasFreeWash} = cart;
+    let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash} = cart;
+
     console.log('selectedDate',selectedDate.format('D-M-Y'));
     let {
       dates,
-      showPaymentModal,
       showOrderSuccessModal,
       addressCreateModalVisible,
       addressCreateFieldsModalVisible,

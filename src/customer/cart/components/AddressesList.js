@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {FlatList, StyleSheet} from 'react-native';
 import colors from 'assets/theme/colors';
-import I18n from 'utils/locale';
 import Divider from 'components/Divider';
 import CheckedListItem from 'components/CheckedListItem';
-import AddressInfo from '../../../components/AddressInfo';
+import AddressInfo from 'components/AddressInfo';
 
 export default class AddressesList extends Component {
   shouldComponentUpdate(nextProps) {
@@ -26,6 +25,7 @@ export default class AddressesList extends Component {
           description={
             <AddressInfo address={item} style={{color: colors.darkGrey}} />
           }
+          onPress={()=>{}}
         />
       );
     }
