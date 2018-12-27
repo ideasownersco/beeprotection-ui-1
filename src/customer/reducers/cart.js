@@ -40,11 +40,6 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         items: rest,
         total: 0,
-        // items: Object.keys(state.items).filter(id => id != action.itemID).map(id => {
-        //   return {
-        //     [id] : state.items[id]
-        //   }
-        // }),
       };
     case ACTION_TYPES.CART_SET_ITEM:
       return {

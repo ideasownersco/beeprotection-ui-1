@@ -132,12 +132,6 @@ class Cart extends PureComponent {
     this.props.actions.setCartItem('selectedAddressID', item.id);
   };
 
-  hideCheckoutModal = () => {
-    this.setState({
-      showPaymentModal: false,
-    });
-  };
-
   hideSuccessModal = () => {
     this.setState({
       showOrderSuccessModal: false,
@@ -275,8 +269,6 @@ class Cart extends PureComponent {
   performCheckout = () => {
     const {user, isAuthenticated, cart} = this.props;
     const {paymentMode} = this.state;
-
-
     const {
       selectedDate,
       selectedAddressID,
@@ -389,7 +381,6 @@ class Cart extends PureComponent {
 
     let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash} = cart;
 
-    console.log('selectedDate',selectedDate.format('D-M-Y'));
     let {
       dates,
       showOrderSuccessModal,

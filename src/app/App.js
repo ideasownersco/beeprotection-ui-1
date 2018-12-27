@@ -69,14 +69,6 @@ class App extends Component {
     //     });
     //   }
     // }
-
-    // if(notification.)
-
-    // let navigation = NavigatorService;
-    // navigation.navigate('UpcomingOrders');
-    // navigation.navigate('OrderDetail', {
-    //   orderID: 13,
-    // });
   };
 
   loadApp = () => {
