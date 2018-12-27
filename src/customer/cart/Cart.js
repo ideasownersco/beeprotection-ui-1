@@ -64,6 +64,11 @@ class Cart extends PureComponent {
 
   componentDidMount() {
     const dates = [];
+
+    moment.tz.setDefault('Asia/Kuwait');
+
+    console.log('m',moment().format('D-M-Y h:s a Z'));
+
     for (let i = 0; i < 30; i++) {
       dates.push(moment().add(i, 'days'));
     }
@@ -234,8 +239,16 @@ class Cart extends PureComponent {
 
   fetchTimings = (date = null) => {
     let {isFreeWash} = this.props.cart;
+
+    console.log('date',date);
+    console.log('this.props.cart.selectedDate',this.props.cart.selectedDate);
+
+    let orderDate = date ?  date : this.props.cart.selectedDate;
+
+    console.log('orderDate',orderDate);
+
     this.props.actions.fetchTimings({
-      date: date ? date : this.props.cart.selectedDate,
+      date: orderDate.format('Y-M-D'),
       items: this.props.cart.items,
       free_wash: isFreeWash,
     });
@@ -302,7 +315,7 @@ class Cart extends PureComponent {
         items: items,
         total: total,
         time: selectedTimeID,
-        date: selectedDate,
+        date: selectedDate.format('Y-M-D'),
         payment_mode: paymentMode,
         free_wash: cart.isFreeWash,
         customer_name:customer_name,
@@ -438,7 +451,7 @@ class Cart extends PureComponent {
     } = this.props;
 
     let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash,hasFreeWash} = cart;
-
+    console.log('selectedDate',selectedDate.format('D-M-Y'));
     let {
       dates,
       showPaymentModal,

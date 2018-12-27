@@ -5,6 +5,8 @@ import App from './src/app/App';
 import {Provider} from 'react-redux';
 import colors from "./src/assets/theme/colors";
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+import moment from 'moment-timezone';
+
 
 const isIOS = Platform.OS === 'ios';
 

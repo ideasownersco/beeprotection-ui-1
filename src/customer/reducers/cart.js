@@ -1,6 +1,8 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import {ACTION_TYPES} from 'customer/common/actions';
 import {ACTION_TYPES as ORDER_ACTION_TYPES} from 'customer/common/actions';
+moment.tz.setDefault('America/Mexico_City');
+// console.log('moment',moment().format('D-M-Y h:s a Z'))
 
 const initialState = {
   items: {},
