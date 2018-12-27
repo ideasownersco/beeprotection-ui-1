@@ -117,8 +117,7 @@ class Cart extends PureComponent {
     this.fetchTimings(date);
   };
 
-  onTimeChange = time => {
-    // this.props.actions.setCartItem('selectedTime', moment(time));
+  onTimeChange = (time:object) => {
     this.props.actions.setCartItem('selectedTimeID', time.id);
   };
 
@@ -224,6 +223,7 @@ class Cart extends PureComponent {
     let orderDate = date ?  date : this.props.cart.selectedDate;
     this.props.actions.fetchTimings({
       date: orderDate.format('Y-M-D'),
+      // date: moment(orderDate.format('Y-M-D')),
       items: this.props.cart.items,
       free_wash: isFreeWash,
     });
@@ -290,7 +290,8 @@ class Cart extends PureComponent {
         items: items,
         total: total,
         time: selectedTimeID,
-        date: moment(selectedDate.format('Y-M-D')),
+        date: selectedDate.format('Y-M-D'),
+        // date: moment(selectedDate.format('Y-M-D')),
         payment_mode: paymentMode,
         free_wash: cart.isFreeWash,
         customer_name:customer_name,
