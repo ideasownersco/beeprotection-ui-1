@@ -1,8 +1,8 @@
 import moment from 'moment-timezone';
 import {ACTION_TYPES} from 'customer/common/actions';
 import {ACTION_TYPES as ORDER_ACTION_TYPES} from 'customer/common/actions';
-// moment.tz.setDefault('Asia/Kuwait');
-moment.tz.setDefault('Pacific/Honolulu');
+moment.tz.setDefault('Asia/Kuwait');
+// moment.tz.setDefault('Pacific/Honolulu');
 
 const initialState = {
   items: {},
