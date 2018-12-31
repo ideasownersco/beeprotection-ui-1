@@ -91,24 +91,6 @@ class Cart extends PureComponent {
     });
   };
 
-  showAddressTypeSelectionModal = () => {
-    let {isAuthenticated} = this.props;
-
-    if (!isAuthenticated) {
-      return this.redirectToLogin();
-    }
-
-    this.setState({
-      addressTypeSelectionModalVisible: true,
-    });
-  };
-
-  hideAddressTypeSelectionModal = () => {
-    this.setState({
-      addressTypeSelectionModalVisible: false,
-    });
-  };
-
   onDatePickerItemPress = date => {
     this.props.actions.setCartItems({
       selectedDate: date,
@@ -127,10 +109,6 @@ class Cart extends PureComponent {
     });
   };
 
-  onAddressesListItemPress = (item: object) => {
-    this.props.actions.setCartItem('selectedAddressID', item.id);
-  };
-
   hideSuccessModal = () => {
     this.setState({
       showOrderSuccessModal: false,
@@ -145,6 +123,86 @@ class Cart extends PureComponent {
         onPress: () => this.props.actions.removeCartItem(item.id),
       },
     ]);
+  };
+
+  showAddressTypeSelectionModal = () => {
+    let {isAuthenticated} = this.props;
+
+    if (!isAuthenticated) {
+      return this.redirectToLogin();
+    }
+
+    this.setState({
+      addressTypeSelectionModalVisible: true,
+    });
+  };
+
+  hideAddressTypeSelectionModal = () => {
+    this.setState({
+      addressTypeSelectionModalVisible: false,
+    });
+  };
+
+  onAddressesListItemPress = (item: object) => {
+    this.props.actions.setCartItem('selectedAddressID', item.id);
+  };
+
+  showAddressCreateFieldsModal = () => {
+    this.setState({
+      addressCreateFieldsModalVisible: true,
+    });
+  };
+
+  hideAddressCreateFieldsModal = () => {
+    this.setState({
+      addressCreateFieldsModalVisible: false,
+    });
+  };
+
+  showAddressCreateModal = () => {
+    this.setState({
+      addressCreateModalVisible: true,
+    });
+  };
+
+  hideAddressCreateModal = () => {
+    this.setState({
+      addressCreateModalVisible: false,
+    });
+  };
+
+  onAddressTypeSelection = (type: string) => {
+    this.setState({
+      addressType: type,
+    });
+
+    this.hideAddressTypeSelectionModal();
+
+    if (type === 'current_location') {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          this.setState(
+            {
+              address: {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+              },
+            },
+            () => {
+              this.showAddressCreateModal();
+            },
+          );
+        },
+        error => {},
+        {
+          enableHighAccuracy: true,
+          timeout: 20000,
+          maximumAge: 1000,
+        },
+      );
+    } else {
+      this.showAddressCreateModal();
+    }
   };
 
   saveAddress = address => {
@@ -228,30 +286,6 @@ class Cart extends PureComponent {
     });
   };
 
-  showAddressCreateFieldsModal = () => {
-    this.setState({
-      addressCreateFieldsModalVisible: true,
-    });
-  };
-
-  hideAddressCreateFieldsModal = () => {
-    this.setState({
-      addressCreateFieldsModalVisible: false,
-    });
-  };
-
-  showAddressCreateModal = () => {
-    this.setState({
-      addressCreateModalVisible: true,
-    });
-  };
-
-  hideAddressCreateModal = () => {
-    this.setState({
-      addressCreateModalVisible: false,
-    });
-  };
-
   redirectToLogin = () => {
     return Alert.alert(`${I18n.t('login_required')}`, '', [
       {text: I18n.t('cancel')},
@@ -332,39 +366,6 @@ class Cart extends PureComponent {
     }
   };
 
-  onAddressTypeSelection = (type: string) => {
-    this.setState({
-      addressType: type,
-    });
-
-    this.hideAddressTypeSelectionModal();
-
-    if (type === 'current_location') {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          this.setState(
-            {
-              address: {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-              },
-            },
-            () => {
-              this.showAddressCreateModal();
-            },
-          );
-        },
-        error => {},
-        {
-          enableHighAccuracy: true,
-          timeout: 20000,
-          maximumAge: 1000,
-        },
-      );
-    } else {
-      this.showAddressCreateModal();
-    }
-  };
 
   render() {
     let {

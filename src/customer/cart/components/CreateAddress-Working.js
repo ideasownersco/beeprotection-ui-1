@@ -5,6 +5,7 @@ import I18n from 'utils/locale';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
 import MapButtons from 'customer/cart/components/MapButtons';
+import SelectArea from "./SelectArea";
 
 export default class extends PureComponent {
   static propTypes = {
@@ -54,6 +55,8 @@ export default class extends PureComponent {
 
     return (
       <View style={styles.container}>
+
+        <SelectArea setArea={this.setArea} items={[]} area_id={area_id} />
 
         <View style={styles.marker}>
           <Image
