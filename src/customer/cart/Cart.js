@@ -265,6 +265,13 @@ class Cart extends PureComponent {
       });
   };
 
+  deleteAddress = (address) => {
+    this.props.actions.deleteAddress({
+      address_id:address.id
+    });
+  };
+
+
   onSuccessButtonPress = () => {
     this.hideSuccessModal();
     this.fetchTimings();
@@ -379,7 +386,7 @@ class Cart extends PureComponent {
       areas,
     } = this.props;
 
-    let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash} = cart;
+    let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash,deletedAddresses} = cart;
 
     let {
       dates,
@@ -468,6 +475,8 @@ class Cart extends PureComponent {
           items={user ? (user.addresses ? user.addresses : []) : []}
           onItemPress={this.onAddressesListItemPress}
           activeItemID={selectedAddressID || null}
+          deleteAddress={this.deleteAddress}
+          deletedAddresses={deletedAddresses}
         />
 
         <Divider />

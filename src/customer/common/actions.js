@@ -42,6 +42,10 @@ export const ACTION_TYPES = {
   UPDATE_ADDRESS_SUCCESS: '@customer/UPDATE_ADDRESS_SUCCESS',
   UPDATE_ADDRESS_FAILURE: '@customer/UPDATE_ADDRESS_FAILURE',
 
+  DELETE_ADDRESS_REQUEST: '@customer/DELETE_ADDRESS_REQUEST',
+  DELETE_ADDRESS_SUCCESS: '@customer/DELETE_ADDRESS_SUCCESS',
+  DELETE_ADDRESS_FAILURE: '@customer/DELETE_ADDRESS_FAILURE',
+
   CREATE_ORDER_REQUEST: '@customer/CREATE_ORDER_REQUEST',
   CREATE_ORDER_SUCCESS: '@customer/CREATE_ORDER_SUCCESS',
   CREATE_ORDER_FAILURE: '@customer/CREATE_ORDER_FAILURE',
@@ -198,6 +202,13 @@ function updateAddress(payload: object) {
   };
 }
 
+function deleteAddress(payload: object) {
+  return {
+    type: ACTION_TYPES.DELETE_ADDRESS_REQUEST,
+    payload,
+  };
+}
+
 function subscribeToOrderTracking(params) {
   return {
     type: ACTION_TYPES.SUBSCRIBE_TO_JOB_TRACK,
@@ -275,6 +286,7 @@ export const ACTIONS = {
   fetchAreas,
   saveAddress,
   updateAddress,
+  deleteAddress,
   checkout,
   setCartItems,
   subscribeToOrderTracking,

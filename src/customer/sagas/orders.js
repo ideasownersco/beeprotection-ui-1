@@ -237,6 +237,38 @@ function* updateAddress(action) {
   }
 }
 
+function* deleteAddress(action) {
+
+  try {
+    const params = {
+      body: {
+        ...action.payload,
+      },
+    };
+
+    const response = yield call(API.deleteAddress, params);
+    const normalized = normalize(response.data, Schema.users);
+    yield put({
+      type: ACTION_TYPES.DELETE_ADDRESS_SUCCESS,
+      entities: normalized.entities,
+      address_id: response.address_id,
+    });
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: I18n.t('address_delete_success'),
+      }),
+    );
+  } catch (error) {
+    yield put({type: ACTION_TYPES.DELETE_ADDRESS_FAILURE, error});
+    yield put(
+      APP_ACTIONS.setNotification({
+        message: I18n.t('address_delete_failure'),
+        type: 'error',
+      }),
+    );
+  }
+}
+
 function* checkout(action) {
   const {item, resolve, reject} = action.payload;
 
@@ -378,6 +410,9 @@ function* saveAddressMonitor() {
 function* updateAddressMonitor() {
   yield takeLatest(ACTION_TYPES.UPDATE_ADDRESS_REQUEST, updateAddress);
 }
+function* deleteAddressMonitor() {
+  yield takeLatest(ACTION_TYPES.DELETE_ADDRESS_REQUEST, deleteAddress);
+}
 
 // function* createOrderMonitor() {
 //   yield takeLatest(ACTION_TYPES.CREATE_ORDER_REQUEST, createOrder);
@@ -422,6 +457,7 @@ export const sagas = all([
   fork(fetchAddressesMonitor),
   fork(fetchAreasMonitor),
   fork(saveAddressMonitor),
+  fork(deleteAddressMonitor),
   fork(updateAddressMonitor),
   // fork(createOrderMonitor),
   fork(checkoutMonitor),

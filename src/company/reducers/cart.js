@@ -41,6 +41,11 @@ export function reducer(state = initialState, action = {}) {
         ...state,
         selectedAddressID: action.address_id,
       };
+    // case ACTION_TYPES.DELETE_ADDRESS_SUCCESS:
+    //   return {
+    //     ...state,
+    //     selectedAddressID: action.address_id,
+    //   };
     default:
       return state;
   }

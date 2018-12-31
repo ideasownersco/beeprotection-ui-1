@@ -19,6 +19,7 @@ const initialState = {
   customer_name:null,
   customer_email:null,
   customer_mobile:null,
+  deletedAddresses : []
 };
 
 export function reducer(state = initialState, action = {}) {
@@ -55,6 +56,11 @@ export function reducer(state = initialState, action = {}) {
       return {
         ...state,
         selectedAddressID: action.address_id,
+      };
+    case ORDER_ACTION_TYPES.DELETE_ADDRESS_SUCCESS:
+      return {
+        ...state,
+        deletedAddresses: state.deletedAddresses.concat(action.address_id),
       };
     case ACTION_TYPES.CART_FLUSH_ITEMS:
       return {

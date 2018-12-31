@@ -85,6 +85,16 @@ function updateAddress(params) {
   return request(requestParams);
 }
 
+function deleteAddress(params) {
+  const path = `customer/addresses/delete`;
+  let requestParams = {
+    path,
+    params,
+    method: 'POST',
+  };
+  return request(requestParams);
+}
+
 function checkout(params) {
   const path = `customer/checkout`;
   let requestParams = {
@@ -120,6 +130,7 @@ export const API = {
   fetchAreas,
   saveAddress,
   updateAddress,
+  deleteAddress,
   checkout,
   fetchUpcomingOrders,
   fetchPastOrders,

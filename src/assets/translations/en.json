@@ -178,5 +178,7 @@
   "delete" : "Delete",
   "track_driver" : "Track Driver",
   "print_invoice" : "Print Invoice",
-  "resume" : "Reset"
+  "resume" : "Reset",
+  "address_delete_success": "Deleted",
+  "address_delete_failure" : "Could not delete address"
 }
