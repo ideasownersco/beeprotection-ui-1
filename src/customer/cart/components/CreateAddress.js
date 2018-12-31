@@ -5,6 +5,7 @@ import I18n from 'utils/locale';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
 import MapButtons from 'customer/cart/components/MapButtons';
+import SelectArea from "./SelectArea";
 
 export default class extends PureComponent {
   static propTypes = {
@@ -48,12 +49,26 @@ export default class extends PureComponent {
     this.setState(address);
   };
 
+  setArea = area => {
+    let {latitude, longitude} = area;
+    let params = {
+      latitude: latitude,
+      longitude: longitude,
+      area_id: area.id,
+    };
+    this.updateAddressFields(params);
+  };
+
   render() {
     const {latitude, longitude, area_id} = this.state;
-    const {savingAddress} = this.props;
+    const {savingAddress,areas} = this.props;
 
     return (
       <View style={styles.container}>
+
+        <View style={styles.searchInputWrapper}>
+          <SelectArea setArea={this.setArea} items={areas} area_id={area_id} />
+        </View>
 
         <View style={styles.marker}>
           <Image
@@ -103,5 +118,14 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     zIndex: 1000,
+  },
+  searchInputWrapper: {
+    zIndex: 5000,
+    top: 20,
+    margin: 10,
+    marginTop: 40,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.primary,
   },
 });
