@@ -30,6 +30,7 @@ export function reducer(state = initialState, action = {}) {
         confirmationScreenVisible: false,
       };
     case ACTION_TYPES.LOGIN_SUCCESS:
+    case ACTION_TYPES.TOKEN_LOGIN_SUCCESS:
       return {
         ...state,
         error: null,
@@ -39,6 +40,7 @@ export function reducer(state = initialState, action = {}) {
         login: {...state.login, busy: false, error: null},
       };
     case ACTION_TYPES.LOGIN_FAILURE:
+    case ACTION_TYPES.TOKEN_LOGIN_FAILURE:
       return {
         ...state,
         isAuthenticated: false,

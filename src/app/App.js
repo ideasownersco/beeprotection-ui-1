@@ -19,7 +19,8 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(ACTIONS.boot());
+   this.props.dispatch(ACTIONS.boot());
+   // this.props.dispatch(USER_ACTIONS.tokenLogin({}));
   }
 
   onLanguageSelect = name => {

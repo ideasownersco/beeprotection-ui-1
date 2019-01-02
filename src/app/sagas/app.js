@@ -20,11 +20,13 @@ function* setInstalled() {
 }
 
 function* boot() {
+
   // 1- Set is the app has installed(run) before
   let installedStorageKey = yield call(getStorageItem, INSTALLED_KEY);
   if (!isNull(installedStorageKey)) {
     yield put({type: ACTION_TYPES.INSTALL_SUCCESS, value: true});
   }
+
 
   let deviceUUIDKey = yield call(getStorageItem, DEVICE_UUID_KEY);
   if(isNull(deviceUUIDKey)) {
@@ -43,7 +45,7 @@ function* boot() {
     });
   }
 
-  //3- Login from history and sync push token to user if exists
+  // 3- Login from history and sync push token to user if exists
   const authStorageKey = yield call(getStorageItem, AUTH_KEY);
   if (!isNull(authStorageKey)) {
     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
@@ -69,7 +71,6 @@ function* boot() {
       yield put({type: AUTH_ACTION_TYPES.LOGIN_FAILURE, error});
     }
   }
-
   //4- boot the app
   yield put({type: ACTION_TYPES.BOOT_SUCCESS});
 }

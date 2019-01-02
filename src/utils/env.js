@@ -13,7 +13,8 @@ if (__DEV__) {
     NETWORK_PROTOCOL: 'https://',
     API_URL: 'beeprotection.net/api',
     WEB_URL: 'https://beeprotection.net',
-    SOCKET_SERVER: 'http://beeprotection.net:3000',
+    // SOCKET_SERVER: 'http://192.34.59.8:3000',
+    SOCKET_SERVER: 'https://beeprotection.net/socket.io',
     PAYMENT_ENDPOINT: 'https://beeprotection.net/payment/knet',
 
     GOOGLE_MAPS_KEY: 'AIzaSyCpQX4H0QPxVgKuNMZ0ELG_ymgT8RHcKh4',
@@ -36,7 +37,8 @@ if (__DEV__) {
     NETWORK_PROTOCOL: 'https://',
     API_URL: 'beeprotection.net/api',
     WEB_URL: 'https://beeprotection.net',
-    SOCKET_SERVER: 'http://beeprotection.net:3000',
+    // SOCKET_SERVER: 'http://beeprotection.net:3000',
+    SOCKET_SERVER: 'https://beeprotection.net/socket.io',
     PAYMENT_ENDPOINT: 'https://beeprotection.net/payment/knet',
 
     GOOGLE_MAPS_KEY: 'AIzaSyCpQX4H0QPxVgKuNMZ0ELG_ymgT8RHcKh4',

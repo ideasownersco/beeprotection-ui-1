@@ -18,6 +18,40 @@ import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import {Platform} from 'react-native';
 
+
+function* tokenLogin(action) {
+  try {
+    const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
+
+    const params = {
+      body: {
+        token: pushTokenStorageKey,
+        os:Platform.OS === 'ios' ? 'ios' : 'android'
+      },
+    };
+
+    const response = yield call(API.login, params);
+
+    if (response.meta) {
+      yield call(setStorageItem, AUTH_KEY, response.meta.api_token || '');
+    }
+
+    const normalized = normalize(response.data, Schema.users);
+
+    yield put({
+      type: ACTION_TYPES.SYNC_USER_TO_SOCKET,
+    });
+
+    yield put({
+      type: ACTION_TYPES.TOKEN_LOGIN_SUCCESS,
+      entities: normalized.entities,
+      payload: response.data,
+    });
+  } catch (error) {
+    yield put({type: ACTION_TYPES.TOKEN_LOGIN_FAILURE, error});
+  }
+}
+
 function* login(action) {
   const {credentials, resolve, reject, redirectRoute} = action.payload;
 
@@ -293,8 +327,16 @@ function* reSendConfirmationCodeMonitor() {
   );
 }
 
+function* tokenLoginMonitor() {
+  yield takeLatest(
+    ACTION_TYPES.TOKEN_LOGIN_REQUEST,
+    tokenLogin,
+  );
+}
+
 export const sagas = all([
   fork(loginMonitor),
+  fork(tokenLoginMonitor),
   fork(logoutMonitor),
   fork(registerMonitor),
   fork(recoverPasswordMonitor),

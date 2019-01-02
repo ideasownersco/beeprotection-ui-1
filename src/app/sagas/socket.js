@@ -54,6 +54,7 @@ function* read(socket) {
 function* syncUserToSocket(socket) {
   const state = yield select();
   const userID = AUTH_SELECTORS.getAuthUserID(state);
+  console.log('userID',userID);
   while (true) {
     yield take(AUTH_ACTIONS.SYNC_USER_TO_SOCKET);
     socket.emit('user.connected', userID);

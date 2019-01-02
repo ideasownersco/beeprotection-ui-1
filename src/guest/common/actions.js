@@ -3,6 +3,10 @@ export const ACTION_TYPES = {
   LOGIN_SUCCESS: '@guest/LOGIN_SUCCESS',
   LOGIN_FAILURE: '@guest/LOGIN_FAILURE',
 
+  TOKEN_LOGIN_REQUEST: '@guest/TOKEN_LOGIN_REQUEST',
+  TOKEN_LOGIN_SUCCESS: '@guest/TOKEN_LOGIN_SUCCESS',
+  TOKEN_LOGIN_FAILURE: '@guest/TOKEN_LOGIN_FAILURE',
+
   REGISTER_REQUEST: '@guest/REGISTER_REQUEST',
   REGISTER_SUCCESS: '@guest/REGISTER_SUCCESS',
   REGISTER_FAILURE: '@guest/REGISTER_FAILURE',
@@ -35,6 +39,12 @@ export const ACTION_TYPES = {
 function login(payload) {
   return {
     type: ACTION_TYPES.LOGIN_REQUEST,
+    payload,
+  };
+}
+function tokenLogin(payload) {
+  return {
+    type: ACTION_TYPES.TOKEN_LOGIN_REQUEST,
     payload,
   };
 }
@@ -88,6 +98,7 @@ function reSendConfirmationCode(params) {
 
 export const ACTIONS = {
   login,
+  tokenLogin,
   register,
   logout,
   recoverPassword,
