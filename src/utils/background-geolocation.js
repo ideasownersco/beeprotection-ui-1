@@ -3,7 +3,7 @@ import BackgroundGeolocation from 'react-native-background-geolocation';
 
 export default {
   desiredAccuracy: BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
-  distanceFilter: 30,
+  distanceFilter: 20,
   stopOnTerminate: false,
   preventSuspend: true,
   startOnBoot: true,
