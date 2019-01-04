@@ -46,7 +46,7 @@ class OrderDetailScene extends Component {
       ),
     );
 
-    BackgroundGeolocation.on('location', this.onLocation);
+    // BackgroundGeolocation.on('location', this.onLocation);
     // BackgroundGeolocation.on('http', this.onHttp);
 
     BackgroundGeolocation.ready(
@@ -84,9 +84,9 @@ class OrderDetailScene extends Component {
     }
   }
 
-  onLocation = location => {
-    console.log('location', location);
-  };
+  // onLocation = location => {
+  //   console.log('location', location);
+  // };
 
   // onHttp = payload => {
   //   console.log('payload', payload);
