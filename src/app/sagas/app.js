@@ -27,7 +27,6 @@ function* boot() {
     yield put({type: ACTION_TYPES.INSTALL_SUCCESS, value: true});
   }
 
-
   let deviceUUIDKey = yield call(getStorageItem, DEVICE_UUID_KEY);
   if(isNull(deviceUUIDKey)) {
     const uniqueId = DeviceInfo.getUniqueID();
