@@ -47,7 +47,7 @@ class Payment extends Component {
         scene: 'success',
       });
 
-      this.props.actions.paymentSuccess({
+      this.props.actions.setPaymentSuccess({
         order_id: this.props.navigation.getParam('orderID'),
       });
     } else if (navState.url === failureUrl) {

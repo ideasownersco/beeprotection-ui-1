@@ -6,7 +6,6 @@ import {API} from 'guest/common/api';
 import {AUTH_KEY} from 'utils/env';
 
 import {ACTIONS as APP_ACTIONS} from 'app/common/actions';
-
 import {
   forgetStorageItem,
   getStorageItem,
