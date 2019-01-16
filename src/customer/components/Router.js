@@ -7,7 +7,6 @@ import Drawer from 'customer/components/Drawer';
 import Home from 'customer/Home';
 import Map from 'customer/Map';
 import Settings from 'guest/Settings';
-import GuestLoginAlert from 'guest/GuestLoginAlert';
 import CreateOrder from 'customer/orders/CreateOrder';
 import DrawerIcon from 'components/DrawerIcon';
 import BackButton from 'components/BackButton';
@@ -105,14 +104,13 @@ const HomeStack = createStackNavigator(
     LanguageSelect: {
       screen: LanguageSelect,
     },
-    GuestLoginAlert:GuestLoginAlert
   },
   {
     navigationOptions: ({navigation}) => ({
       gesturesEnabled: false,
       ...navStyle,
     }),
-    // initialRouteName:'GuestLoginAlert'
+    // initialRouteName:'Payment'
   },
 );
 
