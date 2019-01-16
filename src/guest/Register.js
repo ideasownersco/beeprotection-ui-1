@@ -13,17 +13,8 @@ import I18n from 'utils/locale';
 import Touchable from 'react-native-platform-touchable';
 import FormContainer from 'components/FormContainer';
 import FormContent from 'components/FormContent';
-import {ActivityIndicator, Platform, View} from 'react-native';
-import {
-  Paragraph,
-  Colors,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Button,
-} from 'react-native-paper';
+import {Button, Dialog, DialogContent, Paragraph,} from 'react-native-paper';
 
-const isIOS = Platform.OS === 'ios';
 type State = {
   name: string,
   email: string,
@@ -59,16 +50,32 @@ class Register extends Component {
   };
 
   handleRegister = () => {
-    let credentials = this.state;
-    this.props.actions.register({
-      ...credentials,
-      driver:
-        (this.props.navigation.state.params &&
-          this.props.navigation.state.params.userType &&
-          this.props.navigation.state.params.userType === 'driver') ||
-        false,
-    });
+
+    return new Promise((resolve, reject) => {
+      let credentials = this.state;
+      let isDriver = (this.props.navigation.state.params &&
+        this.props.navigation.state.params.userType &&
+        this.props.navigation.state.params.userType === 'driver') ||
+        false;
+      this.props.actions.register({credentials, resolve, reject, driver:isDriver});
+    })
+      .then(user => {
+        this.props.navigation.pop();
+      })
+      .catch(e => {});
   };
+
+  // handleRegister = () => {
+  //   let credentials = this.state;
+  //   this.props.actions.register({
+  //     ...credentials,
+  //     driver:
+  //       (this.props.navigation.state.params &&
+  //         this.props.navigation.state.params.userType &&
+  //         this.props.navigation.state.params.userType === 'driver') ||
+  //       false,
+  //   });
+  // };
 
   onFieldChange = (field, value) => {
     this.setState({[field]: value});
@@ -171,13 +178,11 @@ class Register extends Component {
 
           <Dialog visible={this.state.show_resend_confirmation_screen}>
             <DialogContent>
-              {/*<Paragraph>{I18n.t('r')}</Paragraph>*/}
               <FormTextInput
                 field="email"
                 onValueChange={this.onFieldChange}
                 label={I18n.t('email')}
               />
-
               <Button
                 raised
                 primary
@@ -202,7 +207,6 @@ class Register extends Component {
         </Touchable>
 
         <Dialog visible={auth.confirmationScreenVisible}>
-          {/*<DialogTitle>Progress Dialog</DialogTitle>*/}
           <DialogContent>
             <Paragraph>{I18n.t('confirm_account')}</Paragraph>
             <FormTextInput
@@ -210,7 +214,6 @@ class Register extends Component {
               onValueChange={this.onFieldChange}
               label={I18n.t('confirmation_code')}
             />
-
             <Button
               raised
               primary

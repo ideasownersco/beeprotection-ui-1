@@ -42,9 +42,17 @@ function login(payload) {
     payload,
   };
 }
+
 function tokenLogin(payload) {
   return {
     type: ACTION_TYPES.TOKEN_LOGIN_REQUEST,
+    payload,
+  };
+}
+
+function register(payload) {
+  return {
+    type: ACTION_TYPES.REGISTER_REQUEST,
     payload,
   };
 }
@@ -71,13 +79,6 @@ function recoverPassword(params) {
 function updatePassword(params) {
   return {
     type: ACTION_TYPES.PASSWORD_UPDATE_REQUEST,
-    params,
-  };
-}
-
-function register(params) {
-  return {
-    type: ACTION_TYPES.REGISTER_REQUEST,
     params,
   };
 }

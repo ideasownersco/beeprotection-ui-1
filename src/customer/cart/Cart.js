@@ -28,6 +28,8 @@ import CreateAddress from 'customer/cart/components/CreateAddress';
 import Modal from 'react-native-modal';
 import AddressTypeSelectionModal from 'customer/cart/components/AddressTypeSelectionModal';
 import CreateAddressFields from 'customer/cart/components/CreateAddressFields';
+import GuestLoginAlert from "guest/GuestLoginAlert";
+import Dialog from "../../components/Dialog";
 
 class Cart extends PureComponent {
   state: State = {
@@ -47,6 +49,8 @@ class Cart extends PureComponent {
       longitude: 47.9774,
     },
     savingAddress: false,
+    showCheckoutLoginModal:false,
+    showAddressLoginModal:false
   };
 
   static defaultProps = {
@@ -129,7 +133,7 @@ class Cart extends PureComponent {
     let {isAuthenticated} = this.props;
 
     if (!isAuthenticated) {
-      return this.redirectToLogin();
+      return this.redirectToAddressLogin();
     }
 
     this.setState({
@@ -294,16 +298,57 @@ class Cart extends PureComponent {
   };
 
   redirectToLogin = () => {
-    return Alert.alert(`${I18n.t('login_required')}`, '', [
-      {text: I18n.t('cancel')},
-      {
-        text: I18n.t('login'),
-        onPress: () =>
-          this.props.navigation.navigate('Login', {
-            redirectRoute: 'Cart',
-          }),
-      },
-    ]);
+    this.setState({
+      showAddressLoginModal:true
+    });
+    // return Alert.alert(`${I18n.t('login_required')}`, '', [
+    //   {text: I18n.t('cancel')},
+    //   {
+    //     text: I18n.t('login'),
+    //     onPress: () =>
+    //       this.props.navigation.navigate('Login', {
+    //         redirectRoute: 'Cart',
+    //       }),
+    //   },
+    // ]);
+  };
+
+  redirectToAddressLogin = () => {
+    this.setState({
+      showAddressLoginModal:true
+    });
+    // return Alert.alert(`${I18n.t('login_required')}`, '', [
+    //   {text: I18n.t('cancel')},
+    //   {
+    //     text: I18n.t('login'),
+    //     onPress: () =>
+    //       this.props.navigation.navigate('Login', {
+    //         redirectRoute: 'Cart',
+    //       }),
+    //   },
+    // ]);
+  };
+
+  login = () => {
+    this.hideLoginModal();
+    this.props.navigation.navigate('Login', {
+      redirectRoute: 'Cart',
+    });
+  };
+
+  guestAddAddress = () => {
+    this.hideLoginModal();
+    this.showAddressCreateModal();
+  };
+
+  guestCheckout = () => {
+    this.hideLoginModal();
+  };
+
+  hideLoginModal = () => {
+    this.setState({
+      showAddressLoginModal:false
+    });
   };
 
   performCheckout = () => {
@@ -398,6 +443,8 @@ class Cart extends PureComponent {
       addressTypeSelectionModalVisible,
       address,
       savingAddress,
+      showAddressLoginModal,
+      showCheckoutLoginModal
     } = this.state;
 
     if (!isFreeWash && !cartItems.length) {
@@ -600,6 +647,41 @@ class Cart extends PureComponent {
             total={cartTotal}
           />
         </Modal>
+
+        {/*<Modal*/}
+        {/*isVisible={showLoginModal}*/}
+        {/*transparent={true}*/}
+        {/*useNativeDriver={true}*/}
+        {/*hideModalContentWhileAnimating={true}*/}
+        {/*style={{margin: 0, padding: 0, backgroundColor: 'white'}}*/}
+        {/*>*/}
+        {/*<GuestLoginAlert*/}
+        {/*onPress={this.onSuccessButtonPress}*/}
+        {/*visible={showOrderSuccessModal}*/}
+        {/*onHide={this.hideLoginModal}*/}
+        {/*cart={cart}*/}
+        {/*total={cartTotal}*/}
+        {/*/>*/}
+        {/*</Modal>*/}
+
+        <Dialog
+          description={I18n.t('login_required')}
+          rightButtonText={I18n.t('login')}
+          rightButtonPress={this.login}
+          leftButtonText={I18n.t('guest_add_address')}
+          leftButtonPress={this.guestAddAddress}
+          visible={showAddressLoginModal}
+        />
+
+        <Dialog
+          description={I18n.t('login_required')}
+          rightButtonText={I18n.t('login')}
+          rightButtonPress={this.login}
+          leftButtonText={I18n.t('guest_checkout')}
+          leftButtonPress={this.guestCheckout}
+          visible={showCheckoutLoginModal}
+        />
+
       </ScrollView>
     );
   }

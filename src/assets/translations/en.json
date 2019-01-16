@@ -180,5 +180,7 @@
   "print_invoice" : "Print Invoice",
   "resume" : "Reset",
   "address_delete_success": "Deleted",
-  "address_delete_failure" : "Could not delete address"
+  "address_delete_failure" : "Could not delete address",
+  "guest_checkout" : "Checkout as Guest",
+  "guest_add_address" : "Use as Guest"
 }

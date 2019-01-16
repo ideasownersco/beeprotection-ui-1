@@ -55,7 +55,7 @@ export function reducer(state = initialState, action = {}) {
     case ACTION_TYPES.REGISTER_SUCCESS:
       return {
         ...state,
-        confirmationScreenVisible: true,
+        confirmationScreenVisible: false,
         register: {...state.register, busy: false, error: null},
       };
     case ACTION_TYPES.REGISTER_FAILURE:

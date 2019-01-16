@@ -105,15 +105,17 @@ function* login(action) {
 }
 
 function* register(action) {
+  const {credentials, resolve, reject} = action.payload;
+
   try {
     const params = {
       body: {
-        ...action.params,
+        ...credentials,
       },
     };
     const response = yield call(API.register, params);
     yield put({type: ACTION_TYPES.REGISTER_SUCCESS, payload: response.data});
-    // yield NavigatorService.back();
+    yield resolve(response.data);
   } catch (error) {
     yield put({type: ACTION_TYPES.REGISTER_FAILURE, error});
     yield put(
@@ -122,6 +124,7 @@ function* register(action) {
         type: 'error',
       }),
     );
+    yield reject(error);
   }
 }
 
