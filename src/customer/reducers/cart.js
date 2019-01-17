@@ -27,7 +27,7 @@ export function reducer(state = initialState, action = {}) {
     case ACTION_TYPES.CART_ADD_ITEM_SUCCESS: {
       return {
         ...state,
-        total: 0,
+        // total: 0,
         items: {
           ...state.items,
           [action.id]: action.item,

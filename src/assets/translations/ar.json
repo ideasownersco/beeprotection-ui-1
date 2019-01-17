@@ -181,5 +181,10 @@
   "delete" : "حذف",
   "track_driver" : "تتبع السائق",
   "print_invoice" : "اطبع فاتورة",
-  "resume" : "Reset"
+  "resume" : "Reset",
+  "address_delete_success": "مسحت",
+  "address_delete_failure" : "خطأ",
+  "guest_checkout" : "Checkout as Guest",
+  "guest_add_address" : "Use as Guest",
+  "contact" : "اتصل بنا"
 }

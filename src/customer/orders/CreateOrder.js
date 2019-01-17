@@ -168,14 +168,6 @@ class CreateOrder extends PureComponent {
       quantity: this.state.quantity,
     };
 
-    this.props.actions.setCartItems({
-      activeCategoryID: undefined,
-      activePackageID: undefined,
-      activeServicesIDs: [],
-      hasFreeWash: false,
-      isFreeWash: false,
-    });
-
     // return new Promise((resolve, reject) => {
     this.props.actions.addToCart(item);
 
@@ -189,13 +181,27 @@ class CreateOrder extends PureComponent {
   };
 
   onAddNewItemPress = () => {
-    this.props.actions.setCartItem('total', 0);
+    this.props.actions.setCartItems({
+      activeCategoryID: undefined,
+      activePackageID: undefined,
+      activeServicesIDs: [],
+      hasFreeWash: false,
+      isFreeWash: false,
+      total:0
+    });
     this.setState({
       showCartSuccessModal: false,
     });
   };
 
   onCheckoutPress = () => {
+    this.props.actions.setCartItems({
+      activeCategoryID: undefined,
+      activePackageID: undefined,
+      activeServicesIDs: [],
+      hasFreeWash: false,
+      isFreeWash: false,
+    });
     this.setState({
       showCartSuccessModal: false,
     });

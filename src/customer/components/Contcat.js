@@ -5,7 +5,7 @@ import Button from 'components/Button';
 import {Title} from 'react-native-paper';
 import {Colors} from 'react-native-paper';
 
-export default class Contact extends Component {
+export default class FreeWash extends Component {
   render() {
     let {onPress, close} = this.props;
     return (

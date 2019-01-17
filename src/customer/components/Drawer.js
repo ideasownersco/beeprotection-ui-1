@@ -6,9 +6,13 @@ import I18n from 'utils/locale';
 import DrawerItem from 'components/DrawerItem';
 import {DrawerSection} from 'react-native-paper';
 import DrawerHeader from 'components/DrawerHeader';
+import Modal from 'react-native-modal';
+import Contact from "customer/components/Contact";
 
 export default class Drawer extends Component {
+
   onItemPress = (routeName: string) => {
+    this.props.navigation.closeDrawer();
     this.setState({
       activeRoute: routeName,
     });
@@ -68,6 +72,17 @@ export default class Drawer extends Component {
           active={this.state.activeRoute === 'LanguageSelect'}
         />
 
+        <DrawerItem
+          label={I18n.t('contact')}
+          routeName="Contact"
+          onItemPress={this.onItemPress}
+          iconProps={{
+            name: 'md-person',
+            type: 'Ionicons',
+          }}
+          active={this.state.activeRoute === 'Contact'}
+        />
+
         {user.id ? (
           <DrawerItem
             label={I18n.t('logout')}
@@ -91,6 +106,23 @@ export default class Drawer extends Component {
             active={this.state.activeRoute === 'Login'}
           />
         )}
+
+        <Modal
+          isVisible={activeRoute === 'Contact'}
+          style={{
+            marginVertical: 100,
+            marginHorizontal: 30,
+            backgroundColor: 'white',
+          }}
+          onSwipe={()=>this.setState({activeRoute:'Home'})}
+          swipeDirection="down"
+          onBackdropPress={()=>this.setState({activeRoute:'Home'})}
+        >
+
+          <Contact />
+
+        </Modal>
+
       </DrawerSection>
     );
   }
