@@ -4,7 +4,7 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Dimensions, Image, StyleSheet} from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -48,6 +48,7 @@ export default class MapPicker extends Component {
         ref={ref => {
           this.map = ref;
         }}
+        provider={PROVIDER_GOOGLE}
         style={[styles.container]}
         region={{
           latitude: latitude,
