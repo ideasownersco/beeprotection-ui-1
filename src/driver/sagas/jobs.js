@@ -105,8 +105,10 @@ function* uploadPhotos(action) {
     images.map(img => {
       formData.append('images[]', {
         uri: img,
-        name: getFileName(img),
-        type: getFileExtension(img),
+        name: Math.random().toString(36).substring(7) + '.jpg',
+        // name: getFileName(img),
+        type: 'image/jpeg',
+        // type: getFileExtension(img),
       });
     });
 
