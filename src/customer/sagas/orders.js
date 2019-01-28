@@ -238,7 +238,6 @@ function* updateAddress(action) {
 }
 
 function* deleteAddress(action) {
-
   try {
     const params = {
       body: {
@@ -327,7 +326,7 @@ function* fetchHasFreeWash(action) {
     const response = yield call(API.fetchHasFreeWash, params);
     yield put({
       type: ACTION_TYPES.FETCH_HAS_FREE_WASH_SUCCESS,
-      has_free_wash:response.has_free_wash
+      has_free_wash: response.has_free_wash,
     });
   } catch (error) {
     yield put({type: ACTION_TYPES.FETCH_HAS_FREE_WASH_FAILURE, error});
@@ -341,13 +340,13 @@ function* setHasFreeWash(action) {
     let params = {
       body: {
         uuid: uuid,
-        ...action.params
+        ...action.params,
       },
     };
     const response = yield call(API.setHasFreeWash, params);
     yield put({
       type: ACTION_TYPES.SET_HAS_FREE_WASH_SUCCESS,
-      has_free_wash:response.has_free_wash
+      has_free_wash: response.has_free_wash,
     });
   } catch (error) {
     yield put({type: ACTION_TYPES.SET_HAS_FREE_WASH_FAILURE, error});

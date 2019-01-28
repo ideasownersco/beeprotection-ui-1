@@ -5,7 +5,7 @@ import I18n from 'utils/locale';
 import MapPicker from 'customer/cart/components/MapPicker';
 import colors from 'assets/theme/colors';
 import MapButtons from 'customer/cart/components/MapButtons';
-import SelectArea from "./SelectArea";
+import SelectArea from './SelectArea';
 
 export default class extends PureComponent {
   static propTypes = {
@@ -61,11 +61,10 @@ export default class extends PureComponent {
 
   render() {
     const {latitude, longitude, area_id} = this.state;
-    const {savingAddress,areas} = this.props;
+    const {savingAddress, areas} = this.props;
 
     return (
       <View style={styles.container}>
-
         <View style={styles.searchInputWrapper}>
           <SelectArea setArea={this.setArea} items={areas} area_id={area_id} />
         </View>

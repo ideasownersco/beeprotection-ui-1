@@ -11,11 +11,11 @@ import {ACTION_TYPES as AUTH_ACTIONS} from 'guest/common/actions';
 import {SELECTORS as AUTH_SELECTORS} from 'guest/common/selectors';
 
 function connect() {
-  const socket = io(SOCKET_SERVER,{
+  const socket = io(SOCKET_SERVER, {
     reconnection: true,
     reconnectionDelay: 1000,
-    reconnectionDelayMax : 5000,
-    reconnectionAttempts: 99999
+    reconnectionDelayMax: 5000,
+    reconnectionAttempts: 99999,
   });
 
   return new Promise(resolve => {
@@ -23,7 +23,6 @@ function connect() {
       resolve(socket);
     });
   });
-
 }
 
 function subscribe(socket) {

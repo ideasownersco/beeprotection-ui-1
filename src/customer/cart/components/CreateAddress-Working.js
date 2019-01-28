@@ -54,7 +54,6 @@ export default class extends PureComponent {
 
     return (
       <View style={styles.container}>
-
         <View style={styles.marker}>
           <Image
             source={require('./../../../assets/images/pin.png')}

@@ -7,7 +7,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ACTIONS, ACTIONS as ORDER_ACTIONS} from 'customer/common/actions';
 import {ACTIONS as USER_ACTIONS} from 'guest/common/actions';
-import {SELECTORS, SELECTORS as ORDER_SELECTORS,} from 'customer/selectors/orders';
+import {
+  SELECTORS,
+  SELECTORS as ORDER_SELECTORS,
+} from 'customer/selectors/orders';
 import {SELECTORS as USER_SELECTORS} from 'guest/common/selectors';
 import Button from 'components/Button';
 import I18n from 'utils/locale';
@@ -99,7 +102,7 @@ class Cart extends PureComponent {
     this.fetchTimings(date);
   };
 
-  onTimeChange = (time:object) => {
+  onTimeChange = (time: object) => {
     this.props.actions.setCartItem('selectedTimeID', time.id);
   };
 
@@ -265,12 +268,11 @@ class Cart extends PureComponent {
       });
   };
 
-  deleteAddress = (address) => {
+  deleteAddress = address => {
     this.props.actions.deleteAddress({
-      address_id:address.id
+      address_id: address.id,
     });
   };
-
 
   onSuccessButtonPress = () => {
     this.hideSuccessModal();
@@ -285,7 +287,7 @@ class Cart extends PureComponent {
 
   fetchTimings = (date = null) => {
     let {isFreeWash} = this.props.cart;
-    let orderDate = date ?  date : this.props.cart.selectedDate;
+    let orderDate = date ? date : this.props.cart.selectedDate;
     this.props.actions.fetchTimings({
       date: orderDate.format('Y-M-D'),
       items: this.props.cart.items,
@@ -317,7 +319,7 @@ class Cart extends PureComponent {
       total,
       customer_name,
       customer_email,
-      customer_mobile
+      customer_mobile,
     } = cart;
 
     if (!isAuthenticated) {
@@ -333,16 +335,18 @@ class Cart extends PureComponent {
         date: selectedDate.format('Y-M-D'),
         payment_mode: paymentMode,
         free_wash: cart.isFreeWash,
-        customer_name:customer_name,
-        customer_email:customer_email,
-        customer_mobile:customer_mobile,
+        customer_name: customer_name,
+        customer_email: customer_email,
+        customer_mobile: customer_mobile,
       };
       return new Promise((resolve, reject) => {
         this.props.actions.checkout({item, resolve, reject});
       })
         .then(order => {
-
-          this.props.actions.setHasFreeWash({has_free_wash:false,force_fill:true});
+          this.props.actions.setHasFreeWash({
+            has_free_wash: false,
+            force_fill: true,
+          });
 
           if (this.state.paymentMode === 'cash') {
             if (order.status == 'Success') {
@@ -373,7 +377,6 @@ class Cart extends PureComponent {
     }
   };
 
-
   render() {
     let {
       cart,
@@ -386,7 +389,13 @@ class Cart extends PureComponent {
       areas,
     } = this.props;
 
-    let {selectedDate, selectedAddressID, selectedTimeID, isFreeWash,deletedAddresses} = cart;
+    let {
+      selectedDate,
+      selectedAddressID,
+      selectedTimeID,
+      isFreeWash,
+      deletedAddresses,
+    } = cart;
 
     let {
       dates,

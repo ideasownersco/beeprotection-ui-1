@@ -34,7 +34,7 @@ class Home extends Component {
   componentDidMount() {
     this.fetchWorkingOrders();
     AppState.addEventListener('change', this.handleAppStateChange);
-    this.props.dispatch(CUSTOMER_ACTIONS.fetchHasFreeWash());
+    // this.props.dispatch(CUSTOMER_ACTIONS.fetchHasFreeWash());
   }
 
   componentWillUnmount() {

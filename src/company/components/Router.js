@@ -20,7 +20,7 @@ import TrackOrderScene from 'customer/orders/TrackOrderScene';
 import CreateOrder from 'customer/orders/CreateOrder';
 import Cart from 'customer/cart/Cart';
 import Payment from 'customer/cart/Payment';
-import OrderCustomerInfo from "company/orders/OrderCustomerInfo";
+import OrderCustomerInfo from 'company/orders/OrderCustomerInfo';
 
 const getDrawerIcon = navigation => {
   return {
@@ -83,7 +83,6 @@ const HomeStack = createStackNavigator(
         title: I18n.t('track_driver'),
       }),
     },
-
   },
   {
     // initialRouteName:'TrackDetail',

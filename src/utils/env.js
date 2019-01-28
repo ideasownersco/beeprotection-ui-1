@@ -3,7 +3,7 @@ const defaults = {};
 if (__DEV__) {
   module.exports = {
     ...defaults,
-    // NETWORK_PROTOCOL: 'http://',
+    // NETWORK_PROTOCOL: 'https://',
     // API_URL: 'beeprotection.test/api',
     // WEB_URL: 'http://beeprotection.test',
     // SOCKET_SERVER: 'http://beeprotection.test:3000',

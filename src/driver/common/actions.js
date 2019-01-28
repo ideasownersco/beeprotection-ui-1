@@ -163,6 +163,13 @@ function fetchJobPhotos(id) {
   };
 }
 
+// function uploadImages(params) {
+//   return {
+//     type: ACTION_TYPES.UPLOAD_PHOTOS_REQUEST,
+//     params,
+//   };
+// }
+
 function uploadImages(params) {
   return {
     type: ACTION_TYPES.UPLOAD_PHOTOS_REQUEST,

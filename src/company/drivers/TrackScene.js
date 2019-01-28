@@ -25,8 +25,8 @@ class TrackScene extends PureComponent {
 
   state = {
     pauseTrackingUpdate: false,
-    initialized:false,
-    appState: AppState.currentState
+    initialized: false,
+    appState: AppState.currentState,
   };
 
   componentDidMount() {
@@ -34,19 +34,22 @@ class TrackScene extends PureComponent {
     this.props.dispatch(DRIVER_ACTIONS.fetchDrivers());
     this.props.dispatch(DRIVER_ACTIONS.subscribeToDriverTrackings());
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setState({
-        initialized:true
-      })
-    },1000)
+        initialized: true,
+      });
+    }, 1000);
   }
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
-  _handleAppStateChange = (nextAppState) => {
-    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+  _handleAppStateChange = nextAppState => {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
       this.props.dispatch(DRIVER_ACTIONS.subscribeToDriverTrackings());
     }
     this.setState({appState: nextAppState});
@@ -57,11 +60,14 @@ class TrackScene extends PureComponent {
   };
 
   resumeTrackingUpdate = () => {
-    this.setState({
-      pauseTrackingUpdate: false,
-    },()=>{
-      this.onMapLayout();
-    });
+    this.setState(
+      {
+        pauseTrackingUpdate: false,
+      },
+      () => {
+        this.onMapLayout();
+      },
+    );
   };
 
   pauseTrackingUpdate = () => {
@@ -70,8 +76,8 @@ class TrackScene extends PureComponent {
     });
   };
 
-  onDriversListItemPress = (orderID) => {
-    if(orderID) {
+  onDriversListItemPress = orderID => {
+    if (orderID) {
       this.props.navigation.navigate('OrderDetail', {
         orderID: orderID,
       });
@@ -101,8 +107,7 @@ class TrackScene extends PureComponent {
           showsUserLocation={false}
           showsMyLocationButton={false}
           onLongPress={this.pauseTrackingUpdate}
-          onPress={this.pauseTrackingUpdate}
-        >
+          onPress={this.pauseTrackingUpdate}>
           {trackings.map((tracking, index) => {
             const {heading} = tracking;
             const rotate =
@@ -110,15 +115,14 @@ class TrackScene extends PureComponent {
                 ? `${heading}deg`
                 : undefined;
 
-            if(this.state.initialized) {
+            if (this.state.initialized) {
               return (
                 <MapView.Marker
                   key={`${index}`}
                   anchor={{x: 0.5, y: 0.5, position: 'relative'}}
                   coordinate={{...tracking}}
                   identifier="MarkerOrigin"
-                  mapPadding={5}
-                >
+                  mapPadding={5}>
                   <Image
                     source={images.car}
                     style={[
@@ -130,9 +134,23 @@ class TrackScene extends PureComponent {
                     ]}
                     resizeMode="cover"
                   />
-                  <MapView.Callout onPress={() => this.onDriversListItemPress(tracking.order_id)} tracksViewChanges={true}>
-                    <View style={{flex:1,width:100,height:30,justifyContent:'center'}}>
-                      <Text style={{fontSize:19}}>{tracking.user ? tracking.user.name : `Driver ${tracking.id}`}</Text>
+                  <MapView.Callout
+                    onPress={() =>
+                      this.onDriversListItemPress(tracking.order_id)
+                    }
+                    tracksViewChanges={true}>
+                    <View
+                      style={{
+                        flex: 1,
+                        width: 100,
+                        height: 30,
+                        justifyContent: 'center',
+                      }}>
+                      <Text style={{fontSize: 19}}>
+                        {tracking.user
+                          ? tracking.user.name
+                          : `Driver ${tracking.id}`}
+                      </Text>
                     </View>
                   </MapView.Callout>
                 </MapView.Marker>

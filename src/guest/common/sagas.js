@@ -17,7 +17,6 @@ import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import {Platform} from 'react-native';
 
-
 function* tokenLogin(action) {
   try {
     const pushTokenStorageKey = yield call(getStorageItem, PUSH_TOKEN_KEY);
@@ -25,7 +24,7 @@ function* tokenLogin(action) {
     const params = {
       body: {
         token: pushTokenStorageKey,
-        os:Platform.OS === 'ios' ? 'ios' : 'android'
+        os: Platform.OS === 'ios' ? 'ios' : 'android',
       },
     };
 
@@ -61,7 +60,7 @@ function* login(action) {
       body: {
         ...credentials,
         token: pushTokenStorageKey,
-        os:Platform.OS === 'ios' ? 'ios' : 'android'
+        os: Platform.OS === 'ios' ? 'ios' : 'android',
       },
     };
 
@@ -330,10 +329,7 @@ function* reSendConfirmationCodeMonitor() {
 }
 
 function* tokenLoginMonitor() {
-  yield takeLatest(
-    ACTION_TYPES.TOKEN_LOGIN_REQUEST,
-    tokenLogin,
-  );
+  yield takeLatest(ACTION_TYPES.TOKEN_LOGIN_REQUEST, tokenLogin);
 }
 
 export const sagas = all([

@@ -21,10 +21,12 @@ export default class ListModal extends Component {
 
   static defaultProps = {
     title: '',
+    disabled:false,
+    buttonText:I18n.t('save')
   };
 
   render() {
-    let {isVisible, onCancel, onSave, title, children, style} = this.props;
+    let {isVisible, onCancel, onSave, title, children, style,disabled,buttonText} = this.props;
 
     return (
       <Modal
@@ -41,7 +43,8 @@ export default class ListModal extends Component {
           primary
           dark
           style={{marginBottom: 50, paddingVertical: 10}}
-          title={I18n.t('save')}
+          title={buttonText}
+          disabled={disabled}
         />
       </Modal>
     );

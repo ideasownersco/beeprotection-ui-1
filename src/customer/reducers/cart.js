@@ -16,10 +16,10 @@ const initialState = {
   activeServicesIDs: [],
   hasFreeWash: false,
   isFreeWash: false,
-  customer_name:null,
-  customer_email:null,
-  customer_mobile:null,
-  deletedAddresses : []
+  customer_name: null,
+  customer_email: null,
+  customer_mobile: null,
+  deletedAddresses: [],
 };
 
 export function reducer(state = initialState, action = {}) {

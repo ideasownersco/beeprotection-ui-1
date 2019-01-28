@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {FlatList, StyleSheet, Text, View,I18nManager} from 'react-native';
+import {FlatList, StyleSheet, Text, View, I18nManager} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import colors from 'assets/theme/colors';
 import IconFactory from 'components/IconFactory';
@@ -88,13 +88,13 @@ export default class TimePicker extends Component {
       <FlatList
         data={items}
         renderItem={this.renderItem}
-        style={[styles.listContainer, isFetching && {opacity: 0.5},]}
+        style={[styles.listContainer, isFetching && {opacity: 0.5}]}
         keyExtractor={(item, index) => `${index}`}
         horizontal={true}
         extraData={activeItemID}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        legacyImplementation={true}
+        legacyImplementation={I18nManager.isRTL}
       />
     );
   }

@@ -22,7 +22,6 @@ import FreeWash from 'customer/components/FreeWash';
 import Modal from 'react-native-modal';
 
 class CreateOrder extends PureComponent {
-
   state = {
     showCartSuccessModal: false,
     showFreewashModal: false,
@@ -187,7 +186,7 @@ class CreateOrder extends PureComponent {
       activeServicesIDs: [],
       hasFreeWash: false,
       isFreeWash: false,
-      total:0
+      total: 0,
     });
     this.setState({
       showCartSuccessModal: false,
@@ -214,8 +213,7 @@ class CreateOrder extends PureComponent {
       showFreewashModal: false,
     });
 
-    this.props.actions.setHasFreeWash({has_free_wash:false,force_fill:true});
-
+    this.props.actions.setHasFreeWash({has_free_wash: false, force_fill: true});
   };
 
   onFreeWashPress = () => {

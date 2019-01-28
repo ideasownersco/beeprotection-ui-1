@@ -7,10 +7,9 @@ import DrawerItem from 'components/DrawerItem';
 import {DrawerSection} from 'react-native-paper';
 import DrawerHeader from 'components/DrawerHeader';
 import Modal from 'react-native-modal';
-import Contact from "customer/components/Contact";
+import Contact from 'customer/components/Contact';
 
 export default class Drawer extends Component {
-
   onItemPress = (routeName: string) => {
     this.props.navigation.closeDrawer();
     this.setState({
@@ -114,15 +113,11 @@ export default class Drawer extends Component {
             marginHorizontal: 30,
             backgroundColor: 'white',
           }}
-          onSwipe={()=>this.setState({activeRoute:'Home'})}
+          onSwipe={() => this.setState({activeRoute: 'Home'})}
           swipeDirection="down"
-          onBackdropPress={()=>this.setState({activeRoute:'Home'})}
-        >
-
+          onBackdropPress={() => this.setState({activeRoute: 'Home'})}>
           <Contact />
-
         </Modal>
-
       </DrawerSection>
     );
   }

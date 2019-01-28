@@ -5,7 +5,14 @@ import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
 import {I18nManager} from 'react-native';
 import {API} from 'app/common/api';
 import {ACTION_TYPES} from 'app/common/actions';
-import {AUTH_KEY, COUNTRY_KEY, DEVICE_UUID_KEY, INSTALLED_KEY, LANGUAGE_KEY, PUSH_TOKEN_KEY,} from 'utils/env';
+import {
+  AUTH_KEY,
+  COUNTRY_KEY,
+  DEVICE_UUID_KEY,
+  INSTALLED_KEY,
+  LANGUAGE_KEY,
+  PUSH_TOKEN_KEY,
+} from 'utils/env';
 import {API as AUTH_API} from 'guest/common/api';
 import {ACTION_TYPES as AUTH_ACTION_TYPES} from 'guest/common/actions';
 import {normalize} from 'normalizr';
@@ -20,7 +27,6 @@ function* setInstalled() {
 }
 
 function* boot() {
-
   // 1- Set is the app has installed(run) before
   let installedStorageKey = yield call(getStorageItem, INSTALLED_KEY);
   if (!isNull(installedStorageKey)) {
@@ -28,7 +34,7 @@ function* boot() {
   }
 
   let deviceUUIDKey = yield call(getStorageItem, DEVICE_UUID_KEY);
-  if(isNull(deviceUUIDKey)) {
+  if (isNull(deviceUUIDKey)) {
     const uniqueId = DeviceInfo.getUniqueID();
     yield call(setStorageItem, DEVICE_UUID_KEY, uniqueId);
   }
@@ -52,7 +58,7 @@ function* boot() {
       const params = {
         body: {
           token: pushTokenStorageKey,
-          os:Platform.OS === 'ios' ? 'ios' : 'android'
+          os: Platform.OS === 'ios' ? 'ios' : 'android',
         },
       };
       let response = yield call(AUTH_API.login, params);
@@ -108,7 +114,7 @@ function* setPushToken(action) {
     const params = {
       body: {
         token: action.params.token,
-        os:Platform.OS === 'ios' ? 'ios' : 'android'
+        os: Platform.OS === 'ios' ? 'ios' : 'android',
       },
     };
 

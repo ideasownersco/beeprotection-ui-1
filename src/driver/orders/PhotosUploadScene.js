@@ -44,6 +44,7 @@ class PhotosUploadScene extends Component {
     showImageUploadOptionsDialog: false,
     imageApprovalDialogVisible: false,
     comment: null,
+    uploading:false
   };
 
   componentDidMount() {
@@ -126,19 +127,52 @@ class PhotosUploadScene extends Component {
     this.showUploadImageModal();
   };
 
+  uploadImages = images => {
+
+    this.setState({
+      uploading:true
+    });
+
+    return new Promise((resolve, reject) => {
+      this.props.dispatch(
+        DRIVER_ACTIONS.uploadImages({
+          job_id: this.props.order.job.id,
+          images,
+          resolve,
+          reject,
+        })
+      );
+    })
+      .then(imgs => {
+        this.setState({
+          uploading:false
+        });
+        this.hideUploadImageModal();
+      })
+      .catch(e => {
+        this.setState({
+          uploading:false
+        });
+        this.hideUploadImageModal();
+      })
+      ;
+  };
+
   onSaveUploadedImage = () => {
+    let {images} = this.state;
+
     this.setState({
       imagesUploaded: true,
     });
 
-    this.props.dispatch(
-      DRIVER_ACTIONS.uploadImages({
-        job_id: this.props.order.job.id,
-        images: this.state.images,
-      }),
-    );
-
-    this.hideUploadImageModal();
+    this.uploadImages(images);
+    //
+    // this.props.dispatch(
+    //   DRIVER_ACTIONS.uploadImages({
+    //     job_id: this.props.order.job.id,
+    //     images: this.state.images,
+    //   }),
+    // );
   };
 
   uploadFromCamera = () => {
@@ -152,14 +186,15 @@ class PhotosUploadScene extends Component {
       includeExif: true,
     })
       .then(image => {
-        this.props.dispatch(
-          DRIVER_ACTIONS.uploadImages({
-            job_id: this.props.order.job.id,
-            images: [image.path],
-          }),
-        );
+        // this.props.dispatch(
+        //   DRIVER_ACTIONS.uploadImages({
+        //     job_id: this.props.order.job.id,
+        //     images: [image.path],
+        //   }),
+        // );
+        this.uploadImages([image.path]);
       })
-      .catch(e => alert(e));
+      .catch(e => console.log('error', e));
   };
 
   onImageUploadOptionsDialogDismiss = () => {
@@ -195,24 +230,24 @@ class PhotosUploadScene extends Component {
         />
 
         {job &&
-          job.photos && (
-            <View>
-              <View style={{padding: 10, backgroundColor: 'white'}}>
-                <FormTextInput
-                  field="comment"
-                  onValueChange={this.onFieldChange}
-                  label={I18n.t('comment')}
-                />
-              </View>
-              <Button
-                title={I18n.t('approve_images')}
-                onPress={this.showImageApprovalDialog}
-                raised
-                // disabled={order.job.photos_approved}
-                style={{margin: 20, marginBottom: 50}}
+        job.photos && (
+          <View>
+            <View style={{padding: 10, backgroundColor: 'white'}}>
+              <FormTextInput
+                field="comment"
+                onValueChange={this.onFieldChange}
+                label={I18n.t('comment')}
               />
             </View>
-          )}
+            <Button
+              title={I18n.t('approve_images')}
+              onPress={this.showImageApprovalDialog}
+              raised
+              // disabled={order.job.photos_approved}
+              style={{margin: 20, marginBottom: 50}}
+            />
+          </View>
+        )}
 
         <View
           style={{
@@ -253,7 +288,10 @@ class PhotosUploadScene extends Component {
         <ListModal
           onCancel={this.hideUploadImageModal}
           onSave={this.onSaveUploadedImage}
-          isVisible={showUploadImageModal}>
+          isVisible={showUploadImageModal}
+          disabled={this.state.uploading}
+          buttonText={this.state.uploading ? 'uploading' : I18n.t('save')}
+        >
           <UploadImage
             images={images}
             updateImage={this.uploadImage}

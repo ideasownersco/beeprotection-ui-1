@@ -38,17 +38,18 @@ function startDriving(id, params) {
   return request(requestParams);
 }
 
-function stopDriving(id,params) {
+function stopDriving(id, params) {
   const path = `driver/jobs/${id}/stop/drive`;
   let requestParams = {
     path,
     method: 'POST',
-    params
+    params,
   };
   return request(requestParams);
 }
 
 function uploadPhotos(id, params) {
+  console.log('params', params);
   const path = `driver/jobs/${id}/photos`;
   let requestParams = {
     path,

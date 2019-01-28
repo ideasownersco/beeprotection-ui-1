@@ -56,11 +56,14 @@ class TrackScene extends PureComponent {
   }
 
   resumeTrackingUpdate = () => {
-    this.setState({
-      pauseTrackingUpdate: false,
-    },()=>{
-      this.onMapLayout();
-    });
+    this.setState(
+      {
+        pauseTrackingUpdate: false,
+      },
+      () => {
+        this.onMapLayout();
+      },
+    );
   };
 
   pauseTrackingUpdate = () => {
@@ -141,8 +144,7 @@ class TrackScene extends PureComponent {
           showsUserLocation={false}
           showsMyLocationButton={false}
           onLongPress={this.pauseTrackingUpdate}
-          onPress={this.pauseTrackingUpdate}
-        >
+          onPress={this.pauseTrackingUpdate}>
           {drivers.map((driver, index) => {
             // const {heading} = driver;
             // const rotate =
@@ -156,8 +158,7 @@ class TrackScene extends PureComponent {
                 anchor={{x: 0.5, y: 0.5, position: 'relative'}}
                 coordinate={{...driver}}
                 identifier="MarkerOrigin"
-                mapPadding={5}
-              >
+                mapPadding={5}>
                 <Image
                   source={images.car}
                   style={[

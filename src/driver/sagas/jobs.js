@@ -4,6 +4,7 @@ import {ACTION_TYPES} from 'driver/common/actions';
 import {Schema} from 'utils/schema';
 import {normalize} from 'normalizr';
 import {getFileExtension, getFileName} from 'utils/functions';
+import {ACTIONS as APP_ACTIONS} from '../../app/common/actions';
 
 function* startWorking(action) {
   try {
@@ -97,18 +98,16 @@ function* fetchJobPhotos(action) {
 }
 
 function* uploadPhotos(action) {
+  const {images, reject, resolve} = action.params;
+
   try {
     const formData = new FormData();
-
-    let {images} = action.params;
 
     images.map(img => {
       formData.append('images[]', {
         uri: img,
         name: Math.random().toString(36).substring(7) + '.jpg',
-        // name: getFileName(img),
         type: 'image/jpeg',
-        // type: getFileExtension(img),
       });
     });
 
@@ -118,17 +117,20 @@ function* uploadPhotos(action) {
     };
 
     const response = yield call(API.uploadPhotos, action.params.job_id, params);
-    const normalized = normalize(response.data, Schema.orders);
 
+    yield resolve(response);
+    const normalized = normalize(response.data, Schema.orders);
     yield put({
       type: ACTION_TYPES.UPLOAD_PHOTOS_SUCCESS,
       entities: normalized.entities,
       result: normalized.result,
     });
   } catch (error) {
+    yield reject(error);
     yield put({type: ACTION_TYPES.UPLOAD_PHOTOS_FAILURE, error});
   }
 }
+
 function* approvePhotos(action) {
   try {
     const params = {

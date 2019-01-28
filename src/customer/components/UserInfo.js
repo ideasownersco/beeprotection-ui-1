@@ -34,7 +34,7 @@ const UserInfo = ({user, style, makeCall}) => {
         <View style={styles.content}>
           <Text style={[styles.label, {flex: 1}]}>{I18n.t('mobile')}</Text>
 
-          <Touchable onPress={()=>makeCall(user.mobile)}>
+          <Touchable onPress={() => makeCall(user.mobile)}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <MaterialIcons name="phone" size={30} color="green" />
               <Text>{user.mobile}</Text>

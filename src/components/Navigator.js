@@ -9,7 +9,6 @@ import {CODE_PUSH_ENABLED} from 'utils/env';
 import CodePush from 'react-native-code-push';
 
 export default class Navigator extends Component {
-
   constructor(props) {
     super(props);
     if (CODE_PUSH_ENABLED) {

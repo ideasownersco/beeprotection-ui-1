@@ -1,5 +1,5 @@
 import {API_URL, AUTH_KEY, NETWORK_PROTOCOL} from 'utils/env';
-import I18n from 'utils/locale';
+import {isRTL} from 'utils/locale';
 import {getStorageItem} from 'utils/functions';
 import NavigatorService from 'components/NavigatorService';
 
@@ -19,18 +19,21 @@ export async function request({
   requiresAuthentication = false,
   forceAuthentication = false,
 }) {
+
+  const apiToken = await getStorageItem(AUTH_KEY);
+
   let {paginated, paginatedUrl, body, isBlob, query} = params;
+
   let fullUrl;
   if (paginated) {
     fullUrl = paginatedUrl;
   } else {
     let localeAwareUrl = domain
       ? domain
-      : `${protocol + API_URL}/${path}?lang=${I18n.locale}&`;
+      : `${protocol + API_URL}/${path}?lang=${isRTL ? 'ar' : 'en'}&`;
     fullUrl = localeAwareUrl + query;
   }
 
-  const apiToken = await getStorageItem(AUTH_KEY);
 
   if (__DEV__) {
     if (console.group) {
@@ -64,15 +67,19 @@ export async function request({
   });
 
   return request
+    // .then(res => res.text())          // convert to plain text
+    // .then(text => console.log(text))  // then log it out
     .then(response =>
-      response.json().then(json => ({
-        status: response.status,
-        statusType: response.statusType,
-        json,
-      })),
+      response.json()
+        .then(json => {
+        return ({
+          status: response.status,
+          statusType: response.statusType,
+          json,
+        })
+      }),
     )
     .then(({status, statusType, json}) => {
-      // .then(({json}) => {
       if (__DEV__) {
         if (console.group) {
           console.log('NETWORK_RESPONSE', json);

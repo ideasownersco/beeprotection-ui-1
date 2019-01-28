@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, Linking} from 'react-native';
 import I18n from 'utils/locale';
 import {Title} from 'react-native-paper';
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Touchable from 'react-native-platform-touchable';
-import Divider from "components/Divider";
+import Divider from 'components/Divider';
 
 export default class FreeWash extends Component {
-
   makeCall = number => {
     let url = `tel:${number}`;
 
@@ -28,9 +27,13 @@ export default class FreeWash extends Component {
             flexDirection: 'row',
             alignItems: 'center',
             paddingHorizontal: 5,
-            paddingTop:50
+            paddingTop: 50,
           }}>
-          <Text style={[styles.title]} onPress={() => this.makeCall('98009966')}>98009966</Text>
+          <Text
+            style={[styles.title]}
+            onPress={() => this.makeCall('98009966')}>
+            98009966
+          </Text>
 
           <Touchable onPress={() => this.makeCall('98009966')}>
             <MaterialIcons name="phone" size={30} color="green" />
@@ -45,13 +48,16 @@ export default class FreeWash extends Component {
             alignItems: 'center',
             paddingHorizontal: 5,
           }}>
-          <Text style={[styles.title]} onPress={() => this.makeCall('98009977')}>98009977</Text>
+          <Text
+            style={[styles.title]}
+            onPress={() => this.makeCall('98009977')}>
+            98009977
+          </Text>
 
           <Touchable onPress={() => this.makeCall('98009977')}>
             <MaterialIcons name="phone" size={30} color="green" />
           </Touchable>
         </View>
-
       </View>
     );
   }
@@ -75,7 +81,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     flexDirection: 'row',
   },
-  title:{
-    paddingHorizontal:10,
-  }
+  title: {
+    paddingHorizontal: 10,
+  },
 });

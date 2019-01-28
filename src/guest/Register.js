@@ -13,7 +13,7 @@ import I18n from 'utils/locale';
 import Touchable from 'react-native-platform-touchable';
 import FormContainer from 'components/FormContainer';
 import FormContent from 'components/FormContent';
-import {Button, Dialog, DialogContent, Paragraph,} from 'react-native-paper';
+import {Button, Dialog, DialogContent, Paragraph} from 'react-native-paper';
 
 type State = {
   name: string,
@@ -50,14 +50,19 @@ class Register extends Component {
   };
 
   handleRegister = () => {
-
     return new Promise((resolve, reject) => {
       let credentials = this.state;
-      let isDriver = (this.props.navigation.state.params &&
-        this.props.navigation.state.params.userType &&
-        this.props.navigation.state.params.userType === 'driver') ||
+      let isDriver =
+        (this.props.navigation.state.params &&
+          this.props.navigation.state.params.userType &&
+          this.props.navigation.state.params.userType === 'driver') ||
         false;
-      this.props.actions.register({credentials, resolve, reject, driver:isDriver});
+      this.props.actions.register({
+        credentials,
+        resolve,
+        reject,
+        driver: isDriver,
+      });
     })
       .then(user => {
         this.props.navigation.pop();

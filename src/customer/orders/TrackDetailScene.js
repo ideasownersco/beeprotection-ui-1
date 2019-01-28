@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Text, View,AppState} from 'react-native';
+import {Text, View, AppState} from 'react-native';
 import {connect} from 'react-redux';
 import {SELECTORS as ORDER_SELECTORS} from 'customer/selectors/orders';
 import I18n from 'utils/locale';
@@ -11,7 +11,6 @@ import Map from 'components/Map';
 import {ACTIONS as CUSTOMER_ACTIONS} from 'customer/common/actions';
 
 class TrackDetailScene extends Component {
-
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -23,7 +22,7 @@ class TrackDetailScene extends Component {
   };
 
   state = {
-    appState: AppState.currentState
+    appState: AppState.currentState,
   };
 
   componentDidMount() {
@@ -48,8 +47,11 @@ class TrackDetailScene extends Component {
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
-  _handleAppStateChange = (nextAppState) => {
-    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+  _handleAppStateChange = nextAppState => {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
       const {order} = this.props;
       if (order && order.trackeable) {
         this.props.dispatch(
@@ -75,8 +77,10 @@ class TrackDetailScene extends Component {
       origin = {
         // latitude: 37.78825,
         // longitude: -122.4324,
-        latitude: job && job.driver && job.driver.latitude || 29.3772392006689,
-        longitude: job && job.driver && job.driver.longitude || 47.98511826155676,
+        latitude:
+          (job && job.driver && job.driver.latitude) || 29.3772392006689,
+        longitude:
+          (job && job.driver && job.driver.longitude) || 47.98511826155676,
         heading: 0,
       };
     }

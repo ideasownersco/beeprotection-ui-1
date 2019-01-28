@@ -9,7 +9,6 @@ import I18n from 'utils/locale';
 import Touchable from 'react-native-platform-touchable';
 
 export default class AddressesList extends Component {
-
   shouldComponentUpdate(nextProps) {
     return (
       nextProps.items !== this.props.items ||
@@ -19,17 +18,26 @@ export default class AddressesList extends Component {
 
   renderRow = ({item}) => {
     return (
-      <View style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-        <Text hitSlop={{top:10,left:10,bottom:10,right:10}} style={{padding:5}} onPress={()=>this.props.deleteAddress(item)}>{I18n.t('delete')}</Text>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Text
+          hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
+          style={{padding: 5}}
+          onPress={() => this.props.deleteAddress(item)}>
+          {I18n.t('delete')}
+        </Text>
         {/*<Touchable hitSlop={{top:10,left:10,bottom:10,right:10}}  onPress={()=>this.props.deleteAddress(item)}>{I18n.t('delete')}</Touchable>*/}
-        <View style={{flex:1}}>
-          {this.renderItem(item)}
-        </View>
+        <View style={{flex: 1}}>{this.renderItem(item)}</View>
       </View>
     );
   };
 
-  renderItem = (item) => {
+  renderItem = item => {
     const {onItemPress, activeItemID} = this.props;
 
     if (!item.area.active) {
@@ -40,7 +48,7 @@ export default class AddressesList extends Component {
           description={
             <AddressInfo address={item} style={{color: colors.darkGrey}} />
           }
-          onPress={()=>{}}
+          onPress={() => {}}
         />
       );
     }
@@ -58,10 +66,12 @@ export default class AddressesList extends Component {
   };
 
   render() {
-    const {items, activeItemID,deletedAddresses} = this.props;
+    const {items, activeItemID, deletedAddresses} = this.props;
     return (
       <FlatList
-        data={items.filter(item => item.area !== null || undefined).filter(item => !deletedAddresses.includes(item.id))}
+        data={items
+          .filter(item => item.area !== null || undefined)
+          .filter(item => !deletedAddresses.includes(item.id))}
         renderItem={this.renderRow}
         style={styles.listContainer}
         keyExtractor={(item, index) => `${index}`}
