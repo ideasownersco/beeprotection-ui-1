@@ -3,19 +3,12 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {
-  Image,
-  FlatList,
-  StyleSheet,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {FlatList, Image, StyleSheet, TouchableHighlight, View,} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import colors from 'assets/theme/colors';
 import ImagePicker from 'react-native-image-crop-picker';
 import map from 'lodash/map';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {isRTL} from 'utils/locale';
 
 export default class UploadImage extends Component {
   static propTypes = {
@@ -29,6 +22,12 @@ export default class UploadImage extends Component {
 
     ImagePicker.openPicker({
       multiple: true,
+      cropping: true,
+      width: 500,
+      height: 500,
+      includeExif: true,
+      compressImageQuality:.3,
+      maxFiles:maxImages
     })
       .then(collection => {
         return map(collection, image => image.path);
@@ -81,7 +80,7 @@ export default class UploadImage extends Component {
   };
 
   render() {
-    const {images, header, footer} = this.props;
+    const {images} = this.props;
 
     return (
       <View style={styles.container}>

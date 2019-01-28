@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ACTIONS as DRIVER_ACTIONS} from 'driver/common/actions';
 import {SELECTORS as DRIVER_SELECTORS} from 'driver/selectors/orders';
-import {ScrollView, View} from 'react-native';
+import {View} from 'react-native';
 import PropTypes from 'prop-types';
 import I18n from 'utils/locale';
 import {FAB} from 'react-native-paper';
@@ -160,19 +160,10 @@ class PhotosUploadScene extends Component {
 
   onSaveUploadedImage = () => {
     let {images} = this.state;
-
     this.setState({
       imagesUploaded: true,
     });
-
     this.uploadImages(images);
-    //
-    // this.props.dispatch(
-    //   DRIVER_ACTIONS.uploadImages({
-    //     job_id: this.props.order.job.id,
-    //     images: this.state.images,
-    //   }),
-    // );
   };
 
   uploadFromCamera = () => {
@@ -180,18 +171,13 @@ class PhotosUploadScene extends Component {
 
     ImagePicker.openCamera({
       multiple: false,
-      cropping: false,
+      cropping: true,
       width: 500,
       height: 500,
       includeExif: true,
+      compressImageQuality:.3,
     })
       .then(image => {
-        // this.props.dispatch(
-        //   DRIVER_ACTIONS.uploadImages({
-        //     job_id: this.props.order.job.id,
-        //     images: [image.path],
-        //   }),
-        // );
         this.uploadImages([image.path]);
       })
       .catch(e => console.log('error', e));
