@@ -39,7 +39,7 @@ export default class TimePicker extends Component {
         style={[
           styles.itemContainer,
           item.disabled && hideDisabledItem
-            ? {opacity: 0.3}
+            ? styles.disabled
             : activeItemID === item.id && styles.itemContainerActive,
         ]}>
         <IconFactory
@@ -88,7 +88,7 @@ export default class TimePicker extends Component {
       <FlatList
         data={items}
         renderItem={this.renderItem}
-        style={[styles.listContainer, isFetching && {opacity: 0.5}]}
+        style={[styles.listContainer, isFetching && {opacity: 0.5,backgroundColor:'pink'}]}
         keyExtractor={(item, index) => `${index}`}
         horizontal={true}
         extraData={activeItemID}
@@ -136,4 +136,7 @@ const styles = StyleSheet.create({
   dayActive: {
     color: colors.primary,
   },
+  disabled:{
+    opacity:.3
+  }
 });
