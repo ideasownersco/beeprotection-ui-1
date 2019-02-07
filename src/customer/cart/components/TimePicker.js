@@ -88,7 +88,10 @@ export default class TimePicker extends Component {
       <FlatList
         data={items}
         renderItem={this.renderItem}
-        style={[styles.listContainer, isFetching && {opacity: 0.5,backgroundColor:'tomato'}]}
+        style={[
+          styles.listContainer,
+          isFetching && {opacity: 0.5, backgroundColor: 'tomato'},
+        ]}
         keyExtractor={(item, index) => `${index}`}
         horizontal={true}
         extraData={activeItemID}
@@ -136,7 +139,7 @@ const styles = StyleSheet.create({
   dayActive: {
     color: colors.primary,
   },
-  disabled:{
-    opacity:.3
-  }
+  disabled: {
+    opacity: 0.3,
+  },
 });

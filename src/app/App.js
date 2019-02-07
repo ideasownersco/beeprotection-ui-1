@@ -20,7 +20,6 @@ class App extends Component {
 
   componentDidMount() {
     this.props.dispatch(ACTIONS.boot());
-    // this.props.dispatch(USER_ACTIONS.tokenLogin({}));
   }
 
   onLanguageSelect = name => {
@@ -57,19 +56,6 @@ class App extends Component {
           break;
       }
     }
-    //
-    // if (
-    //   notification.data.type &&
-    //   notification.data.type === 'message.created'
-    // ) {
-    //   if (AppState.currentState === 'background') {
-    //     navigateToScene('ChatListScene', {});
-    //     navigateToScene('ChatThreadScene', {
-    //       thread_id: notification.data.thread_id,
-    //       title: '',
-    //     });
-    //   }
-    // }
   };
 
   loadApp = () => {
@@ -92,18 +78,6 @@ class App extends Component {
       }
       return <LanguageSelectScene onItemPress={this.onLanguageSelect} />;
     }
-
-    // Permissions.request('notification')
-    //   .then((response) => {
-    //     if (response !== 'authorized') {
-    //       Alert.alert(
-    //         'Please allow notifications',
-    //         'This app needs you to authorize notifications in order to work',
-    //         [{text: 'Go to settings', onPress: () => Permissions.openSettings()}],
-    //         {cancelable: false}
-    //       );
-    //     }
-    //   });
 
     return (
       <View style={{flex: 1, backgroundColor: colors.primary}}>

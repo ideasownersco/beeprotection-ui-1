@@ -202,11 +202,11 @@ class OrderDetailScene extends Component {
                 />
                 <Divider style={{marginBottom: 10}} />
 
-                  <Button
-                    raised
-                    onPress={this.uploadImages}
-                    title={I18n.t('upload_images')}
-                  />
+                <Button
+                  raised
+                  onPress={this.uploadImages}
+                  title={I18n.t('upload_images')}
+                />
               </View>
             )}
           </View>

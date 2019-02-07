@@ -19,7 +19,6 @@ export async function request({
   requiresAuthentication = false,
   forceAuthentication = false,
 }) {
-
   const apiToken = await getStorageItem(AUTH_KEY);
 
   let {paginated, paginatedUrl, body, isBlob, query} = params;
@@ -34,10 +33,9 @@ export async function request({
     fullUrl = localeAwareUrl + query;
   }
 
-
   if (__DEV__) {
     if (console.group) {
-      console.log('NETWORK_REQUEST',{
+      console.log('NETWORK_REQUEST', {
         path: fullUrl,
         method: method,
         params: params,
@@ -66,37 +64,38 @@ export async function request({
     headers,
   });
 
-  return request
-    // .then(res => res.text())          // convert to plain text
-    // .then(text => console.log(text))  // then log it out
-    .then(response =>
-      response.json()
-        .then(json => {
-        return ({
-          status: response.status,
-          statusType: response.statusType,
-          json,
-        })
-      }),
-    )
-    .then(({status, statusType, json}) => {
-      if (__DEV__) {
-        if (console.group) {
-          console.log('NETWORK_RESPONSE', json);
+  return (
+    request
+      // .then(res => res.text())          // convert to plain text
+      // .then(text => console.log(text))  // then log it out
+      .then(response =>
+        response.json().then(json => {
+          return {
+            status: response.status,
+            statusType: response.statusType,
+            json,
+          };
+        }),
+      )
+      .then(({status, statusType, json}) => {
+        if (__DEV__) {
+          if (console.group) {
+            console.log('NETWORK_RESPONSE', json);
+          }
         }
-      }
 
-      if (!json.success) {
-        const errorMsg = json.message
-          ? json.message
-          : `Unknown error occurred. STATUS : ${status}, STATUS TYPE : ${statusType}`;
-        return Promise.reject(errorMsg);
-      }
+        if (!json.success) {
+          const errorMsg = json.message
+            ? json.message
+            : `Unknown error occurred. STATUS : ${status}, STATUS TYPE : ${statusType}`;
+          return Promise.reject(errorMsg);
+        }
 
-      return json;
-    })
-    .catch(e => {
-      console.log('NETWORK_REQUEST_ERROR', e);
-      return Promise.reject(`${e}`);
-    });
+        return json;
+      })
+      .catch(e => {
+        console.log('NETWORK_REQUEST_ERROR', e);
+        return Promise.reject(`${e}`);
+      })
+  );
 }

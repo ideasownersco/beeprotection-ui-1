@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {Title} from 'react-native-paper';
 import Swiper from 'react-native-swiper';
 import colors from 'assets/theme/colors';
@@ -15,7 +15,7 @@ export default class SplashScreen extends Component {
   };
 
   render() {
-    let {onEndReached, onLanguageSelect} = this.props;
+    let {onEndReached} = this.props;
     return (
       <View style={styles.container}>
         <Title style={styles.title}>{I18n.t('app_name')}</Title>

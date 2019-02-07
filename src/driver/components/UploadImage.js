@@ -3,7 +3,13 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {FlatList, Image, StyleSheet, TouchableHighlight, View,} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import colors from 'assets/theme/colors';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -26,8 +32,8 @@ export default class UploadImage extends Component {
       width: 500,
       height: 500,
       includeExif: true,
-      compressImageQuality:.3,
-      maxFiles:maxImages
+      compressImageQuality: 0.3,
+      maxFiles: maxImages,
     })
       .then(collection => {
         return map(collection, image => image.path);

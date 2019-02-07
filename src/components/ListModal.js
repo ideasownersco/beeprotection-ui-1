@@ -21,12 +21,21 @@ export default class ListModal extends Component {
 
   static defaultProps = {
     title: '',
-    disabled:false,
-    buttonText:I18n.t('save')
+    disabled: false,
+    buttonText: I18n.t('save'),
   };
 
   render() {
-    let {isVisible, onCancel, onSave, title, children, style,disabled,buttonText} = this.props;
+    let {
+      isVisible,
+      onCancel,
+      onSave,
+      title,
+      children,
+      style,
+      disabled,
+      buttonText,
+    } = this.props;
 
     return (
       <Modal

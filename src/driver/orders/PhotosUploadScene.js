@@ -44,7 +44,7 @@ class PhotosUploadScene extends Component {
     showImageUploadOptionsDialog: false,
     imageApprovalDialogVisible: false,
     comment: null,
-    uploading:false
+    uploading: false,
   };
 
   componentDidMount() {
@@ -128,9 +128,8 @@ class PhotosUploadScene extends Component {
   };
 
   uploadImages = images => {
-
     this.setState({
-      uploading:true
+      uploading: true,
     });
 
     return new Promise((resolve, reject) => {
@@ -140,22 +139,21 @@ class PhotosUploadScene extends Component {
           images,
           resolve,
           reject,
-        })
+        }),
       );
     })
       .then(imgs => {
         this.setState({
-          uploading:false
+          uploading: false,
         });
         this.hideUploadImageModal();
       })
       .catch(e => {
         this.setState({
-          uploading:false
+          uploading: false,
         });
         this.hideUploadImageModal();
-      })
-      ;
+      });
   };
 
   onSaveUploadedImage = () => {
@@ -175,7 +173,7 @@ class PhotosUploadScene extends Component {
       width: 500,
       height: 500,
       includeExif: true,
-      compressImageQuality:.3,
+      compressImageQuality: 0.3,
     })
       .then(image => {
         this.uploadImages([image.path]);
@@ -216,24 +214,24 @@ class PhotosUploadScene extends Component {
         />
 
         {job &&
-        job.photos && (
-          <View>
-            <View style={{padding: 10, backgroundColor: 'white'}}>
-              <FormTextInput
-                field="comment"
-                onValueChange={this.onFieldChange}
-                label={I18n.t('comment')}
+          job.photos && (
+            <View>
+              <View style={{padding: 10, backgroundColor: 'white'}}>
+                <FormTextInput
+                  field="comment"
+                  onValueChange={this.onFieldChange}
+                  label={I18n.t('comment')}
+                />
+              </View>
+              <Button
+                title={I18n.t('approve_images')}
+                onPress={this.showImageApprovalDialog}
+                raised
+                // disabled={order.job.photos_approved}
+                style={{margin: 20, marginBottom: 50}}
               />
             </View>
-            <Button
-              title={I18n.t('approve_images')}
-              onPress={this.showImageApprovalDialog}
-              raised
-              // disabled={order.job.photos_approved}
-              style={{margin: 20, marginBottom: 50}}
-            />
-          </View>
-        )}
+          )}
 
         <View
           style={{
@@ -276,8 +274,7 @@ class PhotosUploadScene extends Component {
           onSave={this.onSaveUploadedImage}
           isVisible={showUploadImageModal}
           disabled={this.state.uploading}
-          buttonText={this.state.uploading ? 'uploading' : I18n.t('save')}
-        >
+          buttonText={this.state.uploading ? 'uploading' : I18n.t('save')}>
           <UploadImage
             images={images}
             updateImage={this.uploadImage}
